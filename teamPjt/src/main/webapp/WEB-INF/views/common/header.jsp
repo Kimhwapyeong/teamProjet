@@ -46,8 +46,26 @@
       </ul>
 
 	   <ul class="nav col-12 col-md-auto mb-2 justify-content-end mb-md-0" style="padding-right:30px">
-        <li><a href="#" class="nav-link px-2 link-dark">로그인</a></li>
+        <li><a href="/login" class="nav-link px-2 link-dark">로그인</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">로그아웃</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark"><img src="/resources/images/마이페이지.png" style="height:20px;">myPage</a></li>
+        <li><a href="/member/mypage" class="nav-link px-2 link-dark"><img src="/resources/images/마이페이지.png" style="height:20px;">myPage</a></li>
        </ul>
     </header>
+    
+    
+   <!-- Navigation-->
+   <nav class="navbar navbar-light bg-light static-top" style='width: 100%;'>
+       <div class="container" style='margin: 10px 40px; width: 30%;'>
+           <a class="navbar-brand" href="#!" style='font-size: 32px;'>COZY <br> STAY</a>
+       </div>
+       <div>
+           <a class="btn btn-bg" href="#where" style='font-size: 20px; color: rgb(49, 49, 49); margin-right: 50px;'><i class="bi bi-geo-alt">어디로 떠날까요?</i></a>
+           <i class="bi bi-dot"></i>
+           <a class="btn btn-bg" href="#where" style='font-size: 20px; color: rgb(49, 49, 49);'><i class="bi bi-calendar-event">언제 떠날까요?</i></a>
+       </div>
+       
+       <div style='margin-left: 10%;'>
+           <a class="btn btn-bg" href="/login" style='font-size: 20px; color: rgb(49, 49, 49);'>LOGIN</a>
+           <a class="btn btn-bg" href="/member/mypage" style='font-size: 20px; color: rgb(49, 49, 49);'>MY PAGE</a>
+       </divstyle=>
+   </nav>
