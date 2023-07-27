@@ -46,7 +46,7 @@
 					<li><div class="dt">요청 사항</div>
 						<div class="dd">
 							<textarea rows="5" class="form_style" name="description"
-								placeholder="할말 있음 해라ㅋㅋ루삥뽕빵zzzz (최소 50자)"></textarea>
+								placeholder="할말 있음 해라 (최소 50자)"></textarea>
 						</div></li>
 				</ul>
 			</div>
