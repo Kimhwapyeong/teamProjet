@@ -56,6 +56,15 @@
                 </span></div>
         </div>
     </footer>
+	<nav id="moMenu" class="mo-samll-only">
+		<ul>
+			<li><a class="" href="/stay/list"><span>FIND STAY</span></a></li>
+			<li><a class="" href="/promotions"><span>PROMOTION</span></a></li>
+			<li><a class="" href="/journal"><span>JOURNAL</span></a></li>
+			<li><a class="" href="/preorder"><span>PRE-ORDER</span></a></li>
+			<li><a class=" false" href="/chat"><span>MESSAGE</span></a></li>
+		</ul>
+	</nav>
 <!-- bootstrap script -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
