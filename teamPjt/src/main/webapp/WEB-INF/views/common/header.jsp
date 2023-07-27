@@ -66,6 +66,6 @@
        
        <div style='margin-left: 10%;'>
            <a class="btn btn-bg" href="/login" style='font-size: 20px; color: rgb(49, 49, 49);'>LOGIN</a>
-           <a class="btn btn-bg" href="/member/mypage" style='font-size: 20px; color: rgb(49, 49, 49);'>MY PAGE</a>
+           <a class="btn btn-bg" href="/member/mypage/reservation" style='font-size: 20px; color: rgb(49, 49, 49);'>MY PAGE</a>
        </divstyle=>
    </nav>
