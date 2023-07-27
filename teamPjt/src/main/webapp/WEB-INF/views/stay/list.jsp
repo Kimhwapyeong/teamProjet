@@ -3786,7 +3786,6 @@ translateY
                                     </div>
                                 </div>
                                 <div class="sel_map">
-                                    <div class="map_img_off" role="presentation"></div>
                                 </div><button type="button" class="btn_reset">초기화</button>
                                 <div class="search_btn_wrapper"><button type="button" class="btn_search">SEARCH</button>
                                 </div>
