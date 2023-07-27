@@ -7,13 +7,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
+<!-- css -->
 <link rel="stylesheet" href="/resources/css/mypage/reservation.css">
 </head>
 
 <body>
-<body>
 <!-- 헤더 -->
-
+<%@ include file="../../common/header.jsp" %>
 
 	<noscript>
 		<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M24ZFBJ"
@@ -46,10 +46,10 @@
 					</div>
 					<div class="newmypage_menu pc_only">
 						<ul>
-							<li class="active"><a href="/mypage/reservation">예약 정보</a></li>
-							<li class=""><a href="/mypage/reservation/cancel">취소 내역</a></li>
-							<li class=""><a href="/mypage/likestay">관심 스테이</a></li>
-							<li class=""><a href="/mypage/account/edit">회원 정보 수정</a></li>
+							<li class="active"><a href="member/mypage/reservation">예약 정보</a></li>
+							<li class=""><a href="./cancel">취소 내역</a></li>
+							<li class=""><a href="./likestay">관심 스테이</a></li>
+							<li class=""><a href="./info">회원 정보 수정</a></li>
 							<li><a href="/chat">메시지</a></li>
 						</ul>
 					</div>
@@ -97,6 +97,7 @@
 								class="on">1</a><a href="/" class="next" title="다음 페이지">다음
 								페이지</a>
 						</div>
+						<button type="button" class="btn_bk btn_sm findstay_btn" style="margin-top: 20px; margin-bottom: 20px;">FIND STAY</button>
 					</div>
 				</div>
 			</div>
@@ -467,5 +468,8 @@
 	<script type="text/javascript" id="">if (!wcs_add) var wcs_add = {}; wcs_add.wa = "s_4371e2020dab"; if (!_nasa) var _nasa = {}; window.wcs && (wcs.inflow(), wcs_do(_nasa));</script>
 </body>
 </body>
+
+<!-- 푸터 -->
+<%@ include file="../../common/footer.jsp" %>
 
 </html>
