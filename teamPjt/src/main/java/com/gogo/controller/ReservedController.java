@@ -12,4 +12,13 @@ public class ReservedController {
 	public void reservation() {
 		
 	}
+	
+	@GetMapping("calendar")
+	public void calender() {
+		
+	}
+	@GetMapping("calendar2")
+	public void calender2() {
+		
+	}
 }
