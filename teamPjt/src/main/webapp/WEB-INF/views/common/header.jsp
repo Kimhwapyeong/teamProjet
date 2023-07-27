@@ -39,7 +39,7 @@
         <header id="header" class="container_wide">
             <div class="header_wrap gnb-responsive-css only-pc">
                 <div class='logo'>
-                    <a href="/">STAY FOLIO</a>
+                    <a href="/main">STAY FOLIO</a>
                 </div>
                 <div class="whe gnb-responsive-margin" style=""><button type="button"><span class="gnb-mo-small">어디로
                             떠날까요?</span></button><button type="button" class="gnb-when-mo-small"><span

@@ -66,7 +66,7 @@
 								src="https://www.stayfolio.com/web/images/secondImage.jpg"><img width="48%"
 								alt="secondImage" src="https://www.stayfolio.com/web/images/firstImage.jpg">
 						</div>
-						<div class="_contactus_image_guide__XdOKT">
+						<div class="_contactus_video_image_guide__GJRiB">
 							<p class="_contactus_guide_title__ZyIpA">이미지 제출 가이드</p>
 							<p class="_contactus_guide_list__ogEdb">• 이미지 제출은 선택사항입니다.</p>
 							<p class="_contactus_guide_list__ogEdb">• 이미지를
