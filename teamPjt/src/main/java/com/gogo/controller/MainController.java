@@ -12,10 +12,17 @@ public class MainController {
 	}
 	
 	// 매핑용
-	@GetMapping("/add")
+	@GetMapping("/addstay")
 	public String addStay() {
 		
-		return "/stay/add";
+		return "/stay/addstay";
+	}
+	
+	// 매핑용
+	@GetMapping("/addroom")
+	public String addRoom() {
+		
+		return "/stay/addroom";
 	}
 
 }
