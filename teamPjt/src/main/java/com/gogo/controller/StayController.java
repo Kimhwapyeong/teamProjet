@@ -12,4 +12,9 @@ public class StayController {
 	public void getList() {
 		
 	}
+	
+	@GetMapping("room")
+	public void room() {
+		
+	}
 }
