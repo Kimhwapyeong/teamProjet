@@ -10,5 +10,12 @@ public class MainController {
 	public void getMain() {
 		
 	}
+	
+	// 매핑용
+	@GetMapping("/add")
+	public String addStay() {
+		
+		return "/stay/add";
+	}
 
 }
