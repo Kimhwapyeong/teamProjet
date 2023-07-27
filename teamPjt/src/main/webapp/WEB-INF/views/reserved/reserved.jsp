@@ -36,11 +36,11 @@
 						<div class="dd">
 							<input style="font-size: 12px; color:#666;" type="text" class="form_style" name="stayName" value="2023-07-27 ~ 2023-07-30" readonly>			
 						</div></li>
-					
-					
-					
-					
-					
+						
+					<li><div class="dt">가격</div>
+						<div class="dd">
+							<input style="font-size: 12px; color:#666;" type="text" class="form_style" name="stayName" value="900000원" readonly>			
+						</div></li>
 					
 					
 					<li><div class="dt">요청 사항</div>
