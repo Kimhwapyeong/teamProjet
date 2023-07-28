@@ -246,5 +246,5 @@
 	
 	<!-- when modal -->
 	<div class="modalOverlay2" style="display: none;">
-		<jsp:include page="../reserved/calendar.jsp"/>
+		<jsp:include page="/WEB-INF/views/reserved/calendar.jsp"/>
 	</div>
