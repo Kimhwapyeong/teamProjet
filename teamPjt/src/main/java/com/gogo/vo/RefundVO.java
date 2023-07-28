@@ -3,7 +3,7 @@ package com.gogo.vo;
 import lombok.Data;
 
 @Data // 환불
-public class refundVO {
+public class RefundVO {
 
 	private String refundNo; // 환불 seq
 	private String impUid;

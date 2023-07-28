@@ -22,7 +22,7 @@
 					<hr style="color:black; opacity: 1; height:30px;">
 					<li><div class="dt">스테이 이름</div>
 						<div class="dd">
-							<input style="font-size: 12px; color:#666;" type="text" class="form_style" name="stayName" value="매화동" readonly>
+							<input style="font-size: 12px; color:#666; background-color:#e6e6e6;" type="text" class="form_style" name="stayName" value="매화동" disabled>
 						</div></li>
 					<hr>
 					<li><div class="dt">객실 선택 *</div>
@@ -42,10 +42,11 @@
 					
 						<div class="dd">
 							<c:if test="${not empty reserved_day}" var="res">
-								<input style="font-size: 12px; color:#666;" type="text" class="form_style" name="reserved_date" value='' readonly>
+								<input style="font-size: 12px; color:#666; background-color:#e6e6e6;" type="text" class="form_style" name="reserved_date" value='' disabled>
+								<button style="font-size: 12px; color:black;  text-align:left;" class="form_style" onclick="location.href='/reserved/calendar'">예약 날짜 선택하기</button>
 							</c:if>
 							<c:if test="${not res}">
-								<button style="font-size: 12px; color:#666; width:100%; text-align:left;" class="form_style" onclick="location.href='/reserved/calendar'">예약 날짜 선택하기</button>
+								<button style="font-size: 12px; color:black;  text-align:left;" class="form_style" onclick="location.href='/reserved/calendar'">예약 날짜 선택하기</button>
 							</c:if>
 							<script>
 								$(function(){
@@ -211,10 +212,14 @@
 					class="check_policy">개인정보 수집 및 이용에 동의합니다. [필수]</span><span
 					class="check_box"></span></label>
 			</div>
-			<div class="bt_btns">
+			<div class="bt_btns" style="padding-bottom:0px;">
 				<button type="submit" class="btn_bk">제출하기</button>
 			</div>
+			<div class="bt_btns">
+				<button type="submit" onclick="location.href='/main'" class="btn_bk" style="background-color:#243087;">메인으로</button>
+			</div>
 	</div>
+	
 </div>
 </body>
 	<script

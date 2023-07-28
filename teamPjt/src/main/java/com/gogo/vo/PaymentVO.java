@@ -3,7 +3,7 @@ package com.gogo.vo;
 import lombok.Data;
 
 @Data // 환불
-public class paymentVO {
+public class PaymentVO {
 
 	private String impUid;	// 환불 및 조회에 필요한 key
 	private String reservationNo; // 예약 seq

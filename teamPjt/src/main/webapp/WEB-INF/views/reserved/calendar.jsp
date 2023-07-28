@@ -73,7 +73,7 @@
         </p>
       </div>
     </div>
-    <form action="/reserved/day" method="get">
+    <form action="/reserved/day" method="get" onsubmit="return false;">
     <div class="checkInOutInfo" style="position:absolute; bottom:30%; left:50%;">
        <div>
         <p>
@@ -87,7 +87,7 @@
         </p>
       </div>
     </div>
-    	<button type="submit">예약하기</button>
+    	<button type="submit" onclick="check(form)">예약하기</button>
     	<button id="reload">초기화</button>
     	<button id="back">뒤로가기</button>
     </form>
@@ -113,6 +113,31 @@
     		});
     		
     	});
+    	
+    	// 날짜 유효성 검사
+    	function check(form){
+    		
+    		if(checkInDate==""){
+    			
+    				
+    			alert('체크인 날짜를 선택해 주세요');
+    			
+    			return false;
+    		}
+    		
+    		if(checkOutDate==""){
+    			
+    				
+    			alert('체크아웃 날짜를 선택해 주세요');
+    			
+    			return false;
+    		}
+    		
+    		form.submit();
+    		
+    			
+    		
+    	}
     	
     </script>
     
