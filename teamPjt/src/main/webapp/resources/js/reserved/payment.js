@@ -1,7 +1,7 @@
 
 
 	
-
+		/* 결제 */
 		function purchased(pg){
 			
 				IMP.init('imp31246282');
@@ -32,23 +32,30 @@
 					$.ajax({
 						
 						type: "POST"
-						, url : "/member/verify/"+ rsp.imp_uid+"/"+success+"/"+buyer_name
+						, url : "/reserved/verify"
+						, contentType : "application/json"
+						, data : JSON.stringify(rsp)
 						
 					}).done(function(data){
 						
 						console.log("data : ", data);
 						
+						if(data.response!=null && data.response != ''){
 						
-						if(rsp.paid_amount == data.response.amount){
-							
-							
-							alert("결제 및 결제 검증 완료");
-							
+							if(rsp.paid_amount == data.response.amount){
+								
+								
+								alert("결제 및 결제 검증 완료");
+								
+							} else {
+								alert("결제 및 결제 검증 실패 : "+ rsp.error_msg);
+								return false;
+							}
 						} else {
-							alert("결제 및 결제 검증 실패 : "+ rsp.error_msg);
+							
+							alert("결제가 취소되었습니다.");
 							return false;
 						}
-						
 					});
 					
 
@@ -74,6 +81,8 @@
 			})
 		}
 		
+		
+		  /* 환불 */
 		  function cancelPay() {
 			  
 			  if(canclePay==null || canclePay==''
@@ -141,6 +150,10 @@
 			  
 		  }
 		  
+		  
+		  
+		  /* 결제 정보를 console에 찍어주는 스크립트 
+		    	노쓸모 */
 		  function payInfoConsole() {
 			  
 			  	if(payInfo == null || payInfo == ''){

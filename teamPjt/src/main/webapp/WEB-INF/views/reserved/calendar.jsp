@@ -73,6 +73,83 @@
         </p>
       </div>
     </div>
+    <form action="/reserved/day" method="get" onsubmit="return false;">
+    <div class="checkInOutInfo" style="position:absolute; bottom:30%; left:50%;">
+       <div>
+        <p>
+          <span>총 예약일</span>
+        </p>
+        <p>  
+          <label id="check_out_day" class="check_day_count"></label>          
+          <input type="hidden" id="reserved_day" name="reserved_day" value="">
+          <input type="hidden" id="reserved_checkIn" name="reserved_checkIn" value="">
+          <input type="hidden" id="reserved_checkOut" name="reserved_checkOut" value="">
+        </p>
+      </div>
+    </div>
+    	<button type="submit" onclick="check(form)">예약하기</button>
+    	<button id="reload">초기화</button><br>
+    	<button id="back">메인으로</button><br>
+    	<button type="button" class="btn_close" id="closeBtn2">닫기</button>
+    </form>
+    <script>
+    
+    	window.addEventListener('load', function(){
+    		
+    		// 예약 페이지에선 닫기 버튼 안보여주기
+    		if($('.modalOverlay2').attr('style') == null){
+    			
+    			$('#closeBtn2').attr('style', 'display:none;');
+    			
+    		}
+    		
+    		
+    		
+    		reload.addEventListener('click', function(e){
+    			
+    			e.preventDefault();
+    			
+    			window.location.reload();
+    			
+    		});
+    		
+    		back.addEventListener('click', function(e){
+    			
+    			e.preventDefault();
+    			
+    			location.href='/main';
+    			
+    		});
+    		
+    	});
+    	
+    	// 날짜 유효성 검사
+    	function check(form){
+    		
+    		if(checkInDate==""){
+    			
+    				
+    			alert('체크인 날짜를 선택해 주세요');
+    			
+    			return false;
+    		}
+    		
+    		if(checkOutDate==""){
+    			
+    				
+    			alert('체크아웃 날짜를 선택해 주세요');
+    			
+    			return false;
+    		}
+    		
+    		form.submit();
+    		
+    			
+    		
+    	}
+    	
+    </script>
+    
   </div>
 </body>
 

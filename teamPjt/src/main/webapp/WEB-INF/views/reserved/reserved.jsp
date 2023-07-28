@@ -22,7 +22,7 @@
 					<hr style="color:black; opacity: 1; height:30px;">
 					<li><div class="dt">스테이 이름</div>
 						<div class="dd">
-							<input style="font-size: 12px; color:#666;" type="text" class="form_style" name="stayName" value="매화동" readonly>
+							<input style="font-size: 12px; color:#666; background-color:#e6e6e6;" type="text" class="form_style" name="stayName" value="매화동" disabled>
 						</div></li>
 					<hr>
 					<li><div class="dt">객실 선택 *</div>
@@ -30,7 +30,7 @@
 						<!-- font-size: 12px;
     							color: #666; -->
 							<select class="form_style" name="roomName" style="font-size: 12px; color:#666; width:100%;">
-								<option selected>예약할 객실을 선택해 주세요.</option>
+								<option value="" selected>예약할 객실을 선택해 주세요.</option>
 								<option value="A호">A호</option>
 								<option value="B호">B호</option>
 								<option value="C호">C호</option>
@@ -38,9 +38,29 @@
 						</div></li>
 					<hr>
 					<li><div class="dt">예약 날짜</div>
+					
+					
 						<div class="dd">
-							<input style="font-size: 12px; color:#666;" type="text" class="form_style" name="stayName" value="2023-07-27 ~ 2023-07-30" readonly>			
+							<c:if test="${not empty reserved_day}" var="res">
+								<input style="font-size: 12px; color:#666; background-color:#e6e6e6;" type="text" class="form_style" name="reserved_date" value='' disabled>
+								<button style="font-size: 12px; color:black;  text-align:left;" class="form_style" onclick="location.href='/reserved/calendar'">예약 날짜 선택하기</button>
+							</c:if>
+							<c:if test="${not res}">
+								<button style="font-size: 12px; color:black;  text-align:left;" class="form_style" onclick="location.href='/reserved/calendar'">예약 날짜 선택하기</button>
+							</c:if>
+							<script>
+								$(function(){
+									
+									
+										
+										$('input[name=reserved_date]').val('${reserved_checkIn} ~ ${reserved_checkOut}');
+									 
+									
+								});
+							</script>			
 						</div></li>
+					
+				
 					<hr>	
 					<li style="height:200px;"><div class="dt" style="position:relative;">가격</div>
 						<div class="dd">
@@ -50,6 +70,14 @@
 							<span style="font-size:0.85em; position:absolute; right:5%; top:53%; color: #66666682;">-</span><br>
 							<span style="font-size:0.85em; position:absolute; right:40%; top:56%; color: #66666682;">할인 금액</span><br>
 							<span style="font-size:0.85em; position:absolute; right:5%; top:56%; color: #66666682;">-</span><br>
+							<span style="font-size:0.85em; position:absolute; right:40%; top:59%; color: #66666682;">예약일 수</span><br>
+								
+						<c:if test="${not empty reserved_day}" var="res">									
+							<span style="font-size:0.85em; position:absolute; right:4%; top:59%; color: #66666682;">${reserved_day}일</span><br>
+						</c:if>	
+						<c:if test="${not res}">
+							<span style="font-size:0.85em; position:absolute; right:5%; top:59%; color: #66666682;">-</span><br>
+						</c:if>	
 							<span style="font-size:2em; position:absolute; right:3%; top:64%;" id="amount" data-amount="900000">₩900,000</span>						
 						</div></li>
 					
@@ -62,26 +90,35 @@
 						
 						
 					<hr>	
-					<li><div class="dt" style="position:relative;">결제 수단</div>
-						
-							<button id="kakaopay" style="position:absolute; right:19%; bottom:0%;"><img src="/resources/images/kakaopay.JPG"/></button>
-							<button id="nice" style="position:absolute; right:3%; bottom:0.6%;"><img src="/resources/images/신용카드.JPG"/></button>
+					<li><div class="dt" style="position:relative;">결제 수단*</div>
+							
+							<button id="kakaopay" style="position:absolute; right:19%; bottom:0.5%;">
+								<img src="/resources/images/kakaopay2.JPG" id="kakaoImg"/>
+							</button>
+							<button id="nice" style="position:absolute; right:3%; bottom:0.6%;">				
+								<img src="/resources/images/신용카드2.JPG" id="niceImg"/>
+							</button>
 							<script>
 								
 								$(function(){
 									
 									$("#kakaopay").click(function(){
 										
-										purchased('kakaopay');
+																				
+										pg = 'kakaopay';
 										
-										
+										$("#kakaoImg").attr("src", "/resources/images/kakaopay.JPG");
+										$("#nice").attr("style", "position:absolute; right:3%; bottom:0.6%;");
+										$("#niceImg").attr("src", "/resources/images/신용카드2.JPG");
 									});
 									
 									$("#nice").click(function(){
+																				
+										pg = 'nice';
 										
-										purchased('nice');
-										
-										
+										$("#niceImg").attr("src", "/resources/images/신용카드.JPG");
+										$("#nice").attr("style", "position:absolute; right:3%; bottom:1%;");
+										$("#kakaoImg").attr("src", "/resources/images/kakaopay2.JPG");
 									});
 
 									
@@ -92,13 +129,16 @@
 							
 								<script>
  
-		var buyer_name = '원준';
-		var merchant_uid = '999';
-		var canclePay = '';
-		var realAmount = '';
+		var buyer_name = '원준';   // sessionScope.userId 받아와야 함
+		var merchant_uid = '999'; // 시퀀스 추가해야 함
+		var canclePay = '';		  // 환불할 imp_uid
+		var realAmount = '';	  // 환불할 금액
 		var payInfo = '${sessionScope.userId}';
 		var purchaseName = $('input[name=stayName]').val()+", "+$('select[name=roomName]').val();
 		var purchaseAmount = $('#amount').attr("data-amount");
+		var pg = '';
+		
+		
 		
 		$(function(){
 			
@@ -116,7 +156,11 @@
 			
 			$('select[name=roomName]').change(function(){
 				
+				
+				
 				purchaseName = $('input[name=stayName]').val()+", "+$('select[name=roomName]').val();
+				
+				
 				
 			});
 			
@@ -131,35 +175,42 @@
 				</ul>
 			</div>
 		
-			<div class="store_apply_agree">
-				<div class="box">
-					<div class="tit">개인정보 수집 및 이용 동의</div>
-					<div class="desc">
-						(주)스테이폴리오는 아래의 목적으로 개인정보를 수집 및 이용하며, 신청인의 개인정보를 안전하게 취급하는데 최선을
-						다합니다.<br>
-						<br>1. 수집 항목 : 스테이 이름, 상세 주소, 담당자 성함, 전화번호, 메일 주소, 숙박업 인허가 등록
-						여부, 스테이 소개, 첨부 자료<br>2. 수집 및 이용 목적 : 입점 신청에 따른 정보 확인, 입점 가능
-						여부 전달 및 문의사항 대응<br>3. 보유 및 이용 기간 : 입점 신청 및 문의를 위해 검토 완료 후,
-						3개월 간 보관하며 이후 해당 정보는 파기됩니다.<br>
-						<br>
-						<span>이외 기타 사항은 별도 고지하는 [<a target="_blank"
-							rel="noreferrer" style="display: inline" class="bold_contactus"
-							href="https://stayfolio.notion.site/Ver-2-1-1b8348dda5aa42419ed16a27381e8ad6">개인정보
-								처리방침</a>]을 참고해 주시기 바랍니다.
-						</span><br>
-					</div>
-				</div>
-				<label for="check-policy1" class="check_skin"
-					style="width: 100%; display: flex; justify-content: center; margin-top: 34px"><input
-					type="checkbox" id="check-policy1"><span
-					class="check_policy">개인정보 수집 및 이용에 동의합니다. [필수]</span><span
-					class="check_box"></span></label>
+			
+			<div class="bt_btns" style="padding-bottom:0px;">
+				<button type="submit" class="btn_bk" onclick="purchaseBtn()">결제하기</button>
 			</div>
 			<div class="bt_btns">
-				<button type="submit" class="btn_bk">제출하기</button>
+				<button type="submit" onclick="location.href='/main'" class="btn_bk" style="background-color:#243087;">메인으로</button>
 			</div>
 	</div>
+	
 </div>
+				<script>
+					
+				function purchaseBtn(){
+					
+					if($('select[name=roomName]').val()==""){
+						
+						alert('객실을 선택해 주세요.');
+						return false;
+						
+					} else if(pg==''){
+						
+						alert('결제 수단을 선택해 주세요.');
+						return false;
+					}
+
+						purchased(pg);
+						return true;
+					
+				}					
+							
+								
+						
+						
+					
+				
+				</script>
 </body>
 	<script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
