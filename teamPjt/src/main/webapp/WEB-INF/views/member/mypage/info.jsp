@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-숙소 등록
+회원정보수정
 </body>
 </html>

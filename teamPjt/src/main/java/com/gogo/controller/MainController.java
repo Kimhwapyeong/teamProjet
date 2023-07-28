@@ -10,5 +10,19 @@ public class MainController {
 	public void getMain() {
 		
 	}
+	
+	// 매핑용
+	@GetMapping("/addstay")
+	public String addStay() {
+		
+		return "/stay/addstay";
+	}
+	
+	// 매핑용
+	@GetMapping("/addroom")
+	public String addRoom() {
+		
+		return "/stay/addroom";
+	}
 
 }
