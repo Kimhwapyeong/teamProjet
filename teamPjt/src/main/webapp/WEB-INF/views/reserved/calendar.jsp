@@ -88,12 +88,21 @@
       </div>
     </div>
     	<button type="submit" onclick="check(form)">예약하기</button>
-    	<button id="reload">초기화</button>
-    	<button id="back">뒤로가기</button>
+    	<button id="reload">초기화</button><br>
+    	<button id="back">메인으로</button><br>
+    	<button type="button" class="btn_close" id="closeBtn2">닫기</button>
     </form>
     <script>
     
     	window.addEventListener('load', function(){
+    		
+    		// 예약 페이지에선 닫기 버튼 안보여주기
+    		if($('.modalOverlay2').attr('style') == null){
+    			
+    			$('#closeBtn2').attr('style', 'display:none;');
+    			
+    		}
+    		
     		
     		
     		reload.addEventListener('click', function(e){
@@ -108,7 +117,7 @@
     			
     			e.preventDefault();
     			
-    			history.go(-1);
+    			location.href='/main';
     			
     		});
     		

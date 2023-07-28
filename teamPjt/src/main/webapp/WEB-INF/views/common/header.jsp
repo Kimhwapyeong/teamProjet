@@ -46,6 +46,17 @@
         closeBtn.addEventListener('click', function(){
             document.querySelector("div[class=modalOverlay]").style.display='none';
         })
+        
+        // 언제 떠날까요? 달력
+        btnWhen.addEventListener('click', function(){
+            document.querySelector("div[class=modalOverlay2]").style.display='';
+        })
+        
+        closeBtn2.addEventListener('click', function(){
+            document.querySelector("div[class=modalOverlay2]").style.display='none';
+        })
+		// 언제 떠날까요? 달력 끝
+
 		
         // a 요소 (button 의 자식 a)
         let buttons = document.querySelectorAll("button>a");
@@ -86,7 +97,7 @@
                     <a href="/main">STAY FOLIO</a>
                 </div>
                 <div class="whe gnb-responsive-margin" style=""><button type="button" id="btnWhere"><span class="gnb-mo-small">어디로
-                            떠날까요?</span></button><button type="button" class="gnb-when-mo-small"><span
+                            떠날까요?</span></button><button type="button" class="gnb-when-mo-small" id="btnWhen"><span
                             class="gnb-mo-small">언제 떠날까요?</span></button></div>
                 <div class="toggle-ko-mo"></div>
                 <div class="nav">
@@ -231,4 +242,9 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	
+	<!-- when modal -->
+	<div class="modalOverlay2" style="display: none;">
+		<jsp:include page="../reserved/calendar.jsp"/>
 	</div>
