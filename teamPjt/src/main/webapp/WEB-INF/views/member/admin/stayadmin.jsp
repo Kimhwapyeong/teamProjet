@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+
 
 <head>
     <meta charset="UTF-8">
@@ -10,12 +11,13 @@
     <link rel="stylesheet" href="./css/admin/admin.css">
 </head>
 
-<body>
 
-<!-- 헤더 -->
-<%@ include file="../../common/header.jsp" %>
 
-   <body style=""><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M24ZFBJ" height="0" width="0"
+   
+   <!-- 헤더 -->
+	<%@ include file="../../common/header.jsp" %>
+	
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M24ZFBJ" height="0" width="0"
                title="googletagmanager-iframe" style="display:none;visibility:hidden"></iframe></noscript>
        <div id="fb-root" class=" fb_reset">
            <script async="" src="https://connect.facebook.net/en_US/all.js"></script>
@@ -51,12 +53,14 @@
                        <div class="mypage_content">
                            <div class="reserv_wrap mypage-reservation-info">
                                <div class="reserv_box accepted">
+                               <!-- ▶▶▶  forEach ▶▶▶  -->
+                               <c:forEach items="${list}" var="vo" step="1">
                                    <div class="reserv_name">
                                         <!-- =============================== 숙소 seq  ============================================-->
-                                       <div class="option" style='line-height: 50px;'>숙소 번호</div>
+                                       <div class="option" style='line-height: 50px;'>${vo.stayNo}</div>
                                        
                                        <!-- =============================== 숙소이름  ============================================-->
-                                       <p class="name"><span class="ellipsis" style='line-height: 50px; font-size: smaller;'>숙소이름</span></p>
+                                       <p class="name"><span class="ellipsis" style='line-height: 50px; font-size: smaller;'>${vo.stayName }</span></p>
                                    </div>
                                    <div class="stay_view">
                                        <div class="photo"
@@ -66,15 +70,14 @@
                                    </div>
                                        <div class="reserv_info">
                                            <!-- =============================== 숙소 - 회원 아이디 ============================================-->
-                                           <div class="stay" style='line-height: 70px;'>host 이름</div>
+                                           <div class="stay" style='line-height: 70px;'>${vo.memberId }</div>
                                            <p></p>
                                                <!-- =============================== 숙소 설명 ============================================-->
-                                           <div class="option">숙소설명 설명 설명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-                                               ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-                                               ㅇㅇㅇㅇㅇㅇㅇㅇㄱㄷㄴㄷㄱㅁㅇㄹㄷㄹㅇㄴㅌㄹㄷㄿㅇㅋㅑㅇ다<br></div>
+                                           <div class="option">${vo.stayInfo }<br></div>
                                        </div>
                             
                                    </a>
+                                </c:forEach>   
                                </div>
                            </div>
 
@@ -91,6 +94,3 @@
 <!-- 푸터 -->
 <%@ include file="../../common/footer.jsp" %>
 
-</body>
-
-</html>
