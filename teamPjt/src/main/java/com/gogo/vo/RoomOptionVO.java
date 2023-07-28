@@ -14,6 +14,6 @@ public class RoomOptionVO {
 	private String pet;			// 반려동물 (Y,N)
 	private String terrace;		// 테라스 (Y,N)
 	private String pool;		// 풀장 (Y,N)
-	private String view;		// 뷰 (바다, 산)
+	private String viewRoom;		// 뷰 (바다, 산)
 	private String bed; 		// 침구 갯수
 }

@@ -52,9 +52,9 @@
                        </div>
                        <div class="mypage_content">
                            <div class="reserv_wrap mypage-reservation-info">
-                               <div class="reserv_box accepted">
                                <!-- ▶▶▶  forEach ▶▶▶  -->
                                <c:forEach items="${list}" var="vo" step="1">
+                               <div class="reserv_box accepted">
                                    <div class="reserv_name">
                                         <!-- =============================== 숙소 seq  ============================================-->
                                        <div class="option" style='line-height: 50px;'>${vo.stayNo}</div>

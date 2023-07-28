@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class roomPhotoVO {
+public class RoomPhotoVO {
 
 	private String roomNo; // 객실 seq
 	private String stayNo; // 숙소 seq

@@ -6,5 +6,5 @@ import lombok.Data;
 public class MemberRoleVO {
 
 	private String memberId;
-	private String role; // 권한
+	private String role_id; // 권한
 }
