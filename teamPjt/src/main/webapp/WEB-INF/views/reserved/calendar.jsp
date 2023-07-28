@@ -73,6 +73,49 @@
         </p>
       </div>
     </div>
+    <form action="/reserved/day" method="get">
+    <div class="checkInOutInfo" style="position:absolute; bottom:30%; left:50%;">
+       <div>
+        <p>
+          <span>총 예약일</span>
+        </p>
+        <p>  
+          <label id="check_out_day" class="check_day_count"></label>          
+          <input type="hidden" id="reserved_day" name="reserved_day" value="">
+          <input type="hidden" id="reserved_checkIn" name="reserved_checkIn" value="">
+          <input type="hidden" id="reserved_checkOut" name="reserved_checkOut" value="">
+        </p>
+      </div>
+    </div>
+    	<button type="submit">예약하기</button>
+    	<button id="reload">초기화</button>
+    	<button id="back">뒤로가기</button>
+    </form>
+    <script>
+    
+    	window.addEventListener('load', function(){
+    		
+    		
+    		reload.addEventListener('click', function(e){
+    			
+    			e.preventDefault();
+    			
+    			window.location.reload();
+    			
+    		});
+    		
+    		back.addEventListener('click', function(e){
+    			
+    			e.preventDefault();
+    			
+    			history.go(-1);
+    			
+    		});
+    		
+    	});
+    	
+    </script>
+    
   </div>
 </body>
 

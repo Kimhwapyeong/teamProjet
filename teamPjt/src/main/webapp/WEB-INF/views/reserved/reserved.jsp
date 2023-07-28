@@ -38,9 +38,28 @@
 						</div></li>
 					<hr>
 					<li><div class="dt">예약 날짜</div>
+					
+					
 						<div class="dd">
-							<input style="font-size: 12px; color:#666;" type="text" class="form_style" name="stayName" value="2023-07-27 ~ 2023-07-30" readonly>			
+							<c:if test="${not empty reserved_day}" var="res">
+								<input style="font-size: 12px; color:#666;" type="text" class="form_style" name="reserved_date" value='' readonly>
+							</c:if>
+							<c:if test="${not res}">
+								<button style="font-size: 12px; color:#666; width:100%; text-align:left;" class="form_style" onclick="location.href='/reserved/calendar'">예약 날짜 선택</button>
+							</c:if>
+							<script>
+								$(function(){
+									
+									if(${reserved_checkIn}!=null && ${reserved_checkIn}!=''){
+										
+										$('input[name=reserved_date]').val('${reserved_checkIn} ~ ${reserved_checkOut}');
+									} 
+									
+								});
+							</script>			
 						</div></li>
+					
+				
 					<hr>	
 					<li style="height:200px;"><div class="dt" style="position:relative;">가격</div>
 						<div class="dd">
@@ -50,6 +69,14 @@
 							<span style="font-size:0.85em; position:absolute; right:5%; top:53%; color: #66666682;">-</span><br>
 							<span style="font-size:0.85em; position:absolute; right:40%; top:56%; color: #66666682;">할인 금액</span><br>
 							<span style="font-size:0.85em; position:absolute; right:5%; top:56%; color: #66666682;">-</span><br>
+							<span style="font-size:0.85em; position:absolute; right:40%; top:59%; color: #66666682;">예약일 수</span><br>
+								
+						<c:if test="${not empty reserved_day}" var="res">									
+							<span style="font-size:0.85em; position:absolute; right:4%; top:59%; color: #66666682;">${reserved_day}일</span><br>
+						</c:if>	
+						<c:if test="${not res}">
+							<span style="font-size:0.85em; position:absolute; right:5%; top:59%; color: #66666682;">-</span><br>
+						</c:if>	
 							<span style="font-size:2em; position:absolute; right:3%; top:64%;" id="amount" data-amount="900000">₩900,000</span>						
 						</div></li>
 					
@@ -114,10 +141,10 @@
 							
 								<script>
  
-		var buyer_name = '원준';
-		var merchant_uid = '999';
-		var canclePay = '';
-		var realAmount = '';
+		var buyer_name = '원준';   // sessionScope.userId 받아와야 함
+		var merchant_uid = '999'; // 시퀀스 추가해야 함
+		var canclePay = '';		  // 환불할 imp_uid
+		var realAmount = '';	  // 환불할 금액
 		var payInfo = '${sessionScope.userId}';
 		var purchaseName = $('input[name=stayName]').val()+", "+$('select[name=roomName]').val();
 		var purchaseAmount = $('#amount').attr("data-amount");

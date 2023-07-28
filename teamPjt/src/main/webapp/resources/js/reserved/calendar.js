@@ -4,7 +4,7 @@ const regexDate = RegExp(/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/);
 const thisDate = new Date();
 // 오늘 날짜 (yyyy-mm-dd 00:00:00)
 const today = new Date();
-// 달력이도 최대 개월 수
+// 달력 이동 최대 개월 수
 const limitMonth = 4;
 // 달력에서 표기하는 날짜 객체
 let thisMonth = today;
@@ -201,7 +201,27 @@ function addClassSelectDay() {
 
         $('.checkIn').find('.check_in_out_p').html('체크인');
         $('.checkOut').find('.check_in_out_p').html('체크아웃');
-    }
+    }	
+    
+    	/// 총 예약일 수 구하기
+    	if(checkOutDate!='' && checkInDate!=''){
+    		
+    		// 정규 표현식으로 20230823 이렇게 되어있는걸 2023-08-23 으로 바꿈
+    		let a = checkInDate.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
+    		let b = checkOutDate.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
+    		
+    		// 날짜 형식으로 변환
+    		let ci = new Date(a);
+    		let co = new Date(b);
+    		
+    		let diff = Math.abs(co.getTime() - ci.getTime());
+    		diff = Math.ceil(diff / (1000*60*60*24));
+    		
+	        $('.check_day_count').html(diff+'일');
+	        $('#reserved_day').val(diff);
+	        $('#reserved_checkIn').val(a);
+	        $('#reserved_checkOut').val(b);
+        }
 }
 
 // 달력 날짜 클릭
