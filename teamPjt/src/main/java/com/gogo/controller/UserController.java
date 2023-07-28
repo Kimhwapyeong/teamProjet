@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/member/mypage/*")
-public class MemberController {
+public class UserController {
 	
 	// 예약 정보
 	@GetMapping("reservation")

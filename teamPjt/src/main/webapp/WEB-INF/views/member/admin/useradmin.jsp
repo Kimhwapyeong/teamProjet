@@ -52,8 +52,8 @@
                     </div>
                     <div class="newmypage_menu pc_only">
                         <ul >
-                            <li class="active"><a href="./stayadmin">숙소 관리</a></li>
-                            <li class=""><a href="/admin/useradmin">사용자 관리 </a></li>
+                            <li class=""><a href="./stayadmin">숙소 관리</a></li>
+                            <li class="active"><a href="/admin/useradmin">사용자 관리 </a></li>
                             <li class=""><a href="./hosthelp">호스트 지원</a></li>
                             <li class=""><a href="./statistics">통계 및 분석</a></li>
                         </ul>
