@@ -1,7 +1,7 @@
 
 
 	
-
+		/* 결제 */
 		function purchased(pg){
 			
 				IMP.init('imp31246282');
@@ -74,6 +74,8 @@
 			})
 		}
 		
+		
+		  /* 환불 */
 		  function cancelPay() {
 			  
 			  if(canclePay==null || canclePay==''
@@ -141,6 +143,10 @@
 			  
 		  }
 		  
+		  
+		  
+		  /* 결제 정보를 console에 찍어주는 스크립트 
+		    	노쓸모 */
 		  function payInfoConsole() {
 			  
 			  	if(payInfo == null || payInfo == ''){

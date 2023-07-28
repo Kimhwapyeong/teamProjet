@@ -30,7 +30,7 @@
 						<!-- font-size: 12px;
     							color: #666; -->
 							<select class="form_style" name="roomName" style="font-size: 12px; color:#666; width:100%;">
-								<option selected>예약할 객실을 선택해 주세요.</option>
+								<option value="" selected>예약할 객실을 선택해 주세요.</option>
 								<option value="A호">A호</option>
 								<option value="B호">B호</option>
 								<option value="C호">C호</option>
@@ -72,14 +72,36 @@
 									
 									$("#kakaopay").click(function(){
 										
-										purchased('kakaopay');
+										
+										if($('select[name=roomName]').val()==""){
+											
+											alert('객실을 선택해 주세요.');
+											return false;
+											
+										} else {
+											
+											purchased('kakaopay');
+										}
+										
+										
+										
 										
 										
 									});
 									
 									$("#nice").click(function(){
 										
-										purchased('nice');
+										if($('select[name=roomName]').val()==""){
+											
+											alert('객실을 선택해 주세요.');
+											return false;
+										} else {
+											
+											purchased('nice');
+										}
+										
+										
+										
 										
 										
 									});
@@ -100,6 +122,9 @@
 		var purchaseName = $('input[name=stayName]').val()+", "+$('select[name=roomName]').val();
 		var purchaseAmount = $('#amount').attr("data-amount");
 		
+		
+		
+		
 		$(function(){
 			
 			$("#canclePayVal").change(function(){
@@ -116,7 +141,11 @@
 			
 			$('select[name=roomName]').change(function(){
 				
+				
+				
 				purchaseName = $('input[name=stayName]').val()+", "+$('select[name=roomName]').val();
+				
+				
 				
 			});
 			
