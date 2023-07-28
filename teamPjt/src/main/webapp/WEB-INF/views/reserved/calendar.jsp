@@ -126,10 +126,7 @@
     			
     		}
     		
-			if(checkOutDate!=''){
-				
-				$('.space').html('~');
-			}
+			
     		
     		
     		reload.addEventListener('click', function(e){
