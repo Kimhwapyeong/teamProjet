@@ -6,6 +6,24 @@
 <!-- 연결할 mapper의 interface 풀 경로 작성 -->
 <mapper namespace="com.gogo.mapper.mypageMapper">
 	<select id="getList" resultType="com.gogo.vo.StayVO">
-		select stayseq, stayname, member_id, stayinfo from stay
+		select stayNo, stayname, memberId, stayInfo from stay
 	</select>
+	
+	<select id="getMember" resultType="com.gogo.vo.MemberVO">
+		SELECT memberid, membername, memberemail,
+			TO_CHAR(registraiondate, 'YYYY-MM-DD') AS registraiondate
+		FROM member
+	</select>
+	
+	
+	<select id="getMemberAgeGroups" resultType="java.lang.String">
+	    SELECT CASE
+	        WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM TO_DATE(birthday, 'YYYYMMDD')) BETWEEN 20 AND 29 THEN '20대'
+	        WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM TO_DATE(birthday, 'YYYYMMDD')) BETWEEN 30 AND 39 THEN '30대'
+	        ELSE '40세 이상'
+	    END AS 연령대
+	    FROM member
+	</select>
+
+
 </mapper>

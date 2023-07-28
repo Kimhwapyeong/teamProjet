@@ -3,6 +3,8 @@ package com.gogo.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +12,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.gogo.mapper.TestMapper;
+import com.gogo.mapper.mypageMapper;
 import com.gogo.vo.MemberVO;
 import com.gogo.vo.RoomVO;
+import com.gogo.vo.StayVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -22,6 +26,7 @@ public class MapperTest {
 
 	@Autowired
 	TestMapper testMapper;
+	
 	
 	@Test
 	public void test() {
@@ -42,4 +47,5 @@ public class MapperTest {
 		assertEquals(1, res);
 		
 	}
+	
 }

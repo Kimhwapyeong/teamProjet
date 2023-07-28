@@ -20,10 +20,11 @@ public class AdminController {
 		mypageService.getList(model);
 	}
 	
+	
 	// 사용자 관리
 	@GetMapping("useradmin")
-	public void useradmin() {
-		
+	public void useradmin(Model model) {
+		mypageService.getMember(model);
 	}
 	
 	// 호스트 지원

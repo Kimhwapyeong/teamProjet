@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,20 +81,24 @@
                             <!--<table class="table table-striped table-hover">-->
                                   <thead>
                                     <tr>
-                                      <th>회원 번호</th>
                                       <th>회원 아이디</th>
+                                      <th>회원명</th>
                                       <th>이메일</th>
                                       <th>회원가입일</th>
                                     </tr>
                                   </thead>
                                   <tbody>
+                                  
+                                  <!-- ▶▶▶  forEach ▶▶▶  -->
+                                  <c:forEach items="${member}" var="member" step="1">
                                     <tr>
-                                        <td>98</td>
-                                        <td>누가 부트스트랩 공부한다면서요?</td>
-                                        <td>존 김</td>
-                                        <td>2019.07.05</td>
-                                      </tr>
-                                      <tr>
+                                        <td>${member.memberId }</td>
+                                        <td>${member.memberName }</td>
+                                        <td>${member.memberEmail }</td>
+                                        <td>${member.registraionDate }</td>
+                                    </tr>
+                                    </c:forEach>
+                                    
                                     </tbody>
                                   </table>
                                 </div>

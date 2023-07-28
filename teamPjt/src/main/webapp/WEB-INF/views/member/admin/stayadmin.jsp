@@ -52,6 +52,7 @@
                        </div>
                        <div class="mypage_content">
                            <div class="reserv_wrap mypage-reservation-info">
+                           
                                <!-- ▶▶▶  forEach ▶▶▶  -->
                                <c:forEach items="${list}" var="vo" step="1">
                                <div class="reserv_box accepted">
@@ -65,8 +66,8 @@
                                    <div class="stay_view">
                                        <div class="photo"
                                            style="background-image: url(&quot;//images.stayfolio.com/system/pictures/images/000/020/355/display/0259568486bda951e20241b741f6a7a30adc061f.jpg?1504161610&quot;); background-repeat: no-repeat; background-position: center center; background-size: cover;">
-                                           <!-- =============================== 수정 ============================================-->
-                                           <span class="view">스테이 수정</span></div>
+                                           <!-- =============================== 수정 onclick 올리기  ============================================-->
+                                           </div>
                                    </div>
                                        <div class="reserv_info">
                                            <!-- =============================== 숙소 - 회원 아이디 ============================================-->
@@ -76,9 +77,8 @@
                                            <div class="option">${vo.stayInfo }<br></div>
                                        </div>
                             
-                                   </a>
-                                </c:forEach>   
                                </div>
+                               </c:forEach>
                            </div>
 
                            <!-- =============================== 페이징 ============================================-->
