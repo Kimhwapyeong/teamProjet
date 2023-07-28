@@ -1,4 +1,4 @@
-package teamPjt;
+package com.gogo.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
