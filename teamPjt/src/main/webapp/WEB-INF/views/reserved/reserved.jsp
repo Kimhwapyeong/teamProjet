@@ -45,7 +45,7 @@
 								<input style="font-size: 12px; color:#666;" type="text" class="form_style" name="reserved_date" value='' readonly>
 							</c:if>
 							<c:if test="${not res}">
-								<button style="font-size: 12px; color:#666; width:100%; text-align:left;" class="form_style" onclick="location.href='/reserved/calendar'">예약 날짜 선택</button>
+								<button style="font-size: 12px; color:#666; width:100%; text-align:left;" class="form_style" onclick="location.href='/reserved/calendar'">예약 날짜 선택하기</button>
 							</c:if>
 							<script>
 								$(function(){
