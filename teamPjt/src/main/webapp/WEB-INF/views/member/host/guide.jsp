@@ -79,7 +79,8 @@
                                                          <span class="dd">고객에게 만족스러운 숙박 경험과 섬세한 서비스를 제공하는 스테이</span></li>
                                                          <li><span class="dt">가격 (PRICE)</span><span class="dd">공간, 환경, 경험 등을 고려하여 합리적인 가격이 책정된 스테이</span></li></ul>
                                                          </div>
-                                                             <button type="button" class="btn_bk btn_sm findstay_btn" style="margin-top: 20px; margin-bottom: 20px;">신청하기</button>
+                                                             <button type="button" class="btn_bk btn_sm findstay_btn" style="margin-top: 20px; margin-bottom: 20px;">
+                                                             	<a href="/addstay" style='color: white;'>신청하기</a></button>
 
                                                          </div>
 
