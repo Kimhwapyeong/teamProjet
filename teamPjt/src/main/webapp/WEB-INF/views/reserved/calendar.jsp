@@ -120,6 +120,17 @@
     		}
     		*/
     		
+    		if(checkInDate==''|| checkOutDate==''){
+    			
+    			$('.space').html('');
+    			
+    		}
+    		
+			if(checkOutDate!=''){
+				
+				$('.space').html('~');
+			}
+    		
     		
     		reload.addEventListener('click', function(e){
     			

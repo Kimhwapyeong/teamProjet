@@ -221,6 +221,8 @@ function addClassSelectDay() {
 	        $('#reserved_day').val(diff);
 	        $('#reserved_checkIn').val(a);
 	        $('#reserved_checkOut').val(b);
+	        
+	        $('.space').html('~');
         }
 }
 
