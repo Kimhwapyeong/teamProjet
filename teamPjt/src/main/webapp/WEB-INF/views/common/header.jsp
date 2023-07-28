@@ -211,8 +211,8 @@
                 <div class='logo'>
                     <a href="/main">STAY FOLIO</a>
                 </div>
-                <div class="whe gnb-responsive-margin" style=""><button type="button" id="btnWhere"><span class="gnb-mo-small">어디로
-                            떠날까요?</span></button><button type="button" class="gnb-when-mo-small" id="btnWhen"><span
+                <div class="whe gnb-responsive-margin" style=""><button type="button" id="btnWhere"><img src="/resources/images/where.JPG" style="padding-right:5px;"><span class="gnb-mo-small">어디로
+                            떠날까요?</span></button><button type="button" class="gnb-when-mo-small" id="btnWhen" style="padding-left:0px;"><img src="/resources/images/when.JPG"style="padding-right:5px;"><span
                             class="gnb-mo-small">언제 떠날까요?</span></button></div>
                 <div class="toggle-ko-mo"></div>
                 <div class="nav">

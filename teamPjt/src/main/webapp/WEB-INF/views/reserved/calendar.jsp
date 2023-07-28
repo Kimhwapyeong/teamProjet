@@ -21,11 +21,11 @@
 
 <body>
 	<div style="height:100px;">
-		<span style="font-size:2.6em; font-weight:bold; color:#000000cf; position:absolute; left:3%; top:13%;">언제 떠날래?</span>
+		<span style="font-size:2.6em; font-weight:bold; color:#000000cf; position:absolute; left:3%; top:13%;">언제 떠날까요?</span>
 		
 	</div>
 	<br><br><br>
-	<hr style="height:20px;">
+	<hr style="border-top: 2.5px solid;color: #00000061;width:1150px;position:absolute;left:3%;">
 	
 
 
@@ -96,6 +96,7 @@
         <input type="hidden" id="reserved_day" name="reserved_day" value="">
         <input type="hidden" id="reserved_checkIn" name="reserved_checkIn" value="">
         <input type="hidden" id="reserved_checkOut" name="reserved_checkOut" value="">
+		    
 		    <div style="position:absolute; bottom:5%; left:10%; width:1000px;">   
 		    	<button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer;" type="submit" onclick="check(form)">예약하기</button><br><br>
 		    	<button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer;" id="reload">초기화</button><br><br>
