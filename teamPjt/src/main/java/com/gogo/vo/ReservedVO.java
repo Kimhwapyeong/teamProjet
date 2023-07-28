@@ -3,7 +3,7 @@ package com.gogo.vo;
 import lombok.Data;
 
 @Data  // 예약
-public class reservationVO {
+public class ReservedVO {
 
 	private String reservationNo; // 예약 seq
 	private String roomNo; // room seq
