@@ -18,7 +18,17 @@
 
 </head>
 
+
 <body>
+	<div style="height:100px;">
+		<span style="font-size:2.6em; font-weight:bold; color:#000000cf; position:absolute; left:3%; top:13%;">언제 떠날래?</span>
+		
+	</div>
+	<br><br><br>
+	<hr style="height:20px;">
+	
+
+
   <div class="calendar-wrap">
     <div class="calendar-middle-wrap">
       <div class="cal_nav">
@@ -71,38 +81,43 @@
           <span>체크아웃</span>
           <label id="check_out_day"></label>
         </p>
-      </div>
-    </div>
-    <form action="/reserved/day" method="get" onsubmit="return false;">
-    <div class="checkInOutInfo" style="position:absolute; bottom:30%; left:50%;">
-       <div>
+        <br><br>
         <p>
           <span>총 예약일</span>
         </p>
         <p>  
           <label id="check_out_day" class="check_day_count"></label>          
-          <input type="hidden" id="reserved_day" name="reserved_day" value="">
-          <input type="hidden" id="reserved_checkIn" name="reserved_checkIn" value="">
-          <input type="hidden" id="reserved_checkOut" name="reserved_checkOut" value="">
         </p>
+        
       </div>
     </div>
-    	<button type="submit" onclick="check(form)">예약하기</button>
-    	<button id="reload">초기화</button><br>
-    	<button id="back">메인으로</button><br>
-    	<button type="button" class="btn_close" id="closeBtn2">닫기</button>
+   <div id="buttonBtn">
+    <form action="/reserved/day" method="get" onsubmit="return false;">
+        <input type="hidden" id="reserved_day" name="reserved_day" value="">
+        <input type="hidden" id="reserved_checkIn" name="reserved_checkIn" value="">
+        <input type="hidden" id="reserved_checkOut" name="reserved_checkOut" value="">
+		    <div style="position:absolute; bottom:5%; left:10%; width:1000px;">   
+		    	<button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer;" type="submit" onclick="check(form)">예약하기</button><br><br>
+		    	<button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer;" id="reload">초기화</button><br><br>
+		    	<button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer;" id="back">메인으로</button><br><br>
+		    </div>
+		    	<button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer; position:absolute; top:11%; right:1%;" type="button" class="btn_close" onclick="btnClose()" id="closeBtn2">
+		    	<img src="/resources/images/closeBtn.JPG">
+		    	</button>
     </form>
+    </div>
     <script>
     
     	window.addEventListener('load', function(){
     		
+    		/*
     		// 예약 페이지에선 닫기 버튼 안보여주기
     		if($('.modalOverlay2').attr('style') == null){
     			
     			$('#closeBtn2').attr('style', 'display:none;');
     			
     		}
-    		
+    		*/
     		
     		
     		reload.addEventListener('click', function(e){

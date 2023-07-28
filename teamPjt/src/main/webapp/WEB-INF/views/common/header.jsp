@@ -55,7 +55,8 @@
 	        document.querySelector("#whenModal").style.display='none';
 	    })
 		// 언제 떠날까요? 달력 끝
-	
+
+
 		
 	    // a 요소 (button 의 자식 a)
 	    let buttons = document.querySelectorAll("button>a");
@@ -195,7 +196,12 @@
 	
 	<!-- when modal -->
 	<div class="modalOverlay" id="whenModal" style="display: none;">
-		<jsp:include page="/WEB-INF/views/reserved/calendar.jsp"/>
+		<div class="modalWrapper">
+			<div class="modalInner" style="width:1220px; height:900px;">
+	
+					<jsp:include page="/WEB-INF/views/reserved/calendar.jsp"/>
+			</div>
+		</div>
 	</div>
 	
 	<!-- 헤더 메뉴 -->

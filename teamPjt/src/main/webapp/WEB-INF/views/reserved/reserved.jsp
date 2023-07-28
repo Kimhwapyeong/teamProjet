@@ -5,6 +5,26 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	<script src='/resources/js/reserved/payment.js'></script>
+<head>
+<script>
+
+			
+			
+	function btnWhenFunction(){
+				
+		document.querySelector("#whenModal").style.display='';
+		
+	}
+	
+	function btnClose(){
+		
+		document.querySelector("#whenModal").style.display='none';
+
+		
+	}
+
+</script>
+</head>
 
 <body>
 <jsp:include page="../common/header.jsp"/>
@@ -43,10 +63,10 @@
 						<div class="dd">
 							<c:if test="${not empty reserved_day}" var="res">
 								<input style="font-size: 12px; color:#666; background-color:#e6e6e6;" type="text" class="form_style" name="reserved_date" value='' disabled>
-								<button style="font-size: 12px; color:black;  text-align:left;" class="form_style" onclick="location.href='/reserved/calendar'">예약 날짜 선택하기</button>
+								<button onclick="btnWhenFunction()" style="font-size: 12px; color:black;  text-align:left;" class="form_style" >예약 날짜 선택하기</button>
 							</c:if>
 							<c:if test="${not res}">
-								<button style="font-size: 12px; color:black;  text-align:left;" class="form_style" onclick="location.href='/reserved/calendar'">예약 날짜 선택하기</button>
+								<button onclick="btnWhenFunction()" style="font-size: 12px; color:black;  text-align:left;" class="form_style" >예약 날짜 선택하기</button>
 							</c:if>
 							<script>
 								$(function(){
@@ -211,6 +231,9 @@
 					
 				
 				</script>
+				
+				
+			
 </body>
 	<script
   src="https://code.jquery.com/jquery-3.3.1.min.js"

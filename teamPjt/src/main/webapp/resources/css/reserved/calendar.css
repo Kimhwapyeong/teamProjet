@@ -49,7 +49,7 @@ ul {
 .calendar-wrap>div {}
 
 .calendar-middle-wrap {
-    background: #fafbfa;
+    background: white;
     width: 34%;
     padding: 40px 32px;
     padding-bottom: 100px;
@@ -60,7 +60,7 @@ ul {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #fafbfa;
+    background: white;
     position: relative;
 }
 
