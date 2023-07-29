@@ -3,7 +3,7 @@
     <footer id="footer">
         <div class="container_wide">
             <div class="footer_cont">
-                <div class="logo"><img src="/web/images/logo.png" alt="STAYFOLIO"></div>
+                <div class="logo"><img src="https://www.stayfolio.com/web/images/logo.png" alt="STAYFOLIO"></div>
                 <div class="menu-cs">
                     <ul class="menu">
                         <li><a target="_self" rel="noreferrer" href="/about">ABOUT</a></li>

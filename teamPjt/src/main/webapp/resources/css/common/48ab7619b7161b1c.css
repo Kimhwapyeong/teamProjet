@@ -1,5 +1,4 @@
-@charset "UTF-8";
-@charset "utf-8";@font-face {
+        /* @charset "utf-8";@font-face {
     font-family: SpoqaHanSans;
     font-weight: 100;
     src: url(/_next/static/media/SpoqaHanSansRegular.50d57b70.ttf) format("truetype"),url(/_next/static/media/SpoqaHanSansRegular.328aee46.woff) format("woff"),url(/_next/static/media/SpoqaHanSansRegular.ccdc4420.woff2) format("woff2")
@@ -178,7 +177,7 @@
     font-family: SUIT;
     font-weight: 900;
     src: url(/_next/static/media/SUIT-Heavy.5ae5d0f6.woff2) format("woff2")
-}
+} */
 
 a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,button,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,input,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,select,small,span,strike,strong,sub,summary,sup,table,tbody,td,textarea,tfoot,th,thead,time,tr,tt,u,ul,var,video {
     margin: 0;
@@ -346,7 +345,7 @@ caption {
 }
 
 .header_wrap .logo a {
-    background: url(/web/images/logo.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/logo.png) no-repeat 50%;
     background-size: cover;
     display: block;
     width: 86px;
@@ -382,12 +381,12 @@ caption {
 }
 
 .header_wrap .whe>button:first-child {
-    background: url(/web/images/where@3x.png) no-repeat 0 50%;
+    background: url(https://www.stayfolio.com/web/images/where@3x.png) no-repeat 0 50%;
     background-size: 25px 25px
 }
 
 .header_wrap .whe>button:nth-child(2) {
-    background: url(/web/images/when@3x.png) no-repeat 0 50%;
+    background: url(https://www.stayfolio.com/web/images/when@3x.png) no-repeat 0 50%;
     background-size: 25px 25px
 }
 
@@ -437,7 +436,9 @@ caption {
     line-height: 40px;
     color: #999;
     cursor: pointer;
-    padding-left: 22px
+    padding-left: 22px;
+    right: 40px;
+    margin-left:40px;
 }
 
 .header_wrap .nav_etc .nav_tit:before {
@@ -452,17 +453,17 @@ caption {
 }
 
 .header_wrap .nav_etc .nav_tit.login:before {
-    background: url(/web/images/ico_login.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/ico_login.svg) no-repeat 50%;
     background-size: cover
 }
 
 .header_wrap .nav_etc .nav_tit.mypage:before {
-    background: url(/web/images/ico-mypage.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/ico-mypage.svg) no-repeat 50%;
     background-size: cover
 }
 
 .header_wrap .nav_etc .nav_tit.language:before {
-    background: url(/web/images/ico-language.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/ico-language.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -474,7 +475,7 @@ caption {
     border: 1px solid #e6e6e6;
     position: absolute;
     top: 60px;
-    right: -20px;
+    right: 20px;
     transition: all .2s;
     width: 125px;
     box-shadow: 0 4px 20px 0 rgba(0,0,0,.1)
@@ -493,7 +494,7 @@ caption {
     right: 20px;
     width: 16px;
     height: 10px;
-    background: url(/web/images/img-balloon.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/img-balloon.png) no-repeat 50%;
     background-size: cover
 }
 
@@ -537,7 +538,7 @@ caption {
 }
 
 .footer_wrap .logo a {
-    background: url(/web/images/logo.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/logo.png) no-repeat 50%;
     background-size: cover;
     width: 78px;
     height: 32px;
@@ -573,27 +574,27 @@ caption {
 }
 
 .footer_wrap .sns a.fb {
-    background: url(/web/images/ico_sns.png) no-repeat 0 0;
+    background: url(https://www.stayfolio.com/web/images/ico_sns.png) no-repeat 0 0;
     background-size: 20px 100px
 }
 
 .footer_wrap .sns a.insta {
-    background: url(/web/images/ico_sns.png) no-repeat 0 -20px;
+    background: url(https://www.stayfolio.com/web/images/ico_sns.png) no-repeat 0 -20px;
     background-size: 20px 100px
 }
 
 .footer_wrap .sns a.naver {
-    background: url(/web/images/ico_sns.png) no-repeat 0 -40px;
+    background: url(https://www.stayfolio.com/web/images/ico_sns.png) no-repeat 0 -40px;
     background-size: 20px 100px
 }
 
 .footer_wrap .sns a.brunch {
-    background: url(/web/images/ico_sns.png) no-repeat 0 -60px;
+    background: url(https://www.stayfolio.com/web/images/ico_sns.png) no-repeat 0 -60px;
     background-size: 20px 100px
 }
 
 .footer_wrap .sns a.youtube {
-    background: url(/web/images/ico_sns.png) no-repeat 0 -80px;
+    background: url(https://www.stayfolio.com/web/images/ico_sns.png) no-repeat 0 -80px;
     background-size: 20px 100px
 }
 
@@ -694,47 +695,47 @@ caption {
 }
 
 #moMenu>ul>li:first-child>a span:before {
-    background: url(/web/images/ico-bt-menu.png) no-repeat 50% 0;
+    background: url(https://www.stayfolio.com/web/images/ico-bt-menu.png) no-repeat 50% 0;
     background-size: 25px 300px
 }
 
 #moMenu>ul>li:nth-child(2)>a span:before {
-    background: url(/web/images/ico-bt-menu.png) no-repeat 50% -60px;
+    background: url(https://www.stayfolio.com/web/images/ico-bt-menu.png) no-repeat 50% -60px;
     background-size: 25px 300px
 }
 
 #moMenu>ul>li:nth-child(3)>a span:before {
-    background: url(/web/images/ico-bt-menu.png) no-repeat 50% -120px;
+    background: url(https://www.stayfolio.com/web/images/ico-bt-menu.png) no-repeat 50% -120px;
     background-size: 25px 300px
 }
 
 #moMenu>ul>li:nth-child(4)>a span:before {
-    background: url(/web/images/ico-bt-menu.png) no-repeat 50% -180px;
+    background: url(https://www.stayfolio.com/web/images/ico-bt-menu.png) no-repeat 50% -180px;
     background-size: 25px 300px
 }
 
 #moMenu>ul>li:nth-child(5)>a span:before {
-    background: url(/footer-msg.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/footer-msg.svg) no-repeat 50%;
     background-size: 26px
 }
 
 #moMenu>ul>li:first-child>a.active span:before {
-    background: url(/web/images/ico-bt-menu.png) no-repeat 50% -30px;
+    background: url(https://www.stayfolio.com/web/images/ico-bt-menu.png) no-repeat 50% -30px;
     background-size: 25px 300px
 }
 
 #moMenu>ul>li:nth-child(2)>a.active span:before {
-    background: url(/web/images/ico-bt-menu.png) no-repeat 50% -90px;
+    background: url(https://www.stayfolio.com/web/images/ico-bt-menu.png) no-repeat 50% -90px;
     background-size: 25px 300px
 }
 
 #moMenu>ul>li:nth-child(3)>a.active span:before {
-    background: url(/web/images/ico-bt-menu.png) no-repeat 50% -150px;
+    background: url(https://www.stayfolio.com/web/images/ico-bt-menu.png) no-repeat 50% -150px;
     background-size: 25px 300px
 }
 
 #moMenu>ul>li:nth-child(4)>a.active span:before {
-    background: url(/web/images/ico-bt-menu.png) no-repeat 50% -210px;
+    background: url(https://www.stayfolio.com/web/images/ico-bt-menu.png) no-repeat 50% -210px;
     background-size: 25px 300px
 }
 
@@ -818,12 +819,12 @@ caption {
     }
 
     .header_wrap .whe>button:first-child {
-        background: url(/web/images/ico-where-mo.png) no-repeat 0 50%;
+        background: url(https://www.stayfolio.com/web/images/ico-where-mo.png) no-repeat 0 50%;
         background-size: 20px 20px
     }
 
     .header_wrap .whe>button:nth-child(2) {
-        background: url(/web/images/ico-when-mo.png) no-repeat 0 50%;
+        background: url(https://www.stayfolio.com/web/images/ico-when-mo.png) no-repeat 0 50%;
         background-size: 20px 20px
     }
 
@@ -874,27 +875,27 @@ caption {
     }
 
     .footer_wrap .sns a.fb {
-        background: url(/web/images/ico_sns.png) no-repeat 0 0;
+        background: url(https://www.stayfolio.com/web/images/ico_sns.png) no-repeat 0 0;
         background-size: 25px 125px
     }
 
     .footer_wrap .sns a.insta {
-        background: url(/web/images/ico_sns.png) no-repeat 0 -25px;
+        background: url(https://www.stayfolio.com/web/images/ico_sns.png) no-repeat 0 -25px;
         background-size: 25px 125px
     }
 
     .footer_wrap .sns a.naver {
-        background: url(/web/images/ico_sns.png) no-repeat 0 -50px;
+        background: url(https://www.stayfolio.com/web/images/ico_sns.png) no-repeat 0 -50px;
         background-size: 25px 125px
     }
 
     .footer_wrap .sns a.brunch {
-        background: url(/web/images/ico_sns.png) no-repeat 0 -75px;
+        background: url(https://www.stayfolio.com/web/images/ico_sns.png) no-repeat 0 -75px;
         background-size: 25px 125px
     }
 
     .footer_wrap .sns a.youtube {
-        background: url(/web/images/ico_sns.png) no-repeat 0 -100px;
+        background: url(https://www.stayfolio.com/web/images/ico_sns.png) no-repeat 0 -100px;
         background-size: 25px 125px
     }
 
@@ -1085,42 +1086,42 @@ caption {
 }
 
 .footer_cont .sns li a.facebook {
-    background: url(/web/images/sns-facebook.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/sns-facebook.svg) no-repeat 50%;
     background-size: cover
 }
 
 .footer_cont .sns li a.instagram {
-    background: url(/web/images/sns-insta.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/sns-insta.svg) no-repeat 50%;
     background-size: cover
 }
 
 .footer_cont .sns li a.naver {
-    background: url(/web/images/sns-naver.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/sns-naver.svg) no-repeat 50%;
     background-size: cover
 }
 
 .footer_cont .sns li a.brunch {
-    background: url(/web/images/sns-brunch.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/sns-brunch.svg) no-repeat 50%;
     background-size: cover
 }
 
 .footer_cont .sns li a.youtube {
-    background: url(/web/images/sns-youtube.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/sns-youtube.svg) no-repeat 50%;
     background-size: cover
 }
 
 .footer_cont .sns li a.tiktok {
-    background: url(/web/images/sns-tiktok.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/sns-tiktok.svg) no-repeat 50%;
     background-size: cover
 }
 
 .footer_cont .sns li a.pinterest {
-    background: url(/web/images/sns-pinterest.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/sns-pinterest.svg) no-repeat 50%;
     background-size: cover
 }
 
 .footer_cont .sns li a.twitter {
-    background: url(/web/images/sns-twitter.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/sns-twitter.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -1316,7 +1317,7 @@ caption {
     margin-top: -8px;
     width: 16px;
     height: 16px;
-    background: url(/web/images/ico-checkbox.svg) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/ico-checkbox.svg) no-repeat;
     background-size: 16px 32px
 }
 
@@ -1391,12 +1392,12 @@ caption {
     margin-top: -8px;
     width: 100%;
     height: 16px;
-    background: url(/web/images/ico-radio.svg) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/ico-radio.svg) no-repeat;
     background-size: 16px 32px
 }
 
 .radio_skin input+span.disabled:before {
-    background: url(/web/images/ico-radio-disabled.png) repeat-y;
+    background: url(https://www.stayfolio.com/web/images/ico-radio-disabled.png) repeat-y;
     background-size: 16px 16px
 }
 
@@ -1574,7 +1575,7 @@ textarea {
     height: 80px;
     border: 1px solid #ddd;
     display: inline-block;
-    background: #ededed url(/web/images/img_photo.png) no-repeat 50%;
+    background: #ededed url(https://www.stayfolio.com/web/images/img_photo.png) no-repeat 50%;
     background-size: 40px 31px;
     cursor: pointer;
     text-indent: -999999px
@@ -1598,7 +1599,7 @@ textarea {
 }
 
 .input_box .file .file_box .btn_file_del {
-    background: url(/web/images/btn_file_del.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/btn_file_del.png) no-repeat 50%;
     background-size: cover;
     width: 25px;
     height: 25px;
@@ -1654,7 +1655,7 @@ select {
     border: 1px solid #e5e5e5;
     border-radius: 5px;
     font-size: #bbb;
-    background: url(/web/images/arw_selectbox.png) no-repeat 100% 50%;
+    background: url(https://www.stayfolio.com/web/images/arw_selectbox.png) no-repeat 100% 50%;
     background-size: 30px 20px;
     padding: 0 35px 0 10px
 }
@@ -1822,7 +1823,7 @@ select {
     }
 
     .layer_pop .btn_back {
-        background: url(/web/images/btn_back.png) no-repeat 50%;
+        background: url(https://www.stayfolio.com/web/images/btn_back.png) no-repeat 50%;
         background-size: cover;
         display: inline-block;
         width: 40px;
@@ -1885,7 +1886,7 @@ select {
 .board_fold li>.tit:after {
     content: "";
     display: inline-block;
-    background: url(/web/images/ico-view.png) no-repeat 15px -6px;
+    background: url(https://www.stayfolio.com/web/images/ico-view.png) no-repeat 15px -6px;
     background-size: 25px 125px;
     width: 40px;
     height: 14px;
@@ -1897,7 +1898,7 @@ select {
 }
 
 .board_fold li.active>.tit:after {
-    background: url(/web/images/ico-view.png) no-repeat 15px -67px;
+    background: url(https://www.stayfolio.com/web/images/ico-view.png) no-repeat 15px -67px;
     background-size: 25px 125px
 }
 
@@ -1972,7 +1973,7 @@ select {
 }
 
 .agree_box .agree_arrw_down {
-    background: url(/web/images/ico-view.png) no-repeat 15px -6px;
+    background: url(https://www.stayfolio.com/web/images/ico-view.png) no-repeat 15px -6px;
     background-size: 25px 125px
 }
 
@@ -1985,7 +1986,7 @@ select {
 }
 
 .agree_box .agree_arrw_up {
-    background: url(/web/images/ico-view.png) no-repeat 15px -67px;
+    background: url(https://www.stayfolio.com/web/images/ico-view.png) no-repeat 15px -67px;
     background-size: 25px 125px
 }
 
@@ -2093,7 +2094,8 @@ select {
 }
 
 .clearfix {
-    *zoom:1}
+    *zoom:1
+}
 
 .clearfix:after,.clearfix:before {
     display: block;
@@ -2296,7 +2298,7 @@ select {
     width: 26px;
     height: 26px;
     margin: -13px 0 0 -13px;
-    background: url(/web/images/ico_like.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/ico_like.png) no-repeat;
     background-size: 52px 26px;
     transition: opacity .3s
 }
@@ -2307,7 +2309,7 @@ select {
 }
 
 .btn_like.like2 span,.btn_like.like2:after {
-    background: url(/web/images/ico_like2.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/ico_like2.png) no-repeat;
     background-size: 52px 26px
 }
 
@@ -2330,13 +2332,13 @@ select {
     height: 35px;
     font-size: 0;
     z-index: 10;
-    background: url(/web/images/ico-like-bk.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/ico-like-bk.svg) no-repeat 50%;
     text-indent: -99999px;
     transition: all .3s
 }
 
 .btn_like2.on {
-    background: url(/web/images/ico-like-bk-on.svg) no-repeat 50%
+    background: url(https://www.stayfolio.com/web/images/ico-like-bk-on.svg) no-repeat 50%
 }
 
 .btn_share {
@@ -2345,7 +2347,7 @@ select {
     height: 35px;
     font-size: 0;
     z-index: 10;
-    background: url(/web/images/ico-share-1.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/ico-share-1.svg) no-repeat 50%;
     text-indent: -99999px;
     transition: all .3s
 }
@@ -2360,7 +2362,7 @@ select {
         width: 22px;
         height: 22px;
         margin: -11px 0 0 -11px;
-        background: url(/web/images/ico_like.png) no-repeat;
+        background: url(https://www.stayfolio.com/web/images/ico_like.png) no-repeat;
         background-size: 44px 22px
     }
 
@@ -2372,7 +2374,7 @@ select {
         width: 20px;
         height: 20px;
         margin: -10px 0 0 -10px;
-        background: url(/web/images/ico_like2.png) no-repeat;
+        background: url(https://www.stayfolio.com/web/images/ico_like2.png) no-repeat;
         background-size: 40px 20px
     }
 
@@ -2753,12 +2755,12 @@ select {
 }
 
 .paging .prev {
-    background: url(/web/images/arw-bk.png) no-repeat 50% -15px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 50% -15px;
     background-size: 7px 30px
 }
 
 .paging .next {
-    background: url(/web/images/arw-bk.png) no-repeat 50% 0;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 50% 0;
     background-size: 7px 30px
 }
 
@@ -2875,7 +2877,7 @@ select {
 
 .tooltip_btn {
     display: inline-block;
-    background: url(/web/images/ico-guide.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/ico-guide.svg) no-repeat 50%;
     background-size: 16px 16px;
     width: 20px;
     height: 20px;
@@ -3171,7 +3173,7 @@ select {
 .main_visual .slick-prev {
     left: 246px!important;
     z-index: 2;
-    background: url(/web/images/arw-wh.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-wh.png) no-repeat 9px 20px;
     background-position: 0 0;
     border-right: 1px solid hsla(0,0%,100%,.15);
     padding-right: 22px
@@ -3187,7 +3189,7 @@ select {
 
 .main_visual .slick-next {
     left: 282px;
-    background: url(/web/images/arw-wh.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-wh.png) no-repeat 9px 20px;
     background-position: 0 -20px
 }
 
@@ -3363,7 +3365,7 @@ select {
     right: 20px;
     top: 0;
     color: #fff;
-    background: url(/web/images/ico_refresh.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/ico_refresh.png) no-repeat 50%;
     background-size: cover;
     width: 20px;
     display: block;
@@ -3404,12 +3406,12 @@ select {
 }
 
 .main_viprecom .stay_list .slick-next {
-    background: url(/web/images/arw-gry.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-gry.png) no-repeat 9px 20px;
     background-position: 0 0
 }
 
 .main_viprecom .stay_list .slick-prev {
-    background: url(/web/images/arw-gry.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-gry.png) no-repeat 9px 20px;
     background-position: 0 -15px
 }
 
@@ -3420,7 +3422,7 @@ select {
     bottom: 30px;
     right: 30px;
     z-index: 9100;
-    background: url(/web/images/channel-talk-desktop.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/channel-talk-desktop.png) no-repeat 50%;
     background-size: 120%;
     background-size: 60px auto;
     background-color: transparent
@@ -3441,7 +3443,7 @@ select {
         height: 44px;
         width: 44px;
         z-index: 9100;
-        background: url(/web/images/channel-talk-mobile.png) no-repeat 50%;
+        background: url(https://www.stayfolio.com/web/images/channel-talk-mobile.png) no-repeat 50%;
         background-size: 120%;
         background-size: 44px auto;
         right: 10px
@@ -3587,7 +3589,7 @@ select {
 .main_promotion .slick-prev {
     right: inherit;
     left: 60px;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 -15px
 }
 
@@ -3601,7 +3603,7 @@ select {
 
 .main_promotion .slick-next {
     left: 80px;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 0
 }
 
@@ -3845,7 +3847,7 @@ select {
 .main_magazine .slick-prev {
     left: 146px;
     z-index: 2;
-    background: url(/web/images/arw-wh.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-wh.png) no-repeat 9px 20px;
     background-position: 0 0;
     border-right: 1px solid hsla(0,0%,100%,.15);
     padding-right: 22px
@@ -3861,7 +3863,7 @@ select {
 
 .main_magazine .slick-next {
     left: 182px;
-    background: url(/web/images/arw-wh.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-wh.png) no-repeat 9px 20px;
     background-position: 0 -20px
 }
 
@@ -4138,10 +4140,6 @@ select {
     padding: 150px 0
 }
 
-.main_tagThumb:lang(ko) {
-    margin-top: 0
-}
-
 .main_tagThumb .subject {
     position: relative;
     margin-bottom: 20px;
@@ -4227,10 +4225,6 @@ select {
     .main_tagThumb {
         margin-top:50px;
         padding: 70px 0 50px
-    }
-
-    .main_tagThumb:lang(ko) {
-        margin-top: 0
     }
 
     .main_tagThumb .container {
@@ -4363,7 +4357,7 @@ select {
     height: 550px;
     margin: -275px 0 0 -600px;
     text-align: center;
-    background: url(/web/images/img_error.png) no-repeat 50% 115px
+    background: url(https://www.stayfolio.com/web/images/img_error.png) no-repeat 50% 115px
 }
 
 .error_box .cont {
@@ -4403,7 +4397,7 @@ select {
         top:50vh;
         height: 70vh;
         margin: -35vh 0 0;
-        background: url(/web/images/img_error.png) no-repeat 50% 14vh;
+        background: url(https://www.stayfolio.com/web/images/img_error.png) no-repeat 50% 14vh;
         background-size: 900px 20px
     }
 
@@ -4603,7 +4597,7 @@ input[type=number] {
 }
 
 .flist_sorting .sel_map .map_img_on {
-    background: url(/web/images/pc-map-img-on.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/pc-map-img-on.png) no-repeat;
     background-position: 50%;
     background-size: contain;
     width: 36px;
@@ -4612,7 +4606,7 @@ input[type=number] {
 
 .flist_sorting .sel_map .map_img_off {
     text-indent: -9999px;
-    background: #fff url(/web/images/pc-map-img-off.png) no-repeat 50%;
+    background: #fff url(https://www.stayfolio.com/web/images/pc-map-img-off.png) no-repeat 50%;
     background-size: contain;
     width: 36px;
     height: 36px;
@@ -4678,7 +4672,7 @@ input[type=number] {
 .flist_sorting .btn_select {
     cursor: pointer;
     border: 1px solid #e4e4e4;
-    background: #fff url(/web/images/arw_select.png) no-repeat 95% 50%;
+    background: #fff url(https://www.stayfolio.com/web/images/arw_select.png) no-repeat 95% 50%;
     background-size: 20px 20px;
     border-radius: 5px;
     width: 200px;
@@ -4777,7 +4771,7 @@ input[type=number] {
     position: absolute;
     top: 25px;
     right: 25px;
-    background: #fff url(/web/images/btn_layer_close.png) no-repeat 50%;
+    background: #fff url(https://www.stayfolio.com/web/images/btn_layer_close.png) no-repeat 50%;
     width: 30px;
     height: 30px;
     text-indent: -99999px;
@@ -4896,13 +4890,13 @@ input[type=number] {
 
 .layer_select .number_count .btn_minus {
     left: 0;
-    background: #f9fafb url(/web/images/btn_count.png) no-repeat 0 0;
+    background: #f9fafb url(https://www.stayfolio.com/web/images/btn_count.png) no-repeat 0 0;
     background-size: 29px 100px
 }
 
 .layer_select .number_count .btn_plus {
     right: 0;
-    background: #f9fafb url(/web/images/btn_count.png) no-repeat 0 -50px;
+    background: #f9fafb url(https://www.stayfolio.com/web/images/btn_count.png) no-repeat 0 -50px;
     background-size: 29px 100px
 }
 
@@ -4946,7 +4940,7 @@ input[type=number] {
     z-index: 1;
     width: 30px;
     height: 30px;
-    background: url(/web/images/img_handle.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/img_handle.png) no-repeat 50%;
     content: ""
 }
 
@@ -4988,7 +4982,7 @@ input[type=number] {
     right: 0;
     top: 11px;
     text-indent: -9999px;
-    background: #fff url(/web/images/btn_reset.png) no-repeat 50%;
+    background: #fff url(https://www.stayfolio.com/web/images/btn_reset.png) no-repeat 50%;
     background-size: 28px 28px;
     width: 36px;
     height: 36px;
@@ -4998,7 +4992,7 @@ input[type=number] {
 
 .flist_sorting .btn_search {
     display: block;
-    background: url(/web/images/arw-search2.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/arw-search2.png) no-repeat;
     background-position: 103px 12px;
     background-color: #000;
     background-size: 14px 11px;
@@ -5033,7 +5027,7 @@ input[type=number] {
     display: block;
     top: 50px;
     right: 70px;
-    background: url(/web/images/btn-close.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/btn-close.png) no-repeat 50%;
     width: 50px;
     height: 50px;
     text-indent: -99999px
@@ -5294,7 +5288,7 @@ input[type=number] {
     }
 
     .flist_sorting .ico_map_off {
-        background: #fff url(/web/images/ico-map-off.png) no-repeat 50%;
+        background: #fff url(https://www.stayfolio.com/web/images/ico-map-off.png) no-repeat 50%;
         background-size: 20px 20px
     }
 
@@ -5310,7 +5304,7 @@ input[type=number] {
     }
 
     .flist_sorting .ico_map_on {
-        background: #fff url(/web/images/ico-map-on.png) no-repeat 50%;
+        background: #fff url(https://www.stayfolio.com/web/images/ico-map-on.png) no-repeat 50%;
         background-size: 36px 36px
     }
 
@@ -5806,7 +5800,7 @@ input[type=number] {
     z-index: 2;
     width: 16px;
     height: 31px;
-    background: url(/web/images/arw-fslist.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/arw-fslist.png) no-repeat;
     background-size: cover;
     background-position: 0 0
 }
@@ -5817,7 +5811,7 @@ input[type=number] {
     margin-top: -16px;
     width: 16px;
     height: 31px;
-    background: url(/web/images/arw-fslist.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/arw-fslist.png) no-repeat;
     background-size: cover;
     background-position: 0 -31px
 }
@@ -6170,17 +6164,17 @@ input[type=number] {
 }
 
 .map_container .map_tit .links a.insta {
-    background: url(/web/images/ico_sns.png) no-repeat 0 -25px;
+    background: url(https://www.stayfolio.com/web/images/ico_sns.png) no-repeat 0 -25px;
     background-size: 25px 125px
 }
 
 .map_container .map_tit .links a.naver {
-    background: url(/web/images/ico_sns.png) no-repeat 0 -50px;
+    background: url(https://www.stayfolio.com/web/images/ico_sns.png) no-repeat 0 -50px;
     background-size: 25px 125px
 }
 
 .map_container .map_stay {
-    background: url(/web/images/map-stay.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/map-stay.png) no-repeat 50%;
     background-size: cover;
     width: 31px;
     height: 44px;
@@ -6189,7 +6183,7 @@ input[type=number] {
 }
 
 .map_container .map_marker {
-    background: url(/web/images/map-marker.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/map-marker.png) no-repeat 50%;
     background-size: cover;
     width: 34px;
     height: 37px;
@@ -6227,7 +6221,7 @@ input[type=number] {
 }
 
 .fdetail_map .map_info li .map_marker {
-    background: url(/web/images/map-marker.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/map-marker.png) no-repeat 50%;
     background-size: cover;
     width: 34px;
     height: 37px;
@@ -6324,12 +6318,12 @@ input[type=number] {
     }
 
     .map_container .map_tit .links a.insta {
-        background: url(/web/images/ico_sns.png) no-repeat 0 -20px;
+        background: url(https://www.stayfolio.com/web/images/ico_sns.png) no-repeat 0 -20px;
         background-size: 20px 100px
     }
 
     .map_container .map_tit .links a.naver {
-        background: url(/web/images/ico_sns.png) no-repeat 0 -40px;
+        background: url(https://www.stayfolio.com/web/images/ico_sns.png) no-repeat 0 -40px;
         background-size: 20px 100px
     }
 
@@ -6447,7 +6441,7 @@ input[type=number] {
     padding: 10px 0 10px 42px;
     font-size: 13px;
     color: #000;
-    background: url(/web/images/ico-back.png) no-repeat 0 50%
+    background: url(https://www.stayfolio.com/web/images/ico-back.png) no-repeat 0 50%
 }
 
 .fdetail_top .name {
@@ -6501,7 +6495,7 @@ input[type=number] {
     right: 5px;
     width: 40px;
     height: 40px;
-    background: url(/web/images/btn-close.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/btn-close.png) no-repeat 50%;
     background-size: 16px 16px;
     text-indent: -9999px
 }
@@ -7079,7 +7073,7 @@ input[type=number] {
 
 .room_slider .slick-prev {
     left: -415px;
-    background: url(/web/images/arw-fsdetail03.png) no-repeat 70px 140px;
+    background: url(https://www.stayfolio.com/web/images/arw-fsdetail03.png) no-repeat 70px 140px;
     background-position: 0 0
 }
 
@@ -7093,7 +7087,7 @@ input[type=number] {
 
 .room_slider .slick-next {
     left: -330px;
-    background: url(/web/images/arw-fsdetail03.png) no-repeat 70px 140px;
+    background: url(https://www.stayfolio.com/web/images/arw-fsdetail03.png) no-repeat 70px 140px;
     background-position: 0 -70px
 }
 
@@ -7256,7 +7250,7 @@ input[type=number] {
     margin-top: -30px;
     width: 60px;
     height: 60px;
-    background: url(/web/images/arw-fsdetail01.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/arw-fsdetail01.png) no-repeat;
     background-size: cover;
     background-position: 0 0
 }
@@ -7267,7 +7261,7 @@ input[type=number] {
     margin-top: -30px;
     width: 60px;
     height: 60px;
-    background: url(/web/images/arw-fsdetail01.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/arw-fsdetail01.png) no-repeat;
     background-size: cover;
     background-position: 0 -60px
 }
@@ -7424,7 +7418,7 @@ input[type=number] {
 
 .taste_slider .slick-prev {
     left: 30px;
-    background: url(/web/images/arw-fsdetail02.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-fsdetail02.png) no-repeat 9px 20px;
     background-position: 0 0;
     background-color: #fff
 }
@@ -7440,7 +7434,7 @@ input[type=number] {
 
 .taste_slider .slick-next {
     left: 69px;
-    background: url(/web/images/arw-fsdetail02.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-fsdetail02.png) no-repeat 9px 20px;
     background-position: 0 -40px;
     background-color: #fff
 }
@@ -7508,7 +7502,7 @@ input[type=number] {
 
     .taste_slider .slick-prev {
         left: 35px;
-        background: url(/web/images/arw-fslist.png) no-repeat;
+        background: url(https://www.stayfolio.com/web/images/arw-fslist.png) no-repeat;
         background-size: cover;
         background-position: 0 0
     }
@@ -7525,7 +7519,7 @@ input[type=number] {
     .taste_slider .slick-next {
         left: inherit;
         right: 5px;
-        background: url(/web/images/arw-fslist.png) no-repeat;
+        background: url(https://www.stayfolio.com/web/images/arw-fslist.png) no-repeat;
         background-size: cover;
         background-position: 0 -31px
     }
@@ -7620,7 +7614,7 @@ input[type=number] {
 
 .benefit_cont .benefit_option .benefit_box i {
     display: block;
-    background: url(/web/images/ico-benefits.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/ico-benefits.png) no-repeat;
     background-size: 110px 440px;
     width: 110px;
     height: 110px;
@@ -8099,7 +8093,7 @@ input[type=number] {
     left: auto;
     width: 9px;
     height: 15px;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 -15px
 }
 
@@ -8108,7 +8102,7 @@ input[type=number] {
     top: -8px;
     width: 9px;
     height: 15px;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 0
 }
 
@@ -8594,7 +8588,7 @@ input[type=number] {
     z-index: 2;
     width: 9px;
     height: 20px;
-    background: url(/web/images/arw-wh.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-wh.png) no-repeat 9px 20px;
     background-position: 0 0;
     border-right: 1px solid hsla(0,0%,100%,.15);
     padding-right: 22px
@@ -8607,7 +8601,7 @@ input[type=number] {
     left: 282px;
     width: 9px;
     height: 20px;
-    background: url(/web/images/arw-wh.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-wh.png) no-repeat 9px 20px;
     background-position: 0 -20px
 }
 
@@ -8926,7 +8920,7 @@ input[type=number] {
 }
 
 .event_comment .comment_txt .sns span {
-    background: url(/web/images/ico-insta.png) no-repeat 0 50%;
+    background: url(https://www.stayfolio.com/web/images/ico-insta.png) no-repeat 0 50%;
     background-size: 35px 35px;
     padding: 0 20px 0 35px;
     line-height: 33px;
@@ -9222,7 +9216,7 @@ input[type=number] {
     width: 9px;
     height: 15px;
     font-size: 0;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 -15px
 }
 
@@ -9234,7 +9228,7 @@ input[type=number] {
     width: 9px;
     height: 15px;
     font-size: 0;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 0
 }
 
@@ -9732,7 +9726,7 @@ input[type=number] {
     right: 80px;
     left: inherit;
     z-index: 2;
-    background: url(/web/images/arw-bk2.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk2.png) no-repeat 9px 20px;
     background-position: 0 0;
     border-right: 1px solid #e6e6e6;
     padding-right: 22px
@@ -9748,7 +9742,7 @@ input[type=number] {
 
 .mdetail_gallery .slick-next {
     right: 58px;
-    background: url(/web/images/arw-bk2.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk2.png) no-repeat 9px 20px;
     background-position: 0 -20px
 }
 
@@ -12006,7 +12000,7 @@ input[type=number] {
     z-index: 2;
     width: 40px;
     height: 40px;
-    background: url(/web/images/arw-wh-prev.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/arw-wh-prev.svg) no-repeat 50%;
     background-size: cover;
     opacity: .5;
     color: #b3b3b3
@@ -12034,7 +12028,7 @@ input[type=number] {
     z-index: 2;
     width: 40px;
     height: 40px;
-    background: url(/web/images/arw-wh-next.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/arw-wh-next.svg) no-repeat 50%;
     background-size: cover;
     opacity: .5;
     color: #b3b3b3
@@ -12733,34 +12727,34 @@ input[type=number] {
 }
 
 .sns_login>ul li a.btn_naver {
-    background: url(/web/images/social_login/naver.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/social_login/naver.png) no-repeat 50%;
     background-size: cover
 }
 
 .sns_login>ul li a.btn_line {
-    background: url(/web/images/social_login/line.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/social_login/line.png) no-repeat 50%;
     background-color: #06c755;
     border-radius: 100%;
     background-size: 50px
 }
 
 .sns_login>ul li a.btn_fb {
-    background: url(/web/images/social_login/facebook.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/social_login/facebook.png) no-repeat 50%;
     background-size: cover
 }
 
 .sns_login>ul li a.btn_twitter {
-    background: url(/web/images/social_login/twitter.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/social_login/twitter.png) no-repeat 50%;
     background-size: cover
 }
 
 .sns_login>ul li a.btn_apple {
-    background: url(/web/images/social_login/apple.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/social_login/apple.png) no-repeat 50%;
     background-size: cover
 }
 
 .sns_login>ul li a.btn_kakao {
-    background: url(/web/images/social_login/kakao.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/social_login/kakao.png) no-repeat 50%;
     background-size: cover
 }
 
@@ -13000,13 +12994,13 @@ input[type=number] {
 
 .join_box .input_box .checked li.on {
     color: #546de5;
-    background: url(/web/images/ico_checked_on.png) no-repeat 0 0;
+    background: url(https://www.stayfolio.com/web/images/ico_checked_on.png) no-repeat 0 0;
     background-size: 16px 12px
 }
 
 .join_box .input_box .checked li.off {
     color: #bbb;
-    background: url(/web/images/ico_checked_off.png) no-repeat 0 0;
+    background: url(https://www.stayfolio.com/web/images/ico_checked_off.png) no-repeat 0 0;
     background-size: 16px 12px
 }
 
@@ -13016,18 +13010,18 @@ input[type=number] {
     right: 0;
     width: 24px;
     height: 24px;
-    background: url(/web/images/ico_viewoff.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/ico_viewoff.svg) no-repeat 50%;
     background-size: cover;
     text-indent: -9999px
 }
 
 .join_box .input_box .input .pw_view.on {
-    background: url(/web/images/ico_viewon.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/ico_viewon.svg) no-repeat 50%;
     background-size: cover
 }
 
 .join_box .input_box .input .pw_view.off {
-    background: url(/web/images/ico_viewoff.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/ico_viewoff.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -13089,13 +13083,13 @@ input[type=number] {
 
 .login_wrap .input_box .checked li.on {
     color: #546de5;
-    background: url(/web/images/ico_checked_on.png) no-repeat 0 0;
+    background: url(https://www.stayfolio.com/web/images/ico_checked_on.png) no-repeat 0 0;
     background-size: 16px 12px
 }
 
 .login_wrap .input_box .checked li.off {
     color: #bbb;
-    background: url(/web/images/ico_checked_off.png) no-repeat 0 0;
+    background: url(https://www.stayfolio.com/web/images/ico_checked_off.png) no-repeat 0 0;
     background-size: 16px 12px
 }
 
@@ -13323,7 +13317,7 @@ input[type=number] {
     display: block;
     width: 165px;
     height: 35px;
-    background: url(/web/images/ico_star.png) repeat-x;
+    background: url(https://www.stayfolio.com/web/images/ico_star.png) repeat-x;
     background-size: 33px 70px;
     text-align: left;
     font-size: 0
@@ -13333,7 +13327,7 @@ input[type=number] {
     display: inline-block;
     height: 35px;
     font-size: 0;
-    background: url(/web/images/ico_star.png) repeat-x 0 100%;
+    background: url(https://www.stayfolio.com/web/images/ico_star.png) repeat-x 0 100%;
     background-size: 33px 70px;
     vertical-align: top
 }
@@ -13426,7 +13420,7 @@ input[type=number] {
         width: 30px;
         height: 30px;
         margin-top: -15px;
-        background: url(/web/images/ico-checkbox2.png) no-repeat;
+        background: url(https://www.stayfolio.com/web/images/ico-checkbox2.png) no-repeat;
         background-size: 30px 60px;
         color: #555
     }
@@ -13592,7 +13586,7 @@ input[type=number] {
     opacity: 1;
     padding: 0 0 0 12px;
     border-radius: 0;
-    background: url(/public/web/images/arw_select) no-repeat color= "#808080"
+    background: url(/publichttps://www.stayfolio.com/web/images/arw_select) no-repeat color= "#808080"
 }
 
 .change_cont .pre-country,.change_cont .pre-input_text {
@@ -13630,7 +13624,7 @@ input[type=number] {
 .change_cont .change li:after {
     content: "";
     display: inline-block;
-    background: url(/web/images/arw_01.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/arw_01.png) no-repeat 50%;
     background-size: cover;
     width: 22px;
     height: 19px;
@@ -13708,7 +13702,7 @@ input[type=number] {
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
-        background: url(/public/web/images/arw_select) no-repeat color= "#808080"
+        background: url(/publichttps://www.stayfolio.com/web/images/arw_select) no-repeat color= "#808080"
     }
 
     .change_cont .pre-country::-ms-expand {
@@ -14254,7 +14248,7 @@ input[type=number] {
     z-index: 2;
     width: 16px;
     height: 31px;
-    background: url(/web/images/arw-fslist.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/arw-fslist.png) no-repeat;
     background-size: cover;
     background-position: 0 0
 }
@@ -14265,7 +14259,7 @@ input[type=number] {
     margin-top: -16px;
     width: 16px;
     height: 31px;
-    background: url(/web/images/arw-fslist.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/arw-fslist.png) no-repeat;
     background-size: cover;
     background-position: 0 -31px
 }
@@ -14869,7 +14863,7 @@ input[type=number] {
     .travel_guide a:before {
         content: "";
         display: inline-block;
-        background: url(/web/images/ico_guide.png) no-repeat 50%;
+        background: url(https://www.stayfolio.com/web/images/ico_guide.png) no-repeat 50%;
         background-size: cover;
         width: 15px;
         height: 15px;
@@ -15023,7 +15017,7 @@ input[type=number] {
     height: 80px;
     border: 1px solid #ddd;
     display: inline-block;
-    background: #ededed url(/web/images/img_photo.png) no-repeat 50%;
+    background: #ededed url(https://www.stayfolio.com/web/images/img_photo.png) no-repeat 50%;
     background-size: 40px 31px;
     cursor: pointer;
     text-indent: -999999px
@@ -15205,7 +15199,7 @@ input[type=number] {
 .mb_wrap .lv_box .lv_bar .state:after {
     content: "";
     display: inline-block;
-    background: url(/web/images/ico_bar.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/ico_bar.png) no-repeat 50%;
     background-size: cover;
     width: 20px;
     height: 20px;
@@ -15351,7 +15345,7 @@ input[type=number] {
 .mb_wrap .mb_sec_box .guide_view a:after {
     content: "";
     display: inline-block;
-    background: url(/web/images/arw_02.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/arw_02.png) no-repeat 50%;
     background-size: cover;
     width: 5px;
     height: 11px;
@@ -15498,7 +15492,7 @@ input[type=number] {
 .ms_bar_box .ms_bar .state:after {
     content: "";
     display: inline-block;
-    background: url(/web/images/ico_bar.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/ico_bar.png) no-repeat 50%;
     background-size: cover;
     width: 22px;
     height: 22px;
@@ -15601,7 +15595,7 @@ input[type=number] {
     position: absolute;
     bottom: 0;
     right: 0;
-    background: url(/web/images/btn_photo.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/btn_photo.png) no-repeat 50%;
     background-size: cover;
     width: 35px;
     height: 35px;
@@ -15631,13 +15625,13 @@ input[type=number] {
 
 .myedit_wrap .input_box .checked li.on {
     color: #546de5;
-    background: url(/web/images/ico_checked_on.png) no-repeat 0 0;
+    background: url(https://www.stayfolio.com/web/images/ico_checked_on.png) no-repeat 0 0;
     background-size: 16px 12px
 }
 
 .myedit_wrap .input_box .checked li.off {
     color: #bbb;
-    background: url(/web/images/ico_checked_off.png) no-repeat 0 0;
+    background: url(https://www.stayfolio.com/web/images/ico_checked_off.png) no-repeat 0 0;
     background-size: 16px 12px
 }
 
@@ -16095,7 +16089,7 @@ h3.my_tit>em {
 
 h3.my_tit i.ico_greater {
     display: inline-block;
-    background: url(/web/images/arw_tit.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/arw_tit.png) no-repeat 50%;
     background-size: cover;
     width: 20px;
     height: 20px;
@@ -16121,7 +16115,7 @@ h4.my_sub {
     }
 
     h2.my_tit_mo .btn_back {
-        background: url(/web/images/btn_back.png) no-repeat 50%;
+        background: url(https://www.stayfolio.com/web/images/btn_back.png) no-repeat 50%;
         background-size: cover;
         display: inline-block;
         width: 40px;
@@ -16248,7 +16242,7 @@ h4.my_sub {
     background: #ddd;
     margin: 0 4px 2px -2px;
     vertical-align: middle;
-    background: url(/web/images/ico_qna.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/ico_qna.png) no-repeat 50%;
     background-size: cover
 }
 
@@ -16499,7 +16493,7 @@ h4.my_sub {
 .likestay_box_slider>.slick-prev {
     left: inherit;
     right: 29px;
-    background: url(/web/images/arw-fsdetail02.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/arw-fsdetail02.png) no-repeat;
     background-size: 30px 60px;
     background-position: -1px -1px;
     background-color: #fff
@@ -16515,7 +16509,7 @@ h4.my_sub {
 
 .likestay_box_slider>.slick-next {
     right: 0;
-    background: url(/web/images/arw-fsdetail02.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/arw-fsdetail02.png) no-repeat;
     background-size: 30px 60px;
     background-position: -1px -31px;
     background-color: #fff
@@ -16554,7 +16548,7 @@ h4.my_sub {
     display: inline-block;
     width: 5px;
     height: 11px;
-    background: url(/web/images/arw_02.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/arw_02.png) no-repeat 50%;
     background-size: cover;
     position: absolute;
     top: 50%;
@@ -16867,7 +16861,7 @@ h4.my_sub {
 
     .mypage_wrap .newmypage_menu>ul>li {
         border-bottom: 1px solid #d2d2d2;
-        background: url(/web/images/arw_02.png) no-repeat 100% 50%;
+        background: url(https://www.stayfolio.com/web/images/arw_02.png) no-repeat 100% 50%;
         background-size: 6px 13px
     }
 
@@ -17951,7 +17945,7 @@ h4.my_sub {
 }
 
 .icon-bigteibeul,.icon-bim-peurojegteo {
-    background-image: url(/web/images/sprite.png);
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png);
     width: 50px;
     height: 33px
 }
@@ -17965,7 +17959,7 @@ h4.my_sub {
 }
 
 .icon-ceoncang,.icon-dogrib-hwajangsil {
-    background-image: url(/web/images/sprite.png);
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png);
     width: 50px;
     height: 33px
 }
@@ -17981,7 +17975,7 @@ h4.my_sub {
 }
 
 .icon-dogrib-kicin,.icon-facebook-link {
-    background-image: url(/web/images/sprite.png)
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png)
 }
 
 .icon-facebook-link {
@@ -17995,7 +17989,7 @@ h4.my_sub {
 }
 
 .icon-falseceontang,.icon-gaebyeol-bbqdekeu {
-    background-image: url(/web/images/sprite.png);
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png);
     width: 50px;
     height: 33px
 }
@@ -18009,7 +18003,7 @@ h4.my_sub {
 }
 
 .icon-gaebyeoljeongipaeneol,.icon-gaelreori {
-    background-image: url(/web/images/sprite.png);
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png);
     width: 50px;
     height: 33px
 }
@@ -18023,7 +18017,7 @@ h4.my_sub {
 }
 
 .icon-geune,.icon-gongyong-hwajangsil {
-    background-image: url(/web/images/sprite.png);
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png);
     width: 50px;
     height: 33px
 }
@@ -18037,7 +18031,7 @@ h4.my_sub {
 }
 
 .icon-gongyong-kicin,.icon-gongyong-suyeongjang {
-    background-image: url(/web/images/sprite.png);
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png);
     width: 50px;
     height: 33px
 }
@@ -18053,7 +18047,7 @@ h4.my_sub {
 }
 
 .icon-gongyong-syaweosil,.icon-house-plan {
-    background-image: url(/web/images/sprite.png)
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png)
 }
 
 .icon-house-plan {
@@ -18069,7 +18063,7 @@ h4.my_sub {
 }
 
 .icon-iceungcimdae,.icon-instagram-link {
-    background-image: url(/web/images/sprite.png)
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png)
 }
 
 .icon-instagram-link {
@@ -18083,7 +18077,7 @@ h4.my_sub {
 }
 
 .icon-jajeongeo-rental,.icon-jeongi-bbqdekeu {
-    background-image: url(/web/images/sprite.png);
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png);
     width: 50px;
     height: 33px
 }
@@ -18097,7 +18091,7 @@ h4.my_sub {
 }
 
 .icon-jeongweon,.icon-josig {
-    background-image: url(/web/images/sprite.png);
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png);
     width: 50px;
     height: 33px
 }
@@ -18111,7 +18105,7 @@ h4.my_sub {
 }
 
 .icon-juca,.icon-kaempingteibeulceeo {
-    background-image: url(/web/images/sprite.png);
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png);
     width: 50px;
     height: 33px
 }
@@ -18125,7 +18119,7 @@ h4.my_sub {
 }
 
 .icon-more-btn,.icon-more-close-btn {
-    background-image: url(/web/images/sprite.png);
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png);
     width: 15px;
     height: 7px
 }
@@ -18141,7 +18135,7 @@ h4.my_sub {
 }
 
 .icon-naver-link,.icon-next-booking-cal-btn {
-    background-image: url(/web/images/sprite.png)
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png)
 }
 
 .icon-next-booking-cal-btn {
@@ -18157,7 +18151,7 @@ h4.my_sub {
 }
 
 .icon-next-cal-btn,.icon-next-cal-btn-m {
-    background-image: url(/web/images/sprite.png)
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png)
 }
 
 .icon-next-cal-btn {
@@ -18171,7 +18165,7 @@ h4.my_sub {
 }
 
 .icon-opeun-baeseu,.icon-pigeob {
-    background-image: url(/web/images/sprite.png);
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png);
     width: 50px;
     height: 33px
 }
@@ -18181,7 +18175,7 @@ h4.my_sub {
 }
 
 .icon-prev-booking-cal-btn {
-    background-image: url(/web/images/sprite.png);
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png);
     background-position: -273px -112px;
     width: 11px;
     height: 19px
@@ -18194,7 +18188,7 @@ h4.my_sub {
 }
 
 .icon-prev-cal-btn,.icon-prev-cal-btn-m {
-    background-image: url(/web/images/sprite.png)
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png)
 }
 
 .icon-prev-cal-btn {
@@ -18210,7 +18204,7 @@ h4.my_sub {
 }
 
 .icon-ragkeo,.icon-room-plan-btn {
-    background-image: url(/web/images/sprite.png)
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png)
 }
 
 .icon-room-plan-btn {
@@ -18226,7 +18220,7 @@ h4.my_sub {
 }
 
 .icon-sancaegro,.icon-select-arrow {
-    background-image: url(/web/images/sprite.png)
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png)
 }
 
 .icon-select-arrow {
@@ -18240,7 +18234,7 @@ h4.my_sub {
 }
 
 .icon-setag-seobiseu,.icon-silnae-seupa {
-    background-image: url(/web/images/sprite.png);
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png);
     width: 50px;
     height: 33px
 }
@@ -18256,7 +18250,7 @@ h4.my_sub {
 }
 
 .icon-sseonbedeu,.icon-stayfolio-link {
-    background-image: url(/web/images/sprite.png)
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png)
 }
 
 .icon-stayfolio-link {
@@ -18270,7 +18264,7 @@ h4.my_sub {
 }
 
 .icon-suyeongjang,.icon-syaweosil {
-    background-image: url(/web/images/sprite.png);
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png);
     width: 50px;
     height: 33px
 }
@@ -18284,7 +18278,7 @@ h4.my_sub {
 }
 
 .icon-teraseu,.icon-welkeomti {
-    background-image: url(/web/images/sprite.png);
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png);
     width: 50px;
     height: 33px
 }
@@ -18298,7 +18292,7 @@ h4.my_sub {
 }
 
 .icon-weolpul-seupa,.icon-yaoegagu {
-    background-image: url(/web/images/sprite.png);
+    background-image: url(https://www.stayfolio.com/web/images/sprite.png);
     width: 50px;
     height: 33px
 }
@@ -18309,7 +18303,7 @@ h4.my_sub {
 
 @media (-webkit-min-device-pixel-ratio: 2),(min-resolution:192dpi) {
     .icon-bigteibeul,.icon-bim-peurojegteo,.icon-ceoncang,.icon-dogrib-hwajangsil,.icon-dogrib-kicin,.icon-facebook-link,.icon-falseceontang,.icon-gaebyeol-bbqdekeu,.icon-gaebyeoljeongipaeneol,.icon-gaelreori,.icon-geune,.icon-gongyong-hwajangsil,.icon-gongyong-kicin,.icon-gongyong-suyeongjang,.icon-gongyong-syaweosil,.icon-house-plan,.icon-iceungcimdae,.icon-instagram-link,.icon-jajeongeo-rental,.icon-jeongi-bbqdekeu,.icon-jeongweon,.icon-josig,.icon-juca,.icon-kaempingteibeulceeo,.icon-more-btn,.icon-more-close-btn,.icon-naver-link,.icon-next-booking-cal-btn,.icon-next-cal-btn,.icon-next-cal-btn-m,.icon-opeun-baeseu,.icon-pigeob,.icon-prev-booking-cal-btn,.icon-prev-cal-btn,.icon-prev-cal-btn-m,.icon-ragkeo,.icon-room-plan-btn,.icon-sancaegro,.icon-select-arrow,.icon-setag-seobiseu,.icon-silnae-seupa,.icon-sseonbedeu,.icon-stayfolio-link,.icon-suyeongjang,.icon-syaweosil,.icon-teraseu,.icon-welkeomti,.icon-weolpul-seupa,.icon-yaoegagu {
-        background-image:url(/web/images/sprite@2x.png);
+        background-image:url(https://www.stayfolio.com/web/images/sprite@2x.png);
         background-size: 293px 260px
     }
 }
@@ -18369,7 +18363,7 @@ table {
     padding: 10px 0 10px 42px;
     font-size: 13px;
     color: #000;
-    background: url(/web/images/ico-back.png) no-repeat 0 50%
+    background: url(https://www.stayfolio.com/web/images/ico-back.png) no-repeat 0 50%
 }
 
 .booking_summary {
@@ -18391,7 +18385,7 @@ table {
     color: #000;
     cursor: pointer;
     padding: 0 23px 0 0;
-    background: #fff url(/web/images/arw_select.png) no-repeat 100% 50%;
+    background: #fff url(https://www.stayfolio.com/web/images/arw_select.png) no-repeat 100% 50%;
     background-size: 20px 20px
 }
 
@@ -18540,7 +18534,7 @@ table {
 }
 
 .booking_room .room_txt .plan {
-    background: url(/web/images/img_plan.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/img_plan.png) no-repeat 50%;
     background-size: cover;
     width: 37px;
     height: 37px;
@@ -19071,13 +19065,13 @@ table {
 
 .payment_list .sel_option .number_count .btn_minus {
     left: 0;
-    background: #f9fafb url(/web/images/btn_count.png) no-repeat 0 0;
+    background: #f9fafb url(https://www.stayfolio.com/web/images/btn_count.png) no-repeat 0 0;
     background-size: 29px 100px
 }
 
 .payment_list .sel_option .number_count .btn_plus {
     right: 0;
-    background: #f9fafb url(/web/images/btn_count.png) no-repeat 0 -50px;
+    background: #f9fafb url(https://www.stayfolio.com/web/images/btn_count.png) no-repeat 0 -50px;
     background-size: 29px 100px
 }
 
@@ -19530,7 +19524,7 @@ table {
 .card_list .slick-prev {
     width: 100px;
     height: 168px;
-    background: url(/web/images/arw-wh-prev.svg) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/arw-wh-prev.svg) no-repeat;
     background-size: 40px 40px;
     background-position: 0 50%;
     margin-top: 0;
@@ -19540,7 +19534,7 @@ table {
 .card_list .slick-next {
     width: 100px;
     height: 168px;
-    background: url(/web/images/arw-wh-next.svg) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/arw-wh-next.svg) no-repeat;
     background-size: 40px 40px;
     background-position: 100% 50%;
     margin-top: 0;
@@ -19621,7 +19615,7 @@ table {
     left: 16px;
     width: 48px;
     height: 26px;
-    background: url(/web/images/card/ico_chip.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/ico_chip.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19655,7 +19649,7 @@ table {
 }
 
 .card_box.card_kebhana .logo {
-    background: url(/web/images/card/logo_kebhana.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_kebhana.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19664,7 +19658,7 @@ table {
 }
 
 .card_box.card_woori .logo {
-    background: url(/web/images/card/logo_woori.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_woori.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19673,7 +19667,7 @@ table {
 }
 
 .card_box.card_shinhan .logo {
-    background: url(/web/images/card/logo_shinhan.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_shinhan.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19682,7 +19676,7 @@ table {
 }
 
 .card_box.card_kb .logo {
-    background: url(/web/images/card/logo_kb.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_kb.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19691,7 +19685,7 @@ table {
 }
 
 .card_box.card_ibk .logo {
-    background: url(/web/images/card/logo_ibk.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_ibk.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19700,7 +19694,7 @@ table {
 }
 
 .card_box.card_nh .logo {
-    background: url(/web/images/card/logo_nh.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_nh.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19709,7 +19703,7 @@ table {
 }
 
 .card_box.card_mg .logo {
-    background: url(/web/images/card/logo_mg.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_mg.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19718,7 +19712,7 @@ table {
 }
 
 .card_box.card_sccheil .logo {
-    background: url(/web/images/card/logo_sccheil.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_sccheil.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19727,7 +19721,7 @@ table {
 }
 
 .card_box.card_citi .logo {
-    background: url(/web/images/card/logo_citi.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_citi.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19736,7 +19730,7 @@ table {
 }
 
 .card_box.card_shinhyup .logo {
-    background: url(/web/images/card/logo_shinhyup.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_shinhyup.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19745,7 +19739,7 @@ table {
 }
 
 .card_box.card_shsuhyup .logo {
-    background: url(/web/images/card/logo_shsuhyup.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_shsuhyup.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19754,7 +19748,7 @@ table {
 }
 
 .card_box.card_bnkbusan .logo {
-    background: url(/web/images/card/logo_bnkbusan.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_bnkbusan.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19763,7 +19757,7 @@ table {
 }
 
 .card_box.card_kwangju .logo {
-    background: url(/web/images/card/logo_kwangju.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_kwangju.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19772,7 +19766,7 @@ table {
 }
 
 .card_box.card_jeonbuk .logo {
-    background: url(/web/images/card/logo_jeonbuk.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_jeonbuk.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19781,7 +19775,7 @@ table {
 }
 
 .card_box.card_dgb .logo {
-    background: url(/web/images/card/logo_dgb.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_dgb.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19790,7 +19784,7 @@ table {
 }
 
 .card_box.card_bnkkyeongnam .logo {
-    background: url(/web/images/card/logo_bnkkyeongnam.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_bnkkyeongnam.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19799,7 +19793,7 @@ table {
 }
 
 .card_box.card_jeju .logo {
-    background: url(/web/images/card/logo_shinhan.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_shinhan.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19808,7 +19802,7 @@ table {
 }
 
 .card_box.card_kdb .logo {
-    background: url(/web/images/card/logo_kdb.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_kdb.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19818,7 +19812,7 @@ table {
 }
 
 .card_box.card_samsung .logo {
-    background: url(/web/images/card/logo_samsung.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_samsung.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19827,7 +19821,7 @@ table {
 }
 
 .card_box.card_hyundai .logo {
-    background: url(/web/images/card/logo_hyundai.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_hyundai.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19836,7 +19830,7 @@ table {
 }
 
 .card_box.card_bc .logo {
-    background: url(/web/images/card/logo_bc.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_bc.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19845,7 +19839,7 @@ table {
 }
 
 .card_box.card_lotte .logo {
-    background: url(/web/images/card/logo_lotte.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_lotte.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19854,7 +19848,7 @@ table {
 }
 
 .card_box.card_paybook .logo {
-    background: url(/web/images/card/logo_paybook.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_paybook.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19863,7 +19857,7 @@ table {
 }
 
 .card_box.card_jcb .logo {
-    background: url(/web/images/card/logo_jcb.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_jcb.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19872,7 +19866,7 @@ table {
 }
 
 .card_box.card_visa .logo {
-    background: url(/web/images/card/logo_visa.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_visa.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19881,7 +19875,7 @@ table {
 }
 
 .card_box.card_master .logo {
-    background: url(/web/images/card/logo_master.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_master.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19891,7 +19885,7 @@ table {
 }
 
 .card_box.card_unionpay .logo {
-    background: url(/web/images/card/logo_unionpay.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_unionpay.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19900,7 +19894,7 @@ table {
 }
 
 .card_box.card_epost .logo {
-    background: url(/web/images/card/logo_epost.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_epost.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19909,7 +19903,7 @@ table {
 }
 
 .card_box.card_toss .logo {
-    background: url(/web/images/card/logo_toss.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_toss.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19919,7 +19913,7 @@ table {
 }
 
 .card_box.card_kakao .logo {
-    background: url(/web/images/card/logo_kakao.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_kakao.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19928,7 +19922,7 @@ table {
 }
 
 .card_box.card_sjnfcf .logo {
-    background: url(/web/images/card/logo_sjnfcf.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_sjnfcf.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19937,7 +19931,7 @@ table {
 }
 
 .card_box.card_sb .logo {
-    background: url(/web/images/card/logo_sb.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_sb.svg) no-repeat 50%;
     background-size: cover
 }
 
@@ -19946,12 +19940,12 @@ table {
 }
 
 .card_box.card_kbank .logo {
-    background: url(/web/images/card/logo_kbank.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/card/logo_kbank.svg) no-repeat 50%;
     background-size: cover
 }
 
 .card_box.card_add {
-    background: #fff url(/web/images/card/ico_plus.svg) no-repeat 50% 30%;
+    background: #fff url(https://www.stayfolio.com/web/images/card/ico_plus.svg) no-repeat 50% 30%;
     background-size: 48px 48px;
     border: 1px solid #ccc;
     color: #333
@@ -20076,154 +20070,154 @@ table {
     color: #999;
     border-radius: 5px;
     border: 2px solid #e6e6e6;
-    background: #fff url(/web/images/payment/creditcard_deact.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/creditcard_deact.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.general.on {
     color: #444;
     border-radius: 5px;
     border: 2px solid #4d4d4d;
-    background: #fff url(/web/images/payment/creditcard_default.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/creditcard_default.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.lawson.basic {
     color: #444;
     border-radius: 5px;
     border: 2px solid #e6e6e6;
-    background: #fff url(/web/images/payment/lawson_default.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/lawson_default.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.lawson {
     color: #999;
     border-radius: 5px;
     border: 2px solid #e6e6e6;
-    background: #fff url(/web/images/payment/lawson_deact.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/lawson_deact.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.lawson.on {
     color: #444;
     border-radius: 5px;
     border: 2px solid #1475c5;
-    background: #fff url(/web/images/payment/lawson_default.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/lawson_default.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.familyMart.basic {
     color: #444;
     border-radius: 5px;
     border: 2px solid #e6e6e6;
-    background: #fff url(/web/images/payment/familyMart_default.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/familyMart_default.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.familyMart {
     color: #999;
     border-radius: 5px;
     border: 2px solid #e6e6e6;
-    background: #fff url(/web/images/payment/familyMart_deact.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/familyMart_deact.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.familyMart.on {
     color: #444;
     border-radius: 5px;
     border: 2px solid #008cd6;
-    background: #fff url(/web/images/payment/familyMart_default.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/familyMart_default.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.miniStop.basic {
     color: #444;
     border-radius: 5px;
     border: 2px solid #e6e6e6;
-    background: #fff url(/web/images/payment/miniStop_default.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/miniStop_default.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.miniStop {
     color: #999;
     border-radius: 5px;
     border: 2px solid #e6e6e6;
-    background: #fff url(/web/images/payment/miniStop_deact.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/miniStop_deact.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.miniStop.on {
     color: #444;
     border-radius: 5px;
     border: 2px solid #003894;
-    background: #fff url(/web/images/payment/miniStop_default.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/miniStop_default.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.seicoMart.basic {
     color: #444;
     border-radius: 5px;
     border: 2px solid #e6e6e6;
-    background: #fff url(/web/images/payment/seicoMart_default.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/seicoMart_default.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.seicoMart {
     color: #999;
     border-radius: 5px;
     border: 2px solid #e6e6e6;
-    background: #fff url(/web/images/payment/seicoMart_deact.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/seicoMart_deact.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.seicoMart.on {
     color: #444;
     border-radius: 5px;
     border: 2px solid #f08500;
-    background: #fff url(/web/images/payment/seicoMart_default.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/seicoMart_default.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.visa.basic {
     color: #444;
     border-radius: 5px;
     border: 2px solid #e6e6e6;
-    background: #fff url(/web/images/payment/visa_default.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/visa_default.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.visa {
     color: #999;
     border-radius: 5px;
     border: 2px solid #e6e6e6;
-    background: #fff url(/web/images/payment/visa_deact.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/visa_deact.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.visa.on {
     color: #444;
     border-radius: 5px;
     border: 2px solid #0b40c4;
-    background: #fff url(/web/images/payment/visa_default.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/visa_default.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.master.basic {
     color: #444;
     border-radius: 5px;
     border: 2px solid #e6e6e6;
-    background: #fff url(/web/images/payment/master_default.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/master_default.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.master {
     color: #999;
     border-radius: 5px;
     border: 2px solid #e6e6e6;
-    background: #fff url(/web/images/payment/master_deact.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/master_deact.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.master.on {
     color: #444;
     border-radius: 5px;
     border: 2px solid #000;
-    background: #fff url(/web/images/payment/master_default.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/master_default.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.general.basic {
     color: #444;
     border-radius: 5px;
     border: 2px solid #e6e6e6;
-    background: #fff url(/web/images/payment/creditcard_default.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/creditcard_default.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.transfer {
     color: #999;
     border-radius: 5px;
     border: 2px solid #e6e6e6;
-    background: #fff url(/web/images/payment/creditcard_deact.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/creditcard_deact.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.transfer.on {
@@ -20233,7 +20227,7 @@ table {
 
 .generalpay_list ul li.transfer.basic,.generalpay_list ul li.transfer.on {
     color: #444;
-    background: #fff url(/web/images/payment/creditcard_default.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/creditcard_default.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.transfer.basic {
@@ -20251,7 +20245,7 @@ table {
     color: transparent;
     border-radius: 5px;
     border: 2px solid #e6e6e6;
-    background: #fff url(/web/images/payment/Npay_deact.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/Npay_deact.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.npay.on {
@@ -20262,7 +20256,7 @@ table {
 .generalpay_list ul li.npay.basic,.generalpay_list ul li.npay.on {
     flex-grow: 0;
     color: transparent;
-    background: #fff url(/web/images/payment/Npay_default.svg) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/payment/Npay_default.svg) no-repeat 50%
 }
 
 .generalpay_list ul li.npay.basic {
@@ -20275,7 +20269,7 @@ table {
     color: transparent;
     border-radius: 5px;
     border: 2px solid #e6e6e6;
-    background: #fff url(/web/images/payment/kakaopay_deact.svg) no-repeat 50%;
+    background: #fff url(https://www.stayfolio.com/web/images/payment/kakaopay_deact.svg) no-repeat 50%;
     background-size: 75px 22px
 }
 
@@ -20287,7 +20281,7 @@ table {
 .generalpay_list ul li.kakaopay.basic,.generalpay_list ul li.kakaopay.on {
     flex-grow: 0;
     color: transparent;
-    background: #fff url(/web/images/payment/kakaopay_default.svg) no-repeat 50%;
+    background: #fff url(https://www.stayfolio.com/web/images/payment/kakaopay_default.svg) no-repeat 50%;
     background-size: 75px 22px
 }
 
@@ -20301,7 +20295,7 @@ table {
     color: transparent;
     border-radius: 5px;
     border: 2px solid #e6e6e6;
-    background: #fff url(/web/images/payment/Paypal_deact.svg) no-repeat 50%;
+    background: #fff url(https://www.stayfolio.com/web/images/payment/Paypal_deact.svg) no-repeat 50%;
     background-size: 65px 16px
 }
 
@@ -20313,7 +20307,7 @@ table {
 .generalpay_list ul li.paypal.basic,.generalpay_list ul li.paypal.on {
     flex-grow: 0;
     color: transparent;
-    background: #fff url(/web/images/payment/Paypal_default.svg) no-repeat 50%;
+    background: #fff url(https://www.stayfolio.com/web/images/payment/Paypal_default.svg) no-repeat 50%;
     background-size: 65px 16px
 }
 
@@ -20327,7 +20321,7 @@ table {
     color: transparent;
     border-radius: 5px;
     border: 2px solid #e6e6e6;
-    background: #fff url(/web/images/payment/toss_deact.svg) no-repeat 50%;
+    background: #fff url(https://www.stayfolio.com/web/images/payment/toss_deact.svg) no-repeat 50%;
     background-size: 65px 16px
 }
 
@@ -20339,7 +20333,7 @@ table {
 
 .generalpay_list ul li.toss.basic,.generalpay_list ul li.toss.on {
     flex-grow: 0;
-    background: #fff url(/web/images/payment/toss_default.svg) no-repeat 50%;
+    background: #fff url(https://www.stayfolio.com/web/images/payment/toss_default.svg) no-repeat 50%;
     background-size: 65px 16px
 }
 
@@ -20530,7 +20524,7 @@ table {
 .booking_step .step_list li:after {
     content: "";
     display: inline-block;
-    background: url(/web/images/arw_02.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/arw_02.png) no-repeat 50%;
     background-size: cover;
     width: 12px;
     height: 26px;
@@ -20794,7 +20788,7 @@ table {
     display: block;
     top: 59px;
     right: 20px;
-    background: url(/web/images/btn-close.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/btn-close.png) no-repeat 50%;
     width: 50px;
     height: 50px;
     text-indent: -99999px
@@ -20817,7 +20811,7 @@ table {
     border-radius: 100px;
     margin: 80px auto 0;
     padding: 0 20px 0 60px;
-    background: url(/web/images/ico-search2.png) no-repeat 20px 50%;
+    background: url(https://www.stayfolio.com/web/images/ico-search2.png) no-repeat 20px 50%;
     background-size: 30px 30px;
     background-color: #f5f5f5
 }
@@ -20901,7 +20895,7 @@ table {
 .whe_wrap .btn-searchstay {
     display: block;
     z-index: 30;
-    background: url(/web/images/arw-search.png) no-repeat 18px 15px;
+    background: url(https://www.stayfolio.com/web/images/arw-search.png) no-repeat 18px 15px;
     background-position: 140px 25px;
     background-color: #000;
     font-size: 16px;
@@ -20953,7 +20947,7 @@ table {
         width: 100%;
         margin-top: 15px;
         padding: 0 10px 0 45px;
-        background: url(/web/images/ico-search2.png) no-repeat 15px 50%;
+        background: url(https://www.stayfolio.com/web/images/ico-search2.png) no-repeat 15px 50%;
         background-size: 22px 22px;
         background-color: #f5f5f5
     }
@@ -21011,7 +21005,7 @@ table {
     }
 
     .whe_wrap .btn-searchstay {
-        background: url(/web/images/arw-search.png) no-repeat 110px 50%;
+        background: url(https://www.stayfolio.com/web/images/arw-search.png) no-repeat 110px 50%;
         background-size: 15px 12px;
         background-color: #000;
         font-size: 11px;
@@ -21102,7 +21096,7 @@ table {
 
 .calendar_wrap .prev_month {
     left: 0;
-    background: url(/web/images/arw-calendar.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/arw-calendar.png) no-repeat;
     background-size: 30px 60px;
     background-position: 0 0
 }
@@ -21118,7 +21112,7 @@ table {
 
 .calendar_wrap .next_month {
     right: 0;
-    background: url(/web/images/arw-calendar.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/arw-calendar.png) no-repeat;
     background-size: 30px 60px;
     background-position: 0 -30px
 }
@@ -21515,7 +21509,7 @@ table {
 
 .stay_list .slick-prev {
     margin-left: 34px;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 -15px
 }
 
@@ -21531,7 +21525,7 @@ table {
 .stay_list .slick-next {
     right: inherit;
     margin-left: 56px;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 0
 }
 
@@ -21695,7 +21689,7 @@ table {
     display: inline-block;
     width: 32px;
     height: 32px;
-    background: url(/web/images/btn-close.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/btn-close.png) no-repeat 50%;
     background-size: 16px 16px;
     text-indent: -99999px;
     margin-left: 16px
@@ -21759,7 +21753,7 @@ table {
         display: inline-block;
         width: 44px;
         height: 44px;
-        background: url(/web/images/btn-close.png) no-repeat 50%;
+        background: url(https://www.stayfolio.com/web/images/btn-close.png) no-repeat 50%;
         background-size: 16px 16px;
         text-indent: -99999px;
         margin-left: 16px
@@ -21927,7 +21921,7 @@ table {
     width: 58px;
     height: 20px;
     cursor: pointer;
-    background: url(/web/images/toggle-ko.png);
+    background: url(https://www.stayfolio.com/web/images/toggle-ko.png);
     background-repeat: no-repeat;
     background-size: contain
 }
@@ -21936,7 +21930,7 @@ table {
     width: 58px;
     height: 20px;
     cursor: pointer;
-    background: url(/web/images/toggle-en.png);
+    background: url(https://www.stayfolio.com/web/images/toggle-en.png);
     background-repeat: no-repeat;
     background-size: contain
 }
@@ -21956,7 +21950,7 @@ table {
 .side-menu {
     width: 44px;
     height: 44px;
-    background-image: url(/mobile-menu.svg);
+    background-image: url(https://www.stayfolio.com/mobile-menu.svg);
     margin-right: 6px
 }
 
@@ -21976,7 +21970,7 @@ table {
         display: block;
         width: 30px;
         height: 30px;
-        background: url(/web/images/toggle-ko-mo.png);
+        background: url(https://www.stayfolio.com/web/images/toggle-ko-mo.png);
         background-repeat: no-repeat;
         background-size: contain
     }
@@ -21985,7 +21979,7 @@ table {
         display: block;
         width: 30px;
         height: 30px;
-        background: url(/web/images/toggle-en-mo.png);
+        background: url(https://www.stayfolio.com/web/images/toggle-en-mo.png);
         background-repeat: no-repeat;
         background-size: contain
     }
@@ -21993,7 +21987,7 @@ table {
 
 @media(max-width: 320px) {
     .gnb-when-mo-small {
-        background:url(/web/images/when@3x.png) no-repeat 0 50%;
+        background:url(https://www.stayfolio.com/web/images/when@3x.png) no-repeat 0 50%;
         background-size: 25px 25px;
         height: 45px
     }
@@ -22432,7 +22426,7 @@ table {
     width: 9px;
     height: 15px;
     font-size: 0;
-    background: url(/web/images/arw-gry.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-gry.png) no-repeat 9px 20px;
     background-position: 0 0;
     z-index: 11
 }
@@ -22449,7 +22443,7 @@ table {
     width: 9px;
     height: 15px;
     font-size: 0;
-    background: url(/web/images/arw-gry.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-gry.png) no-repeat 9px 20px;
     background-position: 0 -15px;
     z-index: 11
 }
@@ -22570,7 +22564,7 @@ table {
     width: 9px;
     height: 15px;
     font-size: 0;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 0;
     z-index: 11
 }
@@ -22587,7 +22581,7 @@ table {
     width: 9px;
     height: 15px;
     font-size: 0;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 -15px;
     z-index: 11
 }
@@ -24915,7 +24909,7 @@ table {
 }
 
 .swiper-picks-detail-pc .swiper-button-prev {
-    background-image: url(/web/images/journal-detail-arrow-left.png)!important;
+    background-image: url(https://www.stayfolio.com/web/images/journal-detail-arrow-left.png)!important;
     top: 46%;
     width: 60px;
     height: 60px;
@@ -24923,7 +24917,7 @@ table {
 }
 
 .swiper-picks-detail-pc .swiper-button-next {
-    background-image: url(/web/images/journal-detail-arrow-right.png)!important;
+    background-image: url(https://www.stayfolio.com/web/images/journal-detail-arrow-right.png)!important;
     top: 46%;
     background-position: 50%;
     width: 60px;
@@ -24948,7 +24942,7 @@ table {
 }
 
 .not-find-pick-deatail {
-    background: url(/web/images/blindwhile.jpeg) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/blindwhile.jpeg) no-repeat;
     background-size: cover
 }
 
@@ -24995,7 +24989,7 @@ table {
 }
 
 .flist_sorting .btn_map_on {
-    background: #fff url(/web/images/ic-map-on.png) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/ic-map-on.png) no-repeat 50%
 }
 
 .flist_sorting .btn_map_off,.flist_sorting .btn_map_on {
@@ -25010,7 +25004,7 @@ table {
 }
 
 .flist_sorting .btn_map_off {
-    background: #fff url(/web/images/ic-map-off.png) no-repeat 50%
+    background: #fff url(https://www.stayfolio.com/web/images/ic-map-off.png) no-repeat 50%
 }
 
 .pick_list.map .stay_list {
@@ -26024,7 +26018,7 @@ button.swiper-pagination-bullet {
     width: 9px;
     height: 15px;
     font-size: 0;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 0
 }
 
@@ -26040,7 +26034,7 @@ button.swiper-pagination-bullet {
     width: 9px;
     height: 15px;
     font-size: 0;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 -15px
 }
 
@@ -26133,7 +26127,7 @@ button.swiper-pagination-bullet {
     width: 9px;
     height: 15px;
     font-size: 0;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 0
 }
 
@@ -26149,7 +26143,7 @@ button.swiper-pagination-bullet {
     width: 9px;
     height: 15px;
     font-size: 0;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 -15px
 }
 
@@ -26223,7 +26217,7 @@ button.swiper-pagination-bullet {
     right: 5px;
     width: 16px;
     height: 31px;
-    background: url(/web/images/arw-fslist.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/arw-fslist.png) no-repeat;
     background-size: cover;
     background-position: 0 -31px!important
 }
@@ -26235,7 +26229,7 @@ button.swiper-pagination-bullet {
     z-index: 2;
     width: 16px;
     height: 31px;
-    background: url(/web/images/arw-fslist.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/arw-fslist.png) no-repeat;
     background-size: cover;
     background-position: 0 0
 }
@@ -26460,7 +26454,7 @@ button.swiper-pagination-bullet {
 }
 
 .detail_welcome {
-    background: url(/web/images/img_welcome.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/img_welcome.png) no-repeat 50%;
     height: 300px;
     width: 85%;
     text-indent: -99999px;
@@ -26561,7 +26555,7 @@ button.swiper-pagination-bullet {
 }
 
 .detail_up .detail_up_image>div {
-    background: url(/web/images/logo.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/logo.png) no-repeat 50%;
     height: 50px;
     width: 122px;
     text-indent: -99999px;
@@ -26703,7 +26697,7 @@ button.swiper-pagination-bullet {
     width: 9px;
     height: 15px;
     font-size: 0;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 0;
     z-index: 11
 }
@@ -26720,7 +26714,7 @@ button.swiper-pagination-bullet {
     width: 9px;
     height: 15px;
     font-size: 0;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 -15px;
     z-index: 11
 }
@@ -28087,7 +28081,7 @@ button.swiper-pagination-bullet {
     height: 36px;
     cursor: pointer;
     border: 1px solid #e4e4e4;
-    background: #fff url(/web/images/arw_select.png) no-repeat 95% 50%;
+    background: #fff url(https://www.stayfolio.com/web/images/arw_select.png) no-repeat 95% 50%;
     background-size: 20px 20px;
     border-radius: 5px;
     line-height: 36px;
@@ -28640,7 +28634,7 @@ button.swiper-pagination-bullet {
     right: 58px;
     width: 9px;
     height: 20px;
-    background: url(/web/images/arw-bk2.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk2.png) no-repeat 9px 20px;
     background-position: 0 -20px
 }
 
@@ -28658,7 +28652,7 @@ button.swiper-pagination-bullet {
     z-index: 2;
     width: 9px;
     height: 20px;
-    background: url(/web/images/arw-bk2.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk2.png) no-repeat 9px 20px;
     background-position: 0 0;
     border-right: 1px solid #e6e6e6
 }
@@ -28759,7 +28753,7 @@ button.swiper-pagination-bullet {
 }
 
 .not-found-magazine-deatail {
-    background: url(/web/images/blindwhile.jpeg) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/blindwhile.jpeg) no-repeat;
     background-size: cover
 }
 
@@ -29071,12 +29065,12 @@ button.swiper-pagination-bullet {
 }
 
 .preorder_container .preorder-detail-margin .preorder-detail-slide-container .preorder-detail-main-swiper .swiper-button-prev {
-    background: url(/web/images/left-arrow.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/left-arrow.png) no-repeat;
     margin-left: 5px
 }
 
 .preorder_container .preorder-detail-margin .preorder-detail-slide-container .preorder-detail-main-swiper .swiper-button-next {
-    background: url(/web/images/right-arrow.png) no-repeat
+    background: url(https://www.stayfolio.com/web/images/right-arrow.png) no-repeat
 }
 
 .preorder_container .preorder-detail-margin .swiper-preorder-detail-pc .swiper-pagination-bullet {
@@ -29109,7 +29103,7 @@ button.swiper-pagination-bullet {
 }
 
 .preorder_container .preorder-detail-margin .swiper-preorder-detail-pc .swiper-button-prev {
-    background-image: url(/web/images/journal-detail-arrow-left.png)!important;
+    background-image: url(https://www.stayfolio.com/web/images/journal-detail-arrow-left.png)!important;
     top: 46%;
     width: 60px;
     height: 60px;
@@ -29117,7 +29111,7 @@ button.swiper-pagination-bullet {
 }
 
 .preorder_container .preorder-detail-margin .swiper-preorder-detail-pc .swiper-button-next {
-    background-image: url(/web/images/journal-detail-arrow-right.png)!important;
+    background-image: url(https://www.stayfolio.com/web/images/journal-detail-arrow-right.png)!important;
     top: 46%;
     background-position: 50%;
     width: 60px;
@@ -29452,7 +29446,7 @@ button.swiper-pagination-bullet {
 .about_text .tit .logo {
     position: absolute;
     bottom: 0;
-    background: url(/web/images/logo.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/logo.png) no-repeat 50%;
     background-size: cover;
     display: block;
     width: 90px;
@@ -30236,7 +30230,7 @@ button.swiper-pagination-bullet {
     content: "";
     width: 15px;
     height: 30px;
-    background: url(/web/images/arw-step.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/arw-step.svg) no-repeat 50%;
     background-size: cover;
     opacity: .3
 }
@@ -30464,7 +30458,7 @@ button.swiper-pagination-bullet {
     display: inline-block;
     width: 15px;
     height: 15px;
-    background: url(/web/images/ico_addfile.svg) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/ico_addfile.svg) no-repeat 50%;
     background-size: contain;
     vertical-align: middle;
     margin: 0 3px 3px 0
@@ -30744,7 +30738,7 @@ button.swiper-pagination-bullet {
         display: inline-block;
         width: 15px;
         height: 15px;
-        background: url(/web/images/ico_addfile.svg) no-repeat 50%;
+        background: url(https://www.stayfolio.com/web/images/ico_addfile.svg) no-repeat 50%;
         background-size: contain;
         vertical-align: middle;
         margin: 0 3px 3px 0
@@ -30794,7 +30788,7 @@ button.swiper-pagination-bullet {
 }
 
 .swiper-promotions-detail-pc .swiper-button-prev {
-    background-image: url(/web/images/journal-detail-arrow-left.png)!important;
+    background-image: url(https://www.stayfolio.com/web/images/journal-detail-arrow-left.png)!important;
     top: 46%;
     width: 60px;
     height: 60px;
@@ -30802,7 +30796,7 @@ button.swiper-pagination-bullet {
 }
 
 .swiper-promotions-detail-pc .swiper-button-next {
-    background-image: url(/web/images/journal-detail-arrow-right.png)!important;
+    background-image: url(https://www.stayfolio.com/web/images/journal-detail-arrow-right.png)!important;
     top: 46%;
     background-position: 50%;
     width: 60px;
@@ -31175,12 +31169,12 @@ button.swiper-pagination-bullet {
 }
 
 .promotion-detail-slide-container .promotion-detail-main-swiper .swiper-button-prev {
-    background: url(/web/images/left-arrow.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/left-arrow.png) no-repeat;
     margin-left: 5px
 }
 
 .promotion-detail-slide-container .promotion-detail-main-swiper .swiper-button-next {
-    background: url(/web/images/right-arrow.png) no-repeat
+    background: url(https://www.stayfolio.com/web/images/right-arrow.png) no-repeat
 }
 
 @media(min-width: 769px) {
@@ -31198,7 +31192,7 @@ button.swiper-pagination-bullet {
     width: 9px;
     height: 15px;
     font-size: 0;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 0;
     z-index: 11
 }
@@ -31215,7 +31209,7 @@ button.swiper-pagination-bullet {
     width: 9px;
     height: 15px;
     font-size: 0;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 -15px;
     z-index: 11
 }
@@ -31285,7 +31279,7 @@ button.swiper-pagination-bullet {
     bottom: 0;
     width: 40px;
     height: 40px;
-    background: url(/web/images/arw-fsdetail02.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-fsdetail02.png) no-repeat 9px 20px;
     background-position: 0 -40px;
     background-color: #fff;
     border: 1px solid #6e6e6e;
@@ -31303,7 +31297,7 @@ button.swiper-pagination-bullet {
     width: 40px;
     height: 40px;
     font-size: 0;
-    background: url(/web/images/arw-fsdetail02.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-fsdetail02.png) no-repeat 9px 20px;
     background-position: 0 0;
     background-color: #fff;
     border: 1px solid #6e6e6e;
@@ -31507,7 +31501,7 @@ button.swiper-pagination-bullet {
     display: grid;
     place-content: center;
     background-color: #666;
-    background-image: "url(./web/images/gradient.svg)"
+    background-image: "url(.https://www.stayfolio.com/web/images/gradient.svg)"
 }
 
 .events-detail-container .col-md-4 {
@@ -31707,14 +31701,14 @@ button.swiper-pagination-bullet {
 }
 
 #contents.careby-detail-careby-container #careby-detail-article-main-swiper .swiper-button-prev {
-    background-image: url(/web/images/journal-detail-arrow-left.png)!important;
+    background-image: url(https://www.stayfolio.com/web/images/journal-detail-arrow-left.png)!important;
     width: 60px;
     height: 60px;
     left: 0
 }
 
 #contents.careby-detail-careby-container #careby-detail-article-main-swiper .swiper-button-next {
-    background-image: url(/web/images/journal-detail-arrow-right.png)!important;
+    background-image: url(https://www.stayfolio.com/web/images/journal-detail-arrow-right.png)!important;
     background-position: 50%;
     width: 60px;
     height: 60px;
@@ -31730,7 +31724,7 @@ button.swiper-pagination-bullet {
         width: 30px;
         height: 30px;
         margin-top: -15px;
-        background-image: url(/web/images/arw-fsdetail01.png)!important;
+        background-image: url(https://www.stayfolio.com/web/images/arw-fsdetail01.png)!important;
         background-size: cover
     }
 
@@ -31766,7 +31760,7 @@ button.swiper-pagination-bullet {
 }
 
 #contents.careby-detail-careby-container .fdetail_top .top_img .info .link .insta {
-    background: url(/web/images/ico_sns.png) no-repeat 0 -30px;
+    background: url(https://www.stayfolio.com/web/images/ico_sns.png) no-repeat 0 -30px;
     background-size: 30px 150px;
     width: 35px;
     height: 27px;
@@ -31774,7 +31768,7 @@ button.swiper-pagination-bullet {
 }
 
 #contents.careby-detail-careby-container .fdetail_top .top_img .info .link .facebook {
-    background: url(/web/images/ico_sns.png) no-repeat 0 -2px;
+    background: url(https://www.stayfolio.com/web/images/ico_sns.png) no-repeat 0 -2px;
     background-size: 30px 140px;
     width: 35px;
     height: 27px;
@@ -31802,14 +31796,14 @@ button.swiper-pagination-bullet {
     }
 
     #contents.careby-detail-careby-container .fdetail_top .top_img .info .link .sns-wrapper .insta {
-        background: url(/web/images/ico_sns.png) no-repeat 0 -21px;
+        background: url(https://www.stayfolio.com/web/images/ico_sns.png) no-repeat 0 -21px;
         background-size: 26px 120px;
         width: 28px;
         margin-left: 6px
     }
 
     #contents.careby-detail-careby-container .fdetail_top .top_img .info .link .sns-wrapper .facebook {
-        background: url(/web/images/ico_sns.png) no-repeat 0 -1px;
+        background: url(https://www.stayfolio.com/web/images/ico_sns.png) no-repeat 0 -1px;
         background-size: 30px 110px;
         width: 28px
     }
@@ -32069,7 +32063,7 @@ button.swiper-pagination-bullet {
     z-index: 99;
     width: 40px;
     height: 40px;
-    background: url(/web/images/arw-fsdetail02.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-fsdetail02.png) no-repeat 9px 20px;
     background-position: 0 0;
     background-color: #fff;
     border: 1px solid #6e6e6e;
@@ -32083,7 +32077,7 @@ button.swiper-pagination-bullet {
     z-index: 99;
     width: 40px;
     height: 40px;
-    background: url(/web/images/arw-fsdetail02.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-fsdetail02.png) no-repeat 9px 20px;
     background-position: 0 -40px;
     background-color: #fff;
     border: 1px solid #6e6e6e;
@@ -32110,7 +32104,7 @@ button.swiper-pagination-bullet {
         left: 5px;
         width: 16px;
         height: 31px;
-        background: url(/web/images/arw-fslist.png) no-repeat;
+        background: url(https://www.stayfolio.com/web/images/arw-fslist.png) no-repeat;
         background-size: cover;
         background-position: 0 0;
         border: 0;
@@ -32124,7 +32118,7 @@ button.swiper-pagination-bullet {
         right: 5px;
         width: 16px;
         height: 31px;
-        background: url(/web/images/arw-fslist.png) no-repeat;
+        background: url(https://www.stayfolio.com/web/images/arw-fslist.png) no-repeat;
         background-size: cover;
         background-position: 0 -31px;
         border: 0;
@@ -32174,7 +32168,7 @@ button.swiper-pagination-bullet {
     z-index: 2;
     width: 70px;
     height: 70px;
-    background: url(/web/images/arw-fsdetail03.png) no-repeat 70px 140px;
+    background: url(https://www.stayfolio.com/web/images/arw-fsdetail03.png) no-repeat 70px 140px;
     background-position: 0 0
 }
 
@@ -32185,7 +32179,7 @@ button.swiper-pagination-bullet {
     z-index: 2;
     width: 70px;
     height: 70px;
-    background: url(/web/images/arw-fsdetail03.png) no-repeat 70px 140px;
+    background: url(https://www.stayfolio.com/web/images/arw-fsdetail03.png) no-repeat 70px 140px;
     background-position: 0 -70px
 }
 
@@ -32503,7 +32497,7 @@ button.swiper-pagination-bullet {
     z-index: 2;
     width: 70px;
     height: 70px;
-    background: url(/web/images/arw-fsdetail03.png) no-repeat 70px 140px;
+    background: url(https://www.stayfolio.com/web/images/arw-fsdetail03.png) no-repeat 70px 140px;
     background-position: 0 0
 }
 
@@ -32514,7 +32508,7 @@ button.swiper-pagination-bullet {
     z-index: 2;
     width: 70px;
     height: 70px;
-    background: url(/web/images/arw-fsdetail03.png) no-repeat 70px 140px;
+    background: url(https://www.stayfolio.com/web/images/arw-fsdetail03.png) no-repeat 70px 140px;
     background-position: 0 -70px
 }
 
@@ -32637,7 +32631,7 @@ button.swiper-pagination-bullet {
 }
 
 .findstay-detail-container .fdetail_top .top_img .fdetail-main-slide .swiper-button-prev {
-    background-image: url(/web/images/journal-detail-arrow-left.png)!important;
+    background-image: url(https://www.stayfolio.com/web/images/journal-detail-arrow-left.png)!important;
     width: 60px;
     height: 60px;
     left: 0;
@@ -32654,7 +32648,7 @@ button.swiper-pagination-bullet {
 }
 
 .findstay-detail-container .fdetail_top .top_img .fdetail-main-slide .swiper-button-next {
-    background-image: url(/web/images/journal-detail-arrow-right.png)!important;
+    background-image: url(https://www.stayfolio.com/web/images/journal-detail-arrow-right.png)!important;
     background-position: 50%;
     width: 60px;
     height: 60px;
@@ -32715,11 +32709,11 @@ button.swiper-pagination-bullet {
     height: 18px;
     top: 0;
     right: 20px;
-    background: url(/web/images/btn-close.png) no-repeat 50%
+    background: url(https://www.stayfolio.com/web/images/btn-close.png) no-repeat 50%
 }
 
 .findstay-detail-container .icon_info {
-    background: url(/web/images/findstay-detail-info-icon.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/findstay-detail-info-icon.png) no-repeat;
     background-position: 50%;
     width: 40px;
     height: 40px;
@@ -32728,7 +32722,7 @@ button.swiper-pagination-bullet {
 }
 
 .findstay-detail-container .icon_close {
-    background: url(/web/images/findstay-detail-close.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/findstay-detail-close.png) no-repeat;
     background-position: 50%;
     width: 30px;
     height: 40px;
@@ -32737,7 +32731,7 @@ button.swiper-pagination-bullet {
 }
 
 .findstay-detail-container .icon_open {
-    background: url(/web/images/findstay-detail-open.png) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/findstay-detail-open.png) no-repeat;
     background-position: 50%;
     width: 30px;
     height: 40px;
@@ -32910,7 +32904,7 @@ button.swiper-pagination-bullet {
 }
 
 .not-find-findstay-deatail {
-    background: url(/web/images/blindwhile.jpeg) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/blindwhile.jpeg) no-repeat;
     background-size: cover
 }
 
@@ -33055,7 +33049,7 @@ button.swiper-pagination-bullet {
     height: 18px;
     top: 0;
     right: 20px;
-    background: url(/web/images/btn-close.png) no-repeat 50%
+    background: url(https://www.stayfolio.com/web/images/btn-close.png) no-repeat 50%
 }
 
 .findstay-room-detail .booking_room {
@@ -33090,7 +33084,7 @@ button.swiper-pagination-bullet {
 }
 
 .findstay-room-detail .booking_room .swiper-button-prev {
-    background-image: url(/web/images/journal-detail-arrow-left.png)!important;
+    background-image: url(https://www.stayfolio.com/web/images/journal-detail-arrow-left.png)!important;
     width: 60px;
     height: 60px;
     left: 0;
@@ -33107,7 +33101,7 @@ button.swiper-pagination-bullet {
 }
 
 .findstay-room-detail .booking_room .swiper-button-next {
-    background-image: url(/web/images/journal-detail-arrow-right.png)!important;
+    background-image: url(https://www.stayfolio.com/web/images/journal-detail-arrow-right.png)!important;
     background-position: 50%;
     width: 60px;
     height: 60px;
@@ -33158,7 +33152,7 @@ button.swiper-pagination-bullet {
     width: 9px;
     height: 15px;
     font-size: 0;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 -15px
 }
 
@@ -33170,7 +33164,7 @@ button.swiper-pagination-bullet {
     width: 9px;
     height: 15px;
     font-size: 0;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 0
 }
 
@@ -33751,7 +33745,7 @@ button.swiper-pagination-bullet {
 }
 
 .bookings-new .po_payment .payment_list .booking-room-options .swiper-button-prev {
-    background-image: url(/web/images/arw_slick.png)!important;
+    background-image: url(https://www.stayfolio.com/web/images/arw_slick.png)!important;
     width: 60px;
     height: 60px;
     left: 0;
@@ -33768,7 +33762,7 @@ button.swiper-pagination-bullet {
 }
 
 .bookings-new .po_payment .payment_list .booking-room-options .swiper-button-next {
-    background-image: url(/web/images/arw_slick.png)!important;
+    background-image: url(https://www.stayfolio.com/web/images/arw_slick.png)!important;
     background-position: 0 -60px;
     width: 60px;
     height: 60px;
@@ -33960,13 +33954,13 @@ button.swiper-pagination-bullet {
 }
 
 .bookings-new .po_payment .payment_list .payment-method .card_list .swiper-button-prev:hover {
-    background: url(/web/images/arw-wh-prev.svg) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/arw-wh-prev.svg) no-repeat;
     background-size: 40px 40px;
     background-position: 0 50%
 }
 
 .bookings-new .po_payment .payment_list .payment-method .card_list .swiper-button-next:hover {
-    background: url(/web/images/arw-wh-next.svg) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/arw-wh-next.svg) no-repeat;
     background-size: 40px 40px;
     background-position: 100% 50%
 }
@@ -33974,7 +33968,7 @@ button.swiper-pagination-bullet {
 .bookings-new .po_payment .payment_list .payment-method .card_list .swiper-button-prev {
     width: 100px;
     height: 168px;
-    background: url(/web/images/arw-gr-prev.svg) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/arw-gr-prev.svg) no-repeat;
     background-size: 40px 40px;
     background-position: 0 50%;
     margin-top: 0;
@@ -33985,7 +33979,7 @@ button.swiper-pagination-bullet {
 .bookings-new .po_payment .payment_list .payment-method .card_list .swiper-button-next {
     width: 100px;
     height: 168px;
-    background: url(/web/images/arw-gr-next.svg) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/arw-gr-next.svg) no-repeat;
     background-size: 40px 40px;
     background-position: 100% 50%;
     margin-top: 0;
@@ -34079,7 +34073,7 @@ button.swiper-pagination-bullet {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    background-image: url(/web/images/booking-complete.png)
+    background-image: url(https://www.stayfolio.com/web/images/booking-complete.png)
 }
 
 .bookings-complte .complete-page .msg {
@@ -34133,35 +34127,35 @@ button.swiper-pagination-bullet {
 }
 
 .balls {
-    background: url(/web/images/loading-balls.svg) no-repeat 50%
+    background: url(https://www.stayfolio.com/web/images/loading-balls.svg) no-repeat 50%
 }
 
 .bars {
-    background: url(/web/images/loading-bars.svg) no-repeat 50%
+    background: url(https://www.stayfolio.com/web/images/loading-bars.svg) no-repeat 50%
 }
 
 .bubbles {
-    background: url(/web/images/loading-bubbles.svg) no-repeat 50%
+    background: url(https://www.stayfolio.com/web/images/loading-bubbles.svg) no-repeat 50%
 }
 
 .cubes {
-    background: url(/web/images/loading-cubes.svg) no-repeat 50%
+    background: url(https://www.stayfolio.com/web/images/loading-cubes.svg) no-repeat 50%
 }
 
 .cylon {
-    background: url(/web/images/loading-cylon.svg) no-repeat 50%
+    background: url(https://www.stayfolio.com/web/images/loading-cylon.svg) no-repeat 50%
 }
 
 .spin {
-    background: url(/web/images/loading-spin.svg) no-repeat 50%
+    background: url(https://www.stayfolio.com/web/images/loading-spin.svg) no-repeat 50%
 }
 
 .spinning-bubbles {
-    background: url(/web/images/loading-spinning-bubbles.svg) no-repeat 50%
+    background: url(https://www.stayfolio.com/web/images/loading-spinning-bubbles.svg) no-repeat 50%
 }
 
 .spokes {
-    background: url(/web/images/loading-spokes.svg) no-repeat 50%
+    background: url(https://www.stayfolio.com/web/images/loading-spokes.svg) no-repeat 50%
 }
 
 .shard-pagination {
@@ -34216,7 +34210,7 @@ button.swiper-pagination-bullet {
 .shard-pagination .arrow-btn-wrapper .prev-btn {
     width: 9px;
     height: 15px;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 -15px;
     cursor: pointer
 }
@@ -34227,7 +34221,7 @@ button.swiper-pagination-bullet {
     bottom: -1px;
     width: 9px;
     height: 15px;
-    background: url(/web/images/arw-bk.png) no-repeat 9px 20px;
+    background: url(https://www.stayfolio.com/web/images/arw-bk.png) no-repeat 9px 20px;
     background-position: 0 0;
     cursor: pointer
 }
@@ -34256,7 +34250,7 @@ button.swiper-pagination-bullet {
 }
 
 .findstay-only-membership {
-    background: url(/web/images/blindwhile.jpeg) no-repeat;
+    background: url(https://www.stayfolio.com/web/images/blindwhile.jpeg) no-repeat;
     background-size: cover
 }
 
@@ -34486,7 +34480,7 @@ button.swiper-pagination-bullet {
     right: 30px;
     font-size: 0;
     text-indent: -999px;
-    background: url(/web/images/btn-close.png) no-repeat 50%;
+    background: url(https://www.stayfolio.com/web/images/btn-close.png) no-repeat 50%;
     width: 22px;
     height: 22px
 }
@@ -34513,7 +34507,7 @@ button.swiper-pagination-bullet {
     }
 
     .layer_pop .btn_back {
-        background: url(/web/images/btn_back.png) no-repeat 50%;
+        background: url(https://www.stayfolio.com/web/images/btn_back.png) no-repeat 50%;
         background-size: cover;
         display: inline-block;
         width: 40px;

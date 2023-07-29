@@ -12,9 +12,7 @@
 	rel="stylesheet"
 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="/resources/css/main/main.css">
-<link rel="stylesheet" href="/resources/css/main/main2.css">
-<link rel="stylesheet" href="/resources/css/main/main3.css">
+<link rel="stylesheet" href="/resources/css/common/48ab7619b7161b1c.css">
 <style type="text/css">
 .form-control-dark {
   border-color: var(--bs-gray);
@@ -32,6 +30,7 @@
   outline: 0;
 }
 </style>
+<link rel="stylesheet" href="/resources/css/main/header.css">
 <style type="text/css" data-styled-jsx="">a.jsx-a44b61ff91ee7fc6{padding-bottom:30px;border-bottom:1px solid#e6e6e6;margin-bottom:10px}p.jsx-a44b61ff91ee7fc6{font-size:12px;color:#999}.login.jsx-a44b61ff91ee7fc6{font-size:16px;color:#333;margin-bottom:10px}</style>
 </head></html>
 <script>
@@ -74,8 +73,20 @@
 	            });
 	        })
 	    })
+	    
+	    // 사이드메뉴 버튼 클릭시 사이드메뉴 보여줌
+	    sideMenuOn.addEventListener('click', ()=>{
+	    	document.querySelector("#sideMenu").style.display='block';
+	    })
+	    
+	    // 사이드 메뉴 이 외의 부분 클릭 시 사이드메뉴 제거
+	    sideMenuOverlay.addEventListener('click', ()=>{
+	    	document.querySelector("#sideMenu").style.display='none';
+	    })
+	
 	})
 	
+	// active 클래스가 있는 버튼의 innerHTML 값을 파라메터로 가지고 list 페이지 이동
 	function searchWhere(){
 		let where;
 		document.querySelectorAll('button>a').forEach(button =>{
@@ -86,6 +97,16 @@
 			}
 	    })
 	}
+	
+	// 화면이 사이즈가 재조정 될 때마다 함수 실행
+	window.addEventListener("resize", sideMenuClose);
+	
+	// 사이드바가 켜져있는 상태에서 화면이 커지면 사이드바를 닫기 위한 함수
+    function sideMenuClose(){
+	    if(window.innerWidth >= 1024){
+	    	document.querySelector("#sideMenu").style.display='none';
+	    }
+    }
 </script>
 <body>
 	<!-- where/when 모달 -->
@@ -210,12 +231,20 @@
             <div class="header_wrap gnb-responsive-css only-pc">
                 <div class='logo'>
                     <a href="/main">STAY FOLIO</a>
-                </div>
-                <div class="whe gnb-responsive-margin" style=""><button type="button" id="btnWhere"><img src="/resources/images/where.JPG" style="padding-right:5px;"><span class="gnb-mo-small">어디로
-                            떠날까요?</span></button><button type="button" class="gnb-when-mo-small" id="btnWhen" style="padding-left:0px;"><img src="/resources/images/when.JPG"style="padding-right:5px;"><span
-                            class="gnb-mo-small">언제 떠날까요?</span></button></div>
-                <div class="toggle-ko-mo"></div>
-                <div class="nav">
+                </div>    
+				<div class="whe gnb-responsive-margin" style="">
+					<button type="button" id="btnWhere">
+						<img src="/resources/images/where.JPG" style="padding-right: 5px;"><span
+							class="gnb-mo-small">어디로 떠날까요?</span>
+					</button>
+					<button type="button" class="gnb-when-mo-small" id="btnWhen"
+						style="padding-left: 0px;">
+						<img src="/resources/images/when.JPG" style="padding-right: 5px;"><span
+							class="gnb-mo-small">언제 떠날까요?</span>
+					</button>
+				</div>
+				<div class="toggle-ko-mo"></div>
+				<div class="nav">
                     <ul class="menu">
                         <li class=""><a href="/stay/list">FIND STAY</a></li>
                         <li class=""><a href="#none">메뉴</a></li>
@@ -242,16 +271,48 @@
                 </div>
             </div>
             <div class="header_wrap gnb-responsive-css only-mobile">
-                <div class="logo"><a href="/">STAY FOLIO</a></div>
-                <div class="side-menu"></div>
+                <div class="logo"><a href="/main">STAY FOLIO</a></div>
+                <div class="side-menu" id="sideMenuOn"></div>
             </div>
             <div class="header_wrap gnb-responsive-css new-header">
-                <div class="logo" style="margin-left: 16px;"><a href="/">STAY FOLIO</a></div>
+                <div class="logo" style="margin-left: 16px;"><a href="/main">STAY FOLIO</a></div>
                 <div class="right-menu">
                     <div class="side-menu"></div>
                 </div>
             </div>
         </header>
+    </div>
+    <!-- 사이드 메뉴 -->
+    <div class="jsx-645c674fce93a7bf wrapper" style="display: none;" id="sideMenu">
+        <div aria-hidden="true" class="jsx-645c674fce93a7bf overlay" id='sideMenuOverlay'></div>
+        <div class="jsx-645c674fce93a7bf menu-modal"><a href="/mypage/account/edit" class="jsx-c4e7717c5657cc43">
+                <div class="jsx-c4e7717c5657cc43 profile">
+                    <div class="jsx-c4e7717c5657cc43 profile-img"></div>
+                    <div class="jsx-c4e7717c5657cc43 profile-right">
+                        <div class="jsx-c4e7717c5657cc43 name">김화평 님</div>
+                        <div role="link" tabindex="0" class="jsx-c4e7717c5657cc43 booking-msg">스테이폴리오와 함께 0번의 여행을 했어요.
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <div class="landing_menu">
+                <ul>
+					<li><a href="/member/mypage/reservation">예약 정보</a></li>
+					<li><a href="/member/mypage/cancel">취소 내역</a></li>
+					<li><a href="/member/mypage/likestay">관심 스테이</a></li>
+					<li><a href="/mypage/account/edit">회원 정보 수정</a></li>
+					<li><a href="/chat">메시지</a></li>
+                </ul>
+            </div>
+            <ul class="jsx-bc9726d7609f7d7f setting-menu">
+                <li role="presentation" class="jsx-bc9726d7609f7d7f lang-menu">
+                    <div class="jsx-bc9726d7609f7d7f">언어 설정</div>
+                    <div class="jsx-bc9726d7609f7d7f lang">한국어</div>
+                </li>
+                <li role="presentation" class="jsx-bc9726d7609f7d7f">1:1 문의</li>
+            </ul>
+            <div class="jsx-13bd1097de52bb6b"><button type="button" class="jsx-13bd1097de52bb6b">로그아웃</button></div>
+        </div>
     </div>
     
 
