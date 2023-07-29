@@ -3,7 +3,7 @@ package com.gogo.vo;
 import lombok.Data;
 
 @Data
-public class pageDto {
+public class PageDto {
 
 	Criteria cri;	// 페이지번호, 페이지당 게시물 수
 	int total;		// 총 게시물의 수
@@ -15,7 +15,7 @@ public class pageDto {
 	
 	int realEnd;	// 페이지 블록의 진짜 끝 번호
 	
-	public pageDto(Criteria cri, int total) {
+	public PageDto(Criteria cri, int total) {
 		this.cri = cri;
 		this.total = total;
 		

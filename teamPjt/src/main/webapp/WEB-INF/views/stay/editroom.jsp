@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="../common/header.jsp"/>
-<link href="/resources/main/add.css">
 
 <div id="contents">
 	<div class="container sub_title">
-		<div class="txt">room 등록</div>
+		<div class="txt">room 수정</div>
 	</div>
 	<div class="store_apply">
 		<form name="addRoomForm" method="post">
@@ -178,13 +177,6 @@
 						</div>
 					</div>
 
-
-<!-- 					부트스트랩 파일첨부 input		
-							<div class="mb-3">
-								<label for="formFileMultiple" class="form-label"></label> 
-								<input class="form-control" type="file"
-									id="formFileMultiple" multiple>
-							</div> -->
 					<li><div class="dt">파일 첨부 *</div>
 						<div class="dd">
 							<div class="file_wrap">
@@ -216,7 +208,7 @@
 				</ul>
 			</div>
 			<div class="bt_btns">
-				<button type="submit" class="btn_bk">등록하기</button>
+				<button type="submit" class="btn_bk">수정하기</button>
 				<button type="reset" class="btn_bk">초기화</button>
 			</div>
 		</form>

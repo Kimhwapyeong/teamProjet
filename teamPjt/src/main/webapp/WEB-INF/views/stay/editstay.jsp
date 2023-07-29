@@ -1,25 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<jsp:include page="../common/header.jsp" />
-<link href="/resources/main/add.css">
-<script>
-	window.addEventListener('load', ()=>{
-		
-		// 등록 버튼 눌렸을 때의 이벤트. 유효성 검사 및 서브밋을 한다.
-		btnAddStay.addEventListener('click', (e)=>{
-			e.preventDefault();
-			
-			// 개인정보 수집 동의 체크 유효성 검사
-			if(!document.querySelector("input[id=check-policy1]").checked){
-				alertPopOn('개인정보 수집 및 이용 동의에 체크 해주세요.')
-				return;
-			}
-		})
-	})
-</script>
+    pageEncoding="UTF-8"%>
+<jsp:include page="../common/header.jsp"/>
+
 <div id="contents">
 	<div class="container sub_title">
-		<div class="txt">Stay 등록</div>
+		<div class="txt">Stay 수정</div>
 	</div>
 	<div class="store_apply">
 		<form name="addStayForm">
@@ -158,34 +143,13 @@
 						</div></li>
 				</ul>
 			</div>
-			<div class="store_apply_agree">
-				<div class="box">
-					<div class="tit">개인정보 수집 및 이용 동의</div>
-					<div class="desc">
-						(주)올래갈래는 아래의 목적으로 개인정보를 수집 및 이용하며, 신청인의 개인정보를 안전하게 취급하는데 최선을
-						다합니다.<br> <br>1. 수집 항목 : 스테이 이름, 상세 주소, 담당자 성함, 전화번호, 메일
-						주소, 스테이 소개, 첨부 자료<br>2. 수집 및 이용 목적 : 입점에 따른
-						정보 확인, 입점 가능 여부 전달 및 문의사항 대응<br>3. 보유 및 이용 기간 : 입점 및 문의를
-						위해 검토 완료 후, 3개월 간 보관하며 이후 해당 정보는 파기됩니다.<br> <br> <span>이외
-							기타 사항은 별도 고지하는 [<a target="_blank" rel="noreferrer"
-							style="display: inline" class="bold_contactus"
-							href="https://stayfolio.notion.site/Ver-2-1-1b8348dda5aa42419ed16a27381e8ad6">개인정보
-								처리방침</a>]을 참고해 주시기 바랍니다.
-						</span><br>
-					</div>
-				</div>
-				<label for="check-policy1" class="check_skin"
-					style="width: 100%; display: flex; justify-content: center; margin-top: 34px"><input
-					type="checkbox" id="check-policy1"><span
-					class="check_policy">개인정보 수집 및 이용에 동의합니다. [필수]</span><span
-					class="check_box"></span></label>
-			</div>
+
 			<div class="bt_btns">
-				<button type="submit" class="btn_bk" id=btnAddStay>등록하기</button>
+				<button type="submit" class="btn_bk" id=btnAddStay>수정하기</button>
 				<button type="reset" class="btn_bk">초기화</button>
 			</div>
 		</form>
 	</div>
 </div>
 
-<jsp:include page="../common/footer.jsp" />
+<jsp:include page="../common/footer.jsp"/>

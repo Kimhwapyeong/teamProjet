@@ -11,18 +11,32 @@ public class MainController {
 		
 	}
 	
-	// 매핑용
+	// 임시 매핑용
 	@GetMapping("/addstay")
 	public String addStay() {
 		
 		return "/stay/addstay";
 	}
 	
-	// 매핑용
+	// 임시 매핑용
 	@GetMapping("/addroom")
 	public String addRoom() {
 		
 		return "/stay/addroom";
+	}
+	
+	// 임시 매핑용
+	@GetMapping("/editstay")
+	public String editStay() {
+		
+		return "stay/editstay";
+	}
+
+	// 임시 매핑용
+	@GetMapping("/editroom")
+	public String editRoom() {
+		
+		return "stay/editroom";
 	}
 
 }

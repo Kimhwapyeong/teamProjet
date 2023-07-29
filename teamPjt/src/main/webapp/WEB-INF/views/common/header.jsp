@@ -257,12 +257,12 @@
 	</div>
 	
 	<!-- 헤더 메뉴 -->
-    <div id="gnbBgColor">
-        <header id="header" class="container_wide">
-            <div class="header_wrap gnb-responsive-css only-pc">
-                <div class='logo'>
-                    <a href="/main">STAY FOLIO</a>
-                </div>    
+	<div id="gnbBgColor">
+		<header id="header" class="container_wide">
+			<div class="header_wrap gnb-responsive-css only-pc">
+				<div class='logo'>
+					<a href="/main">STAY FOLIO</a>
+				</div>
 				<div class="whe gnb-responsive-margin" style="">
 					<button type="button" id="btnWhere">
 						<span class="gnb-mo-small">어디로 떠날까요?</span>
@@ -273,45 +273,49 @@
 				</div>
 				<div class="toggle-ko-mo"></div>
 				<div class="nav">
-                    <ul class="menu">
-                        <li class=""><a href="/stay/list">FIND STAY</a></li>
-                        <li class=""><a href="#none">메뉴</a></li>
-                    </ul>
-                    <ul class="etc">
-                        <div class="nav_etc">
-                        	<!-- 추후 login 여부 판단하여 mypage와 login 둘 중 하나 노출 -->
-	                        	<div class="box">
-	                            	<a href="/login"><div class="nav_tit login">LOGIN</div></a>
-	                           	</div>
-	                        <!-- 로그인 구현 되면 session에 저장된 값을 비교 -->
-                        	<c:if test="${ param.role eq 'user' or empty param.role }">
-	                            <div class="box">
-	                                <div class="nav_tit mypage">MY PAGE</div>
-	                                <ul class="open_list" style="width: 125px;">
-	                                    <li><a href="/member/mypage/reservation">예약 정보</a></li>
-	                                    <li><a href="/member/mypage/cancel">취소 내역</a></li>
-	                                    <li><a href="/member/mypage/likestay">관심 스테이</a></li>
-	                                    <li><a href="/mypage/account/edit">회원 정보 수정</a></li>
-	                                    <li><a href="/chat">메시지</a></li>
-	                                    <!-- 편의를 위해 우선  main 페이지로 설정 -->
-	                                    <li class="login"><a href="/main">로그아웃</a></li>
-	                                </ul>
-	                            </div>
-                        	</c:if>
-                        	<c:if test="${ param.role eq 'admin' }">
+					<ul class="menu">
+						<li class=""><a href="/stay/list">FIND STAY</a></li>
+						<li class=""><a href="#none">메뉴</a></li>
+					</ul>
+					<ul class="etc">
+						<div class="nav_etc">
+							<!-- 추후 login 여부 판단하여 mypage와 login 둘 중 하나 노출 -->
+							<div class="box">
+								<a href="/login"><div class="nav_tit login">LOGIN</div></a>
+							</div>
+							<!-- 로그인 구현 되면 session에 저장된 값을 비교 -->
+							<c:if test="${ param.role eq 'user' or empty param.role }">
+								<div class="box">
+									<div class="nav_tit mypage">MY PAGE</div>
+									<ul class="open_list" style="width: 125px;">
+										<li><a href="/member/mypage/reservation">예약 정보</a></li>
+										<li><a href="/member/mypage/cancel">취소 내역</a></li>
+										<li><a href="/member/mypage/likestay">관심 스테이</a></li>
+										<li><a href="/mypage/account/edit">회원 정보 수정</a></li>
+										<li><a href="/chat">메시지</a></li>
+										<!-- 편의를 위해 우선  main 페이지로 설정 -->
+										<li class="login"><a href="/main">로그아웃</a></li>
+									</ul>
+								</div>
+							</c:if>
+							<c:if test="${ param.role eq 'admin' }">
 								<div class="box">
 									<div class="nav_tit mypage">ADMIN PAGE</div>
 									<ul class="open_list" style="width: 125px;">
-										<li><a href="/member/admin/stayadmin?role=admin">숙소 관리</a></li>
-										<li><a href="/member/admin/useradmin?role=admin">사용자 관리</a></li>
-										<li><a href="/member/admin/hosthelp?role=admin">호스트 지원</a></li>
-										<li><a href="/member/admin/statistics?role=admin">통계 및 분석</a></li>
+										<li><a href="/member/admin/stayadmin?role=admin">숙소
+												관리</a></li>
+										<li><a href="/member/admin/useradmin?role=admin">사용자
+												관리</a></li>
+										<li><a href="/member/admin/hosthelp?role=admin">호스트
+												지원</a></li>
+										<li><a href="/member/admin/statistics?role=admin">통계
+												및 분석</a></li>
 										<li><a href="/chat">메시지</a></li>
 										<li class="login"><a href="/main">로그아웃</a></li>
 									</ul>
 								</div>
 							</c:if>
-                        	<c:if test="${ param.role eq 'host' }">
+							<c:if test="${ param.role eq 'host' }">
 								<div class="box">
 									<div class="nav_tit mypage">HOST PAGE</div>
 									<ul class="open_list" style="width: 125px;">
@@ -324,54 +328,77 @@
 									</ul>
 								</div>
 							</c:if>
-                        </div>
-                    </ul>
-                </div>
-            </div>
-            <div class="header_wrap gnb-responsive-css only-mobile">
-                <div class="logo"><a href="/main">STAY FOLIO</a></div>
-                <div class="side-menu" id="sideMenuOn"></div>
-            </div>
-            <div class="header_wrap gnb-responsive-css new-header">
-                <div class="logo" style="margin-left: 16px;"><a href="/main">STAY FOLIO</a></div>
-                <div class="right-menu">
-                    <div class="side-menu"></div>
-                </div>
-            </div>
-        </header>
-    </div>
-    <!-- 사이드 메뉴 -->
-    <div class="jsx-645c674fce93a7bf wrapper" style="display: none;" id="sideMenu">
-        <div aria-hidden="true" class="jsx-645c674fce93a7bf overlay" id='sideMenuOverlay'></div>
-        <div class="jsx-645c674fce93a7bf menu-modal"><a href="/mypage/account/edit" class="jsx-c4e7717c5657cc43">
-                <div class="jsx-c4e7717c5657cc43 profile">
-                    <div class="jsx-c4e7717c5657cc43 profile-img"></div>
-                    <div class="jsx-c4e7717c5657cc43 profile-right">
-                        <div class="jsx-c4e7717c5657cc43 name">김화평 님</div>
-                        <div role="link" tabindex="0" class="jsx-c4e7717c5657cc43 booking-msg">스테이폴리오와 함께 0번의 여행을 했어요.
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <div class="landing_menu">
-                <ul>
-					<li><a href="/member/mypage/reservation">예약 정보</a></li>
-					<li><a href="/member/mypage/cancel">취소 내역</a></li>
-					<li><a href="/member/mypage/likestay">관심 스테이</a></li>
-					<li><a href="/mypage/account/edit">회원 정보 수정</a></li>
-					<li><a href="/chat">메시지</a></li>
-                </ul>
-            </div>
-            <ul class="jsx-bc9726d7609f7d7f setting-menu">
-                <li role="presentation" class="jsx-bc9726d7609f7d7f lang-menu">
-                    <div class="jsx-bc9726d7609f7d7f">언어 설정</div>
-                    <div class="jsx-bc9726d7609f7d7f lang">한국어</div>
-                </li>
-                <li role="presentation" class="jsx-bc9726d7609f7d7f">1:1 문의</li>
-            </ul>
-            <div class="jsx-13bd1097de52bb6b"><button type="button" class="jsx-13bd1097de52bb6b">로그아웃</button></div>
-        </div>
-    </div>
-    
-
-	
+						</div>
+					</ul>
+				</div>
+			</div>
+			<div class="header_wrap gnb-responsive-css only-mobile">
+				<div class="logo">
+					<a href="/main">STAY FOLIO</a>
+				</div>
+				<div class="side-menu" id="sideMenuOn"></div>
+			</div>
+			<div class="header_wrap gnb-responsive-css new-header">
+				<div class="logo" style="margin-left: 16px;">
+					<a href="/main">STAY FOLIO</a>
+				</div>
+				<div class="right-menu">
+					<div class="side-menu"></div>
+				</div>
+			</div>
+		</header>
+	</div>
+	<!-- 사이드 메뉴 -->
+	<div class="jsx-645c674fce93a7bf wrapper" style="display: none;"
+		id="sideMenu">
+		<div aria-hidden="true" class="jsx-645c674fce93a7bf overlay"
+			id='sideMenuOverlay'></div>
+		<div class="jsx-645c674fce93a7bf menu-modal">
+			<a href="/mypage/account/edit" class="jsx-c4e7717c5657cc43">
+				<div class="jsx-c4e7717c5657cc43 profile">
+					<div class="jsx-c4e7717c5657cc43 profile-img"></div>
+					<div class="jsx-c4e7717c5657cc43 profile-right">
+						<div class="jsx-c4e7717c5657cc43 name">올래갈래님</div>
+						<div role="link" tabindex="0"
+							class="jsx-c4e7717c5657cc43 booking-msg">스테이폴리오와 함께 0번의 여행을
+							했어요.</div>
+					</div>
+				</div>
+			</a>
+			<div class="landing_menu">
+				<ul>
+					<c:if test="${ param.role eq 'user' or empty param.role }">
+						<li><a href="/member/mypage/reservation">예약 정보</a></li>
+						<li><a href="/member/mypage/cancel">취소 내역</a></li>
+						<li><a href="/member/mypage/likestay">관심 스테이</a></li>
+						<li><a href="/mypage/account/edit">회원 정보 수정</a></li>
+						<li><a href="/chat">메시지</a></li>
+					</c:if>
+					<c:if test="${ param.role eq 'host' }">
+						<li><a href="/member/host/stayhost?role=host">숙소 관리</a></li>
+						<li><a href="/member/host/reservation?role=host">예약 관리</a></li>
+						<li><a href="/member/host/income?role=host">수입 현황</a></li>
+						<li><a href="/member/host/guide?role=host">호스트 가이드</a></li>
+						<li><a href="/chat">메시지</a></li>
+					</c:if>
+					<c:if test="${ param.role eq 'admin' }">
+						<li><a href="/member/admin/stayadmin?role=admin">숙소 관리</a></li>
+						<li><a href="/member/admin/useradmin?role=admin">사용자 관리</a></li>
+						<li><a href="/member/admin/hosthelp?role=admin">호스트 지원</a></li>
+						<li><a href="/member/admin/statistics?role=admin">통계 및 분석</a></li>
+						<li><a href="/chat">메시지</a></li>
+					</c:if>
+				</ul>
+			</div>
+			<ul class="jsx-bc9726d7609f7d7f setting-menu">
+				<li role="presentation" class="jsx-bc9726d7609f7d7f lang-menu">
+					<div class="jsx-bc9726d7609f7d7f">언어 설정</div>
+					<div class="jsx-bc9726d7609f7d7f lang">한국어</div>
+				</li>
+				<li role="presentation" class="jsx-bc9726d7609f7d7f">1:1 문의</li>
+			</ul>
+			<div class="jsx-13bd1097de52bb6b">
+				<button type="button" class="jsx-13bd1097de52bb6b">로그아웃</button>
+			</div>
+		</div>
+	</div>
