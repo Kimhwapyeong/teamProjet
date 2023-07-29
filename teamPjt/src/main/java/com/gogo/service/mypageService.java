@@ -20,6 +20,5 @@ public interface mypageService {
 	// 회원 조회
 	public List<MemberVO> getMember(Model model);
 	
-	// 연령대별 조회
-	public List<MemberVO> getMemberAgeGroups();
+
 }

@@ -28,9 +28,4 @@ public class mypageTest {
 		log.info("member : " + member);
 	}
 	
-	@Test
-	public void age() {
-		List<MemberVO> member = mapper.getMemberAgeGroups();
-		log.info("member : " + member);
-	}
 }

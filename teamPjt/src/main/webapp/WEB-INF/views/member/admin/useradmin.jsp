@@ -76,7 +76,8 @@
                             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
                             crossorigin="anonymous"></script>
                             <div class="container">
-                                <h6>회원목록</h6>      
+                                <h6 style="line-height:60px">회원목록</h6>
+                                
                                 <table class="table">
                             <!--<table class="table table-striped table-hover">-->
                                   <thead>

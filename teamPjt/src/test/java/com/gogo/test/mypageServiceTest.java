@@ -28,9 +28,4 @@ public class mypageServiceTest {
 		//log.info("member : " + member);
 	}
 	
-	@Test
-	public void age() {
-		List<MemberVO> member = service.getMemberAgeGroups();
-		log.info("member : " + member);
-	}
 }

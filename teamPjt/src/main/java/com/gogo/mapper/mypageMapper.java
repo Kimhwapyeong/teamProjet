@@ -14,7 +14,4 @@ public interface mypageMapper {
 	// 회원 조회
 	public List<MemberVO> getMember();
 	
-	// 연령대별 조회
-	public List<MemberVO> getMemberAgeGroups();
-	
 }

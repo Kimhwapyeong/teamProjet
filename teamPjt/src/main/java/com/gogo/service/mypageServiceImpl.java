@@ -41,10 +41,5 @@ public class mypageServiceImpl implements mypageService {
 		return null;
 	}
 	
-	// 연령대별 조회
-	@Override
-	public List<MemberVO> getMemberAgeGroups() {
-		return mypageMapper.getMemberAgeGroups();
-	}
 	
 }
