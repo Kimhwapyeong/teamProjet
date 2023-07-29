@@ -41,5 +41,14 @@ public class mypageServiceImpl implements mypageService {
 		return null;
 	}
 	
-	
+	// ▶▶▶  admin ▶▶▶
+	// 숙소 관리
+	@Override
+	public List<StayVO> getStay(Model model) {
+		List<StayVO> list = mypageMapper.getStay();
+		log.info("===========");
+		log.info("list : " + list);
+		model.addAttribute("list", list);
+		return null;
+	}
 }

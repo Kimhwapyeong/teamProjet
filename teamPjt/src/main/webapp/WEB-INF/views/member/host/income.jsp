@@ -40,7 +40,7 @@
                         <ul>
                             <li class=""><a href="./stayhost">숙소 관리</a></li>
                             <li class=""><a href="./reservation">예약 관리 </a></li>
-                            <li class="active"><a href="/host/income">수입 현황</a></li>
+                            <li class="active"><a href="./income">수입 현황</a></li>
                             <li class=""><a href="./guide">호스트가이드</a></li>
                         </ul>
                     </div>
@@ -48,8 +48,8 @@
                         <div class="reserv_wrap mypage-reservation-info">
                             <div class="reserv_box accepted">
                                 <div class="reserv_name">
-                                    <!-- =============================== 숙소이름  ============================================-->
-                                    <p class="name"><span class="ellipsis">숙소이름</span></p>
+                                    <!-- =============================== 수입 현황  ============================================-->
+                                    <p class="name"><span class="ellipsis" style="font-size:30px">수입 현황</span></p>
                                 </div>
                                 <!-- chart.js -->
                                 

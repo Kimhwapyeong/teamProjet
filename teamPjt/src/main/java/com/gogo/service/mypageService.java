@@ -20,5 +20,8 @@ public interface mypageService {
 	// 회원 조회
 	public List<MemberVO> getMember(Model model);
 	
-
+	
+	// ▶▶▶  host ▶▶▶
+	// 숙소 관리
+	public List<StayVO> getStay(Model model);
 }

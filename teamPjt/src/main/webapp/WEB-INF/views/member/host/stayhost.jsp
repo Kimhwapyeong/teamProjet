@@ -47,7 +47,7 @@
                        </div>
                        <div class="newmypage_menu pc_only">
                            <ul>
-                               <li class="active"><a href="/host/stayhost">숙소 관리</a></li>
+                               <li class="active"><a href="./stayhost">숙소 관리</a></li>
                                <li class=""><a href="./reservation">예약 관리 </a></li>
                                <li class=""><a href="./income">수입 현황</a></li>
                                <li class=""><a href="./guide">호스트가이드</a></li>
@@ -55,56 +55,30 @@
                        </div>
                        <div class="mypage_content">
                            <div class="reserv_wrap mypage-reservation-info">
+                           	   <!-- ▶▶▶  forEach ▶▶▶  -->
+                               <c:forEach items="${list}" var="vo" step="1">
                                <div class="reserv_box accepted">
                                    <div class="reserv_name">
                                        <!-- =============================== 숙소이름  ============================================-->
-                                       <p class="name"><span class="ellipsis">숙소이름</span></p>
+                                       <p class="name"><span class="ellipsis">${vo.stayName }</span></p>
                                    </div>
                                    <div class="stay_view">
                                        <div class="photo"
-                                           style="background-image: url(&quot;//images.stayfolio.com/system/pictures/images/000/020/355/display/0259568486bda951e20241b741f6a7a30adc061f.jpg?1504161610&quot;); background-repeat: no-repeat; background-position: center center; background-size: cover;">
+                                           style="background-image: url(${vo.mainPic1}); background-repeat: no-repeat; background-position: center center; background-size: cover;">
                                            <!-- =============================== 수정 ============================================-->
                                            <span class="view">스테이 수정</span></div>
                                    </div>
                                        <div class="reserv_info">
                                            <!-- =============================== 숙소 분류 ============================================-->
-                                           <div class="stay">숙소분류</div>
+                                           <div class="stay">${vo.stayType }</div>
                                            <p></p>
                                                <!-- =============================== 숙소 설명 ============================================-->
                                            <div class="option">숙소설명 설명 설명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
                                                ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
                                                ㅇㅇㅇㅇㅇㅇㅇㅇㄱㄷㄴㄷㄱㅁㅇㄹㄷㄹㅇㄴㅌㄹㄷㄿㅇㅋㅑㅇ다<br></div>
                                        </div>
-                            
-                                   </a>
                                </div>
-                           </div>
-
-
-                           <div class="reserv_wrap mypage-reservation-info">
-                               <div class="reserv_box accepted">
-                                   <div class="reserv_name">
-                                       <!-- =============================== 숙소이름  ============================================-->
-                                       <p class="name"><span class="ellipsis">숙소이름</span></p>
-                                   </div>
-                                   <div class="stay_view">
-                                       <div class="photo"
-                                           style="background-image: url(&quot;//images.stayfolio.com/system/pictures/images/000/020/355/display/0259568486bda951e20241b741f6a7a30adc061f.jpg?1504161610&quot;); background-repeat: no-repeat; background-position: center center; background-size: cover;">
-                                           <!-- =============================== 수정 ============================================-->
-                                           <span class="view">스테이 수정</span></div>
-                                   </div>
-                                       <div class="reserv_info">
-                                           <!-- =============================== 숙소 분류 ============================================-->
-                                           <div class="stay">숙소분류</div>
-                                           <p></p>
-                                               <!-- =============================== 숙소 설명 ============================================-->
-                                           <div class="option">숙소설명 설명 설명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-                                               ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-                                               ㅇㅇㅇㅇㅇㅇㅇㅇㄱㄷㄴㄷㄱㅁㅇㄹㄷㄹㅇㄴㅌㄹㄷㄿㅇㅋㅑㅇ다<br></div>
-                                       </div>
-                            
-                                   </a>
-                               </div>
+                               </c:forEach>
                            </div>
 
 

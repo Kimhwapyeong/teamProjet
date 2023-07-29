@@ -5,15 +5,27 @@
 
 <!-- 연결할 mapper의 interface 풀 경로 작성 -->
 <mapper namespace="com.gogo.mapper.mypageMapper">
+	<!--  ▶▶▶  admin ▶▶▶ -->
+	<!-- 숙소 관리 -->
 	<select id="getList" resultType="com.gogo.vo.StayVO">
-		select stayNo, stayname, memberId, stayInfo from stay
+		select stayNo, stayname, memberId, stayInfo, mainpic1 from stay
 	</select>
 	
+	<!-- 사용자 관리 -->
 	<select id="getMember" resultType="com.gogo.vo.MemberVO">
 		SELECT memberid, membername, memberemail,
 			TO_CHAR(registraiondate, 'YYYY-MM-DD') AS registraiondate
 		FROM member
 	</select>
+	
+	<!--  ▶▶▶  host ▶▶▶ -->
+	<!-- 숙소 관리 -->
+	<select id="getStay" resultType="com.gogo.vo.StayVO">
+	<!-- 나중에 where 절 삭제하고 session id 값과 비교  -->
+		SELECT stayname, stayloc, stayadress, staytype, mainpic1 FROM stay
+		WHERE memberid like 'host%'
+	</select>
+
 	
 
 

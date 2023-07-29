@@ -44,7 +44,10 @@ public class AdminController {
 	}
 	
 	// 통계 및 지원
-
+	@GetMapping("statistics")
+	public void statistics() {
+		
+	}
 
 
 }

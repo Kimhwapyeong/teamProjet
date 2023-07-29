@@ -46,7 +46,7 @@
                             <ul>
                                 <li class=""><a href="./reservation">예약 정보</a></li>
 								<li class=""><a href="./cancel">취소 내역</a></li>
-								<li class="active"><a href="member/mypage/likestay">관심 스테이</a></li>
+								<li class="active"><a href="./likestay">관심 스테이</a></li>
 								<li class=""><a href="./info">회원 정보 수정</a></li>
 								<li><a href="./message">메시지</a></li>
                             </ul>

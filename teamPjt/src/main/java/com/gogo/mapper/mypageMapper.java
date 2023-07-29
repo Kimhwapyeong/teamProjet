@@ -14,4 +14,9 @@ public interface mypageMapper {
 	// 회원 조회
 	public List<MemberVO> getMember();
 	
+	
+	// ▶▶▶  host ▶▶▶
+	// 숙소 관리
+	public List<StayVO> getStay();
+	
 }

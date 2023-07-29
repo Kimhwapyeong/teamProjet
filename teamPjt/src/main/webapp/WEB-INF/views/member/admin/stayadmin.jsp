@@ -44,7 +44,7 @@
                        </div>
                        <div class="newmypage_menu pc_only">
                            <ul>
-                               <li class="active"><a href="/admin/stayadmin">숙소 관리</a></li>
+                               <li class="active"><a href="./stayadmin">숙소 관리</a></li>
                                <li class=""><a href="./useradmin">사용자 관리 </a></li>
                                <li class=""><a href="./hosthelp">호스트 지원</a></li>
                                <li class=""><a href="./statistics">통계 및 분석</a></li>
@@ -65,7 +65,7 @@
                                    </div>
                                    <div class="stay_view">
                                        <div class="photo"
-                                           style="background-image: url(&quot;//images.stayfolio.com/system/pictures/images/000/020/355/display/0259568486bda951e20241b741f6a7a30adc061f.jpg?1504161610&quot;); background-repeat: no-repeat; background-position: center center; background-size: cover;">
+                                           style="background-image: url(${vo.mainPic1};); background-repeat: no-repeat; background-position: center center; background-size: cover;">
                                            <!-- =============================== 수정 onclick 올리기  ============================================-->
                                            </div>
                                    </div>

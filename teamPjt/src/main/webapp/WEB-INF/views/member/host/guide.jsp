@@ -45,7 +45,7 @@
                              <li class=""><a href="./stayhost">숙소 관리</a></li>
                              <li class=""><a href="./reservation">예약 관리 </a></li>
                              <li class=""><a href="./income">수입 현황</a></li>
-                             <li class="active"><a href="/host/guide">호스트가이드</a></li>
+                             <li class="active"><a href="./guide">호스트가이드</a></li>
                          </ul>
                      </div>
                      <div class="mypage_content">
