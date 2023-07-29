@@ -228,6 +228,7 @@ function addClassSelectDay() {
 
 // 달력 날짜 클릭
 function selectDay(obj) {
+	console.log(obj);
     if (checkInDate === "") {
         $(obj).addClass('checkIn');
         $('.checkIn').find('.check_in_out_p').html('체크인');

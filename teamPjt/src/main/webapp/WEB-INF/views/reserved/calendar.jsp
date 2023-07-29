@@ -25,11 +25,11 @@
 		
 	</div>
 	<br><br><br>
-	<hr style="border-top: 2.5px solid;color: #00000061;width:1150px;position:absolute;left:3%;">
-	
+	<hr style="border-top: 2.8px solid;color: #00000061;width:1150px;position:absolute;left:3%;">
+	<hr style="border-top: 2.9px solid;color: #00000061;width:1150px;position:absolute;left:3%;bottom:20%;">
 
 
-  <div class="calendar-wrap">
+  <div class="calendar-wrap" style="padding-left:40px;">
     <div class="calendar-middle-wrap">
       <div class="cal_nav">
         <a href="javascript:;" class="nav-btn go-prev"></a>
@@ -70,13 +70,13 @@
       </div>
     </div>
 
-    <div class="checkInOutInfo">
+    <div class="checkInOutInfo" style="height:400px;">
       <div>
         <p>
-          <span>체크인</span>
+          <span style="padding-bottom:15px">체크인</span>
           <label id="check_in_day"></label>
         </p>
-        <p class="space">~</p>
+        <p class="space" style="color: #212529;font-size:2em;">~</p>
         <p>
           <span>체크아웃</span>
           <label id="check_out_day"></label>
@@ -133,8 +133,26 @@
     			
     			e.preventDefault();
     			
-    			window.location.reload();
+    			//window.location.reload();
     			
+    			// 달력 체크 인/아웃 값 초기화
+    			$('.checkIn').find('.check_in_out_p').html('');
+    			$('.checkOut').find('.check_in_out_p').html('');
+
+    			$('.day').removeClass('checkIn');
+    			$('.day').removeClass('checkOut');
+    			$('.day').removeClass('selectDay');
+
+
+    			$('.checkInOutInfo label').html('')
+
+
+
+    			checkInDate = '';
+    			checkOutDate = '';
+				
+    			// ~ 표시
+    			$('.space').html('');
     		});
     		
     		back.addEventListener('click', function(e){
