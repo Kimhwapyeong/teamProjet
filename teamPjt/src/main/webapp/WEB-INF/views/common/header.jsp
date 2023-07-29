@@ -102,13 +102,44 @@
 	window.addEventListener("resize", sideMenuClose);
 	
 	// 사이드바가 켜져있는 상태에서 화면이 커지면 사이드바를 닫기 위한 함수
-    function sideMenuClose(){
-	    if(window.innerWidth >= 1024){
-	    	document.querySelector("#sideMenu").style.display='none';
-	    }
-    }
+  function sideMenuClose(){
+   if(window.innerWidth >= 1024){
+   	document.querySelector("#sideMenu").style.display='none';
+   }
+  }
+
+	// 매개변수로 받은 메시지를 알림창으로 띄워주는 함수
+	function alertPopOn(msg){
+		alertTxt.innerHTML=msg;
+		alertPop.style.display='block';
+	}
+	
+	// 알림창 끄기
+	function alertPopClose(){
+		alertPop.style.display='none';
+	}
 </script>
 <body>
+	<!-- 알림 팝업창
+				alertPop display='block' 설정 해주고, alertTxt.innerHTML로 메시지 입력 -->
+	<div class="layer_pop" id="alertPop"
+		style="background: none; display: none; z-index: 9500;">
+		<div role="button" tabindex="0" class="layer_pop" aria-label="bg"
+			style="display: block;"></div>
+		<div class="layer_pop_wrap" style="z-index: 9001;">
+			<button type="button" class="btn_layer_close" onclick="alertPopClose()">닫기</button>
+			<button type="button" class="btn_back mo_only">back</button>
+			<h2 class="layer_title">&nbsp;</h2>
+			<div class="change_wrap">
+				<div class="change_cont">
+					<div class="txt" id="alertTxt">파일 업로드에 실패하였습니다.</div>
+				</div>
+				<div class="bt_btns">
+					<button type="button" class="btn_bk" id="popup-focus">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- where/when 모달 -->
 	<!-- where modal -->
 	<div class="modalOverlay" id="whereModal" style="display: none;">
@@ -234,13 +265,10 @@
                 </div>    
 				<div class="whe gnb-responsive-margin" style="">
 					<button type="button" id="btnWhere">
-						<img src="/resources/images/where.JPG" style="padding-right: 5px;"><span
-							class="gnb-mo-small">어디로 떠날까요?</span>
+						<span class="gnb-mo-small">어디로 떠날까요?</span>
 					</button>
-					<button type="button" class="gnb-when-mo-small" id="btnWhen"
-						style="padding-left: 0px;">
-						<img src="/resources/images/when.JPG" style="padding-right: 5px;"><span
-							class="gnb-mo-small">언제 떠날까요?</span>
+					<button type="button" class="gnb-when-mo-small" id="btnWhen">
+						<span class="gnb-mo-small">언제 떠날까요?</span>
 					</button>
 				</div>
 				<div class="toggle-ko-mo"></div>
@@ -252,20 +280,50 @@
                     <ul class="etc">
                         <div class="nav_etc">
                         	<!-- 추후 login 여부 판단하여 mypage와 login 둘 중 하나 노출 -->
-                        	<div class="box">
-                            	<a href="/login"><div class="nav_tit login">LOGIN</div></a>
-                           	</div>
-                            <div class="box">
-                                <div class="nav_tit mypage">MY PAGE</div>
-                                <ul class="open_list" style="width: 125px;">
-                                    <li><a href="/member/mypage/reservation">예약 정보</a></li>
-                                    <li><a href="/member/mypage/cancel">취소 내역</a></li>
-                                    <li><a href="/member/mypage/likestay">관심 스테이</a></li>
-                                    <li><a href="/mypage/account/edit">회원 정보 수정</a></li>
-                                    <li><a href="/chat">메시지</a></li>
-                                    <li class="login"><a href="">로그아웃</a></li>
-                                </ul>
-                            </div>
+	                        	<div class="box">
+	                            	<a href="/login"><div class="nav_tit login">LOGIN</div></a>
+	                           	</div>
+	                        <!-- 로그인 구현 되면 session에 저장된 값을 비교 -->
+                        	<c:if test="${ param.role eq 'user' or empty param.role }">
+	                            <div class="box">
+	                                <div class="nav_tit mypage">MY PAGE</div>
+	                                <ul class="open_list" style="width: 125px;">
+	                                    <li><a href="/member/mypage/reservation">예약 정보</a></li>
+	                                    <li><a href="/member/mypage/cancel">취소 내역</a></li>
+	                                    <li><a href="/member/mypage/likestay">관심 스테이</a></li>
+	                                    <li><a href="/mypage/account/edit">회원 정보 수정</a></li>
+	                                    <li><a href="/chat">메시지</a></li>
+	                                    <!-- 편의를 위해 우선  main 페이지로 설정 -->
+	                                    <li class="login"><a href="/main">로그아웃</a></li>
+	                                </ul>
+	                            </div>
+                        	</c:if>
+                        	<c:if test="${ param.role eq 'admin' }">
+								<div class="box">
+									<div class="nav_tit mypage">ADMIN PAGE</div>
+									<ul class="open_list" style="width: 125px;">
+										<li><a href="/member/admin/stayadmin?role=admin">숙소 관리</a></li>
+										<li><a href="/member/admin/useradmin?role=admin">사용자 관리</a></li>
+										<li><a href="/member/admin/hosthelp?role=admin">호스트 지원</a></li>
+										<li><a href="/member/admin/statistics?role=admin">통계 및 분석</a></li>
+										<li><a href="/chat">메시지</a></li>
+										<li class="login"><a href="/main">로그아웃</a></li>
+									</ul>
+								</div>
+							</c:if>
+                        	<c:if test="${ param.role eq 'host' }">
+								<div class="box">
+									<div class="nav_tit mypage">HOST PAGE</div>
+									<ul class="open_list" style="width: 125px;">
+										<li><a href="/member/host/stayhost?role=host">숙소 관리</a></li>
+										<li><a href="/member/host/reservation?role=host">예약 관리</a></li>
+										<li><a href="/member/host/income?role=host">수입 현황</a></li>
+										<li><a href="/member/host/guide?role=host">호스트 가이드</a></li>
+										<li><a href="/chat">메시지</a></li>
+										<li class="login"><a href="/main">로그아웃</a></li>
+									</ul>
+								</div>
+							</c:if>
                         </div>
                     </ul>
                 </div>

@@ -2,7 +2,21 @@
 	pageEncoding="UTF-8"%>
 <jsp:include page="../common/header.jsp" />
 <link href="/resources/main/add.css">
-
+<script>
+	window.addEventListener('load', ()=>{
+		
+		// 등록 버튼 눌렸을 때의 이벤트. 유효성 검사 및 서브밋을 한다.
+		btnAddStay.addEventListener('click', (e)=>{
+			e.preventDefault();
+			
+			// 개인정보 수집 동의 체크 유효성 검사
+			if(!document.querySelector("input[id=check-policy1]").checked){
+				alertPopOn('개인정보 수집 및 이용 동의에 체크 해주세요.')
+				return;
+			}
+		})
+	})
+</script>
 <div id="contents">
 	<div class="container sub_title">
 		<div class="txt">Stay 등록</div>
@@ -56,26 +70,41 @@
 					<div class="_contactus_divider__BZ5eb"></div>
 					
 					<li><div class="left">이미지 제출</div></li>
-					<div class="_contactus_video_image_guide__GJRiB">
-						<div class="_contactus_video_div__FnIjL">
-							<img src="https://images.stayfolio.com/system/pictures/images/000/026/062/original/6be1c115d15928bfd8cdece979778e183b380f30.jpg?1523266043"
-										style="width:90%;"></iframe>
-						</div>
-						<div class="_contactus_image_div__7cvYh">
-							<img width="48%" alt="firstImage"
-								src="https://www.stayfolio.com/web/images/secondImage.jpg"><img width="48%"
-								alt="secondImage" src="https://www.stayfolio.com/web/images/firstImage.jpg">
-						</div>
-						<div class="_contactus_video_image_guide__GJRiB">
-							<p class="_contactus_guide_title__ZyIpA">이미지 제출 가이드</p>
-							<p class="_contactus_guide_list__ogEdb">• 이미지 제출은 선택사항입니다.</p>
-							<p class="_contactus_guide_list__ogEdb">• 이미지를
-								자유롭게 첨부해 주세요.</p>
-							<p class="_contactus_guide_sub_list__srBT5">￮ 숙소의 기획의도, 특징 등</p>
-							<p class="_contactus_guide_sub_list__srBT5">￮ 숙소의 디테일, 경험 등</p>
+					<div class="container text-start lh-base" style="background-color: white">
+						<div class="row g-1">
+							<div class="col-6">
+								<div class="p-1 bg-white">
+									<img
+										src="https://images.stayfolio.com/system/pictures/images/000/026/062/original/6be1c115d15928bfd8cdece979778e183b380f30.jpg?1523266043"
+										style="width: 100%;">
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="p-1 bg-white">
+									<img alt=""
+										src="https://www.stayfolio.com/_next/image?url=http%3A%2F%2F%2F%2Fimages.stayfolio.com%2Fsystem%2Fpictures%2Fimages%2F000%2F187%2F276%2Foriginal%2Fc0769ad4ba823cca80805714a5c6734a6421f10b.jpg%3F1688627296&w=3840&q=75"
+										style="width: 100%">
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="p-1 bg-white">
+									<img alt=""
+										src="https://www.stayfolio.com/_next/image?url=https%3A%2F%2Fimages.stayfolio.com%2Fsystem%2Fpictures%2Fimages%2F000%2F013%2F971%2Foriginal%2F39825fb5a1aa7be5ef4a72f3ae2cd000e453583a.jpg%3F1481683602&w=2048&q=75"
+										style="width: 100%">
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="p-1 bg-white">
+									<p class="_contactus_guide_title__ZyIpA">이미지 제출 가이드</p>
+									<p class="_contactus_guide_list__ogEdb">• 이미지 제출은 선택사항입니다.</p>
+									<p class="_contactus_guide_list__ogEdb">• 이미지를 자유롭게 첨부해 주세요.</p>
+									<p class="_contactus_guide_sub_list__srBT5">￮ 전체으로 나온 숙소의 사진</p>
+									<p class="_contactus_guide_sub_list__srBT5">￮ 숙소에 있는 대표 room의 사진</p>
+								</div>
+							</div>
 						</div>
 					</div>
-					
+
 					<li><div class="dt">파일 첨부 *</div>
 						<div class="dd">
 							<div class="file_wrap">
@@ -92,13 +121,13 @@
 									MB / 1024 MB
 									<div class="file_att" style="margin-top: -7px">
 										<label for="file_attach"><img alt="file_upload_button"
-											src="/web/images/file_upload_button.svg"
+											src="https://www.stayfolio.com/web/images/file_upload_button.svg"
 											style="margin-bottom: 2px; margin-right: 6px">이미지
 											첨부</label><input type="file" id="file_attach" multiple=""
 											accept="image/png,image/gif,image/jpg,image/jpeg,image/webp,image/tif,image/tiff,image/bmp,video/mp4,application/pdf,video/quicktime">
 									</div>
 								</div>
-								<p style="font-size: 12px; margin-top: 15px; color: #808080">*
+								<p class="lh-base" style="font-size: 12px; margin-top: 15px; color: #808080">*
 									대용량 파일의 경우 업로드까지 3분 이상 소요될 수 있습니다.<br>
 									* 숙소 사진은 최대 2장까지 업로드 가능합니다.</p>
 							</div>
@@ -128,7 +157,7 @@
 					class="check_box"></span></label>
 			</div>
 			<div class="bt_btns">
-				<button type="submit" class="btn_bk">등록하기</button>
+				<button type="submit" class="btn_bk" id=btnAddStay>등록하기</button>
 				<button type="reset" class="btn_bk">초기화</button>
 			</div>
 		</form>

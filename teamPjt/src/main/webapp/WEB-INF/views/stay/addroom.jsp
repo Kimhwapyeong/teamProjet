@@ -5,77 +5,167 @@
 
 <div id="contents">
 	<div class="container sub_title">
-		<div class="txt">객실 등록</div>
+		<div class="txt">room 등록</div>
 	</div>
 	<div class="store_apply">
 		<form>
 			<div class="store_apply_form">
 				<ul class="form_dl">
 					<div class="_contactus_divider__BZ5eb"></div>
-					<li style="flex-direction: row"><span class="left">스테이
-							정보</span><span class="right">* 필수 입력 항목</span></li>
-					<li><div class="dt">스테이 이름 *</div>
+					<li style="flex-direction: row"><span class="left">room 정보</span>
+					<span class="right">* 필수 입력 항목</span></li>
+					<li><div class="dt">room 이름 *</div>
 						<div class="dd">
-							<input type="text" class="form_style" name="name" value=""
-								placeholder="스테이 이름을 입력해 주세요.">
+							<input type="text" class="form_style" name="roomName" value=""
+								placeholder="room 이름을 입력해 주세요.">
 						</div></li>
-					<li><div class="dt">상세 주소 *</div>
+					<li style="width:53%"><div class="dt">기준인원 *</div>
+						<div class="dd" style="width:200px">
+							<select style="width: 100%" class="form_style" name="stdPerson"><option
+									selected="" value="">선택해 주세요</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+							</select>
+						</div>
+					</li>
+					<li style="width:53%">
+						<div class="dt">최대인원 *</div>
+						<div class="dd" style="width:200px">
+							<select style="width: 100%" class="form_style" name="overPerson">
+								<option selected="" value="">선택해 주세요</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+							</select>
+						</div>
+					</li>
+					<li><div class="dt">옵션 *</div>
 						<div class="dd">
-							<input type="text" class="form_style" name="address" value=""
-								placeholder="정확한 주소를 입력해 주세요.">
+							<label for="bathroom" class="check_skin">
+								<input type="checkbox" id="bathroom" name="bathroom">
+									<span style="font-size: 12px">화장실</span>
+								</label>
+							<label for="kitchen" class="check_skin">
+								<input type="checkbox" id="kitchen" name="kitchen">
+									<span style="font-size: 12px">부엌</span>
+								</label>
+							<label for="parking" class="check_skin">
+								<input type="checkbox" id="parking" name="parking">
+									<span style="font-size: 12px">주차장</span>
+								</label>
+							<label for="babiqu" class="check_skin">
+								<input type="checkbox" id="babiqu" name="babiqu">
+									<span style="font-size: 12px">부엌</span>
+								</label>
+							<label for="pet" class="check_skin">
+								<input type="checkbox" id="pet" name="pet">
+									<span style="font-size: 12px">부엌</span>
+								</label>
+							<label for="terrace" class="check_skin">
+								<input type="checkbox" id="terrace" name="terrace">
+									<span style="font-size: 12px">테라스</span>
+								</label>
+							<label for="pool" class="check_skin">
+								<input type="checkbox" id="pool" name="pool">
+									<span style="font-size: 12px">풀장</span>
+								</label>
+							<label for="mountain" class="radio_skin">
+								<input type="radio" id="mountain" name="viewroom">
+									<span style="font-size: 12px">산</span>
+								</label>
+							<label for="ocean" class="radio_skin">
+								<input type="radio" id="ocean" name="viewroom">
+									<span style="font-size: 12px">바다</span>
+								</label>
+						<div class="dd" style="width:110px; display:flex">
+							<select style="width: 100%" class="form_style" name="bed"><option
+									selected="" value="">침구 갯수</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+							</select>
+						</div>
+							</div>
+						</li>
+					<li><div class="dt">room 소제목 *</div>
+						<div class="dd">
+							<input type="text" class="form_style" name="info" value=""
+								placeholder="room의 소제목을  간단하게 입력해주세요. (최대 50자)">
 						</div></li>
-					<li><div class="dt">웹사이트 및 SNS 주소</div>
+					<li><div class="dt">room 소개 *</div>
 						<div class="dd">
-							<textarea class="form_style" name="website"
-								placeholder="스테이 공간 / 브랜드를 살펴볼 수 있는 웹사이트 및 SNS 주소를 기재해 주세요."></textarea>
-						</div></li>
-					<li><div class="dt">숙박업 사업자 등록 여부 *</div>
-						<div class="dd">
-							<label for="radio-check3" class="radio_skin"><input
-								type="radio" id="radio-check3" name="not_register"><span
-								style="font-size: 12px">준비 중</span></label><label for="radio-check4"
-								class="radio_skin"><input type="radio" id="radio-check4"
-								name="register"><span style="font-size: 12px">등록
-									완료</span></label>
-						</div></li>
-					<li><div class="dt">분류 *</div>
-						<div class="dd">
-							<select style="width: 100%" class="form_style" name="category"><option
-									selected="" value="" disabled="" hidden="">선택해 주세요</option>
-								<option value="hanok">한옥체험업</option>
-								<option value="home_stay">민박업</option>
-								<option value="residence">생활 숙박시설 운영업</option>
-								<option value="hotel_hostel">호텔/호스텔업</option>
-								<option value="etc">기타</option></select>
-						</div></li>
-					<li><div class="dt">스테이 소개 *</div>
-						<div class="dd">
-							<textarea rows="5" class="form_style" name="description"
+							<textarea rows="5" class="form_style" name="roomInfo"
 								placeholder="공간의 구조, 컨셉, 스토리 등을 자유롭게 작성해 주세요. (최소 50자)"></textarea>
 						</div></li>
 					<div class="_contactus_divider__BZ5eb"></div>
 					
 					<li><div class="left">이미지 제출</div></li>
-					<div class="_contactus_video_image_guide__GJRiB">
-						<div class="_contactus_video_div__FnIjL">
-							<img src="https://images.stayfolio.com/system/pictures/images/000/026/062/original/6be1c115d15928bfd8cdece979778e183b380f30.jpg?1523266043"
-										style="width:90%;"></iframe>
-						</div>
-						<div class="_contactus_image_div__7cvYh">
-							<img width="48%" alt="firstImage"
-								src="https://www.stayfolio.com/web/images/secondImage.jpg"><img width="48%"
-								alt="secondImage" src="https://www.stayfolio.com/web/images/firstImage.jpg">
-						</div>
-						<div class="_contactus_image_guide__XdOKT">
-							<p class="_contactus_guide_title__ZyIpA">이미지 제출 가이드</p>
-							<p class="_contactus_guide_list__ogEdb">• 이미지 제출은 선택사항입니다.</p>
-							<p class="_contactus_guide_list__ogEdb">• 이미지를
-								자유롭게 첨부해 주세요.</p>
-							<p class="_contactus_guide_sub_list__srBT5">￮ 숙소의 기획의도, 특징 등</p>
-							<p class="_contactus_guide_sub_list__srBT5">￮ 숙소의 디테일, 경험 등</p>
+					<div class="container text-start lh-base" style="background-color: white">
+						<div class="row g-1">
+							<div class="col-6">
+								<div class="p-1 bg-white">
+									<img
+										src="/resources/images/room/roomphoto2.JPG"
+										style="width: 100%;">
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="p-1 bg-white">
+									<img alt=""
+										src="/resources/images/room/roomphoto1.JPG"
+										style="width: 100%">
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="p-1 bg-white">
+									<img alt=""
+										src="/resources/images/room/roomphoto3.JPG"
+										style="width: 100%">
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="p-1 bg-white">
+									<p class="_contactus_guide_title__ZyIpA">이미지 제출 가이드</p>
+									<p class="_contactus_guide_list__ogEdb">• 이미지 제출은 선택사항입니다.</p>
+									<p class="_contactus_guide_list__ogEdb">• 이미지를 자유롭게 첨부해
+										주세요.</p>
+									<p class="_contactus_guide_sub_list__srBT5">￮ room기획 의도, 특징 등
+										등</p>
+									<p class="_contactus_guide_sub_list__srBT5">￮ room의 디테일, 경험 등</p>
+								</div>
+							</div>
 						</div>
 					</div>
-					
+
+
+<!-- 					부트스트랩 파일첨부 input		
+							<div class="mb-3">
+								<label for="formFileMultiple" class="form-label"></label> 
+								<input class="form-control" type="file"
+									id="formFileMultiple" multiple>
+							</div> -->
 					<li><div class="dt">파일 첨부 *</div>
 						<div class="dd">
 							<div class="file_wrap">
@@ -92,17 +182,18 @@
 									MB / 1024 MB
 									<div class="file_att" style="margin-top: -7px">
 										<label for="file_attach"><img alt="file_upload_button"
-											src="/web/images/file_upload_button.svg"
+											src="https://www.stayfolio.com/web/images/file_upload_button.svg"
 											style="margin-bottom: 2px; margin-right: 6px">이미지
 											첨부</label><input type="file" id="file_attach" multiple=""
 											accept="image/png,image/gif,image/jpg,image/jpeg,image/webp,image/tif,image/tiff,image/bmp,video/mp4,application/pdf,video/quicktime">
 									</div>
 								</div>
-								<p style="font-size: 12px; margin-top: 15px; color: #808080">*
+								<p class="lh-base" style="font-size: 12px; margin-top: 15px; color: #808080">*
 									대용량 파일의 경우 업로드까지 3분 이상 소요될 수 있습니다.<br>
 									* 숙소 사진은 최대 2장까지 업로드 가능합니다.</p>
 							</div>
-						</div></li>
+						</div>
+					</li>
 				</ul>
 			</div>
 			<div class="store_apply_agree">

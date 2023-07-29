@@ -387,7 +387,7 @@ caption {
 
 .header_wrap .whe>button:nth-child(2) {
     background: url(https://www.stayfolio.com/web/images/when@3x.png) no-repeat 0 50%;
-    background-size: 25px 25px
+    background-size: 25px 25px;
 }
 
 .header_wrap .nav {
