@@ -8,14 +8,16 @@
 <meta charset="UTF-8">
 <title>Login</title>
  <script>
+ 
  window.addEventListener('load',function(){
      
+	 
      // 로그인
      btnSignin.addEventListener('click', function(e){
 			// 기본이벤트 제거
 			e.preventDefault();
 			
-			// 파라메터 수집
+			
 			// 사용자가 입력한 아이디와 비밀번호 값을 수집하여 obj 객체에 저장
 			let obj={
 					id : loginForm.id.value,
@@ -25,7 +27,7 @@
 			console.log(obj);
 			
 			// 요청
-			fetchPost('/loginAction', obj, loginCheck)
+			fetchPost('/loginAction', obj, loginCheck);
 		})
 		
 
@@ -33,16 +35,22 @@
    
    // 로그인 버튼 클릭 시 로그인 처리
    function loginCheck(map){
+	 
 		// 로그인 성공 -> list 로 이동
 		if(map.result == 'success'){
 			location.href = map.url;
 			//alert(loginForm.signUpName.value+"님 환영합니다.")
 		} else {
 			// 로그인 실패 시 메시지 처리
-			msg.innerHTML=map.msg;
+			alert(map.msg);
+			msg.innerHTML = map.msg;
 		}
 		console.log(map);
 	 }
+ 
+ 
+
+
 
 </script>
 </head>
@@ -69,7 +77,9 @@
                    <button type="submit" class="btn_bk btn_login" id='btnSignin'>LOGIN</button>
                </div>
                <div>
+              	 <a href="/sighUp">
                    <button type="button" class="btn-sign-in" id='btnSignup'>회원가입</button>
+                  </a>
                </div>
 
         <div class="etc">

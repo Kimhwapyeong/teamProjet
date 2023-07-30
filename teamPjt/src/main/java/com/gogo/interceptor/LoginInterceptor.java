@@ -32,11 +32,11 @@ public class LoginInterceptor implements HandlerInterceptor{
 			throws Exception {
 		
 		HttpSession session = request.getSession();
-		if(session.getAttribute("userId") == null 
-				|| session.getAttribute("userId").toString() == "") {
+		if(session.getAttribute("memberId") == null 
+				|| session.getAttribute("memberId").toString() == "") {
 			
 			// 로그인 페이지로 이동
-			String msg = URLEncoder.encode("로그인후 사용 가능한 메뉴 입니다.","utf-8");			
+			String msg = URLEncoder.encode("로그인 후 사용 가능한 메뉴 입니다.","utf-8");			
 			response.sendRedirect("/login?msg="+msg);
 			return false;
 		}

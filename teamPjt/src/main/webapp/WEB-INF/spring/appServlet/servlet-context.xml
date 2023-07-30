@@ -23,6 +23,25 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	
+	<context:component-scan base-package="com.gogo.interceptor"></context:component-scan>
+	<!-- 인터셉터 설정 -->
+	<interceptors>
+		<!-- 로그인 체크 -->
+		<interceptor>
+			<mapping path=""/>
+			<exclude-mapping path=""/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		
+		<!-- 관리자 체크 -->
+		<interceptor>
+			<mapping path="/admin**"/>
+			<beans:ref bean="adminInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
+	
 		<!-- WebSocket -->
 	<websocket:handlers>
 		<websocket:mapping handler="echoHandler" path="/echo" />

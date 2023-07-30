@@ -10,5 +10,5 @@ public interface MemberMapper {
 	public MemberVO login(MemberVO member);
 	
 	
-	public List<String> getMemberRole(String id);
+	public List<String> getMemberRole(String memberId);
 }

@@ -30,12 +30,13 @@ public class MemberController extends CommonRestController {
 	// 로그아웃 페이지 이동
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
+		// 현재 세션 무효화하여 로그아웃처리
 		session.invalidate();
-		return "login";
+		return "/login/login";
 	}
 	
 	//JSON 형식 데이터 교환
-	@PostMapping("/loginAction")
+	@PostMapping("/login/loginAction")
 	public @ResponseBody Map<String, Object> loginAction(
 										@RequestBody MemberVO member
 										, Model model
@@ -48,13 +49,12 @@ public class MemberController extends CommonRestController {
 		if(member != null) {
 			session.setAttribute("member", member);
 			session.setAttribute("memberId", member.getMemberId());
-			Map<String, Object> map = 
-					responseMap(REST_SUCCESS, "로그인 되었습니다.");
+			Map<String, Object> map = responseMap(REST_SUCCESS, "환영합니다.");
 			
-			if(member.getRole() != null 
-					&& member.getRole().contains("ADMIN_ROLE")) {
+			// 권한 확인
+			if(member.getRole() != null && member.getRole().contains("ADMIN_ROLE")) {
 				// 관리자 로그인 -> 관리자 페이지로 이동
-				map.put("url", "../admin/stayadmin");
+				map.put("url", "/admin/stayadmin");
 			} else {
 				map.put("url", "/main");
 			}
@@ -65,6 +65,12 @@ public class MemberController extends CommonRestController {
 			return responseMap(REST_FAIL, "아이디와 비밀번호를 확인해주세요.");
 		}
 		
+	}
+	
+	
+	@GetMapping("/signUp")
+	public String signUp() {
+		return "/login/signUp";
 	}
 }
 
