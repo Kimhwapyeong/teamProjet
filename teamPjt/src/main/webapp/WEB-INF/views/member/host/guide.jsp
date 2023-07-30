@@ -8,6 +8,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>guide</title>
     <link rel="stylesheet" href="./css/host/host.css">
+
+<script type="text/javascript">
+window.addEventListener('load', function(){
+	signButton.addEventListener('click', function(){ 
+		signUp.style.display=''; 
+		qa.style.display='none';
+		signButton.style.fontWeight = 'bold';
+		qaButton.style.fontWeight = '';
+	  });
+	
+	  
+	qaButton.addEventListener('click', function(){ 
+		signUp.style.display='none';  
+		qa.style.display='';
+		qaButton.style.fontWeight = 'bold';
+		signButton.style.fontWeight = '';
+	  });
+});
+</script>
+
 </head>
 
 
@@ -52,17 +72,19 @@
                          <div class="tab_mypage">
                              <ul>
                                  <!-- ================================ restcontroller -> 숙소 업로드 ==============================================-->
-                                 <li class="active"><a id="info" href="/" style="padding-bottom: 0px;">입점 신청</a>
+                                 <li class="active">
+                                 <button id="signButton" style="padding-bottom: 0px;">입점 신청</button>
                                  </li>
                                  <!-- ================================ 질문 ==============================================-->
-                                 <li class=""><a id="info" href="/" style="padding-bottom: 0px;">문의 요청</a>
+                                 <li class="">
+                                  <button id="qaButton" style="padding-bottom: 0px;">문의요청</button>
                                  </li>
                              </ul>
                          </div>
-                         <div class="reserv_wrap mypage-reservation-info">
+                         
+                         <!-- 입점 신청 -->
+                         <div id="signUp">
                              <div class="reserv_box accepted">
-                                 
-                                 
                                  <div class="store_apply">
                                      <div class="store_sec">
                                          <div class="tit">스테이 큐레이션</div>
@@ -81,13 +103,31 @@
                                                          </div>
                                                              <button type="button" class="btn_bk btn_sm findstay_btn" style="margin-top: 20px; margin-bottom: 20px;">
                                                              	<a href="/addstay" style='color: white;'>신청하기</a></button>
-
                                                          </div>
-
                              </div>
                          </div>
-                         <!-- =============================== 페이징 ============================================-->
                      </div>
+                     
+                     <!-- 문의 요청 -->
+                     <form name='qa' style='display: none;'>
+                     <input type="hidden" value="1" id="queNo">
+	                    <div class="mb-3">
+							  <label for="title" class="form-label">제목</label>
+							  <input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요">
+						</div>
+						<div class="input-group mb-3">
+							  <span class="input-group-text" style="background-color:white; font-size:14px;">작성자</span>
+							  <input type="text" class="form-control" placeholder="host" aria-label="host" id="host">
+							  <span class="input-group-text" style="background-color:white; font-size:14px;">게시일</span>
+							  <input type="text" class="form-control" aria-label="boardDate" id="boardDate">
+						</div>
+						<div class="mb-3">
+							  <label for="content" class="form-label">내용</label>
+							  <textarea class="form-control" id="content" rows="10"  placeholder="내용을 입력해주세요"></textarea>
+						</div>
+					</form>
+                     
+                     
                  </div>
              </div>
 

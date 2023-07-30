@@ -50,20 +50,76 @@
                        </div>
                        <div class="mypage_content">
                            <div class="reserv_wrap mypage-reservation-info">
-                               
-
-
+								<div class="container">
+								
+								
+								<div class="stay_view">
+                                       <div class="photo"
+                                           style="background-image: url(${pic.mainPic1}); background-repeat: no-repeat; background-position: center center; background-size: cover;">
+                                           <!-- =============================== 수정 ============================================-->
+                                           <span></span></div>
+                                 </div>
+                                 
+                                       <p class="name"><span class="ellipsis"></span></p>
+								
+                                <table class="table">
+								    <thead>
+								        <tr>
+								            <th>객실 번호</th>
+								            <th>회원 아이디</th>
+								            <th>예약일</th>
+								            <th>체크인</th>
+								            <th>체크아웃</th>
+								            <th>예약 인원</th>
+								        </tr>
+								    </thead>
+								    <tbody>
+								        <c:set var="prevRoomNo" value="" />
+								        <c:set var="firstRow" value="true" />
+								
+								        <!-- ▶▶▶ forEach ▶▶▶ -->
+								        <c:forEach items="${list}" var="reserve" step="1">
+								            <c:set var="currentRoomNo" value="${reserve.roomNo}" />
+											
+											<!-- 전객실번호 존재 x or 현객실번호=전객실번호 -> 출력x -->
+								            <c:if test="${not empty prevRoomNo and !currentRoomNo.equals(prevRoomNo)}">
+								                </tbody>
+								            </c:if>
+											
+											<!-- 현객실번호 != 전객실번호 <hr> 태그로 구분 -->
+								            <c:if test="${firstRow or not currentRoomNo.equals(prevRoomNo)}">
+								                <tbody>
+								                    <tr>
+								                        <td colspan="6"><hr></td>
+								                    </tr>
+								                </tbody>
+								            </c:if>
+								
+								            <tbody>
+								                <tr>
+								                    <td>${reserve.roomNo}</td>
+								                    <td>${reserve.memberId}</td>
+								                    <td>${reserve.regDate}</td>
+								                    <td>${reserve.checkIn}</td>
+								                    <td>${reserve.checkOut}</td>
+								                    <td>${reserve.memberCount}</td>
+								                </tr>
+								            </tbody>
+								
+								            <!-- 변수 업데이트 -->
+								            <c:set var="prevRoomNo" value="${currentRoomNo}" />
+								            <c:set var="firstRow" value="false" />
+								        </c:forEach>
+								
+								        <!-- 마지막 그룹 닫기 -->
+								        <c:if test="${not firstRow}">
+								            </tbody>
+								        </c:if>
+								    </tbody>
+								</table>
+								
+                                </div>
                            </div>
-
-
-                           <div class="reserv_wrap mypage-reservation-info">
-                               <div class="reserv_box accepted">
-                                   
-
-
-                               </div>
-                           </div>
-
 
                            <!-- =============================== 페이징 ============================================-->
                            <div class="paging"><a href="/" class="prev" title="이전 페이지">이전 페이지</a><a href="/"

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 
 import com.gogo.mapper.mypageMapper;
 import com.gogo.vo.MemberVO;
+import com.gogo.vo.ReservedVO;
 import com.gogo.vo.StayVO;
 
 import lombok.extern.log4j.Log4j;
@@ -51,4 +52,22 @@ public class mypageServiceImpl implements mypageService {
 		model.addAttribute("list", list);
 		return null;
 	}
+	
+	@Override
+	public List<ReservedVO> reservinfo(Model model) {
+		List<ReservedVO> list = mypageMapper.reservinfo();
+		log.info("===========");
+		log.info("list : " + list);
+		model.addAttribute("list", list);
+		return null;
+	}
+	
+//	@Override
+//	public List<StayVO> reservpic(Model model) {
+//		List<StayVO> pic = mypageMapper.reservpic();
+//		log.info("===========");
+//		log.info("list : " + pic);
+//		model.addAttribute("pic", pic);
+//		return null;
+//	}
 }
