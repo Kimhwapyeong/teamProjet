@@ -23,8 +23,9 @@ public class HostController {
 	
 	// 예약 관리
 	@GetMapping("reservation")
-	public void reservation() {
-		
+	public void reservation(Model model) {
+		mypageService.reservinfo(model);
+//		mypageService.reservpic(model);
 	}
 	
 	// 수입 현황

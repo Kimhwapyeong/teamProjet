@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.gogo.mapper.mypageMapper;
 import com.gogo.vo.MemberVO;
+import com.gogo.vo.ReservedVO;
 import com.gogo.vo.StayVO;
 
 import lombok.extern.log4j.Log4j;
@@ -35,5 +36,18 @@ public class mypageTest {
 		log.info("=========");
 		log.info("list : " + list);
 	}
+	
+	@Test
+	public void reserveinfo() {
+		List<ReservedVO> list = mapper.reservinfo();
+		log.info("list : " + list);
+	}
+	
+//	@Test
+//	public void reservpic() {
+//		List<StayVO> list = mapper.reservpic();
+//		log.info("=========");
+//		log.info("list : " + list);
+//	}
 	
 }

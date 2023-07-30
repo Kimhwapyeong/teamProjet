@@ -38,7 +38,7 @@ public class AdminInterceptor implements HandlerInterceptor{
 			}
 		}
 		// 로그인 페이지로 이동
-		String msg = URLEncoder.encode("로그인후 사용 가능한 메뉴 입니다.","utf-8");			
+		String msg = URLEncoder.encode("로그인 후 사용 가능한 메뉴 입니다.","utf-8");			
 		response.sendRedirect("/login?msg="+msg);
 		return false;
 	}

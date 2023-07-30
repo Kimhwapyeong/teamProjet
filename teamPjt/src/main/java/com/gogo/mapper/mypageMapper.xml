@@ -25,6 +25,38 @@
 		SELECT stayname, stayloc, stayadress, staytype, mainpic1 FROM stay
 		WHERE memberid like 'host%'
 	</select>
+	
+	<!-- 예약 관리 -->
+	<select id="reservinfo" resultType="com.gogo.vo.ReservedVO">
+		SELECT
+		      roomno,
+		      memberid,
+		      TO_CHAR(regdate, 'YY-MM-DD') AS regdate,
+		      TO_CHAR(checkin, 'YY-MM-DD') AS checkin,
+		      TO_CHAR(checkout, 'YY-MM-DD') AS checkout,
+		      membercount
+	    FROM reservation
+	</select>
+	
+	<!-- 예약 관리 숙소 대표 사진 -->
+	<resultMap id="roomMap" type="com.gogo.vo.RoomVO">
+	    <result property="roomNo" column="ROOMNO" />
+	</resultMap>
+
+	<resultMap type="com.gogo.vo.StayVO" id="stayMap">
+	    <result property="stayName" column="STAYNAME" />
+	    <result property="mainPic1" column="MAINPIC1" />
+	    <collection property="roomMap" resultMap="roomMap" />
+	</resultMap>
+	
+	<!-- <select id="reservpic" resultMap="stayMap">
+	    SELECT s.STAYNAME, s.MAINPIC1, r.ROOMNO
+	    FROM STAY s
+	    JOIN ROOM r ON s.STAYNO = r.STAYNO
+	    JOIN RESERVATION v ON r.ROOMNO = v.ROOMNO
+	</select>  -->
+
+
 
 	
 

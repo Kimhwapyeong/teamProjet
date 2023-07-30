@@ -12732,35 +12732,15 @@ input[type=number] {
     text-indent: -99999px
 }
 
+
 .sns_login>ul li a.btn_naver {
-    background: url(resources/images/btnG_완성형.png) no-repeat 50%;
+    background: url(/resoureces/images/btnG_완성형.png) no-repeat 50%;
     background-size: cover
 }
 
-.sns_login>ul li a.btn_line {
-    background: url(/web/images/social_login/line.png) no-repeat 50%;
-    background-color: #06c755;
-    border-radius: 100%;
-    background-size: 50px
-}
-
-.sns_login>ul li a.btn_fb {
-    background: url(/web/images/social_login/facebook.png) no-repeat 50%;
-    background-size: cover
-}
-
-.sns_login>ul li a.btn_twitter {
-    background: url(/web/images/social_login/twitter.png) no-repeat 50%;
-    background-size: cover
-}
-
-.sns_login>ul li a.btn_apple {
-    background: url(/web/images/social_login/apple.png) no-repeat 50%;
-    background-size: cover
-}
 
 .sns_login>ul li a.btn_kakao {
-    background: url(/web/images/social_login/kakao.png) no-repeat 50%;
+    background: url(/resoureces/images/kakao_login_medium_narrow.png) no-repeat 50%;
     background-size: cover
 }
 
