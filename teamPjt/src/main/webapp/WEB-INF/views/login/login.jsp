@@ -5,60 +5,95 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Login</title>
+ <script>
+ window.addEventListener('load',function(){
+     
+     // 로그인
+     btnSignin.addEventListener('click', function(e){
+			// 기본이벤트 제거
+			e.preventDefault();
+			
+			// 파라메터 수집
+			// 사용자가 입력한 아이디와 비밀번호 값을 수집하여 obj 객체에 저장
+			let obj={
+					id : loginForm.id.value,
+					pw : loginForm.password.value
+			}
+			
+			console.log(obj);
+			
+			// 요청
+			fetchPost('/loginAction', obj, loginCheck)
+		})
+		
 
+   })
+   
+   // 로그인 버튼 클릭 시 로그인 처리
+   function loginCheck(map){
+		// 로그인 성공 -> list 로 이동
+		if(map.result == 'success'){
+			location.href = map.url;
+			//alert(loginForm.signUpName.value+"님 환영합니다.")
+		} else {
+			// 로그인 실패 시 메시지 처리
+			msg.innerHTML=map.msg;
+		}
+		console.log(map);
+	 }
 
+</script>
 </head>
 <body>
 
+ 	<div id="contents">
+       <div class="container sub_title">
+           <div class="tit">Login</div>
+           <div class="txt">로그인</div>
+	</div>
+       <div class="container">
+       <form class="login_wrap" name="loginForm">
+               <div class="form_wrap">
+                   <div class="input_box">
+                       <div class="input">
+                           <input type="text" name="id" id="id" placeholder="아이디" required="required"/>
+                       </div>
+                       <div class="input">
+                           <input type="password" name="password" id="password" placeholder="비밀번호" required="required"/>
+                       </div>
+                   </div>
+               </div>
+               <div class="login_btns">
+                   <button type="submit" class="btn_bk btn_login" id='btnSignin'>LOGIN</button>
+               </div>
+               <div>
+                   <button type="button" class="btn-sign-in" id='btnSignup'>회원가입</button>
+               </div>
 
- <div id="contents">
-                <div class="container sub_title">
-                    <div class="tit">Login</div>
-                    <div class="txt">로그인</div>
-                </div>
-                <div class="container">
-                    <form class="login_wrap">
-                        <div class="form_wrap">
-                            <div class="input_box">
-                                <div class="input">
-                                    <input type="text" name="email" placeholder="아이디"/>
-                                </div>
-                                <div class="input">
-                                    <input type="password" name="password" placeholder="비밀번호"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="login_btns">
-                            <button type="submit" class="btn_bk btn_login">LOGIN</button>
-                        </div>
-                        <div>
-                            <button type="button" class="btn-sign-in">회원가입</button>
-                        </div>
-                        <div class="etc">
-                            <div class="find">
-                                <a class="find-id" href="/">아이디 찾기</a>
-                                <a class="find-password" href="/">비밀번호 찾기</a>
-                            </div>
-                        </div>
-                        <div class="sns_login">
-                            <div class="tit">SNS 계정으로 로그인하기</div>
-                            <ul>
-                                <li>
-                                    <a class="btn_naver" href="/">네이버</a>
-                                    <div id="naverIdLogin" style="display:none"></div>
-                                </li>
-                                <li>
-                                    <a class="btn_kakao" href="/">카카오</a>
-                                </li>
-       
-                            </ul>
-                        </div>
-                    </form>
-                </div>
+        <div class="etc">
+            <div class="find">
+                <a class="find-id" href="/">아이디 찾기</a>
+                <a class="find-password" href="/">비밀번호 찾기</a>
             </div>
+        </div>
+        <div class="sns_login">
+            <div class="tit">SNS 계정으로 로그인하기</div>
+            <ul>
+                <li>
+                    <a class="btn_naver" href="/">네이버</a>
+                    <div id="naverIdLogin" style="display:none"></div>
+                </li>
+                <li>
+                    <a class="btn_kakao" href="/">카카오</a>
+                </li>
+
+            </ul>
+          </div>
+        </form>
+    </div>
+</div>
 </body>
 <jsp:include page="../common/footer.jsp" />
 </html>

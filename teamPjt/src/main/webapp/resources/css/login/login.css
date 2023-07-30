@@ -12733,7 +12733,7 @@ input[type=number] {
 }
 
 .sns_login>ul li a.btn_naver {
-    background: url(/resources/images/btnG_완성형.png) no-repeat 50%;
+    background: url(resources/images/btnG_완성형.png) no-repeat 50%;
     background-size: cover
 }
 
