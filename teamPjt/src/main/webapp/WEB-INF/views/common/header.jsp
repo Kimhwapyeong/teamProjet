@@ -34,6 +34,9 @@
 <style type="text/css" data-styled-jsx="">a.jsx-a44b61ff91ee7fc6{padding-bottom:30px;border-bottom:1px solid#e6e6e6;margin-bottom:10px}p.jsx-a44b61ff91ee7fc6{font-size:12px;color:#999}.login.jsx-a44b61ff91ee7fc6{font-size:16px;color:#333;margin-bottom:10px}</style>
 </head></html>
 <script>
+	// 알림창을 위한 변수
+	let msg = '${msg}'
+
 	window.addEventListener('load', function(){
 		// btnWhere 클릭되면 모달창 보이기
 		btnWhere.addEventListener('click', function(){
@@ -83,6 +86,9 @@
 	    sideMenuOverlay.addEventListener('click', ()=>{
 	    	document.querySelector("#sideMenu").style.display='none';
 	    })
+	    
+	    // msg가 있으면 알림창 보여주기
+	    alertPopOn(msg);
 	
 	})
 	
@@ -110,8 +116,10 @@
 
 	// 매개변수로 받은 메시지를 알림창으로 띄워주는 함수
 	function alertPopOn(msg){
-		alertTxt.innerHTML=msg;
-		alertPop.style.display='block';
+		if(msg != ''){
+			alertTxt.innerHTML=msg;
+			alertPop.style.display='block';
+		}
 	}
 	
 	// 알림창 끄기
