@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>STAY OLLE GALLE</title>
 <!-- 부트스트랩 css link -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -281,7 +281,7 @@
 						<div class="nav_etc">
 							<!-- 추후 login 여부 판단하여 mypage와 login 둘 중 하나 노출 -->
 							<div class="box">
-								<a href="/login"><div class="nav_tit login">LOGIN</div></a>
+								<a href="/login/login"><div class="nav_tit login">LOGIN</div></a>
 							</div>
 							<!-- 로그인 구현 되면 session에 저장된 값을 비교 -->
 							<c:if test="${ param.role eq 'user' or empty param.role }">
