@@ -45,7 +45,7 @@ public class MemberController extends CommonRestController {
 		System.out.println("pw : " + member.getPw());
 		
 		member = memberService.login(member);
-		
+		System.out.println(member.getMemberId());
 		if(member != null) {
 			session.setAttribute("member", member);
 			session.setAttribute("memberId", member.getMemberId());
@@ -68,9 +68,9 @@ public class MemberController extends CommonRestController {
 	}
 	
 	
-	@GetMapping("/signUp")
-	public String signUp() {
-		return "/login/signUp";
+	@GetMapping("/login/signup")
+	public String signup() {
+		return "/login/signup";
 	}
 }
 
