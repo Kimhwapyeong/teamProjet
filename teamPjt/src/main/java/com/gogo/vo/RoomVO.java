@@ -19,4 +19,5 @@ public class RoomVO {
 	
 	// 인원 추가시 금액 추가 된다면 추가금액 필드를 추가해 주어야 함
 	
+	private List<String> roomImg; // 이미지 사진
 }
