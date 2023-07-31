@@ -73,7 +73,7 @@ public class ReservedController {
 				
 		reserved.setCheckIn(reserved_checkIn);
 		reserved.setCheckOut(reserved_checkOut);
-		String res = service.goReserved(reserved, model);
+		String res =service.goReserved(reserved, model);
 		
 		if("search".equals(btnYN)) {
 			res = "/stay/list";
