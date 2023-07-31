@@ -109,7 +109,7 @@ window.addEventListener('load', function(){
                      </div>
                      
                      <!-- 문의 요청 -->
-                     <form name='qa' style='display: none;'method="post" action="/member/host/write">
+                     <form name='qa' style='display: none;' method="post" action="/member/host/write">
                      <input type="hidden" id="queNo" name="queNo">
 	                    <div class="mb-3">
 							  <label for="title" class="form-label">제목</label>

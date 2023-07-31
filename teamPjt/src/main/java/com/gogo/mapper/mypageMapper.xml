@@ -60,7 +60,7 @@
 		</selectKey>
 	
 		insert into question (queNo, memberid, title, content, contentDate) 
-		values (#{queNo}, #{memberId}, #{title}, #{content}, sysdate)
+		values (#{queNo}, #{memberid}, #{title}, #{content}, sysdate)
 	</insert>
 
 	<!-- 문의 list 출력 -->

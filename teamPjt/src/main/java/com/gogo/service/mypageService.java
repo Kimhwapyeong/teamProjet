@@ -32,7 +32,7 @@ public interface mypageService {
 	public List<ReservedVO>reservinfo(Model model);
 	
 	// 예약 관리 대표 사진
-	public List<Map<String, String>> reservpic();
+	public List<Map<String, String>> reservpic(Model model);
 	
 	// 가이드 문의 요청 ->
 	public int insert(QuestionVO qa);

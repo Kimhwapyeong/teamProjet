@@ -1,6 +1,7 @@
 package com.gogo.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,14 +64,14 @@ public class mypageServiceImpl implements mypageService {
 		return null;
 	}
 	
-//	@Override
-//	public List<StayVO> reservpic(Model model) {
-//		List<StayVO> pic = mypageMapper.reservpic();
-//		log.info("===========");
-//		log.info("list : " + pic);
-//		model.addAttribute("pic", pic);
-//		return null;
-//	}
+	@Override
+	public List<Map<String, String>> reservpic(Model model) {
+		List<Map<String, String>> pic = mypageMapper.reservpic();
+		log.info("===========");
+		log.info("list : " + pic);
+		model.addAttribute("pic", pic);
+		return null;
+	}
 	
 	@Override
 	public int insert(QuestionVO qa) {

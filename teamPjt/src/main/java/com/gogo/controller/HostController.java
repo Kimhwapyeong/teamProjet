@@ -61,7 +61,7 @@ public class HostController extends CommonRestController{
 			model.addAttribute("msg", msg);
 			return "./qaList";
 		} else {
-			return "/member/host/guide";
+			return "./guide";
 		}
 	}
 	
