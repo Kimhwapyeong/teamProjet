@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <jsp:include page="../common/header.jsp" />
 <link href="/resources/main/add.css">
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f7f4e3f6830b08acddb284ad285c5c0d&libraries=services"></script>
 <script>
 	window.addEventListener('load', ()=>{
 		
@@ -14,15 +15,41 @@
 				alertPopOn('개인정보 수집 및 이용 동의에 체크 해주세요.')
 				return;
 			}
+
+			let address = document.querySelector("#address").value;
+			console.log('address', address);
+			
+			getXY(address);
+			
 		})
 	})
+	
+	function getXY(address){
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+	
+		// 주소로 좌표를 검색합니다
+		geocoder.addressSearch(address, function(result, status) {
+			
+		    // 정상적으로 검색이 완료됐으면 
+		    if (status === kakao.maps.services.Status.OK) {
+				
+		    	// 좌표를 input에 담아주고
+		    	document.querySelector("input[name=latitude]").value = result[0].y;
+				document.querySelector("input[name=longitude]").value = result[0].x;
+				
+				// 서브밋.
+				addStayForm.submit();
+		    }
+		})
+	}
 </script>
 <div id="contents">
 	<div class="container sub_title">
 		<div class="txt">Stay 등록</div>
 	</div>
 	<div class="store_apply">
-		<form name="addStayForm">
+		<form name="addStayForm" method="post" enctype="multipart/form-data" action="/addStayAction">
 			<div class="store_apply_form">
 				<ul class="form_dl">
 					<div class="_contactus_divider__BZ5eb"></div>
@@ -30,33 +57,38 @@
 							정보</span><span class="right">* 필수 입력 항목</span></li>
 					<li><div class="dt">스테이 이름 *</div>
 						<div class="dd">
-							<input type="text" class="form_style" name="name" value=""
+							<input type="text" class="form_style" name="stayName" value=""
 								placeholder="스테이 이름을 입력해 주세요.">
 						</div></li>
 					<li><div class="dt">지역 *</div>
 						<div class="dd">
 							<select style="width: 100%" class="form_style" name="stayLoc"><option
 									selected="" value="" disabled="" hidden="">지역을 선택해 주세요</option>
-								<option value="hanok">제주</option>
-								<option value="home_stay">서울</option>
-								<option value="residence">강원</option>
-								<option value="hotel_hostel">부산</option>
-								<option value="etc">경기</option>
-								<option value="etc">충청</option>
-								<option value="etc">경상</option>
-								<option value="etc">전라</option>
-								<option value="etc">인천</option>
-								<option value="etc">광주</option>
-								<option value="etc">대전</option>
-								<option value="etc">대구</option>
-								<option value="etc">울산</option>
+								<option value="jaeju">제주</option>
+								<option value="seoul">서울</option>
+								<option value="kangwon">강원</option>
+								<option value="busan">부산</option>
+								<option value="kyeongki">경기</option>
+								<option value="choongchung">충청</option>
+								<option value="kyeongsang">경상</option>
+								<option value="jeonla">전라</option>
+								<option value="incheon">인천</option>
+								<option value="kyangju">광주</option>
+								<option value="daejeon">대전</option>
+								<option value="daegu">대구</option>
+								<option value="ulsan">울산</option>
 							</select>
 						</div></li>
-					<li><div class="dt">상세 주소 *</div>
+<!-- 					<li><div class="dt">상세 주소 *</div>
 						<div class="dd">
-							<input type="text" class="form_style" name="address" value=""
+							<input type="text" class="form_style" name="stayAdress" value=""
 								placeholder="정확한 주소를 입력해 주세요.">
-						</div></li>
+						</div></li> -->
+		<!-- 		</ul> -->
+
+					<jsp:include page="joosoSearch.jsp"/>
+
+		<!-- 		<ul class="form_dl">	 -->
 					<li><div class="dt">웹사이트 및 SNS 주소</div>
 						<div class="dd">
 							<textarea class="form_style" name="website"
@@ -73,7 +105,7 @@
 						</div></li>
 					<li><div class="dt">분류 *</div>
 						<div class="dd">
-							<select style="width: 100%" class="form_style" name="category"><option
+							<select style="width: 100%" class="form_style" name="stayType"><option
 									selected="" value="" disabled="" hidden="">선택해 주세요</option>
 								<option value="hanok">한옥체험업</option>
 								<option value="home_stay">민박업</option>
@@ -83,12 +115,12 @@
 						</div></li>
 					<li><div class="dt">스테이 소개 *</div>
 						<div class="dd">
-							<textarea rows="5" class="form_style" name="description"
+							<textarea rows="5" class="form_style" name="stayInfo"
 								placeholder="공간의 구조, 컨셉, 스토리 등을 자유롭게 작성해 주세요. (최소 50자)"></textarea>
 						</div></li>
 					<li><div class="dt">뱃지 *</div>
 						<div class="dd">
-							<input type="text" class="form_style" name="bedge" value=""
+							<input type="text" class="form_style" name="badge" value=""
 								placeholder="뱃지는 ... 입니다.">
 						</div></li>
 					<div class="_contactus_divider__BZ5eb"></div>
@@ -184,6 +216,12 @@
 				<button type="submit" class="btn_bk" id=btnAddStay>등록하기</button>
 				<button type="reset" class="btn_bk">초기화</button>
 			</div>
+			<!--  -->
+			<input type="hidden" name="memberId" value="host1">
+			<input type="hidden" name="mainPic1" value="pic1">
+			<input type="hidden" name="mainPic2" value="pic2">
+			<input type="hidden" name="latitude" value="">
+			<input type="hidden" name="longitude" value="">
 		</form>
 	</div>
 </div>

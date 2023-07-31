@@ -17,6 +17,7 @@ public class StayVO {
 	private String mainPic2; // 메인사진 2
 	
 	// 위도, 경도는 카카오맵 api 사용 시 지도에 마커로 표시할 때 사용됨
-	private int latitude; 	// 위도
-	private int longitude;	// 경도
+	private double latitude; 	// 위도
+	private double longitude;	// 경도
+
 }
