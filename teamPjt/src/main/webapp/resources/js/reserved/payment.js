@@ -32,7 +32,7 @@
 					$.ajax({
 						
 						type: "POST"
-						, url : "/reserved/verify"
+						, url : "/payment/verify"
 						, contentType : "application/json"
 						, data : JSON.stringify(rsp)
 						

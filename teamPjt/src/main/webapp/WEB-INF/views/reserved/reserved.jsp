@@ -42,19 +42,14 @@
 					<hr style="color:black; opacity: 1; height:30px;">
 					<li><div class="dt">스테이 이름</div>
 						<div class="dd">
-							<input style="font-size: 12px; color:#666; background-color:#e6e6e6;" type="text" class="form_style" name="stayName" value="매화동" disabled>
+							<input style="font-size: 12px; color:#666; background-color:#e6e6e6;" type="text" class="form_style" name="stayName" value="${stay.stayName}" disabled>
 						</div></li>
 					<hr>
 					<li><div class="dt">객실 선택 *</div>
 						<div class="dd">
 						<!-- font-size: 12px;
     							color: #666; -->
-							<select class="form_style" name="roomName" style="font-size: 12px; color:#666; width:100%;">
-								<option value="" selected>예약할 객실을 선택해 주세요.</option>
-								<option value="A호">A호</option>
-								<option value="B호">B호</option>
-								<option value="C호">C호</option>
-							</select>
+							<input style="font-size: 12px; color:#666; background-color:#e6e6e6;" type="text" class="form_style" name="roomName" value="${room.roomName}" disabled>
 						</div></li>
 					<hr>
 					<li><div class="dt">예약 날짜</div>
@@ -66,6 +61,7 @@
 								<button onclick="btnWhenFunction()" style="font-size: 12px; color:black;  text-align:left;" class="form_style" >예약 날짜 선택하기</button>
 							</c:if>
 							<c:if test="${not res}">
+								<input style="font-size: 12px; color:#666; background-color:#e6e6e6;" type="text" class="form_style" name="checkInOut" value='${reserved.checkIn} ~ ${reserved.checkOut}' disabled>
 								<button onclick="btnWhenFunction()" style="font-size: 12px; color:black;  text-align:left;" class="form_style" >예약 날짜 선택하기</button>
 							</c:if>
 							<script>
@@ -85,20 +81,20 @@
 					<li style="height:200px;"><div class="dt" style="position:relative;">가격</div>
 						<div class="dd">
 							<span style="font-size:0.85em; position:absolute; right:40%; top:50%; color: #66666682;">객실 요금</span><br>
-							<span style="font-size:0.85em; position:absolute; right:3%; top:50%; color: #66666682;">₩900,000</span><br>
+							<span style="font-size:0.85em; position:absolute; right:3%; top:50%; color: #66666682;">₩${room.price}</span><br>
 							<span style="font-size:0.85em; position:absolute; right:40%; top:53%; color: #66666682;">옵션</span><br>
 							<span style="font-size:0.85em; position:absolute; right:5%; top:53%; color: #66666682;">-</span><br>
 							<span style="font-size:0.85em; position:absolute; right:40%; top:56%; color: #66666682;">할인 금액</span><br>
 							<span style="font-size:0.85em; position:absolute; right:5%; top:56%; color: #66666682;">-</span><br>
 							<span style="font-size:0.85em; position:absolute; right:40%; top:59%; color: #66666682;">예약일 수</span><br>
 								
-						<c:if test="${not empty reserved_day}" var="res">									
-							<span style="font-size:0.85em; position:absolute; right:4%; top:59%; color: #66666682;">${reserved_day}일</span><br>
+						<c:if test="${not empty reservedDay}" var="res">									
+							<span style="font-size:0.85em; position:absolute; right:4%; top:59%; color: #66666682;">${reservedDay}일</span><br>
 						</c:if>	
 						<c:if test="${not res}">
 							<span style="font-size:0.85em; position:absolute; right:5%; top:59%; color: #66666682;">-</span><br>
 						</c:if>	
-							<span style="font-size:2em; position:absolute; right:3%; top:64%;" id="amount" data-amount="900000">₩900,000</span>						
+							<span style="font-size:2em; position:absolute; right:3%; top:64%;" id="amount" data-amount="${room.price}">₩${room.price}</span>						
 						</div></li>
 					
 					<hr>
@@ -154,8 +150,8 @@
 		var canclePay = '';		  // 환불할 imp_uid
 		var realAmount = '';	  // 환불할 금액
 		var payInfo = '${sessionScope.userId}';
-		var purchaseName = $('input[name=stayName]').val()+", "+$('select[name=roomName]').val();
-		var purchaseAmount = $('#amount').attr("data-amount");
+		var purchaseName = $('input[name=stayName]').val()+', ' +$('input[name=roomName]').val();
+		var purchaseAmount = ${price};
 		var pg = '';
 		
 		

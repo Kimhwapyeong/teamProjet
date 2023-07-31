@@ -5,10 +5,11 @@ import lombok.Data;
 @Data // 환불
 public class PaymentVO {
 
-	private String impUid;	// 환불 및 조회에 필요한 key
+	private String paymentNo;	// 결제 Seq
 	private String reservationNo; // 예약 seq
 	private String regDate; // 결제 시간
 	private String paymentMethod; // 결제 수단
-	private String merchant_uid; // 거래 번호
+	private String impUid; // 거래 번호
 	private String errorCode; // 에러코드
+	private String cancleYN;
 }

@@ -1,0 +1,202 @@
+package com.gogo.service;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.net.ssl.HttpsURLConnection;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.gogo.mapper.PaymentMapper;
+import com.gogo.vo.PaymentVO;
+
+@Service
+public class PaymentServiceImpl implements PaymentService {
+	
+	@Autowired
+	PaymentMapper paymentMapper;
+
+	
+	@Override
+	public int insertPayment(PaymentVO vo) {
+		return paymentMapper.insertPayment(vo);
+	}
+	
+	
+	@Override
+	// 결제 정보 select로 PaymentVo 객체 불러오기
+	public PaymentVO selectOne(String impUid) {
+		
+		PaymentVO vo = paymentMapper.selectOne(impUid);
+		return vo;
+	}
+
+	
+	
+	
+	
+	// Payment 공통 모듈
+	
+	
+	// iamPort 필수 정보 정의
+	private String impKey = "1500511887437481";
+	private String impSecret = "qPqnrNzBkKnVFPKnVh9f2vzz5zvz1Xb1YVm0W7iyMbXAlGLmkyTnzc0Gg2qxLQF4nJkyyokH8kO47qMq";
+	
+	
+	// 토큰 생성 메소드
+	public String getToken() throws Exception {
+
+		HttpsURLConnection conn = null;
+		URL url = new URL("https://api.iamport.kr/users/getToken");
+
+		conn = (HttpsURLConnection) url.openConnection();
+
+		conn.setRequestMethod("POST");
+		conn.setRequestProperty("Content-type", "application/json");
+		conn.setRequestProperty("Accept", "application/json");
+		conn.setDoOutput(true);
+		JsonObject json = new JsonObject();
+
+		json.addProperty("imp_key", impKey);
+		json.addProperty("imp_secret", impSecret);
+		
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+		
+		bw.write(json.toString());
+		bw.flush();
+		bw.close();
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+
+		Gson gson = new Gson();
+
+		String response = gson.fromJson(br.readLine(), Map.class).get("response").toString();
+
+
+		String token = gson.fromJson(response, Map.class).get("access_token").toString();
+
+		br.close();
+		conn.disconnect();
+
+		return token;
+	}
+
+	
+    //결제 정보 JSON으로 불러오기, paySave를 위해 사용한다.
+	public Map<String, String> paymentInfo(String imp_uid, String access_token) throws IOException, ParseException {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		HttpsURLConnection conn = null;
+
+		URL url = new URL("https://api.iamport.kr/payments/" + imp_uid);
+
+		conn = (HttpsURLConnection) url.openConnection();
+
+		conn.setRequestMethod("GET");
+		conn.setRequestProperty("Authorization", access_token);
+		conn.setDoOutput(true);
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+
+		JSONParser parser = new JSONParser();
+
+		JSONObject p = (JSONObject) parser.parse(br.readLine());
+		
+		String response = p.get("response").toString();
+		System.out.println("paymentInfo response : "+response);
+		
+		p = (JSONObject) parser.parse(response);
+		
+		String amount = p.get("amount").toString();
+		
+		map.put("productName", p.get("name").toString());
+		map.put("amount", p.get("amount").toString());
+		map.put("merchant_uid", p.get("merchant_uid").toString());
+		map.put("imp_uid", p.get("imp_uid").toString());
+		map.put("pg_provider", p.get("pg_provider").toString());
+		map.put("buyer_name", p.get("buyer_name").toString());
+		
+		return map;
+	}
+	
+	public String payMentCancle(String access_token, String imp_uid, String amount,String reason, String checksum) {
+		try {
+		System.out.println(imp_uid+"에 대한 환불을 진행합니다.");
+		HttpsURLConnection conn = null;
+		URL url = new URL("https://api.iamport.kr/payments/cancel");
+
+		conn = (HttpsURLConnection) url.openConnection();
+
+		conn.setRequestMethod("POST");
+
+		conn.setRequestProperty("Content-type", "application/json");
+		conn.setRequestProperty("Accept", "application/json");
+		conn.setRequestProperty("Authorization", access_token);
+
+		conn.setDoOutput(true);
+		
+		JsonObject json = new JsonObject();
+
+		json.addProperty("reason", reason);
+		json.addProperty("imp_uid", imp_uid);
+		json.addProperty("amount", amount);
+		// 환불 금액 조작을 위해 검증 생략
+		System.out.println("checksum : "+ checksum);
+		json.addProperty("checksum", checksum);
+		
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+
+		bw.write(json.toString());
+		bw.flush();
+		bw.close();
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));			
+		return "success";
+		} catch(Exception e) {
+			e.printStackTrace();
+			return "failed";
+		}
+	}
+	
+	
+	// 결제 정보 저장
+	public int paymentSave(String imp_uid, String access_token, String success, String buyerName) throws IOException, ParseException {
+		
+		Map<String, String> map = paymentInfo(imp_uid, access_token);
+		
+		System.out.println("map.get(\"merchant_uid\") : "+ map.get("merchant_uid"));
+		System.out.println("map.get(\"mount\") : "+ map.get("amount"));
+		System.out.println("map.get(\"imp_uid\") : "+map.get("imp_uid"));
+		System.out.println("map.get(\"pg_provider\") : "+map.get("pg_provider"));
+		System.out.println("map.get(\"buyer_name\") : "+buyerName);
+		
+		
+		
+		PaymentVO vo = new PaymentVO();
+		
+		vo.setImpUid(map.get("imp_uid"));
+		vo.setPaymentMethod(map.get("pg_provider"));
+		
+		
+		
+		
+		return paymentMapper.insertPayment(vo);
+		
+	}
+	
+	
+
+
+}
