@@ -37,4 +37,9 @@ public interface mypageMapper {
 	// 문의 내역 한건 조회
 	public QuestionVO getOne(int queNo);
 	
+	
+	// ▶▶▶  user ▶▶▶
+	// 회원 정보 조회
+	public List<MemberVO> mem();
+	
 }

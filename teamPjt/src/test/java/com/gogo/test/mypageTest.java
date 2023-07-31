@@ -79,4 +79,11 @@ public class mypageTest {
 		log.info("one : " + one);
 	}
 	
+	@Test
+	public void mem() {
+		List<MemberVO> mem = mapper.mem();
+		log.info("=========");
+		log.info("one : " + mem);
+	}
+	
 }

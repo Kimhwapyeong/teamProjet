@@ -73,10 +73,11 @@ public class HostController extends CommonRestController{
 	}
 	
 	@GetMapping("answer")
-	public void getOne(int queNo, Model model) {
-		QuestionVO que = mypageService.getOne(queNo);
+	public void getOne(QuestionVO vo, Model model) {
+		QuestionVO que = mypageService.getOne(vo.getQueNo());
 		log.info("========");
 		log.info("que : " + que);
+		log.info("queNo : " + vo.getQueNo());
 		model.addAttribute("que", que);
 	}
 	
