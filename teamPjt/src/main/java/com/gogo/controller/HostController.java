@@ -1,16 +1,24 @@
 package com.gogo.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gogo.service.mypageService;
+import com.gogo.vo.QuestionVO;
 
+import lombok.extern.log4j.Log4j;
+
+@Log4j
 @Controller
 @RequestMapping("/member/host/*")
-public class HostController {
+public class HostController extends CommonRestController{
 	
 	@Autowired
 	mypageService mypageService;
@@ -38,6 +46,28 @@ public class HostController {
 	@GetMapping("guide")
 	public void guide() {
 		
+	}
+	
+	// 호스트 가이드 -문의
+	@PostMapping("write")
+	public String insert(QuestionVO qa, Model model) {
+		int res;
+		
+		String msg = "";
+		res = mypageService.insert(qa);
+		
+		if(res > 0) {
+			msg="문의 되었습니다";
+			model.addAttribute("msg", msg);
+			return "./qaList";
+		} else {
+			return "/member/host/guide";
+		}
+	}
+	
+	@GetMapping("qaList")
+	public void qaList(Model model) {
+		mypageService.qaList(model);
 	}
 	
 }

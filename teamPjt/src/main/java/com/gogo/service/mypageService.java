@@ -1,11 +1,13 @@
 package com.gogo.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.gogo.vo.MemberVO;
+import com.gogo.vo.QuestionVO;
 import com.gogo.vo.ReservedVO;
 import com.gogo.vo.StayVO;
 
@@ -30,5 +32,11 @@ public interface mypageService {
 	public List<ReservedVO>reservinfo(Model model);
 	
 	// 예약 관리 대표 사진
-//	public List<StayVO> reservpic(Model model);
+	public List<Map<String, String>> reservpic();
+	
+	// 가이드 문의 요청 ->
+	public int insert(QuestionVO qa);
+	
+	// 문의 내역 조회
+	public List<QuestionVO> qaList(Model model);
 }

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 
 import com.gogo.mapper.mypageMapper;
 import com.gogo.vo.MemberVO;
+import com.gogo.vo.QuestionVO;
 import com.gogo.vo.ReservedVO;
 import com.gogo.vo.StayVO;
 
@@ -70,4 +71,16 @@ public class mypageServiceImpl implements mypageService {
 //		model.addAttribute("pic", pic);
 //		return null;
 //	}
+	
+	@Override
+	public int insert(QuestionVO qa) {
+		return mypageMapper.insert(qa);
+	}
+	
+	@Override
+	public List<QuestionVO> qaList(Model model) {
+		List<QuestionVO> list = mypageMapper.qaList();
+		model.addAttribute("list", list);
+		return null;
+	}
 }
