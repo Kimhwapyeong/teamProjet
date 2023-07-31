@@ -44,7 +44,7 @@ public class mypageServiceImpl implements mypageService {
 		return null;
 	}
 	
-	// ▶▶▶  admin ▶▶▶
+	// ▶▶▶  host ▶▶▶
 	// 숙소 관리
 	@Override
 	public List<StayVO> getStay(Model model) {
@@ -91,13 +91,38 @@ public class mypageServiceImpl implements mypageService {
 		return que;
 	}
 	
+	
+	// ▶▶▶  user ▶▶▶
+	// 예약 정보
+	@Override
+	public List<Map<String, String>> reservList(Model model) {
+		List<Map<String, String>> list = mypageMapper.reservList();
+		log.info("===========");
+		log.info("list : " + list);
+		model.addAttribute("list", list);
+		return null;
+	}
+	
+	// 취소 정보
+	@Override
+	public List<Map<String, String>> cancelList(Model model) {
+		List<Map<String, String>> list = mypageMapper.cancelList();
+		log.info("===========");
+		log.info("list : " + list);
+		model.addAttribute("list", list);
+		return null;
+	}
+	
+	// 회원정보 수정
 	@Override
 	public List<MemberVO> mem(Model model) {
 		List<MemberVO> mem = mypageMapper.mem();
 		log.info("===========");
 		log.info("mem : " + mem);
 		model.addAttribute("mem", mem);
+		
 		return null;
 	}
+	
 	
 }

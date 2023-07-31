@@ -48,7 +48,7 @@
                 <div class="container mypage_wrap">
                     <div class="mypage_myinfo">
                         <!-- =================================== admin  =================================== -->
-                        <div class="tit">HOST 000</div>
+                        <div class="tit">HOST ${sessionScope.memberId}</div>
                         <div class="my-count" role="link" tabindex="0">HOST GUIDE</div>
                     </div>
                     <div class="newmypage_menu pc_only">

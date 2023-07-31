@@ -86,4 +86,16 @@ public class mypageTest {
 		log.info("one : " + mem);
 	}
 	
+	@Test
+	public void reservList() {
+		List<Map<String, String>> list = (List<Map<String, String>>) mapper.reservList();
+		log.info("list : " + list);
+	}
+	
+	@Test
+	public void cancelList() {
+		List<Map<String, String>> list = (List<Map<String, String>>) mapper.cancelList();
+		log.info("list : " + list);
+	}
+	
 }

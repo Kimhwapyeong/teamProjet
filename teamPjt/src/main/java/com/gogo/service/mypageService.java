@@ -45,7 +45,14 @@ public interface mypageService {
 	
 	
 	// ▶▶▶  host ▶▶▶
+	// 예약 정보
+	public List<Map<String, String>> reservList(Model model);
+	
+	// 취소 정보
+	public List<Map<String, String>> cancelList(Model model);
+	
 	// 회원 정보 조회
 	public List<MemberVO> mem(Model model);
+	
 		
 }

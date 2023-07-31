@@ -25,19 +25,16 @@
     </div>
    
     <script src="/static/js/common.js"></script>
+    
     <div id="__next" data-reactroot="">
         <div>
-            <div class=""></div>
-            <div id="gnbBgColor">
-            
-            </div>
             <div id="contents">
                 <div class="container sub_title">
                     <div class="tit">MY PAGE</div>
                 </div>
                 <div class="container mypage_wrap">
                     <div class="mypage_myinfo">
-                        <div class="tit">000님 반가워요!</div>
+                        <div class="tit">${sessionScope.memberId}님 반가워요!</div>
                         <div class="my-count" role="link" tabindex="0">함께 0번의 여행을 했어요.</div>
                     </div>
                     <div class="newmypage_menu pc_only">
@@ -54,12 +51,10 @@
                             <h3 class="my_tit pc_only">회원 정보 수정</h3>
                             
                              <!-- ▶▶▶  forEach ▶▶▶  -->
-                             
                              <c:forEach items="${mem}" var="member" step="1">
                              
-                             <script type="text/javascript">
-                             if ('${sessionScope.memberId}' == '${member.memberId}') {
-                             </script>
+                             <c:if test="${sessionScope.memberId == member.memberId}">
+                             
                              
                             <form>
                             	<script type="text/javascript">
@@ -115,10 +110,7 @@
                                 </div>
                                 </form>
                       			
-                      			<script type="text/javascript">
-                             	}
-                      			</script>
-                                
+                      			</c:if>
                                 </c:forEach>
                                 
                                 <div class="tit" style="padding-top: 22px; margin-left: 8px;"></div>

@@ -23,7 +23,7 @@ public interface mypageMapper {
 	public List<StayVO> getStay();
 	
 	// 예약 관리
-	public List<ReservedVO>reservinfo();
+	public List<ReservedVO> reservinfo();
 	
 	// 예약 관리 대표 사진
 	public List<Map<String, String>> reservpic();
@@ -39,7 +39,14 @@ public interface mypageMapper {
 	
 	
 	// ▶▶▶  user ▶▶▶
+	// 예약 정보
+	public List<Map<String, String>> reservList();
+	
+	// 취소 정보
+	public List<Map<String, String>> cancelList();
+	
 	// 회원 정보 조회
 	public List<MemberVO> mem();
+	
 	
 }

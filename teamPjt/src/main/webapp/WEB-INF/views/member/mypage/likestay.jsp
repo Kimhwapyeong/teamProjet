@@ -39,7 +39,7 @@
                     <div class="container mypage_wrap">
                         <div class="mypage_myinfo">
                             <!-- =============================== 이름 ============================================-->
-                            <div class="tit">000님 반가워요!</div>
+                            <div class="tit">${sessionScope.memberId}님 반가워요!</div>
                             <div class="my-count" role="link" tabindex="0">함께 0번의 여행을 했어요.</div>
                         </div>
                         <div class="newmypage_menu pc_only">

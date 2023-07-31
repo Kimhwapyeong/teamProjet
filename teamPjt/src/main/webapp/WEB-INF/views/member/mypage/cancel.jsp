@@ -35,7 +35,7 @@
                     <div class="container mypage_wrap">
                         <div class="mypage_myinfo">
                             <!-- =============================== 이름 ============================================-->
-                            <div class="tit">000님 반가워요!</div>
+                            <div class="tit">${sessionScope.memberId}님 반가워요!</div>
                             <div class="my-count" role="link" tabindex="0">함께 0번의 여행을 했어요.</div>
                         </div>
                         <div class="newmypage_menu pc_only">
@@ -48,29 +48,37 @@
                             </ul>
                         </div>
                         <div class="mypage_content">
+                        
+                         <c:forEach items="${list}" var="list" step="1">
+                         <c:if test="${sessionScope.memberId == list.MEMBERID}">
+                        
                             <div class="reserv_wrap mypage-reservation-info">
                                 <div class="reserv_box canceled">
                                     <div class="reserv_name">
                                         <p class="label">게스트 예약 취소</p>
                                         <!-- =============================== 숙소 이름 ============================================-->
-                                        <p class="name"><span class="ellipsis">숙소</span></p>
+                                        <p class="name"><span class="ellipsis">${list.STAYNAME }</span></p>
                                     </div>
                                     <div class="stay_view">
                                         <!-- =============================== 숙소 썸네일 url ============================================-->
                                         <div class="photo"
-                                            style="background-image: url(&quot;//images.stayfolio.com/system/pictures/images/000/161/924/display/7b5519004f5763fa0583d8f07d2bf13100c3c824.jpg?1673943659&quot;); background-repeat: no-repeat; background-position: center center; background-size: cover;">
+                                            style="background-image: url(${list.MAINPIC1 }); background-repeat: no-repeat; background-position: center center; background-size: cover;">
                                             <span class="view">스테이 보기</span></div>
                                     </div><a href="/mypage/reservation/146969764">
                                         <div class="reserv_info">
                                             <!-- =============================== 체크인 체크아웃 ============================================-->
-                                            <div class="day">2023.11.10 ~
-                                                2023.11.11 (1 박)</div>
-                                            <div class="option">성인 2명<br></div>
+                                            <div class="day">${list.CHECKIN } ~
+                                                ${list.CHECKOUT }</div>
+                                            <div class="option">성인 ${list.MEMBERCOUNT }명<br></div>
                                             <!-- =============================== 상세 보기 ============================================-->
                                         </div><br><button type="button" class="btn_reserv_detail">예약 상세 확인</button>
                                     </a>
                                 </div>
                             </div>
+                            
+                            </c:if>
+                        	</c:forEach>
+                        
                             <!-- =============================== 페이징 ============================================-->
                             <div class="paging"><a href="/" class="prev" title="이전 페이지">이전 페이지</a><a href="/"
                                     class="on">1</a><a href="/" class="next" title="다음 페이지">다음 페이지</a></div>

@@ -17,14 +17,14 @@ public class UserController {
 	
 	// 예약 정보
 	@GetMapping("reservation")
-	public void reservation() {
-		
+	public void reservation(Model model) {
+		service.reservList(model);
 	}
 	
 	// 취소내역
 	@GetMapping("cancel")
-	public void cancel() {
-		
+	public void cancel(Model model) {
+		service.cancelList(model);
 	}
 	
 	// 관심 스테이

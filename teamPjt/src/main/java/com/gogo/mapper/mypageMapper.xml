@@ -76,11 +76,68 @@
 	</select>
 	
 	
-	<!--  ▶▶▶  host ▶▶▶ -->
-	<!-- 숙소 관리 -->
+	<!--  ▶▶▶  user ▶▶▶ -->
+	<!-- 예약 정보 -->
+	<select id="reservList" resultType="java.util.Map">
+		SELECT
+		    s.mainpic1,
+		    s.stayname,
+		    r.price,
+		    TO_CHAR(v.regdate, 'yyyy-mm-dd') as regdate,
+		    TO_CHAR(v.checkin, 'yyyy-mm-dd') as checkin,
+		    TO_CHAR(v.checkout, 'yyyy-mm-dd') as checkout,
+		    v.membercount,
+		    m.memberid
+		FROM
+		    stay s,
+		    room r,
+		    reservation v,
+		    member m
+		WHERE
+		    s.stayno = r.stayno
+		    AND r.roomno = v.roomno
+		    And v.memberid = m.memberid
+	</select>
+	
+	<resultMap type="java.util.HashMap" id="reservMap">
+	    <result property="stayName" column="stayname" />
+	    <result property="mainPic1" column="MAINPIC1" />
+	    <result property="price" column="PRICE" />
+	    <result property="regDate" column="REGDATE" />
+	    <result property="checkIn" column="CHECKIN" />
+	    <result property="checkOut" column="CHECKOUT" />
+	    <result property="memberCount" column="MEMBERCOUNT" />
+	    <result property="memberId" column="MEMBERID" />
+	</resultMap>
+	
+	<!-- 취소 정보 -->
+	<select id="cancelList" resultType="java.util.Map">
+		select s.stayname, s.mainpic1,
+			TO_CHAR(v.checkin, 'yyyy-mm-dd') as checkin,
+		    TO_CHAR(v.checkout, 'yyyy-mm-dd') as checkout,
+			v.membercount, m.memberid
+		from refund f, payment p, reservation v, member m, room r, stay s
+		where f.impuid = p.impuid
+			and p.reservationno = v.reservationno
+			and v.roomno = r.roomno
+			and v.memberid = m.memberid
+			and r.stayno = s.stayno
+	</select>
+	
+	<resultMap type="java.util.HashMap" id="cancelMap">
+	    <result property="stayName" column="STAYNAME" />
+	    <result property="mainPic1" column="MAINPIC1" />
+	    <result property="checkIn" column="CHECKIN" />
+	    <result property="checkOut" column="CHECKOUT" />
+	    <result property="memberCount" column="MEMBjava.util.MapERCOUNT" />
+	    <result property="memberId" column="MEMBERID" />
+	</resultMap>
+	
+	<!-- 회원정보 수정 -->
 	<select id="mem" resultType="com.gogo.vo.MemberVO">
 		select memberid, membername, pw, memberemail from member
 	</select>
+	
 
-
+	
 </mapper>
