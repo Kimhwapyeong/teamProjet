@@ -96,7 +96,12 @@
         <input type="hidden" id="reserved_day" name="reserved_day" value="">
         <input type="hidden" id="reserved_checkIn" name="reserved_checkIn" value="">
         <input type="hidden" id="reserved_checkOut" name="reserved_checkOut" value="">
-		    
+		<input type="hidden" name="roomNo" value="${reserved.roomNo}">
+		<input type="hidden" name="memberId" value="${reserved.memberId}">
+		<input type="hidden" name="checkIn" value="${reserved.checkIn}">
+		<input type="hidden" name="checkOut" value="${reserved.checkOut}">
+		<input type="hidden" name="memberCount" value="${reserved.memberCount}">
+		
 		    <div style="position:absolute; bottom:5%; left:10%; width:1000px;">   
 		    	<button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer;" type="submit" onclick="check(form)">예약하기</button><br><br>
 		    	<button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer;" id="reload">초기화</button><br><br>

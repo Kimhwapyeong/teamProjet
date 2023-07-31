@@ -7,27 +7,43 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.siot.IamportRestClient.IamportClient;
+import com.siot.IamportRestClient.response.IamportResponse;
+import com.siot.IamportRestClient.response.Payment;
+
+
+
 import com.gogo.mapper.PaymentMapper;
 import com.gogo.vo.PaymentVO;
+import com.gogo.vo.ReservedVO;
 
 @Service
+
 public class PaymentServiceImpl implements PaymentService {
 	
 	@Autowired
 	PaymentMapper paymentMapper;
-
+	
+	@Autowired
+	ReservedService service_r;
+	
 	
 	@Override
 	public int insertPayment(PaymentVO vo) {
@@ -43,7 +59,15 @@ public class PaymentServiceImpl implements PaymentService {
 		return vo;
 	}
 
+	@Override
+	public String getUid() {
+		return paymentMapper.getUid();
+	}
 	
+	@Override
+	public int updateError(PaymentVO vo) {
+		return paymentMapper.updateError(vo);
+	}
 	
 	
 	
@@ -54,7 +78,7 @@ public class PaymentServiceImpl implements PaymentService {
 	private String impKey = "1500511887437481";
 	private String impSecret = "qPqnrNzBkKnVFPKnVh9f2vzz5zvz1Xb1YVm0W7iyMbXAlGLmkyTnzc0Gg2qxLQF4nJkyyokH8kO47qMq";
 	
-	
+	@Override
 	// 토큰 생성 메소드
 	public String getToken() throws Exception {
 
@@ -93,14 +117,14 @@ public class PaymentServiceImpl implements PaymentService {
 		return token;
 	}
 
-	
+	@Override
     //결제 정보 JSON으로 불러오기, paySave를 위해 사용한다.
-	public Map<String, String> paymentInfo(String imp_uid, String access_token) throws IOException, ParseException {
+	public Map<String, String> paymentInfo(String impUid, String access_token) throws IOException, ParseException {
 		
 		Map<String, String> map = new HashMap<String, String>();
 		HttpsURLConnection conn = null;
 
-		URL url = new URL("https://api.iamport.kr/payments/" + imp_uid);
+		URL url = new URL("https://api.iamport.kr/payments/" + impUid);
 
 		conn = (HttpsURLConnection) url.openConnection();
 
@@ -131,6 +155,7 @@ public class PaymentServiceImpl implements PaymentService {
 		return map;
 	}
 	
+	@Override
 	public String payMentCancle(String access_token, String imp_uid, String amount,String reason, String checksum) {
 		try {
 		System.out.println(imp_uid+"에 대한 환불을 진행합니다.");
@@ -170,17 +195,16 @@ public class PaymentServiceImpl implements PaymentService {
 		}
 	}
 	
-	
+	@Override
 	// 결제 정보 저장
-	public int paymentSave(String imp_uid, String access_token, String success, String buyerName) throws IOException, ParseException {
+	public int paymentSave(String impUid, String access_token, String reservationNo, String paymentNo) throws IOException, ParseException {
 		
-		Map<String, String> map = paymentInfo(imp_uid, access_token);
+		Map<String, String> map = paymentInfo(impUid, access_token);
 		
 		System.out.println("map.get(\"merchant_uid\") : "+ map.get("merchant_uid"));
 		System.out.println("map.get(\"mount\") : "+ map.get("amount"));
 		System.out.println("map.get(\"imp_uid\") : "+map.get("imp_uid"));
 		System.out.println("map.get(\"pg_provider\") : "+map.get("pg_provider"));
-		System.out.println("map.get(\"buyer_name\") : "+buyerName);
 		
 		
 		
@@ -188,13 +212,101 @@ public class PaymentServiceImpl implements PaymentService {
 		
 		vo.setImpUid(map.get("imp_uid"));
 		vo.setPaymentMethod(map.get("pg_provider"));
-		
-		
+		vo.setReservationNo(reservationNo);
+		vo.setPaymentNo(paymentNo);
 		
 		
 		return paymentMapper.insertPayment(vo);
 		
 	}
+	
+	
+	// 결제 검증 메소드, 예약 insert, paymentSave, error_msg update 등을 관리한다.
+	private IamportClient api;
+	@Override
+	public IamportResponse<Payment> verify(Model model
+										, Locale locale
+										, HttpSession session
+										, String imp_uid
+										, Map<String, Object> map) throws Exception{
+		String token = getToken();
+		
+		api = new IamportClient(impKey, impSecret);
+		
+		System.out.println("imp_uid : "+map.get("imp_uid"));
+		System.out.println("success : "+map.get("success"));
+		System.out.println("reservationNo : "+map.get("reservationNo"));
+		System.out.println("merchant_uid : "+map.get("merchant_uid"));
+		System.out.println("memberCount : "+map.get("memberCount"));
+		System.out.println("roomNo : "+map.get("roomNo"));
+		System.out.println("checkIn : "+map.get("checkIn"));
+		System.out.println("checkOut : "+map.get("checkOut"));
+		
+		System.err.println("검증 시작");
+		
+		
+		String impUid = String.valueOf(map.get("imp_uid"));
+		String paymentNo = String.valueOf(map.get("merchant_uid"));
+		String memberId = String.valueOf(map.get("memberId"));
+		String checkIn = String.valueOf(map.get("checkIn"));
+		String checkOut = String.valueOf(map.get("checkOut"));
+		String roomNo = String.valueOf(map.get("roomNo"));
+		String reservationNo = String.valueOf(map.get("reservationNo"));
+		String memberCount = String.valueOf(map.get("memberCount"));
+		
+		// 예약 insert
+		ReservedVO reserved = new ReservedVO();
+		reserved.setReservationNo(reservationNo);
+		reserved.setRoomNo(roomNo);
+		reserved.setMemberId(memberId);
+		reserved.setCheckIn(checkIn);
+		reserved.setCheckOut(checkOut);
+		reserved.setMemberCount(memberCount);
+		
+		int reservedRes = service_r.insertReserved(reserved);
+		
+		if(reservedRes>0) {
+			System.out.println("예약 정보 저장 성공");
+		} else {
+			System.out.println("예약 정보 저장 실패");
+		}
+		
+		// 결제 정보 저장
+		int res = paymentSave(impUid,token, reserved.getReservationNo(), paymentNo);
+		
+		// success 가 false일시 error 메세지 저장
+		String success = String.valueOf(map.get("success"));
+		if("false".equals(success)) {
+			
+			PaymentVO error = new PaymentVO();
+			String errorCode = String.valueOf(map.get("error_code"));
+			String error_Msg = String.valueOf(map.get("error_msg"));
+			
+			error.setImpUid(impUid);
+			error.setErrorCode(errorCode);
+			error.setError_Msg(error_Msg);
+			
+			int res2 = updateError(error);
+			
+			if(res2>0) {
+				System.out.println("결제 취소 정보 업데이트 성공");
+			} else {
+				System.out.println("결제 취소 정보 업데이트 실패!");
+			}
+		} 
+		
+		if(res>0) {
+			System.out.println("결제 정보 저장 성공!");
+			return api.paymentByImpUid(impUid);
+		} else {
+			System.out.println("결제 정보 저장 실패...");
+			return null;
+		}
+		
+	}
+
+
+
 	
 	
 

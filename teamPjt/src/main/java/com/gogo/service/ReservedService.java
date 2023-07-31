@@ -2,6 +2,7 @@ package com.gogo.service;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.gogo.vo.ReservedVO;
 import com.gogo.vo.RoomVO;
@@ -19,5 +20,8 @@ public interface ReservedService {
 	public String reservedDay(String reservationNo);
 	
 	public String reservedDay2(@Param("checkIn") String checkIn, @Param("checkOut") String checkOut);
-
+	
+	public String getReservationNo();
+	
+	public String goReserved(ReservedVO reserved, Model model);
 }

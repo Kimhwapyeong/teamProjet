@@ -5,7 +5,7 @@
 	
 	<insert id="insertReserved">
 		insert into reservation 
-		values(reservationseq.nextval, #{roomNo}, #{memberId}, sysdate, #{checkIn}, #{checkOut}, #{memberCount})
+		values(#{reservationNo}, #{roomNo}, #{memberId}, sysdate, #{checkIn}, #{checkOut}, #{memberCount})
 	</insert>
 	
 	<select id="selectOne_room" resultType="com.gogo.vo.RoomVO">
@@ -22,6 +22,10 @@
 	
 	<select id="reservedDay2" resultType="String">
 		select to_date('${checkOut}')- to_date('${checkIn}') from dual
+	</select>
+	
+	<select id="getReservationNo" resultType="String">
+		select reservationseq.nextval from dual
 	</select>
 
 </mapper>

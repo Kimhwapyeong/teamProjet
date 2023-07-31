@@ -19,4 +19,5 @@ public interface ReservedMapper {
 	
 	public String reservedDay2(@Param("checkIn") String checkIn, @Param("checkOut") String checkOut);
 	
+	public String getReservationNo();
 }
