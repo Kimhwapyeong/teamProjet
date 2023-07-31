@@ -81,8 +81,8 @@
                                 <table class="table">
                                   <thead>
                                     <tr>
-                                      <th style="width:15%">문의 번호</th>
-                                      <th style="width:20%">문의 제목</th>
+                                      <th style="width:10%">문의 번호</th>
+                                      <th style="width:25%">문의 제목</th>
                                       <th style="width:50%; text-align:center">문의 내용</th>
                                       <th style="width:15%">문의 작성일</th>
                                     </tr>
@@ -93,7 +93,7 @@
                                   <c:forEach items="${list}" var="qa" step="1">
                                     <tr style="line-height: 20px">
                                         <td>${qa.queNo }</td>
-                                        <td>${qa.title }</td>
+                                        <td><a href="/member/host/answer">${qa.title }</a></td>
                                         <td style="text-align:center">${qa.content }</td>
                                         <td>${qa.contentDate }</td>
                                     </tr>

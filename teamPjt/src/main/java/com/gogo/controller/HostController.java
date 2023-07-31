@@ -66,9 +66,18 @@ public class HostController extends CommonRestController{
 		}
 	}
 	
+	// 문의 목록
 	@GetMapping("qaList")
 	public void qaList(Model model) {
 		mypageService.qaList(model);
+	}
+	
+	@GetMapping("answer")
+	public void getOne(int queNo, Model model) {
+		QuestionVO que = mypageService.getOne(queNo);
+		log.info("========");
+		log.info("que : " + que);
+		model.addAttribute("que", que);
 	}
 	
 }

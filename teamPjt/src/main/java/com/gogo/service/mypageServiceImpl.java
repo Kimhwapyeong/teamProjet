@@ -84,4 +84,11 @@ public class mypageServiceImpl implements mypageService {
 		model.addAttribute("list", list);
 		return null;
 	}
+	
+	@Override
+	public QuestionVO getOne(int queNo) {
+		QuestionVO que = mypageMapper.getOne(queNo);
+		return que;
+		
+	}
 }

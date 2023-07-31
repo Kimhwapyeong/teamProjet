@@ -34,9 +34,16 @@ public class mypageServiceTest {
 	
 	@Test
 	public void reservpic() {
-		List<Map<String, String>> list = (List<Map<String, String>>) service.reservpic();
+//		List<Map<String, String>> list = (List<Map<String, String>>) service.reservpic();
+//		log.info("=========");
+//		log.info("list : " + list);
+	}
+	
+	@Test
+	public void getOne() {
+		QuestionVO one = service.getOne(1);
 		log.info("=========");
-		log.info("list : " + list);
+		log.info("one : " + one);
 	}
 	
 

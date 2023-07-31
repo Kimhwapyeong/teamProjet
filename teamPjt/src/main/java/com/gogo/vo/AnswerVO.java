@@ -5,7 +5,7 @@ import lombok.Data;
 @Data	// 답변
 public class AnswerVO {
 
-	private String queNo; // 질문 seq
+	private int queNo; // 질문 seq
 	private String answerInfo; // 답변
 	private String answerDate; // 답변일
 }

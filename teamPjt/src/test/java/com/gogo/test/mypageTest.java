@@ -72,4 +72,11 @@ public class mypageTest {
 		log.info("list : " + list);
 	}
 	
+	@Test
+	public void getOne() {
+		QuestionVO one = mapper.getOne(1);
+		log.info("=========");
+		log.info("one : " + one);
+	}
+	
 }
