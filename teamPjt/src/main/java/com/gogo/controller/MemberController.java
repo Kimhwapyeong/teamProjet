@@ -67,7 +67,7 @@ public class MemberController extends CommonRestController {
 		
 	}
 	
-	
+
 	@GetMapping("/login/signup")
 	public String signup() {
 		return "/login/signup";
