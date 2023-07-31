@@ -29,7 +29,7 @@
                             <div class="stay-main-img"><span id="show-pictures-button">사진 모아보기</span><span
                                     style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;"><img
                                         alt="Stay Main Image" sizes="100vw"
-                                        src="../resources/images/jyp.jpg"
+                                        src="/resources/images/jyp.jpg"
                                         decoding="async" data-nimg="fill"
                                         style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;"></span>
                             </div>
