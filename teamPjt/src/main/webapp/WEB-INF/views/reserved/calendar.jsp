@@ -101,6 +101,7 @@
 		<input type="hidden" name="checkIn" value="${reserved.checkIn}">
 		<input type="hidden" name="checkOut" value="${reserved.checkOut}">
 		<input type="hidden" name="memberCount" value="${reserved.memberCount}">
+		<input type="hidden" name="btnYN" value="${btnYN}">
 		
 		    <div style="position:absolute; bottom:5%; left:10%; width:1000px;">   
 		    	<button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer;" type="submit" onclick="check(form)">예약하기</button><br><br>

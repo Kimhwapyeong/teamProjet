@@ -60,9 +60,11 @@ public class ReservedController {
 	public String day(@RequestParam("reserved_day") String reserved_day
 					, @RequestParam("reserved_checkIn") String reserved_checkIn
 					, @RequestParam("reserved_checkOut") String reserved_checkOut
+					, @RequestParam("btnYN") String btnYN
 					, ReservedVO reserved
 					, Model model) {
 		
+		System.out.println("btnYN : "+btnYN);
 		System.out.println("reserved.roomNo : "+ reserved.getRoomNo());
 		
 		System.out.println("총 예약일 : "+reserved_day);
@@ -72,6 +74,12 @@ public class ReservedController {
 		reserved.setCheckIn(reserved_checkIn);
 		reserved.setCheckOut(reserved_checkOut);
 		String res = service.goReserved(reserved, model);
+		
+		if("search".equals(btnYN)) {
+			res = "/stay/list";
+		} else {
+			res = "/reserved/reserved";
+		}
 		
 		return res;
 	}

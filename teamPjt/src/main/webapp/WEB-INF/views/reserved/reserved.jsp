@@ -13,13 +13,14 @@
 	function btnWhenFunction(){
 				
 		document.querySelector("#whenModal").style.display='';
-		
+		btnYN = 'reservation';
+		$('input[name=btnYN]').val('reservation');
 	}
 	
 	function btnClose(){
 		
 		document.querySelector("#whenModal").style.display='none';
-
+		$('input[name=btnYN]').val('');
 		
 	}
 
@@ -159,6 +160,7 @@
 		var r_checkOut = '${reserved.checkOut}';
 		var memberCount = '${reserved.memberCount}';
 		var memberId = 'user1'; // sessionScope.userId 받아와야 함
+		
 		
 		
 		$(function(){
