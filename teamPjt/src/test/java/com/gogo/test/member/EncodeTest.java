@@ -16,7 +16,7 @@ public class EncodeTest {
 	
 	@Test
 	public void test() {
-		String pw = "안녕하세요";
+		String pw = "1234";
 		
 		for(int i=0; i<10; i++) {
 			

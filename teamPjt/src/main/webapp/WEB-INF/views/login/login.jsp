@@ -67,7 +67,7 @@
 		// 로그인 성공 -> list 로 이동
 		if(map.result == 'success'){
 			location.href = map.url;
-			//alert(loginForm.signUpName.value+"님 환영합니다.")
+			alert(loginForm.id.value+"님 환영합니다.")
 		} else {
 			// 로그인 실패 시 메시지 처리
 			alert(map.msg);

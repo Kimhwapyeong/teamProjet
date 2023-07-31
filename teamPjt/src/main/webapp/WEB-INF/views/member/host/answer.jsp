@@ -8,6 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>answer</title>
     <link rel="stylesheet" href="./css/host/host.css">
+
+
+<script type="text/javascript">
+	function goList(){
+		window.location.assign('/member/host/qaList');
+	};
+</script>
 </head>
 
 
@@ -53,11 +60,14 @@
                      <form>
 	                    <div class="mb-3">
 							  <label for="title" class="form-label">제목</label>
-							  <input type="text" class="form-control" id="title" name="title">
+							  <input type="text" class="form-control" id="title" name="title" value="${que.title }">
 						</div>
 						<div class="mb-3">
 							  <label for="content" class="form-label"></label>
-							  <textarea class="form-control" id="content" rows="10" name="content"></textarea>
+							  <textarea class="form-control" id="content" rows="10" name="content">${que.content }
+							   ------------------------------------
+							  안녕하세요:)
+							  </textarea>
 						</div>
 						<div style=" float: right">
 							<button type="button" class="btn btn-light btn-sm" onclick="goList()">문의 목록 바로가기</button>

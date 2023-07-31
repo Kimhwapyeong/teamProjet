@@ -7,6 +7,10 @@ import com.gogo.vo.MemberVO;
 public interface MemberService {
 	
 	MemberVO login(MemberVO member);
+
+	int idCheck(MemberVO member);
+
+	int signup(MemberVO member);
 	
 
 }

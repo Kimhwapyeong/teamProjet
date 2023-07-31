@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,10 +52,21 @@
                     <div class="mypage_content">
                         <div class="myedit_wrap">
                             <h3 class="my_tit pc_only">회원 정보 수정</h3>
+                            
+                             <!-- ▶▶▶  forEach ▶▶▶  -->
+                             
+                             <c:forEach items="${mem}" var="member" step="1">
+                             
+                             <script type="text/javascript">
+                             if ('${sessionScope.memberId}' == '${member.memberId}') {
+                             </script>
+                             
                             <form>
+                            	<script type="text/javascript">
+                            		
+                            	</script>
                                 <div class="profile_photo">
                                     <div class="input_box">
-                                        <div class="tit">프로필 사진</div>
                                         <div class="photo" style="">profile photo</div><input type="file" id="imgFile"
                                             name="imgFile" title="프로필 사진" class="btn_photo"
                                             accept="image/jpeg, image/png">
@@ -64,38 +76,22 @@
                                     <div class="input_box">
                                         <div class="tit">이메일</div>
                                         <div class="input"><input type="email" name="email"
-                                                placeholder="example@example.com" disabled=""
-                                                value="@naver.com"
-                                                style="color: rgb(128, 128, 128); -webkit-text-fill-color: rgb(128, 128, 128); margin-left: 12px;">
+                                                placeholder="@이메일.com"
+                                                style=" -webkit-text-fill-color: rgb(128, 128, 128); margin-left: 12px;" value=${member.memberEmail }>
                                         </div>
                                     </div>
                                     <div class="input_box">
                                         <div class="tit">이름</div>
                                         <div class="input"><input type="text" name="name"
-                                                placeholder="이용자 본인의 이름을 입력하세요." value="000" style="color: rgb(128, 128, 128); -webkit-text-fill-color: rgb(128, 128, 128); margin-left: 12px;" readonly>
+                                                value=${member.memberName } style="color: rgb(128, 128, 128); -webkit-text-fill-color: rgb(128, 128, 128); margin-left: 12px;" readonly>
                                         </div>
                                     </div>
-                                    <div class="input_box">
-                                        <div>
-                                            <div class="tit">휴대전화번호</div>
-                                            
-                                            <div class="input"><label style="display: flex;"><input
-                                                        class="mypage_account_edit_phone_number" type="number"
-                                                        name="mobilePhone" placeholder="- 없이 휴대전화번호를 입력하세요."
-                                                        maxlength="20" value="010"
-                                                        style="margin-left: 7px;"></label></div>
-                                            <div>
-                                                <div>
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                   
                                     <div class="input_box">
                                         <div class="tit">비밀번호</div>
                                         <div class="input"><label style="display: flex;"><input
                                                     class="mypage_account_edit_password" type="password" name="password"
-                                                    placeholder="현재 비밀번호" value="" style="margin-left: 8px;"><button
+                                                    placeholder="현재 비밀번호" value="${member.pw }" style="margin-left: 8px;"><button
                                                     type="button" style="margin-right: -15px;"><img
                                                         src="/web/images/password-deactivate-icon.svg"
                                                         alt=""></button></label></div>
@@ -117,6 +113,14 @@
                                     </div><button type="button" class="btn_bk btn_sm"
                                         style="margin: 10px 0px; width: 100%;">비밀번호 변경</button>
                                 </div>
+                                </form>
+                      			
+                      			<script type="text/javascript">
+                             	}
+                      			</script>
+                                
+                                </c:forEach>
+                                
                                 <div class="tit" style="padding-top: 22px; margin-left: 8px;"></div>
                                 <div class="agree_box">
                                     

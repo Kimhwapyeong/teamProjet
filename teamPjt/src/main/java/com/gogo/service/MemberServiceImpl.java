@@ -38,8 +38,26 @@ public class MemberServiceImpl implements MemberService {
 			
 		}
 		
-		return null;
+		return member;
 	}
+	@Override
+	public int signup(MemberVO member) {
+		
+		// 비밀번호 암호화
+//		BCryptPasswordEncoder encoder =  new BCryptPasswordEncoder();
+		
+		// 암호화된 비번을 다시 비번에 넣어줌
+		member.setPw(encoder.encode(member.getPw()));
+		
+		System.out.println("pw : "+member.getPw());
+		return memberMapper.signup(member);
+	}
+
+	@Override
+	public int idCheck(MemberVO member) {
+		return memberMapper.signup(member);
+	}
+
 
 	
 }

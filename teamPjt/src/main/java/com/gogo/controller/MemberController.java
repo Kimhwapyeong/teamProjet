@@ -55,6 +55,8 @@ public class MemberController extends CommonRestController {
 			if(member.getRole() != null && member.getRole().contains("ADMIN_ROLE")) {
 				// 관리자 로그인 -> 관리자 페이지로 이동
 				map.put("url", "/admin/stayadmin");
+			} else if(member.getRole() != null && member.getRole().contains("HOST_ROLE")){
+				map.put("url", "host/stayhost");
 			} else {
 				map.put("url", "/main");
 			}
@@ -67,7 +69,7 @@ public class MemberController extends CommonRestController {
 		
 	}
 	
-	
+
 	@GetMapping("/login/signup")
 	public String signup() {
 		return "/login/signup";

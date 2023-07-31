@@ -74,6 +74,13 @@
 	<!-- 회원 아이디와 비교해서 해당 -> 출력 -->
 		select queNo, title, content from question where queNo = #{queNo}
 	</select>
+	
+	
+	<!--  ▶▶▶  host ▶▶▶ -->
+	<!-- 숙소 관리 -->
+	<select id="mem" resultType="com.gogo.vo.MemberVO">
+		select memberid, membername, pw, memberemail from member
+	</select>
 
 
 </mapper>

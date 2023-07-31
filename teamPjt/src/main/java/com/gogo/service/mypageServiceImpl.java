@@ -89,6 +89,15 @@ public class mypageServiceImpl implements mypageService {
 	public QuestionVO getOne(int queNo) {
 		QuestionVO que = mypageMapper.getOne(queNo);
 		return que;
-		
 	}
+	
+	@Override
+	public List<MemberVO> mem(Model model) {
+		List<MemberVO> mem = mypageMapper.mem();
+		log.info("===========");
+		log.info("mem : " + mem);
+		model.addAttribute("mem", mem);
+		return null;
+	}
+	
 }

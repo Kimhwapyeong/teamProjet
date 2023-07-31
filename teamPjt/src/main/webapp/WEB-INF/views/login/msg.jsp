@@ -12,7 +12,7 @@
 		const myModal = new bootstrap.Modal('#myModal', {
 		  keyboard: false
 		});
-		document.querySelector(".modal-body").innerHTML= '메세지...';
+		document.querySelector(".modal-body").innerHTML= '메세지';
 		
 		myModal.show();
 		
