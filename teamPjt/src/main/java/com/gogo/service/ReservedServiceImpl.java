@@ -95,7 +95,7 @@ public class ReservedServiceImpl implements ReservedService{
 		
 		
 		// merchant_uid(거래 번호)를 새로 생성
-		String merchant_uid = service_p.getUid();
+		String paymentNo = service_p.getUid();
 		
 		String reservationNo = getReservationNo();
 		
@@ -106,14 +106,14 @@ public class ReservedServiceImpl implements ReservedService{
 		System.out.println("reserved.checkIn : "+reserved.getCheckIn());
 		System.out.println("reserved.checkOut : "+reserved.getCheckOut());
 		System.out.println("reserved.memberCount : "+reserved.getMemberCount());
-		System.out.println("reserved.merchant_uid : "+ merchant_uid);
+		System.out.println("reserved.paymentNo : "+ paymentNo);
 		
 		model.addAttribute("reserved", reserved);
 		model.addAttribute("room", room);
 		model.addAttribute("stay", stay);
 		model.addAttribute("reservedDay", reservedDay);
 		model.addAttribute("price", price);
-		model.addAttribute("merchant_uid", merchant_uid);
+		model.addAttribute("paymentNo", paymentNo);
 		model.addAttribute("reservationNo", reservationNo);
 
 		return "/reserved/reserved";

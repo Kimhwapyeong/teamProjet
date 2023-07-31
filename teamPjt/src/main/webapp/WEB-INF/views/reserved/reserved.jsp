@@ -115,39 +115,12 @@
 							<button id="nice" style="position:absolute; right:3%; bottom:0.6%;">				
 								<img src="/resources/images/신용카드2.JPG" id="niceImg"/>
 							</button>
-							<script>
+							
+<script>
 								
-								$(function(){
-									
-									$("#kakaopay").click(function(){
-										
-																				
-										pg = 'kakaopay';
-										
-										$("#kakaoImg").attr("src", "/resources/images/kakaopay.JPG");
-										$("#nice").attr("style", "position:absolute; right:3%; bottom:0.6%;");
-										$("#niceImg").attr("src", "/resources/images/신용카드2.JPG");
-									});
-									
-									$("#nice").click(function(){
-																				
-										pg = 'nice';
-										
-										$("#niceImg").attr("src", "/resources/images/신용카드.JPG");
-										$("#nice").attr("style", "position:absolute; right:3%; bottom:1%;");
-										$("#kakaoImg").attr("src", "/resources/images/kakaopay2.JPG");
-									});
 
-									
-								});
-								
-							
-							</script>
-							
-								<script>
- 
 		var buyer_name = 'user1';   // sessionScope.userId 받아와야 함
-		var merchant_uid = '${merchant_uid}'; // 시퀀스 추가해야 함
+		var paymentNo = '${paymentNo}'; // 시퀀스 추가해야 함
 		var canclePay = '';		  // 환불할 imp_uid
 		var realAmount = '';	  // 환불할 금액
 		var payInfo = '${sessionScope.userId}';
@@ -187,9 +160,31 @@
 				
 			});
 			
+			$("#kakaopay").click(function(){
+				
+				
+				pg = 'kakaopay';
+				
+				$("#kakaoImg").attr("src", "/resources/images/kakaopay.JPG");
+				$("#nice").attr("style", "position:absolute; right:3%; bottom:0.6%;");
+				$("#niceImg").attr("src", "/resources/images/신용카드2.JPG");
+			});
+			
+			$("#nice").click(function(){
+														
+				pg = 'nice';
+				
+				$("#niceImg").attr("src", "/resources/images/신용카드.JPG");
+				$("#nice").attr("style", "position:absolute; right:3%; bottom:1%;");
+				$("#kakaoImg").attr("src", "/resources/images/kakaopay2.JPG");
+			});
+
+			
 			
 		});
-	</script>
+		
+
+</script>
 							
 							
 							
@@ -218,14 +213,14 @@
 						return false;
 						
 					} else if(pg==''){
-						
+						http://localhost:8080/addstay
 						alert('결제 수단을 선택해 주세요.');
 						return false;
 					}
-
+						
+						console.log('pg : ',pg);
 						purchased(pg);
 						return true;
-					
 				}					
 							
 								

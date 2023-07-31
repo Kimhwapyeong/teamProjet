@@ -3,12 +3,19 @@
 	
 		/* 결제 */
 		function purchased(pg){
+		
+		
+				console.log('pg', pg);
+				console.log('paymentNo', paymentNo);
+				console.log('purchaseName', purchaseName);
+				console.log('purchaseAmount', purchaseAmount);
+				console.log('buyer_name', buyer_name);
 			
 				IMP.init('imp31246282');
 				IMP.request_pay({
 				    pg : pg,
 				    pay_method : 'card', //생략 가능
-				    merchant_uid: merchant_uid, // 상점에서 관리하는 주문 번호
+				    merchant_uid : 'merchant_'+paymentNo, // 상점에서 관리하는 주문 번호
 				    name : purchaseName,
 				    amount : purchaseAmount,
 				    buyer_email : 'iamport@siot.do',
