@@ -53,7 +53,6 @@ public class HostController extends CommonRestController{
 	public String insert(QuestionVO qa, Model model) {
 		int res;
 	
-		System.out.println("출력: ");
 		String msg = "";
 		res = mypageService.insert(qa);
 		

@@ -32,6 +32,7 @@
                 <div class="container sub_title">
                     <div class="tit">MY PAGE</div>
                 </div>
+            </div>
                 <div class="container mypage_wrap">
                     <div class="mypage_myinfo">
                         <div class="tit">${sessionScope.memberId}님 반가워요!</div>
@@ -52,27 +53,23 @@
                             
                              <!-- ▶▶▶  forEach ▶▶▶  -->
                              <c:forEach items="${mem}" var="member" step="1">
-                             
                              <c:if test="${sessionScope.memberId == member.memberId}">
                              
                              
-                            <form>
-                            	<script type="text/javascript">
-                            		
-                            	</script>
-                                <div class="profile_photo">
+                            <form form name="infoFrm" method="post" action="/member/user/infoFrm">
+                                <!-- <div class="profile_photo">
                                     <div class="input_box">
                                         <div class="photo" style="">profile photo</div><input type="file" id="imgFile"
                                             name="imgFile" title="프로필 사진" class="btn_photo"
                                             accept="image/jpeg, image/png">
                                     </div>
-                                </div>
+                                </div>  -->
                                 <div class="myedit_box">
                                     <div class="input_box">
                                         <div class="tit">이메일</div>
                                         <div class="input"><input type="email" name="email"
                                                 placeholder="@이메일.com"
-                                                style=" -webkit-text-fill-color: rgb(128, 128, 128); margin-left: 12px;" value=${member.memberEmail }>
+                                                style=" -webkit-text-fill-color: black; margin-left: 12px;" value=${member.memberEmail }>
                                         </div>
                                     </div>
                                     <div class="input_box">
@@ -108,15 +105,16 @@
                                     </div><button type="button" class="btn_bk btn_sm"
                                         style="margin: 10px 0px; width: 100%;">비밀번호 변경</button>
                                 </div>
-                                </form>
+                             </form>
                       			
-                      			</c:if>
-                                </c:forEach>
+               				</c:if>
+                            </c:forEach>
                                 
-                                <div class="tit" style="padding-top: 22px; margin-left: 8px;"></div>
-                                <div class="agree_box">
-                                    
-            </nav>
+                            <div class="tit" style="padding-top: 22px; margin-left: 8px;"></div>
+                            <div class="agree_box">
+       					</div>
+        		</div>
+        	</div>
         </div>
     </div>
     <!-- 푸터 -->

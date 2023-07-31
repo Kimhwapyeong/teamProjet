@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gogo.service.mypageService;
@@ -37,6 +38,15 @@ public class UserController {
 	@GetMapping("info")
 	public void info(Model model) {
 		service.mem(model);
+	}
+	
+	@PostMapping("infoFrm")
+	public void infoFrm() {
+		int res;
+		
+		System.out.println("출력: ");
+		String msg = "";
+	
 	}
 		
 	// 메세지

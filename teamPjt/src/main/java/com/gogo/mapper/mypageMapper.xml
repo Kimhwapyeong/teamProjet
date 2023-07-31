@@ -117,7 +117,7 @@
 		    TO_CHAR(v.checkout, 'yyyy-mm-dd') as checkout,
 			v.membercount, m.memberid
 		from refund f, payment p, reservation v, member m, room r, stay s
-		where f.impuid = p.impuid
+		where f.paymentno = p.paymentno
 			and p.reservationno = v.reservationno
 			and v.roomno = r.roomno
 			and v.memberid = m.memberid
@@ -129,7 +129,7 @@
 	    <result property="mainPic1" column="MAINPIC1" />
 	    <result property="checkIn" column="CHECKIN" />
 	    <result property="checkOut" column="CHECKOUT" />
-	    <result property="memberCount" column="MEMBjava.util.MapERCOUNT" />
+	    <result property="memberCount" column="MEMBERCOUNT" />
 	    <result property="memberId" column="MEMBERID" />
 	</resultMap>
 	

@@ -57,15 +57,14 @@
                                     <div class="info_container">
                                         <!-- =============================== 숙소정보 ============================================-->
                                         <div class="name"><span class="ellipsis"
-                                                style="padding-bottom: 0px;">스테이무카</span><small>staymuka</small></div>
+                                                style="padding-bottom: 0px;">숙소이름</span><small>숙소분류</small></div>
                                         <div class="stay">
                                             <p class="txt mo_only"><span class="ellipsis">staymuka</span></p>
-                                            <p class="option">전라/장성군<br>최소 4명 / 최대 6명<br>₩400,000 ~ ₩480,000</p>
+                                            <p class="option">위치<br>최소 4명 / 최대 6명<br>₩가격</p>
                                         </div>
+                                        
                                         <!-- =============================== 예약 링크 ============================================-->
-                                        <div class="btns"><button type="button" class="btn_bk"><a
-                                                    href="/findstay/staymuka">예약하기</a></button></div><a
-                                            href="/findstay/staymuka">
+                                        <div class="btns"><button type="button" class="btn_bk"><a href="" style="color:white">예약하기</a></button></div>
                                             <div class="likestay_img" role="presentation" style="padding-top: 0px;">
                                                 <ul
                                                     class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events slider1 flist_slider">
@@ -73,17 +72,17 @@
                                                         <li class="swiper-slide swiper-slide-active img"
                                                             style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/144/994/display/da4b0a181e677eb34638abe5b91695985b43613d.jpg?1664264819&quot;) center center / cover no-repeat; width: 372px;">
                                                         </li>
-                                                        
-                                                    </div><span>
-                                                        <div class="_badge_badge_wrapper__h9IsV">
-                                                        </div>
+                                                    </div>
+                                                    <span>
+                                                        <div class="_badge_badge_wrapper__h9IsV"></div>
                                                     </span>
                                                 </ul>
                                             </div>
-                                        </a>
                                     </div>
                                 </div>
                             </div>
+                            
+                            <!-- ============ 페이징 =============== -->
                             <div class="paging"><a href="/" class="prev" title="이전 페이지">이전 페이지</a><a href="/"
                                     class="on">1</a><a href="/" class="next" title="다음 페이지">다음 페이지</a></div>
                         </div>
