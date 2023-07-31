@@ -11,4 +11,7 @@ public interface MemberMapper {
 	
 	
 	public List<String> getMemberRole(String memberId);
+
+
+	public int signup(MemberVO member);
 }

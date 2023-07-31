@@ -99,7 +99,90 @@ option {
     display: flex;
     align-items: center;
   }
-</style>    
+  select.box {
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+  margin-left: 5px;
+  padding: 5px 0 5px 10px;
+  border-radius: 4px;
+  border: 1px solid #d9d6d6;
+  color: #383838;
+  background-color: #ffffff;
+  font-family: 'Montserrat', 'Pretendard', sans-serif;
+}
+
+option {
+  font-size: 16px;
+}
+
+.info .box#domain-list option {
+  font-size: 14px;
+  background-color: #ffffff;
+}
+   
+</style>
+<script>
+	window.addEventListener('load', function(){
+		btnSignup.addEventListener('click', function(e){
+        	// 기본 이벤트 초기화
+        	e.preventDefault();
+        	
+        	let id = signUpId.value;
+        	let pw = signUpPw.value;
+        	let name = signUpName.value;
+        	
+        	if(!id){
+        		signupMsg.innerHTML = '아이디를 입력해주세요';
+        		return;
+        	}
+        	if(!pw){
+        		signupMsg.innerHTML = '비밀번호를 입력해주세요';
+        		return;
+        	}
+        	if(!name){
+        		signupMsg.innerHTML = '이름을 입력해주세요';
+        		return;
+        	}
+        	
+        	// 아이디 중복체크 확인 - 중복확인 버튼 만들기
+        	if(idCheckRes.value != 1){
+        		signupMsg.innerHTML = "아이디 중복체크를 해주세요.";
+        		sighUpId.focus();
+        		return;
+        	}
+        	
+        	// 비밀번호 일치 확인
+        	if(pwCheckRes.value !=1){
+        		signupMsg.innerHTML = "비밀번호가 일치하는지 확인해주세요.";
+        		pwCheckRes.focus();
+        		return;	
+        	}
+        	
+        	
+        	obj = {
+        			memberId : id
+        			, pw : pw
+        			, memberName : name
+        	}
+        	
+        	console.log('회원가입 obj : ', obj);
+        	
+        	// 회원가입 요청
+        	fetchPost('/signup'
+        				, obj
+        				, (map)=>{
+				        		if(map.result =='success'){
+				        			location.href ='/login/login?msg='+map.msg;
+				        		}else{
+				        			signupMsg.innerHTML = map.msg;
+				        		}
+					        	});
+        })
+	
+	})// window.addEventListner 함수 끝
+	
+</script>    
 <body>
 <div id="contents">
 	<div class="container sub_title">
@@ -108,26 +191,26 @@ option {
 	</div>
 	<div class="container">
 	<div class="login_wrap">
+<form name='signupForm' style='display:none'>
 		<div class="form_wrap">
 			<div class="input_box">
 				<div class="tit">아이디</div>
 				<div class="input">
-					<input type="text" name="name" placeholder="아이디를 입력하세요."
-						value="" style="margin-left: 12px;">
+					<input type="text" name="id" id="signUpId" placeholder="아이디를 입력하세요." value="" style="margin-left: 12px;">
 				</div>
 				<input type="button">
 			</div>
 			<div class="input_box">
 				<div class="tit">이름</div>
 				<div class="input">
-					<input type="text" name="name" placeholder="이용자 본인의 이름을 입력하세요."
+					<input type="text" name="name" id="signUpName" placeholder="이용자 본인의 이름을 입력하세요."
 						value="" style="margin-left: 12px;">
 				</div>
 			</div>
 			<div class="input_box">
 				<div class="tit">비밀번호</div>
 				<div class="input">
-					<input type="password" name="password" placeholder="비밀번호를 입력하세요."
+					<input type="password" id="signUpPw" name="password" placeholder="비밀번호를 입력하세요."
 						style="margin-left: 12px;">
 				</div>
 				<ul class="checked" style="margin-left: 12px;">
@@ -139,7 +222,7 @@ option {
 				<br><br>
 					<div class="tit">비밀번호 확인</div>
 				<div class="input">
-					<input type="password" placeholder="비밀번호를 한 번 더 입력하세요."
+					<input type="password" id="pwCheck" placeholder="비밀번호를 한 번 더 입력하세요."
 						style="margin-left: 12px;">
 				</div>
 			</div>
@@ -160,27 +243,29 @@ option {
 			<!-- 성별 체크 -->
 			<div class="tit">성별</div>
 			<br>
-			<form id="genderForm">
+			<div id="genderForm">
 				<input type="radio" name="gender" value="male">남 	
 				<input type="radio" name="gender" value="female">여
-			</form>
+			</div>
 			<br>
 			<br>
 			<br>
 			
-			<div class="tit">이메일</div>
-			<div class="input">
-				<input class="box" name="email" id="domain-txt" type="text" placeholder="이메일을 입력하세요."/>
-				<select class="box" id="domain-list">
-					<option value="type">직접 입력</option>
-					<option value="naver.com">naver.com</option>
-					<option value="google.com">google.com</option>
-					<option value="hanmail.net">hanmail.net</option>
-					<option value="nate.com">nate.com</option>
-				</select>	
-				</div>
-		
-			
+		<div class="tit">이메일</div>
+		<div class="input">
+		  <input class="box" name="email" id="email-txt" type="text" placeholder="이메일 아이디를 입력하세요."  />
+		  @
+		  <input class="box" name="emailDomain" id="domain-txt" type="text" />
+		  <select class="box" id="domain-list" onchange="updateEmailDomain()">
+		    <option value="type">직접 입력</option>
+		    <option value="naver.com">naver.com</option>
+		    <option value="google.com">google.com</option>
+		    <option value="hanmail.net">hanmail.net</option>
+		    <option value="nate.com">nate.com</option>
+		  </select>
+		</div>
+			<br>		
+			<br>
 			<div class="tit">호스트 여부 
 			<br>
 			<div>
@@ -189,6 +274,7 @@ option {
 			  </label></div>
 			</div>
 		</div>
+</form>
 		<!--사용자 약관-->
 		<div class="agree_box signup-agree">
 			<ul class="board_fold" id="listFold">
@@ -248,8 +334,9 @@ option {
 			</ul>
 		</div>
 		<div class="login_btns">
-			<button type="button" class="btn_bk">회원가입</button>
+			<button type="submit" class="btn_bk" id="btnSignup" >회원가입</button>
 		</div>
+		<div id='signupMsg'></div>
 		<div class="sns_login">
 			<div class="tit">SNS 계정으로 로그인하기</div>
 			<ul>
@@ -322,24 +409,20 @@ option {
          }
      }
      });       
+     function updateEmailDomain() {
+         var domainList = document.getElementById("domain-list");
+         var selectedDomain = domainList.value;
+         var domainTxt = document.getElementById("domain-txt");
+     
+         if (selectedDomain === "type") {
+           domainTxt.value = "";
+           domainTxt.removeAttribute("disabled");
+         } else {
+           domainTxt.value = selectedDomain;
+           domainTxt.setAttribute("disabled", "disabled");
+         }
+       }
 
-     // 이메일   
-     // 도메인 직접 입력 or domain option 선택
-        const domainListEl = document.querySelector('#domain-list')
-        const domainInputEl = document.querySelector('#domain-txt')
-        // select 옵션 변경 시
-        domainListEl.addEventListener('change', (event) => {
-          // option에 있는 도메인 선택 시
-          if(event.target.value !== "type") {
-            // 선택한 도메인을 input에 입력하고 disabled
-            domainInputEl.value = event.target.value
-            domainInputEl.disabled = true
-          } else { // 직접 입력 시
-            // input 내용 초기화 & 입력 가능하도록 변경
-            domainInputEl.value = ""
-            domainInputEl.disabled = false
-          }
-        })
         
 </script>
 </body>
