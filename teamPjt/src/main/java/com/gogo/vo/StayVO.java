@@ -12,7 +12,7 @@ public class StayVO {
 	private String stayAdress;
 	private String stayInfo; // 숙소 설명
 	private String stayType; // 분류
-	private String bedge;
+	private String badge;
 	private String mainPic1; // 메인사진 1
 	private String mainPic2; // 메인사진 2
 	
