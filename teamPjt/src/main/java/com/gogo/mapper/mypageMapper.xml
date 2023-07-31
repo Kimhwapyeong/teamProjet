@@ -28,6 +28,7 @@
 	
 	<!-- 예약 관리 -->
 	<select id="reservinfo" resultType="com.gogo.vo.ReservedVO">
+	<!-- 회원 아이디와 비교해서 해당 -> 출력 -->
 		SELECT
 		      roomno,
 		      memberid,
@@ -39,23 +40,34 @@
 	</select>
 	
 	<!-- 예약 관리 숙소 대표 사진 -->
-	<resultMap id="roomMap" type="com.gogo.vo.RoomVO">
-	    <result property="roomNo" column="ROOMNO" />
-	</resultMap>
-
-	<resultMap type="com.gogo.vo.StayVO" id="stayMap">
+	<resultMap type="map" id="stayMap">
 	    <result property="stayName" column="STAYNAME" />
 	    <result property="mainPic1" column="MAINPIC1" />
-	    <collection property="roomMap" resultMap="roomMap" />
+	    <result property="roomNo" column="ROOMNO" />
 	</resultMap>
 	
-	<!-- <select id="reservpic" resultMap="stayMap">
+	 <select id="reservpic" resultMap="stayMap">
 	    SELECT s.STAYNAME, s.MAINPIC1, r.ROOMNO
 	    FROM STAY s
 	    JOIN ROOM r ON s.STAYNO = r.STAYNO
 	    JOIN RESERVATION v ON r.ROOMNO = v.ROOMNO
-	</select>  -->
+	</select>  
+	
+	<!-- 가이드 문의 요청 -->
+	<insert id="insert">
+		<selectKey keyProperty="queNo" order="BEFORE" resultType="int">
+			select QUESEQ.nextval from dual
+		</selectKey>
+	
+		insert into question (queNo, memberid, title, content, contentDate) 
+		values (#{queNo}, #{memberId}, #{title}, #{content}, sysdate)
+	</insert>
 
+	<!-- 문의 list 출력 -->
+	<select id="qaList" resultType="com.gogo.vo.QuestionVO">
+	<!-- 회원 아이디와 비교해서 해당 -> 출력 -->
+		select queno, title, content, to_char(contentdate, 'yy-dd-mm') as contentdate from question
+	</select>
 
 
 	

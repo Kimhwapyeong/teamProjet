@@ -109,21 +109,23 @@ window.addEventListener('load', function(){
                      </div>
                      
                      <!-- 문의 요청 -->
-                     <form name='qa' style='display: none;'>
-                     <input type="hidden" value="1" id="queNo">
+                     <form name='qa' style='display: none;'method="post" action="/member/host/write">
+                     <input type="hidden" id="queNo" name="queNo">
 	                    <div class="mb-3">
 							  <label for="title" class="form-label">제목</label>
-							  <input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요">
+							  <input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요" name="title">
 						</div>
 						<div class="input-group mb-3">
 							  <span class="input-group-text" style="background-color:white; font-size:14px;">작성자</span>
-							  <input type="text" class="form-control" placeholder="host" aria-label="host" id="host">
-							  <span class="input-group-text" style="background-color:white; font-size:14px;">게시일</span>
-							  <input type="text" class="form-control" aria-label="boardDate" id="boardDate">
+							  <input type="text" class="form-control" placeholder="host" id="memberId" name="memberId" value="host1">
 						</div>
 						<div class="mb-3">
 							  <label for="content" class="form-label">내용</label>
-							  <textarea class="form-control" id="content" rows="10"  placeholder="내용을 입력해주세요"></textarea>
+							  <textarea class="form-control" id="content" rows="10" name="content" placeholder="내용을 입력해주세요"></textarea>
+						</div>
+						<div style=" float: right">
+							<button type="submit" class="btn btn-light btn-sm">문의 하기</button>
+							<button type="reset" class="btn btn-light btn-sm">작성 취소</button>
 						</div>
 					</form>
                      

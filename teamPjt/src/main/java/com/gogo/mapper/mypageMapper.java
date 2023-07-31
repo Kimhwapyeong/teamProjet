@@ -1,8 +1,10 @@
 package com.gogo.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.gogo.vo.MemberVO;
+import com.gogo.vo.QuestionVO;
 import com.gogo.vo.ReservedVO;
 import com.gogo.vo.StayVO;
 
@@ -24,6 +26,12 @@ public interface mypageMapper {
 	public List<ReservedVO>reservinfo();
 	
 	// 예약 관리 대표 사진
-//	public List<StayVO> reservpic();
+	public List<Map<String, String>> reservpic();
+	
+	// 가이드 질문
+	public int insert(QuestionVO qa);
+	
+	// 문의 내역 조회
+	public List<QuestionVO> qaList();
 	
 }

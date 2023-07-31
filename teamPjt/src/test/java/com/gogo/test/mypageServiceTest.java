@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.gogo.service.mypageService;
 import com.gogo.vo.MemberVO;
+import com.gogo.vo.QuestionVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -27,5 +28,7 @@ public class mypageServiceTest {
 		log.info("========");
 		//log.info("member : " + member);
 	}
+	
+
 	
 }
