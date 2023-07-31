@@ -299,8 +299,8 @@
 										<li><a href="/member/mypage/reservation">예약 정보</a></li>
 										<li><a href="/member/mypage/cancel">취소 내역</a></li>
 										<li><a href="/member/mypage/likestay">관심 스테이</a></li>
-										<li><a href="/mypage/account/edit">회원 정보 수정</a></li>
-										<li><a href="/chat">메시지</a></li>
+										<li><a href="/member/mypage/info">회원 정보 수정</a></li>
+										<li><a href="/member/mypage/message">메시지</a></li>
 										<!-- 편의를 위해 우선  main 페이지로 설정 -->
 										<li class="login"><a href="/main">로그아웃</a></li>
 									</ul>
@@ -379,8 +379,8 @@
 						<li><a href="/member/mypage/reservation">예약 정보</a></li>
 						<li><a href="/member/mypage/cancel">취소 내역</a></li>
 						<li><a href="/member/mypage/likestay">관심 스테이</a></li>
-						<li><a href="/mypage/account/edit">회원 정보 수정</a></li>
-						<li><a href="/chat">메시지</a></li>
+						<li><a href="/member/mypage/info">회원 정보 수정</a></li>
+						<li><a href="/member/mypage/message">메시지</a></li>
 					</c:if>
 					<c:if test="${ param.role eq 'host' }">
 						<li><a href="/member/host/stayhost?role=host">숙소 관리</a></li>
