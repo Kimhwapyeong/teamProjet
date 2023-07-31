@@ -15,10 +15,15 @@
 				alertPopOn('개인정보 수집 및 이용 동의에 체크 해주세요.')
 				return;
 			}
-
+			
+			// 좌표를 받아오기 위해 주소 value 변수에 저장
 			let address = document.querySelector("#address").value;
 			console.log('address', address);
 			
+			// 주소에서 앞 2글자로 지역저장
+			document.querySelector("input[name=stayLoc]").value = address.substr(0,2);
+			console.log(document.querySelector("input[name=stayLoc]").value);
+			// 좌표 받아오고 서브밋
 			getXY(address);
 			
 		})
@@ -34,7 +39,7 @@
 		    // 정상적으로 검색이 완료됐으면 
 		    if (status === kakao.maps.services.Status.OK) {
 				
-		    	// 좌표를 input에 담아주고
+		    	// 좌표를 input에 저장
 		    	document.querySelector("input[name=latitude]").value = result[0].y;
 				document.querySelector("input[name=longitude]").value = result[0].x;
 				
@@ -60,25 +65,25 @@
 							<input type="text" class="form_style" name="stayName" value=""
 								placeholder="스테이 이름을 입력해 주세요.">
 						</div></li>
-					<li><div class="dt">지역 *</div>
+<!-- 					<li><div class="dt">지역 *</div>
 						<div class="dd">
 							<select style="width: 100%" class="form_style" name="stayLoc"><option
 									selected="" value="" disabled="" hidden="">지역을 선택해 주세요</option>
-								<option value="jaeju">제주</option>
-								<option value="seoul">서울</option>
-								<option value="kangwon">강원</option>
-								<option value="busan">부산</option>
-								<option value="kyeongki">경기</option>
-								<option value="choongchung">충청</option>
-								<option value="kyeongsang">경상</option>
-								<option value="jeonla">전라</option>
-								<option value="incheon">인천</option>
-								<option value="kyangju">광주</option>
-								<option value="daejeon">대전</option>
-								<option value="daegu">대구</option>
-								<option value="ulsan">울산</option>
+								<option value="제주">제주</option>
+								<option value="서울">서울</option>
+								<option value="강원">강원</option>
+								<option value="부산">부산</option>
+								<option value="경기">경기</option>
+								<option value="충청">충청</option>
+								<option value="경상">경상</option>
+								<option value="전라">전라</option>
+								<option value="인천">인천</option>
+								<option value="광주">광주</option>
+								<option value="대전">대전</option>
+								<option value="대구">대구</option>
+								<option value="울산">울산</option>
 							</select>
-						</div></li>
+						</div></li> -->
 <!-- 					<li><div class="dt">상세 주소 *</div>
 						<div class="dd">
 							<input type="text" class="form_style" name="stayAdress" value=""
@@ -220,6 +225,7 @@
 			<input type="hidden" name="memberId" value="host1">
 			<input type="hidden" name="mainPic1" value="pic1">
 			<input type="hidden" name="mainPic2" value="pic2">
+			<input type="hidden" name="stayLoc" value="">
 			<input type="hidden" name="latitude" value="">
 			<input type="hidden" name="longitude" value="">
 		</form>

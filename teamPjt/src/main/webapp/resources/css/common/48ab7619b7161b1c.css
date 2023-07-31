@@ -805,7 +805,7 @@ caption {
     .header_wrap .whe {
         margin: 0;
         right: 20px;
-        top: 10px
+        top: 10px;
     }
 
     .header_wrap .whe>button {
@@ -12727,14 +12727,18 @@ input[type=number] {
 }
 
 .sns_login>ul li a.btn_naver {
-    background: url(../images/btnG_naver.png) no-repeat 50%;
-    background-size: cover
+    width: 150px;
+    height: 40px;
+    background: url(/resources/images/btnG_naver.png) no-repeat 50%;
+    background-size: 100% 100%
 }
 
 
 .sns_login>ul li a.btn_kakao {
-    background: url(../images/kakao_login_medium_narrow.png) no-repeat 50%;
-    background-size: cover
+	 width: 150px;
+	 height: 40px;
+    background: url(/resources/images/kakao_login_medium_narrow.png) no-repeat 50%;
+    background-size: 100% 100%
 }
 
 @media (max-width: 768px) {
@@ -21944,8 +21948,8 @@ table {
         right: 50px;
         top: 10px
     }
-
-    #gnbBgColor .toggle-ko-mo {
+		
+/*     #gnbBgColor .toggle-ko-mo {
         display: block;
         width: 30px;
         height: 30px;
@@ -21961,7 +21965,7 @@ table {
         background: url(https://www.stayfolio.com/web/images/toggle-en-mo.png);
         background-repeat: no-repeat;
         background-size: contain
-    }
+    } */
 }
 
 @media(max-width: 320px) {
@@ -21974,6 +21978,16 @@ table {
     .gnb-mo-small {
         display: none
     }
+}
+/* 추가(kim) 헤더 메뉴 수정 */
+@media(max-width: 1024px){
+	.gnb-when-mo-small{
+		display: none;
+	}
+	
+	.gnb-mo-small{
+		display: none!important
+	}
 }
 
 @media(max-width: 430px) {

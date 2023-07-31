@@ -32,7 +32,7 @@
 </style>
 <link rel="stylesheet" href="/resources/css/main/header.css">
 <style type="text/css" data-styled-jsx="">a.jsx-a44b61ff91ee7fc6{padding-bottom:30px;border-bottom:1px solid#e6e6e6;margin-bottom:10px}p.jsx-a44b61ff91ee7fc6{font-size:12px;color:#999}.login.jsx-a44b61ff91ee7fc6{font-size:16px;color:#333;margin-bottom:10px}</style>
-</head></html>
+</head>
 <script>
 	// 알림창을 위한 변수
 	let msg = '${msg}'
@@ -110,11 +110,11 @@
 	window.addEventListener("resize", sideMenuClose);
 	
 	// 사이드바가 켜져있는 상태에서 화면이 커지면 사이드바를 닫기 위한 함수
-  function sideMenuClose(){
-   if(window.innerWidth >= 1024){
-   	document.querySelector("#sideMenu").style.display='none';
+   function sideMenuClose(){
+	   if(window.innerWidth >= 1024){
+	   	document.querySelector("#sideMenu").style.display='none';
+	   }
    }
-  }
 
 	// 매개변수로 받은 메시지를 알림창으로 띄워주는 함수
 	function alertPopOn(msg){
@@ -274,7 +274,7 @@
 					<a href="/main">STAY FOLIO</a>
 				</div>
 				<div class="whe gnb-responsive-margin" style="">
-					<button type="button" id="btnWhere">
+					<button type="button" class="gnb-mo-small" id="btnWhere">
 						<span class="gnb-mo-small">어디로 떠날까요?</span>
 					</button>
 					<button type="button" class="gnb-when-mo-small" id="btnWhen">
@@ -289,54 +289,60 @@
 					</ul>
 					<ul class="etc">
 						<div class="nav_etc">
-							<!-- 추후 login 여부 판단하여 mypage와 login 둘 중 하나 노출 -->
 							<div class="box">
-								<a href="/login/login"><div class="nav_tit login">LOGIN</div></a>
+								<a href="/login/login"><div class="nav_tit login"><span data-tooltip="너무너무 귀여워">LOGIN</span></div></a>
 							</div>
-							<!-- 로그인 구현 되면 session에 저장된 값을 비교 -->
-							<c:if test="${ param.role eq 'user' or empty param.role }">
+							<c:if test="${ empty sessionScope.member }" var="res">
 								<div class="box">
-									<div class="nav_tit mypage">MY PAGE</div>
-									<ul class="open_list" style="width: 125px;">
-										<li><a href="/member/mypage/reservation">예약 정보</a></li>
-										<li><a href="/member/mypage/cancel">취소 내역</a></li>
-										<li><a href="/member/mypage/likestay">관심 스테이</a></li>
-										<li><a href="/member/mypage/info">회원 정보 수정</a></li>
-										<li><a href="/member/mypage/message">메시지</a></li>
-										<!-- 편의를 위해 우선  main 페이지로 설정 -->
-										<li class="login"><a href="/main">로그아웃</a></li>
-									</ul>
+									<a href="/login/login"><div class="nav_tit login">LOGIN</div></a>
 								</div>
 							</c:if>
-							<c:if test="${ param.role eq 'admin' }">
-								<div class="box">
-									<div class="nav_tit mypage">ADMIN PAGE</div>
-									<ul class="open_list" style="width: 125px;">
-										<li><a href="/member/admin/stayadmin?role=admin">숙소
-												관리</a></li>
-										<li><a href="/member/admin/useradmin?role=admin">사용자
-												관리</a></li>
-										<li><a href="/member/admin/hosthelp?role=admin">호스트
-												지원</a></li>
-										<li><a href="/member/admin/statistics?role=admin">통계
-												및 분석</a></li>
-										<li><a href="/chat">메시지</a></li>
-										<li class="login"><a href="/main">로그아웃</a></li>
-									</ul>
-								</div>
-							</c:if>
-							<c:if test="${ param.role eq 'host' }">
-								<div class="box">
-									<div class="nav_tit mypage">HOST PAGE</div>
-									<ul class="open_list" style="width: 125px;">
-										<li><a href="/member/host/stayhost?role=host">숙소 관리</a></li>
-										<li><a href="/member/host/reservation?role=host">예약 관리</a></li>
-										<li><a href="/member/host/income?role=host">수입 현황</a></li>
-										<li><a href="/member/host/guide?role=host">호스트 가이드</a></li>
-										<li><a href="/chat">메시지</a></li>
-										<li class="login"><a href="/main">로그아웃</a></li>
-									</ul>
-								</div>
+							<c:if test="${ not res }">
+								<!-- 로그인 구현 되면 session에 저장된 값을 비교 -->
+								<c:if test="${ param.role eq 'user' or empty param.role }">
+									<div class="box">
+										<div class="nav_tit mypage">MY PAGE</div>
+										<ul class="open_list" style="width: 125px;">
+											<li><a href="/member/mypage/reservation">예약 정보</a></li>
+											<li><a href="/member/mypage/cancel">취소 내역</a></li>
+											<li><a href="/member/mypage/likestay">관심 스테이</a></li>
+											<li><a href="/member/mypage/info">회원 정보 수정</a></li>
+											<li><a href="/member/mypage/message">메시지</a></li>
+											<!-- 편의를 위해 우선  main 페이지로 설정 -->
+											<li class="login"><a href="/main">로그아웃</a></li>
+										</ul>
+									</div>
+								</c:if>
+								<c:if test="${ param.role eq 'admin' }">
+									<div class="box">
+										<div class="nav_tit mypage">ADMIN PAGE</div>
+										<ul class="open_list" style="width: 125px;">
+											<li><a href="/member/admin/stayadmin?role=admin">숙소
+													관리</a></li>
+											<li><a href="/member/admin/useradmin?role=admin">사용자
+													관리</a></li>
+											<li><a href="/member/admin/hosthelp?role=admin">호스트
+													지원</a></li>
+											<li><a href="/member/admin/statistics?role=admin">통계
+													및 분석</a></li>
+											<li><a href="/chat">메시지</a></li>
+											<li class="login"><a href="/main">로그아웃</a></li>
+										</ul>
+									</div>
+								</c:if>
+								<c:if test="${ param.role eq 'host' }">
+									<div class="box">
+										<div class="nav_tit mypage">HOST PAGE</div>
+										<ul class="open_list" style="width: 125px;">
+											<li><a href="/member/host/stayhost?role=host">숙소 관리</a></li>
+											<li><a href="/member/host/reservation?role=host">예약 관리</a></li>
+											<li><a href="/member/host/income?role=host">수입 현황</a></li>
+											<li><a href="/member/host/guide?role=host">호스트 가이드</a></li>
+											<li><a href="/chat">메시지</a></li>
+											<li class="login"><a href="/main">로그아웃</a></li>
+										</ul>
+									</div>
+								</c:if>
 							</c:if>
 						</div>
 					</ul>
