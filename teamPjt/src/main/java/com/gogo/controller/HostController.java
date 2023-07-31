@@ -33,7 +33,7 @@ public class HostController extends CommonRestController{
 	@GetMapping("reservation")
 	public void reservation(Model model) {
 		mypageService.reservinfo(model);
-//		mypageService.reservpic(model);
+		mypageService.reservpic(model);
 	}
 	
 	// 수입 현황
@@ -52,16 +52,17 @@ public class HostController extends CommonRestController{
 	@PostMapping("write")
 	public String insert(QuestionVO qa, Model model) {
 		int res;
-		
+	
+		System.out.println("출력: ");
 		String msg = "";
 		res = mypageService.insert(qa);
 		
 		if(res > 0) {
 			msg="문의 되었습니다";
 			model.addAttribute("msg", msg);
-			return "./qaList";
+			return "redirect:/member/host/qaList";
 		} else {
-			return "./guide";
+			return "redirect:/member/host/guide";
 		}
 	}
 	

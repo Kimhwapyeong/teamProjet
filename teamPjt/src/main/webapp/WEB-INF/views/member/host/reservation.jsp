@@ -51,13 +51,17 @@
                        <div class="mypage_content">
                            <div class="reserv_wrap mypage-reservation-info">
 								<div class="container">
-								
-								
+								pic: ${pic }
 								<div class="stay_view">
-                                       <div class="photo"
-                                           style="background-image: url(${pic.mainPic1}); background-repeat: no-repeat; background-position: center center; background-size: cover;">
-                                           <!-- =============================== 수정 ============================================-->
-                                           <span></span></div>
+										<!-- ▶▶▶ forEach ▶▶▶ -->
+								        <c:forEach items="${pic}" var="pics" step="1">
+									        <div class="stay_view">
+									        pics: ${pics }
+		                                       <div class="photo"
+		                                           style="background-image: url(${pics.mainPic1}); background-repeat: no-repeat; background-position: center center; background-size: cover;">
+		                                           </div>
+		                                    </div>
+                                        </c:forEach>
                                  </div>
                                  
                                        <p class="name"><span class="ellipsis"></span></p>

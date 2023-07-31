@@ -59,8 +59,8 @@
 			select QUESEQ.nextval from dual
 		</selectKey>
 	
-		insert into question (queNo, memberid, title, content, contentDate) 
-		values (#{queNo}, #{memberid}, #{title}, #{content}, sysdate)
+		insert into question (queNo, memberId, title, content, contentDate) 
+		values (#{queNo}, #{memberId}, #{title}, #{content}, sysdate)
 	</insert>
 
 	<!-- 문의 list 출력 -->

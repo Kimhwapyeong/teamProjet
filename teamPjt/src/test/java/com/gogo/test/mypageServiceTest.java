@@ -1,12 +1,14 @@
 package com.gogo.test;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.ui.Model;
 
 import com.gogo.service.mypageService;
 import com.gogo.vo.MemberVO;
@@ -23,10 +25,18 @@ public class mypageServiceTest {
 	mypageService service;
 	
 	@Test
-	public void getMember() {
-		//List<MemberVO> member = service.getMember();
-		log.info("========");
-		//log.info("member : " + member);
+	public void getMember(Model model) {
+		List<Map<String, String>> pic = service.reservpic(model);
+		log.info("===========");
+		log.info("list : " + pic);
+		//model.addAttribute("pic", pic);
+	}
+	
+	@Test
+	public void reservpic() {
+		List<Map<String, String>> list = (List<Map<String, String>>) service.reservpic();
+		log.info("=========");
+		log.info("list : " + list);
 	}
 	
 

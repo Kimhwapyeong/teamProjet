@@ -68,7 +68,7 @@ public class mypageServiceImpl implements mypageService {
 	public List<Map<String, String>> reservpic(Model model) {
 		List<Map<String, String>> pic = mypageMapper.reservpic();
 		log.info("===========");
-		log.info("list : " + pic);
+		log.info("pic : " + pic);
 		model.addAttribute("pic", pic);
 		return null;
 	}
