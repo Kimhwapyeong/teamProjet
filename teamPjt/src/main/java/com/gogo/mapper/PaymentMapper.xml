@@ -5,11 +5,20 @@
 
 	<insert id="insertPayment">
 		insert into payment (paymentNo, reservationNo, regDate, paymentMethod, impUid) 
-		values (paymentSeq.nextval, #{reservationNo}, sysdate, #{paymentMethod}, #{impUid})
+		values (#{paymentNo}, #{reservationNo}, sysdate, #{paymentMethod}, #{impUid})
 	</insert>
 	
 	<select id="selectOne" resultType="com.gogo.vo.PaymentVO">
 		select * from payment where impUid = #{impUid}
 	</select>
-
+	
+	
+	<select id="getUid" resultType="String">
+		select paymentseq.nextval from dual
+	</select>
+	
+	<update id="updateError">
+		update payment set errorCode = #{errorCode}, error_Msg = #{error_Msg}
+		where impUid = #{impUid} 
+	</update>
 </mapper>

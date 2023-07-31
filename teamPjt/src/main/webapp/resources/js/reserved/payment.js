@@ -21,18 +21,30 @@
 				    
 				}, function(rsp){
 					
-					console.log("rsp : ", rsp);
+					
 					console.log(rsp.merchant_uid);
 					console.log(rsp.imp_uid);
 					console.log(rsp.success);
 					console.log(rsp.pg_provider);
-					let success = rsp.success;
+					
+					rsp.checkIn = r_checkIn;
+					rsp.checkOut = r_checkOut;
+					rsp.roomNo = roomNo;
+					rsp.memberCount = memberCount;
+					rsp.reservationNo = reservationNo;
+					rsp.memberId = memberId;
+					
+					console.log("rsp : ", rsp);
+					
+					
+					if(rsp.imp_uid!=null && rsp.imp_uid!=""){
+						
 					
 					
 					$.ajax({
 						
 						type: "POST"
-						, url : "/payment/verify"
+						, url : "/payment/verify/"+rsp.imp_uid
 						, contentType : "application/json"
 						, data : JSON.stringify(rsp)
 						
@@ -46,6 +58,7 @@
 								
 								
 								alert("결제 및 결제 검증 완료");
+								location.href='/main';
 								
 							} else {
 								alert("결제 및 결제 검증 실패 : "+ rsp.error_msg);
@@ -74,10 +87,14 @@
 					
 				
 						alert(msg);
+						location.href='/main';
 					
 				
 				
-				
+				} else {
+					alert('[결제 오류] 거래 번호(imp_uid)가 존재하지 않습니다.');
+					location.href='/main';
+				}
 			})
 		}
 		

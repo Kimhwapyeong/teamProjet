@@ -4,12 +4,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>stay 목록</title>
 <link href="../resources/css/list/list.css" rel="stylesheet">
 <link href="../resources/css/common/48ab7619b7161b1c.css" rel="stylesheet">
 <link href="../resources/css//common/5f0d2e1da89b35fb.css" rel="stylesheet">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="/resources/js/list/list.js"></script>
 
 
 <style>
@@ -254,6 +258,7 @@
 </head>
 
 <body style="">
+ <%-- <%@include file="../common/header.jsp" %>  --%>
     <div role="presentation">
         <div class="container sub_title">
             <div class="tit">FIND STAY</div>
@@ -266,7 +271,7 @@
                         <div class="Keyword"><span class="tit">스테이/지역</span><input type="text" class="inp_keyword"
                                 value="">
                         </div>
-                        <div class="filter_area"><button type="button" class="btn_select" id='travelbtn'>국내 전체</button>
+                        <div class="filter_area"><button type="button" class="btn_select" id='travelbtn' style='margin-top: 16px;'>국내 전체</button>
 
                             <button class='a'></button>
                             <div id="areaSelect" class="layer_pop" style="display: '';" id='areaSelect'>
@@ -461,10 +466,11 @@
                                                       
                                                       
                                                       
+                                                      			// 초기화 버튼
+                                                                /* reload.addEventListener('click', function (e) {
                                                       
-                                                                reload.addEventListener('click', function (e) {
-                                                      
-                                                                  e.preventDefault();
+                                                                  e.preventDefault();            <button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer;"
+                                                                      id="reload">초기화</button><br><br>
                                                       
                                                                   //window.location.reload();
                                                       
@@ -486,15 +492,16 @@
                                                       
                                                                   // ~ 표시
                                                                   $('.space').html('');
-                                                                });
+                                                                }); */
                                                       
-                                                                back.addEventListener('click', function (e) {
+                                                                // 뒤로가기 버튼
+                                                                /* back.addEventListener('click', function (e) {
                                                       
                                                                   e.preventDefault();
                                                       
                                                                   location.href = '/main';
                                                       
-                                                                });
+                                                                }); */
                                                       
                                                               });
                                                       
@@ -828,9 +835,10 @@
     <!-- 숙소 목록 -->
     <div class="container findstay_list  ">
         <div class="flist_wrap">
-            <!-- <a href="/stay/room/{name}"> -->
-                <div class="flist_box"><button type="button" class="btn_like "><span>관심스테이</span></button><button
-                        type="button" class="location_btn_pc" style="display: none;">위치보기</button><a
+            <a href="/stay/room">
+                <div class="flist_box">
+                <!-- <button type="button" class="btn_like "><span>관심스테이</span></button> -->
+                <button type="button" class="location_btn_pc" style="display: none;">위치보기</button><a
                         href="/findstay/dansim-stay">
                         <div class="info_container_wrapper">
                             <div class="name info_container" role="presentation">단심스테이<span>민박</span></div>
@@ -856,22 +864,22 @@
                                         class="swiper-pagination-bullet"></span></div>
                                 <div class="swiper-wrapper">
                                     <li class="swiper-slide img swiper-slide-active"
-                                        style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/051/small/0c6d4f002d9ec019336717a93860bda6db5ddb8d.jpg?1674109162&quot;) center center / cover no-repeat; cursor: pointer; width: 389px;">
+                                        style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/051/small/0c6d4f002d9ec019336717a93860bda6db5ddb8d.jpg?1674109162&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
                                     </li>
                                     <li class="swiper-slide img swiper-slide-next"
-                                        style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/035/small/76c44f42cc10d2307b01076923a1a9af4252b1c8.jpg?1674109162&quot;) center center / cover no-repeat; cursor: pointer; width: 389px;">
+                                        style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/035/small/76c44f42cc10d2307b01076923a1a9af4252b1c8.jpg?1674109162&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
                                     </li>
                                     <li class="swiper-slide img"
-                                        style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/054/small/1b4aff9e300e4d76eff93203e6b823ba6a842366.jpg?1674109163&quot;) center center / cover no-repeat; cursor: pointer; width: 389px;">
+                                        style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/054/small/1b4aff9e300e4d76eff93203e6b823ba6a842366.jpg?1674109163&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
                                     </li>
                                     <li class="swiper-slide img"
-                                        style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/050/small/7caaacab2f4fa2f43f155d751a5f564ce82dc8d1.jpg?1674109162&quot;) center center / cover no-repeat; cursor: pointer; width: 389px;">
+                                        style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/050/small/7caaacab2f4fa2f43f155d751a5f564ce82dc8d1.jpg?1674109162&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
                                     </li>
                                     <li class="swiper-slide img"
-                                        style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/042/small/29659232d544a6bdb24936ba45a85cf014cc94ff.jpg?1674109160&quot;) center center / cover no-repeat; cursor: pointer; width: 389px;">
+                                        style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/042/small/29659232d544a6bdb24936ba45a85cf014cc94ff.jpg?1674109160&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
                                     </li>
                                     <li class="swiper-slide img"
-                                        style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/041/small/2788f8130206145600d56cb8faea3eba0d11c369.jpg?1674109160&quot;) center center / cover no-repeat; cursor: pointer; width: 389px;">
+                                        style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/041/small/2788f8130206145600d56cb8faea3eba0d11c369.jpg?1674109160&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
                                     </li>
                                 </div>
                                 <div class="_badge_badge_wrapper__h9IsV">
@@ -882,7 +890,8 @@
                             </ul>
                         </div>
                     </a><button type="button" class="location_btn_mo" style="display: none;">위치보기</button>
-            <!-- </a> -->
+            </a>
+            <button type="button" class="btn_like "><span>관심스테이</span></button>
         </div>
 
         <!-- 여기서 부터  -->
@@ -912,28 +921,26 @@
                         </div>
                         <div class="swiper-wrapper">
                             <li class="swiper-slide img swiper-slide-active"
-                                style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/157/341/small/939bd14ef2bb850a1f23dd243d03f427b6777f1c.JPG?1670382885&quot;) center center / cover no-repeat; cursor: pointer; width: 389px;">
+                                style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/157/341/small/939bd14ef2bb850a1f23dd243d03f427b6777f1c.JPG?1670382885&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
                             </li>
                             <li class="swiper-slide img swiper-slide-next"
-                                style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/157/344/small/a82403dfb0d7aa165dce20901829ff2fa68d12dd.jpg?1670382888&quot;) center center / cover no-repeat; cursor: pointer; width: 389px;">
+                                style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/157/344/small/a82403dfb0d7aa165dce20901829ff2fa68d12dd.jpg?1670382888&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
                             </li>
                             <li class="swiper-slide img"
-                                style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/157/333/small/c090018adf6e49264f10313adeebdcefce2e336c.jpg?1670382882&quot;) center center / cover no-repeat; cursor: pointer; width: 389px;">
+                                style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/157/333/small/c090018adf6e49264f10313adeebdcefce2e336c.jpg?1670382882&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
                             </li>
                             <li class="swiper-slide img"
-                                style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/157/330/small/541ebdd8e26335e1418faf6fe2fe6a0fe663b46d.jpg?1670382880&quot;) center center / cover no-repeat; cursor: pointer; width: 389px;">
+                                style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/157/330/small/541ebdd8e26335e1418faf6fe2fe6a0fe663b46d.jpg?1670382880&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
                             </li>
                             <li class="swiper-slide img"
-                                style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/157/342/small/e27fe49b18194eb52cc5f524498ed2c686e12362.jpg?1670382885&quot;) center center / cover no-repeat; cursor: pointer; width: 389px;">
+                                style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/157/342/small/e27fe49b18194eb52cc5f524498ed2c686e12362.jpg?1670382885&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
                             </li>
                             <li class="swiper-slide img"
-                                style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/157/336/small/ead2ac339b9c76279e4fa820edcffdc096ab7e9e.jpg?1670382883&quot;) center center / cover no-repeat; cursor: pointer; width: 389px;">
+                                style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/157/336/small/ead2ac339b9c76279e4fa820edcffdc096ab7e9e.jpg?1670382883&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
                             </li>
                         </div>
                         <div class="_badge_badge_wrapper__h9IsV">
                             <div class="_badge_promo__vtoja"><span class="_badge_txt__fonwF">PROMO</span></div>
-                            <div class="_badge_exclusive__prNZN"><span class="_badge_txt__fonwF">EXCLUSIVE</span>
-                            </div>
                         </div>
                     </ul>
                 </div>
@@ -949,7 +956,7 @@
                 class="">5</a>...<a href="/">20</a><a href="/" class="next" title="다음 페이지">다음 페이지</a></div>
     </div>
     </div>
-    
+    <%@include file="../common/footer.jsp" %>
 </body>
 
 </html>

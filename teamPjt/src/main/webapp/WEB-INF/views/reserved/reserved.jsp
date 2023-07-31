@@ -13,13 +13,14 @@
 	function btnWhenFunction(){
 				
 		document.querySelector("#whenModal").style.display='';
-		
+		btnYN = 'reservation';
+		$('input[name=btnYN]').val('reservation');
 	}
 	
 	function btnClose(){
 		
 		document.querySelector("#whenModal").style.display='none';
-
+		$('input[name=btnYN]').val('');
 		
 	}
 
@@ -88,7 +89,7 @@
 							<span style="font-size:0.85em; position:absolute; right:5%; top:56%; color: #66666682;">-</span><br>
 							<span style="font-size:0.85em; position:absolute; right:40%; top:59%; color: #66666682;">예약일 수</span><br>
 								
-						<c:if test="${not empty reservedDay}" var="res">									
+						<c:if test="${not empty reservedDay or reservedDay ne 0}" var="res">									
 							<span style="font-size:0.85em; position:absolute; right:4%; top:59%; color: #66666682;">${reservedDay}일</span><br>
 						</c:if>	
 						<c:if test="${not res}">
@@ -145,14 +146,20 @@
 							
 								<script>
  
-		var buyer_name = '원준';   // sessionScope.userId 받아와야 함
-		var merchant_uid = '999'; // 시퀀스 추가해야 함
+		var buyer_name = 'user1';   // sessionScope.userId 받아와야 함
+		var merchant_uid = '${merchant_uid}'; // 시퀀스 추가해야 함
 		var canclePay = '';		  // 환불할 imp_uid
 		var realAmount = '';	  // 환불할 금액
 		var payInfo = '${sessionScope.userId}';
 		var purchaseName = $('input[name=stayName]').val()+', ' +$('input[name=roomName]').val();
-		var purchaseAmount = ${price};
+		var purchaseAmount = '${price}';
 		var pg = '';
+		var reservationNo = '${reservationNo}';
+		var roomNo = '${reserved.roomNo}';
+		var r_checkIn = '${reserved.checkIn}';
+		var r_checkOut = '${reserved.checkOut}';
+		var memberCount = '${reserved.memberCount}';
+		var memberId = 'user1'; // sessionScope.userId 받아와야 함
 		
 		
 		
@@ -227,8 +234,7 @@
 					
 				
 				</script>
-				
-				
+		
 			
 </body>
 	<script

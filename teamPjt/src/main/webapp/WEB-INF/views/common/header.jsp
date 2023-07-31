@@ -51,10 +51,12 @@
 	    // 언제 떠날까요? 달력
 	    btnWhen.addEventListener('click', function(){
 	        document.querySelector("#whenModal").style.display='';
+	        $('input[name=btnYN]').val('search');
 	    })
 	    
 	    closeBtn2.addEventListener('click', function(){
 	        document.querySelector("#whenModal").style.display='none';
+	        $('input[name=btnYN]').val('');
 	    })
 		// 언제 떠날까요? 달력 끝
 

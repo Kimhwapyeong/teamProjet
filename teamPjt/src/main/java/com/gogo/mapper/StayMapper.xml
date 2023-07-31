@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gogo.mapper.StayMapper">
+	
+	<select id="stayList" resultType="com.gogo.vo.StayVO">
+		select stayName,
+		stayType,
+		stayLoc || ' / ' || SUBSTR(stayAdress, INSTR(stayAdress, ' ') + 1, INSTR(stayAdress, ' ', INSTR(stayAdress, ' ') + 1) - INSTR(stayAdress, ' ') - 1) AS stayAdress,
+		(select MIN(stdPerson) from room where stayNo = #{stayNo}) stdPerson,
+		(select MAX(overPerson) from room where stayNo = #{stayNo}) overPerson,
+		(select MAX(price) from room where stayNo = #{stayNo}) maxPrice,
+		(select MIN(price) from room where stayNo = #{stayNo}) minPrice,
+		mainpic1,
+		mainpic2
+		from stay
+		where stay.stayno = #{stayNo}
+	</select>
+	
+</mapper>
