@@ -27,7 +27,7 @@ public class roomTest {
 	
 	@Test
 	public void stayList() {
-		List<StayVO> list = sm.stayList(1);
+		List<StayVO> list = sm.stayList();
 		log.info("=========");
 		log.info(list);
 	}

@@ -6,5 +6,5 @@ import com.gogo.vo.StayVO;
 
 public interface StayMapper {
 	
-	public List<StayVO> stayList(int stayNo);
+	public List<StayVO> stayList();
 }

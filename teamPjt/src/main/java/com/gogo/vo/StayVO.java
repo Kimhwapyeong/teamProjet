@@ -22,6 +22,7 @@ public class StayVO {
     
 	private String stdPerson; 	// 기준 인원
 	private String overPerson; 	// 최대 인원
-	private String minPrice; // 최소 가격
-	private String maxPrice; // 최대 가격
+	private String minPrice; // 가격
+	private String maxPrice; // 가격
+
 }
