@@ -19,7 +19,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class FileuploadServiceImpl implements FileuploadService{
 	
-	private static final String ATTACHES_DIR = "c:\\upload\\tmp\\";
+	private static final String ATTACHES_DIR = "\\c:upload\\tmp\\";
 	
 	@Autowired
 	FileuploadMapper fileuploadMapper;
@@ -27,11 +27,17 @@ public class FileuploadServiceImpl implements FileuploadService{
 	public int fileupload(List<MultipartFile> files, String dir, String stayNo, String roomNo) {
 		int insertRes = 0;
 		for(MultipartFile file : files) {
+			
+			log.info("getoriname : " + file.getOriginalFilename());
+			
 			try {
-				
+				System.out.println("dir : " + dir);
 				UUID uuid = UUID.randomUUID();
 				String saveFileName = uuid + "_" + file.getOriginalFilename();
 				File sFile = new File(ATTACHES_DIR + dir + getFolder(dir) + saveFileName);
+
+				// file 을  sFile에 저장
+				file.transferTo(sFile);
 				
 				FileuploadVO vo = new FileuploadVO();
 				
@@ -41,19 +47,17 @@ public class FileuploadServiceImpl implements FileuploadService{
 				
 				// 이미지가 아니면 리턴 0
 				if(contentType == null && !contentType.startsWith("image")) {
-					
+					System.out.println("이미지 아님");
 					return 0;
 				}
-
-				// file 을  sFile에 저장
-				file.transferTo(sFile);
+				System.out.println("sfile : " + sFile);
 				vo.setFileName(file.getOriginalFilename());
 				vo.setUuid(uuid.toString());
 				vo.setUploadPath(getFolder(dir));
 				vo.setStayNo(stayNo);
 				vo.setRoomNo(roomNo);
 				
-				fileuploadMapper.insert(vo);
+				insertRes += fileuploadMapper.insert(vo);
 				
 			} catch(Exception e) {
 				
@@ -74,7 +78,8 @@ public class FileuploadServiceImpl implements FileuploadService{
 		log.info("경로 : " + uploadPath);
 		
 		// 폴더 생성(없으면)
-		File saveDir = new File(dir + uploadPath);
+		File saveDir = new File(ATTACHES_DIR + dir + uploadPath);
+		System.out.println("fileuploadImpl getFolder saveDir : " + saveDir);
 		if(!saveDir.exists()) {
 			if(saveDir.mkdirs()) {
 				log.info("폴더 생성!!!");
