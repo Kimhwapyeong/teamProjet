@@ -40,6 +40,7 @@
 					rsp.memberCount = memberCount;
 					rsp.reservationNo = reservationNo;
 					rsp.memberId = memberId;
+					rsp.talkSome = talkSome;
 					
 					console.log("rsp : ", rsp);
 					

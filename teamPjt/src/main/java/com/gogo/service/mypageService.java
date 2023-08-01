@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gogo.vo.MemberVO;
 import com.gogo.vo.QuestionVO;
@@ -57,5 +58,12 @@ public interface mypageService {
 	// 회원 정보 조회
 	public List<MemberVO> mem(Model model);
 	
-		
+	
+	// 예약 상세보기
+	public void reservation_detail(@RequestParam("checkIn") String checkIn
+			, @RequestParam("checkOut") String checkOut
+			, @RequestParam("price") String price
+			, @RequestParam("stayNo") String stayNo
+			, @RequestParam("reservationNo") String reservationNo
+			, Model model);
 }
