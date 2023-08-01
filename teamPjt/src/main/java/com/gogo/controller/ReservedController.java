@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,12 +35,14 @@ public class ReservedController {
 	
 	
 	@GetMapping("reserved")
-	public void reservation(ReservedVO reserved, Model model) {
+	public void reservation(ReservedVO reserved, Model model, HttpSession session) {
+		
+		String memberId = String.valueOf(session.getAttribute("memberId"));
 		
 		// 테스트를 위해 임의로 정보 삽입
 		// 여기서 예약 페이지에서 보여줄 데이터를 설정한다.
-		reserved.setRoomNo("2");
-		reserved.setMemberId("user1");
+		reserved.setRoomNo("3");
+		reserved.setMemberId(memberId);
 		reserved.setCheckIn("2023/08/21");
 		reserved.setCheckOut("2023/08/23");
 		reserved.setMemberCount("3");

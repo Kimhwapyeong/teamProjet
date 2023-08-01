@@ -11,9 +11,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
+<!-- js -->
+<script src='/resources/js/reserved/payment.js'></script>
 <!-- css -->
 <link rel="stylesheet" href="/resources/css/mypage/reservation.css">
-
 </head>
 
 
@@ -101,11 +102,11 @@
                 <ul class="dl">
                     <li>
                         <div class="dt">01. 예약 번호</div>
-                        <div class="dd">${reservationNo}<small>(예약 확정 : 2023-07-26 10:05)</small></div>
+                        <div class="dd">${param.reservationNo}<small>(예약 확정 : 2023-07-26 10:05)</small></div>
                     </li>
                     <li>
                         <div class="dt">02. 스테이 및 객실</div>
-                        <div class="dd">${param.stayName} / Cottage</div>
+                        <div class="dd">${param.stayName} / ${roomName}</div>
                     </li>
                     <li>
                         <div class="dt">03. 예약 인원</div>
@@ -186,11 +187,11 @@
                             <div class="dt">01. 결제 금액</div>
                             <div class="dd">
                                 <div class="price">
-                                    <div>빈티지제주 / Cottage<span class="desc">${day} 박</span></div>
-                                    <div>${dayPrice}</div>
+                                    <div>${param.stayName} / ${roomName}<span class="desc">${day} 박</span></div>
+                                    <div>₩${dayPrice}</div>
                                 </div>
                                 <div class="price total">
-                                    <div>총 결제 금액<span class="desc">₩${allPrice}(네이버페이)</span></div>
+                                    <div>총 결제 금액<span class="desc">₩${allPrice}(${paymentMethod})</span></div>
                                     <div>₩${allPrice}</div>
                                 </div>
                             </div>
@@ -198,13 +199,13 @@
                         <hr class="line">
                         <li>
                             <div class="dt">02. 결제 방법</div>
-                            <div class="dd">네이버페이<small> (결제 완료 : 2023-07-25 21:30)</small>
+                            <div class="dd">${paymentMethod}<small> (결제 완료 : ${paymentRegDate})</small>
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="bt_btns"><button type="button" class="btn_wh">예약 취소</button><button type="button" class="btn_wh">이용 안내 및 환불 규정</button></div>
+            <div class="bt_btns"><button style="background-color:black; color:white;" type="button" class="btn_wh">예약 취소</button><button type="button" class="btn_wh">이용 안내 및 환불 규정</button></div>
         </div>
     </div>
 </div>				</div>
@@ -228,6 +229,10 @@
 <%@ include file="../../common/footer.jsp" %>
 
 <script>
+
+	var canclePay = '${impUid}';		 // 환불할 imp_uid
+	var realAmount = '${allPriceInteger}';	 // 환불할 금액
+
 	$(function(){
 			
 		$('.btn_reserv_detail').click(function(){
@@ -235,6 +240,13 @@
 			location.href='/member/mypage/reserved_detail';
 			
 		});
+		
+		$('.btn_wh').click(function(){
+			
+			canclePayFunction();
+			
+		});
+		
 		
 	});
 	

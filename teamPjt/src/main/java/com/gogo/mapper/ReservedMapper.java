@@ -14,9 +14,8 @@ public interface ReservedMapper {
 	public int insertReserved(ReservedVO vo); 
 	
 	public RoomVO selectOne_room(String roomNo);
-	public RoomVO selectOne_room_stayNo(String stayNo);
 	
-	public ReservedVO selectOne_reservation_roomNo(String roomNo);
+	public ReservedVO selectOne_reservation(String reservationNo);
 	
 	public StayVO selectOne_stay(String stayNo);
 	

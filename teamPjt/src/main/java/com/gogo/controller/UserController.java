@@ -76,6 +76,7 @@ public class UserController {
 								, @RequestParam("checkOut") String checkOut
 								, @RequestParam("price") String price
 								, @RequestParam("stayNo") String stayNo
+								, @RequestParam("reservationNo") String reservationNo
 								, Model model) {
 		
 		
@@ -86,22 +87,23 @@ public class UserController {
 		int a = Integer.parseInt(day);
 		int b = Integer.parseInt(price);
 		String allPrice = service_r.comma(a*b);
+		int allPriceInteger = a*b;
 		
 		
 		// stay 정보
 		StayVO stay = service_r.selectOne_stay(stayNo);
-		// room 정보
-		RoomVO room = service_r.selectOne_room_stayNo(stayNo);
 		// reservation 정보
-		ReservedVO reserved = service_r.selectOne_reservation_roomNo(room.getRoomNo());
+		ReservedVO reserved = service_r.selectOne_reservation(reservationNo);
+		// room 정보
+		RoomVO room = service_r.selectOne_room(reserved.getRoomNo());
 		// payment 정보
 		PaymentVO payment = service_p.selectOne_payment_reservationNo(reserved.getReservationNo());
 		
 		
-		
-		model.addAttribute("reservationNo", reserved.getReservationNo());
+		model.addAttribute("impUid", payment.getImpUid());
 		model.addAttribute("stayAddress", stay.getStayAdress());
 		model.addAttribute("allPrice", allPrice);
+		model.addAttribute("allPriceInteger", allPriceInteger);
 		model.addAttribute("dayPrice", dayPrice);
 		model.addAttribute("day", day);
 		model.addAttribute("roomName", room.getRoomName());
@@ -109,6 +111,7 @@ public class UserController {
 		model.addAttribute("checkOut", reserved.getCheckOut());
 		model.addAttribute("paymentMethod", payment.getPaymentMethod());
 		model.addAttribute("paymentRegDate", payment.getRegDate());
+		
 	}
 
 	

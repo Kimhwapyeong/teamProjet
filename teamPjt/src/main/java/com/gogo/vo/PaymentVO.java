@@ -13,4 +13,5 @@ public class PaymentVO {
 	private String errorCode; // 에러코드
 	private String error_Msg; // 에러 메세지
 	private String cancleYN;
+	private String amount; // 총 결제 가격
 }

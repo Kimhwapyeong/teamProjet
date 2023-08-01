@@ -68,6 +68,10 @@ public class PaymentServiceImpl implements PaymentService {
 	public int updateError(PaymentVO vo) {
 		return paymentMapper.updateError(vo);
 	}
+	@Override
+	public int updateCancle(String impUid) {
+		return paymentMapper.updateCancle(impUid);
+	}
 	
 	@Override
 	public PaymentVO selectOne_payment_reservationNo(String reservationNo) {
@@ -207,7 +211,7 @@ public class PaymentServiceImpl implements PaymentService {
 		Map<String, String> map = paymentInfo(impUid, access_token);
 		
 		System.out.println("map.get(\"merchant_uid\") : "+ map.get("merchant_uid"));
-		System.out.println("map.get(\"mount\") : "+ map.get("amount"));
+		System.out.println("map.get(\"amount\") : "+ map.get("amount"));
 		System.out.println("map.get(\"imp_uid\") : "+map.get("imp_uid"));
 		System.out.println("map.get(\"pg_provider\") : "+map.get("pg_provider"));
 		
@@ -219,6 +223,7 @@ public class PaymentServiceImpl implements PaymentService {
 		vo.setPaymentMethod(map.get("pg_provider"));
 		vo.setReservationNo(reservationNo);
 		vo.setPaymentNo(paymentNo);
+		vo.setAmount(map.get("amount"));
 		
 		
 		return paymentMapper.insertPayment(vo);

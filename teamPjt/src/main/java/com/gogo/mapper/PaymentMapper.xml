@@ -4,8 +4,8 @@
 <mapper namespace="com.gogo.mapper.PaymentMapper">
 
 	<insert id="insertPayment">
-		insert into payment (paymentNo, reservationNo, regDate, paymentMethod, impUid) 
-		values (#{paymentNo}, #{reservationNo}, sysdate, #{paymentMethod}, #{impUid})
+		insert into payment (paymentNo, reservationNo, regDate, paymentMethod, impUid, amount) 
+		values (#{paymentNo}, #{reservationNo}, sysdate, #{paymentMethod}, #{impUid}, #{amount})
 	</insert>
 	
 	<select id="selectOne" resultType="com.gogo.vo.PaymentVO">
@@ -24,5 +24,9 @@
 	<update id="updateError">
 		update payment set errorCode = #{errorCode}, error_Msg = #{error_Msg}
 		where impUid = #{impUid} 
+	</update>
+	
+	<update id="updateCancle">
+		update payment set cancleYN = 'Y' where impUid = #{impUid}
 	</update>
 </mapper>

@@ -22,6 +22,9 @@ public class mypageServiceImpl implements mypageService {
 	@Autowired
 	mypageMapper mypageMapper;
 	
+	@Autowired
+	ReservedService service_r;
+	
 	// ▶▶▶  admin ▶▶▶
 	// 숙소 조회
 	@Override
@@ -105,6 +108,13 @@ public class mypageServiceImpl implements mypageService {
 	@Override
 	public List<Map<String, String>> reservList(Model model) {
 		List<Map<String, String>> list = mypageMapper.reservList();
+		
+		list.forEach(map->{
+			
+			map.put("amount", service_r.comma(map.get("price")));
+			
+		});
+		
 		log.info("===========");
 		log.info("list : " + list);
 		model.addAttribute("list", list);

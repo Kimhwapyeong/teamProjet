@@ -14,4 +14,6 @@ public interface PaymentMapper {
 	public String getUid();
 	
 	public int updateError(PaymentVO vo);
+	
+	public int updateCancle(String impUid);
 }

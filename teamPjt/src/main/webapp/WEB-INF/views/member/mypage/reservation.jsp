@@ -103,7 +103,7 @@
 											onclick="location.href='/member/mypage/reserved_detail'
 												+'?stayName=${list.STAYNAME}&mainImg=${list.MAINPIC1}&'
 												+'checkIn=${list.CHECKIN}&checkOut=${list.CHECKOUT}&'
-												+'memberCount=${list.MEMBERCOUNT}&price=${list.PRICE}&stayNo=${list.STAYNO}';">예약 상세 확인</button>
+												+'memberCount=${list.MEMBERCOUNT}&price=${list.PRICE}&stayNo=${list.STAYNO}&reservationNo=${list.RESERVATIONNO}';">예약 상세 확인</button>
 							</div>
 						</div>							
 						</c:if>

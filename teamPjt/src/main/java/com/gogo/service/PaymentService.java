@@ -26,6 +26,7 @@ public interface PaymentService {
 	public PaymentVO selectOne_payment_reservationNo(String reservationNo);
 	
 	public int updateError(PaymentVO vo);
+	public int updateCancle(String impUid);
 	
 	// 결제 모듈
 	public String getToken() throws Exception;

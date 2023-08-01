@@ -32,17 +32,12 @@ public class ReservedServiceImpl implements ReservedService{
 	public RoomVO selectOne_room(String roomNo) {
 		return reservedMapper.selectOne_room(roomNo);
 	}
-	
+		
 	@Override
-	public RoomVO selectOne_room_stayNo(String stayNo) {
-		return reservedMapper.selectOne_room_stayNo(stayNo);
+	public ReservedVO selectOne_reservation(String reservationNo) {
+		return reservedMapper.selectOne_reservation(reservationNo);
 	}
 	
-	@Override
-	public ReservedVO selectOne_reservation_roomNo(String roomNo) {
-		return reservedMapper.selectOne_reservation_roomNo(roomNo);
-	}
-
 
 	@Override
 	public StayVO selectOne_stay(String stayNo) {

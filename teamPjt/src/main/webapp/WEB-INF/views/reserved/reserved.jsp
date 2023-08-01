@@ -77,7 +77,6 @@
 							</script>			
 						</div></li>
 					
-				
 					<hr>	
 					<li style="height:200px;"><div class="dt" style="position:relative;">가격</div>
 						<div class="dd">
@@ -121,8 +120,6 @@
 
 		var buyer_name = 'user1';   // sessionScope.userId 받아와야 함
 		var paymentNo = '${paymentNo}'; // 시퀀스 추가해야 함
-		var canclePay = '';		  // 환불할 imp_uid
-		var realAmount = '';	  // 환불할 금액
 		var payInfo = '${sessionScope.userId}';
 		var purchaseName = $('input[name=stayName]').val()+', ' +$('input[name=roomName]').val();
 		var purchaseAmount = '${price}';
@@ -138,11 +135,11 @@
 		
 		$(function(){
 			
-			$("#canclePayVal").change(function(){
+			//$("#canclePayVal").change(function(){
 				
-				canclePay = $("#canclePayVal").val();
+			//	canclePay = $("#canclePayVal").val();
 				
-			});
+			//});
 			
 			$("#realAmountVal").change(function(){
 				

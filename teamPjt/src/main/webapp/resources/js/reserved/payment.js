@@ -107,7 +107,7 @@
 		
 		
 		  /* 환불 */
-		  function cancelPay() {
+		  function canclePayFunction() {
 			  
 			  if(canclePay==null || canclePay==''
 				  || realAmount == null || realAmount == ''){
@@ -124,7 +124,7 @@
 			  
 			  // 원래 가격을 checksum에 넣어 검수하기 위한 ajax
 			  $.ajax({
-				 "url" : "/member/payInfoAction"
+				 "url" : "/payment/payInfoAction"
 				 , "type" : "post"
 				 , "contentType" : "application/json"
 				 , "data" : imp_uid
@@ -140,7 +140,7 @@
 				  
 				    $.ajax({
 				      // 예: http://www.myservice.com/payments/cancel
-				      "url": "/member/canclePay/"+amount+"", 
+				      "url": "/payment/canclePay/"+amount+"", 
 				      "type": "post",
 				      "contentType": "application/json",
 				      "data": JSON.stringify({
