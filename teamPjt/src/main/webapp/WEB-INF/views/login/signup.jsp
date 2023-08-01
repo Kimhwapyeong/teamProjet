@@ -164,7 +164,7 @@ table tr td input[name=addr] {
 	font-weight: bold; 
 }
 
-.valid { color: green; }
+.valid { color: blue; }
 
 .invalid { color: red; }	
 }
@@ -221,9 +221,11 @@ a:link, a:visited {
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script>
 //아이디 중복 검사
-$('#btnid').on('click', function() {
-	idcheck();
-});
+$(document).ready(function() {
+	$('#btnid').on('click', function() {
+		idcheck();
+	});
+})
 
 //올바른 아이디 입력 형태인지 파악하여 유효하지 않다면 중복확인 불필요
 function idcheck() {
@@ -355,23 +357,17 @@ function item_check(item) {
 							    <th class="tit">비밀번호 *</th>
 							    <td>
 							      <input type="password" id="signUpPw" name="pw" placeholder="비밀번호를 입력하세요.">
-							     
-							      <div class="valid">
-							      <ul class="checked">
-							        <li class="off" style="font-size: inherit;">영문</li>
-							        <li class="off" style="font-size: inherit;">숫자</li>
-							        <li class="off" style="font-size: inherit;">특수문자</li>
-							        <li class="off" style="font-size: inherit;">8자 이상 20자 이하</li>
-							      </ul>
-							      </div>
+							     <div class="valid">영문 대/소문자, 숫자를 모두 포함, 8자 이상 20자 미만</div>
 							      
 							    </td>
 							  </tr>
+							  <tr>
 							      <th class="tit">비밀번호 확인 *</th>
-							      <td>
-							        <input type="password" id="pwCheck" name="pw_ck" class="chk" placeholder="비밀번호를 한 번 더 입력하세요.">
-							        <div class="valid">비밀번호를 한 번 더 입력하세요.</div>
-							    </td>
+							      	<td>
+							        	<input type="password" id="pwCheck" name="pw_ck" class="chk" placeholder="비밀번호를 한 번 더 입력하세요.">
+							        	<div class="valid">비밀번호를 한 번 더 입력하세요.</div>
+							    	</td>
+							   </tr> 	
 							  <!-- 생년월일 -->
 							  <tr>
 							    <th class="tit">생년월일</th>
@@ -415,11 +411,13 @@ function item_check(item) {
 							    </td>
 							  </tr>
 							  <tr>
-							    <th class="tit">호스트 여부 *</th>
-							    <td>
-							      <label for="hostCheckbox"> 호스트이신가요? <br>
-							        <input type="checkbox" id="hostCheckbox" name="host" value="true">
-							      </label>
+							    <th class="tit">호스트이신가요?*</th>
+							    <td id="genderForm">
+							    	<div>
+							      	<input type="radio" name="hostyn" value="n" checked>아니요,일반이용자입니다.
+							     
+							      	<input type="radio" name="hostyn" value="y"> 네,숙소 호스트입니다.
+							      	</div>
 							    </td>
 							  </tr>
 							</table>

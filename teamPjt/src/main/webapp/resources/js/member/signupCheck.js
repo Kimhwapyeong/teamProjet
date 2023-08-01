@@ -98,3 +98,29 @@ var signup = {
 		return data;
 	}
 }
+
+/**
+ *  사용자약관체크
+ */
+$(document).ready(function() {
+    // 사용자 약관 전체 동의 체크 박스를 클릭했을 때
+    $("#check_all").on("click", function() {
+        // 전체 동의 체크 박스의 상태를 가져옴
+        var isChecked = $(this).prop("checked");
+
+        // 개별 약관 동의 체크 박스들의 상태를 전체 동의 체크 박스와 같은 상태로 반영
+        $("#listFold input[type='checkbox']").prop("checked", isChecked);
+    });
+
+    // 개별 약관 동의 체크 박스를 클릭했을 때
+    $("#listFold input[type='checkbox']").not("#check_all").on("click", function() {
+        // 개별 동의 체크 박스들 중 하나라도 체크되지 않았는지 확인
+        var isAnyUnchecked = $("#listFold input[type='checkbox']").not("#check_all").filter(":not(:checked)").length > 0;
+
+        // 개별 동의 체크 박스들 중 하나라도 체크되지 않았으면 사용자 약관 전체 동의 체크 박스의 체크를 해제
+        if (isAnyUnchecked) {
+            $("#check_all").prop("checked", false);
+        }
+    });
+});
+
