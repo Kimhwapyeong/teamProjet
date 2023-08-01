@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.gogo.service.MainService;
+import com.gogo.vo.RoomOptionVO;
+import com.gogo.vo.RoomVO;
 import com.gogo.vo.StayVO;
 
 @Controller
@@ -29,7 +31,7 @@ public class MainController {
 
 	// 임시
 	@PostMapping("/addStayAction")
-	public String editStayAction(StayVO vo, Model model) {
+	public String addStayAction(StayVO vo, Model model) {
 		
 		int res = mainService.insert(vo);
 		if(res > 0) {
@@ -38,6 +40,19 @@ public class MainController {
 			model.addAttribute("msg", "숙소 등록 실패");
 		}
 		
+		return "/main";
+	}
+	
+	@PostMapping("/addRoomAction")
+	public String addRoomAction(RoomVO roomVO
+						, RoomOptionVO optionVO, Model model) {
+		
+		int res = mainService.insertRoom(roomVO, optionVO);
+		if(res > 0) {
+			model.addAttribute("msg", "room 등록 완료");
+		}else {
+			model.addAttribute("msg", "room 등록 실패");
+		}
 		return "/main";
 	}
 	

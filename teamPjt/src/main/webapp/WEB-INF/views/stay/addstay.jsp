@@ -6,7 +6,7 @@
 <script>
 	window.addEventListener('load', ()=>{
 		
-		// 등록 버튼 눌렸을 때의 이벤트. 유효성 검사 및 서브밋을 한다.
+		// 등록 버튼 눌렸을 때의 이벤트. 유효성 검사, 좌표 저장, 지역저장, submit 처리
 		btnAddStay.addEventListener('click', (e)=>{
 			e.preventDefault();
 			

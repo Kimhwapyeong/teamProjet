@@ -1,5 +1,6 @@
-package MainMapperTest;
+package com.gogo.main;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
@@ -10,6 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.gogo.mapper.MainMapper;
 import com.gogo.test.MapperTest;
+import com.gogo.vo.RoomOptionVO;
+import com.gogo.vo.RoomVO;
 import com.gogo.vo.StayVO;
 
 import lombok.extern.log4j.Log4j;
@@ -44,6 +47,44 @@ public class StayMapperTest {
 		stayVO.setStayType("내타입");
 		
 		mainMapper.insert(stayVO);
+	}
+	
+	@Test
+	public void insertRoom() {
+		RoomVO roomVO = new RoomVO();
+		roomVO.setStayNo("1");
+		roomVO.setInfo("info");
+		roomVO.setOverPerson("8");
+		roomVO.setPrice("10000");
+		roomVO.setRoomInfo("roominfo");
+		roomVO.setRoomName("roomname");
+		roomVO.setRoomType("roomtype");
+		roomVO.setStdPerson("4");
+		
+		int res = mainMapper.insertRoom(roomVO);
+		
+		assertEquals(1, res);
+	}
+	
+	@Test
+	public void insertRoomOption() {
+		RoomOptionVO vo = new RoomOptionVO();
+		
+		vo.setStayNo("1");
+		vo.setRoomNo("1");
+		vo.setBabiqu("Y");
+		vo.setBathroom("Y");
+		vo.setBed("3");
+		vo.setKitchen("N");
+		vo.setParking("Y");
+		vo.setPet("N");
+		vo.setPool("Y");
+		vo.setTerrace("Y");
+		vo.setViewRoom("mountain");
+		
+		int res = mainMapper.insertRoomOption(vo);
+		
+		assertEquals(1, res);
 	}
 	
 }

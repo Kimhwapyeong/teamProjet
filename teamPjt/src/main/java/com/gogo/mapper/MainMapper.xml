@@ -4,10 +4,30 @@
   				<!-- 경로 + xml 파일명 -->
 <mapper namespace="com.gogo.mapper.MainMapper">
 	
+	<!-- stay 등록 -->
 	<insert id="insert">
 		insert into stay (stayno, memberid, stayname, stayloc, stayadress
 						, stayinfo, staytype, badge, mainpic1, mainpic2, latitude, longitude)
 		values (stayseq.nextval, #{memberId}, #{stayName}, #{stayLoc}, #{stayAdress}
 				,#{stayInfo}, #{stayType}, #{badge}, #{mainPic1}, #{mainPic2}, #{latitude}, #{longitude})
+	</insert>
+	
+	<!-- room 등록 -->
+	<insert id="insertRoom">
+		<selectKey keyProperty="roomNo" order="BEFORE" resultType="String">
+			select roomseq.nextval from dual
+		</selectKey>
+		insert into room (roomno, stayno, roomname, stdperson
+						, overperson, roominfo, price, roomtype, info)
+		values (#{roomNo}, #{stayNo}, #{roomName}, #{stdPerson}
+				, #{overPerson}, #{roomInfo}, #{price}, #{roomType}, #{info})
+	</insert>
+	
+	<!-- room 옵션 등록 -->
+	<insert id="insertRoomOption">
+		insert into roomoptionyn (roomno, stayno, bathroom, kitchen, parking
+						, babiqu, pet, terrace, pool, viewRoom, bed)
+		values (#{roomNo}, #{stayNo}, #{bathroom}, #{kitchen}, #{parking}
+						, #{babiqu}, #{pet}, #{terrace}, #{pool}, #{viewRoom}, #{bed})
 	</insert>
 </mapper>

@@ -2,13 +2,36 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="../common/header.jsp"/>
 <link href="/resources/main/add.css">
+<script type="text/javascript">
+	window.addEventListener('load', ()=>{
+		
+		btnAddRoom.addEventListener('click', (e)=>{
+			e.preventDefault();
+			
+			let optionCheck = document.querySelectorAll("input[type=checkbox]");
+			// option 체크박스 돌면서
+			optionCheck.forEach((option)=>{
+				// 체크되어있지 않으면
+				if(!option.checked){
+					// value를 N으로 바꾸고
+					option.value='N';
+					// checked설정
+					option.checked=true;
+				}
+			})
+			
+			addRoomForm.submit();
+			
+		})
+	})
 
+</script>
 <div id="contents">
 	<div class="container sub_title">
 		<div class="txt">room 등록</div>
 	</div>
 	<div class="store_apply">
-		<form name="addRoomForm" method="post">
+		<form name="addRoomForm" method="post" enctype="multipart/form-data" action="/addRoomAction">
 			<div class="store_apply_form">
 				<ul class="form_dl">
 					<div class="_contactus_divider__BZ5eb"></div>
@@ -23,22 +46,22 @@
 						<div class="dd">
 							<select class="form_style" name="roomType" style="width:100%">
 								<option selected="" value="">Type을 선택해 주세요.</option>
-								<option value="1">게스트하우스</option>
-								<option value="2">렌탈하우스</option>
-								<option value="3">펜션</option>
-								<option value="4">한옷</option>
-								<option value="5">캠핑&아웃도어</option>
-								<option value="6">호스텔</option>
-								<option value="7">리조트</option>
-								<option value="8">민박</option>
-								<option value="9">호텔</option>
+								<option value="게스트하우스">게스트하우스</option>
+								<option value="렌탈하우스">렌탈하우스</option>
+								<option value="펜션">펜션</option>
+								<option value="한옥">한옥</option>
+								<option value="캠핑&아웃도어">캠핑&아웃도어</option>
+								<option value="호스텔">호스텔</option>
+								<option value="리조트">리조트</option>
+								<option value="민박">민박</option>
+								<option value="호텔">호텔</option>
 							</select>
 						</div>
 					</li>
 					<li style="width:53%"><div class="dt">기준인원 *</div>
 						<div class="dd" style="width:200px">
 							<select style="width: 100%" class="form_style" name="stdPerson"><option
-									selected="" value="">선택해 주세요</option>
+									selected="" value="0">선택해 주세요</option>
 								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
@@ -56,7 +79,7 @@
 						<div class="dt">최대인원 *</div>
 						<div class="dd" style="width:200px">
 							<select style="width: 100%" class="form_style" name="overPerson">
-								<option selected="" value="">선택해 주세요</option>
+								<option selected="" value="0">선택해 주세요</option>
 								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
@@ -73,43 +96,43 @@
 					<li><div class="dt">옵션 *</div>
 						<div class="dd">
 							<label for="bathroom" class="check_skin">
-								<input type="checkbox" id="bathroom" name="bathroom">
+								<input type="checkbox" id="bathroom" value="Y" name="bathroom">
 									<span style="font-size: 12px">화장실</span>
 								</label>
 							<label for="kitchen" class="check_skin">
-								<input type="checkbox" id="kitchen" name="kitchen">
+								<input type="checkbox" id="kitchen" value="Y" name="kitchen">
 									<span style="font-size: 12px">부엌</span>
 								</label>
 							<label for="parking" class="check_skin">
-								<input type="checkbox" id="parking" name="parking">
+								<input type="checkbox" id="parking" value="Y" name="parking">
 									<span style="font-size: 12px">주차장</span>
 								</label>
 							<label for="babiqu" class="check_skin">
-								<input type="checkbox" id="babiqu" name="babiqu">
+								<input type="checkbox" id="babiqu" value="Y" name="babiqu">
 									<span style="font-size: 12px">부엌</span>
 								</label>
 							<label for="pet" class="check_skin">
-								<input type="checkbox" id="pet" name="pet">
+								<input type="checkbox" id="pet" value="Y" name="pet">
 									<span style="font-size: 12px">부엌</span>
 								</label>
 							<label for="terrace" class="check_skin">
-								<input type="checkbox" id="terrace" name="terrace">
+								<input type="checkbox" id="terrace" value="Y" name="terrace">
 									<span style="font-size: 12px">테라스</span>
 								</label>
 							<label for="pool" class="check_skin">
-								<input type="checkbox" id="pool" name="pool">
+								<input type="checkbox" id="pool" value="Y" name="pool">
 									<span style="font-size: 12px">풀장</span>
 								</label>
 							<label for="mountain" class="radio_skin">
-								<input type="radio" id="mountain" name="viewroom">
+								<input type="radio" id="mountain" name="viewRoom" value="산">
 									<span style="font-size: 12px">산</span>
 								</label>
 							<label for="ocean" class="radio_skin">
-								<input type="radio" id="ocean" name="viewroom">
+								<input type="radio" id="ocean" name="viewRoom" value="바다">
 									<span style="font-size: 12px">바다</span>
 								</label>
 						<div class="dd" style="width:110px; display:flex">
-							<select style="width: 100%" class="form_style" name="bed"><option
+							<select style="width: 100%" class="form_style" value="Y" name="bed"><option
 									selected="" value="">침구 갯수</option>
 								<option value="1">1</option>
 								<option value="2">2</option>
@@ -215,8 +238,9 @@
 					</li>
 				</ul>
 			</div>
+			<input type="hidden" name="stayNo" value="1">
 			<div class="bt_btns">
-				<button type="submit" class="btn_bk">등록하기</button>
+				<button type="submit" class="btn_bk" id="btnAddRoom">등록하기</button>
 				<button type="reset" class="btn_bk">초기화</button>
 			</div>
 		</form>
