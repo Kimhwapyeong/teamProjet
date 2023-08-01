@@ -73,13 +73,15 @@
 									
 									        function getGraph(){
 									            let ageList = [];
-									            let ageCount = [];
+									            let ageCount = [ssss, dfdd];
+									            
+									            
 									            
 									            
 									            $.ajax({
 									                url:"member/admin/statistics",
 									                type:"get",
-									                data:{age_group:"", count},
+									                data: JSON.stringify(value),
 									                dataType:"json",
 									                success:function(data){
 									                    for(let i=0; i<data.length; i++){

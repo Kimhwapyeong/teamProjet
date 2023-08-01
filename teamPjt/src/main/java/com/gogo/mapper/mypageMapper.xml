@@ -118,11 +118,15 @@
 		    stay s,
 		    room r,
 		    reservation v,
-		    member m
+		    member m,
+		    payment p
 		WHERE
 		    s.stayno = r.stayno
 		    AND r.roomno = v.roomno
+		    and v.reservationNo = p.reservationNo
 		    And v.memberid = m.memberid
+			and p.cancleYN = 'N'
+		order by v.regdate desc		    
 	</select>
 	
 	<resultMap type="java.util.HashMap" id="reservMap">
@@ -148,6 +152,7 @@
 			and v.roomno = r.roomno
 			and v.memberid = m.memberid
 			and r.stayno = s.stayno
+		order by regdate desc
 	</select>
 	
 	<resultMap type="java.util.HashMap" id="cancelMap">
