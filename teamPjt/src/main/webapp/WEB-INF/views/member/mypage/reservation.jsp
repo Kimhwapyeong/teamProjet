@@ -68,7 +68,7 @@
 						</div>
 						
 						<!-- ▶▶▶  forEach ▶▶▶  -->
-                        <c:forEach items="${list}" var="list" step="1">
+                        <c:forEach items="${list}" var="list" step="1" varStatus="status">
                         <c:if test="${sessionScope.memberId == list.MEMBERID}">
 						
 						<div class="reserv_wrap mypage-reservation-info">
@@ -99,10 +99,21 @@
 									<!-- =============================== 가격 & view ============================================-->
 									<div class="price">₩ ${list.PRICE }</div> <br>
 									<!-- =============================== 예약 상세 연결 ============================================-->
-									<button type="button" class="btn_reserv_detail">예약 상세 확인</button>
+									<button type="button" class="btn_reserv_detail"
+											onclick="location.href='/member/mypage/reserved_detail'
+												+'?stayName=${list.STAYNAME}&mainImg=${list.MAINPIC1}&'
+												+'checkIn=${list.CHECKIN}&checkOut=${list.CHECKOUT}&'
+												+'memberCount=${list.MEMBERCOUNT}&price=${list.PRICE}';">예약 상세 확인</button>
 							</div>
 						</div>
-						
+							<input type="hidden" id="stayName${status.index}" value="${list.STAYNAME}"/>
+							<input type="hidden" id="mainImg${status.index}" value="${list.MAINPIC1}"/>
+							<input type="hidden" id="checkIn" value="${list.CHECKIN}"/>
+							<input type="hidden" id="checkOut" value="${list.CHECKOUT}"/>
+							<input type="hidden" id="memberCount" value="${list.MEMBERCOUNT}"/>
+							<input type="hidden" id="price" value="${list.PRICE}"/>
+							
+							
 						</c:if>
                         </c:forEach>
 						
@@ -135,17 +146,6 @@
 <!-- 푸터 -->
 <%@ include file="../../common/footer.jsp" %>
 
-<script>
-	$(function(){
-			
-		$('.btn_reserv_detail').click(function(){
-				
-			location.href='/reserved/reserved_detail';
-			
-		});
-		
-	});
-	
-</script>
+
 
 </html>

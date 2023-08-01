@@ -81,10 +81,5 @@ public class ReservedController {
 		return res;
 	}
 	
-	// 예약 상세 확인
-	@GetMapping("reserved_detail")
-	public void reserved_detail() {
-		
-	}
 	
 }

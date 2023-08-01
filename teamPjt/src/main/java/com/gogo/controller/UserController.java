@@ -6,7 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gogo.service.ReservedService;
 import com.gogo.service.mypageService;
 
 @Controller
@@ -15,6 +17,9 @@ public class UserController {
 	
 	@Autowired
 	mypageService service;
+	
+	@Autowired
+	ReservedService service_r;
 	
 	// 예약 정보
 	@GetMapping("reservation")
@@ -54,5 +59,27 @@ public class UserController {
 	public void message() {
 		
 	}
+	
+	// 예약 상세 확인
+	@GetMapping("reserved_detail")
+	public void reserved_detail(@RequestParam("checkIn") String checkIn
+								, @RequestParam("checkOut") String checkOut
+								, @RequestParam("price") String price
+								, Model model) {
+		
+		
+		// 총 몇 일인지 반환
+		String day = service_r.reservedDay2(checkIn, checkOut);
+		// 가격에 세자리 콤마를 찍어서 반환
+		String dayPrice = service_r.comma(price);
+		int a = Integer.parseInt(day);
+		int b = Integer.parseInt(price);
+		String allPrice = service_r.comma(a*b);
+		
+		model.addAttribute("allPrice", allPrice);
+		model.addAttribute("dayPrice", dayPrice);
+		model.addAttribute("day", day);
+	}
+
 	
 }
