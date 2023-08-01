@@ -56,8 +56,8 @@ public class mypageServiceImpl implements mypageService {
 	}
 	
 	@Override
-	public List<ReservedVO> reservinfo(Model model) {
-		List<ReservedVO> list = mypageMapper.reservinfo();
+	public List<Map<String, String>> reservinfo(Model model) {
+		List<Map<String, String>> list = mypageMapper.reservinfo();
 		log.info("===========");
 		log.info("list : " + list);
 		model.addAttribute("list", list);

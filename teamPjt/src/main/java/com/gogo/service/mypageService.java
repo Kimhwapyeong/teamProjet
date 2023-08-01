@@ -29,7 +29,7 @@ public interface mypageService {
 	public List<Map<String, String>> getStay(Model model);
 	
 	// 예약 관리
-	public List<ReservedVO>reservinfo(Model model);
+	public List<Map<String, String>> reservinfo(Model model);
 	
 	// 예약 관리 대표 사진
 	public List<Map<String, String>> reservpic(Model model);
@@ -44,7 +44,7 @@ public interface mypageService {
 	public QuestionVO getOne(int queNo);
 	
 	
-	// ▶▶▶  host ▶▶▶
+	// ▶▶▶  user ▶▶▶
 	// 예약 정보
 	public List<Map<String, String>> reservList(Model model);
 	

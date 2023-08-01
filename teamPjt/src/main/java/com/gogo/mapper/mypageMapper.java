@@ -23,7 +23,7 @@ public interface mypageMapper {
 	public List<Map<String, String>> getStay();
 	
 	// 예약 관리
-	public List<ReservedVO> reservinfo();
+	public List<Map<String, String>> reservinfo();
 	
 	// 예약 관리 대표 사진
 	public List<Map<String, String>> reservpic();

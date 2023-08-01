@@ -77,6 +77,7 @@ public class HostController extends CommonRestController{
 		log.info("========");
 		log.info("que : " + que);
 		log.info("queNo : " + vo.getQueNo());
+		log.info("vo.getTitle : " + vo.getTitle());
 		model.addAttribute("que", que);
 	}
 	

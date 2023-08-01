@@ -42,7 +42,7 @@ public class mypageTest {
 	
 	@Test
 	public void reserveinfo() {
-		List<ReservedVO> list = mapper.reservinfo();
+		List<Map<String, String>> list = (List<Map<String, String>>) mapper.reservinfo();
 		log.info("list : " + list);
 	}
 	

@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>stayhost</title>
+    <title>reservation</title>
     <link rel="stylesheet" href="./css/host/host.css">
 </head>
 
@@ -49,7 +49,6 @@
                            </ul>
                        </div>
                        <div class="mypage_content">
-                       <c:if test="${sessionScope.memberId == vo.MEMBERID}">
                            <div class="reserv_wrap mypage-reservation-info">
 								<div class="container">
 								<div class="stay_view">
@@ -76,7 +75,9 @@
 								
 								        <!-- ▶▶▶ forEach ▶▶▶ -->
 								        <c:forEach items="${list}" var="reserve" step="1">
-								            <c:set var="currentRoomNo" value="${reserve.roomNo}" />
+				                        <c:if test="${sessionScope.memberId == reserve.STAYMEMBERID}">
+				                        
+								            <c:set var="currentRoomNo" value="${reserve.ROOMNO}" />
 											
 											<!-- 전객실번호 존재 x or 현객실번호=전객실번호 -> 출력x -->
 								            <c:if test="${not empty prevRoomNo and !currentRoomNo.equals(prevRoomNo)}">
@@ -94,18 +95,20 @@
 								
 								            <tbody>
 								                <tr>
-								                    <td>${reserve.roomNo}</td>
-								                    <td>${reserve.memberId}</td>
-								                    <td>${reserve.regDate}</td>
-								                    <td>${reserve.checkIn}</td>
-								                    <td>${reserve.checkOut}</td>
-								                    <td>${reserve.memberCount}</td>
+								                    <td>${reserve.ROOMNO}</td>
+								                    <td>${reserve.RESERVATIONMEMBERID}</td>
+								                    <td>${reserve.REGDATE}</td>
+								                    <td>${reserve.CHECKIN}</td>
+								                    <td>${reserve.CHECKOUT}</td>
+								                    <td>${reserve.MEMBERCOUNT}</td>
 								                </tr>
 								            </tbody>
 								
 								            <!-- 변수 업데이트 -->
 								            <c:set var="prevRoomNo" value="${currentRoomNo}" />
 								            <c:set var="firstRow" value="false" />
+			                           
+			                            </c:if>
 								        </c:forEach>
 								
 								        <!-- 마지막 그룹 닫기 -->
@@ -118,7 +121,6 @@
                                 </div>
                            </div>
                            
-                           </c:if>
 
                            <!-- =============================== 페이징 ============================================-->
                            <div class="paging"><a href="/" class="prev" title="이전 페이지">이전 페이지</a><a href="/"
