@@ -101,7 +101,7 @@
                 <ul class="dl">
                     <li>
                         <div class="dt">01. 예약 번호</div>
-                        <div class="dd">75396007<small>(예약 확정 : 2023-07-26 10:05)</small></div>
+                        <div class="dd">${reservationNo}<small>(예약 확정 : 2023-07-26 10:05)</small></div>
                     </li>
                     <li>
                         <div class="dt">02. 스테이 및 객실</div>
@@ -113,11 +113,11 @@
                     </li>
                     <li>
                         <div class="dt">04. 체크인</div>
-                        <div class="dd">${param.checkIn}</div>
+                        <div class="dd">${checkIn}</div>
                     </li>
                     <li>
                         <div class="dt">05. 체크아웃</div>
-                        <div class="dd">${param.checkOut}</div>
+                        <div class="dd">${checkOut}</div>
                     </li>
                     <hr class="line">
                     <li>

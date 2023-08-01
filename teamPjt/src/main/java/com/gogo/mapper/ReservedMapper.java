@@ -1,5 +1,7 @@
 package com.gogo.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.gogo.vo.ReservedVO;
@@ -12,6 +14,9 @@ public interface ReservedMapper {
 	public int insertReserved(ReservedVO vo); 
 	
 	public RoomVO selectOne_room(String roomNo);
+	public RoomVO selectOne_room_stayNo(String stayNo);
+	
+	public ReservedVO selectOne_reservation_roomNo(String roomNo);
 	
 	public StayVO selectOne_stay(String stayNo);
 	

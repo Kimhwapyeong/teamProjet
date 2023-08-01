@@ -1,6 +1,7 @@
 package com.gogo.service;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,16 @@ public class ReservedServiceImpl implements ReservedService{
 	@Override
 	public RoomVO selectOne_room(String roomNo) {
 		return reservedMapper.selectOne_room(roomNo);
+	}
+	
+	@Override
+	public RoomVO selectOne_room_stayNo(String stayNo) {
+		return reservedMapper.selectOne_room_stayNo(stayNo);
+	}
+	
+	@Override
+	public ReservedVO selectOne_reservation_roomNo(String roomNo) {
+		return reservedMapper.selectOne_reservation_roomNo(roomNo);
 	}
 
 

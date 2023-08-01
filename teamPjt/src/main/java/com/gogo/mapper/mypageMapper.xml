@@ -108,6 +108,7 @@
 		    s.stayname,
 		    s.stayno,
 		    r.price,
+		    v.reservationno,
 		    TO_CHAR(v.regdate, 'yyyy-mm-dd') as regdate,
 		    TO_CHAR(v.checkin, 'yyyy-mm-dd') as checkin,
 		    TO_CHAR(v.checkout, 'yyyy-mm-dd') as checkout,
@@ -137,7 +138,7 @@
 	
 	<!-- 취소 정보 -->
 	<select id="cancelList" resultType="java.util.Map">
-		select s.stayname, s.mainpic1, s.stayno,
+		select s.stayname, s.mainpic1, s.stayno, v.reservationno,
 			TO_CHAR(v.checkin, 'yyyy-mm-dd') as checkin,
 		    TO_CHAR(v.checkout, 'yyyy-mm-dd') as checkout,
 			v.membercount, m.memberid

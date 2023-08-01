@@ -12,8 +12,16 @@
 		select * from Room where roomNo = #{roomNo}
 	</select>
 	
+	<select id="selectOne_room_stayNo" resultType="com.gogo.vo.RoomVO">
+		select * from Room where stayNo = #{stayNo}
+	</select>
+	
 	<select id="selectOne_stay" resultType="com.gogo.vo.StayVO">
 		select * from Stay where stayNo = #{stayNo}
+	</select>
+	
+	<select id="selectOne_reservation_roomNo" resultType="com.gogo.vo.ReservedVO">
+		select * from reservation where roomNo = #{roomNo}
 	</select>
 	
 	<select id="reservedDay" resultType="String">

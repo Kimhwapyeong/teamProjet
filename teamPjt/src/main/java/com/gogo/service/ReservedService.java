@@ -1,5 +1,7 @@
 package com.gogo.service;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -14,6 +16,9 @@ public interface ReservedService {
 	public int insertReserved(ReservedVO vo);
 	
 	public RoomVO selectOne_room(String roomNo);
+	public RoomVO selectOne_room_stayNo(String stayNo);
+	
+	public ReservedVO selectOne_reservation_roomNo(String roomNo);
 	
 	public StayVO selectOne_stay(String stayNo);
 

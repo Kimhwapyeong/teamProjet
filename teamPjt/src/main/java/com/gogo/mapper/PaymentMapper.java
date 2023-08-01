@@ -8,6 +8,8 @@ public interface PaymentMapper {
 	public int insertPayment(PaymentVO vo);
 	
 	public PaymentVO selectOne(String impUid);
+	public PaymentVO selectOne_payment_reservationNo(String reservationNo);
+	
 	
 	public String getUid();
 	

@@ -1,5 +1,7 @@
 package com.gogo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,8 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gogo.service.PaymentService;
 import com.gogo.service.ReservedService;
 import com.gogo.service.mypageService;
+import com.gogo.vo.PaymentVO;
+import com.gogo.vo.ReservedVO;
+import com.gogo.vo.RoomVO;
+import com.gogo.vo.StayVO;
 
 @Controller
 @RequestMapping("/member/mypage/*")
@@ -20,6 +27,9 @@ public class UserController {
 	
 	@Autowired
 	ReservedService service_r;
+	
+	@Autowired
+	PaymentService service_p;
 	
 	// 예약 정보
 	@GetMapping("reservation")
@@ -65,6 +75,7 @@ public class UserController {
 	public void reserved_detail(@RequestParam("checkIn") String checkIn
 								, @RequestParam("checkOut") String checkOut
 								, @RequestParam("price") String price
+								, @RequestParam("stayNo") String stayNo
 								, Model model) {
 		
 		
@@ -75,11 +86,29 @@ public class UserController {
 		int a = Integer.parseInt(day);
 		int b = Integer.parseInt(price);
 		String allPrice = service_r.comma(a*b);
-		// stay 정보
 		
+		
+		// stay 정보
+		StayVO stay = service_r.selectOne_stay(stayNo);
+		// room 정보
+		RoomVO room = service_r.selectOne_room_stayNo(stayNo);
+		// reservation 정보
+		ReservedVO reserved = service_r.selectOne_reservation_roomNo(room.getRoomNo());
+		// payment 정보
+		PaymentVO payment = service_p.selectOne_payment_reservationNo(reserved.getReservationNo());
+		
+		
+		
+		model.addAttribute("reservationNo", reserved.getReservationNo());
+		model.addAttribute("stayAddress", stay.getStayAdress());
 		model.addAttribute("allPrice", allPrice);
 		model.addAttribute("dayPrice", dayPrice);
 		model.addAttribute("day", day);
+		model.addAttribute("roomName", room.getRoomName());
+		model.addAttribute("checkIn", reserved.getCheckIn());
+		model.addAttribute("checkOut", reserved.getCheckOut());
+		model.addAttribute("paymentMethod", payment.getPaymentMethod());
+		model.addAttribute("paymentRegDate", payment.getRegDate());
 	}
 
 	

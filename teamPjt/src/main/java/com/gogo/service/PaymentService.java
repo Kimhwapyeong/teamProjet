@@ -23,6 +23,7 @@ public interface PaymentService {
 	public int insertPayment(PaymentVO vo);
 	public PaymentVO selectOne(String impUid);
 	public String getUid();
+	public PaymentVO selectOne_payment_reservationNo(String reservationNo);
 	
 	public int updateError(PaymentVO vo);
 	

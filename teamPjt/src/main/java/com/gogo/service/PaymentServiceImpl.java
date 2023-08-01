@@ -69,6 +69,11 @@ public class PaymentServiceImpl implements PaymentService {
 		return paymentMapper.updateError(vo);
 	}
 	
+	@Override
+	public PaymentVO selectOne_payment_reservationNo(String reservationNo) {
+		return paymentMapper.selectOne_payment_reservationNo(reservationNo);
+	}
+	
 	
 	
 	// Payment 공통 모듈

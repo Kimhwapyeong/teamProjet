@@ -12,6 +12,10 @@
 		select * from payment where impUid = #{impUid}
 	</select>
 	
+	<select id="selectOne_payment_reservationNo" resultType="com.gogo.vo.PaymentVO">
+		select * from payment where reservationNo = #{reservationNo}
+	</select>
+	
 	
 	<select id="getUid" resultType="String">
 		select paymentseq.nextval from dual
