@@ -28,11 +28,9 @@
     
     <div id="__next" data-reactroot="">
         <div>
-            <div id="contents">
                 <div class="container sub_title">
                     <div class="tit">MY PAGE</div>
                 </div>
-            </div>
                 <div class="container mypage_wrap">
                     <div class="mypage_myinfo">
                         <div class="tit">${sessionScope.memberId}님 반가워요!</div>

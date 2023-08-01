@@ -6,7 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gogo.service.ReservedService;
 import com.gogo.service.mypageService;
 
 @Controller
@@ -15,6 +17,9 @@ public class UserController {
 	
 	@Autowired
 	mypageService service;
+	
+	@Autowired
+	ReservedService reserved;
 	
 	// 예약 정보
 	@GetMapping("reservation")
