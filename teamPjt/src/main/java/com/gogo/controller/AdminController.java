@@ -55,11 +55,10 @@ public class AdminController {
 //		
 //	}
 	
-	@GetMapping("statistics")
-	public List<MemberVO> statistics(Model model){
+	@RequestMapping("statistics")
+	public @ResponseBody List<MemberVO> statistics(Model model){
 		List<MemberVO> list = mypageService.chartAge();
-	    model.addAttribute("list", list);
-	    model.addAttribute("mb_id");
+	    model.addAttribute("mb_id", list);
 	    log.info("============");
 	    log.info("list : " + list);
 	    return list;

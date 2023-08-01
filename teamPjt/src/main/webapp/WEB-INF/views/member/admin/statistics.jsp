@@ -76,12 +76,10 @@
 									            let ageCount = [ssss, dfdd];
 									            
 									            
-									            
-									            
 									            $.ajax({
 									                url:"member/admin/statistics",
 									                type:"get",
-									                data: JSON.stringify(value),
+									                data: {age_group: "${mb_id.age_group}", count: "${mb_id.count}"},
 									                dataType:"json",
 									                success:function(data){
 									                    for(let i=0; i<data.length; i++){

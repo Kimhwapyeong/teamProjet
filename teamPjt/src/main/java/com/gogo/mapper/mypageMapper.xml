@@ -152,7 +152,8 @@
 			and v.roomno = r.roomno
 			and v.memberid = m.memberid
 			and r.stayno = s.stayno
-		order by regdate desc
+			and p.cancleyn = 'Y'
+		order by v.regdate desc
 	</select>
 	
 	<resultMap type="java.util.HashMap" id="cancelMap">
