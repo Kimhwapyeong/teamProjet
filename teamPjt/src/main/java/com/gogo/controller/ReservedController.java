@@ -35,16 +35,13 @@ public class ReservedController {
 	@GetMapping("reserved")
 	public void reservation(ReservedVO reserved, Model model) {
 		
-		// 받아올 데이터가 없기에 일단은 매개변수에서 빼서 여기에 세팅
-		//ReservedVO reserved = new ReservedVO();
-		
 		// 테스트를 위해 임의로 정보 삽입
 		// 여기서 예약 페이지에서 보여줄 데이터를 설정한다.
-		reserved.setRoomNo("1");
+		reserved.setRoomNo("2");
 		reserved.setMemberId("user1");
-		reserved.setCheckIn("2023/08/06");
-		reserved.setCheckOut("2023/08/09");
-		reserved.setMemberCount("5");
+		reserved.setCheckIn("2023/08/21");
+		reserved.setCheckOut("2023/08/23");
+		reserved.setMemberCount("3");
 		
 		service.goReserved(reserved, model);
 	}
@@ -83,4 +80,11 @@ public class ReservedController {
 		
 		return res;
 	}
+	
+	// 예약 상세 확인
+	@GetMapping("reserved_detail")
+	public void reserved_detail() {
+		
+	}
+	
 }

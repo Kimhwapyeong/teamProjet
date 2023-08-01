@@ -135,4 +135,17 @@
 <!-- 푸터 -->
 <%@ include file="../../common/footer.jsp" %>
 
+<script>
+	$(function(){
+			
+		$('.btn_reserv_detail').click(function(){
+				
+			location.href='/reserved/reserved_detail';
+			
+		});
+		
+	});
+	
+</script>
+
 </html>
