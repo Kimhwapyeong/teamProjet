@@ -36,6 +36,7 @@
 <script>
 	// 알림창을 위한 변수
 	let msg = '${msg}'
+	// let msg = '모달테스트';
 
 	window.addEventListener('load', function(){
 		// btnWhere 클릭되면 모달창 보이기
@@ -145,7 +146,7 @@
 					<div class="txt" id="alertTxt">파일 업로드에 실패하였습니다.</div>
 				</div>
 				<div class="bt_btns">
-					<button type="button" class="btn_bk" id="popup-focus">확인</button>
+					<button type="button" class="btn_bk" id="popup-focus" onclick="alertPopClose()">확인</button>
 				</div>
 			</div>
 		</div>
