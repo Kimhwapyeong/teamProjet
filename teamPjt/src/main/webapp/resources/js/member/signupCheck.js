@@ -12,7 +12,7 @@ var signup = {
 	},
 	
 	id: {
-		valid: { code:'valid', desc: '아이디를 중복확인하세요.' },
+		valid: { code:'valid', desc: '아이디를 중복 확인하세요.' },
 		invalid: { code:'invalid', desc: '아이디는 영문 소문자, 숫자만 입력하세요.' },
 		usable: { code: 'valid', desc: '사용 가능한 아이디입니다.'},
 		unusable: { code: 'invalid', desc: '이미 사용 중인 아이디입니다.	' }
@@ -99,28 +99,38 @@ var signup = {
 	}
 }
 
-/**
- *  사용자약관체크
- */
-$(document).ready(function() {
+//사용자약관체크(script)
+document.addEventListener("DOMContentLoaded", function() {
     // 사용자 약관 전체 동의 체크 박스를 클릭했을 때
-    $("#check_all").on("click", function() {
+    var checkAll = document.getElementById("check_all");
+    checkAll.addEventListener("click", function() {
         // 전체 동의 체크 박스의 상태를 가져옴
-        var isChecked = $(this).prop("checked");
+        var isChecked = checkAll.checked;
 
         // 개별 약관 동의 체크 박스들의 상태를 전체 동의 체크 박스와 같은 상태로 반영
-        $("#listFold input[type='checkbox']").prop("checked", isChecked);
+        var listFoldCheckboxes = document.querySelectorAll("#listFold input[type='checkbox']");
+        for (var i = 0; i < listFoldCheckboxes.length; i++) {
+            listFoldCheckboxes[i].checked = isChecked;
+        }
     });
 
     // 개별 약관 동의 체크 박스를 클릭했을 때
-    $("#listFold input[type='checkbox']").not("#check_all").on("click", function() {
-        // 개별 동의 체크 박스들 중 하나라도 체크되지 않았는지 확인
-        var isAnyUnchecked = $("#listFold input[type='checkbox']").not("#check_all").filter(":not(:checked)").length > 0;
+    var individualCheckboxes = document.querySelectorAll("#listFold input[type='checkbox']:not(#check_all)");
+    for (var i = 0; i < individualCheckboxes.length; i++) {
+        individualCheckboxes[i].addEventListener("click", function() {
+            // 개별 동의 체크 박스들 중 하나라도 체크되지 않았는지 확인
+            var isAnyUnchecked = false;
+            for (var j = 0; j < individualCheckboxes.length; j++) {
+                if (!individualCheckboxes[j].checked) {
+                    isAnyUnchecked = true;
+                    break;
+                }
+            }
 
-        // 개별 동의 체크 박스들 중 하나라도 체크되지 않았으면 사용자 약관 전체 동의 체크 박스의 체크를 해제
-        if (isAnyUnchecked) {
-            $("#check_all").prop("checked", false);
-        }
-    });
+            // 개별 동의 체크 박스들 중 하나라도 체크되지 않았으면 사용자 약관 전체 동의 체크 박스의 체크를 해제
+            checkAll.checked = !isAnyUnchecked;
+        });
+    }
 });
+
 

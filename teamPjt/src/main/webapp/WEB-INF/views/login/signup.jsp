@@ -225,36 +225,7 @@ $(document).ready(function() {
 	$('#btnid').on('click', function() {
 		idCheck();
 	});
-})
 
-//올바른 아이디 입력 형태인지 파악하여 유효하지 않다면 중복확인 불필요
-function idCheck() {
-	var $id = $('[name=id]');
-	if($id.hasClass('chked')) return;
-	console.log('go check');
-	
-	var data = signup.tag_status($id);
-	if(data.code != 'valid') {
-		alert('아이디 중복 확인 불필요\n' + data.desc);
-		$id.focus();
-		return;
-	}
-
-	$.ajax({
-		type: 'post',
-		url: '/login/idCheck',
-		data: {id: $id.val()},
-		success: function(data) {
-			data = signup.id_usable(data);
-			// 중복 확인 결과에 따라 아이디 입력란 옆에 메시지를 표시
-			display_status($id.siblings('div'), data);
-			$id.addClass('chked');
-		},
-		error: function(req, text) {
-			alert(text + ': ' + req.status);
-		}
-	});
-}
 //유효성 검사
 $('.chk').on('keyup', function(){
 	if($(this).attr('name') == 'id') {
@@ -266,7 +237,42 @@ $('.chk').on('keyup', function(){
 	} else {
 		validate($(this));
 	}
-});
+});	
+	
+})
+
+//올바른 아이디 입력 형태인지 파악하여 유효하지 않다면 중복확인 불필요
+function idCheck() {
+	var $id = $('[name=id]');
+	if($id.hasClass('chked')) return;
+	console.log('go check');
+	
+	var data = signup.tag_status($id);
+	if(data.code != 'valid') {
+		alert('아이디 중복 확인 불필요\n' + data);
+		$id.focus();
+		return;
+	}
+
+	   $.ajax({
+	        type: 'post',
+	        url: '/idCheck',
+	        contentType: 'application/json', // 데이터 전송 형식을 JSON으로 설정
+	        data: JSON.stringify({memberId: $id.val()}), // 아이디 정보를 JSON 형식으로 변환하여 전송
+	        success: function(data) {
+	            data = signup.id_usable(data);
+	            console.log('data1', data);
+	            console.log(data);
+	            // 중복 확인 결과에 따라 아이디 입력란 옆에 메시지를 표시
+	            $('.valid').eq(0).html(data.msg);
+	            display_status($id.siblings('div'), data.msg);
+	            $id.addClass('chked');
+	        },
+	        error: function(req, text) {
+	            alert(text + ': ' + req.status);
+	        }
+	    });
+}
 // 입력 요소를 검증하고 검증 결과에 따라 상태를 업데이트
 function validate(t) {
 	var data = signup.tag_status(t);
@@ -280,9 +286,10 @@ function display_status(div, data) {
 	div.removeClass();
 	div.addClass(data.code)
 }
+
 function go_join() {
 	if( $('[name=name]').val() == '') {
-		alert('성명을 입력하세요!');
+		alert('이름을 입력하세요!');
 		$('[name=name]').focus();
 		return;
 	}
@@ -321,8 +328,6 @@ function item_check(item) {
 		return false;
 	} else return true;
 }
-
-
 </script>
 <body>
 	<div id="contents">
@@ -330,9 +335,9 @@ function item_check(item) {
 			<div class="tit">JOIN</div>
 			<div class="txt">회원가입</div>
 		</div>
+	<form name='signupForm'>
 		<div class="container">
 			<div class="login_wrap">
-				<form name='signupForm'>
 					<div class="form_wrap">
 <p class="w-pct60 right" style="margin: 0 auto; padding-bottom: 5px; font-size: 11px; align-text: left;">*는 필수 입력 항목입니다.</p>
 						<div class="input_box">
@@ -423,7 +428,6 @@ function item_check(item) {
 							</table>
 						</div>
 					</div>
-				</form>
 				<!--사용자 약관-->
 				<div class="agree_box signup-agree">
 					<ul class="board_fold" id="listFold">
@@ -498,6 +502,7 @@ function item_check(item) {
 				</div>
 			</div>
 		</div>
+	</form>
 	</div>
 	
 <script>	

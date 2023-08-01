@@ -6,11 +6,11 @@ import com.gogo.vo.MemberVO;
 @Service
 public interface MemberService {
 
-	MemberVO login(MemberVO member);
+	public MemberVO login(MemberVO member);
 
-	int idCheck(MemberVO member);
+	public int idCheck(MemberVO member);
 
-	int signup(MemberVO member);
+	public int signup(MemberVO member);
 	
 
 }
