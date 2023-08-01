@@ -75,6 +75,7 @@ public class UserController {
 		int a = Integer.parseInt(day);
 		int b = Integer.parseInt(price);
 		String allPrice = service_r.comma(a*b);
+		// stay 정보
 		
 		model.addAttribute("allPrice", allPrice);
 		model.addAttribute("dayPrice", dayPrice);

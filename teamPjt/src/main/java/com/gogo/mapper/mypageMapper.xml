@@ -94,10 +94,11 @@
 		SELECT
 		    s.mainpic1,
 		    s.stayname,
+		    s.stayno,
 		    r.price,
-		    TO_CHAR(v.regdate, 'yyyy-mm-dd') as regdate,
-		    TO_CHAR(v.checkin, 'yyyy-mm-dd') as checkin,
-		    TO_CHAR(v.checkout, 'yyyy-mm-dd') as checkout,
+		    TO_CHAR(v.regdate, 'yyyy-mm-dd hh:MM:ss') as regdate,
+		    TO_CHAR(v.checkin, 'yyyy-mm-dd hh:MM:ss') as checkin,
+		    TO_CHAR(v.checkout, 'yyyy-mm-dd hh:MM:ss') as checkout,
 		    v.membercount,
 		    m.memberid
 		FROM
@@ -124,9 +125,9 @@
 	
 	<!-- 취소 정보 -->
 	<select id="cancelList" resultType="java.util.Map">
-		select s.stayname, s.mainpic1,
-			TO_CHAR(v.checkin, 'yyyy-mm-dd') as checkin,
-		    TO_CHAR(v.checkout, 'yyyy-mm-dd') as checkout,
+		select s.stayname, s.mainpic1, s.stayno,
+			TO_CHAR(v.checkin, 'yyyy-mm-dd hh:MM:ss') as checkin,
+		    TO_CHAR(v.checkout, 'yyyy-mm-dd hh:MM:ss') as checkout,
 			v.membercount, m.memberid
 		from refund f, payment p, reservation v, member m, room r, stay s
 		where f.paymentno = p.paymentno
