@@ -24,4 +24,6 @@ public interface ReservedService {
 	public String getReservationNo();
 	
 	public String goReserved(ReservedVO reserved, Model model);
+	
+	public String comma(Object a);
 }

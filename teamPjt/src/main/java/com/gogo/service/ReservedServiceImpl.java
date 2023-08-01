@@ -120,5 +120,27 @@ public class ReservedServiceImpl implements ReservedService{
 		
 	}
 	
+	@Override
+	public String comma(Object a) {
+		
+		DecimalFormat formatter = new DecimalFormat("###,###");
+		// 3자리 콤마
+		// DecimalFormat은 Number형만 받음
+		
+		if(a!=null && !"".equals(a)) {
+			
+			int res = Integer.parseInt(String.valueOf(a));
+			
+			return formatter.format(res);
+		} else {
+			
+			return "";
+		}
+		
+		
+		
+
+	}
+	
 		
 }
