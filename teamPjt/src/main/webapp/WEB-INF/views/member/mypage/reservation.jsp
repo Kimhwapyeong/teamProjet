@@ -103,17 +103,9 @@
 											onclick="location.href='/member/mypage/reserved_detail'
 												+'?stayName=${list.STAYNAME}&mainImg=${list.MAINPIC1}&'
 												+'checkIn=${list.CHECKIN}&checkOut=${list.CHECKOUT}&'
-												+'memberCount=${list.MEMBERCOUNT}&price=${list.PRICE}';">예약 상세 확인</button>
+												+'memberCount=${list.MEMBERCOUNT}&price=${list.PRICE}&stayNo=${list.STAYNO}';">예약 상세 확인</button>
 							</div>
-						</div>
-							<input type="hidden" id="stayName${status.index}" value="${list.STAYNAME}"/>
-							<input type="hidden" id="mainImg${status.index}" value="${list.MAINPIC1}"/>
-							<input type="hidden" id="checkIn" value="${list.CHECKIN}"/>
-							<input type="hidden" id="checkOut" value="${list.CHECKOUT}"/>
-							<input type="hidden" id="memberCount" value="${list.MEMBERCOUNT}"/>
-							<input type="hidden" id="price" value="${list.PRICE}"/>
-							
-							
+						</div>							
 						</c:if>
                         </c:forEach>
 						
