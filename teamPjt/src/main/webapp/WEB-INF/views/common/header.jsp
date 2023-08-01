@@ -33,6 +33,7 @@
 <link rel="stylesheet" href="/resources/css/main/header.css">
 <style type="text/css" data-styled-jsx="">a.jsx-a44b61ff91ee7fc6{padding-bottom:30px;border-bottom:1px solid#e6e6e6;margin-bottom:10px}p.jsx-a44b61ff91ee7fc6{font-size:12px;color:#999}.login.jsx-a44b61ff91ee7fc6{font-size:16px;color:#333;margin-bottom:10px}</style>
 </head>
+<script src="/resources/js/reserved/jquery-3.7.0.js"></script>
 <script>
 	// 알림창을 위한 변수
 	let msg = '${msg}'
