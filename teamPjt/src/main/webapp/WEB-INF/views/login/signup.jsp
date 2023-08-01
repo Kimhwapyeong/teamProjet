@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <!DOCTYPE html>
 <jsp:include page="../common/header.jsp" />
 <html>
+	<!-- jQuery 라이브러리 추가 -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- ?v=<new java.util.Date().getTime()>을 붙이면 수정사항이 바로바로 새로고침 됨-->
+<script src="/resources/js/member/signupCheck.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>SIGN UP</title>
@@ -163,10 +169,10 @@ table tr td input[name=addr] {
 .invalid { color: red; }	
 }
 a:hover { cursor:pointer; }
+
 a.btn-fill-s { 
 	background-color: #bacdfa;
 }
-
 a.btn-empty-s { 
 	background-color: #fff;
 }
@@ -178,8 +184,8 @@ a.btn-fill, a.btn-empty {
 	text-align: center;
 	padding: 3px 10px;
 	border:1px solid #3367d6;
-	border-radius: 3px;
-	box-shadow: 2px 2px 3px #022d72;
+	border-radius: 1px;
+	box-shadow: 2px 2px 2px #022d72;
 	/* 오른쪽, 아래쪽, 번진 정도 */
 }
 
@@ -201,8 +207,18 @@ a.btn-fill-s, a.btn-empty-s {
 	box-shadow: 2px 2px 3px #022d72;
 	font-size: 13px;
 }
+a:link, a:visited {
+	text-decoration: none;
+	color: #000;
+}
+
+#content {
+	padding: 20px 0;
+	min-width: 1024px;	/* 창의 최소 크기 지정 */
+}
 
 </style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script>
 //아이디 중복 검사
 $('#btnid').on('click', function() {
@@ -237,8 +253,72 @@ function idcheck() {
 		}
 	});
 }
+//유효성 검사
+$('.chk').on('keyup', function(){
+	if($(this).attr('name') == 'id') {
+		if(event.keyCode == 13) { idcheck(); }
+		else {
+			$(this).removeClass('chked');
+			validate( $(this) );
+		}
+	} else {
+		validate($(this));
+	}
+});
+// 입력 요소를 검증하고 검증 결과에 따라 상태를 업데이트
+function validate(t) {
+	var data = signup.tag_status(t);
+	display_status(t.siblings('div'), data);
+}
 
+// 요소의 내용과 클래스를 업데이트
+function display_status(div, data) {
+	div.text(data.desc);
+	// 이전에 적용된 클래스들 모두 제거
+	div.removeClass();
+	div.addClass(data.code)
+}
+function go_join() {
+	if( $('[name=name]').val() == '') {
+		alert('성명을 입력하세요!');
+		$('[name=name]').focus();
+		return;
+	}
 
+	//필수 항목의 유효성을 판단하도록 한다.
+	//중복확인 한 경우
+	if($('[name=id]').hasClass('chked') ) {
+		//이미 사용중인 경우는 회원가입 불가
+		if($('[name=id]').siblings('div').hasClass('invalid')) {
+			alert('회원가입 불가\n' + signup.id.unusable.desc);
+			$('[name=id]').focus();
+			return;
+		}
+	} else {
+		//중복 확인 하지 않은 경우
+		if( !item_check($('[name=id]')) ) return;
+		else {
+			alert('회원가입 불가\n' + signup.id.valid.desc);
+			$('[name=id]').focus();
+			return;
+		}
+	}
+	
+	if(!item_check($('[name=pw]'))) return;
+	if(!item_check($('[name=pw_ck]'))) return;
+	if(!item_check($('[name=email]'))) return;
+	
+	$('form').submit();
+}
+
+function item_check(item) {
+	var data = signup.tag_status(item);
+	if(data.code == 'invalid') {
+		alert('회원가입 불가! \n' + data.desc);
+		item.focus();
+		return false;
+	} else return true;
+}
 
 
 </script>
@@ -258,8 +338,10 @@ function idcheck() {
 							  <tr>
 							    <th class="tit">아이디 *</th>
 							    <td>
+							    <div style="display: flex">
 							      <input type="text" name="id" id="signUpId" class="chk" placeholder="아이디를 입력하세요." value="">
-							      <a id="btnid" class='btn-fill-s'>중복 확인</a><br>
+							      <a id="btnid" class='btn-fill-s'>중복확인</a><br>
+							    </div>  
 							      <div class='valid'>아이디를 입력하세요(영문 소문자, 숫자만 입력 가능)</div>
 							    </td>
 							  </tr>
@@ -273,19 +355,22 @@ function idcheck() {
 							    <th class="tit">비밀번호 *</th>
 							    <td>
 							      <input type="password" id="signUpPw" name="pw" placeholder="비밀번호를 입력하세요.">
+							     
+							      <div class="valid">
 							      <ul class="checked">
 							        <li class="off" style="font-size: inherit;">영문</li>
 							        <li class="off" style="font-size: inherit;">숫자</li>
 							        <li class="off" style="font-size: inherit;">특수문자</li>
 							        <li class="off" style="font-size: inherit;">8자 이상 20자 이하</li>
 							      </ul>
-							      <div class="valid">비밀번호를 입력하세요(영문 대/소문자, 숫자를 모두 포함)</div>
+							      </div>
+							      
 							    </td>
 							  </tr>
 							      <th class="tit">비밀번호 확인 *</th>
 							      <td>
 							        <input type="password" id="pwCheck" name="pw_ck" class="chk" placeholder="비밀번호를 한 번 더 입력하세요.">
-							        <div class="valid"></div>
+							        <div class="valid">비밀번호를 한 번 더 입력하세요.</div>
 							    </td>
 							  <!-- 생년월일 -->
 							  <tr>
@@ -293,7 +378,7 @@ function idcheck() {
 							    <td>
 							      <div class="info" id="info__birth">
 							        <select class="box" id="birth-year">
-							          <option disabled selected>출생연도</option>
+							          <option disabled selected >출생연도</option>
 							        </select>
 							        <select class="box" id="birth-month">
 							          <option disabled selected>월</option>
@@ -315,6 +400,7 @@ function idcheck() {
 							  <tr>
 							    <th class="tit">이메일 *</th>
 							    <td>
+							    <div style="display: flex">
 							      <input class="box" name="email" id="email-txt" type="text" placeholder="이메일 아이디를 입력하세요." /> @ <input class="box"
 							        name="emailDomain" id="domain-txt" type="text" />
 							      <select class="box" id="domain-list" onchange="updateEmailDomain()">
@@ -324,6 +410,7 @@ function idcheck() {
 							        <option value="hanmail.net">hanmail.net</option>
 							        <option value="nate.com">nate.com</option>
 							      </select>
+							      </div>
 							        <div class="valid">이메일을 입력하세요</div>
 							    </td>
 							  </tr>
@@ -336,9 +423,6 @@ function idcheck() {
 							    </td>
 							  </tr>
 							</table>
-							
-
-
 						</div>
 					</div>
 				</form>
@@ -399,7 +483,7 @@ function idcheck() {
 					</ul>
 				</div>
 				<div class="login_btns">
-					<button type="submit" class="btn_bk" id="btnSignup">회원가입</button>
+					<button type="submit" class="btn_bk" id="btnSignup" onclick="go_join()">회원가입</button>
 				</div>
 				<div id='signupMsg'></div>
 				<div class="sns_login">
