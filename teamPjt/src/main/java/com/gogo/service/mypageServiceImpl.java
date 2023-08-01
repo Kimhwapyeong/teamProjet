@@ -49,8 +49,8 @@ public class mypageServiceImpl implements mypageService {
 	
 	
 	@Override
-	public List<MemberVO> chartAge() {
-		List<MemberVO> member = mypageMapper.chartAge();
+	public List<MemberVO> chartAge(MemberVO vo) {
+		List<MemberVO> member = mypageMapper.chartAge(vo);
 		return member;
 	}
 	

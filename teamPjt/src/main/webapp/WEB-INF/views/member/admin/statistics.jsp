@@ -60,9 +60,8 @@
                                 <div class="reserv_box accepted">
                                     <!-- script -->
                                     
-                                    
+										<!--차트-->
 									    <div style="width: 300px; height: 300px;">
-										<!--차트가 그려질 부분-->
 										<canvas id="myChart"></canvas>
 									
 									    <script type="text/javascript">
@@ -73,7 +72,7 @@
 									
 									        function getGraph(){
 									            let ageList = [];
-									            let ageCount = [ssss, dfdd];
+									            let ageCount = [];
 									            
 									            
 									            $.ajax({
@@ -91,7 +90,7 @@
 									                        data : {
 									                            labels: ageList,
 									                            datasets : [{
-									                                data: ageList, ageCount,
+									                                data: ageCount,
 									                                label: '연령대별 예약',
 									                                fill: false,
 									                                backgroundColor: [

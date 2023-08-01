@@ -37,7 +37,7 @@ public class UserController {
 		service.reservList(model);
 	}
 	
-	// 취소내역
+	// 취소 내역
 	@GetMapping("cancel")
 	public void cancel(Model model) {
 		service.cancelList(model);
@@ -49,11 +49,13 @@ public class UserController {
 		
 	}
 	
-	// 회원 정보 수정
+	// 회원 정보 조회
 	@GetMapping("info")
 	public void info(Model model) {
 		service.mem(model);
 	}
+	
+
 	
 	@PostMapping("infoFrm")
 	public void infoFrm() {

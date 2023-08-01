@@ -184,10 +184,15 @@
 	    <result property="memberId" column="MEMBERID" />
 	</resultMap>
 	
-	<!-- 회원정보 수정 -->
+	<!-- 회원 정보 조회 -->
 	<select id="mem" resultType="com.gogo.vo.MemberVO">
 		select memberid, membername, pw, memberemail from member
 	</select>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="update">
+		update member set memberemail = #{memberemail} , pw = #{pw} where memberid = #{memberid}
+	</update>
 	
 
 	

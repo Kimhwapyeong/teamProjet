@@ -99,10 +99,21 @@ public class mypageTest {
 	}
 	
 	@Test
-	public void chartAge() {
-		List<MemberVO> member = mapper.chartAge();
+	public void chartAge(MemberVO vo) {
+		List<MemberVO> member = mapper.chartAge(vo);
 		log.info("=========================");
 		log.info("member: " + member);
+	}
+	
+	@Test
+	public void update() {
+		MemberVO vo = new MemberVO();
+		vo.setMemberId("user1");
+		vo.setMemberEmail("@mail");
+		vo.setPw("5678");
+		mapper.update(vo);
+		log.info("=========================");
+		log.info("vo: " + vo);
 	}
 	
 }

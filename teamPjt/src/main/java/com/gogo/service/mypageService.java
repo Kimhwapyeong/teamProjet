@@ -24,7 +24,7 @@ public interface mypageService {
 	public List<MemberVO> getMember(Model model);
 	
 	// 통계
-	public List<MemberVO> chartAge();
+	public List<MemberVO> chartAge(MemberVO vo);
 	
 	
 	// ▶▶▶  host ▶▶▶

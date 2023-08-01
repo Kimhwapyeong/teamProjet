@@ -56,11 +56,11 @@ public class AdminController {
 //	}
 	
 	@RequestMapping("statistics")
-	public @ResponseBody List<MemberVO> statistics(Model model){
-		List<MemberVO> list = mypageService.chartAge();
+	public @ResponseBody List<MemberVO> statistics(Model model, MemberVO vo){
+		List<MemberVO> list = mypageService.chartAge(vo);
 	    model.addAttribute("mb_id", list);
 	    log.info("============");
-	    log.info("list : " + list);
+	    log.info("mb_id : " + list);
 	    return list;
 	}
 

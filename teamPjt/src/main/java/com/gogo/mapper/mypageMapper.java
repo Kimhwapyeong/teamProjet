@@ -18,7 +18,7 @@ public interface mypageMapper {
 	public List<MemberVO> getMember();
 	
 	// 통계
-	public List<MemberVO> chartAge();
+	public List<MemberVO> chartAge(MemberVO vo);
 	
 	
 	// ▶▶▶  host ▶▶▶
@@ -50,6 +50,9 @@ public interface mypageMapper {
 	
 	// 회원 정보 조회
 	public List<MemberVO> mem();
+	
+	// 회원 정보 수정
+	public int update(MemberVO vo);
 	
 	
 }
