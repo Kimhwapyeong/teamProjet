@@ -191,7 +191,7 @@
 	
 	<!-- 회원 정보 수정 -->
 	<update id="update">
-		update member set memberemail = #{memberemail} , pw = #{pw} where memberid = #{memberid}
+		update member set memberEmail = #{memberEmail} , pw = #{pw} where memberid = #{memberid}
 	</update>
 	
 

@@ -55,6 +55,7 @@
                              
                              
                             <form form name="infoFrm" method="post" action="/member/user/infoFrm">
+                                        <input type="hidden" name="memberId" value=${member.memberId }>
                                 <!-- <div class="profile_photo">
                                     <div class="input_box">
                                         <div class="photo" style="">profile photo</div><input type="file" id="imgFile"
@@ -65,14 +66,14 @@
                                 <div class="myedit_box">
                                     <div class="input_box">
                                         <div class="tit">이메일</div>
-                                        <div class="input"><input type="email" name="email"
+                                        <div class="input"><input type="email" name="memberEmail"
                                                 placeholder="@이메일.com"
                                                 style=" -webkit-text-fill-color: black; margin-left: 12px;" value=${member.memberEmail }>
                                         </div>
                                     </div>
                                     <div class="input_box">
                                         <div class="tit">이름</div>
-                                        <div class="input"><input type="text" name="name"
+                                        <div class="input"><input type="text" name="memberName"
                                                 value=${member.memberName } style="color: rgb(128, 128, 128); -webkit-text-fill-color: rgb(128, 128, 128); margin-left: 12px;" readonly>
                                         </div>
                                     </div>

@@ -54,17 +54,6 @@ public class UserController {
 	public void info(Model model) {
 		service.mem(model);
 	}
-	
-
-	
-	@PostMapping("infoFrm")
-	public void infoFrm() {
-		int res;
-		
-		System.out.println("출력: ");
-		String msg = "";
-	
-	}
 		
 	// 메세지
 	@GetMapping("message")
