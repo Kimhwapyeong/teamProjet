@@ -25,8 +25,8 @@
 		    WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM birthday) + 1 BETWEEN 20 AND 29 THEN '20대'
 		    WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM birthday) + 1 BETWEEN 30 AND 39 THEN '30대'
 		    ELSE '40대 이상'
-		  END AS age_group,
-		  COUNT(*) AS count
+		END AS age_group,
+		COUNT(*) AS count
 		FROM member m
 		JOIN reservation v ON v.memberid = m.memberid
 		GROUP BY 

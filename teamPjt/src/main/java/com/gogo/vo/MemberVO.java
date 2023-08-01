@@ -16,6 +16,9 @@ public class MemberVO {
 	private String registraionDate; // 가입일
 	private String snsCk;	// 소셜계정 로그인 체크
 	private String profile;
+	private String age_group;
+	private String count;
+	
 	
 	// 사용자 권한
 	private List<String> role;
