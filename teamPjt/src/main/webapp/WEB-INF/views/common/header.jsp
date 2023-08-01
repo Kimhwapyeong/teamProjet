@@ -39,6 +39,10 @@
 	// 알림창을 위한 변수
 	let msg = '${msg}'
 	// let msg = '모달테스트';
+	
+	// sideMenu가 켜진 상태에서 페이지 사이즈를 늘려 메뉴가 사라졌을 경우, 다시 사이즈를 줄이면
+	// sideMenu를 보여주기 위한 변수
+	var side;
 
 	window.addEventListener('load', function(){
 		// btnWhere 클릭되면 모달창 보이기
@@ -85,11 +89,13 @@
 	    // 사이드메뉴 버튼 클릭시 사이드메뉴 보여줌
 	    sideMenuOn.addEventListener('click', ()=>{
 	    	document.querySelector("#sideMenu").style.display='block';
+	    	side = 1;
 	    })
 	    
 	    // 사이드 메뉴 이 외의 부분 클릭 시 사이드메뉴 제거
 	    sideMenuOverlay.addEventListener('click', ()=>{
 	    	document.querySelector("#sideMenu").style.display='none';
+	    	side = 0;
 	    })
 	    
 	    // msg가 있으면 알림창 보여주기
@@ -116,6 +122,16 @@
    function sideMenuClose(){
 	   if(window.innerWidth >= 1024){
 	   	document.querySelector("#sideMenu").style.display='none';
+		   // 768-1024 사이즈에서 사이드메뉴를 보여주기 위해 새로 만든 이미지를 사이즈가 커지면 없애기 위한 코드
+	   	sideMenuMiddle.style.display='none';
+	   }
+	   if(window.innerWidth <= 1023){
+		   // 768-1024사이즈에서 사이드메뉴를 보여주는 코드
+		   sideMenuMiddle.style.display='block';
+		   // 브라우저 사이즈가 1023보다 작아졌을 때 side가 1이면 sideMenu 다시 열기
+		   if(side == 1){
+			   document.querySelector("#sideMenu").style.display='block';
+		   }
 	   }
    }
 
@@ -276,6 +292,7 @@
 				<div class='logo'>
 					<a href="/main">STAY FOLIO</a>
 				</div>
+				<div class="side-Menu" id="sideMenuMiddle" style="width: 44px; height: 44px; background-image: url(https://www.stayfolio.com/mobile-menu.svg);"></div>
 				<div class="whe gnb-responsive-margin" style="">
 					<button type="button" class="gnb-mo-small" id="btnWhere">
 						<span class="gnb-mo-small">어디로 떠날까요?</span>
