@@ -14,4 +14,7 @@ public interface MemberMapper {
 
 
 	public int signup(MemberVO member);
+
+
+	public int idCheck(MemberVO member);
 }

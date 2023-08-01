@@ -45,7 +45,7 @@ public class MemberController extends CommonRestController {
 		System.out.println("pw : " + member.getPw());
 		
 		member = memberService.login(member);
-		System.out.println(member.getMemberId());
+		
 		if(member != null) {
 			session.setAttribute("member", member);
 			session.setAttribute("memberId", member.getMemberId());
@@ -60,18 +60,17 @@ public class MemberController extends CommonRestController {
 			} else {
 				map.put("url", "/main");
 			}
-			
-			return map;
-			
+				return map;
 		} else {
 			return responseMap(REST_FAIL, "아이디와 비밀번호를 확인해주세요.");
-		}
+		}  
 		
 	}
-	
-
+	// 회원가입 페이지 이동
 	@GetMapping("/login/signup")
-	public String signup() {
+	public String signup(HttpSession session) {
+		// 세션에 "category"라는 이름으로 "signup"을 저장 
+		session.setAttribute("category", "signup");
 		return "/login/signup";
 	}
 }
