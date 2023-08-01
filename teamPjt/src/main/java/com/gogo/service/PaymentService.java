@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.gogo.vo.PaymentVO;
 import com.siot.IamportRestClient.response.IamportResponse;
@@ -38,5 +40,8 @@ public interface PaymentService {
 			, HttpSession session
 			, String imp_uid
 			, Map<String, Object> map) throws Exception;
+	public String canclePay(@RequestBody Map<String, Object> data
+			, @PathVariable String checksum) throws Exception;
+	public Map<String, Object> payInfoAction(String imp_uid);
 	// 결제 모듈 끝
 }
