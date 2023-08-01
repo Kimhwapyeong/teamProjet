@@ -163,6 +163,7 @@
 				    	
 				    	if(res.responseText == 'success'){
 				    		alert('환불 요청 완료');
+				    		location.href='/main';
 				    	} else if (res.responseText == 'dup'){
 				    		alert('이미 처리된 건입니다.');
 				    	} else {

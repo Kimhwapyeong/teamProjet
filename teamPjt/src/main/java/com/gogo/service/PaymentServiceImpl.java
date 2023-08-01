@@ -160,6 +160,7 @@ public class PaymentServiceImpl implements PaymentService {
 		map.put("imp_uid", p.get("imp_uid").toString());
 		map.put("pg_provider", p.get("pg_provider").toString());
 		map.put("buyer_name", p.get("buyer_name").toString());
+		map.put("card_name", p.get("card_name").toString());
 		
 		return map;
 	}
@@ -220,7 +221,16 @@ public class PaymentServiceImpl implements PaymentService {
 		PaymentVO vo = new PaymentVO();
 		
 		vo.setImpUid(map.get("imp_uid"));
-		vo.setPaymentMethod(map.get("pg_provider"));
+		
+		if(map.get("card_name")!=null && !"".equals(map.get("card_name"))) {
+			
+			vo.setPaymentMethod(map.get("card_name"));
+		} else {
+			
+			vo.setPaymentMethod(map.get("pg_provider"));
+		}
+		
+		
 		vo.setReservationNo(reservationNo);
 		vo.setPaymentNo(paymentNo);
 		vo.setAmount(map.get("amount"));
