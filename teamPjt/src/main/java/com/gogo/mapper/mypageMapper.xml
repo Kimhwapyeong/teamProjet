@@ -161,7 +161,7 @@
 	
 	<!-- 취소 정보 -->
 	<select id="cancelList" resultType="java.util.Map">
-		select s.stayname, s.mainpic1, s.stayno, v.reservationno,
+		select s.stayname, s.mainpic1, s.stayno, v.reservationno, r.price,
 			TO_CHAR(v.checkin, 'yyyy-mm-dd') as checkin,
 		    TO_CHAR(v.checkout, 'yyyy-mm-dd') as checkout,
 			v.membercount, m.memberid

@@ -128,6 +128,18 @@ public class mypageServiceImpl implements mypageService {
 	@Override
 	public List<Map<String, String>> cancelList(Model model) {
 		List<Map<String, String>> list = mypageMapper.cancelList();
+		
+		list.forEach(map->{
+			String day = service_r.reservedDay2(map.get("CHECKIN"), map.get("CHECKOUT"));
+			int dayInteger = Integer.parseInt(day);
+			int priceInteger = Integer.parseInt(String.valueOf(map.get("PRICE")));
+			int res = dayInteger * priceInteger;
+			
+			map.put("amount", service_r.comma(res));
+		});
+
+		
+		
 		log.info("===========");
 		log.info("list : " + list);
 		model.addAttribute("list", list);
