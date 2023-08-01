@@ -18,6 +18,25 @@
 		FROM member
 	</select>
 	
+	<!-- 통계 -->
+	<select id="chartAge" resultType="com.gogo.vo.MemberVO">
+	    SELECT 
+		CASE 
+		    WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM birthday) + 1 BETWEEN 20 AND 29 THEN '20대'
+		    WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM birthday) + 1 BETWEEN 30 AND 39 THEN '30대'
+		    ELSE '40대 이상'
+		  END AS age_group,
+		  COUNT(*) AS count
+		FROM member m
+		JOIN reservation v ON v.memberid = m.memberid
+		GROUP BY 
+		  CASE 
+		    WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM birthday) + 1 BETWEEN 20 AND 29 THEN '20대'
+		    WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM birthday) + 1 BETWEEN 30 AND 39 THEN '30대'
+		    ELSE '40대 이상'
+		  END
+	</select>
+	
 	<!--  ▶▶▶  host ▶▶▶ -->
 	<!-- 숙소 관리 -->
 	<select id="getStay" resultType="java.util.Map">
@@ -118,11 +137,15 @@
 		    stay s,
 		    room r,
 		    reservation v,
-		    member m
+		    member m,
+            payment p
 		WHERE
 		    s.stayno = r.stayno
 		    AND r.roomno = v.roomno
+            and v.reservationno = p.reservationno
 		    And v.memberid = m.memberid
+            and p.cancleyn ='N'
+        order by v.regdate
 	</select>
 	
 	<resultMap type="java.util.HashMap" id="reservMap">

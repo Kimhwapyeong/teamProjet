@@ -23,6 +23,9 @@ public interface mypageService {
 	// 회원 조회
 	public List<MemberVO> getMember(Model model);
 	
+	// 통계
+	public List<MemberVO> chartAge();
+	
 	
 	// ▶▶▶  host ▶▶▶
 	// 숙소 관리

@@ -44,6 +44,14 @@ public class mypageServiceImpl implements mypageService {
 		return null;
 	}
 	
+	
+	@Override
+	public List<MemberVO> chartAge() {
+		List<MemberVO> member = mypageMapper.chartAge();
+		return member;
+	}
+	
+	
 	// ▶▶▶  host ▶▶▶
 	// 숙소 관리
 	@Override

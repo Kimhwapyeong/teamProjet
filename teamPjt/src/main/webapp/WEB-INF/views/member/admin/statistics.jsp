@@ -12,6 +12,7 @@
     <!-- 차트 링크 -->
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
   
 </head>
 
@@ -57,10 +58,79 @@
                         <div class="mypage_content">
                             <div class="reserv_wrap mypage-reservation-info">
                                 <div class="reserv_box accepted">
+                                    <!-- script -->
                                     
                                     
-                                    
-                             			
+									    <div style="width: 300px; height: 300px;">
+										<!--차트가 그려질 부분-->
+										<canvas id="myChart"></canvas>
+									
+									    <script type="text/javascript">
+									
+									        $(document).ready(function(){
+									            getGraph();
+									        });
+									
+									        function getGraph(){
+									            let ageList = [];
+									            let ageCount = [];
+									            
+									            
+									            $.ajax({
+									                url:"member/admin/statistics",
+									                type:"get",
+									                data:{age_group:"", count},
+									                dataType:"json",
+									                success:function(data){
+									                    for(let i=0; i<data.length; i++){
+									                        ageList.push(data[i].age_group);
+									                        ageCount.push(data[i].count)
+									                    }
+									                    new Chart(document.getElementById("myChart"),{
+									                        type:'line',
+									                        data : {
+									                            labels: ageList,
+									                            datasets : [{
+									                                data: ageCount,
+									                                label: '연령대별 예약',
+									                                fill: false,
+									                                backgroundColor: [
+									                                    //색상
+									                                    'rgba(255, 99, 132, 0.2)',
+									                                    'rgba(75, 192, 192, 0.2)',
+									                                    'rgba(255, 159, 64, 0.2)'
+									                                ],
+									                                borderColor: [
+									                                    //경계선 색상
+									                                    'rgba(255, 99, 132, 1)',
+									                                    'rgba(75, 192, 192, 1)',
+									                                    'rgba(255, 159, 64, 1)'
+									                                ],
+									                                borderWidth: 1 //경계선 굵기
+									                            }]
+									                        },
+									                        options: {
+									                        scales: {
+									                            yAxes: [
+									                                {
+									                                    ticks: {
+									                                        beginAtZero: true
+									                                    }
+									                                }
+									                            ]
+									                        }
+									                    }
+									        
+									                    }); // 그래프
+									                },
+									                error:function(){
+									                    alert("실패")
+									                }
+									            })
+									        }
+									
+									    
+									    </script>
                              			
                                 </div>
                             </div>

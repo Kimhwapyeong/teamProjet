@@ -1,7 +1,10 @@
 package com.gogo.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -16,7 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.gogo.service.mypageService;
 import com.gogo.vo.MemberVO;
 import com.google.gson.Gson;
- 
+
+import lombok.extern.log4j.Log4j;
+
+@Log4j
 @Controller
 @RequestMapping("/member/admin/*")
 public class AdminController {
@@ -43,11 +49,21 @@ public class AdminController {
 		
 	}
 	
-	// 통계 및 지원
+//	// 통계 및 지원
+//	@GetMapping("statistics")
+//	public void statistics() {
+//		
+//	}
+	
 	@GetMapping("statistics")
-	public void statistics() {
-		
+	public List<MemberVO> statistics(Model model){
+		List<MemberVO> list = mypageService.chartAge();
+	    model.addAttribute("list", list);
+	    log.info("============");
+	    log.info("list : " + list);
+	    return list;
 	}
+
 
 
 }

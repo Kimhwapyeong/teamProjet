@@ -46,6 +46,13 @@ public class mypageServiceTest {
 		log.info("one : " + one);
 	}
 	
+	@Test
+	public void chartAge() {
+		List<MemberVO> list = service.chartAge();
+		log.info("=========================");
+		log.info("list: " + list);
+	}
+	
 
 	
 }

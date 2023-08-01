@@ -98,4 +98,11 @@ public class mypageTest {
 		log.info("list : " + list);
 	}
 	
+	@Test
+	public void chartAge() {
+		List<MemberVO> member = mapper.chartAge();
+		log.info("=========================");
+		log.info("member: " + member);
+	}
+	
 }
