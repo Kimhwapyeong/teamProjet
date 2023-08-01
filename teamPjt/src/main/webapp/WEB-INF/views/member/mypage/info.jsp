@@ -19,7 +19,7 @@
 	   		e.preventDefault();
 	   	 
 		   	let memberEmail = email.value;
-		   	let pw = newpw.value;
+		   	let pw = newpww.value;
 		   	let newpw= newpwCheck.value;
 		   	let memberId = id.value;
 		   	
@@ -50,16 +50,18 @@
 	          
 	          console.log("회원정보수정 obj", obj)
 	          
-	          fetchPost('/infoFrm', obj, (map)=>{
-		      		if(map.result == 'success'){   // 회원가입 성공 -> 게시판
-		      			location.href='./info/msg='+map.msg;
-		    		} else{
-		    			// 회원가입실패
-		    			signupMsg.innerHTML="회원 정보 수정에 실패하였습니다";
-		    		}	
-				});
+	          fetchPost('/member/mypage/infoFrm', obj, result);
 		});
     });
+    
+    function result(map){
+		if(map.result == 'success'){   // 회원가입 성공 -> 게시판
+  			location.href='/member/mypage/info?msg='+map.msg;
+		} else{
+			// 회원가입실패
+			signupMsg.innerHTML="회원 정보 수정에 실패하였습니다";
+		}	
+    }
     </script>
 </head>
 
@@ -146,7 +148,7 @@
                                         
                                         <div class="input">
 	                                        <label style="display: flex;">
-	                                        <input class="mypage_account_edit_password" type="password" id="newpw"
+	                                        <input class="mypage_account_edit_password" type="password" id="newpww"
 	                                                    name="pw" placeholder="변경할 비밀번호" style="margin-left: 8px;">
 	                                        </label>
                                         </div>
