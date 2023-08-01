@@ -223,12 +223,12 @@ a:link, a:visited {
 //아이디 중복 검사
 $(document).ready(function() {
 	$('#btnid').on('click', function() {
-		idcheck();
+		idCheck();
 	});
 })
 
 //올바른 아이디 입력 형태인지 파악하여 유효하지 않다면 중복확인 불필요
-function idcheck() {
+function idCheck() {
 	var $id = $('[name=id]');
 	if($id.hasClass('chked')) return;
 	console.log('go check');
@@ -242,7 +242,7 @@ function idcheck() {
 
 	$.ajax({
 		type: 'post',
-		url: 'idcheck',
+		url: '/login/idCheck',
 		data: {id: $id.val()},
 		success: function(data) {
 			data = signup.id_usable(data);
@@ -258,7 +258,7 @@ function idcheck() {
 //유효성 검사
 $('.chk').on('keyup', function(){
 	if($(this).attr('name') == 'id') {
-		if(event.keyCode == 13) { idcheck(); }
+		if(event.keyCode == 13) { idCheck(); }
 		else {
 			$(this).removeClass('chked');
 			validate( $(this) );

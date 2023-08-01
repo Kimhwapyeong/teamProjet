@@ -5,7 +5,7 @@ import com.gogo.vo.MemberVO;
 
 @Service
 public interface MemberService {
-	
+
 	MemberVO login(MemberVO member);
 
 	int idCheck(MemberVO member);

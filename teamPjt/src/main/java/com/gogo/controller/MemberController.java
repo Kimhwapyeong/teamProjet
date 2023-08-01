@@ -75,7 +75,7 @@ public class MemberController extends CommonRestController {
 	}
 	
 	//아이디 중복확인 요청
-	@PostMapping("/idcheck")
+	@PostMapping("/login/idCheck")
 	public @ResponseBody Map<String, Object> idCheck(@RequestBody MemberVO member){
 		
 		int res = memberService.idCheck(member);

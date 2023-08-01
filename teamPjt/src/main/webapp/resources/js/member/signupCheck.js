@@ -7,8 +7,8 @@ var signup = {
 	common: {
 		empty: {code: 'invalid', desc: title + '입력하세요.'},
 		space: {code: 'invalid', desc: '공백 없이 입력하세요.'},
-		min: {code: 'invalid', desc: '최소 8자 이상 입력하세요.'},
-		max: {code: 'invalid', desc: '최대 20자 이내로 입력하세요.'}
+		min: {code: 'invalid', desc: '최소 5자 이상 입력하세요.'},
+		max: {code: 'invalid', desc: '최대 10자 이내로 입력하세요.'}
 	},
 	
 	id: {
@@ -25,7 +25,7 @@ var signup = {
 	
 	id_status: function(id) {
 		var reg = /[^a-z0-9]/g;
-		title = $('[name = id]').attr('title');
+		title = $('[name=id]').attr('title');
 		if(id == '') { 
 			return this.common.empty;
 		} else if(id.match(space)) {
@@ -51,7 +51,7 @@ var signup = {
 	
 	pw_status: function(pw) {
 		var reg = /[^a-zA-Z0-9]/g;
-		title = $('[name = pw]').attr('title');
+		title = $('[name=pw]').attr('title');
 		var upper = /[A-Z]/g, lower = /[a-z]/g, digit = /[0-9]/g;
 		if(pw == '') return this.common.empty;
 		else if(pw.match(space)) return this.common.space;
@@ -76,7 +76,7 @@ var signup = {
 	
 	email_status: function(email) {
 		var reg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-		title = $('[name = email]').attr('title');
+		title = $('[name=email]').attr('title');
 		if( email == '' ) return this.common.empty;
 		else if(email.match(space)) return this.common.space;
 		else if( reg.test(email) ) return this.email.valid;
