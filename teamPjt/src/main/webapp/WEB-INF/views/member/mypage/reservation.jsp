@@ -97,7 +97,7 @@
 										</div>
 									</div>
 									<!-- =============================== 가격 & view ============================================-->
-									<div class="price">₩ ${list.PRICE }</div> <br>
+									<div class="price">₩ ${list.amount }</div> <br>
 									<!-- =============================== 예약 상세 연결 ============================================-->
 									<button type="button" class="btn_reserv_detail"
 											onclick="location.href='/member/mypage/reserved_detail'

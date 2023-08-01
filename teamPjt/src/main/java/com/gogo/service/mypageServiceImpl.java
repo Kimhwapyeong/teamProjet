@@ -110,9 +110,12 @@ public class mypageServiceImpl implements mypageService {
 		List<Map<String, String>> list = mypageMapper.reservList();
 		
 		list.forEach(map->{
+			String day = service_r.reservedDay2(map.get("CHECKIN"), map.get("CHECKOUT"));
+			int dayInteger = Integer.parseInt(day);
+			int priceInteger = Integer.parseInt(String.valueOf(map.get("PRICE")));
+			int res = dayInteger * priceInteger;
 			
-			map.put("amount", service_r.comma(map.get("price")));
-			
+			map.put("amount", service_r.comma(res));
 		});
 		
 		log.info("===========");
