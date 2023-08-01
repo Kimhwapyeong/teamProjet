@@ -73,5 +73,19 @@ public class MemberController extends CommonRestController {
 		session.setAttribute("category", "signup");
 		return "/login/signup";
 	}
+	
+	//아이디 중복확인 요청
+	@PostMapping("/idcheck")
+	public @ResponseBody Map<String, Object> idCheck(@RequestBody MemberVO member){
+		
+		int res = memberService.idCheck(member);
+		
+		if(res == 0) {
+			// count = 1이면 fail(회원가입 불가)
+			return responseMap(REST_SUCCESS,"사용가능한 아이디 입니다.");
+		}else {
+			return responseMap(REST_FAIL,"이미 사용중인 아이디 입니다.");	
+		}
+	}
 }
 
