@@ -11,12 +11,14 @@
 		select stayNo, stayname, memberId, stayInfo, mainpic1 from stay
 	</select>
 	
+	
 	<!-- 사용자 관리 -->
 	<select id="getMember" resultType="com.gogo.vo.MemberVO">
 		SELECT memberid, membername, memberemail,
 			TO_CHAR(registraiondate, 'YYYY-MM-DD') AS registraiondate
 		FROM member
 	</select>
+	
 	
 	<!-- 통계 -->
 	<select id="chartAge" resultType="com.gogo.vo.MemberVO">
@@ -37,10 +39,11 @@
 		  END
 	</select>
 	
+	
+	
 	<!--  ▶▶▶  host ▶▶▶ -->
 	<!-- 숙소 관리 -->
 	<select id="getStay" resultType="java.util.Map">
-	<!-- 나중에 where 절 삭제하고 session id 값과 비교  -->
 		SELECT s.stayname, s.stayloc, s.stayadress, s.staytype, s.mainpic1, s.memberid
 		FROM stay s, room r, reservation v, member m
 		where s.stayno = r.stayno
@@ -57,9 +60,9 @@
 	    <result property="memberId" column="MEMBERID" />
 	</resultMap>
 	
+	
 	<!-- 예약 관리 -->
 	<select id="reservinfo" resultType="java.util.Map">
-	<!-- 회원 아이디와 비교해서 해당 -> 출력 -->
 		SELECT
 		      v.roomno,
 		      v.memberid AS reservationMemberId,
@@ -82,6 +85,7 @@
 	    <result property="checkOut" column="CHECKOUT" />
 	</resultMap>
 	
+	
 	<!-- 예약 관리 숙소 대표 사진 -->
 	<resultMap type="map" id="stayMap">
 	    <result property="stayName" column="STAYNAME" />
@@ -96,6 +100,7 @@
 	    JOIN RESERVATION v ON r.ROOMNO = v.ROOMNO
 	</select>  
 	
+	
 	<!-- 가이드 문의 요청 -->
 	<insert id="insert">
 		<selectKey keyProperty="queNo" order="BEFORE" resultType="int">
@@ -106,17 +111,20 @@
 		values (#{queNo}, #{memberId}, #{title}, #{content}, sysdate)
 	</insert>
 
+
 	<!-- 문의 list 출력 -->
 	<select id="qaList" resultType="com.gogo.vo.QuestionVO">
-	<!-- 회원 아이디와 비교해서 해당 -> 출력 -->
-		select queno, title, content, to_char(contentdate, 'yy-mm-dd') as contentdate from question
+		select queno, memberid, title, content, to_char(contentdate, 'yy-mm-dd') as contentdate
+		from question
 	</select>
+
 
 	<!-- 문의 한건 출력 -->
 	<select id="getOne" resultType="com.gogo.vo.QuestionVO">
 	<!-- 회원 아이디와 비교해서 해당 -> 출력 -->
 		select queNo, title, content from question where queNo = #{queNo}
 	</select>
+	
 	
 	
 	<!--  ▶▶▶  user ▶▶▶ -->
@@ -159,6 +167,7 @@
 	    <result property="memberId" column="MEMBERID" />
 	</resultMap>
 	
+	
 	<!-- 취소 정보 -->
 	<select id="cancelList" resultType="java.util.Map">
 		select s.stayname, s.mainpic1, s.stayno, v.reservationno, r.price,
@@ -183,6 +192,7 @@
 	    <result property="memberCount" column="MEMBERCOUNT" />
 	    <result property="memberId" column="MEMBERID" />
 	</resultMap>
+	
 	
 	<!-- 회원 정보 조회 -->
 	<select id="mem" resultType="com.gogo.vo.MemberVO">

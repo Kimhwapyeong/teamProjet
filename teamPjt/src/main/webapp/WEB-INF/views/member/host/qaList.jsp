@@ -81,12 +81,16 @@
                                   
                                   <!-- ▶▶▶  forEach ▶▶▶  -->
                                   <c:forEach items="${list}" var="qa" step="1">
+                                  <c:if test="${sessionScope.memberId == qa.memberId}">
+                                  
                                     <tr style="line-height: 40px">
                                         <td>${qa.queNo }</td>
                                         <td><a href="/member/host/answer">${qa.title }</a></td>
                                         <td style="text-align:center">${qa.content }</td>
                                         <td>${qa.contentDate }</td>
                                     </tr>
+                                    
+                                    </c:if>
                                     </c:forEach>
                                     
                                     </tbody>
