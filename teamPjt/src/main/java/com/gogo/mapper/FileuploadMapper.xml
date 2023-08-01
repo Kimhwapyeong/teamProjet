@@ -3,6 +3,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   				<!-- 경로 + xml 파일명 -->
 <mapper namespace="com.gogo.mapper.FileuploadMapper">
-
+	
+	<insert id="insert">
+		insert into attach (uuid, uploadpath, filename, stayno, roomno)
+		values (#{uuid}, #{uploadPath}, #{fileName}, #{stayNo}, #{roomNo})
+	</insert>
 
 </mapper>

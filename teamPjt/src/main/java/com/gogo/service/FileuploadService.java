@@ -8,5 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public interface FileuploadService {
 
-	public int fileupload(List<MultipartFile> files, String dir);
+	public int fileupload(List<MultipartFile> files, String dir
+						,String stayNo, String roomNo);
 }
