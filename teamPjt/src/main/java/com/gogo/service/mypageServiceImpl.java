@@ -6,11 +6,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gogo.mapper.mypageMapper;
 import com.gogo.vo.MemberVO;
+import com.gogo.vo.PaymentVO;
 import com.gogo.vo.QuestionVO;
 import com.gogo.vo.ReservedVO;
+import com.gogo.vo.RoomVO;
 import com.gogo.vo.StayVO;
 
 import lombok.extern.log4j.Log4j;
@@ -24,6 +27,9 @@ public class mypageServiceImpl implements mypageService {
 	
 	@Autowired
 	ReservedService service_r;
+	
+	@Autowired
+	PaymentService service_p;
 	
 	// ▶▶▶  admin ▶▶▶
 	// 숙소 조회
@@ -155,6 +161,49 @@ public class mypageServiceImpl implements mypageService {
 		model.addAttribute("mem", mem);
 		
 		return null;
+	}
+	
+	// 예약 상세보기
+	@Override
+	public void reservation_detail(@RequestParam("checkIn") String checkIn
+									, @RequestParam("checkOut") String checkOut
+									, @RequestParam("price") String price
+									, @RequestParam("stayNo") String stayNo
+									, @RequestParam("reservationNo") String reservationNo
+									, Model model) {
+		// 총 몇 일인지 반환
+		String day = service_r.reservedDay2(checkIn, checkOut);
+		// 가격에 세자리 콤마를 찍어서 반환
+		String dayPrice = service_r.comma(price);
+		int a = Integer.parseInt(day);
+		int b = Integer.parseInt(price);
+		String allPrice = service_r.comma(a*b);
+		int allPriceInteger = a*b;
+		
+		
+		// stay 정보
+		StayVO stay = service_r.selectOne_stay(stayNo);
+		// reservation 정보
+		ReservedVO reserved = service_r.selectOne_reservation(reservationNo);
+		// room 정보
+		RoomVO room = service_r.selectOne_room(reserved.getRoomNo());
+		// payment 정보
+		PaymentVO payment = service_p.selectOne_payment_reservationNo(reserved.getReservationNo());
+		
+		
+		model.addAttribute("talk", reserved.getTalk());
+		model.addAttribute("impUid", payment.getImpUid());
+		model.addAttribute("stayAddress", stay.getStayAdress());
+		model.addAttribute("allPrice", allPrice);
+		model.addAttribute("allPriceInteger", allPriceInteger);
+		model.addAttribute("dayPrice", dayPrice);
+		model.addAttribute("day", day);
+		model.addAttribute("roomName", room.getRoomName());
+		model.addAttribute("checkIn", reserved.getCheckIn());
+		model.addAttribute("checkOut", reserved.getCheckOut());
+		model.addAttribute("paymentMethod", payment.getPaymentMethod());
+		model.addAttribute("paymentRegDate", payment.getRegDate());
+
 	}
 	
 	
