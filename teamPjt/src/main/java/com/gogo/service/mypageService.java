@@ -26,7 +26,7 @@ public interface mypageService {
 	
 	// ▶▶▶  host ▶▶▶
 	// 숙소 관리
-	public List<StayVO> getStay(Model model);
+	public List<Map<String, String>> getStay(Model model);
 	
 	// 예약 관리
 	public List<ReservedVO>reservinfo(Model model);

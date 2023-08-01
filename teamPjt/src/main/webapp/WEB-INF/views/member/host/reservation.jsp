@@ -49,6 +49,7 @@
                            </ul>
                        </div>
                        <div class="mypage_content">
+                       <c:if test="${sessionScope.memberId == vo.MEMBERID}">
                            <div class="reserv_wrap mypage-reservation-info">
 								<div class="container">
 								<div class="stay_view">
@@ -116,6 +117,8 @@
 								
                                 </div>
                            </div>
+                           
+                           </c:if>
 
                            <!-- =============================== 페이징 ============================================-->
                            <div class="paging"><a href="/" class="prev" title="이전 페이지">이전 페이지</a><a href="/"

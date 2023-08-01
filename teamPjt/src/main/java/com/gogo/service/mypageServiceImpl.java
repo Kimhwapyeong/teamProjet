@@ -47,8 +47,8 @@ public class mypageServiceImpl implements mypageService {
 	// ▶▶▶  host ▶▶▶
 	// 숙소 관리
 	@Override
-	public List<StayVO> getStay(Model model) {
-		List<StayVO> list = mypageMapper.getStay();
+	public List<Map<String, String>> getStay(Model model) {
+		List<Map<String, String>> list = mypageMapper.getStay();
 		log.info("===========");
 		log.info("list : " + list);
 		model.addAttribute("list", list);

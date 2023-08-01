@@ -57,25 +57,29 @@
                            <div class="reserv_wrap mypage-reservation-info">
                            	   <!-- ▶▶▶  forEach ▶▶▶  -->
                                <c:forEach items="${list}" var="vo" step="1">
+                               <c:if test="${sessionScope.memberId == vo.MEMBERID}">
+
                                <div class="reserv_box accepted">
                                    <div class="reserv_name">
                                        <!-- =============================== 숙소이름  ============================================-->
-                                       <p class="name"><span class="ellipsis">${vo.stayName }</span></p>
+                                       <p class="name"><span class="ellipsis">${vo.STAYNAME }</span></p>
                                    </div>
                                    <div class="stay_view">
                                        <div class="photo"
-                                           style="background-image: url(${vo.mainPic1}); background-repeat: no-repeat; background-position: center center; background-size: cover;">
+                                           style="background-image: url(${vo.MAINPIC1}); background-repeat: no-repeat; background-position: center center; background-size: cover;">
                                            <!-- =============================== 수정 ============================================-->
                                            <span class="view">스테이 수정</span></div>
                                    </div>
                                        <div class="reserv_info">
                                            <!-- =============================== 숙소 분류 ============================================-->
-                                           <div class="stay">${vo.stayType } / ${vo.stayLoc }</div>
+                                           <div class="stay">${vo.STAYTYPE } / ${vo.STAYLOC }</div>
                                            <p></p>
                                                <!-- =============================== 숙소 설명 ============================================-->
-                                           <div class="option">${vo.stayAdress }<br></div>
+                                           <div class="option">${vo.STAYADRESS }<br></div>
                                        </div>
                                </div>
+                               
+                               </c:if>
                                </c:forEach>
                            </div>
 

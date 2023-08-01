@@ -20,7 +20,7 @@ public interface mypageMapper {
 	
 	// ▶▶▶  host ▶▶▶
 	// 숙소 관리
-	public List<StayVO> getStay();
+	public List<Map<String, String>> getStay();
 	
 	// 예약 관리
 	public List<ReservedVO> reservinfo();

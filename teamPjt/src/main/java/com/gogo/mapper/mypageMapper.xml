@@ -20,11 +20,23 @@
 	
 	<!--  ▶▶▶  host ▶▶▶ -->
 	<!-- 숙소 관리 -->
-	<select id="getStay" resultType="com.gogo.vo.StayVO">
+	<select id="getStay" resultType="java.util.Map">
 	<!-- 나중에 where 절 삭제하고 session id 값과 비교  -->
-		SELECT stayname, stayloc, stayadress, staytype, mainpic1 FROM stay
-		WHERE memberid like 'host%'
+		SELECT s.stayname, s.stayloc, s.stayadress, s.staytype, s.mainpic1, s.memberid
+		FROM stay s, room r, reservation v, member m
+		where s.stayno = r.stayno
+			and r.roomno = v.roomno
+			and v.memberid = m.memberid
 	</select>
+	
+	<resultMap type="java.util.HashMap" id="getMap">
+	    <result property="stayName" column="STAYNAME" />
+	    <result property="stayLoc" column="STAYLOC" />
+	    <result property="stayAdress" column="STAYADRESS" />
+	    <result property="stayType" column="STAYTYPE" />
+	    <result property="mainPic1" column="MAINPIC1" />
+	    <result property="memberId" column="MEMBERID" />
+	</resultMap>
 	
 	<!-- 예약 관리 -->
 	<select id="reservinfo" resultType="com.gogo.vo.ReservedVO">

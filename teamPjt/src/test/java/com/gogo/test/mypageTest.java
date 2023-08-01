@@ -35,7 +35,7 @@ public class mypageTest {
 	
 	@Test
 	public void getStay() {
-		List<StayVO> list = mapper.getStay();
+		List<Map<String, String>> list = (List<Map<String, String>>) mapper.getStay();
 		log.info("=========");
 		log.info("list : " + list);
 	}
