@@ -70,7 +70,7 @@
                                         <div id="mapi" class="photo"
                                             style="background-image: url(${list.MAINPIC1 }); background-repeat: no-repeat; background-position: center center; background-size: cover; cursor: default !important;">
                                             <span class="view" style="display:none;">스테이 보기</span></div>
-                                    </div><a href="#">
+                                    </div><a>
                                         <div class="reserv_info">
                                             <!-- =============================== 체크인 체크아웃 ============================================-->
                                             <div class="day">${list.CHECKIN } ~
