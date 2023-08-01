@@ -152,7 +152,7 @@ public class mypageServiceImpl implements mypageService {
 		return null;
 	}
 	
-	// 회원정보 수정
+	// 회원정보 조회
 	@Override
 	public List<MemberVO> mem(Model model) {
 		List<MemberVO> mem = mypageMapper.mem();
@@ -161,6 +161,13 @@ public class mypageServiceImpl implements mypageService {
 		model.addAttribute("mem", mem);
 		
 		return null;
+	}
+	
+	// 회원 정보 수정
+	@Override
+	public int update(MemberVO vo) {
+		return mypageMapper.update(vo);
+		
 	}
 	
 	// 예약 상세보기

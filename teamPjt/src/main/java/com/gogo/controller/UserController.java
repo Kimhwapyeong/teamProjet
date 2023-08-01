@@ -2,22 +2,29 @@ package com.gogo.controller;
 
 
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gogo.service.ReservedService;
 import com.gogo.service.mypageService;
+import com.gogo.vo.MemberVO;
 
+import lombok.extern.log4j.Log4j;
 
+@Log4j
 @Controller
 @RequestMapping("/member/mypage/*")
-public class UserController {
+public class UserController extends CommonRestController{
 	
 	@Autowired
 	mypageService service;
@@ -48,6 +55,17 @@ public class UserController {
 	@GetMapping("info")
 	public void info(Model model) {
 		service.mem(model);
+	}
+	
+	@PostMapping("infoFrm")
+	public @ResponseBody Map<String, Object> infoFrm(@RequestBody MemberVO member) {
+		try {
+			int res = service.update(member);
+			return responseMap(res, "회원 정보를 수정하였습니다");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return responseMap(REST_FAIL, "회원 정보 수정 중 문제가 발생하였습니다");
+		}
 	}
 		
 	// 메세지
