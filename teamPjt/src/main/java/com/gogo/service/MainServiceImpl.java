@@ -1,8 +1,11 @@
 package com.gogo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gogo.mapper.MainMapper;
 import com.gogo.vo.RoomOptionVO;
@@ -14,6 +17,9 @@ public class MainServiceImpl implements MainService{
 
 	@Autowired
 	MainMapper mainMapper;
+	
+	@Autowired
+	FileuploadService fileuploadService;
 	
 	@Override
 	public int insert(StayVO vo) {
@@ -34,5 +40,16 @@ public class MainServiceImpl implements MainService{
 		
 		return res;
 	}
+
+	@Override
+	public int roomFileupload(List<MultipartFile> files, String stayNo, String roomNo) {
+		
+		String dir = "room\\";
+		int res = fileuploadService.fileupload(files, dir, stayNo, roomNo);
+		
+		return res;
+	}
+	
+
 
 }
