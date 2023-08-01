@@ -91,7 +91,7 @@
 									                        data : {
 									                            labels: ageList,
 									                            datasets : [{
-									                                data: ageCount,
+									                                data: ageList, ageCount,
 									                                label: '연령대별 예약',
 									                                fill: false,
 									                                backgroundColor: [
