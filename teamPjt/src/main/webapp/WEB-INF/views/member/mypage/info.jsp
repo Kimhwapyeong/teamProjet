@@ -36,13 +36,13 @@
 		   	  return;
 		     }
 		     
-		     if(pw.value == newpw.value){
+		     if(newpww.value == newpwCheck.value){
 		    	 
 		     } else{
-		    	 let msg = "비밀번호가 일치하지 않습니다";
-		    	 pw.focus();  // 비밀번호재입력 포커스
-	       		 newpw.value='';
-	       		 pw.value='';  
+		    	 signupMsg.innerHTML = "비밀번호가 일치하지 않습니다";
+		    	 newpww.focus();  // 비밀번호 재입력 포커스
+		    	 newpww.value='';  
+		    	 newpwCheck.value='';
 	       		 return;
 		     }
 		     
@@ -160,8 +160,8 @@
 	                                        </label>
                                         </div>
                                     </div>
+                                    <div id="signupMsg" style="display: flex; justify-content: center;"></div>  <!-- msg 출력 -->
                                     <button type="button" class="btn_bk btn_sm" style="margin: 10px 0px; width: 100%;" id='changeInfo'>회원정보 변경</button>
-                                    <div id="signupMsg"></div>
                                 </div>
                              </form>
                       			
