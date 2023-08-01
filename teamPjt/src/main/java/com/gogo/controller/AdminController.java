@@ -59,7 +59,7 @@ public class AdminController {
 	public List<MemberVO> statistics(Model model){
 		List<MemberVO> list = mypageService.chartAge();
 	    model.addAttribute("list", list);
-	    model.addAttribute("mb_id",);
+	    model.addAttribute("mb_id");
 	    log.info("============");
 	    log.info("list : " + list);
 	    return list;
