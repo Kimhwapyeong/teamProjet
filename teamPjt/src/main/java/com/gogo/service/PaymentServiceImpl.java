@@ -160,7 +160,11 @@ public class PaymentServiceImpl implements PaymentService {
 		map.put("imp_uid", p.get("imp_uid").toString());
 		map.put("pg_provider", p.get("pg_provider").toString());
 		map.put("buyer_name", p.get("buyer_name").toString());
-		map.put("card_name", p.get("card_name").toString());
+		
+		if(p.get("card_name")!=null) {
+			
+			map.put("card_name", p.get("card_name").toString());
+		}
 		
 		return map;
 	}
@@ -261,6 +265,7 @@ public class PaymentServiceImpl implements PaymentService {
 		System.out.println("roomNo : "+map.get("roomNo"));
 		System.out.println("checkIn : "+map.get("checkIn"));
 		System.out.println("checkOut : "+map.get("checkOut"));
+		System.out.println("talkSome : "+map.get("talkSome"));
 		
 		System.err.println("검증 시작");
 		
@@ -273,6 +278,7 @@ public class PaymentServiceImpl implements PaymentService {
 		String roomNo = String.valueOf(map.get("roomNo"));
 		String reservationNo = String.valueOf(map.get("reservationNo"));
 		String memberCount = String.valueOf(map.get("memberCount"));
+		String talkSome = String.valueOf(map.get("talkSome"));
 		
 		// 예약 insert
 		ReservedVO reserved = new ReservedVO();
@@ -282,6 +288,7 @@ public class PaymentServiceImpl implements PaymentService {
 		reserved.setCheckIn(checkIn);
 		reserved.setCheckOut(checkOut);
 		reserved.setMemberCount(memberCount);
+		reserved.setTalk(talkSome);
 		
 		int reservedRes = service_r.insertReserved(reserved);
 		

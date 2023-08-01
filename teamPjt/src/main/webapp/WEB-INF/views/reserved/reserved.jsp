@@ -101,7 +101,7 @@
 					<li><div class="dt">요청 사항</div>
 						<div class="dd">
 							<textarea rows="5" class="form_style" name="description"
-								placeholder="할말 있음 해라ㅋㅋ (최소 50자)"></textarea>
+								placeholder="할말 있음 해라ㅋㅋ (최소 50자)" id="talk"></textarea>
 						</div></li>
 						
 						
@@ -118,9 +118,9 @@
 <script>
 								
 
-		var buyer_name = 'user1';   // sessionScope.userId 받아와야 함
+		var buyer_name = '${sessionScope.memberId}';   // sessionScope.userId 받아와야 함
 		var paymentNo = '${paymentNo}'; // 시퀀스 추가해야 함
-		var payInfo = '${sessionScope.userId}';
+		var payInfo = '${sessionScope.memberId}';
 		var purchaseName = $('input[name=stayName]').val()+', ' +$('input[name=roomName]').val();
 		var purchaseAmount = '${price}';
 		var pg = '';
@@ -129,17 +129,16 @@
 		var r_checkIn = '${reserved.checkIn}';
 		var r_checkOut = '${reserved.checkOut}';
 		var memberCount = '${reserved.memberCount}';
-		var memberId = 'user1'; // sessionScope.userId 받아와야 함
-		
+		var memberId = '${sessionScope.memberId}'; // sessionScope.userId 받아와야 함
+		var talkSome = $('#talk').val();
 		
 		
 		$(function(){
 			
-			//$("#canclePayVal").change(function(){
+			$('#talk').change(function(){
 				
-			//	canclePay = $("#canclePayVal").val();
-				
-			//});
+				talkSome = $('#talk').val();
+			});
 			
 			$("#realAmountVal").change(function(){
 				

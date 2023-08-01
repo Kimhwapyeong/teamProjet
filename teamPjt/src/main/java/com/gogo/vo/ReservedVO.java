@@ -12,4 +12,5 @@ public class ReservedVO {
 	private String checkIn; // 체크인 날짜
 	private String checkOut; // 체크아웃 날짜
 	private String memberCount; // 예약 인원
+	private String talk; // 요청 사항
 }

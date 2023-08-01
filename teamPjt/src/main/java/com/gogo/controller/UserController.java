@@ -102,6 +102,7 @@ public class UserController {
 		PaymentVO payment = service_p.selectOne_payment_reservationNo(reserved.getReservationNo());
 		
 		
+		model.addAttribute("talk", reserved.getTalk());
 		model.addAttribute("impUid", payment.getImpUid());
 		model.addAttribute("stayAddress", stay.getStayAdress());
 		model.addAttribute("allPrice", allPrice);
