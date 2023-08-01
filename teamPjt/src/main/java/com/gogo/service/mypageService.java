@@ -58,6 +58,9 @@ public interface mypageService {
 	// 회원 정보 조회
 	public List<MemberVO> mem(Model model);
 	
+	// 회원 정보 수정
+	public int update(MemberVO vo);
+	
 	
 	// 예약 상세보기
 	public void reservation_detail(@RequestParam("checkIn") String checkIn
