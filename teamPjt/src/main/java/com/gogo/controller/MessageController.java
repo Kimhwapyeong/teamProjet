@@ -66,14 +66,23 @@ public class MessageController {
 		
 		
 		
+		
 		System.out.println(map+"호출 성공");
 		MessageVO vo = new MessageVO();
 		
-		vo.setContent(String.valueOf(map.get("content")));
+		if(map.get("enterMsg")!=null && !"".equals(map.get("enterMsg"))) {
+			
+			vo.setContent(String.valueOf(map.get("enterMsg")));
+		} else {
+			
+			vo.setContent(String.valueOf(map.get("content")));
+		}
+		
+		
 		vo.setRegDate(String.valueOf(map.get("regDate")));
 		vo.setWriter(String.valueOf(map.get("writer")));
 		vo.setMessageRoom(String.valueOf(map.get("roomId")));
-		vo.setType("TALK");
+		vo.setType(String.valueOf(map.get("type")));
 		int res = service.insertMessage(vo);
 		
 		if(res>0) {

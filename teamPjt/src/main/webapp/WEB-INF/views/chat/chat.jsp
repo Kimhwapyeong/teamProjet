@@ -72,6 +72,7 @@
 						<div id="messageBtn" style=" position:absolute; bottom:0; width: 100%; border:1px solid #f2f2f2;">
 							<input type="text" id="message" style="width:300px; border:1px solid #f2f2f2;"/>
 							<input type="button" class="btnStyle" id="sendBtn" value="전송" style="border:1px solid #f2f2f2;"/>
+							<input type="button" class="btnStyle" id="exitBtn" value="퇴장" style="border:1px solid #f2f2f2;"/>
 						</div>
 				</div>
 				
@@ -96,11 +97,14 @@
 	
 	
 		var message = '';
-		var role = "<유저>"		
+		var role = "<유저>";
 		var memberId = '${sessionScope.memberId}';
-		var content = ''
+		var content = '';
+		var type = '';
+		var enterMsg = '';
 
 	$("#sendBtn").click(function() {
+		enterMsg = '';
 		// 길이 제한
 		if($("#message").val().length > 85){
 			
@@ -114,8 +118,11 @@
 		$('#message').val('')
 	});
 	
-	$("#closeBtn").click(function(){
-		onClose(this);
+	$("#exitBtn").click(function(){
+		
+		content = '연결 해제';
+		type = "OUT";
+		sock.send("<p id='ENTER' style='padding:5px;'>연결 해제</p><br/>");
 	});
 
 	let sock = new SockJS("http://localhost:8080/echo");
@@ -124,6 +131,7 @@
 	// 메시지 전송
 	function sendMessage() {
 			
+			type = "TALK";
 			sock.send(role+memberId+"님의 메세지 : "+$("#message").val());
 		
 	}
@@ -134,8 +142,12 @@
 	function onMessage(msg) {
 		console.log(msg);
 		message = msg.data;
-		
 		let roomId = '${param.roomId}';
+		
+		if(type=='ENTER'){
+			
+			enterMsg = memberId+'님 ${param.roomId}번 채팅방 입장';
+		}
 		
 		var regDate = new Date(msg.timeStamp);
 		var data = {
@@ -144,7 +156,8 @@
 				, regDate : regDate
 				, writer : memberId
 				, roomId : roomId
-				
+				, type : type
+				, enterMsg : enterMsg
 		}
 		
 		
@@ -162,17 +175,26 @@
 			if(res.vo != null){
 				console.log(res.vo);
 			}
+			if(type=='OUT'){
+				alert('연결이 해제되었습니다.');
+				location.href='/main';
+			}
 			
 			alert(res.msg);
 			
 		});
-
-		$("#chatList").append("<p style='padding:5px;'>"+ message + "</p><br/>");
+		
+		if(type=='ENTER'){
+			
+			$("#chatList").append("<p id='ENTER' style='padding:5px;'>"+ message + "</p><br/>");
+		} else {
+			
+			$("#chatList").append("<p style='padding:5px;'>"+ message + "</p><br/>");
+		}
 		
 	}
 	// 서버와 연결을 끊었을 때
 	function onClose(evt) {
-		$("#messageArea").append("연결 끊김");
 
 	}
 	
@@ -183,9 +205,11 @@
 		
 		
 		setTimeout(function(){
+			type = "ENTER";
 			sock.send('${enter}');
-			
+
 		}, 1000);
+		
 		
 		
 	});
