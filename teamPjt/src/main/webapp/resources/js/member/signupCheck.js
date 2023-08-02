@@ -63,40 +63,24 @@ var signup = {
 	},
 	
 	pw_ck_status: function(pw_ck) {
-		title = $('[name = pw_ck]').attr('title');
+		title = $('[name=pw_ck]').attr('title');
 		if ( pw_ck=='' ) return this.common.empty;
 		else if(pw_ck == $('[name=pw]').val() ) return this.pw.equal;
 		else return this.pw.notEqual; 
 	},
-	
-	email: {
-		valid: { code: 'valid', desc: '유효한 이메일입니다.' },
-		invalid: { code: 'invalid', desc: '유효하지 않은 이메일입니다.' }
-	},
-	
-	email_status: function(email) {
-		var reg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-		title = $('[name=email]').attr('title');
-		if( email == '' ) return this.common.empty;
-		else if(email.match(space)) return this.common.space;
-		else if( reg.test(email) ) return this.email.valid;
-		else return this.email.invalid;  
-	},
-	
 	tag_status: function(tag) {
-		var data = tag.val();
-		tag = tag.attr('name');
-		if(tag == 'id') {
-			data = this.id_status(data);
-		} else if(tag == 'pw') {
-			data = this.pw_status(data);
-		} else if(tag == 'pw_ck') {
-			data = this.pw_ck_status(data);
-		} else if(tag == 'email') {
-			data = this.email_status(data);
-		} 
-		return data;
+	    var data;
+	    if (tag.attr('name') == 'id') {
+	        data = this.id_status(tag.val());
+	    } else if (tag.attr('name') == 'pw') {
+	        data = this.pw_status(tag.val());
+	    } else if (tag.attr('name') == 'pw_ck') {
+	        data = this.pw_ck_status(tag.val());
+	    }
+	    return data;
 	}
+
+
 }
 
 //사용자약관체크(script)

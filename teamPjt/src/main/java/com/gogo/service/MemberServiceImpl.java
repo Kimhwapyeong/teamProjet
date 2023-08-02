@@ -43,13 +43,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int signup(MemberVO member) {
 		
-		// 비밀번호 암호화
-		BCryptPasswordEncoder encoder =  new BCryptPasswordEncoder();
-		
 		// 암호화된 비번을 다시 비번에 넣어줌
 		member.setPw(encoder.encode(member.getPw()));
 		
 		System.out.println("pw : "+ member.getPw());
+		// Mapper의 쿼리 호출
 		return memberMapper.signup(member);
 	}
 

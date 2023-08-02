@@ -127,15 +127,7 @@ option {
 	font-size: 14px;
 	background-color: #ffffff;
 }
-/* 중복확인버튼*/
-#btnid{
-	border: 1px solid pink;
-	margin: 0px;
-	padding: 0px;
-	display: flex;
-	background-color: pink;
-	font-size: 12px;
-}
+
 /* 이메일박스 */
 .box{
 	border-radius: 4px;
@@ -164,15 +156,15 @@ table tr td input[name=addr] {
 	font-weight: bold; 
 }
 
-.valid { color: blue; }
+.valid { color: green; }
 
 .invalid { color: red; }	
 }
 a:hover { cursor:pointer; }
 
-a.btn-fill-s { 
+/* a.btn-fill-s { 
 	background-color: #bacdfa;
-}
+} */
 a.btn-empty-s { 
 	background-color: #fff;
 }
@@ -201,11 +193,29 @@ a.btn-empty {
 
 a.btn-fill-s, a.btn-empty-s {
 	text-align: center;
-	padding: 1px 10px;
+	padding: 1px 3px;
 	border:1px solid #c4dafc
 	border-radius: 3px;
-	box-shadow: 2px 2px 3px #022d72;
-	font-size: 13px;
+
+	font-size: 11px;
+}
+
+/* 중복확인버튼*/
+.btn-fill-s {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #f0f0f0; /* 연한 회색 배경색 */
+	border: 1px solid #ccc;
+	margin-left: 3px;
+	border-radius: 4px;
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* 입체적인 느낌을 위한 그림자 효과 */
+	cursor: pointer;
+	transition: box-shadow 0.2s ease; /* hover 효과를 위한 애니메이션 */
+}
+
+.btn-fill-s:hover {
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3); /* hover 시 그림자 효과 강화 */
 }
 a:link, a:visited {
 	text-decoration: none;
@@ -220,8 +230,9 @@ a:link, a:visited {
 </style>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script>
-//아이디 중복 검사
 $(document).ready(function() {
+	// 아이디 중복 검사 
+	// 버튼 클릭 시 함수 실행
 	$('#btnid').on('click', function() {
 		idCheck();
 	});
@@ -240,32 +251,34 @@ $('.chk').on('keyup', function(){
 });	
 	
 })
-
-//올바른 아이디 입력 형태인지 파악하여 유효하지 않다면 중복확인 불필요
 function idCheck() {
 	var $id = $('[name=id]');
+	// 올바른 아이디 입력 형태인지 파악하여 
+	// 유효한 아이디의 경우 서버에서 중복확인
 	if($id.hasClass('chked')) return;
 	console.log('go check');
 	
 	var data = signup.tag_status($id);
+	// 유효하지 않다면 중복확인 불필요
 	if(data.code != 'valid') {
 		alert('아이디 중복 확인 불필요\n' + data);
 		$id.focus();
 		return;
 	}
-
+	 console.log("data1 :"+data);
 	   $.ajax({
 	        type: 'post',
 	        url: '/idCheck',
 	        contentType: 'application/json', // 데이터 전송 형식을 JSON으로 설정
 	        data: JSON.stringify({memberId: $id.val()}), // 아이디 정보를 JSON 형식으로 변환하여 전송
 	        success: function(data) {
+	            console.log("data :"+data);
+	        	
 	            data = signup.id_usable(data);
-	            console.log('data1', data);
 	            console.log(data);
 	            // 중복 확인 결과에 따라 아이디 입력란 옆에 메시지를 표시
-	            $('.valid').eq(0).html(data.msg);
-	            display_status($id.siblings('div'), data.msg);
+	            $('.valid').eq(0).html(data.desc);
+	            display_status($id.siblings('div'), data);
 	            $id.addClass('chked');
 	        },
 	        error: function(req, text) {
@@ -288,46 +301,48 @@ function display_status(div, data) {
 }
 
 function go_join() {
-	if( $('[name=name]').val() == '') {
-		alert('이름을 입력하세요!');
-		$('[name=name]').focus();
-		return;
-	}
+    if ($('[name=name]').val() == '') {
+        alert('이름을 입력하세요!');
+        $('[name=name]').focus();
+        return;
+    }
 
-	//필수 항목의 유효성을 판단하도록 한다.
-	//중복확인 한 경우
-	if($('[name=id]').hasClass('chked') ) {
-		//이미 사용중인 경우는 회원가입 불가
-		if($('[name=id]').siblings('div').hasClass('invalid')) {
-			alert('회원가입 불가\n' + signup.id.unusable.desc);
-			$('[name=id]').focus();
-			return;
-		}
-	} else {
-		//중복 확인 하지 않은 경우
-		if( !item_check($('[name=id]')) ) return;
-		else {
-			alert('회원가입 불가\n' + signup.id.valid.desc);
-			$('[name=id]').focus();
-			return;
-		}
-	}
-	
-	if(!item_check($('[name=pw]'))) return;
-	if(!item_check($('[name=pw_ck]'))) return;
-	if(!item_check($('[name=email]'))) return;
-	
-	$('form').submit();
+    // 필수 항목의 유효성을 판단
+    // 중복확인 한 경우
+    if ($('[name=id]').hasClass('chked')) {
+        // 이미 사용중인 경우는 회원가입 불가
+        if ($('[name=id]').siblings('div').hasClass('invalid')) {
+            alert('회원가입 불가\n' + signup.id.unusable.desc);
+            $('[name=id]').focus();
+            return;
+        }
+    } else {
+        // 중복 확인 하지 않은 경우
+        if (!item_check(signup.tag_status($('[name=id]')))) return;
+        else {
+            alert('회원가입 불가\n' + signup.id.valid.desc);
+            $('[name=id]').focus();
+            return;
+        }
+    }
+
+    if (!item_check($('[name=pw]'))) return;
+    if (!item_check($('[name=pw_ck]'))) return;
+    if (!item_check($('[name=email]'))) return;
+
+    alert("회원가입되었습니다.")
+    $('form').submit();
 }
 
 function item_check(item) {
-	var data = signup.tag_status(item);
-	if(data.code == 'invalid') {
-		alert('회원가입 불가! \n' + data.desc);
-		item.focus();
-		return false;
-	} else return true;
+    var data = item;
+    if (data.code == 'invalid') {
+        alert('회원가입 불가합니다. \n' + data.desc);
+        item.focus();
+        return false;
+    } else return true;
 }
+
 </script>
 <body>
 	<div id="contents">
