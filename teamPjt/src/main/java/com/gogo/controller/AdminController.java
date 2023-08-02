@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gogo.service.mypageService;
 import com.gogo.vo.MemberVO;
@@ -43,17 +44,40 @@ public class AdminController {
 		mypageService.getMember(model);
 	}
 	
+	
+	// 사용자 삭제
+	@GetMapping("delete")
+	public String delete(String memberId, Model model, RedirectAttributes rttr) {
+		System.out.println("memberId:" + memberId);
+		int res = mypageService.delete(memberId);
+		System.out.println("삭제 res : " + res);
+		
+		String msg = "";
+		
+		if(res>0) {
+			msg = memberId + "회원을 삭제하였습니다";
+			rttr.addFlashAttribute("msg", msg);  
+			return "redirect:/member/admin/useradmin";
+		} else {
+			msg = "회원 삭제 도중 오류가 발생하였습니다";
+			model.addAttribute("msg", msg);
+			return "redirect:/member/admin/useradmin";
+		}
+	}
+	
+	
 	// 호스트 지원
 	@GetMapping("hosthelp")
 	public void hosthelp() {
 		
 	}
 	
-//	// 통계 및 지원
-//	@GetMapping("statistics")
-//	public void statistics() {
-//		
-//	}
+	// 통계 및 지원
+	@GetMapping("statistics")
+	public void statistics() {
+		
+	}
+	
 	
 	@RequestMapping("statistics")
 	public @ResponseBody List<MemberVO> statistics(Model model, MemberVO vo){

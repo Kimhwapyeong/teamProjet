@@ -55,10 +55,9 @@
     });
     
     function result(map){
-		if(map.result == 'success'){   // 회원가입 성공 -> 게시판
+		if(map.result == 'success'){   
   			location.href='/member/mypage/info?msg='+map.msg;
 		} else{
-			// 회원가입실패
 			signupMsg.innerHTML="회원 정보 수정에 실패하였습니다";
 		}	
     }
@@ -112,11 +111,12 @@
                                         <input type="hidden" name="memberId" value=${member.memberId } id ='id'>
                                 <!-- <div class="profile_photo">
                                     <div class="input_box">
-                                        <div class="photo" style="">profile photo</div><input type="file" id="imgFile"
-                                            name="imgFile" title="프로필 사진" class="btn_photo"
+                                        <input type="file" id="imgFile" name="imgFile" title="프로필 사진" class="photo" style="">profile photo
+                                        
+                                        <input type="file" id="imgFile" name="imgFile" title="프로필 사진" class="btn_photo"
                                             accept="image/jpeg, image/png">
                                     </div>
-                                </div>  -->
+                                </div>   -->
                                 <div class="myedit_box">
                                     <div class="input_box">
                                         <div class="tit">이메일</div>

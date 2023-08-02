@@ -61,7 +61,7 @@
                     </div>
                     <div class="mypage_content">
                         <div class="reserv_wrap mypage-reservation-info">
-                            <div class="reserv_box accepted">
+                            <div class="reserv_box accepted" style="margin-bottom:0px">
                                 
                             <!-- ========================= 회원 목록 조회 =================== -->
                             
@@ -85,7 +85,7 @@
                                   
                                     <tr style="line-height: 40px">
                                         <td>${qa.queNo }</td>
-                                        <td><a href="/member/host/answer">${qa.title }</a></td>
+                                        <td><a href="/member/host/answer?queNo=${qa.queNo }">${qa.title }</a></td>
                                         <td style="text-align:center">${qa.content }</td>
                                         <td>${qa.contentDate }</td>
                                     </tr>

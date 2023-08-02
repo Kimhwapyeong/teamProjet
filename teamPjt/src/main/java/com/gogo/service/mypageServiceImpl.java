@@ -53,6 +53,11 @@ public class mypageServiceImpl implements mypageService {
 		return null;
 	}
 	
+	@Override
+	public int delete(String memberId) {
+		return mypageMapper.delete(memberId);
+	}
+	
 	
 	@Override
 	public List<MemberVO> chartAge(MemberVO vo) {

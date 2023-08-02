@@ -24,6 +24,9 @@ public interface mypageService {
 	// 회원 조회
 	public List<MemberVO> getMember(Model model);
 	
+	// 회원 삭제
+	public int delete(String memberId);
+	
 	// 통계
 	public List<MemberVO> chartAge(MemberVO vo);
 	

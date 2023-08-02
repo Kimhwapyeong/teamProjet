@@ -65,7 +65,7 @@
 						<div class="mb-3">
 							  <label for="content" class="form-label"></label>
 							  <textarea class="form-control" id="content" rows="10" name="content">${que.content }
-							
+							 
 							  </textarea>
 						</div>
 						<div style=" float: right">
