@@ -1,5 +1,6 @@
 package com.gogo.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -226,6 +227,14 @@ public class mypageServiceImpl implements mypageService {
 		log.info("like : " + like);
 		model.addAttribute("like", like);
 		return null;
+	}
+
+	@Override
+	public int deleteArr(String[] idArr) {
+		System.out.println(idArr[0]);
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("idArr", idArr);
+		return mypageMapper.deleteArr(paramMap);
 	}
 	
 	

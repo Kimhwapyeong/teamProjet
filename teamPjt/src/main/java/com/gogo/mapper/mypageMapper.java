@@ -1,5 +1,6 @@
 package com.gogo.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,6 +60,8 @@ public interface mypageMapper {
 	
 	// 관심 스테이
 	public List<Map<String, String>> likestay();
+
+	public int deleteArr(HashMap<String, Object> idArr);
 	
 	
 }

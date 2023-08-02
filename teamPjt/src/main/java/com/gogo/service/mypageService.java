@@ -75,4 +75,7 @@ public interface mypageService {
 	
 	// 관심 스테이
 	public List<Map<String, String>> likestay(Model model);
+	
+	// 여러명 삭제
+	public int deleteArr(String[] idArr);
 }

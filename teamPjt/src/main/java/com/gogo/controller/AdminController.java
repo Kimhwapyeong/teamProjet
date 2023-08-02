@@ -45,11 +45,33 @@ public class AdminController {
 	}
 	
 	
+//	// 사용자 삭제
+//	@GetMapping("delete")
+//	public String delete(String memberId, Model model, RedirectAttributes rttr) {
+//		System.out.println("memberId:" + memberId);
+//		int res = mypageService.delete(memberId);
+//		System.out.println("삭제 res : " + res);
+//		
+//		String msg = "";
+//		
+//		if(res>0) {
+//			msg = memberId + "회원을 삭제하였습니다";
+//			rttr.addFlashAttribute("msg", msg);  
+//			return "redirect:/member/admin/useradmin";
+//		} else {
+//			msg = "회원 삭제 도중 오류가 발생하였습니다";
+//			model.addAttribute("msg", msg);
+//			return "redirect:/member/admin/useradmin";
+//		}
+//	}
 	// 사용자 삭제
 	@GetMapping("delete")
 	public String delete(String memberId, Model model, RedirectAttributes rttr) {
 		System.out.println("memberId:" + memberId);
-		int res = mypageService.delete(memberId);
+		String[] idArr = memberId.split(",");
+		System.out.println("idArr : " + idArr);
+		
+		int res = mypageService.deleteArr(idArr);
 		System.out.println("삭제 res : " + res);
 		
 		String msg = "";
