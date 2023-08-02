@@ -67,7 +67,10 @@
 	    })
 		// 언제 떠날까요? 달력 끝
 
-
+		// window 첫 로드시 width 1024보다 작으면 사이드바 버튼 display none
+		if(window.innerWidth >= 1024){
+			sideMenuMiddle.style.display='none';
+		}
 		
 	    // a 요소 (button 의 자식 a)
 	    let buttons = document.querySelectorAll("button>a");
@@ -84,6 +87,12 @@
 	                }
 	            });
 	        })
+	    })
+	    
+	    // 사이드메뉴 버튼 클릭시 사이드메뉴
+	    sideMenuMiddle.addEventListener('click', ()=>{
+	    	document.querySelector("#sideMenu").style.display='block';
+	    	side = 1;
 	    })
 	    
 	    // 사이드메뉴 버튼 클릭시 사이드메뉴 보여줌
@@ -122,7 +131,7 @@
    function sideMenuClose(){
 	   if(window.innerWidth >= 1024){
 	   	document.querySelector("#sideMenu").style.display='none';
-		   // 768-1024 사이즈에서 사이드메뉴를 보여주기 위해 새로 만든 이미지를 사이즈가 커지면 없애기 위한 코드
+	   // 768-1024 사이즈에서 사이드메뉴를 보여주기 위해 / 새로 만든 이미지를 사이즈가 커지면 없애기 위한 코드
 	   	sideMenuMiddle.style.display='none';
 	   }
 	   if(window.innerWidth <= 1023){
@@ -390,7 +399,7 @@
 		<div aria-hidden="true" class="jsx-645c674fce93a7bf overlay"
 			id='sideMenuOverlay'></div>
 		<div class="jsx-645c674fce93a7bf menu-modal">
-			<a href="/mypage/account/edit" class="jsx-c4e7717c5657cc43">
+			<a href="/member/mypage/reservation" class="jsx-c4e7717c5657cc43">
 				<div class="jsx-c4e7717c5657cc43 profile">
 					<div class="jsx-c4e7717c5657cc43 profile-img"></div>
 					<div class="jsx-c4e7717c5657cc43 profile-right">

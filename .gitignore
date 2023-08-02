@@ -117,3 +117,7 @@ buildNumber.properties
 MANIFEST.MF
 
 root-context.xml
+
+images/stay/
+
+images/room/

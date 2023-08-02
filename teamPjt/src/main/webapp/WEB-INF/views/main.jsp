@@ -7,8 +7,6 @@
 <a href="/reserved/reserved">예약</a><br>
 <a href="/addstay">숙소등록</a><br>
 <a href="/addroom">room등록</a>
-
 </div>
-
 
 <jsp:include page="common/footer.jsp" />

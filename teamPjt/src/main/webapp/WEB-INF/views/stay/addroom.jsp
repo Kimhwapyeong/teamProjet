@@ -226,7 +226,7 @@
 										<label for="file_attach"><img alt="file_upload_button"
 											src="https://www.stayfolio.com/web/images/file_upload_button.svg"
 											style="margin-bottom: 2px; margin-right: 6px">이미지
-											첨부</label><input type="file" id="file_attach" multiple=""
+											첨부</label><input type="file" name="files" id="file_attach" multiple=""
 											accept="image/png,image/gif,image/jpg,image/jpeg,image/webp,image/tif,image/tiff,image/bmp,video/mp4,application/pdf,video/quicktime">
 									</div>
 								</div>
