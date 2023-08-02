@@ -44,7 +44,7 @@ public class MainServiceImpl implements MainService{
 	@Override
 	public int roomFileupload(List<MultipartFile> files, String stayNo, String roomNo) {
 		
-		String dir = "room\\";
+		String dir = "rooom\\";
 		int res = fileuploadService.fileupload(files, dir, stayNo, roomNo);
 		
 		return res;

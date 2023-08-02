@@ -19,7 +19,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class FileuploadServiceImpl implements FileuploadService{
 	
-	private static final String ATTACHES_DIR = "\\c:upload\\tmp\\";
+	private static final String ATTACHES_DIR = "D:\\teamProject\\teamProjetGit\\teamPjt\\src\\main\\webapp\\resources";
 	
 	@Autowired
 	FileuploadMapper fileuploadMapper;
