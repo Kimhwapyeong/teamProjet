@@ -1,5 +1,6 @@
 package com.gogo.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,11 +22,14 @@ public interface mypageService {
 	// 숙소 조회
 	public List<StayVO> getList(Model model);
 	
+	// 숙소 삭제
+	public int deleteStay(String[] idArr);
+	
 	// 회원 조회
 	public List<MemberVO> getMember(Model model);
 	
-	// 회원 삭제
-	public int delete(String memberId);
+	// 회원 여러명 삭제
+	public int deleteArr(String[] idArr);
 	
 	// 통계
 	public List<MemberVO> chartAge(MemberVO vo);
@@ -76,6 +80,4 @@ public interface mypageService {
 	// 관심 스테이
 	public List<Map<String, String>> likestay(Model model);
 	
-	// 여러명 삭제
-	public int deleteArr(String[] idArr);
 }

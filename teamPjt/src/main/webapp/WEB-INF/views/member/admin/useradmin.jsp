@@ -31,35 +31,11 @@
 <script type="text/javascript">
 	window.addEventListener('load', function(){
 		
-		/*$(document).ready(function(){
-			$('#deleteBtn').on('click', function(){
-				var checked = document.querySelectorAll('[type=checkbox]:checked');
-				console.log(checked.length);
-				
-				// 1개도 선택되지 않으면 알람창
-				if(checked.length<1){
-					alert('삭제할 회원을 선택해주세요');
-					return false;
-				}
-				
-				// 배열 선언
-				var idList = [];
-				
-				$.each(checked, function(k,v){
-					idList.push($(this).val());
-				});
-				
-				console.log(idList);
-				console.log(idList.join(','));  // 배열 문자열로 변경
-				
-			})
-		})*/
-		
 		
 	});
 	
 		function deleteMember(){
-		 	delNoList = document.querySelectorAll("[type=check]:checked");
+		 	delNoList = document.querySelectorAll("[type=checkbox]:checked");
 		 	
 		 	let memberId = "";
 		 	
@@ -139,7 +115,7 @@
 
 									<form action="./delete" name="memberFrm" >
 										<table class="table">
-											<!--<table class="table table-striped table-hover">-->
+											<!--<table class="table tableㅔ-striped table-hover">-->
 											<thead>
 												<tr>
 													<th></th>
@@ -153,7 +129,7 @@
 
 												<!-- ▶▶▶  forEach ▶▶▶  -->
 												<c:forEach items="${member}" var="member" step="1">
-													<tr  style="line-height:50px;">
+													<tr style="line-height:50px;">
 														<td>
 															<label class="check_skin">
 															<input type="checkbox"name="memberId" value="${member.memberId }">
@@ -173,7 +149,7 @@
 								</div>
 								
 								<!-- 삭제 버튼 -->
-								<button type="button" id="deleteBtn" class="btn btn-outline-secondary btn-sm"
+								<button type="checkbox" id="deleteBtn" class="btn btn-outline-secondary btn-sm"
 									 onclick="deleteMember()" style="float: right;">회원 삭제</button>
 							</div>
 						</div>

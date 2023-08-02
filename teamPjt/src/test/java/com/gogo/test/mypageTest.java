@@ -122,10 +122,5 @@ public class mypageTest {
 		log.info("list : " + list);
 	}
 	
-	@Test
-	public void delete() {
-		int res = mapper.delete("testuser");
-		log.info("res : " + res);
-	}
 	
 }

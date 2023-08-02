@@ -15,11 +15,14 @@ public interface mypageMapper {
 	// 숙소 조회
 	public List<StayVO> getList();
 	
+	// 숙소 삭제
+	public int deleteStay(HashMap<String, Object> idArr);
+	
 	// 회원 조회
 	public List<MemberVO> getMember();
 	
 	// 회원 삭제
-	public int delete(String memberId);
+	public int deleteArr(HashMap<String, Object> idArr);
 	
 	// 통계
 	public List<MemberVO> chartAge(MemberVO vo);
@@ -61,7 +64,6 @@ public interface mypageMapper {
 	// 관심 스테이
 	public List<Map<String, String>> likestay();
 
-	public int deleteArr(HashMap<String, Object> idArr);
 	
 	
 }

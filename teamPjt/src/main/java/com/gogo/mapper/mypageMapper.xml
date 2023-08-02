@@ -12,6 +12,15 @@
 	</select>
 	
 	
+	<!-- 숙소 삭제 -->
+	<delete id="deleteStay">
+		delete stay where stayno in
+		<foreach collection="idArr" item="item" index="index" separator="," open="(" close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	
 	<!-- 사용자 관리 -->
 	<select id="getMember" resultType="com.gogo.vo.MemberVO">
 		SELECT memberid, membername, memberemail,
@@ -20,10 +29,14 @@
 	</select>
 	
 	
-	<!-- 회원 삭제 -->
-	<delete id="delete">
-		DELETE FROM member WHERE memberid in (${memberId})
-	</delete>	
+	<!-- 멤버 여러명 삭제 -->
+	<delete id="deleteArr">
+		delete member where memberid in
+		<foreach collection="idArr" item="item" index="index" separator="," open="(" close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
 	
 	<!-- 통계 -->
 	<select id="chartAge" resultType="com.gogo.vo.MemberVO">
@@ -217,13 +230,5 @@
 	    <result property="memberId" column="MEMBERID" />
 	</resultMap>
 
-	
-	<!-- 멤버 여러명 삭제 -->
-	<delete id="deleteArr">
-		delete member where memberid in
-		<foreach collection="idArr" item="item" index="index" separator="," open="(" close=")">
-			#{item}
-		</foreach>
-	</delete>
 	
 </mapper>

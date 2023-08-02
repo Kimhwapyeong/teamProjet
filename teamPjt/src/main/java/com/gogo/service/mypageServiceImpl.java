@@ -44,6 +44,14 @@ public class mypageServiceImpl implements mypageService {
 			
 		}
 	
+	@Override
+	public int deleteStay(String[] idArr) {
+		System.out.println(idArr[0]);
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("idArr", idArr);
+		return mypageMapper.deleteStay(paramMap);
+	}
+	
 	// 회원 조회
 	@Override
 	public List<MemberVO> getMember(Model model) {
@@ -55,8 +63,11 @@ public class mypageServiceImpl implements mypageService {
 	}
 	
 	@Override
-	public int delete(String memberId) {
-		return mypageMapper.delete(memberId);
+	public int deleteArr(String[] idArr) {
+		System.out.println(idArr[0]);
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("idArr", idArr);
+		return mypageMapper.deleteArr(paramMap);
 	}
 	
 	
@@ -229,13 +240,6 @@ public class mypageServiceImpl implements mypageService {
 		return null;
 	}
 
-	@Override
-	public int deleteArr(String[] idArr) {
-		System.out.println(idArr[0]);
-		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("idArr", idArr);
-		return mypageMapper.deleteArr(paramMap);
-	}
 	
 	
 }
