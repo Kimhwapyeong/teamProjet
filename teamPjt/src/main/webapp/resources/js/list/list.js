@@ -254,7 +254,7 @@ function selectDay(obj) {
             checkInDate = $(obj).data('day');
 
             $(obj).addClass('checkIn');
-            $('.checkIn').find('.check_in_out_p').html('체크인');
+            // $('.checkIn').find('.check_in_out_p').html('체크인');
 
             $('.day[data-day="' + checkOutDate + '"]').addClass('checkOut');
             $('.checkOut').find('.check_in_out_p').html('체크아웃');
@@ -288,7 +288,7 @@ function selectDay(obj) {
                 $('.day').removeClass('selectDay');
 
                 $(obj).addClass('checkIn');
-                $('.checkIn').find('.check_in_out_p').html('체크인');
+                //$('.checkIn').find('.check_in_out_p').html('체크인');
 
                 checkInDate = $(obj).data('day');
                 checkOutDate = "";

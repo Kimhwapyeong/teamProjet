@@ -46,7 +46,7 @@
             
             
             // 날짜 선택 버튼
-            let dateBtn = document.querySelector('.booking_summary .day');
+            let dateBtn = document.querySelector('.booking_summary .dayday');
             dateBtn.addEventListener('click', () => {
             	console.log('aa');
             	document.querySelector('.booking_summary .modalOverlay').style.display='';
@@ -101,7 +101,7 @@
 		<div class="container fdetail_calendar">
 			<div class="booking_summary">
 				<div class="name">${list.STAYNAME }</div>
-				<div class="day" role="presentation">
+				<div class="dayday" role="presentation">
 					<div class="btn_select ">날짜를 선택해주세요.</div>
 				</div>
 				
@@ -286,7 +286,8 @@
                                                 
                                                 
                                             </div>
-                                        </div><button type="button" class="day_del">선택 날짜 지우기</button>
+                                        </div>
+                                        <!-- <button type="button" class="day_del">선택 날짜 지우기</button> -->
                                     </div>
                                     <div class="btn_close" role="presentation"></div>
                                 </div>
