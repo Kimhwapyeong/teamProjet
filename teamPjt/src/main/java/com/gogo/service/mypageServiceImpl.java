@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gogo.mapper.mypageMapper;
+import com.gogo.vo.AnswerVO;
 import com.gogo.vo.MemberVO;
 import com.gogo.vo.PaymentVO;
 import com.gogo.vo.QuestionVO;
@@ -68,6 +69,11 @@ public class mypageServiceImpl implements mypageService {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("idArr", idArr);
 		return mypageMapper.deleteArr(paramMap);
+	}
+	
+	@Override
+	public int answering(AnswerVO vo) {
+		return mypageMapper.answering(vo);
 	}
 	
 	

@@ -109,10 +109,11 @@ window.addEventListener('load', function(){
                     
                     <!-- 답변 form -->
                  	<form name='answering' id="answering" style='display: none;' method="post" action="/member/admin/answering">
+						 문의 번호 : <input type="textNo" name="queNo" value="${que.queNo }" style="width:15px">번
 						<div class="mb-3">
-							  <label for="content" class="col-sm-2 col-form-label">답변하기</label>
-							  <textarea class="form-control" id="answerContent" rows="10" 
-							  name="answerContent" style="font-size:15px; background-color:white" >답변하기
+							  <label for="answerInfo" class="col-sm-2 col-form-label"></label>
+							  <textarea class="form-control" id="answerInfo" rows="10" 
+							  name="answerInfo" style="font-size:15px; background-color:white" >
 							  </textarea>
 						</div>
 						<button type="submit" class="btn btn-outline-dark btn-sm" style=" float: right">답변 보내기</button>

@@ -38,6 +38,12 @@
 	</delete>
 	
 	
+	<!-- 호스트지원 - 문의 답변하기 -->
+	<insert id="answering">
+		insert into answer (queno, answerinfo, answerdate) values (#{queNo}, #{answerInfo}, sysdate)
+	</insert>
+	
+	
 	<!-- 통계 -->
 	<select id="chartAge" resultType="com.gogo.vo.MemberVO">
 		SELECT 

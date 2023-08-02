@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gogo.vo.AnswerVO;
 import com.gogo.vo.MemberVO;
 import com.gogo.vo.QuestionVO;
 import com.gogo.vo.ReservedVO;
@@ -30,6 +31,9 @@ public interface mypageService {
 	
 	// 회원 여러명 삭제
 	public int deleteArr(String[] idArr);
+	
+	// 호스트지원 - 답변하기
+	public int answering(AnswerVO vo);
 	
 	// 통계
 	public List<MemberVO> chartAge(MemberVO vo);

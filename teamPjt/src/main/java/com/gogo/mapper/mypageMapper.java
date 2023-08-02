@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.gogo.vo.AnswerVO;
 import com.gogo.vo.MemberVO;
 import com.gogo.vo.QuestionVO;
 import com.gogo.vo.ReservedVO;
@@ -23,6 +24,12 @@ public interface mypageMapper {
 	
 	// 회원 삭제
 	public int deleteArr(HashMap<String, Object> idArr);
+	
+	// 호스트지원 - 답변하기
+	public int answering(AnswerVO vo);
+	
+	// 답변한 내용 호스트 확인 
+	//public AnswerVO anwerInfo(int queNo);
 	
 	// 통계
 	public List<MemberVO> chartAge(MemberVO vo);
