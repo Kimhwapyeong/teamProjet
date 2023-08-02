@@ -91,8 +91,8 @@
             btn2.addEventListener('click', function () {
                 selectNumber.classList.add('open');
             })
-            let clsbtn1 = document.querySelectorAll('.btn_close')[1];
-            clsbtn1.addEventListener('click', function () {
+            let clsbtn3 = document.querySelectorAll('.btn_close')[3];
+            clsbtn3.addEventListener('click', function () {
                 selectNumber.classList.remove('open');
             })
 
@@ -101,8 +101,8 @@
             btn3.addEventListener('click', function () {
                 selectPrice.classList.add('open');
             })
-            let clsbtn2 = document.querySelectorAll('.btn_close')[2];
-            clsbtn2.addEventListener('click', function () {
+            let clsbtn4 = document.querySelectorAll('.btn_close')[4];
+            clsbtn4.addEventListener('click', function () {
                 selectPrice.classList.remove('open');
             })
 
@@ -111,8 +111,8 @@
             btn4.addEventListener('click', function () {
                 selectType.classList.add('open');
             })
-            let clsbtn3 = document.querySelectorAll('.btn_close')[3];
-            clsbtn3.addEventListener('click', function () {
+            let clsbtn5 = document.querySelectorAll('.btn_close')[5];
+            clsbtn5.addEventListener('click', function () {
                 selectType.classList.remove('open');
             })
 
@@ -121,8 +121,8 @@
             btn5.addEventListener('click', function () {
                 selectTheme.classList.add('open');
             })
-            let clsbtn4 = document.querySelectorAll('.btn_close')[4];
-            clsbtn4.addEventListener('click', function () {
+            let clsbtn6 = document.querySelectorAll('.btn_close')[6];
+            clsbtn6.addEventListener('click', function () {
                 selectTheme.classList.remove('open');
             })
 
@@ -241,7 +241,7 @@
 
             let calendarContainer = document.querySelector('#iscalendar');
             let iscalendar = document.querySelectorAll('.DateInput input');
-            let closeBtn2 = document.getElementById('closeBtn2');
+            let closeBtn222 = document.getElementById('closeBtn222');
 
             // Event listener for iscalendar inputs and closeBtn2
             function toggleCalendar() {
@@ -256,7 +256,7 @@
             input.addEventListener('click', toggleCalendar);
             });
 
-            closeBtn2.addEventListener('click', toggleCalendar);
+            closeBtn222.addEventListener('click', toggleCalendar);
         })
 
 
@@ -274,7 +274,7 @@
 </head>
 
 <body style="">
- 	<%-- <%@include file="../common/header.jsp" %> --%>
+ 	<%@include file="../common/header.jsp" %>
     <div role="presentation">
         <div class="container sub_title">
             <div class="tit">FIND STAY</div>
@@ -412,12 +412,12 @@
                                                               <div>
                                                                 <p>
                                                                   <span style="padding-bottom:15px">체크인</span>
-                                                                  <label id="check_in_day" style='font-size: 20px;'></label>
+                                                                  <label id="check_in_day_list" style='font-size: 20px;'></label>
                                                                 </p>
                                                                 <p class="space" style="color: #212529;font-size:2em;">~</p>
                                                                 <p>
                                                                   <span>체크아웃</span>
-                                                                  <label id="check_out_day" style='font-size: 20px;'></label>
+                                                                  <label id="check_out_day_list" style='font-size: 20px;'></label>
                                                                 </p>
                                                                 <br><br>
                                                                 <p>
@@ -441,7 +441,7 @@
                                                                   </div>
                                                                   <button
                                                                     style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer; position:absolute; top:3%; right:2%;"
-                                                                    type="button" id="closeBtn2">
+                                                                    type="button" id="closeBtn222">
                                                                     <img src="https://www.stayfolio.com/web/images/btn_layer_close.png">
                                                                   </button>
                                                                 </form>
@@ -806,51 +806,11 @@
     </div>
     </div>
 
-
-    <!-- 숙소 목록 -->
-    <%-- <div class="container findstay_list  ">
-        <div class="flist_wrap">
-            <c:forEach items="${list}" var="list" step="1">
-	            <a href="/stay/room">
-                	<div class="flist_box">
-                        <div class="info_container_wrapper">
-                            <div class="name info_container" role="presentation">${list.stayName }<span>${list.stayType }</span></div>
-                            <div class="clearfix"></div>
-                            <div class="flist_info" role="presentation">
-                                <p class="address info_container" role="presentation"><span>${list.stayLoc }</span><br>
-                                	기준 ${list.stdPerson }명&nbsp;(최대 ${list.overPerson }명)<br>${list.minPrice } ~ ${list.maxPrice }</p>
-                                <p class="btn_more " role="presentation" tabindex="-1" style="cursor: pointer;"> 예약하기</p>
-                            </div>
-                        </div>
-                        <div class="flist_img" role="presentation" style="padding-top: 0px;">
-                            <ul class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events slider1 flist_slider">
-                                <div class="swiper-button-prev"></div>
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-wrapper"> 
-                                    <li class="swiper-slide img swiper-slide-active"
-                                        style="background: url(&quot;${list.mainPic1}&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
-                                    </li>
-                                    <li class="swiper-slide img swiper-slide-next"
-                                        style="background: url(&quot;${list.mainPic2}&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
-                                    </li> 
-                                </div>
-                                <div class="_badge_badge_wrapper__h9IsV">
-                                    <div class="_badge_exclusive__prNZN"><span
-                                            class="_badge_txt__fonwF">${list.badge }</span>
-									</div>
-								</div>
-							</ul>
-						</div>
-<!--                     </a> -->
-					<button type="button" class="btn_like "><span>관심스테이</span></button>
-				</a>
-			</div>
-        </c:forEach> --%>
 	<div class="container findstay_list  ">
 		<div class="flist_wrap">
 			<c:forEach items="${list}" var="list" step="1">
 				<div class="flist_box">
-					<a href="/stay/room/${list.stayName}">
+					<a href="/stay/room?stayName=${list.stayName}">
 						<div class="info_container_wrapper">
 							<div class="name info_container" role="presentation">${list.stayName }<span>${list.stayType }</span></div>
 							<div class="clearfix"></div>

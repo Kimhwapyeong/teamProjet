@@ -1,6 +1,7 @@
 package com.gogo.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,24 @@ public class StayServiceImpl implements StayService{
 		log.info("===========");
 		log.info("list : " + list);
 		model.addAttribute("list", list);
+		return null;
+	}
+
+	@Override
+	public Map<String, String> roomInfo(String stayName, Model model) {
+		Map<String, String> roomInfo = stayMapper.roomInfo(stayName);
+		log.info("===========");
+		log.info("list : " + roomInfo);
+		model.addAttribute("list", roomInfo);
+		return null;
+	}
+
+	@Override
+	public List<Map<String, String>> stayRoomList(String stayName, Model model) {
+		List<Map<String, String>> stayRoomInfo = stayMapper.stayRoomList(stayName);
+		log.info("===========");
+		log.info("stayRoomInfo : " + stayRoomInfo);
+		model.addAttribute("stayRoomInfo", stayRoomInfo);
 		return null;
 	}
 }

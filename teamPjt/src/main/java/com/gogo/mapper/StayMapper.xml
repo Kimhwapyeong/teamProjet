@@ -14,8 +14,8 @@
 			subq3.badge,
 			subq3.mainpic1,
 			subq3.mainpic2,
-			subq3.minPrice as minPrice,
-			subq3.maxPrice as maxPrice
+			TO_CHAR(subq3.minPrice, '999,999') as minPrice,
+			TO_CHAR(subq3.maxPrice, '999,999') as maxPrice
 		FROM (
 			SELECT subq2.stayNo, subq2.stayName,
 			subq2.stayType,
@@ -48,5 +48,113 @@
 			) subq3
 		WHERE subq3.rn = 1
 	</select>
-
+	
+	<!-- room 정보 출력 -->
+	<select id="roomInfo" resultType="java.util.Map">
+	SELECT subq3.stayNo,
+       subq3.stayname,
+       subq3.staytype,
+       subq3.stayloc || '/' || SUBSTR(subq3.stayadress, INSTR(subq3.stayadress, ' ') + 1, INSTR(subq3.stayadress, ' ', INSTR(subq3.stayadress, ' ') + 1) - INSTR(subq3.stayadress, ' ') - 1) AS stayLoc,
+       subq3.stdperson,
+       subq3.overperson,
+       subq3.stayadress,
+       subq3.badge,
+       subq3.mainpic1,
+       subq3.mainpic2,
+       subq3.stayview,
+       subq3.info,
+       subq3.stayinfo,
+       TO_CHAR(subq3.minprice, '999,999') as minprice,
+       decode(like_count, null, 0, like_count) as likecount
+       ,subquery.babiqu,
+       subquery.pet,
+       subquery.pool,
+       subquery.terrace,
+       subquery.beamprojector
+	FROM (
+	  SELECT subq2.stayNo, 
+	        subq2.stayNo AS stayNo_subq3, subq2.stayname,
+	         subq2.staytype,
+	         subq2.stayloc,
+	         subq2.stayadress,
+	         min(subq2.stdperson) OVER (PARTITION BY subq2.stayname) AS stdperson,
+         	 max(subq2.overperson) OVER (PARTITION BY subq2.stayname) AS overperson,
+	         subq2.price,
+	         subq2.badge,
+	         subq2.mainpic1,
+	         subq2.mainpic2,
+	         subq2.stayview,
+	         subq2.info,
+	         subq2.stayinfo,
+	         MIN(subq2.price) OVER (PARTITION BY subq2.stayname) AS minprice,
+	         ROW_NUMBER() OVER (PARTITION BY subq2.stayname ORDER BY subq2.stayname) AS rn
+	  FROM (
+	    SELECT stay.stayNo, stayname,
+	           staytype,
+	           stayloc,
+	           stayadress,
+	           stdperson,
+           	   overperson,
+	           price,
+	           badge,
+	           mainpic1,
+	           mainpic2,
+	           stayview,
+	           info,
+	           stayinfo
+	    FROM stay
+	    LEFT JOIN room ON stay.stayNo = room.stayNo
+	  ) subq2
+	) subq3
+	left JOIN (
+	  SELECT
+	    stayNo,
+	    babiqu,
+	    pet,
+	    pool,
+	    terrace,
+	    beamprojector,
+	    ROW_NUMBER() OVER (PARTITION BY stayNo ORDER BY roomNo) AS sequence_number
+	  FROM roomoptionyn
+	) subquery
+	ON subq3.stayNo_subq3 = subquery.stayNo
+	
+	LEFT JOIN (
+	  SELECT stayNo, COUNT(*) AS like_count
+	  FROM likestay
+	  GROUP BY stayNo
+	) subq4
+	ON subq3.stayNo_subq3 = subq4.stayNo
+	WHERE subq3.rn = 1 and stayName = #{stayName} AND subquery.sequence_number = 1
+	</select>
+	
+	<resultMap type="java.util.HashMap" id="roomInfo">
+	    <result property="stayName" column="STAYNO" />
+	    <result property="info" column="INFO" />
+	    <result property="babiqu" column="BABIQU" />
+	    <result property="pet" column="PET" />
+	    <result property="pool" column="POOL" />
+	    <result property="terrace" column="TERRACE" />
+	    <result property="beamProjector" column="BEAMPROJECTOR" />
+	</resultMap>
+	
+	<select id="stayRoomList" resultType="java.util.Map">
+		SELECT 
+		  room.roomno as roomno,
+		  roomName,
+		  stdperson,
+		  overperson,
+		  TO_CHAR(PRICE, '999,999') AS price,
+		  roomtype,
+		  bed,
+		  roomphoto.field as field
+		FROM room
+		LEFT JOIN roomoptionyn ON room.roomno = roomoptionyn.roomno
+		LEFT JOIN roomphoto ON room.roomno = roomphoto.roomno
+		WHERE room.stayNo = (SELECT stayNo FROM stay WHERE stayName = #{stayName})
+	</select>
+	<resultMap type="java.util.HashMap" id="stayRoomList">
+	    <result property="bed" column="BED" />
+	    <result property="field" column="FIELD" />
+	</resultMap>
 </mapper>

@@ -16,4 +16,5 @@ public class RoomOptionVO {
 	private String pool;		// 풀장 (Y,N)
 	private String viewRoom;		// 뷰 (바다, 산)
 	private String bed; 		// 침구 갯수
+	private String beamProjector; // 빔프로잭터
 }
