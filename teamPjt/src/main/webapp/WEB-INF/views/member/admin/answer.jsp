@@ -37,6 +37,7 @@ window.addEventListener('load', function(){
 <style>
     input:focus, textarea:focus {
         outline-color: black;
+        borer-color: black;
     }
 </style>
 
