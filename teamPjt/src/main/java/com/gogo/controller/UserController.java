@@ -47,8 +47,8 @@ public class UserController extends CommonRestController{
 	
 	// 관심 스테이
 	@GetMapping("likestay")
-	public void likestay() {
-		
+	public void likestay(Model model) {
+		service.likestay(model);
 	}
 	
 	// 회원 정보 조회
@@ -86,6 +86,6 @@ public class UserController extends CommonRestController{
 		service.reservation_detail(checkIn, checkOut, price, stayNo, reservationNo, model);
 		
 	}
-
+	
 	
 }

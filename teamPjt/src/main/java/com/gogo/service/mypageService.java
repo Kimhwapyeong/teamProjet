@@ -30,7 +30,7 @@ public interface mypageService {
 	
 	// ▶▶▶  host ▶▶▶
 	// 숙소 관리
-	public List<Map<String, String>> getStay(Model model);
+	public List<StayVO> getStay(Model model);
 	
 	// 예약 관리
 	public List<Map<String, String>> reservinfo(Model model);
@@ -69,4 +69,7 @@ public interface mypageService {
 			, @RequestParam("stayNo") String stayNo
 			, @RequestParam("reservationNo") String reservationNo
 			, Model model);
+	
+	// 관심 스테이
+	public List<Map<String, String>> likestay(Model model);
 }

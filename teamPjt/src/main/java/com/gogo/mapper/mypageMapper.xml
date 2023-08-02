@@ -43,22 +43,10 @@
 	
 	<!--  ▶▶▶  host ▶▶▶ -->
 	<!-- 숙소 관리 -->
-	<select id="getStay" resultType="java.util.Map">
-		SELECT s.stayname, s.stayloc, s.stayadress, s.staytype, s.mainpic1, s.memberid
-		FROM stay s, room r, reservation v, member m
-		where s.stayno = r.stayno
-			and r.roomno = v.roomno
-			and v.memberid = m.memberid
+	<select id="getStay" resultType="com.gogo.vo.StayVO">
+		SELECT s.stayname, s.stayloc, s.stayadress, s.staytype, s.mainpic1, s.memberId
+		FROM stay s
 	</select>
-	
-	<resultMap type="java.util.HashMap" id="getMap">
-	    <result property="stayName" column="STAYNAME" />
-	    <result property="stayLoc" column="STAYLOC" />
-	    <result property="stayAdress" column="STAYADRESS" />
-	    <result property="stayType" column="STAYTYPE" />
-	    <result property="mainPic1" column="MAINPIC1" />
-	    <result property="memberId" column="MEMBERID" />
-	</resultMap>
 	
 	
 	<!-- 예약 관리 -->
@@ -204,6 +192,25 @@
 		update member set memberEmail = #{memberEmail} , pw = #{pw} where memberid = #{memberId}
 	</update>
 	
+	
+	<!-- 관심스테이 -->
+	<select id="likestay" resultType="java.util.Map">
+		select s.stayname, s.staytype, s.stayadress, r.stdperson, r.overperson, r.price, l.memberid
+		from stay s, room r, likestay l
+		where s.stayno = r.stayno
+		and r.stayno = l.stayno
+		order by stayname
+	</select>
+	
+	<resultMap type="java.util.HashMap" id="likeMap">
+	    <result property="stayName" column="STAYNAME" />
+	    <result property="stayType" column="STAYTYPE" />
+	    <result property="stayAdress" column="STAYADRESS" />
+	    <result property="stePerson" column="STDPERSON" />
+	    <result property="overPerson" column="OVERPERSON" />
+	    <result property="price" column="PRICE" />
+	    <result property="memberId" column="MEMBERID" />
+	</resultMap>
 
 	
 </mapper>

@@ -64,8 +64,8 @@ public class mypageServiceImpl implements mypageService {
 	// ▶▶▶  host ▶▶▶
 	// 숙소 관리
 	@Override
-	public List<Map<String, String>> getStay(Model model) {
-		List<Map<String, String>> list = mypageMapper.getStay();
+	public List<StayVO> getStay(Model model) {
+		List<StayVO> list = mypageMapper.getStay();
 		log.info("===========");
 		log.info("list : " + list);
 		model.addAttribute("list", list);
@@ -211,6 +211,16 @@ public class mypageServiceImpl implements mypageService {
 		model.addAttribute("paymentMethod", payment.getPaymentMethod());
 		model.addAttribute("paymentRegDate", payment.getRegDate());
 
+	}
+	
+	// 관심스테이
+	@Override
+	public List<Map<String, String>> likestay(Model model) {
+		List<Map<String, String>> like = mypageMapper.likestay();
+		log.info("===========");
+		log.info("like : " + like);
+		model.addAttribute("like", like);
+		return null;
 	}
 	
 	

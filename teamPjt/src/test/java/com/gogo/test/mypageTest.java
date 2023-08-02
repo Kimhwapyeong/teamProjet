@@ -35,7 +35,7 @@ public class mypageTest {
 	
 	@Test
 	public void getStay() {
-		List<Map<String, String>> list = (List<Map<String, String>>) mapper.getStay();
+		List<StayVO> list = mapper.getStay();
 		log.info("=========");
 		log.info("list : " + list);
 	}
@@ -114,6 +114,12 @@ public class mypageTest {
 		mapper.update(vo);
 		log.info("=========================");
 		log.info("vo: " + vo);
+	}
+	
+	@Test
+	public void likestay() {
+		List<Map<String, String>> list = (List<Map<String, String>>) mapper.likestay();
+		log.info("list : " + list);
 	}
 	
 }

@@ -23,7 +23,7 @@ public interface mypageMapper {
 	
 	// ▶▶▶  host ▶▶▶
 	// 숙소 관리
-	public List<Map<String, String>> getStay();
+	public List<StayVO> getStay();
 	
 	// 예약 관리
 	public List<Map<String, String>> reservinfo();
@@ -53,6 +53,9 @@ public interface mypageMapper {
 	
 	// 회원 정보 수정
 	public int update(MemberVO vo);
+	
+	// 관심 스테이
+	public List<Map<String, String>> likestay();
 	
 	
 }
