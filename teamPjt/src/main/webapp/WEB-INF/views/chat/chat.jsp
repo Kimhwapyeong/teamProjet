@@ -120,9 +120,9 @@
 	
 	$("#exitBtn").click(function(){
 		
-		content = '연결 해제';
+		content = memberId+'님 연결 해제';
 		type = "OUT";
-		sock.send("<p id='ENTER' style='padding:5px;'>연결 해제</p><br/>");
+		sock.send("<p id='ENTER' style='padding:5px;'>"+memberId+"님 연결 해제</p><br/>");
 	});
 
 	let sock = new SockJS("http://localhost:8080/echo");
