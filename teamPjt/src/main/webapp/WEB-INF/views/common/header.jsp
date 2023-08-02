@@ -156,6 +156,10 @@
 	function alertPopClose(){
 		alertPop.style.display='none';
 	}
+	
+	function goMain(){
+		location.href="/main";
+	}
 </script>
 <body>
 	<!-- 알림 팝업창
@@ -319,7 +323,7 @@
 					<ul class="etc">
 						<div class="nav_etc">
 							<div class="box">
-								<a href="/login/login"><div class="nav_tit login"><span data-tooltip="너무너무 귀여워">LOGIN</span></div></a>
+								<a href="/login/login"><div class="nav_tit login">LOGIN</div></a>
 							</div>
 							<c:if test="${ empty sessionScope.member }" var="res">
 								<div class="box">
@@ -399,19 +403,21 @@
 		<div aria-hidden="true" class="jsx-645c674fce93a7bf overlay"
 			id='sideMenuOverlay'></div>
 		<div class="jsx-645c674fce93a7bf menu-modal">
+			<c:if test="${ not empty sessionScope.memberId }" var="res">
 			<a href="/member/mypage/reservation" class="jsx-c4e7717c5657cc43">
 				<div class="jsx-c4e7717c5657cc43 profile">
 					<div class="jsx-c4e7717c5657cc43 profile-img"></div>
 					<div class="jsx-c4e7717c5657cc43 profile-right">
-						<div class="jsx-c4e7717c5657cc43 name">올래갈래님</div>
+						<div class="jsx-c4e7717c5657cc43 name">
+							${ sessionScope.memberId }님 환영합니다
+						</div>
 						<div role="link" tabindex="0"
-							class="jsx-c4e7717c5657cc43 booking-msg">스테이폴리오와 함께 0번의 여행을
-							했어요.</div>
+							class="jsx-c4e7717c5657cc43 booking-msg">올래갈래말래화이팅</div>
 					</div>
 				</div>
 			</a>
 			<div class="landing_menu">
-				<ul>
+				<ul style="padding-left:0px;">
 					<c:if test="${ param.role eq 'user' or empty param.role }">
 						<li><a href="/member/mypage/reservation">예약 정보</a></li>
 						<li><a href="/member/mypage/cancel">취소 내역</a></li>
@@ -435,7 +441,7 @@
 					</c:if>
 				</ul>
 			</div>
-			<ul class="jsx-bc9726d7609f7d7f setting-menu">
+			<ul style="padding-left:0px;" class="jsx-bc9726d7609f7d7f setting-menu">
 				<li role="presentation" class="jsx-bc9726d7609f7d7f lang-menu">
 					<div class="jsx-bc9726d7609f7d7f">언어 설정</div>
 					<div class="jsx-bc9726d7609f7d7f lang">한국어</div>
@@ -443,7 +449,31 @@
 				<li role="presentation" class="jsx-bc9726d7609f7d7f">1:1 문의</li>
 			</ul>
 			<div class="jsx-13bd1097de52bb6b">
-				<button type="button" class="jsx-13bd1097de52bb6b">로그아웃</button>
+				<button type="button" class="jsx-13bd1097de52bb6b" onclick="goMain()">로그아웃</button>
 			</div>
+			</c:if>
+			
+			<c:if test="${ not res }">
+				<a href="/login/login" class="jsx-c4e7717c5657cc43">
+					<div class="jsx-c4e7717c5657cc43 profile">
+						<div class="jsx-c4e7717c5657cc43 profile-img"></div>
+						<div class="jsx-c4e7717c5657cc43 profile-right">
+							<div class="jsx-c4e7717c5657cc43 name">로그인 • 회원가입</div>
+							<div role="link" tabindex="0"
+								class="jsx-c4e7717c5657cc43 booking-msg">올래갈래말래 화이팅</div>
+						</div>
+					</div>
+				</a>
+				<ul class="jsx-bc9726d7609f7d7f setting-menu">
+				<li role="presentation" class="jsx-bc9726d7609f7d7f lang-menu">
+					<div class="jsx-bc9726d7609f7d7f">언어 설정</div>
+					<div class="jsx-bc9726d7609f7d7f lang">한국어</div>
+				</li>
+				<li role="presentation" class="jsx-bc9726d7609f7d7f">1:1 문의</li>
+			</ul>
+			<div class="jsx-13bd1097de52bb6b">
+				<button type="button" class="jsx-13bd1097de52bb6b">로그인</button>
+			</div>
+			</c:if>
 		</div>
 	</div>
