@@ -7,6 +7,7 @@ public class MessageVO {
 	
 	
 	
+	private String type; // 메세지 타입 (입장, 퇴장, 대화) // ENTER, OUT, TALK
 	private String messageNo;
 	private String content;
 	private String regDate;

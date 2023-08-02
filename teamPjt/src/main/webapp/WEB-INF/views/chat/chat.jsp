@@ -91,18 +91,14 @@
 
 
 <script type="text/javascript">
-$('#messageRoom').click(function(){
-	
-	
-	
-});
+		
 
 	
 	
 		var message = '';
 		var role = "<유저>"		
 		var memberId = '${sessionScope.memberId}';
-	
+		var content = ''
 
 	$("#sendBtn").click(function() {
 		// 길이 제한
@@ -112,6 +108,7 @@ $('#messageRoom').click(function(){
 			
 		}
 		
+		content = $('#message').val();
 
 		sendMessage();
 		$('#message').val('')
@@ -127,20 +124,26 @@ $('#messageRoom').click(function(){
 	// 메시지 전송
 	function sendMessage() {
 			
-			sock.send($("#message").val());
+			sock.send(role+memberId+"님의 메세지 : "+$("#message").val());
 		
 	}
+
+
+
 	// 서버로부터 메시지를 받았을 때
 	function onMessage(msg) {
 		console.log(msg);
 		message = msg.data;
 		
+		let roomId = '${param.roomId}';
+		
 		var regDate = new Date(msg.timeStamp);
 		var data = {
 		
-				content : msg.data
+				content : content
 				, regDate : regDate
 				, writer : memberId
+				, roomId : roomId
 				
 		}
 		
@@ -164,7 +167,7 @@ $('#messageRoom').click(function(){
 			
 		});
 
-		$("#chatList").append("<p style='padding:5px;'>"+role+memberId+"님의 메세지 : "+ message + "</p><br/>");
+		$("#chatList").append("<p style='padding:5px;'>"+ message + "</p><br/>");
 		
 	}
 	// 서버와 연결을 끊었을 때
@@ -172,6 +175,21 @@ $('#messageRoom').click(function(){
 		$("#messageArea").append("연결 끊김");
 
 	}
+	
+	
+
+	
+	window.addEventListener('load', function(){
+		
+		
+		setTimeout(function(){
+			sock.send('${enter}');
+			
+		}, 1000);
+		
+		
+	});
+
 
 </script>
 	<script
