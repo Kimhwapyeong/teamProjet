@@ -43,9 +43,12 @@ public class HostController extends CommonRestController{
 		System.out.println((String)session.getAttribute("memberId"));
 		String memberId = (String)session.getAttribute("memberId");
 		cri = new Criteria();
-
+		cri.setAmount(5);
+		cri.setPageNo(1);
 		int totalCnt = paging.hostayCnt(cri, memberId);
 		
+		log.info("memberId : " + memberId);
+		log.info("totalCnt : " + totalCnt);
 		PageDto pageDto = new PageDto(cri, totalCnt);
 		model.addAttribute("pageDto", pageDto);
 	}
