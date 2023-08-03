@@ -2,14 +2,19 @@ package com.gogo.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.ConstructorArgs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -44,6 +49,60 @@ public class MessageServiceImpl implements MessageService{
 	@Override
 	public String getRoomId(String roomId) {
 		return messageMapper.getRoomId(roomId);
+	}
+	
+	@Override
+	public void chattingGet(String roomId, HttpSession session, Model model) throws Exception {
+		String check = getRoomId(roomId);
+		if(check==null || "".equals(check)) {
+			
+			insertMessageRoom();
+		}
+	
+		
+		
+		String memberId = (String)session.getAttribute("memberId");
+		
+		System.out.println(memberId+"님 "+roomId+"번 채팅방 입장");
+		
+		String enter = memberId+"님 "+roomId+"번 채팅방 입장";
+		
+		model.addAttribute("enter", enter);
+
+	}
+	
+	@Override
+	public Map<String, Object> insertChatting(Map<String, Object> map){
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		System.out.println(map+"호출 성공");
+		MessageVO vo = new MessageVO();
+		
+		if(map.get("enterMsg")!=null && !"".equals(map.get("enterMsg"))) {
+			
+			vo.setContent(String.valueOf(map.get("enterMsg")));
+		} else {
+			
+			vo.setContent(String.valueOf(map.get("content")));
+		}
+		
+		
+		vo.setRegDate(String.valueOf(map.get("regDate")));
+		vo.setWriter(String.valueOf(map.get("writer")));
+		vo.setMessageRoom(String.valueOf(map.get("roomId")));
+		vo.setType(String.valueOf(map.get("type")));
+		int res = insertMessage(vo);
+		
+		if(res>0) {
+			System.out.println("메세지 vo 저장 성공");
+			result.put("vo", vo);
+			result.put("msg", "메세지 저장 성공");
+		} else {
+			System.out.println("메세지 vo 저장 실패!");
+			result.put("msg", "메세지 저장 실패");
+		}
+		return result;
+
 	}
 
 
