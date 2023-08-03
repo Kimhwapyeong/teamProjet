@@ -13,6 +13,8 @@ public class Criteria {
 
 	private int startNo = 1;
 	private int endNo = 10;
+
+	private String memberId;
 	
 	
 	public void setPageNo(int pageNo) {

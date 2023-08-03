@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,8 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.gogo.service.myPagingService;
 import com.gogo.service.mypageService;
 import com.gogo.vo.AnswerVO;
+import com.gogo.vo.Criteria;
+import com.gogo.vo.PageDto;
 import com.gogo.vo.QuestionVO;
 
 import lombok.extern.log4j.Log4j;
@@ -26,10 +32,25 @@ public class HostController extends CommonRestController{
 	@Autowired
 	mypageService mypageService;
 	
+	@Autowired
+	myPagingService paging;
+	
 	// 숙소 관리
 	@GetMapping("stayhost")
-	public void stayhost(Model model) {
+	public void stayhost(Model model, Criteria cri, HttpServletRequest request) {
 		mypageService.getStay(model);
+		HttpSession session = request.getSession();
+		System.out.println((String)session.getAttribute("memberId"));
+		String memberId = (String)session.getAttribute("memberId");
+		cri = new Criteria();
+		cri.setAmount(5);
+		cri.setPageNo(1);
+		int totalCnt = paging.hostayCnt(cri, memberId);
+		
+		log.info("memberId : " + memberId);
+		log.info("totalCnt : " + totalCnt);
+		PageDto pageDto = new PageDto(cri, totalCnt);
+		model.addAttribute("pageDto", pageDto);
 	}
 	
 	// 예약 관리
