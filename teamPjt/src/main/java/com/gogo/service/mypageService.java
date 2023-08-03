@@ -35,6 +35,9 @@ public interface mypageService {
 	// 호스트지원 - 답변하기
 	public int answering(AnswerVO vo);
 	
+	// 답변한 내용 ADMIN에서 확인 
+	public AnswerVO answerInfo(int queNo);
+	
 	// 통계
 	public List<MemberVO> chartAge(MemberVO vo);
 	

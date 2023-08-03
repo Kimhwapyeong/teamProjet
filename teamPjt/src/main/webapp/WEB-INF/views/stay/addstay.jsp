@@ -48,7 +48,29 @@
 		    }
 		})
 	}
+	
+    function setThumbnail(event) {
+    	document.querySelector("div.drag").style.display='none';
+    	var fileList = event.target.files;
+    	for(let i=0; i<fileList.length; i++){
+	        var reader = new FileReader();
+	
+	        reader.onload = function(event) {
+	          var img = document.createElement("img");
+	          img.setAttribute("src", event.target.result);
+
+	          img.style='width:150px; height:85px; padding:5px;';
+	       	  //document.querySelector("div#image_container").
+	          document.querySelector("div#image_container").appendChild(img);
+	        };
+	
+	        reader.readAsDataURL(event.target.files[i]);
+	    }
+   	}
 </script>
+<style>
+	
+</style>
 <div id="contents">
 	<div class="container sub_title">
 		<div class="txt">Stay 등록</div>
@@ -169,8 +191,8 @@
 					<li><div class="dt">파일 첨부 *</div>
 						<div class="dd">
 							<div class="file_wrap">
-								<div class="form_style" style="padding: 0" role="presentation"
-									tabindex="0">
+								<div class="form_style" style="padding: 0; justify-content: center" role="presentation"
+									tabindex="0" id="image_container">
 									<div class="drag" role="button" style="cursor: pointer"
 										tabindex="0">
 										<i class="ico_addfile"></i>첨부 파일을 마우스로 끌어서 넣어주세요.
@@ -184,7 +206,7 @@
 										<label for="file_attach"><img alt="file_upload_button"
 											src="https://www.stayfolio.com/web/images/file_upload_button.svg"
 											style="margin-bottom: 2px; margin-right: 6px">이미지
-											첨부</label><input type="file" name="files" id="file_attach" multiple=""
+											첨부</label><input type="file" name="files" id="file_attach" multiple onchange="setThumbnail(event)"
 											accept="image/png,image/gif,image/jpg,image/jpeg,image/webp,image/tif,image/tiff,image/bmp,video/mp4,application/pdf,video/quicktime">
 									</div>
 								</div>

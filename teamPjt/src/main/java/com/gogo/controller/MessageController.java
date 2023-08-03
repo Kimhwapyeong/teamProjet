@@ -37,22 +37,7 @@ public class MessageController {
 						, HttpSession session
 						, Model model) throws Exception {
 		
-		String check = service.getRoomId(roomId);
-		if(check==null || "".equals(check)) {
-			
-			service.insertMessageRoom();
-		}
-	
-		
-		
-		String memberId = (String)session.getAttribute("memberId");
-		
-		System.out.println(memberId+"님 "+roomId+"번 채팅방 입장");
-		
-		String enter = memberId+"님 "+roomId+"번 채팅방 입장";
-		
-		model.addAttribute("enter", enter);
-		
+		service.chattingGet(roomId, session, model);
 		
 	}
 	
@@ -62,39 +47,8 @@ public class MessageController {
 	@ResponseBody
 	public Map<String, Object> insertChat(@RequestBody Map<String, Object> map) {
 		
-		Map<String, Object> result = new HashMap<String, Object>();
 		
-		
-		
-		
-		System.out.println(map+"호출 성공");
-		MessageVO vo = new MessageVO();
-		
-		if(map.get("enterMsg")!=null && !"".equals(map.get("enterMsg"))) {
-			
-			vo.setContent(String.valueOf(map.get("enterMsg")));
-		} else {
-			
-			vo.setContent(String.valueOf(map.get("content")));
-		}
-		
-		
-		vo.setRegDate(String.valueOf(map.get("regDate")));
-		vo.setWriter(String.valueOf(map.get("writer")));
-		vo.setMessageRoom(String.valueOf(map.get("roomId")));
-		vo.setType(String.valueOf(map.get("type")));
-		int res = service.insertMessage(vo);
-		
-		if(res>0) {
-			System.out.println("메세지 vo 저장 성공");
-			result.put("vo", vo);
-			result.put("msg", "메세지 저장 성공");
-		} else {
-			System.out.println("메세지 vo 저장 실패!");
-			result.put("msg", "메세지 저장 실패");
-		}
-		
-		return result;
+		return service.insertChatting(map);
 		
 		
 	}

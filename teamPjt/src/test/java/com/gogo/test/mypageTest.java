@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.gogo.mapper.mypageMapper;
+import com.gogo.vo.AnswerVO;
 import com.gogo.vo.MemberVO;
 import com.gogo.vo.QuestionVO;
 import com.gogo.vo.ReservedVO;
@@ -120,6 +121,13 @@ public class mypageTest {
 	public void likestay() {
 		List<Map<String, String>> list = (List<Map<String, String>>) mapper.likestay();
 		log.info("list : " + list);
+	}
+	
+	@Test
+	public void answerInfo() {
+		AnswerVO answer = mapper.answerInfo(1);
+		log.info("=========================");
+		log.info("answer: " + answer);
 	}
 	
 	

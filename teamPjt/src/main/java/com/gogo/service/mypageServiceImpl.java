@@ -76,6 +76,12 @@ public class mypageServiceImpl implements mypageService {
 		return mypageMapper.answering(vo);
 	}
 	
+	@Override
+	public AnswerVO answerInfo(int queNo) {
+		AnswerVO answer = mypageMapper.answerInfo(queNo);
+		return answer;
+	}
+	
 	
 	@Override
 	public List<MemberVO> chartAge(MemberVO vo) {

@@ -43,11 +43,7 @@
 	
 	
 		<!-- WebSocket -->
-	<websocket:handlers>
-		<websocket:mapping handler="echoHandler" path="/echo" />
-		<websocket:sockjs />
-	</websocket:handlers>
-	
+
 	<websocket:handlers>
 		<websocket:mapping handler="echoHandler" path="/echo" />
 		<websocket:handshake-interceptors>
