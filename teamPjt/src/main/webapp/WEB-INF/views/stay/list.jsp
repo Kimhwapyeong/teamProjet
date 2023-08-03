@@ -7,6 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FIND STAY</title>
+<link rel="shortcut icon" type="image⁄x-icon" href="https://www.stayfolio.com/web/images/logo.png">
 <link href="../resources/css/list/list.css" rel="stylesheet">
 <link href="../resources/css/common/48ab7619b7161b1c.css" rel="stylesheet">
 <link href="../resources/css//common/5f0d2e1da89b35fb.css" rel="stylesheet">

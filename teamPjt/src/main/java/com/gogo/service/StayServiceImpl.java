@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.gogo.mapper.StayMapper;
+import com.gogo.vo.RoomPhotoVO;
 import com.gogo.vo.StayVO;
 
 import lombok.extern.log4j.Log4j;
@@ -46,4 +47,24 @@ public class StayServiceImpl implements StayService{
 		model.addAttribute("stayRoomInfo", stayRoomInfo);
 		return null;
 	}
+
+	@Override
+	public Map<String, String> roomInfoPageList(String stayName, String roomName, Model model) {
+		Map<String, String> roomInfo = stayMapper.roomInfoPageList(stayName, roomName);
+		log.info("===========");
+		log.info("roomInfo : " + roomInfo);
+		model.addAttribute("roomInfo", roomInfo);
+		return null;
+	}
+
+	@Override
+	public List<RoomPhotoVO> roomInfoPagePic(String stayName, String roomName, Model model) {
+		List<RoomPhotoVO> picList = stayMapper.roomInfoPagePic(stayName, roomName);
+		log.info("===========");
+		log.info("picList : " + picList);
+		model.addAttribute("picList", picList);
+		return null;
+	}
+
+	
 }

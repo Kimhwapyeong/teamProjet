@@ -65,14 +65,14 @@
             // 카카오 지도 
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = { 
-		        center: new kakao.maps.LatLng(33.265614881274765, 126.40958392909278), // 지도의 중심좌표
+		        center: new kakao.maps.LatLng(${list.LATITUDE}, ${list.LONGITUDE}), // 지도의 중심좌표
 		        level: 4 // 지도의 확대 레벨
 		    };
 		
 			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 			
 			// 마커가 표시될 위치입니다 
-			var markerPosition  = new kakao.maps.LatLng(33.265614881274765, 126.40958392909278); 
+			var markerPosition  = new kakao.maps.LatLng(${list.LATITUDE}, ${list.LONGITUDE}); 
 			
 			// 마커를 생성합니다
 			var marker = new kakao.maps.Marker({
@@ -137,9 +137,7 @@
                                      <div class="shared-calendar" >
                                         <div class="DatePicker_calendar_wrap" >
                                             <div class="DateRangePicker DateRangePicker_1">
-                                                
                                                 <div class="" style="width: 1080px; height: 450px; border: 1px solid #e4e4e4; background: #fff; border-radius: 5px;">
-
                                                         <div class="calendar-wrap" style="padding-top: 0px ">
                                                             <div class="calendar-middle-wrap" style="height: 400px;">
                                                               <div class="cal_nav">
@@ -344,8 +342,8 @@
 						<c:forEach items="${stayRoomInfo}" var="roomList" step="1">
 						<li
 							class="swiper-slide slider_box single-room swiper-slide-active">
-							<a
-							href="/findstay/dansim-stay/room?room_id=2155&amp;identifier=dansim-stay&amp;check_in=&amp;check_out=">
+							<%-- <a href="/stay/roomInfo/${list.STAYNAME }/${${roomList.ROOMNAME}"> --%>
+							<a href="/stay/roomInfo?stayName=${list.STAYNAME }&roomName=${roomList.ROOMNAME}">
 								<div role="presentation" class="img"
 									style="background-image: url(&quot;${roomList.FIELD}&quot;); background-repeat: no-repeat; background-position: center center; background-size: cover;">
 								</div>
