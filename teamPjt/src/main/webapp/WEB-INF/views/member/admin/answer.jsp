@@ -114,9 +114,10 @@ window.addEventListener('load', function(){
 						<div class="mb-3">
 							  <label for="answerInfo" class="col-sm-2 col-form-label"></label>
 							  <textarea class="form-control" id="answerInfo" rows="10" 
-							  name="answerInfo" style="font-size:15px; background-color:white" >
+							  name="answerInfo" style="font-size:15px; background-color:white" >${answer.answerInfo }
 							  </textarea>
 						</div>
+						 답변 작성일 : <input type="textNo" name="queNo" value="${answer.answerDate }" style="width:40px">
 						<button type="submit" class="btn btn-outline-dark btn-sm" style=" float: right">답변 보내기</button>
 					</form>
 					

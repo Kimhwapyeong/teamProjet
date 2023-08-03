@@ -44,6 +44,14 @@
 	</insert>
 	
 	
+	<!-- 호스트지원 - 답변한 내용 어드민에서 확인 할 수 있게! -->
+	<select id="answerInfo" resultType="com.gogo.vo.AnswerVO">
+		select answerinfo, 
+		TO_CHAR(answerdate, 'MM/DD') AS answerdate
+		from answer where queno = #{queNo}
+	</select>
+	
+	
 	<!-- 통계 -->
 	<select id="chartAge" resultType="com.gogo.vo.MemberVO">
 		SELECT 
@@ -128,6 +136,7 @@
 	<select id="qaList" resultType="com.gogo.vo.QuestionVO">
 		select queno, memberid, title, content, to_char(contentdate, 'yy-mm-dd') as contentdate
 		from question
+		order by queno desc, contentdate desc
 	</select>
 
 

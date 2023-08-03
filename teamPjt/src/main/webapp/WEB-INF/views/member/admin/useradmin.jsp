@@ -149,7 +149,7 @@
 								</div>
 								
 								<!-- 삭제 버튼 -->
-								<button type="checkbox" id="deleteBtn" class="btn btn-outline-secondary btn-sm"
+								<button type="checkbox" id="deleteBtn" class="btn btn-outline-dark btn-sm"
 									 onclick="deleteMember()" style="float: right;">회원 삭제</button>
 							</div>
 						</div>

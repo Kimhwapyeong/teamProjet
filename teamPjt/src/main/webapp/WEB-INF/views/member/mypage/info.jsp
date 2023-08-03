@@ -109,14 +109,15 @@
                              
                             <form name="infoFrm" method="post" action="/member/user/infoFrm">
                                         <input type="hidden" name="memberId" value=${member.memberId } id ='id'>
-                                <!-- <div class="profile_photo">
+                                        <!-- 프로필 사진 -->
+                                  <div class="profile_photo">
                                     <div class="input_box">
                                         <input type="file" id="imgFile" name="imgFile" title="프로필 사진" class="photo" style="">profile photo
                                         
                                         <input type="file" id="imgFile" name="imgFile" title="프로필 사진" class="btn_photo"
                                             accept="image/jpeg, image/png">
                                     </div>
-                                </div>   -->
+                                </div>   
                                 <div class="myedit_box">
                                     <div class="input_box">
                                         <div class="tit">이메일</div>

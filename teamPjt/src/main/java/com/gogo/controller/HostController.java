@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gogo.service.mypageService;
 import com.gogo.vo.QuestionVO;
@@ -50,7 +51,7 @@ public class HostController extends CommonRestController{
 	
 	// 호스트 가이드 -문의
 	@PostMapping("write")
-	public String insert(QuestionVO qa, Model model) {
+	public String insert(QuestionVO qa, Model model, RedirectAttributes rttr) {
 		int res;
 	
 		String msg = "";
@@ -58,7 +59,7 @@ public class HostController extends CommonRestController{
 		
 		if(res > 0) {
 			msg="문의 되었습니다";
-			model.addAttribute("msg", msg);
+			rttr.addFlashAttribute("msg", msg);  
 			return "redirect:/member/host/qaList";
 		} else {
 			return "redirect:/member/host/guide";

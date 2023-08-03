@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -103,34 +104,53 @@ public class AdminController {
 		log.info("list : " + list);
 	}
 	
+	
 	// 호스트지원 - 문의 자세히보기
-	@GetMapping("answer")
-	public void getOne(QuestionVO vo, Model model) {
-		log.info("queNo :" + vo.getQueNo()); 
-		QuestionVO que = mypageService.getOne(vo.getQueNo());
-		log.info("========");
-		log.info("que : " + que);
-		log.info("queNo : " + vo.getQueNo());
-		log.info("vo.getTitle : " + vo.getTitle());
-		model.addAttribute("que", que);
-	}
+//	@GetMapping("answer")
+//	public void answer(@RequestParam("queNo") int queNo, Model model) {
+//	    log.info("queNo :" + queNo); 
+//	    QuestionVO que = mypageService.getOne(queNo);
+//	    log.info("que : " + que);
+//	    model.addAttribute("que", que);
+//
+//	    AnswerVO answer = mypageService.answerInfo(queNo);
+//	    log.info("answer : " + answer);
+//	    model.addAttribute("answer", answer);
+//	}
+	
+	@GetMapping(value = {"answer", "answerInfo"})
+	   public String answer(QuestionVO vo, Model model){
+	    QuestionVO que = mypageService.getOne(vo.getQueNo());
+	    model.addAttribute("que", que);
+
+	    AnswerVO answer = mypageService.answerInfo(vo.getQueNo());
+	    model.addAttribute("answer", answer);
+	    
+	    return "member/admin/answer";
+	   }
+
+	
 	
 	// 호스트 지원 - 답변 달기
 	@PostMapping("answering")
-	public String answering(AnswerVO vo, Model model) {
+	public String answering(AnswerVO vo, Model model, RedirectAttributes rttr) {
 		int res;
 		
 		String msg = "";
 		res = mypageService.answering(vo);
 		
 		if(res > 0) {
-			msg="답변이 작성되었습니다";
+			msg = "답변이 작성되었습니다";
+			rttr.addFlashAttribute("msg", msg);  
 			model.addAttribute("msg", msg);
 			return "redirect:/member/admin/hosthelp";
 		} else {
+			msg = "답변 작성 중 오류가 발생하였습니다";
+			model.addAttribute("msg", msg);
 			return "redirect:/member/admin/hosthelp";
 		}
 	}
+	
 	
 	
 	// 통계 및 지원
