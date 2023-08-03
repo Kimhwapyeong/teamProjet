@@ -38,7 +38,7 @@
 		<div class="chat-list-pc" style="position: relative; align:right;">
 				<hr style="position:absolute;color: #f2f2f2; opacity: 1; height:30px; width:100%; top:5%;">
 				<div id="messageList" style=" position:absolute; left:0;display: inline-block;text-align: center;  width:30%; height: 100%; border:1px solid #f2f2f2;">
-					<img onclick="history.go(-1);" src="https://chat.stayfolio.com/img/back.svg" style="    vertical-align: middle;
+					<img onclick="exit()" src="https://chat.stayfolio.com/img/back.svg" style="    vertical-align: middle;
 																				    border: 0;
 																				    position: absolute;
 																				    top: 7px;
@@ -118,21 +118,32 @@
 		$('#message').val('')
 	});
 	
+	
+	function exit(){
+		content = memberId+'님 연결 해제';
+		type = "OUT";
+		sock.send("<p id='ENTER' style='padding:5px; color:red;'>"+memberId+"님 연결 해제</p><br/>");
+		
+	}
+	
+	
 	$("#exitBtn").click(function(){
 		
 		content = memberId+'님 연결 해제';
 		type = "OUT";
-		sock.send("<p id='ENTER' style='padding:5px;'>"+memberId+"님 연결 해제</p><br/>");
+		sock.send("<p id='ENTER' style='padding:5px; color:red;'>"+memberId+"님 연결 해제</p><br/>");
 	});
 
-	let sock = new SockJS("http://localhost:8080/echo");
+	let sock = new SockJS("http://localhost:8080/echo?roomId=${param.roomId}");
+	console.log('sock : ',sock);
+	console.log('sock._rto : ',sock._rto);
 	sock.onmessage = onMessage;
 	sock.onclose = onClose;
 	// 메시지 전송
 	function sendMessage() {
 			
 			type = "TALK";
-			sock.send(role+memberId+"님의 메세지 : "+$("#message").val());
+			sock.send("<span style='color:skyblue; font-weight:bold;'>"+role+memberId+"님의 메세지</span> : "+$("#message").val());
 		
 	}
 
@@ -206,7 +217,7 @@
 		
 		setTimeout(function(){
 			type = "ENTER";
-			sock.send('${enter}');
+			sock.send('<span style="color:red">${enter}</span>');
 
 		}, 1000);
 		
