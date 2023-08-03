@@ -27,4 +27,9 @@ public class StayController {
 		stayService.stayRoomList(stayName, model);
 		stayService.roomInfo(stayName, model);
 	}
+	
+	@GetMapping("roomInfo")
+	public void room() {
+		
+	}
 }
