@@ -52,22 +52,49 @@ public class MessageServiceImpl implements MessageService{
 	}
 	
 	@Override
-	public void chattingGet(String roomId, HttpSession session, Model model) throws Exception {
-		String check = getRoomId(roomId);
-		if(check==null || "".equals(check)) {
-			
-			insertMessageRoom();
-		}
+	public String getNewRoomId() {
+		return messageMapper.getNewRoomId();
+	}
+	@Override
+	public int insertMessageRoomCustom(String roomId) {
+		return messageMapper.insertMessageRoomCustom(roomId);
+	}
 	
+	@Override
+	public void chattingGet(String roomId, HttpSession session, Model model) throws Exception {
 		
+		int res = insertMessageRoom();
 		
-		String memberId = (String)session.getAttribute("memberId");
+		if(res>0) {
+			
+			String memberId = (String)session.getAttribute("memberId");
+			
+			// 파라미터가 null이면 위의 insert문에서 사용한 시퀀스를 가져옴(currVal)
+			if(roomId==null || "".equals(roomId)) {
+				
+				roomId = getNewRoomId();
+			}
+			
+			// 체크해서 없는 roomId면 새로 insert
+			String check = getRoomId(roomId);
+			
+			if(check==null || "".equals(check)) {
+				
+				insertMessageRoomCustom(roomId);
+				
+			}
+			
+			
+			System.out.println(memberId+"님 "+roomId+"번 채팅방 입장");
+			
+			String enter = memberId+"님 "+roomId+"번 채팅방 입장";
+			
+			model.addAttribute("enter", enter);
+			model.addAttribute("roomId", roomId);
+		} else {
+			
+		}
 		
-		System.out.println(memberId+"님 "+roomId+"번 채팅방 입장");
-		
-		String enter = memberId+"님 "+roomId+"번 채팅방 입장";
-		
-		model.addAttribute("enter", enter);
 
 	}
 	
@@ -104,6 +131,9 @@ public class MessageServiceImpl implements MessageService{
 		return result;
 
 	}
+
+
+
 
 
 
