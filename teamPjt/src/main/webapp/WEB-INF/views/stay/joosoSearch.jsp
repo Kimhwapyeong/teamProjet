@@ -1665,30 +1665,42 @@ li.L1,li.L3,li.L5,li.L7,li.L9 {
 </style>
 </head>
 <body>
-<li style="padding:0px"><div class="dt">주소 *</div>
-<div class="dd">
-<input type="text" id="postcode" class="form_style" style="width:150px" placeholder="우편번호">
-<input type="button" onclick="sample3_execDaumPostcode()" value="우편번호 찾기" class="d_btn"></div></li>
-<li style="padding:0px"><div class="dt"></div>
-<div class="dd">
-<div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
-<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
-</div>
-</div>
-</li>
-<li><div class="dt"></div>
-<div class="dd">
-<input type="text" id="address" name="stayAdress" class="form_style" placeholder="주소"></div></li>
-<li style="padding-top:0px"><div class="dt"></div>
-<div class="dd">
-<input type="text" id="detailAddress" class="form_style" placeholder="상세주소"></div></li>
-<li style="padding-top:0px"><div class="dt"></div>
-<div class="dd">
-<input type="text" id="extraAddress"class="form_style" placeholder="참고항목"></div></li>
+	<li style="padding: 0px"><div class="dt">주소 *</div>
+		<div class="dd">
+			<input type="text" id="postcode" class="form_style"
+				style="width: 150px" placeholder="우편번호 *"> <input
+				type="button" onclick="sample3_execDaumPostcode()" value="우편번호 찾기"
+				class="d_btn">
+		</div></li>
+	<li style="padding: 0px"><div class="dt"></div>
+		<div class="dd">
+			<div id="wrap"
+				style="display: none; border: 1px solid; width: 500px; height: 300px; margin: 5px 0; position: relative">
+				<img src="//t1.daumcdn.net/postcode/resource/images/close.png"
+					id="btnFoldWrap"
+					style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1"
+					onclick="foldDaumPostcode()" alt="접기 버튼">
+			</div>
+		</div></li>
+	<li><div class="dt"></div>
+		<div class="dd">
+			<input type="text" id="address" name="stayAdress" class="form_style"
+				placeholder="주소 *">
+		</div></li>
+	<li style="padding-top: 0px"><div class="dt"></div>
+		<div class="dd">
+			<input type="text" id="detailAddress" class="form_style"
+				placeholder="상세주소">
+		</div></li>
+	<li style="padding-top: 0px"><div class="dt"></div>
+		<div class="dd">
+			<input type="text" id="extraAddress" class="form_style"
+				placeholder="참고항목">
+		</div></li>
 
 
 
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     // 우편번호 찾기 찾기 화면을 넣을 element
     var element_wrap = document.getElementById('wrap');

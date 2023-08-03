@@ -24,6 +24,44 @@
 			
 		})
 	})
+	
+	// 업로드 사진 미리보기
+    function setThumbnail(event) {
+    	document.querySelector("div.drag").style.display='none';
+    	let imageContainer = document.querySelector("div#image_container");
+    	let images = document.querySelectorAll("#image_container img");
+    	images.forEach((image) => {
+    		imageContainer.removeChild(image);
+    	})
+    	
+    	var fileList = event.target.files;
+    	if(fileList.length == 0){
+    		document.querySelector("div.drag").style.display='block';
+    	}
+    	var totalSize = 0;
+    	for(let i=0; i<fileList.length; i++){
+	        var reader = new FileReader();
+	
+	        reader.onload = function(event) {
+	          var img = document.createElement("img");
+	          img.setAttribute("src", event.target.result);
+	          img.setAttribute("id", 'thumnailImg'+i);
+	          img.style='width:150px; height:85px; padding:5px; border-radius:12px';
+	       	  //document.querySelector("div#image_container").
+	          document.querySelector("div#image_container").appendChild(img);
+	        };
+	        totalSize += event.target.files[i].size;
+	        reader.readAsDataURL(event.target.files[i]);
+	    }
+    	
+    	totalSize = (totalSize/(1024*1024)).toFixed(3);
+    	document.querySelector("div[class=file_desc]").firstChild.textContent=totalSize;
+   	}
+	
+	// 사진 업로드 미리보기 창 클릭 시 input:file 실행
+	function fileUpload(){
+		file_attach.click();
+	}
 
 </script>
 <div id="contents">
@@ -171,8 +209,15 @@
 							<div class="col-6">
 								<div class="p-1 bg-white">
 									<img
-										src="/resources/images/room/roomphoto2.JPG"
+										src="/resources/images/room/roomphoto3.JPG"
 										style="width: 100%;">
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="p-1 bg-white">
+									<img alt=""
+										src="/resources/images/room/roomphoto2.JPG"
+										style="width: 100%">
 								</div>
 							</div>
 							<div class="col-6">
@@ -184,16 +229,9 @@
 							</div>
 							<div class="col-6">
 								<div class="p-1 bg-white">
-									<img alt=""
-										src="/resources/images/room/roomphoto3.JPG"
-										style="width: 100%">
-								</div>
-							</div>
-							<div class="col-6">
-								<div class="p-1 bg-white">
 									<p class="_contactus_guide_title__ZyIpA">이미지 제출 가이드</p>
-									<p class="_contactus_guide_list__ogEdb">• 이미지 제출은 필수 사항 입니다.</p>
-									<p class="_contactus_guide_list__ogEdb">• 이미지를 자유롭게 첨부해 주세요.</p>
+									<p class="_contactus_guide_list__ogEdb">• room 이미지 제출은 필수 사항 입니다.</p>
+									<p class="_contactus_guide_list__ogEdb">• room 이미지는 최대 10장까지 제출 할 수 있습니다.</p>
 									<p class="_contactus_guide_sub_list__srBT5">￮ room의 외부 사진</p>
 									<p class="_contactus_guide_sub_list__srBT5">￮ room의 디테일</p>
 								</div>
@@ -211,22 +249,22 @@
 					<li><div class="dt">파일 첨부 *</div>
 						<div class="dd">
 							<div class="file_wrap">
-								<div class="form_style" style="padding: 0" role="presentation"
-									tabindex="0">
+								<div class="form_style" style="padding: 0; align-items: center" role="presentation"
+									tabindex="0" id="image_container" onclick="fileUpload()">
 									<div class="drag" role="button" style="cursor: pointer"
 										tabindex="0">
-										<i class="ico_addfile"></i>첨부 파일을 마우스로 끌어서 넣어주세요.
+										<i class="ico_addfile"></i>첨부파일 올리기/미리보기
 									</div>
 								</div>
 								<div class="file_desc">
 									0
 									<!-- -->
-									MB / 1024 MB
+									MB / 30 MB
 									<div class="file_att" style="margin-top: -7px">
 										<label for="file_attach"><img alt="file_upload_button"
 											src="https://www.stayfolio.com/web/images/file_upload_button.svg"
 											style="margin-bottom: 2px; margin-right: 6px">이미지
-											첨부</label><input type="file" name="files" id="file_attach" multiple=""
+											첨부</label><input type="file" name="files" id="file_attach" multiple onchange="setThumbnail(event)"
 											accept="image/png,image/gif,image/jpg,image/jpeg,image/webp,image/tif,image/tiff,image/bmp,video/mp4,application/pdf,video/quicktime">
 									</div>
 								</div>
