@@ -63,7 +63,6 @@
                             <div class="reserv_box accepted" style="margin-bottom:0px">
                                 
                             <!-- ========================= 회원 목록 조회 =================== -->
-                            
                             <div class="container">
                                 <h6 style="line-height:60px">문의 목록</h6>
                                 
@@ -72,8 +71,9 @@
                                     <tr>
                                       <th style="width:15%">문의 번호</th>
                                       <th style="width:25%">문의 제목</th>
-                                      <th style="width:45%; text-align:center">문의 내용</th>
+                                      <th style="width:40%; text-align:center">문의 내용</th>
                                       <th style="width:15%">문의 작성일</th>
+                                      <th style="width:15%; text-align:center">답변</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -87,6 +87,11 @@
                                         <td><a href="/member/host/answer?queNo=${qa.queNo }">${qa.title }</a></td>
                                         <td style="text-align:center">${qa.content }</td>
                                         <td>${qa.contentDate }</td>
+                                        <td style="font-weight:bold">
+	                                        <c:if test="${qa.answerYN eq 'Y'}">
+	                                        	답변 완료
+	                                        </c:if>
+                                        </td>
                                     </tr>
                                     
                                     </c:if>

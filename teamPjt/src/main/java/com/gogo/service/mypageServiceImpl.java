@@ -125,9 +125,21 @@ public class mypageServiceImpl implements mypageService {
 	}
 	
 	@Override
-	public List<QuestionVO> qaList(Model model) {
-		List<QuestionVO> list = mypageMapper.qaList();
-		model.addAttribute("list", list);
+	public List<QuestionVO> qaList(Model model, QuestionVO vo) {
+		List<QuestionVO> question = mypageMapper.qaList();
+		
+		int queNo = 0;
+		
+		for(QuestionVO que : question) {
+			queNo = que.getQueNo();
+			AnswerVO answer = answerInfo(queNo);
+			
+			if(answer != null) {
+				que.setAnswerYN("Y");
+			}
+		}
+		
+		model.addAttribute("list", question);
 		return null;
 	}
 	

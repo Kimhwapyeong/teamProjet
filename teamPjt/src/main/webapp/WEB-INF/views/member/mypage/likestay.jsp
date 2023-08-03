@@ -70,9 +70,9 @@
                                         <div class="btns"><button type="button" class="btn_bk"><a href="" style="color:white">예약하기</a></button></div>
                                             <div class="likestay_img" role="presentation" style="padding:0px;">
                                                 <ul class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events slider1 flist_slider">
-                                                    <div class="swiper-wrapper">
+                                                    <div class="swiper-wrapper" style="margin:20px">
                                                         <li class="swiper-slide swiper-slide-active img"
-                                                            style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/144/994/display/da4b0a181e677eb34638abe5b91695985b43613d.jpg?1664264819&quot;) center center / cover no-repeat; 
+                                                            style="background: url(${like.MAINPIC1}) center center / cover no-repeat; 
                                                             width: 372px;">
                                                         </li>
                                                     </div>

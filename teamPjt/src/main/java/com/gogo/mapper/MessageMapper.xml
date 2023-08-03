@@ -19,8 +19,17 @@
 		insert into messageRoom values(messageroomseq.nextval, messageroomseq.nextval||'번방')
 	</insert>
 	
+	<insert id="insertMessageRoomCustom">
+		insert into messageRoom values(#{roomId}, #{roomId}||'번방')
+	</insert>
+	
 	<select id="getRoomId" resultType="String">
 		select roomId from messageRoom where roomId = #{roomId}
+	</select>
+	
+	<!-- currval가 가능한 이유는 위에서 insert한 직후에 사용해서이다. -->
+	<select id="getNewRoomId" resultType="String">
+		select messageroomseq.currval from dual
 	</select>
 
 </mapper>

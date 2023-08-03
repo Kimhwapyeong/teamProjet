@@ -20,9 +20,11 @@ public interface MessageService {
 	
 	public int insertMessage(MessageVO vo);
 	public int insertMessageRoom();
+	public int insertMessageRoomCustom(String roomId);
 	public String getRoomId(String roomId);
 	public void chattingGet(String roomId, HttpSession session, Model model) throws Exception;
 	public Map<String, Object> insertChatting(Map<String, Object> map);
+	public String getNewRoomId();
 
 
 }

@@ -12,4 +12,6 @@ public class QuestionVO {
 	private String title;
 	private String content;
 	private String contentDate; // 게시일
+	
+	private String answerYN;
 }

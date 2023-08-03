@@ -56,7 +56,7 @@ public interface mypageService {
 	public int insert(QuestionVO qa);
 	
 	// 문의 내역 조회
-	public List<QuestionVO> qaList(Model model);
+	public List<QuestionVO> qaList(Model model, QuestionVO vo);
 	
 	// 문의 내역 한건 조회
 	public QuestionVO getOne(int queNo);

@@ -134,7 +134,7 @@
 		sock.send("<p id='ENTER' style='padding:5px; color:red;'>"+memberId+"님 연결 해제</p><br/>");
 	});
 
-	let sock = new SockJS("http://localhost:8080/echo?roomId=${param.roomId}");
+	let sock = new SockJS("http://localhost:8080/echo?roomId=${roomId}");
 	console.log('sock : ',sock);
 	console.log('sock._rto : ',sock._rto);
 	sock.onmessage = onMessage;
@@ -153,11 +153,11 @@
 	function onMessage(msg) {
 		console.log(msg);
 		message = msg.data;
-		let roomId = '${param.roomId}';
+		let roomId = '${roomId}';
 		
 		if(type=='ENTER'){
 			
-			enterMsg = memberId+'님 ${param.roomId}번 채팅방 입장';
+			enterMsg = memberId+'님 ${roomId}번 채팅방 입장';
 		}
 		
 		var regDate = new Date(msg.timeStamp);

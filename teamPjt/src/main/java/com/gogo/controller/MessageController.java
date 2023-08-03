@@ -33,11 +33,11 @@ public class MessageController {
 	
 	
 	@GetMapping("chat")
-	public void chatGet(@RequestParam String roomId
+	public void chatGet(@RequestParam(required = false) String roomId
 						, HttpSession session
 						, Model model) throws Exception {
 		
-		service.chattingGet(roomId, session, model);
+		service.chattingGet(roomId ,session, model);
 		
 	}
 	

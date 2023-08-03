@@ -56,7 +56,9 @@
 							<li class=""><a href="./cancel">취소 내역</a></li>
 							<li class=""><a href="./likestay">관심 스테이</a></li>
 							<li class=""><a href="./info">회원 정보 수정</a></li>
-							<li><a href="./message">메시지</a></li>
+							<li><a href="/chat/chat">메시지</a></li>
+							<li><a style="cursor:pointer;" onclick="goChatRoom()">메시지 방 입장</a>
+								<input style="border: 1px solid #f2f2f2; width:175px; height:30px;" type="text" id="rid" placeholder="방 번호를 입력해 주세요" value=""/></li>
 						</ul>
 					</div>
 					<div class="mypage_content">
@@ -138,6 +140,29 @@
 <!-- 푸터 -->
 <%@ include file="../../common/footer.jsp" %>
 
+<script>
+	var rid = '';
+	
+	$(function(){
+		
+		$('#rid').change(function(){
 
+			rid = $('#rid').val();
+			
+		});
+	});
+	
+	function goChatRoom(){
+		
+		
+		
+		if(rid == null || rid== ''){
+			rid = '1';
+		}
+		
+		location.href='/chat/chat?roomId='+rid;
+	}
+
+</script>
 
 </html>

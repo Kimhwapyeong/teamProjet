@@ -100,23 +100,12 @@ public class AdminController {
 	// 호스트 지원
 	@GetMapping("hosthelp")
 	public void hosthelp(Model model) {
-		List<QuestionVO> list  = mypageService.qaList(model);
+		QuestionVO vo = new QuestionVO();
+		List<QuestionVO> list  = mypageService.qaList(model, vo);
 		log.info("list : " + list);
 	}
 	
 	
-	// 호스트지원 - 문의 자세히보기
-//	@GetMapping("answer")
-//	public void answer(@RequestParam("queNo") int queNo, Model model) {
-//	    log.info("queNo :" + queNo); 
-//	    QuestionVO que = mypageService.getOne(queNo);
-//	    log.info("que : " + que);
-//	    model.addAttribute("que", que);
-//
-//	    AnswerVO answer = mypageService.answerInfo(queNo);
-//	    log.info("answer : " + answer);
-//	    model.addAttribute("answer", answer);
-//	}
 	
 	@GetMapping(value = {"answer", "answerInfo"})
 	   public String answer(QuestionVO vo, Model model){
@@ -154,12 +143,12 @@ public class AdminController {
 	
 	
 	// 통계 및 지원
-	@GetMapping("statistics")
-	public void statistics() {
-		
-	}
+//	@GetMapping("statistics")
+//	public void statistics() {
+//		
+//	}
 	
-	
+	// 통계 및 지원
 	@RequestMapping("statistics")
 	public @ResponseBody List<MemberVO> statistics(Model model, MemberVO vo){
 		List<MemberVO> list = mypageService.chartAge(vo);

@@ -12,8 +12,12 @@ public interface MessageMapper {
 	public List<MessageVO> getList(String messageRoom);
 	
 	public int insertMessageRoom(); 
+	public int insertMessageRoomCustom(String roomId);
+	
 	
 	public String getRoomId(String roomId);
+	
+	public String getNewRoomId();
 	
 	
 }

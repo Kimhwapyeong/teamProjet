@@ -62,16 +62,32 @@
 							  <input type="text" class="form-control" id="title" name="title" value="${que.title }" style="font-size:15px" readonly>
 						</div>
 						<div class="mb-3">
-							  <label for="content" class="form-label"></label>
+							  <label for="content" class="form-label">내용</label>
 							  <textarea class="form-control" id="content" rows="10" name="content" style="font-size:15px" readonly> ${que.content } 
 							 
 							  </textarea>
 						</div>
-						<div style=" float: right">
-							<button type="button" class="btn btn-light btn-sm" onclick="goList()">문의 목록 바로가기</button>
-						</div>
 					</form>
+					
+					<div style="height:30px"></div>
+					
+					<c:if test="${not empty answer.answerInfo}">
+
+						<!-- admin 답변 보기 -->
+	                 	<form>
+	                 		문의 답변
+							<div class="mb-3">
+								  <label for="answerInfo" class="col-sm-2 col-form-label"></label>
+								  <textarea class="form-control" id="answerInfo" rows="10" 
+								  name="answerInfo" style="font-size:15px; background-color:white" >${answer.answerInfo }
+								  </textarea>
+							</div>
+						</form>
+					</c:if>
                      
+					<div style=" float: right">
+						<button type="button" class="btn btn-outline-dark btn-sm" onclick="goList()">문의 목록 바로가기</button>
+					</div>
                      
                  </div>
              </div>
