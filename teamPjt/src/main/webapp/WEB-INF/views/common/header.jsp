@@ -12,6 +12,7 @@
 	rel="stylesheet"
 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous"> -->
+<link rel="shortcut icon" type="image⁄x-icon" href="https://www.stayfolio.com/web/images/logo.png">	
 <link rel="stylesheet" href="/resources/css/common/bootstrap5_2_3.css">
 <link rel="stylesheet" href="/resources/css/common/48ab7619b7161b1c.css">
 <style type="text/css">

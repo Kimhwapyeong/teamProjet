@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.gogo.mapper.StayMapper;
 import com.gogo.mapper.TestMapper;
+import com.gogo.vo.RoomPhotoVO;
 import com.gogo.vo.StayVO;
 
 import lombok.extern.log4j.Log4j;
@@ -45,5 +46,19 @@ public class roomTest {
 		List<Map<String, String>> stayRoomInfo = sm.stayRoomList("제주스테이 비우다");
 		log.info("=========");
 		log.info(stayRoomInfo);
+	}
+	
+	@Test
+	public void roomInfoList() {
+		Map<String, String> Info = sm.roomInfoPageList("제주스테이 비우다", "A동");
+		log.info("=========");
+		log.info(Info);
+	}
+	
+	@Test
+	public void roomInfoPicList() {
+		List<RoomPhotoVO> picInfo = sm.roomInfoPagePic("제주스테이 비우다", "A동");
+		log.info("=========");
+		log.info(picInfo);
 	}
 }

@@ -64,6 +64,8 @@
        subq3.stayview,
        subq3.info,
        subq3.stayinfo,
+       subq3.latitude,
+       subq3.longitude,
        TO_CHAR(subq3.minprice, '999,999') as minprice,
        decode(like_count, null, 0, like_count) as likecount
        ,subquery.babiqu,
@@ -86,6 +88,8 @@
 	         subq2.stayview,
 	         subq2.info,
 	         subq2.stayinfo,
+	         subq2.latitude,
+         	 subq2.longitude,
 	         MIN(subq2.price) OVER (PARTITION BY subq2.stayname) AS minprice,
 	         ROW_NUMBER() OVER (PARTITION BY subq2.stayname ORDER BY subq2.stayname) AS rn
 	  FROM (
@@ -101,7 +105,9 @@
 	           mainpic2,
 	           stayview,
 	           info,
-	           stayinfo
+	           stayinfo,
+	           latitude,
+               longitude
 	    FROM stay
 	    LEFT JOIN room ON stay.stayNo = room.stayNo
 	  ) subq2
@@ -138,6 +144,7 @@
 	    <result property="beamProjector" column="BEAMPROJECTOR" />
 	</resultMap>
 	
+	<!-- 숙소 페이지에서 방 리스트 뽑기 -->
 	<select id="stayRoomList" resultType="java.util.Map">
 		SELECT 
 		  room.roomno as roomno,
@@ -157,4 +164,32 @@
 	    <result property="bed" column="BED" />
 	    <result property="field" column="FIELD" />
 	</resultMap>
+	
+	<!-- 객실 페이지에서 정보 뽑기 -->
+	<select id="roomInfoPageList" resultType="java.util.Map">
+		SELECT 
+		(SELECT STAYNAME FROM STAY WHERE STAYNO = (select STAYNO from room where roomname=#{roomName})) AS STAYNAME, 
+		room.roomno as roomno , room.stayno as stayno, roomname, stdperson, overperson, roominfo, price, roomtype, info, bathroom, kitchen, parking, babiqu, pet, terrace, pool, beamprojector
+		FROM ROOM 
+		LEFT JOIN ROOMOPTIONYN
+		ON ROOM.ROOMNO = ROOMOPTIONYN.ROOMNO
+		WHERE ROOMNAME = #{roomName} AND ROOM.STAYNO = (SELECT STAYNO FROM STAY WHERE STAYNAME=#{stayName})
+	</select>
+	<resultMap type="java.util.HashMap" id="roomInfoPageList">
+	    <result property="stayName" column="STAYNAME" />
+	    <result property="bathroom" column="BATHROOM" />
+	    <result property="kitchen" column="KITCHEN" />
+	    <result property="parking" column="PARKING" />
+	    <result property="babiqu" column="BABIQU" />
+	    <result property="pet" column="PET" />
+	    <result property="terrace" column="TERRACE" />
+	    <result property="pool" column="POOL" />
+	    <result property="bed" column="BED" />
+	    <result property="beamprojector" column="BEAMPROJECTOR" />
+	</resultMap>
+	<!-- 객실 페이지에서 객실 사진 뽑아오기 -->
+	<select id="roomInfoPagePic" resultType="com.gogo.vo.RoomPhotoVO">
+		select * from roomphoto where stayno = (SELECT STAYNO FROM STAY WHERE STAYNAME=#{stayName}) and roomno = (select roomno from room where roomname=#{roomName})
+	</select>
+	
 </mapper>

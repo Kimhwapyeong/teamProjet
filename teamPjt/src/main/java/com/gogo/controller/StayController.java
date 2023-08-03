@@ -27,4 +27,10 @@ public class StayController {
 		stayService.stayRoomList(stayName, model);
 		stayService.roomInfo(stayName, model);
 	}
+	
+	@GetMapping("roomInfo")
+	public void room(String stayName, String roomName, Model model) {
+		stayService.roomInfoPageList(stayName, roomName, model);
+		stayService.roomInfoPagePic(stayName, roomName, model);
+	}
 }
