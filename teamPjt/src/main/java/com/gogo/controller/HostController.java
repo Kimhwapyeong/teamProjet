@@ -1,6 +1,7 @@
 package com.gogo.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gogo.service.mypageService;
+import com.gogo.vo.AnswerVO;
 import com.gogo.vo.QuestionVO;
 
 import lombok.extern.log4j.Log4j;
@@ -66,21 +68,32 @@ public class HostController extends CommonRestController{
 		}
 	}
 	
-	// 문의 목록
+	
+	// 문의 목록 -> 답변 있을 시 답변 출력
 	@GetMapping("qaList")
-	public void qaList(Model model) {
-		mypageService.qaList(model);
+	public void qaList(Model model, QuestionVO vo) {
+		List<QuestionVO> question = mypageService.qaList(model, vo);
+		
+		
+		
+//	    model.addAttribute("answer", answer);
+	    
 	}
 	
-	@GetMapping("answer")
-	public void getOne(QuestionVO vo, Model model) {
-		log.info("queNo :" + vo.getQueNo()); 
-		QuestionVO que = mypageService.getOne(vo.getQueNo());
-		log.info("========");
-		log.info("que : " + que);
-		log.info("queNo : " + vo.getQueNo());
-		log.info("vo.getTitle : " + vo.getTitle());
-		model.addAttribute("que", que);
-	}
+	
+	// admin 답변 출력
+	@GetMapping(value = {"answer", "answerInfo"})
+	   public String answer(QuestionVO vo, Model model){
+	    QuestionVO que = mypageService.getOne(vo.getQueNo());
+	    model.addAttribute("que", que);
+
+	    AnswerVO answer = mypageService.answerInfo(vo.getQueNo());
+	    model.addAttribute("answer", answer);
+	    
+	    log.info("==============");
+	    log.info("답 : " + answer);
+	    
+	    return "member/host/answer";
+	   }
 	
 }

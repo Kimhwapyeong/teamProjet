@@ -100,23 +100,12 @@ public class AdminController {
 	// 호스트 지원
 	@GetMapping("hosthelp")
 	public void hosthelp(Model model) {
-		List<QuestionVO> list  = mypageService.qaList(model);
+		QuestionVO vo = new QuestionVO();
+		List<QuestionVO> list  = mypageService.qaList(model, vo);
 		log.info("list : " + list);
 	}
 	
 	
-	// 호스트지원 - 문의 자세히보기
-//	@GetMapping("answer")
-//	public void answer(@RequestParam("queNo") int queNo, Model model) {
-//	    log.info("queNo :" + queNo); 
-//	    QuestionVO que = mypageService.getOne(queNo);
-//	    log.info("que : " + que);
-//	    model.addAttribute("que", que);
-//
-//	    AnswerVO answer = mypageService.answerInfo(queNo);
-//	    log.info("answer : " + answer);
-//	    model.addAttribute("answer", answer);
-//	}
 	
 	@GetMapping(value = {"answer", "answerInfo"})
 	   public String answer(QuestionVO vo, Model model){
