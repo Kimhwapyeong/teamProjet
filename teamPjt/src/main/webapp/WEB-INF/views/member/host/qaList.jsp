@@ -87,9 +87,9 @@
                                         <td><a href="/member/host/answer?queNo=${qa.queNo }">${qa.title }</a></td>
                                         <td style="text-align:center">${qa.content }</td>
                                         <td>${qa.contentDate }</td>
-                                        <td>
+                                        <td style="font-weight:bold">
 	                                        <c:if test="${qa.answerYN eq 'Y'}">
-	                                        	답변완료
+	                                        	답변 완료
 	                                        </c:if>
                                         </td>
                                     </tr>

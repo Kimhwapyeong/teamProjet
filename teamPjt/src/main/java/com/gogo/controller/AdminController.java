@@ -143,12 +143,12 @@ public class AdminController {
 	
 	
 	// 통계 및 지원
-	@GetMapping("statistics")
-	public void statistics() {
-		
-	}
+//	@GetMapping("statistics")
+//	public void statistics() {
+//		
+//	}
 	
-	
+	// 통계 및 지원
 	@RequestMapping("statistics")
 	public @ResponseBody List<MemberVO> statistics(Model model, MemberVO vo){
 		List<MemberVO> list = mypageService.chartAge(vo);
