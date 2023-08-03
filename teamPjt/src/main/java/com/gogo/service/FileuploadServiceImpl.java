@@ -18,12 +18,12 @@ import net.coobird.thumbnailator.Thumbnails;
 
 @Service
 @Log4j
-public class FileuploadServiceImpl implements FileuploadService{
-	
-	private static final String ATTACHES_DIR = "D:\\teamProject\\teamProjetGit\\teamPjt\\src\\main\\webapp\\resources\\images\\";
+public class FileuploadServiceImpl extends FileuploadPath implements FileuploadService{
 	
 	@Autowired
 	FileuploadMapper fileuploadMapper;
+	
+	private static final String ATTACHES_DIR = dirPath;
 	
 	public int fileupload(List<MultipartFile> files, String dir, String stayNo, String roomNo) {
 		int insertRes = 0;
