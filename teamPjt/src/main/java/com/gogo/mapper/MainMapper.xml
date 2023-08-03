@@ -7,9 +7,9 @@
 	<!-- stay 등록 -->
 	<insert id="insert">
 		insert into stay (stayno, memberid, stayname, stayloc, stayadress
-						, stayinfo, staytype, badge, mainpic1, mainpic2, latitude, longitude)
+						, stayinfo, staytype, badge, latitude, longitude)
 		values (stayseq.nextval, #{memberId}, #{stayName}, #{stayLoc}, #{stayAdress}
-				,#{stayInfo}, #{stayType}, #{badge}, #{mainPic1}, #{mainPic2}, #{latitude}, #{longitude})
+				,#{stayInfo}, #{stayType}, #{badge}, #{latitude}, #{longitude})
 	</insert>
 	
 	<!-- room 등록 -->
@@ -29,5 +29,22 @@
 						, babiqu, pet, terrace, pool, viewRoom, bed)
 		values (#{roomNo}, #{stayNo}, #{bathroom}, #{kitchen}, #{parking}
 						, #{babiqu}, #{pet}, #{terrace}, #{pool}, #{viewRoom}, #{bed})
+	</insert>
+	
+	<!-- 사진 등록 -->
+	<insert id="insertPhoto">
+		insert into attach (uuid, uploadpath, filename, stayno, roomno)
+		values (#{uuid}, #{uploadPath}, #{fileName}, #{stayNo}, #{roomNo})
+	</insert>
+	
+	<!-- 스테이 등록 -->
+	<insert id="insertStay">
+		<selectKey keyProperty="stayNo" order="BEFORE" resultType="String">
+			select stayseq.nextval from dual
+		</selectKey>
+		insert into stay (stayno, memberid, stayname, stayloc, stayadress
+						, stayinfo, staytype, badge, latitude, longitude)
+		values (#{stayNo}, #{memberId}, #{stayName}, #{stayLoc}, #{stayAdress}
+				, #{stayInfo}, #{stayType}, #{badge}, #{latitude}, #{longitude})
 	</insert>
 </mapper>

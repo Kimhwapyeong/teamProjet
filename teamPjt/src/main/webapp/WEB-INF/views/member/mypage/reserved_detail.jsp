@@ -130,7 +130,7 @@
                     <hr class="line">
                     <li>
                         <div class="dt">07. 요청사항</div>
-                        <div class="dd">요청사항이 없습니다.</div>
+                        <div class="dd">${talk}</div>
                     </li>
                     <hr class="line">
                     <li>

@@ -35,7 +35,7 @@ public class mypageTest {
 	
 	@Test
 	public void getStay() {
-		List<Map<String, String>> list = (List<Map<String, String>>) mapper.getStay();
+		List<StayVO> list = mapper.getStay();
 		log.info("=========");
 		log.info("list : " + list);
 	}
@@ -98,11 +98,29 @@ public class mypageTest {
 		log.info("list : " + list);
 	}
 	
+//	@Test
+//	public void chartAge(MemberVO vo) {
+//		List<MemberVO> member = mapper.chartAge(vo);
+//		log.info("=========================");
+//		log.info("member: " + member);
+//	}
+	
 	@Test
-	public void chartAge() {
-		List<MemberVO> member = mapper.chartAge();
+	public void update() {
+		MemberVO vo = new MemberVO();
+		vo.setMemberId("user1");
+		vo.setMemberEmail("mail");
+		vo.setPw("5678");
+		mapper.update(vo);
 		log.info("=========================");
-		log.info("member: " + member);
+		log.info("vo: " + vo);
 	}
+	
+	@Test
+	public void likestay() {
+		List<Map<String, String>> list = (List<Map<String, String>>) mapper.likestay();
+		log.info("list : " + list);
+	}
+	
 	
 }

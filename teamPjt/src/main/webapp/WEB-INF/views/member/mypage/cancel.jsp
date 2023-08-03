@@ -8,6 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cancel</title>
     <link rel="stylesheet" href="/resources/css/mypage/cancel.css">
+    <style>
+    	#mapi{
+    		pointer-events: none;
+    		cursor: default !important;
+    	}
+    </style>
 </head>
 
 <body>
@@ -61,17 +67,19 @@
                                     </div>
                                     <div class="stay_view">
                                         <!-- =============================== 숙소 썸네일 url ============================================-->
-                                        <div class="photo"
-                                            style="background-image: url(${list.MAINPIC1 }); background-repeat: no-repeat; background-position: center center; background-size: cover;">
-                                            <span class="view">스테이 보기</span></div>
-                                    </div><a href="/mypage/reservation/146969764">
+                                        <div id="mapi" class="photo"
+                                            style="background-image: url(${list.MAINPIC1 }); background-repeat: no-repeat; background-position: center center; background-size: cover; cursor: default !important;">
+                                            <span class="view" style="display:none;">스테이 보기</span></div>
+                                    </div><a>
                                         <div class="reserv_info">
                                             <!-- =============================== 체크인 체크아웃 ============================================-->
                                             <div class="day">${list.CHECKIN } ~
                                                 ${list.CHECKOUT }</div>
                                             <div class="option">성인 ${list.MEMBERCOUNT }명<br></div>
                                             <!-- =============================== 상세 보기 ============================================-->
-                                        </div><br><button type="button" class="btn_reserv_detail">예약 상세 확인</button>
+                                        </div>
+                                        <!-- =============================== 가격 & view ============================================-->
+										<div class="price">₩ ${list.amount }</div> <br>
                                     </a>
                                 </div>
                             </div>

@@ -34,9 +34,9 @@ public class MainController {
 
 	// 임시
 	@PostMapping("/addStayAction")
-	public String addStayAction(StayVO vo, Model model) {
+	public String addStayAction(StayVO vo, List<MultipartFile> files, Model model) {
 		
-		int res = mainService.insert(vo);
+		int res = mainService.insertStay(vo, files);
 		if(res > 0) {
 			model.addAttribute("msg", "숙소 등록 완료");
 		}else {
@@ -48,9 +48,11 @@ public class MainController {
 	
 	@PostMapping("/addRoomAction")
 	public String addRoomAction(RoomVO roomVO
-						, RoomOptionVO optionVO, Model model) {
+						, RoomOptionVO optionVO
+						, String stayNo
+						, List<MultipartFile> files, Model model) {
 		
-		int res = mainService.insertRoom(roomVO, optionVO);
+		int res = mainService.insertRoom(roomVO, optionVO, files, stayNo);
 		if(res > 0) {
 			model.addAttribute("msg", "room 등록 완료");
 		}else {

@@ -235,7 +235,7 @@ function selectDay(obj) {
 
         checkInDate = $(obj).data('day');
 
-        $('#check_in_day').html(getCheckIndateHtml());
+        $('#check_in_day_list').html(getCheckIndateHtml());
 
         lastCheckInDate();
     } else {
@@ -248,19 +248,19 @@ function selectDay(obj) {
         if (checkOutDate === "" && parseInt(checkInDate) > $(obj).data('day')) {
             $('.checkIn').find('.check_in_out_p').html('');
             $('.day').removeClass('checkIn');
-            $('#check_in_day').html("");
+            $('#check_in_day_list').html("");
 
             checkOutDate = checkInDate
             checkInDate = $(obj).data('day');
 
             $(obj).addClass('checkIn');
-            $('.checkIn').find('.check_in_out_p').html('체크인');
+            // $('.checkIn').find('.check_in_out_p').html('체크인');
 
             $('.day[data-day="' + checkOutDate + '"]').addClass('checkOut');
             $('.checkOut').find('.check_in_out_p').html('체크아웃');
 
-            $('#check_in_day').html(getCheckIndateHtml());
-            $('#check_out_day').html(getCheckOutdateHtml());
+            $('#check_in_day_list').html(getCheckIndateHtml());
+            $('#check_out_day_list').html(getCheckOutdateHtml());
 
             addClassSelectDay();
 
@@ -274,7 +274,7 @@ function selectDay(obj) {
 
             checkOutDate = $(obj).data('day');
 
-            $('#check_out_day').html(getCheckOutdateHtml());
+            $('#check_out_day_list').html(getCheckOutdateHtml());
 
             addClassSelectDay();
         } else {
@@ -288,13 +288,13 @@ function selectDay(obj) {
                 $('.day').removeClass('selectDay');
 
                 $(obj).addClass('checkIn');
-                $('.checkIn').find('.check_in_out_p').html('체크인');
+                //$('.checkIn').find('.check_in_out_p').html('체크인');
 
                 checkInDate = $(obj).data('day');
                 checkOutDate = "";
 
-                $('#check_in_day').html(getCheckIndateHtml());
-                $('#check_out_day').html("");
+                $('#check_in_day_list').html(getCheckIndateHtml());
+                $('#check_out_day_list').html("");
 
                 lastCheckInDate();
             }
@@ -341,7 +341,7 @@ function lastCheckInDate() {
 
         $('.checkOut').find('.check_in_out_p').html('체크아웃');
 
-        $('#check_out_day').html(getCheckOutdateHtml());
+        $('#check_out_day_list').html(getCheckOutdateHtml());
 
         addClassSelectDay();
     }

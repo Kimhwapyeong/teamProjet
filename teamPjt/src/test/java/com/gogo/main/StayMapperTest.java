@@ -32,13 +32,11 @@ public class StayMapperTest {
 	}
 	
 	@Test
-	public void insert() {
+	public void insertStay() {
 		StayVO stayVO = new StayVO();
 		stayVO.setBadge("뱃지");
-//		stayVO.setLatitude(1234);
-//		stayVO.setLongitude(12345);
-		stayVO.setMainPic1("pic1");
-		stayVO.setMainPic2("pic2");
+		stayVO.setLatitude(1234);
+		stayVO.setLongitude(12345);
 		stayVO.setMemberId("user1");
 		stayVO.setStayAdress("address");
 		stayVO.setStayInfo("info");
@@ -46,7 +44,9 @@ public class StayMapperTest {
 		stayVO.setStayName("짱");
 		stayVO.setStayType("내타입");
 		
-		mainMapper.insert(stayVO);
+		int res = mainMapper.insertStay(stayVO);
+		
+		assertEquals(1, res);
 	}
 	
 	@Test

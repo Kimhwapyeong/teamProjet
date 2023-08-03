@@ -32,6 +32,7 @@ import com.siot.IamportRestClient.response.Payment;
 
 import com.gogo.mapper.PaymentMapper;
 import com.gogo.vo.PaymentVO;
+import com.gogo.vo.RefundVO;
 import com.gogo.vo.ReservedVO;
 
 @Service
@@ -43,6 +44,9 @@ public class PaymentServiceImpl implements PaymentService {
 	
 	@Autowired
 	ReservedService service_r;
+	
+	@Autowired
+	RefundService service_re;
 	
 	
 	@Override
@@ -161,6 +165,11 @@ public class PaymentServiceImpl implements PaymentService {
 		map.put("pg_provider", p.get("pg_provider").toString());
 		map.put("buyer_name", p.get("buyer_name").toString());
 		
+		if(p.get("card_name")!=null) {
+			
+			map.put("card_name", p.get("card_name").toString());
+		}
+		
 		return map;
 	}
 	
@@ -220,7 +229,16 @@ public class PaymentServiceImpl implements PaymentService {
 		PaymentVO vo = new PaymentVO();
 		
 		vo.setImpUid(map.get("imp_uid"));
-		vo.setPaymentMethod(map.get("pg_provider"));
+		
+		if(map.get("card_name")!=null && !"".equals(map.get("card_name"))) {
+			
+			vo.setPaymentMethod(map.get("card_name"));
+		} else {
+			
+			vo.setPaymentMethod(map.get("pg_provider"));
+		}
+		
+		
 		vo.setReservationNo(reservationNo);
 		vo.setPaymentNo(paymentNo);
 		vo.setAmount(map.get("amount"));
@@ -251,6 +269,7 @@ public class PaymentServiceImpl implements PaymentService {
 		System.out.println("roomNo : "+map.get("roomNo"));
 		System.out.println("checkIn : "+map.get("checkIn"));
 		System.out.println("checkOut : "+map.get("checkOut"));
+		System.out.println("talkSome : "+map.get("talkSome"));
 		
 		System.err.println("검증 시작");
 		
@@ -263,6 +282,7 @@ public class PaymentServiceImpl implements PaymentService {
 		String roomNo = String.valueOf(map.get("roomNo"));
 		String reservationNo = String.valueOf(map.get("reservationNo"));
 		String memberCount = String.valueOf(map.get("memberCount"));
+		String talkSome = String.valueOf(map.get("talkSome"));
 		
 		// 예약 insert
 		ReservedVO reserved = new ReservedVO();
@@ -272,6 +292,7 @@ public class PaymentServiceImpl implements PaymentService {
 		reserved.setCheckIn(checkIn);
 		reserved.setCheckOut(checkOut);
 		reserved.setMemberCount(memberCount);
+		reserved.setTalk(talkSome);
 		
 		int reservedRes = service_r.insertReserved(reserved);
 		
@@ -313,6 +334,86 @@ public class PaymentServiceImpl implements PaymentService {
 			return null;
 		}
 		
+	}
+	
+	@Override
+	public String canclePay(@RequestBody Map<String, Object> data
+			, @PathVariable String checksum) throws Exception {
+		
+		String res = "";
+		
+		if(data!=null) {
+			String token = getToken();
+			String imp_uid = (String)data.get("imp_uid");
+			Object price = data.get("cancel_request_amount");
+			
+			
+			
+			System.out.println("canclepay : "+checksum);
+			
+			// 환불 금액 걍 조작 가능ㅋ
+			String refundPrice = String.valueOf(price);
+			res = payMentCancle(token, imp_uid, refundPrice, "환불이다!", checksum);
+			
+			if("success".equals(res)) {
+				
+				System.out.println("cancleYN 수정 완료");
+				updateCancle(imp_uid);
+				
+				
+				PaymentVO pay = selectOne(imp_uid);
+				RefundVO check = service_re.selectOne(pay.getPaymentNo());
+				
+				if(check==null) {
+					
+					RefundVO vo = new RefundVO();
+					
+					vo.setPaymentNo(pay.getPaymentNo());
+					vo.setAmount(pay.getAmount());
+					vo.setFee("0");
+					
+					service_re.insertRefund(vo);
+				} else {
+					
+					res = "dup";
+				}
+				
+				
+				
+			} else {
+				System.out.println("cancleYN 수정 실패..");
+			}
+		}
+		
+		return res;
+
+	}
+	
+	@Override
+	public Map<String, Object> payInfoAction(String imp_uid){
+		
+		System.out.println(imp_uid);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		PaymentVO vo = selectOne(imp_uid);
+		
+		if(vo==null) {
+			System.out.println("해당 결제 정보를 찾을 수 없습니다.");
+			map.put("message", "해당 결제 정보를 찾을 수 없습니다.");
+			return map;
+		}
+		
+		
+		System.out.println(vo.getPaymentNo());
+		System.out.println(vo.getPaymentMethod());
+		System.out.println(vo.getImpUid());
+		System.out.println(vo.getReservationNo());
+		System.out.println(vo.getCancleYN());
+		
+		map.put("vo", vo);
+		
+		return map;
+
 	}
 
 

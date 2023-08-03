@@ -29,7 +29,8 @@ public class MainServiceImpl implements MainService{
 
 	@Override
 	@Transactional
-	public int insertRoom(RoomVO vo, RoomOptionVO optionVO) {
+	public int insertRoom(RoomVO vo, RoomOptionVO optionVO,
+					List<MultipartFile> files, String stayNo) {
 		
 		int res = mainMapper.insertRoom(vo);
 		System.out.println(vo.getRoomNo());
@@ -37,14 +38,43 @@ public class MainServiceImpl implements MainService{
 			optionVO.setRoomNo(vo.getRoomNo());
 			res = mainMapper.insertRoomOption(optionVO);
 		}
-		
+		if(res>0) {
+			res = roomFileupload(files, stayNo, vo.getRoomNo());
+		}
 		return res;
+	}
+
+	@Override
+	@Transactional
+	public int insertStay(StayVO vo, List<MultipartFile> files) {
+		
+		
+		  int res = mainMapper.insertStay(vo); 
+		  System.out.println(vo.getStayNo());
+		  System.out.println("insertStay res : " + res);
+ 
+		  if(res>0) { 
+			  String roomNo = "";
+			  res = stayFileupload(files, vo.getStayNo(), roomNo); 
+			  System.out.println("mainservice insertstay res : " + res);
+		  }
+		 
+		  return res;
 	}
 
 	@Override
 	public int roomFileupload(List<MultipartFile> files, String stayNo, String roomNo) {
 		
 		String dir = "rooom\\";
+		int res = fileuploadService.fileupload(files, dir, stayNo, roomNo);
+		
+		return res;
+	}
+	
+	@Override
+	public int stayFileupload(List<MultipartFile> files, String stayNo, String roomNo) {
+		System.out.println("stayFileupload 입장!!!!!");
+		String dir = "stay\\";
 		int res = fileuploadService.fileupload(files, dir, stayNo, roomNo);
 		
 		return res;

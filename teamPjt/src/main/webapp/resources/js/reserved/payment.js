@@ -40,6 +40,7 @@
 					rsp.memberCount = memberCount;
 					rsp.reservationNo = reservationNo;
 					rsp.memberId = memberId;
+					rsp.talkSome = talkSome;
 					
 					console.log("rsp : ", rsp);
 					
@@ -163,6 +164,7 @@
 				    	
 				    	if(res.responseText == 'success'){
 				    		alert('환불 요청 완료');
+				    		location.href='/main';
 				    	} else if (res.responseText == 'dup'){
 				    		alert('이미 처리된 건입니다.');
 				    	} else {

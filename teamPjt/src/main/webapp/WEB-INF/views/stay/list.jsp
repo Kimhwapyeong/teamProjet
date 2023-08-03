@@ -47,6 +47,11 @@
             background-position: 100%;
             opacity: 0;
         }
+        .modal_hidden {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility .3s ease-out, opacity .3s ease-out;
+        }
     </style>
     <script>
         window.addEventListener('load', function () {
@@ -86,8 +91,8 @@
             btn2.addEventListener('click', function () {
                 selectNumber.classList.add('open');
             })
-            let clsbtn1 = document.querySelectorAll('.btn_close')[1];
-            clsbtn1.addEventListener('click', function () {
+            let clsbtn3 = document.querySelectorAll('.btn_close')[3];
+            clsbtn3.addEventListener('click', function () {
                 selectNumber.classList.remove('open');
             })
 
@@ -96,8 +101,8 @@
             btn3.addEventListener('click', function () {
                 selectPrice.classList.add('open');
             })
-            let clsbtn2 = document.querySelectorAll('.btn_close')[2];
-            clsbtn2.addEventListener('click', function () {
+            let clsbtn4 = document.querySelectorAll('.btn_close')[4];
+            clsbtn4.addEventListener('click', function () {
                 selectPrice.classList.remove('open');
             })
 
@@ -106,8 +111,8 @@
             btn4.addEventListener('click', function () {
                 selectType.classList.add('open');
             })
-            let clsbtn3 = document.querySelectorAll('.btn_close')[3];
-            clsbtn3.addEventListener('click', function () {
+            let clsbtn5 = document.querySelectorAll('.btn_close')[5];
+            clsbtn5.addEventListener('click', function () {
                 selectType.classList.remove('open');
             })
 
@@ -116,8 +121,8 @@
             btn5.addEventListener('click', function () {
                 selectTheme.classList.add('open');
             })
-            let clsbtn4 = document.querySelectorAll('.btn_close')[4];
-            clsbtn4.addEventListener('click', function () {
+            let clsbtn6 = document.querySelectorAll('.btn_close')[6];
+            clsbtn6.addEventListener('click', function () {
                 selectTheme.classList.remove('open');
             })
 
@@ -136,6 +141,8 @@
             })
 
 
+
+            
 
             // 추천순, 인기순, ...
             const buttons = document.querySelectorAll('#listpick li');
@@ -185,6 +192,15 @@
             })
 
 
+			// 프로모션 보여줬다 사라지기            
+            const messageElement = document.getElementById('rightnow');
+			function showElement() {
+			    messageElement.classList.add('modal_hidden');
+			}
+			setTimeout(showElement, 3000);            
+
+            
+            
 
             // likeBtn.addEventListener('click', function(){
             //     console.log('a');
@@ -225,7 +241,7 @@
 
             let calendarContainer = document.querySelector('#iscalendar');
             let iscalendar = document.querySelectorAll('.DateInput input');
-            let closeBtn2 = document.getElementById('closeBtn2');
+            let closeBtn222 = document.getElementById('closeBtn222');
 
             // Event listener for iscalendar inputs and closeBtn2
             function toggleCalendar() {
@@ -240,7 +256,7 @@
             input.addEventListener('click', toggleCalendar);
             });
 
-            closeBtn2.addEventListener('click', toggleCalendar);
+            closeBtn222.addEventListener('click', toggleCalendar);
         })
 
 
@@ -258,7 +274,7 @@
 </head>
 
 <body style="">
- <%-- <%@include file="../common/header.jsp" %>  --%>
+ 	<%@include file="../common/header.jsp" %>
     <div role="presentation">
         <div class="container sub_title">
             <div class="tit">FIND STAY</div>
@@ -313,28 +329,13 @@
                                             </ul>
                                         </div>
                                         <div class="box">
-                                            <div class="tit cate_stay" style="text-align: left;">옵션</div>
+                                            <div class="tit cate_stay" style="text-align: left;">주변 경치</div>
                                             <ul class="clearfix">
-                                                <li><button type="button" class="" style="cursor: pointer;">옵션
-                                                        전체</button></li>
-                                                <li><button type="button" class="" style="cursor: pointer;">애견
-                                                        동반</button></li>
-                                                <li><button type="button" class="" style="cursor: pointer;">풀장</button>
-                                                </li>
-                                                <li><button type="button" class="" style="cursor: pointer;">테라스</button>
-                                                </li>
-                                                <li><button type="button" class="" style="cursor: pointer;">바베큐</button>
-                                                </li>
-                                                <li><button type="button" class="" style="cursor: pointer;">주차장</button>
-                                                </li>
-                                            </ul>
-                                            <div class="tit" style="text-align: left;">뷰</div>
-                                            <ul class="clearfix">
-                                                <li><button type="button" class="" style="cursor: pointer;">바다</button>
+                                             	<li><button type="button" class="" style="cursor: pointer;">바다</button>
                                                 </li>
                                                 <li><button type="button" class="" style="cursor: pointer;">산</button>
                                                 </li>
-                                            </ul>
+                                             </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -364,7 +365,7 @@
                                             <div class="DayPicker DayPicker_1 DayPicker__horizontal DayPicker__horizontal_2 DayPicker__withBorder DayPicker__withBorder_3"
                                                 style="width: 619px; display: none;" id='iscalendar'>
                                                 <div>
-                                                    <div class="" style="width: 618px; height: 450px; border: 1px solid black;">
+                                                    <div class="" style="width: 618px; height: 450px; border: 1px solid #e4e4e4; background: #fff; border-radius: 5px;">
 
                                                         <div class="calendar-wrap" style="padding-top: 0px ">
                                                             <div class="calendar-middle-wrap" style='height: 400px;'>
@@ -411,12 +412,12 @@
                                                               <div>
                                                                 <p>
                                                                   <span style="padding-bottom:15px">체크인</span>
-                                                                  <label id="check_in_day" style='font-size: 20px;'></label>
+                                                                  <label id="check_in_day_list" style='font-size: 20px;'></label>
                                                                 </p>
                                                                 <p class="space" style="color: #212529;font-size:2em;">~</p>
                                                                 <p>
                                                                   <span>체크아웃</span>
-                                                                  <label id="check_out_day" style='font-size: 20px;'></label>
+                                                                  <label id="check_out_day_list" style='font-size: 20px;'></label>
                                                                 </p>
                                                                 <br><br>
                                                                 <p>
@@ -440,7 +441,7 @@
                                                                   </div>
                                                                   <button
                                                                     style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer; position:absolute; top:3%; right:2%;"
-                                                                    type="button" id="closeBtn2">
+                                                                    type="button" id="closeBtn222">
                                                                     <img src="https://www.stayfolio.com/web/images/btn_layer_close.png">
                                                                   </button>
                                                                 </form>
@@ -603,12 +604,6 @@
                                         style="cursor: pointer;">인천</button></li>
                                 <li class="area_mobile ko"><button type="button" class=""
                                         style="cursor: pointer;">광주</button></li>
-                                <li class="area_mobile ko"><button type="button" class=""
-                                        style="cursor: pointer;">대전</button></li>
-                                <li class="area_mobile ko"><button type="button" class=""
-                                        style="cursor: pointer;">대구</button></li>
-                                <li class="area_mobile ko"><button type="button" class=""
-                                        style="cursor: pointer;">울산</button></li>
                             </ul>
                             <div class="tit" style="margin-top: 20px;">해외</div>
                             <ul class="check_list">
@@ -661,16 +656,8 @@
                                             type="button" class="btn_plus">더하기</button></div>
                                 </dd>
                                 <dt style="float: left; margin: 12px 0px 0px;">
-                                    <span>아동<small>24개월~12세</small></span>
+                                    <span>아동</span>
                                 </dt>
-                                <dd class="">
-                                    <div class="number_count"><button type="button" class="btn_minus"
-                                            disabled="">빼기</button><span class="input-num"><input type="number"
-                                                value="0"><span class="person-count">명</span></span><button
-                                            type="button" class="btn_plus">더하기</button></div>
-                                </dd>
-                                <dt style="float: left; margin: 12px 0px 0px;"><span>영아<small>24개월
-                                            미만</small></span></dt>
                                 <dd class="">
                                     <div class="number_count"><button type="button" class="btn_minus"
                                             disabled="">빼기</button><span class="input-num"><input type="number"
@@ -732,20 +719,14 @@
                             <ul class="check_list">
                                 <li class="ko"><label class="check_skin" for="all"><input type="checkbox" id="all"
                                             checked=""><span>전체</span></label></li>
-                                <li class="ko"><label class="check_skin" for="guest_house"><input type="checkbox"
-                                            id="guest_house"><span>게스트하우스</span></label></li>
                                 <li class="ko"><label class="check_skin" for="rental_house"><input type="checkbox"
                                             id="rental_house"><span>렌탈하우스</span></label></li>
                                 <li class="ko"><label class="check_skin" for="pension"><input type="checkbox"
                                             id="pension"><span>펜션</span></label></li>
                                 <li class="ko"><label class="check_skin" for="hanok"><input type="checkbox"
                                             id="hanok"><span>한옥</span></label></li>
-                                <li class="ko"><label class="check_skin" for="camping_outdoor"><input type="checkbox"
-                                            id="camping_outdoor"><span>캠핑&amp;아웃도어</span></label></li>
                                 <li class="ko"><label class="check_skin" for="hostel"><input type="checkbox"
                                             id="hostel"><span>호스텔</span></label></li>
-                                <li class="ko"><label class="check_skin" for="resort"><input type="checkbox"
-                                            id="resort"><span>리조트</span></label></li>
                                 <li class="ko"><label class="check_skin" for="bnb"><input type="checkbox"
                                             id="bnb"><span>민박</span></label></li>
                                 <li class="ko"><label class="check_skin" for="hotel"><input type="checkbox"
@@ -757,25 +738,19 @@
                             <div class="tit">편의시설</div>
                             <div class="btn-wrapper"><button type="button" class="btn-number-search">적용하기</button></div>
                             <ul class="findstay_check_list">
-                                <li class="ko"><label class="check_skin" for="all_theme"><input type="checkbox"
-                                            id="all_theme" checked=""><span>전체</span></label></li>
+<!--                                 <li class="ko"><label class="check_skin" for="all_theme"><input type="checkbox"
+                                            id="all_theme" ><span>전체</span></label></li> -->
                                 <li class="ko"><label class="check_skin" for="bbq_theme"><input type="checkbox"
-                                            id="bbq_theme"><span>바베큐</span></label></li>
+                                            id="bbq_theme" checked=""><span>바베큐</span></label></li>
                                 <li class="ko"><label class="check_skin" for="pets_theme"><input type="checkbox"
                                             id="pets_theme"><span>반려동물</span></label></li>
-                                <li class="ko"><label class="check_skin" for="tub_theme"><input type="checkbox"
-                                            id="tub_theme"><span>반신욕</span></label></li>
                                 <li class="ko"><label class="check_skin" for="display_theme"><input type="checkbox"
                                             id="display_theme"><span>빔프로젝터, TV</span></label>
                                 </li>
                                 <li class="ko"><label class="check_skin" for="pool_theme"><input type="checkbox"
-                                            id="pool_theme"><span>수영장</span></label></li>
-                                <li class="ko"><label class="check_skin" for="breakfast_theme"><input type="checkbox"
-                                            id="breakfast_theme"><span>아침식사</span></label></li>
-                                <li class="ko"><label class="check_skin" for="dinner_theme"><input type="checkbox"
-                                            id="dinner_theme"><span>저녁식사</span></label></li>
+                                            id="pool_theme"><span>풀장</span></label></li>
                                 <li class="ko"><label class="check_skin" for="kitchenette_theme"><input type="checkbox"
-                                            id="kitchenette_theme"><span>취사</span></label></li>
+                                            id="kitchenette_theme"><span>테라스</span></label></li>
                             </ul>
                         </div>
                     </div>
@@ -793,8 +768,8 @@
             <div class="_findstay_sort_wrap__JLD12">
                 <ul class="_findstay_sort_selb__JhhC5">
                     <li><button type="button" class="_findstay_btn_sort__h6PXi btn_toggle">모든 스테이</button>
-                        <div class="_tooltips_balloon_desc_black__Xv4MX _tooltips_hidden__xldhU">
-                            <div class="_tooltips_alert_cont__K8tDm">지금 특별 프로모션이 진행 중인 스테이를 만나보세요.</div>
+                        <div class="_tooltips_balloon_desc_black__Xv4MX " id='rightnow'>
+                            <div class="_tooltips_alert_cont__K8tDm ">지금 특별 프로모션이 진행 중인 스테이를 만나보세요.</div>
                         </div>
                     </li>
                     <li class="_findstay_mo_only__ojbXn"><button type="button"
@@ -831,132 +806,90 @@
     </div>
     </div>
 
+	<div class="container findstay_list  ">
+		<div class="flist_wrap">
+			<c:forEach items="${list}" var="list" step="1">
+				<div class="flist_box">
+					<a href="/stay/room?stayName=${list.stayName}">
+						<div class="info_container_wrapper">
+							<div class="name info_container" role="presentation">${list.stayName }<span>${list.stayType }</span></div>
+							<div class="clearfix"></div>
+							<div class="flist_info" role="presentation">
+								<p class="address info_container" role="presentation"><span>${list.stayLoc }</span><br>
+									 기준 ${list.stdPerson }명&nbsp;(최대 ${list.overPerson }명)<br>₩${list.minPrice } ~ ₩${list.maxPrice }</p>
+								<p class="btn_more " role="presentation" tabindex="-1" style="cursor: pointer;">예약하기</p>
+							</div>
+						</div>
+						<div class="flist_img" role="presentation"
+							style="padding-top: 0px;">
+							<ul class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events slider1 flist_slider">
+								<div class="swiper-button-prev "></div>
+								<div class="swiper-button-next"></div>
+								<div class="swiper-wrapper">
+									<li class="swiper-slide img swiper-slide-active"
+										style="background: url(&quot;${list.mainPic1}&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
+									</li>
+									<li class="swiper-slide img swiper-slide-next"
+										style="background: url(&quot;${list.mainPic2}&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
+									</li>
+								</div>
+								<div class="_badge_badge_wrapper__h9IsV">
+									<div class="_badge_exclusive__prNZN">
+										<span class="_badge_txt__fonwF">${list.badge }</span>
+									</div>
+								</div>
+							</ul>
+						</div>
+					</a>
+					<button type="button" class="btn_like "><span>관심스테이</span></button>
+				</div>
+			</c:forEach>
 
-    <!-- 숙소 목록 -->
-    <div class="container findstay_list  ">
-        <div class="flist_wrap">
-            <a href="/stay/room">
-                <div class="flist_box">
-                <!-- <button type="button" class="btn_like "><span>관심스테이</span></button> -->
-                <button type="button" class="location_btn_pc" style="display: none;">위치보기</button><a
-                        href="/findstay/dansim-stay">
-                        <div class="info_container_wrapper">
-                            <div class="name info_container" role="presentation">단심스테이<span>민박</span></div>
-                            <div class="clearfix"></div>
-                            <div class="flist_info" role="presentation">
-                                <p class="address info_container" role="presentation"><span>제주/서귀포시</span><br>기준
-                                    4명&nbsp;(최대 6명)<br>₩450,000 ~ ₩550,000</p>
-                                <p class="btn_more " role="presentation" tabindex="-1" style="cursor: pointer;">
-                                    예약하기</p>
-                            </div>
+			<!--         <div class="flist_box">
+                    <div class="info_container_wrapper">
+                        <div class="name info_container" role="presentation">단심스테이<span>민박</span></div>
+                        <div class="clearfix"></div>
+                        <div class="flist_info" role="presentation">
+                            <p class="address info_container" role="presentation"><span>제주/서귀포시</span><br>
+                            기준 4명&nbsp;(최대 6명)<br>₩450,000 ~ ₩550,000</p>
+                            <p class="btn_more " role="presentation" tabindex="-1" style="cursor: pointer;">예약하기</p>
                         </div>
-                        <div class="flist_img" role="presentation" style="padding-top: 0px;">
-                            <ul
-                                class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events slider1 flist_slider">
-                                <div class="swiper-button-prev swiper-button-disabled"></div>
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-pagination swiper-pagination-bullets"><span
-                                        class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span
-                                        class="swiper-pagination-bullet"></span><span
-                                        class="swiper-pagination-bullet"></span><span
-                                        class="swiper-pagination-bullet"></span><span
-                                        class="swiper-pagination-bullet"></span><span
-                                        class="swiper-pagination-bullet"></span></div>
-                                <div class="swiper-wrapper">
-                                    <li class="swiper-slide img swiper-slide-active"
-                                        style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/051/small/0c6d4f002d9ec019336717a93860bda6db5ddb8d.jpg?1674109162&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
-                                    </li>
-                                    <li class="swiper-slide img swiper-slide-next"
-                                        style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/035/small/76c44f42cc10d2307b01076923a1a9af4252b1c8.jpg?1674109162&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
-                                    </li>
-                                    <li class="swiper-slide img"
-                                        style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/054/small/1b4aff9e300e4d76eff93203e6b823ba6a842366.jpg?1674109163&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
-                                    </li>
-                                    <li class="swiper-slide img"
-                                        style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/050/small/7caaacab2f4fa2f43f155d751a5f564ce82dc8d1.jpg?1674109162&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
-                                    </li>
-                                    <li class="swiper-slide img"
-                                        style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/042/small/29659232d544a6bdb24936ba45a85cf014cc94ff.jpg?1674109160&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
-                                    </li>
-                                    <li class="swiper-slide img"
-                                        style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/041/small/2788f8130206145600d56cb8faea3eba0d11c369.jpg?1674109160&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
-                                    </li>
-                                </div>
-                                <div class="_badge_badge_wrapper__h9IsV">
-                                    <div class="_badge_exclusive__prNZN"><span
-                                            class="_badge_txt__fonwF">EXCLUSIVE</span>
-                                    </div>
-                                </div>
-                            </ul>
-                        </div>
-                    </a><button type="button" class="location_btn_mo" style="display: none;">위치보기</button>
-            </a>
-            <button type="button" class="btn_like "><span>관심스테이</span></button>
-        </div>
-
-        <!-- 여기서 부터  -->
-        <div class="flist_box"><button type="button" class="btn_like "><span>관심스테이</span></button><button type="button"
-                class="location_btn_pc" style="display: none;">위치보기</button><a href="/findstay/bengdi-1967">
-                <div class="info_container_wrapper">
-                    <div class="name info_container" role="presentation">벵디1967<span>민박</span></div>
-                    <div class="clearfix"></div>
-                    <div class="flist_info" role="presentation">
-                        <p class="address info_container" role="presentation"><span>제주/제주시</span><br>기준
-                            1명&nbsp;(최대 4명)<br>₩260,000 ~ ₩360,000</p>
-                        <p class="btn_more " role="presentation" tabindex="-1" style="cursor: pointer;">
-                            예약하기</p>
                     </div>
-                </div>
-                <div class="flist_img" role="presentation" style="padding-top: 0px;">
-                    <ul
-                        class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events slider1 flist_slider">
-                        <div class="swiper-button-prev swiper-button-disabled"></div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-pagination swiper-pagination-bullets"><span
-                                class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span
-                                class="swiper-pagination-bullet"></span><span
-                                class="swiper-pagination-bullet"></span><span
-                                class="swiper-pagination-bullet"></span><span
-                                class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span>
-                        </div>
-                        <div class="swiper-wrapper">
-                            <li class="swiper-slide img swiper-slide-active"
-                                style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/157/341/small/939bd14ef2bb850a1f23dd243d03f427b6777f1c.JPG?1670382885&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
-                            </li>
-                            <li class="swiper-slide img swiper-slide-next"
-                                style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/157/344/small/a82403dfb0d7aa165dce20901829ff2fa68d12dd.jpg?1670382888&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
-                            </li>
-                            <li class="swiper-slide img"
-                                style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/157/333/small/c090018adf6e49264f10313adeebdcefce2e336c.jpg?1670382882&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
-                            </li>
-                            <li class="swiper-slide img"
-                                style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/157/330/small/541ebdd8e26335e1418faf6fe2fe6a0fe663b46d.jpg?1670382880&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
-                            </li>
-                            <li class="swiper-slide img"
-                                style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/157/342/small/e27fe49b18194eb52cc5f524498ed2c686e12362.jpg?1670382885&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
-                            </li>
-                            <li class="swiper-slide img"
-                                style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/157/336/small/ead2ac339b9c76279e4fa820edcffdc096ab7e9e.jpg?1670382883&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
-                            </li>
-                        </div>
-                        <div class="_badge_badge_wrapper__h9IsV">
-                            <div class="_badge_promo__vtoja"><span class="_badge_txt__fonwF">PROMO</span></div>
-                        </div>
-                    </ul>
-                </div>
-            </a><button type="button" class="location_btn_mo" style="display: none;">위치보기</button>
-        </div>
-        <!-- 여기가지 반복 -->
+                    <div class="flist_img" role="presentation" style="padding-top: 0px;">
+                        <ul class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events slider1 flist_slider">
+                            <div class="swiper-button-prev "></div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-wrapper"> 
+                                <li class="swiper-slide img swiper-slide-active"
+                                    style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/051/small/0c6d4f002d9ec019336717a93860bda6db5ddb8d.jpg?1674109162&quot;) center center / cover no-repeat; cursor: pointer; width: 389px;">
+                                </li>
+                                <li class="swiper-slide img swiper-slide-next"
+                                    style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/035/small/76c44f42cc10d2307b01076923a1a9af4252b1c8.jpg?1674109162&quot;) center center / cover no-repeat; cursor: pointer; width: 389px;">
+                                </li>
+                            </div>
+                            <div class="_badge_badge_wrapper__h9IsV">
+                                <div class="_badge_exclusive__prNZN"><span
+                                        class="_badge_txt__fonwF">EXCLUSIVE</span>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                <button type="button" class="btn_like "><span>관심스테이</span></button>
+            </a>
+        </div> -->
 
 
 
-        <!-- 페이지 -->
-        <div class="paging false"><a href="/" class="prev" title="이전 페이지">이전 페이지</a><a href="/" class="on">1</a><a
-                href="/" class="">2</a><a href="/" class="">3</a><a href="/" class="">4</a><a href="/"
-                class="">5</a>...<a href="/">20</a><a href="/" class="next" title="다음 페이지">다음 페이지</a></div>
-    </div>
-    </div>
-    <%@include file="../common/footer.jsp" %>
+			<!-- 페이지 -->
+			<div class="paging false">
+				<a href="/" class="prev" title="이전 페이지">이전 페이지</a><a href="/"
+					class="on">1</a><a href="/" class="">2</a><a href="/" class="">3</a><a
+					href="/" class="">4</a><a href="/" class="">5</a>...<a href="/">20</a><a
+					href="/" class="next" title="다음 페이지">다음 페이지</a>
+			</div>
+		</div>
+		<!-- </div> -->
+		<%@include file="../common/footer.jsp"%>
 </body>
 
 </html>

@@ -1,10 +1,12 @@
 package com.gogo.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gogo.vo.MemberVO;
 import com.gogo.vo.QuestionVO;
@@ -20,16 +22,22 @@ public interface mypageService {
 	// 숙소 조회
 	public List<StayVO> getList(Model model);
 	
+	// 숙소 삭제
+	public int deleteStay(String[] idArr);
+	
 	// 회원 조회
 	public List<MemberVO> getMember(Model model);
 	
+	// 회원 여러명 삭제
+	public int deleteArr(String[] idArr);
+	
 	// 통계
-	public List<MemberVO> chartAge();
+	public List<MemberVO> chartAge(MemberVO vo);
 	
 	
 	// ▶▶▶  host ▶▶▶
 	// 숙소 관리
-	public List<Map<String, String>> getStay(Model model);
+	public List<StayVO> getStay(Model model);
 	
 	// 예약 관리
 	public List<Map<String, String>> reservinfo(Model model);
@@ -57,5 +65,19 @@ public interface mypageService {
 	// 회원 정보 조회
 	public List<MemberVO> mem(Model model);
 	
-		
+	// 회원 정보 수정
+	public int update(MemberVO vo);
+	
+	
+	// 예약 상세보기
+	public void reservation_detail(@RequestParam("checkIn") String checkIn
+			, @RequestParam("checkOut") String checkOut
+			, @RequestParam("price") String price
+			, @RequestParam("stayNo") String stayNo
+			, @RequestParam("reservationNo") String reservationNo
+			, Model model);
+	
+	// 관심 스테이
+	public List<Map<String, String>> likestay(Model model);
+	
 }

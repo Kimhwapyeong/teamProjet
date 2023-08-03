@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gogo.service.mypageService;
 import com.gogo.vo.MemberVO;
+import com.gogo.vo.QuestionVO;
 import com.google.gson.Gson;
 
 import lombok.extern.log4j.Log4j;
@@ -37,30 +39,93 @@ public class AdminController {
 	}
 	
 	
+	// 숙소 삭제
+	@GetMapping("deleteStay")
+	public String deleteStay(String stayNo, Model model, RedirectAttributes rttr) {
+		System.out.println("stayNo:" + stayNo);
+		String[] idArr = stayNo.split(",");
+		System.out.println("idArr : " + idArr);
+		
+		int res = mypageService.deleteStay(idArr);
+		System.out.println("삭제 res : " + res);
+		
+		String msg = "";
+		
+		if(res>0) {
+			msg = stayNo + "번 숙소를 삭제하였습니다";
+			rttr.addFlashAttribute("msg", msg);  
+			return "redirect:/member/admin/stayadmin";
+		} else {
+			msg = "숙소 삭제 도중 오류가 발생하였습니다";
+			model.addAttribute("msg", msg);
+			return "redirect:/member/admin/stayadmin";
+		}
+	}
+	
+	
 	// 사용자 관리
 	@GetMapping("useradmin")
 	public void useradmin(Model model) {
 		mypageService.getMember(model);
 	}
 	
+	
+	// 사용자 삭제
+	@GetMapping("delete")
+	public String delete(String memberId, Model model, RedirectAttributes rttr) {
+		System.out.println("memberId:" + memberId);
+		String[] idArr = memberId.split(",");
+		System.out.println("idArr : " + idArr);
+		
+		int res = mypageService.deleteArr(idArr);
+		System.out.println("삭제 res : " + res);
+		
+		String msg = "";
+		
+		if(res>0) {
+			msg = memberId + "회원을 삭제하였습니다";
+			rttr.addFlashAttribute("msg", msg);  
+			return "redirect:/member/admin/useradmin";
+		} else {
+			msg = "회원 삭제 도중 오류가 발생하였습니다";
+			model.addAttribute("msg", msg);
+			return "redirect:/member/admin/useradmin";
+		}
+	}
+	
+	
+	
 	// 호스트 지원
 	@GetMapping("hosthelp")
-	public void hosthelp() {
+	public void hosthelp(Model model) {
+		List<QuestionVO> list  = mypageService.qaList(model);
+		log.info("list : " + list);
+	}
+	
+	@GetMapping("answer")
+	public void getOne(QuestionVO vo, Model model) {
+		log.info("queNo :" + vo.getQueNo()); 
+		QuestionVO que = mypageService.getOne(vo.getQueNo());
+		log.info("========");
+		log.info("que : " + que);
+		log.info("queNo : " + vo.getQueNo());
+		log.info("vo.getTitle : " + vo.getTitle());
+		model.addAttribute("que", que);
+	}
+	
+	// 통계 및 지원
+	@GetMapping("statistics")
+	public void statistics() {
 		
 	}
 	
-//	// 통계 및 지원
-//	@GetMapping("statistics")
-//	public void statistics() {
-//		
-//	}
 	
 	@RequestMapping("statistics")
-	public @ResponseBody List<MemberVO> statistics(Model model){
-		List<MemberVO> list = mypageService.chartAge();
+	public @ResponseBody List<MemberVO> statistics(Model model, MemberVO vo){
+		List<MemberVO> list = mypageService.chartAge(vo);
 	    model.addAttribute("mb_id", list);
 	    log.info("============");
-	    log.info("list : " + list);
+	    log.info("mb_id : " + list);
 	    return list;
 	}
 

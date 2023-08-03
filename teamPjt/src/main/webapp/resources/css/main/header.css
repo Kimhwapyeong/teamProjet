@@ -290,3 +290,13 @@ li.jsx-bc9726d7609f7d7f {
 	display: flex;
 }
 -webkit-box-
+
+button.jsx-13bd1097de52bb6b {
+	width: 276px;
+	line-height: 44px;
+	font-size: 14px;
+	text-align: center;
+	border: solid 1px #000;
+	position: absolute;
+	bottom: 50px
+}

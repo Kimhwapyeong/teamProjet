@@ -125,20 +125,20 @@ window.addEventListener('load', function(){
                      <form name='qa' style='display: none;' method="post" action="/member/host/write">
 	                    <div class="mb-3">
 							  <label for="title" class="form-label" required>제목  <span style="color: red">*</span></label>
-							  <input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요" name="title">
+							  <input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요" name="title" required>
 						</div>
-						<div class="input-group mb-3">
-							  <span class="input-group-text" style="background-color:white; font-size:14px;" required>작성자  <span style="color: red"> *</span></span>
-							  <input type="text" class="form-control" placeholder="host" id="memberId" name="memberId" value="host1">
+						<div class="mb-3">
+							  <label for="memberId" class="form-label" style="background-color:white; font-size:14px;"> 작성자  <span style="color: red"> *</span></label>
+							  <input type="text" class="form-control" placeholder="host" id="memberId" name="memberId" value="host1" required>
 						</div>
 						<div class="mb-3">
 							  <label for="content" class="form-label" required>내용  <span style="color: red">*</span></label>
-							  <textarea class="form-control" id="content" rows="10" name="content" placeholder="내용을 입력해주세요"></textarea>
+							  <textarea class="form-control" id="content" rows="10" name="content" placeholder="내용을 입력해주세요" required></textarea>
 						</div>
 						<div style=" float: right">
-							<button type="button" class="btn btn-light btn-sm" onclick="goList()">문의 목록 바로가기</button>
-							<button type="submit" class="btn btn-light btn-sm" >문의 하기</button>
-							<button type="reset" class="btn btn-light btn-sm">작성 취소</button>
+							<button type="button" class="btn btn-outline-dark btn-sm" onclick="goList()">문의 목록 바로가기</button>
+							<button type="submit" class="btn btn-outline-dark btn-sm" >문의 하기</button>
+							<button type="reset" class="btn btn-outline-dark btn-sm">작성 취소</button>
 						</div>
 					</form>
                      

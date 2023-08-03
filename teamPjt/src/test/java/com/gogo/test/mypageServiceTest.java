@@ -47,8 +47,8 @@ public class mypageServiceTest {
 	}
 	
 	@Test
-	public void chartAge() {
-		List<MemberVO> list = service.chartAge();
+	public void chartAge(MemberVO vo) {
+		List<MemberVO> list = service.chartAge(vo);
 		log.info("=========================");
 		log.info("list: " + list);
 	}

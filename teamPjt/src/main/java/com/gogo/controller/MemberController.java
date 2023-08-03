@@ -20,6 +20,8 @@ public class MemberController extends CommonRestController {
 
     @Autowired
     private MemberService memberService;
+    
+    
 
     // 로그인 페이지 이동
 	@GetMapping("/login/login")
@@ -75,7 +77,7 @@ public class MemberController extends CommonRestController {
 	}
 	
 	//아이디 중복확인 요청
-	@PostMapping("/idcheck")
+	@PostMapping("/idCheck")
 	public @ResponseBody Map<String, Object> idCheck(@RequestBody MemberVO member){
 		
 		int res = memberService.idCheck(member);

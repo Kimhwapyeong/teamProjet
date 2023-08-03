@@ -36,17 +36,21 @@ public class MemberTest {
 		assertNotNull(member);
 	}
 	
-//	@Test
-//	public void testInsert() {
-//		Member member = new Member();
-//		member.setId("test1");
-//		member.setPw("1234");
-//		member.setName("name1");
-//		
-//		int res = memberMapper.insert(member);		
-//		
-//		assertEquals(1, res);
-//	}
+	@Test
+	public void testInsert() {
+		MemberVO member = new MemberVO();
+		member.setMemberId("user6");
+		member.setMemberName("name1");
+		member.setBirthday("1992-08-15");
+		member.setPw("1234");
+		member.setMemberEmail("yuhhwe@naver.com");;
+		member.setGender("F");
+		
+		
+		int res = memberMapper.signup(member);		
+		
+		assertEquals(1, res);
+	}
 //	
 //	@Test
 //	public void testIdCheck() {
@@ -60,15 +64,12 @@ public class MemberTest {
 //	
 //	@Test
 //	public void testGetMemberRole() {
-//		List<String> list = memberMapper.getMemberRole("adminaa");
+//		List<String> list = memberMapper.getMemberRole("admin");
 //		System.out.println(list);
 //		System.out.println("관리자권한 : " + list.contains("ADMIN_ROLE"));
 //	}
+
 }
-
-
-
-
 
 
 

@@ -54,18 +54,17 @@
                          </ul>
                      </div>
                      <div class="mypage_content">
- 
                      
                      <!-- 문의 요청 -->
                      <form>
 	                    <div class="mb-3">
 							  <label for="title" class="form-label">제목</label>
-							  <input type="text" class="form-control" id="title" name="title" value="${que.title }">
+							  <input type="text" class="form-control" id="title" name="title" value="${que.title }" style="font-size:15px" readonly>
 						</div>
 						<div class="mb-3">
 							  <label for="content" class="form-label"></label>
-							  <textarea class="form-control" id="content" rows="10" name="content">${que.content }
-							
+							  <textarea class="form-control" id="content" rows="10" name="content" style="font-size:15px" readonly> ${que.content } 
+							 
 							  </textarea>
 						</div>
 						<div style=" float: right">

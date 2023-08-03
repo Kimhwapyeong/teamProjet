@@ -7,12 +7,12 @@ var signup = {
 	common: {
 		empty: {code: 'invalid', desc: title + '입력하세요.'},
 		space: {code: 'invalid', desc: '공백 없이 입력하세요.'},
-		min: {code: 'invalid', desc: '최소 8자 이상 입력하세요.'},
-		max: {code: 'invalid', desc: '최대 20자 이내로 입력하세요.'}
+		min: {code: 'invalid', desc: '최소 5자 이상 입력하세요.'},
+		max: {code: 'invalid', desc: '최대 10자 이내로 입력하세요.'}
 	},
 	
 	id: {
-		valid: { code:'valid', desc: '아이디를 중복확인하세요.' },
+		valid: { code:'valid', desc: '아이디를 중복 확인하세요.' },
 		invalid: { code:'invalid', desc: '아이디는 영문 소문자, 숫자만 입력하세요.' },
 		usable: { code: 'valid', desc: '사용 가능한 아이디입니다.'},
 		unusable: { code: 'invalid', desc: '이미 사용 중인 아이디입니다.	' }
@@ -25,7 +25,7 @@ var signup = {
 	
 	id_status: function(id) {
 		var reg = /[^a-z0-9]/g;
-		title = $('[name = id]').attr('title');
+		title = $('[name=id]').attr('title');
 		if(id == '') { 
 			return this.common.empty;
 		} else if(id.match(space)) {
@@ -51,7 +51,7 @@ var signup = {
 	
 	pw_status: function(pw) {
 		var reg = /[^a-zA-Z0-9]/g;
-		title = $('[name = pw]').attr('title');
+		title = $('[name=pw]').attr('title');
 		var upper = /[A-Z]/g, lower = /[a-z]/g, digit = /[0-9]/g;
 		if(pw == '') return this.common.empty;
 		else if(pw.match(space)) return this.common.space;
@@ -63,64 +63,58 @@ var signup = {
 	},
 	
 	pw_ck_status: function(pw_ck) {
-		title = $('[name = pw_ck]').attr('title');
+		title = $('[name=pw_ck]').attr('title');
 		if ( pw_ck=='' ) return this.common.empty;
 		else if(pw_ck == $('[name=pw]').val() ) return this.pw.equal;
 		else return this.pw.notEqual; 
 	},
-	
-	email: {
-		valid: { code: 'valid', desc: '유효한 이메일입니다.' },
-		invalid: { code: 'invalid', desc: '유효하지 않은 이메일입니다.' }
-	},
-	
-	email_status: function(email) {
-		var reg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-		title = $('[name = email]').attr('title');
-		if( email == '' ) return this.common.empty;
-		else if(email.match(space)) return this.common.space;
-		else if( reg.test(email) ) return this.email.valid;
-		else return this.email.invalid;  
-	},
-	
 	tag_status: function(tag) {
-		var data = tag.val();
-		tag = tag.attr('name');
-		if(tag == 'id') {
-			data = this.id_status(data);
-		} else if(tag == 'pw') {
-			data = this.pw_status(data);
-		} else if(tag == 'pw_ck') {
-			data = this.pw_ck_status(data);
-		} else if(tag == 'email') {
-			data = this.email_status(data);
-		} 
-		return data;
+	    var data;
+	    if (tag.attr('name') == 'id') {
+	        data = this.id_status(tag.val());
+	    } else if (tag.attr('name') == 'pw') {
+	        data = this.pw_status(tag.val());
+	    } else if (tag.attr('name') == 'pw_ck') {
+	        data = this.pw_ck_status(tag.val());
+	    }
+	    return data;
 	}
+
+
 }
 
-/**
- *  사용자약관체크
- */
-$(document).ready(function() {
+//사용자약관체크(script)
+document.addEventListener("DOMContentLoaded", function() {
     // 사용자 약관 전체 동의 체크 박스를 클릭했을 때
-    $("#check_all").on("click", function() {
+    var checkAll = document.getElementById("check_all");
+    checkAll.addEventListener("click", function() {
         // 전체 동의 체크 박스의 상태를 가져옴
-        var isChecked = $(this).prop("checked");
+        var isChecked = checkAll.checked;
 
         // 개별 약관 동의 체크 박스들의 상태를 전체 동의 체크 박스와 같은 상태로 반영
-        $("#listFold input[type='checkbox']").prop("checked", isChecked);
+        var listFoldCheckboxes = document.querySelectorAll("#listFold input[type='checkbox']");
+        for (var i = 0; i < listFoldCheckboxes.length; i++) {
+            listFoldCheckboxes[i].checked = isChecked;
+        }
     });
 
     // 개별 약관 동의 체크 박스를 클릭했을 때
-    $("#listFold input[type='checkbox']").not("#check_all").on("click", function() {
-        // 개별 동의 체크 박스들 중 하나라도 체크되지 않았는지 확인
-        var isAnyUnchecked = $("#listFold input[type='checkbox']").not("#check_all").filter(":not(:checked)").length > 0;
+    var individualCheckboxes = document.querySelectorAll("#listFold input[type='checkbox']:not(#check_all)");
+    for (var i = 0; i < individualCheckboxes.length; i++) {
+        individualCheckboxes[i].addEventListener("click", function() {
+            // 개별 동의 체크 박스들 중 하나라도 체크되지 않았는지 확인
+            var isAnyUnchecked = false;
+            for (var j = 0; j < individualCheckboxes.length; j++) {
+                if (!individualCheckboxes[j].checked) {
+                    isAnyUnchecked = true;
+                    break;
+                }
+            }
 
-        // 개별 동의 체크 박스들 중 하나라도 체크되지 않았으면 사용자 약관 전체 동의 체크 박스의 체크를 해제
-        if (isAnyUnchecked) {
-            $("#check_all").prop("checked", false);
-        }
-    });
+            // 개별 동의 체크 박스들 중 하나라도 체크되지 않았으면 사용자 약관 전체 동의 체크 박스의 체크를 해제
+            checkAll.checked = !isAnyUnchecked;
+        });
+    }
 });
+
 

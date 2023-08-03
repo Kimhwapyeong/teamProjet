@@ -1,5 +1,6 @@
 package com.gogo.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,16 +15,22 @@ public interface mypageMapper {
 	// 숙소 조회
 	public List<StayVO> getList();
 	
+	// 숙소 삭제
+	public int deleteStay(HashMap<String, Object> idArr);
+	
 	// 회원 조회
 	public List<MemberVO> getMember();
 	
+	// 회원 삭제
+	public int deleteArr(HashMap<String, Object> idArr);
+	
 	// 통계
-	public List<MemberVO> chartAge();
+	public List<MemberVO> chartAge(MemberVO vo);
 	
 	
 	// ▶▶▶  host ▶▶▶
 	// 숙소 관리
-	public List<Map<String, String>> getStay();
+	public List<StayVO> getStay();
 	
 	// 예약 관리
 	public List<Map<String, String>> reservinfo();
@@ -50,6 +57,13 @@ public interface mypageMapper {
 	
 	// 회원 정보 조회
 	public List<MemberVO> mem();
+	
+	// 회원 정보 수정
+	public int update(MemberVO vo);
+	
+	// 관심 스테이
+	public List<Map<String, String>> likestay();
+
 	
 	
 }

@@ -35,7 +35,6 @@
         </div>
     </div>
    
-    <script src="/static/js/common.js"></script>
     <div id="__next" data-reactroot="">
         <div>
             <div class=""></div>
@@ -47,12 +46,12 @@
                 </div>
                 <div class="container mypage_wrap">
                     <div class="mypage_myinfo">
-                        <!-- =================================== admin  =================================== -->
+                        <!-- =================================== host  =================================== -->
                         <div class="tit">HOST ${sessionScope.memberId}</div>
                         <div class="my-count" role="link" tabindex="0">HOST GUIDE</div>
                     </div>
                     <div class="newmypage_menu pc_only">
-                        <ul >
+                        <ul>
                            <li class=""><a href="./stayhost">숙소 관리</a></li>
                              <li class=""><a href="./reservation">예약 관리 </a></li>
                              <li class=""><a href="./income">수입 현황</a></li>
@@ -61,7 +60,7 @@
                     </div>
                     <div class="mypage_content">
                         <div class="reserv_wrap mypage-reservation-info">
-                            <div class="reserv_box accepted">
+                            <div class="reserv_box accepted" style="margin-bottom:0px">
                                 
                             <!-- ========================= 회원 목록 조회 =================== -->
                             
@@ -81,12 +80,16 @@
                                   
                                   <!-- ▶▶▶  forEach ▶▶▶  -->
                                   <c:forEach items="${list}" var="qa" step="1">
+                                  <c:if test="${sessionScope.memberId == qa.memberId}">
+                                  
                                     <tr style="line-height: 40px">
                                         <td>${qa.queNo }</td>
-                                        <td><a href="/member/host/answer">${qa.title }</a></td>
+                                        <td><a href="/member/host/answer?queNo=${qa.queNo }">${qa.title }</a></td>
                                         <td style="text-align:center">${qa.content }</td>
                                         <td>${qa.contentDate }</td>
                                     </tr>
+                                    
+                                    </c:if>
                                     </c:forEach>
                                     
                                     </tbody>

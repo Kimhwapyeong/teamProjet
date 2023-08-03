@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gogo.mapper.MessageMapper">
+
+	<insert id="insertMessage">
+		insert into message values(messageseq.nextval, #{content}, sysdate, #{writer}, #{messageRoom}, #{type})
+	</insert>
+	
+	
+	
+	
+	<select id="getList" resultType="com.gogo.vo.MessageVO">
+		select * from message where messageRoom = #{messageRoom}
+	</select>
+
+
+	<insert id="insertMessageRoom">
+		insert into messageRoom values(messageroomseq.nextval, messageroomseq.nextval||'번방')
+	</insert>
+	
+	<select id="getRoomId" resultType="String">
+		select roomId from messageRoom where roomId = #{roomId}
+	</select>
+
+</mapper>

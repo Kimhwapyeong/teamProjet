@@ -1,7 +1,9 @@
 package com.gogo.webSocket;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +12,8 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import org.slf4j.Logger;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.slf4j.LoggerFactory;
 
 
@@ -29,6 +32,7 @@ public class EchoHandler extends TextWebSocketHandler{
 		
 		sessionList.add(session);
 		logger.info("{} 연결됨", session.getId());
+		System.err.println(session.getRemoteAddress());
 		
 	}
 	
@@ -43,12 +47,14 @@ public class EchoHandler extends TextWebSocketHandler{
 		}
 	}
 	
+	
+	
+	
 	// 클라이언트 연결을 끊었을때 실행
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		sessionList.remove(session);
 		logger.info("{} 연결 끊김", session.getId());
 	}
-	
-	
+
 }

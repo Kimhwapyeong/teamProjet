@@ -3,6 +3,7 @@ package com.gogo.test;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,8 +28,22 @@ public class roomTest {
 	
 	@Test
 	public void stayList() {
-		List<StayVO> list = sm.stayList(1);
+		List<StayVO> list = sm.stayList();
 		log.info("=========");
 		log.info(list);
+	}
+	
+	@Test
+	public void roomInfo() {
+		Map<String, String> roomInfo = sm.roomInfo("제주스테이 비우다");
+		log.info("=========");
+		log.info(roomInfo);
+	}
+	
+	@Test
+	public void stayRoomInfo() {
+		List<Map<String, String>> stayRoomInfo = sm.stayRoomList("제주스테이 비우다");
+		log.info("=========");
+		log.info(stayRoomInfo);
 	}
 }
