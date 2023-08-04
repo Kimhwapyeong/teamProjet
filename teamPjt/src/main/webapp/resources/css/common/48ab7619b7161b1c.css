@@ -2586,8 +2586,8 @@ select {
     display: flex;
     display: -ms-flexbox;
     justify-content: space-between;
-    padding: 30px 0;
-    width: 420px;
+    padding: 10px 0;
+    width: 250px;
     font-family: Abel,SpoqaHanSans;
     text-align: center;
     margin: 0 auto
@@ -13513,7 +13513,7 @@ input[type=number] {
 .change_cont {
     border-top: 1px solid #e5e5e5;
     border-bottom: 1px solid #e5e5e5;
-    padding: 50px 50px 60px;
+    padding: 40px 40px 40px;
     text-align: center;
     font-family: SpoqaHanSans
 }
@@ -34445,7 +34445,7 @@ button.swiper-pagination-bullet {
 .layer_pop .layer_pop_wrap {
     position: relative;
     display: inline-block;
-    width: 600px;
+    width: 400px;
     margin: 50px auto;
     background: #fff;
     text-align: left;
@@ -34454,7 +34454,7 @@ button.swiper-pagination-bullet {
 }
 
 .layer_pop .layer_title,.layer_pop .layer_title_preorder {
-    line-height: 80px;
+    line-height: 70px;
     font-size: 16px;
     font-weight: 500;
     color: #000;
@@ -34469,7 +34469,7 @@ button.swiper-pagination-bullet {
 .layer_pop .btn_layer_close {
     display: inline-block;
     position: absolute;
-    top: 30px;
+    top: 25px;
     right: 30px;
     font-size: 0;
     text-indent: -999px;
@@ -34481,7 +34481,7 @@ button.swiper-pagination-bullet {
 @media (max-width: 768px) {
     .layer_pop {
         top:50px;
-        bottom: 60px
+        /* bottom: 60px */
     }
 
     .layer_pop:before {
@@ -34489,9 +34489,9 @@ button.swiper-pagination-bullet {
     }
 
     .layer_pop .layer_pop_wrap {
-        width: 100%;
+        /* width: 100%; */
         min-height: 100vh;
-        margin: 0 auto;
+        /* margin: 0 auto; */
         transform: none
     }
 
