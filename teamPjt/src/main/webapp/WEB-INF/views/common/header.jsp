@@ -309,7 +309,7 @@
 				<div class='logo'>
 					<a href="/main" >STAY OLLAE</a>
 				</div>
-				<div class="side-Menu" id="sideMenuMiddle" style="width: 30px; height: 44px; background-image: url('/resources/images/stayNameImg/stay2.png');"></div>
+				<div class="side-Menu" id="sideMenuMiddle" style="width: 20px; height: 20px; background-image: url('/resources/images/stayNameImg/stay2_2.png');"></div>
 				<div class="whe gnb-responsive-margin" style="">
 					<button type="button" class="gnb-mo-small" id="btnWhere">
 						<span class="gnb-mo-small">어디로 떠날까요?</span>
