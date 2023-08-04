@@ -92,7 +92,7 @@ public class UserController extends CommonRestController{
 		}
 	}
 		
-	// 메세지
+	// 메세지 연결
 	@GetMapping("message")
 	public void message() {
 		
