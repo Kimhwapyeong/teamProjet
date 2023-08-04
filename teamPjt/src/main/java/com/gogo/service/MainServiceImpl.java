@@ -73,7 +73,7 @@ public class MainServiceImpl implements MainService{
 	
 	@Override
 	public int stayFileupload(List<MultipartFile> files, String stayNo, String roomNo) {
-		System.out.println("stayFileupload 입장!!!!!");
+		//System.out.println("stayFileupload 입장!!!!!");
 		String dir = "stay\\";
 		int res = fileuploadService.fileupload(files, dir, stayNo, roomNo);
 		
