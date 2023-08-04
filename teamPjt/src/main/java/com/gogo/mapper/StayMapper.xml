@@ -146,19 +146,24 @@
 	
 	<!-- 숙소 페이지에서 방 리스트 뽑기 -->
 	<select id="stayRoomList" resultType="java.util.Map">
-		SELECT 
-		  room.roomno as roomno,
-		  roomName,
-		  stdperson,
-		  overperson,
-		  TO_CHAR(PRICE, '999,999') AS price,
-		  roomtype,
-		  bed,
-		  roomphoto.field as field
-		FROM room
-		LEFT JOIN roomoptionyn ON room.roomno = roomoptionyn.roomno
-		LEFT JOIN roomphoto ON room.roomno = roomphoto.roomno
-		WHERE room.stayNo = (SELECT stayNo FROM stay WHERE stayName = #{stayName})
+		select * 
+		from(	
+			SELECT 
+			  room.roomno as roomno,
+			  roomName,
+			  stdperson,
+			  overperson,
+			  TO_CHAR(PRICE, '999,999') AS price,
+			  roomtype,
+			  bed,
+			  roomphoto.field as field,
+			  ROW_NUMBER() OVER (PARTITION BY room.roomno ORDER BY room.roomno) AS rn
+			FROM room
+			LEFT JOIN roomoptionyn ON room.roomno = roomoptionyn.roomno
+			LEFT JOIN roomphoto ON room.roomno = roomphoto.roomno
+			WHERE room.stayNo = (SELECT stayNo FROM stay WHERE stayName = #{stayName})
+		) subquery
+		where rn = 1
 	</select>
 	<resultMap type="java.util.HashMap" id="stayRoomList">
 	    <result property="bed" column="BED" />

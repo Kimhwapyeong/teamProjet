@@ -83,6 +83,57 @@
 			marker.setMap(map);
 			
             
+			
+			
+			 let nextBtn = document.querySelector('.swiper-button-next-room');
+			 /* let roomList = document.querySelectorAll('.room_slider ul li'); */
+			 let room = document.querySelectorAll('.room_slider ul');
+			
+			 let startIdx = 0;
+			 let maxIdx = roomList.length;
+			 
+/* 			 nextBtn.addEventListener('click', ()=>{
+				console.log('a');
+				// 버튼을 누르면  0 1 2
+				// 버튼을 누르면  1 2 0
+				// 버튼을 누르면  2 0 1
+				// 버튼을 누르면  0 1 2
+				
+				
+			}) */	
+			
+			// 객실 갯수에 따른 인덱스 번호
+			let indices = Array.from({ length: roomList.length }, (_, i) => i);
+
+			function rotateIndices() {
+			  let firstIndex = indices[0];
+
+			  indices.shift();
+
+			  indices.push(firstIndex);
+
+			  return indices;
+			}
+
+			// Get the button element
+			let rotateBtn = document.querySelector('.swiper-button-next-room');
+
+			// Add a click event listener to the button
+			rotateBtn.addEventListener('click', () => {
+			  let updatedIndices = rotateIndices();
+				
+			  console.log(updatedIndices);
+			  console.log(updatedIndices[0]);
+			  
+
+			  roomList[0].innerHTML = roomList[updatedIndices[0]].outerHTML;
+			  roomList[1].innerHTML = roomList[updatedIndices[1]].outerHTML;
+			  roomList[2].innerHTML = roomList[updatedIndices[2]].outerHTML; 
+			});
+
+			
+			
+			
         });
     </script>
 </head>
@@ -340,8 +391,7 @@
 					<ul class="swiper-wrapper">
 						<!-- 반복 -->
 						<c:forEach items="${stayRoomInfo}" var="roomList" step="1">
-						<li
-							class="swiper-slide slider_box single-room swiper-slide-active">
+						<li class="swiper-slide slider_box single-room swiper-slide-active">
 							<%-- <a href="/stay/roomInfo/${list.STAYNAME }/${${roomList.ROOMNAME}"> --%>
 							<a href="/stay/roomInfo?stayName=${list.STAYNAME }&roomName=${roomList.ROOMNAME}">
 								<div role="presentation" class="img"
@@ -357,7 +407,7 @@
 									<p class="price">₩${roomList.PRICE} ~</p>
 									<p class="book mo-book-btn" role="presentation">예약하기</p>
 								</div>
-						</a>
+							</a>
 						</li>
 						</c:forEach>
 						<!-- 여기까지 -->
