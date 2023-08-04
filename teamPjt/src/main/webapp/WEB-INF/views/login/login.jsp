@@ -82,9 +82,6 @@
 		location.href='/login/signup';
 		
 	});
-	
-	    
-	
  
 </script>
 </head>
@@ -118,8 +115,8 @@
 
         <div class="etc">
             <div class="find">
-                <a class="find-id" href="/">아이디 찾기</a>
-                <a class="find-password" href="/">비밀번호 찾기</a>
+                <a class="find-id" href="/login/findId">아이디 찾기</a>
+                <a class="find-password" href="#">비밀번호 찾기</a>
             </div>
         </div>
         <div class="sns_login">

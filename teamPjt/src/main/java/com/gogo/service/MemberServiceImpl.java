@@ -35,9 +35,7 @@ public class MemberServiceImpl implements MemberService {
 				
 				return member;
 			}
-			
 		}
-		
 		return member;
 	}
 	@Override
@@ -67,6 +65,18 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberVO selectOne(MemberVO member) {
 		return memberMapper.selectOne(member);
+	}
+	@Override
+	public String findIdAction(String memberName, String memberEmail) {
+		String result = "";
+		try {
+			
+			result = memberMapper.findId(memberName, memberEmail);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 

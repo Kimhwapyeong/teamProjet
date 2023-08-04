@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -42,7 +44,7 @@ public class MemberController extends CommonRestController {
 		return "/login/login";
 	}
 	
-	//JSON 형식 데이터 교환
+	// JSON 형식 데이터 교환
 	@PostMapping("/login/loginAction")
 	public @ResponseBody Map<String, Object> loginAction(
 										@RequestBody MemberVO member
@@ -86,7 +88,7 @@ public class MemberController extends CommonRestController {
 		return "/login/signup";
 	}
 	
-	//아이디 중복확인 요청
+	// 아이디 중복확인 요청
 	@PostMapping("/idCheck")
 	public @ResponseBody Map<String, Object> idCheck(@RequestBody MemberVO member){
 		
@@ -100,6 +102,19 @@ public class MemberController extends CommonRestController {
 		}
 	}
 	
+	// 아이디 찾기 페이지 이동
+	@GetMapping("/login/findId")
+	public String findId() {
+		return "/login/findId";
+	}
+	
+	// 아이디 찾기
+	@RequestMapping(value = "/login/findId", method = RequestMethod.POST)
+	@ResponseBody
+	public String findIdAction(@RequestParam("name") String memberName, @RequestParam("email") String memberEmail) {
+		String result = memberService.findIdAction(memberName, memberEmail);
+		return result;
+	}
 	
 	//네이버 로그인
 	@GetMapping("naverAction")
