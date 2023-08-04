@@ -149,12 +149,15 @@
 			  roomList[0].innerHTML = roomList[1].innerHTML;
 			  roomList[1].innerHTML = roomList[2].innerHTML;
 			  roomList[2].innerHTML = tmp;
-			  
-			  
 			});
 
-			
-			
+			let prevtBtn = document.querySelector('.swiper-button-prev-room');
+			prevtBtn.addEventListener('click', ()=>{
+				  let tmp = roomList[0].innerHTML;
+				  roomList[0].innerHTML = roomList[2].innerHTML;
+				  roomList[1].innerHTML = roomList[1].innerHTML;
+				  roomList[2].innerHTML = tmp;
+			})
 			
 			
 			
@@ -176,9 +179,7 @@
 			// 카카오 링크 공유 api
 			 Kakao.Share.createDefaultButton({
 			      container: '#kakaotalk-sharing-btn',
-			      objectType: 'location',
-			      address: '경기 성남시 분당구 판교역로 166 3층',
-			      addressTitle: '카카오 판교아지트 카페톡',
+			      objectType: 'feed',
 			      content: {
 			        title: '${list.STAYNAME }',
 			        description: '${list.STAYINFO }',

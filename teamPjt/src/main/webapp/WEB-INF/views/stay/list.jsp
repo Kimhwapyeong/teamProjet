@@ -768,7 +768,7 @@
         <div class="_findstay_findstay_list__1KB6H">
             <div class="_findstay_sort_wrap__JLD12">
                 <ul class="_findstay_sort_selb__JhhC5">
-                    <li><button type="button" class="_findstay_btn_sort__h6PXi btn_toggle">모든 스테이</button>
+                    <li><button type="button" class="_findstay_btn_sort__h6PXi btn_toggle" style="background-size: 15px 15px;">모든 스테이</button>
                         <div class="_tooltips_balloon_desc_black__Xv4MX " id='rightnow'>
                             <div class="_tooltips_alert_cont__K8tDm ">지금 특별 프로모션이 진행 중인 스테이를 만나보세요.</div>
                         </div>
