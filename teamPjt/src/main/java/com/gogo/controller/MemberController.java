@@ -52,10 +52,11 @@ public class MemberController extends CommonRestController {
 		System.out.println("pw : " + member.getPw());
 		
 		member = memberService.login(member);
+		MemberVO user = memberService.selectOne(member);
 		
 		if(member != null) {
-			session.setAttribute("member", member);
-			session.setAttribute("memberId", member.getMemberId());
+			session.setAttribute("member", user);
+			session.setAttribute("memberId", user.getMemberId());
 			Map<String, Object> map = responseMap(REST_SUCCESS, "환영합니다.");
 			
 			// SNS 로그인 체크 로직		

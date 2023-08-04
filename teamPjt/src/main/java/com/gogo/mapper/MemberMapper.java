@@ -9,6 +9,10 @@ public interface MemberMapper {
 	
 	public MemberVO login(MemberVO member);
 	
+	// 멤버의 정보를 불러오기 위한 함수
+	public MemberVO selectOne(MemberVO member);
+	
+	
 	public int updateNaver(MemberVO member);
 	
 	public String getPw(MemberVO member);

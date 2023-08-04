@@ -64,6 +64,10 @@ public class MemberServiceImpl implements MemberService {
 	public String getPw(MemberVO member) {
 		return memberMapper.getPw(member);
 	}
+	@Override
+	public MemberVO selectOne(MemberVO member) {
+		return memberMapper.selectOne(member);
+	}
 
 
 	

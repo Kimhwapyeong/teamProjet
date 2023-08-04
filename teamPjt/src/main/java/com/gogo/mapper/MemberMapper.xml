@@ -26,14 +26,20 @@
 		VALUES (#{memberId}, #{memberName}, #{birthday}, #{pw}, #{memberEmail}, #{gender})
 	</insert>
 	
-	
+	<!-- sns 회원이면 snsCk = 'Y' -->
 	<update id="updateNaver">
 		update member set snsck = #{snsCk}, profile = #{profile} where memberId = #{memberId}
 	</update>
 	
+	<!-- sns 회원의 로그인을 위한 pw 조회 -->
 	<select id="getPw" resultType="String">
 		select pw from member where memberId = #{memberId}
 	</select>
+	
+	<select id="selectOne" resultType="com.gogo.vo.MemberVO">
+		select * from member where memberId = #{memberId}
+	</select>
+	
 </mapper>
 
 

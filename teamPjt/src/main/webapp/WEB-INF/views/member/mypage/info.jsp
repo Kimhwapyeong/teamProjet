@@ -112,11 +112,26 @@
                                         <!-- 프로필 사진 -->
                                   <div class="profile_photo">
                                     <div class="input_box">
-                                        <input type="file" id="imgFile" name="imgFile" title="프로필 사진" class="photo" style="">
-                                        
-                                        <input type="file" id="imgFile" name="imgFile" title="프로필 사진" class="btn_photo"
+                                    	<input type="file" id="imgFile" name="imgFile" title="프로필 사진" class="photo" style="">
+                                        <input type="file" id="imgFileBtn" name="imgFile" title="프로필 사진" class="btn_photo"
                                             accept="image/jpeg, image/png">
                                     </div>
+                                    <script>
+                                    	$(function(){
+                                    		
+                                    		$('#imgFileBtn').change(function(){
+                                    			
+                                    			$('#imgFile').val($('#imgFileBtn').val());
+                                    			
+                                    		});
+                                    		
+                                    		if($('#imgFile').val()!=null){
+                                    			
+                                    			$('#imgFile').attr("style", "background-image: url('${sessionScope.member.profile}'); background-size : 100%;");
+                                    		}
+                                    		
+                                    	});
+                                    </script>
                                 </div>   
                                 <div class="myedit_box">
                                     <div class="input_box">
