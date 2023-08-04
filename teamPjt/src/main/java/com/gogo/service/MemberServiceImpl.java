@@ -55,6 +55,15 @@ public class MemberServiceImpl implements MemberService {
 	public int idCheck(MemberVO member) {
 		return memberMapper.idCheck(member);
 	}
+	
+	@Override
+	public int updateNaver(MemberVO member) {
+		return memberMapper.updateNaver(member);
+	}
+	@Override
+	public String getPw(MemberVO member) {
+		return memberMapper.getPw(member);
+	}
 
 
 	

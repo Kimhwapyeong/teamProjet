@@ -132,7 +132,6 @@ option {
 /* 이메일박스 */
 .box{
 	border-radius: 4px;
-	border: 1px solid #d9d6d6;
 }
 table tr td {
 	text-align: left;

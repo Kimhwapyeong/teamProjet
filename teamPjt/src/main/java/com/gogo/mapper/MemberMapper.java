@@ -9,12 +9,13 @@ public interface MemberMapper {
 	
 	public MemberVO login(MemberVO member);
 	
+	public int updateNaver(MemberVO member);
+	
+	public String getPw(MemberVO member);
 	
 	public List<String> getMemberRole(String memberId);
 
-
 	public int signup(MemberVO member);
-
 
 	public int idCheck(MemberVO member);
 }

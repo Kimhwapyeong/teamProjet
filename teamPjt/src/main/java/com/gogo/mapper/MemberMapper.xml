@@ -23,8 +23,17 @@
 	<!--회원 등록 -->
 	<insert id="signup" parameterType="com.gogo.vo.MemberVO">
 		INSERT INTO MEMBER (memberId, memberName, BIRTHDAY, pw, memberEmail, GENDER) 
-		VALUES (#{memberId}, #{memberName}, #{BIRTHDAY}, #{pw}, #{memberEmail}, #{GENDER})
+		VALUES (#{memberId}, #{memberName}, #{birthday}, #{pw}, #{memberEmail}, #{gender})
 	</insert>
+	
+	
+	<update id="updateNaver">
+		update member set snsck = #{snsCk}, profile = #{profile} where memberId = #{memberId}
+	</update>
+	
+	<select id="getPw" resultType="String">
+		select pw from member where memberId = #{memberId}
+	</select>
 </mapper>
 
 
