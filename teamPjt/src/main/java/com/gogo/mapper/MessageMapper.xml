@@ -4,14 +4,14 @@
 <mapper namespace="com.gogo.mapper.MessageMapper">
 
 	<insert id="insertMessage">
-		insert into message values(messageseq.nextval, #{content}, sysdate, #{writer}, #{messageRoom}, #{type})
+		insert into message values(messageseq.nextval, #{content}, sysdate, #{memberId}, #{roomId}, #{type})
 	</insert>
 	
 	
 	
 	
 	<select id="getList" resultType="com.gogo.vo.MessageVO">
-		select * from message where messageRoom = #{messageRoom}
+		select * from message where roomId = #{roomId}
 	</select>
 
 

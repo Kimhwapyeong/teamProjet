@@ -115,8 +115,8 @@ public class MessageServiceImpl implements MessageService{
 		
 		
 		vo.setRegDate(String.valueOf(map.get("regDate")));
-		vo.setWriter(String.valueOf(map.get("writer")));
-		vo.setMessageRoom(String.valueOf(map.get("roomId")));
+		vo.setMemberId(String.valueOf(map.get("writer")));
+		vo.setRoomId(String.valueOf(map.get("roomId")));
 		vo.setType(String.valueOf(map.get("type")));
 		int res = insertMessage(vo);
 		

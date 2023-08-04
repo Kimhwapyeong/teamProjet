@@ -205,7 +205,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="bt_btns"><button style="background-color:black; color:white;" type="button" class="btn_wh">예약 취소</button><button type="button" class="btn_wh">이용 안내 및 환불 규정</button></div>
+            <div class="bt_btns"><button style="background-color:black; color:white;" type="button" class="btn_wh">예약 취소</button><button type="button" style="border: 1px solid black;" onclick="location.href='https://www.easylaw.go.kr/CSP/CnpClsMain.laf?csmSeq=835&ccfNo=4&cciNo=1&cnpClsNo=2'">이용 안내 및 환불 규정</button></div>
         </div>
     </div>
 </div>				</div>
