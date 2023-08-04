@@ -220,11 +220,17 @@
 		select memberid, membername, pw, memberemail from member
 	</select>
 	
+	
 	<!-- 회원 정보 수정 -->
 	<update id="update">
 		update member set memberEmail = #{memberEmail} , pw = #{pw} where memberid = #{memberId}
 	</update>
 	
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="memberQuit">
+		delete member where memberid = #{memberId}
+	</delete>
 	
 	<!-- 관심스테이 -->
 	<select id="likestay" resultType="java.util.Map">

@@ -137,6 +137,13 @@ public class mypageTest {
 		log.info("res: " + res);
 	}
 	
+	@Test
+	public void memberQuit() {
+		int res = mapper.memberQuit("user1");
+		log.info("=========================");
+		log.info("res: " + res);
+	}
+	
 	
 	
 }

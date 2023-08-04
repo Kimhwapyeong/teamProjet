@@ -75,6 +75,9 @@ public interface mypageService {
 	// 회원 정보 수정
 	public int update(MemberVO vo);
 	
+	// 회원 탈퇴
+	public int memberQuit(String memberId);
+	
 	
 	// 예약 상세보기
 	public void reservation_detail(@RequestParam("checkIn") String checkIn

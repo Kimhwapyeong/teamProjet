@@ -71,6 +71,8 @@
                 $(this).find('img').attr('src', '/resources/images/eyeoff.svg');
             }
         });
+	    
+	    
         
     });
     
@@ -81,6 +83,17 @@
 			signupMsg.innerHTML="회원 정보 수정에 실패하였습니다";
 		}	
     }
+    
+    
+ 	// 회원 탈퇴
+	function memberQuit(url){
+		memberId = document.querySelector('[id=id]').value
+ 		
+		infoFrm.action = url;
+		infoFrm.memberId.value=memberId;
+		infoFrm.submit();
+		
+	};
 
     </script>
 
@@ -124,14 +137,15 @@
                     <div class="mypage_content">
                         <div class="myedit_wrap">
                             <h3 class="my_tit pc_only">회원 정보 수정</h3>
-                            
+                             
                              <!-- ▶▶▶  forEach ▶▶▶  -->
                              <c:forEach items="${mem}" var="member" step="1">
                              <c:if test="${sessionScope.memberId == member.memberId}">
                              
-                             
-                            <form name="infoFrm" method="post" action="/member/user/infoFrm">
-                                       <input type="hidden" name="memberId" value=${member.memberId } id ='id'>
+                            <!--  프로필 form -->
+                            <form name="infoFrm" method="post" action="/member/user/infoFrm"  enctype="multipart/form-data">
+                                  <input type="hidden" name="memberId" value="${member.memberId }" id ='id'>
+                                  
                                   <!-- 프로필 사진 -->
                                   <div class="profile_photo">
                                     <div class="input_box">
@@ -226,9 +240,6 @@
 	                                        <input class="mypage_account_edit_password" type="password" name="password" id="currentpw"
 	                                                    placeholder="현재 비밀번호" value="${member.pw }" style="margin-left: 8px;">
 	                                        <button type="button"  class="togglePW" style="margin-right: -15px;"><img src="/resources/images/eyeoff.svg" alt=""></button>
-	                                        <button type="button" style="margin-right: -15px;">
-	                                        	<img src="/web/images/password-deactivate-icon.svg" alt="">
-	                                        </button>
 	                                        </label>
                                         </div>
                                         
@@ -249,16 +260,20 @@
                                         </div>
                                     </div>
                                     <div id="signupMsg" style="display: flex; justify-content: center; color:red"></div>  <!-- msg 출력 -->
-                                    <button type="button" class="btn_bk btn_sm" style="margin: 20px 0px; width: 100%;" id='changeInfo'>회원정보 변경</button>
+                                    <div class="bt_btns btn_submit">
+                                    	<button type="button" class="btn_bk btn_sm" style="margin: 20px 0px; width: 100%;" id='changeInfo'>회원정보 변경</button>
+                                    </div>
                                 </div>
                              </form>
                       			
                				</c:if>
                             </c:forEach>
-                                
+                               
+                             
                             <div class="tit" style="padding-top: 22px; margin-left: 8px;"></div>
                             <div class="agree_box">
        					</div>
+                          	<button type="button" class="btn_txt btn_quit" onclick="memberQuit('/member/mypage/memberQuit')" style="text-underline-position: under;">회원 탈퇴</button>
         		</div>
         	</div>
         </div>

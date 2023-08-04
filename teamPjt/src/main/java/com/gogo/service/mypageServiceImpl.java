@@ -227,6 +227,13 @@ public class mypageServiceImpl implements mypageService {
 	}
 	
 	
+	// 회원 탈퇴
+	@Override
+	public int memberQuit(String memberId) {
+		return mypageMapper.memberQuit(memberId);
+	}
+	
+	
 	// 예약 상세보기
 	@Override
 	public void reservation_detail(@RequestParam("checkIn") String checkIn

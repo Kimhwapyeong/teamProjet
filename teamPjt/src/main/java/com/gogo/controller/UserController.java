@@ -91,6 +91,29 @@ public class UserController extends CommonRestController{
 			return responseMap(REST_FAIL, "회원 정보 수정 중 문제가 발생하였습니다");
 		}
 	}
+	
+	// 회원 탈퇴
+	@PostMapping("memberQuit")
+	public String memberQuit(String memberId, RedirectAttributes rttr) {
+		
+		int res;
+		
+		String msg = "";
+		res = service.memberQuit(memberId);
+		
+		if(res > 0) {
+			msg="회원 탈퇴 되었습니다";
+			rttr.addFlashAttribute("msg", msg);  
+			return "redirect:/member/mypage/info";
+		} else {
+			msg="회원 탈퇴 중 오류가 발생하였습니다";
+			rttr.addFlashAttribute("msg", msg);  
+			return "redirect:/member/mypage/info";
+		}
+		
+		
+		
+	}
 		
 	// 메세지 연결
 	@GetMapping("message")
