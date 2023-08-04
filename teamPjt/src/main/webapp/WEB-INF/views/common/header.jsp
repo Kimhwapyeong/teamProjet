@@ -161,6 +161,9 @@
 	function goMain(){
 		location.href="/main";
 	}
+	
+
+	
 </script>
 <body>
 	<!-- 알림 팝업창
@@ -323,9 +326,6 @@
 					</ul>
 					<ul class="etc">
 						<div class="nav_etc">
-							<div class="box">
-								<a href="/login/login"><div class="nav_tit login">LOGIN</div></a>
-							</div>
 							<c:if test="${ empty sessionScope.member }" var="res">
 								<div class="box">
 									<a href="/login/login"><div class="nav_tit login">LOGIN</div></a>
@@ -343,7 +343,7 @@
 											<li><a href="/member/mypage/info">회원 정보 수정</a></li>
 											<li><a href="/member/mypage/message">메시지</a></li>
 											<!-- 편의를 위해 우선  main 페이지로 설정 -->
-											<li class="login"><a href="/main">로그아웃</a></li>
+											<li class="login"><a onclick="location.href='/logout'" style="cursor:pointer;">로그아웃</a></li>
 										</ul>
 									</div>
 								</c:if>
