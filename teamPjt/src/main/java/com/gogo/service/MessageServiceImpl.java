@@ -20,6 +20,7 @@ import org.springframework.web.socket.WebSocketSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gogo.mapper.MessageMapper;
+import com.gogo.vo.MemberVO;
 import com.gogo.vo.MessageVO;
 import com.gogo.webSocket.EchoHandler;
 
@@ -67,7 +68,9 @@ public class MessageServiceImpl implements MessageService{
 		
 		if(res>0) {
 			
-			String memberId = (String)session.getAttribute("memberId");
+			MemberVO member = (MemberVO)session.getAttribute("member");
+			
+			String memberId = member.getMemberName();
 			
 			// 파라미터가 null이면 위의 insert문에서 사용한 시퀀스를 가져옴(currVal)
 			if(roomId==null || "".equals(roomId)) {
@@ -89,6 +92,7 @@ public class MessageServiceImpl implements MessageService{
 			
 			String enter = memberId+"님 "+roomId+"번 채팅방 입장";
 			
+			model.addAttribute("memberName", memberId);
 			model.addAttribute("enter", enter);
 			model.addAttribute("roomId", roomId);
 		} else {

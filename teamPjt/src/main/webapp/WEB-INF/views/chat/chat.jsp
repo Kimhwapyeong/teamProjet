@@ -122,7 +122,7 @@
 	function exit(){
 		content = memberId+'님 연결 해제';
 		type = "OUT";
-		sock.send("<p id='ENTER' style='padding:5px; color:red;'>"+memberId+"님 연결 해제</p><br/>");
+		sock.send("<p id='ENTER' style='padding:5px; color:red;'>${memberName}님 연결 해제</p><br/>");
 		
 	}
 	
@@ -131,7 +131,7 @@
 		
 		content = memberId+'님 연결 해제';
 		type = "OUT";
-		sock.send("<p id='ENTER' style='padding:5px; color:red;'>"+memberId+"님 연결 해제</p><br/>");
+		sock.send("<p id='ENTER' style='padding:5px; color:red;'>${memberName}님 연결 해제</p><br/>");
 	});
 
 	let sock = new SockJS("http://localhost:8080/echo?roomId=${roomId}");
@@ -143,7 +143,7 @@
 	function sendMessage() {
 			
 			type = "TALK";
-			sock.send("<span style='color:skyblue; font-weight:bold;'>"+role+memberId+"님의 메세지</span> : "+$("#message").val());
+			sock.send("<span style='color:skyblue; font-weight:bold;'>"+role+"${memberName}님의 메세지</span> : "+$("#message").val());
 		
 	}
 
