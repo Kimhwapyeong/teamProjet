@@ -113,25 +113,71 @@
                                   <div class="profile_photo">
                                     <div class="input_box">
                                     	<input type="file" id="imgFile" name="imgFile" title="프로필 사진" class="photo" style="">
-                                        <input type="file" id="imgFileBtn" name="imgFile" title="프로필 사진" class="btn_photo"
+                                        <input type="button" onclick="imgFile.click()" id="imgFile2" name="imgFile2" title="프로필 사진" class="btn_photo"
                                             accept="image/jpeg, image/png">
                                     </div>
                                     <script>
                                     	$(function(){
                                     		
-                                    		$('#imgFileBtn').change(function(){
-                                    			
-                                    			$('#imgFile').val($('#imgFileBtn').val());
-                                    			
-                                    		});
                                     		
                                     		if($('#imgFile').val()!=null){
                                     			
-                                    			$('#imgFile').attr("style", "background-image: url('${sessionScope.member.profile}'); background-size : 100%;");
+                                    			$('#imgFile').attr("style", "background-image: url('${sessionScope.member.profile}'); background-size : cover;");
                                     		}
+                                    		
+                                    		$('#imgFile').change(function(){
+                                    			
+                                    			fileCheck();
+                                    			
+                                    			
+                                    			var input = document.getElementById("imgFile");
+
+                                    			var fReader = new FileReader();
+
+                                    			fReader.readAsDataURL(input.files[0]);
+
+                                    			fReader.onloadend = function(event){
+
+                                    			    var img = event.target.result;
+
+	                                    			console.log("img : ", img);
+	                                    			
+	                                    			$('#imgFile').attr("style", "background-image: url("+img+"); background-size : cover;");
+	                                    			
+                                    			}
+                                    			
+                                    		});
                                     		
                                     	});
                                     </script>
+                                    		<script type='text/javascript'>
+			//1MB(메가바이트)는 1024KB(킬로바이트)
+			var maxSize = 2048;
+			
+			function fileCheck() {
+				//input file 태그.
+				var file = document.getElementById('imgFile');
+				//파일 경로.
+				var filePath = file.value;
+				//전체경로를 \ 나눔.
+				var filePathSplit = filePath.split('\\'); 
+				//전체경로를 \로 나눈 길이.
+				var filePathLength = filePathSplit.length;
+				//마지막 경로를 .으로 나눔.
+				var fileNameSplit = filePathSplit[filePathLength-1].split('.');
+				//파일명 : .으로 나눈 앞부분
+				var fileName = fileNameSplit[0];
+				//파일 확장자 : .으로 나눈 뒷부분
+				var fileExt = fileNameSplit[1];
+				//파일 크기
+				var fileSize = file.files[0].size;
+				
+				console.log('파일 경로 : ' + filePath);
+				console.log('파일명 : ' + fileName);
+				console.log('파일 확장자 : ' + fileExt);
+				console.log('파일 크기 : ' + fileSize);
+			}
+		</script>
                                 </div>   
                                 <div class="myedit_box">
                                     <div class="input_box">
