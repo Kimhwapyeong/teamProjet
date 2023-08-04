@@ -52,6 +52,26 @@
 	          
 	          fetchPost('/member/mypage/infoFrm', obj, result);
 		});
+		
+	    
+	    // 비밀번호 보기
+        $('.togglePW').on('click', function(){
+        	// 이전 input 요소의 type이 password 인지 확인
+            var input = $(this).prev('input');
+            var isPassword = input.attr('type') === 'password';
+            
+            console.log("pw", isPassword);
+            
+            // true면 input 요소 text 저장해서 pw 보이게 
+            if (isPassword) {
+                input.attr('type', 'text');
+                $(this).find('img').attr('src', '/resources/images/eye.svg');
+            } else {
+                input.attr('type', 'password');
+                $(this).find('img').attr('src', '/resources/images/eyeoff.svg');
+            }
+        });
+        
     });
     
     function result(map){
@@ -61,7 +81,10 @@
 			signupMsg.innerHTML="회원 정보 수정에 실패하였습니다";
 		}	
     }
+
     </script>
+
+<link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 </head>
 
 <body style="overflow: visible;">
@@ -107,16 +130,16 @@
                              <c:if test="${sessionScope.memberId == member.memberId}">
                              
                              
-                            <form name="infoFrm" method="post" action="/member/user/infoFrm" enctype="multipart/form-data">
-                                        <input type="hidden" name="memberId" value=${member.memberId } id ='id'>
-                                        <!-- 프로필 사진 -->
+                            <form name="infoFrm" method="post" action="/member/user/infoFrm">
+                                       <input type="hidden" name="memberId" value=${member.memberId } id ='id'>
+                                  <!-- 프로필 사진 -->
                                   <div class="profile_photo">
                                     <div class="input_box">
                                     	<input type="file" id="imgFile" name="imgFile" title="프로필 사진" class="photo" style="">
                                         <input type="button" onclick="imgFile.click()" id="imgFile2" name="imgFile2" title="프로필 사진" class="btn_photo"
                                             accept="image/jpeg, image/png">
-                                    </div>
-                                    <script>
+                                  </div>
+                                   <script>
                                     	$(function(){
                                     		
                                     		
@@ -150,34 +173,34 @@
                                     		
                                     	});
                                     </script>
-                                    		<script type='text/javascript'>
-			//1MB(메가바이트)는 1024KB(킬로바이트)
-			var maxSize = 2048;
-			
-			function fileCheck() {
-				//input file 태그.
-				var file = document.getElementById('imgFile');
-				//파일 경로.
-				var filePath = file.value;
-				//전체경로를 \ 나눔.
-				var filePathSplit = filePath.split('\\'); 
-				//전체경로를 \로 나눈 길이.
-				var filePathLength = filePathSplit.length;
-				//마지막 경로를 .으로 나눔.
-				var fileNameSplit = filePathSplit[filePathLength-1].split('.');
-				//파일명 : .으로 나눈 앞부분
-				var fileName = fileNameSplit[0];
-				//파일 확장자 : .으로 나눈 뒷부분
-				var fileExt = fileNameSplit[1];
-				//파일 크기
-				var fileSize = file.files[0].size;
-				
-				console.log('파일 경로 : ' + filePath);
-				console.log('파일명 : ' + fileName);
-				console.log('파일 확장자 : ' + fileExt);
-				console.log('파일 크기 : ' + fileSize);
-			}
-		</script>
+                                    <script type='text/javascript'>
+										//1MB(메가바이트)는 1024KB(킬로바이트)
+										var maxSize = 2048;
+										
+										function fileCheck() {
+											//input file 태그.
+											var file = document.getElementById('imgFile');
+											//파일 경로.
+											var filePath = file.value;
+											//전체경로를 \ 나눔.
+											var filePathSplit = filePath.split('\\'); 
+											//전체경로를 \로 나눈 길이.
+											var filePathLength = filePathSplit.length;
+											//마지막 경로를 .으로 나눔.
+											var fileNameSplit = filePathSplit[filePathLength-1].split('.');
+											//파일명 : .으로 나눈 앞부분
+											var fileName = fileNameSplit[0];
+											//파일 확장자 : .으로 나눈 뒷부분
+											var fileExt = fileNameSplit[1];
+											//파일 크기
+											var fileSize = file.files[0].size;
+											
+											console.log('파일 경로 : ' + filePath);
+											console.log('파일명 : ' + fileName);
+											console.log('파일 확장자 : ' + fileExt);
+											console.log('파일 크기 : ' + fileSize);
+										} 
+									</script>
                                 </div>   
                                 <div class="myedit_box">
                                     <div class="input_box">
@@ -202,6 +225,7 @@
 	                                        <label style="display: flex;">
 	                                        <input class="mypage_account_edit_password" type="password" name="password" id="currentpw"
 	                                                    placeholder="현재 비밀번호" value="${member.pw }" style="margin-left: 8px;">
+	                                        <button type="button"  class="togglePW" style="margin-right: -15px;"><img src="/resources/images/eyeoff.svg" alt=""></button>
 	                                        <button type="button" style="margin-right: -15px;">
 	                                        	<img src="/web/images/password-deactivate-icon.svg" alt="">
 	                                        </button>
@@ -210,15 +234,17 @@
                                         
                                         <div class="input">
 	                                        <label style="display: flex;">
-	                                        <input class="mypage_account_edit_password" type="password" id="newpww"
-	                                                    name="pw" placeholder="변경할 비밀번호" style="margin-left: 8px;">
+		                                        <input class="mypage_account_edit_password" type="password" id="newpww"
+		                                                    name="pw" placeholder="변경할 비밀번호" style="margin-left: 8px;">
+	                                            <button type="button"  class="togglePW" style="margin-right: -15px;"><img src="/resources/images/eyeoff.svg" alt=""></button>
 	                                        </label>
                                         </div>
                                         
                                         <div class="input">
 	                                        <label style="display: flex;">
-	                                        <input class="mypage_account_edit_password" type="password" id="newpwCheck"
-	                                                    name="newpw" placeholder="변경할 비밀번호 확인" style="margin-left: 8px;">
+		                                        <input class="mypage_account_edit_password" type="password" id="newpwCheck"
+		                                                    name="newpw" placeholder="변경할 비밀번호 확인" style="margin-left: 8px;">
+	                                            <button type="button"  class="togglePW" style="margin-right: -15px;"><img src="/resources/images/eyeoff.svg" alt=""></button>
 	                                        </label>
                                         </div>
                                     </div>
