@@ -17,7 +17,16 @@
 <script src="/resources/js/list/list.js"></script>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=09bf24dddad83867e65996ffe53d6185"></script>
-<script>
+
+<style>
+	.reveal {
+    visibility: visible;
+    opacity: 1;
+    transition: .3s;
+}
+</style>
+
+<script charset="utf-8">
         window.addEventListener('load', function () {
             let guideBtn = document.querySelectorAll('.faq_cont .left li');
             let guideInfo = document.querySelectorAll('.tab_view');
@@ -86,7 +95,9 @@
 			
 			
 			 let nextBtn = document.querySelector('.swiper-button-next-room');
-			 /* let roomList = document.querySelectorAll('.room_slider ul li'); */
+			 var roomList = document.querySelectorAll('.room_slider ul li');
+			 var roomListt = document.querySelectorAll('.room_slider ul li');
+			 var roomListtt = document.querySelectorAll('.room_slider ul li');
 			 let room = document.querySelectorAll('.room_slider ul');
 			
 			 let startIdx = 0;
@@ -115,27 +126,112 @@
 			  return indices;
 			}
 
-			// Get the button element
 			let rotateBtn = document.querySelector('.swiper-button-next-room');
 
-			// Add a click event listener to the button
 			rotateBtn.addEventListener('click', () => {
 			  let updatedIndices = rotateIndices();
 				
 			  console.log(updatedIndices);
 			  console.log(updatedIndices[0]);
+			  console.log(updatedIndices[1]);
+			  console.log(updatedIndices[2]);
 			  
+			  
+/* 			  roomList[0].innerHTML = roomListt[updatedIndices[0]].outerHTML;
+			  console.log(roomListt[updatedIndices[0]]);
+			  roomList[1].innerHTML = roomListt[updatedIndices[1]].outerHTML;
+			  console.log(roomListt[updatedIndices[1]]);
+			  roomList[2].innerHTML = roomListt[updatedIndices[2]].outerHTML; 
+			  console.log(roomListt[updatedIndices[2]]); */
 
-			  roomList[0].innerHTML = roomList[updatedIndices[0]].outerHTML;
-			  roomList[1].innerHTML = roomList[updatedIndices[1]].outerHTML;
-			  roomList[2].innerHTML = roomList[updatedIndices[2]].outerHTML; 
+			  
+			  let tmp = roomList[0].innerHTML;
+			  roomList[0].innerHTML = roomList[1].innerHTML;
+			  roomList[1].innerHTML = roomList[2].innerHTML;
+			  roomList[2].innerHTML = tmp;
+			  
+			  
 			});
 
 			
 			
 			
+			
+			
+			
+			// 공유하기
+			let shareClose = document.querySelector('.share_layer .btn_close');
+			shareClose.addEventListener('click', ()=>{
+				document.querySelector('.share_layer').style.display= 'none';
+			})
+			
+			let shareBtn = document.querySelector('.links_area .btn_share');
+			shareBtn.addEventListener('click', ()=>{
+				document.querySelector('.share_layer').style.display= '';
+			})
+			
+			var link =  document.location.href;
+			console.log(link);
+			
+			// 카카오 링크 공유 api
+			 Kakao.Share.createDefaultButton({
+			      container: '#kakaotalk-sharing-btn',
+			      objectType: 'location',
+			      address: '경기 성남시 분당구 판교역로 166 3층',
+			      addressTitle: '카카오 판교아지트 카페톡',
+			      content: {
+			        title: '${list.STAYNAME }',
+			        description: '${list.STAYINFO }',
+			        imageUrl:
+			          '${list.MAINPIC1 }',
+			        link: {
+			          // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함 // 들어갈 링크
+			          mobileWebUrl: link,
+			          webUrl: link,
+			        },
+			      },
+			      buttons: [
+			        {
+			          title: '자세히 보기',
+			          link: {
+			            mobileWebUrl: link,
+			            webUrl: link,
+			          },
+			        },
+			      ],
+			      // 카카오톡 미설치 시 카카오톡 설치 경로이동
+			      installTalk: true,
+			    });
+			
+			let likeCopy = document.querySelector('.share_list img');
+			let copySuccess = document.getElementById('toast');
+			likeCopy.addEventListener('click', () => {
+				console.log('a');
+				
+				// 링크 복사
+				navigator.clipboard.writeText(link).then(() => {
+					// 링크 복사 알림창
+					copySuccess.classList.add('reveal');
+					
+					// 3초후에 사라짐
+					setTimeout(() => {
+						copySuccess.classList.remove('reveal');
+					}, 3000);
+				}).catch((err) => {
+				    console.error('Failed to copy link:', err);
+				});
+			});
+			
         });
+        
     </script>
+    
+    
+    <!-- 카카오 공유하기 api스크립트 -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.3.0/kakao.min.js" integrity="sha384-70k0rrouSYPWJt7q9rSTKpiTfX6USlMYjZUtr1Du+9o4cGvhPAWxngdtVZDdErlh" crossorigin="anonymous"></script>
+  	<script>
+  		Kakao.init('124076e69929aa6f11bd182ef5993338'); // 사용하려는 앱의 JavaScript 키 입력
+  	</script>
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
@@ -149,7 +245,22 @@
 						</button>
 						<small class="small">${list.LIKECOUNT }</small></li>
 					<li><button type="button" class="btn_share">공유하기</button>
+						<div class="share_layer" style="display: none;">
+							<button type="button" class="btn_close">
+								<span>닫기</span>
+							</button>
+							<div class="share_tit">공유하기</div>
+							<ul class="share_list">
+								<li><a href="#"><img
+										src="https://www.stayfolio.com/web/images/ico-share-link.svg" alt="링크복사">링크 복사</a></li>
+								<li><a id="kakaotalk-sharing-btn" href="javascript:;">
+								<img src="https://www.stayfolio.com/web/images/ico-share-kakao.svg" alt="올래갈래" />카카오톡</a></li>
+							</ul>
+							<div class="link-copy-topbanner" id="toast">클립보드에 링크가 복사되었습니다.</div>
+						</div> 
 						<small class="small">공유하기</small></li>
+						
+						
 				</ul>
 			</div>
 			<div class="top_img">
@@ -392,7 +503,6 @@
 						<!-- 반복 -->
 						<c:forEach items="${stayRoomInfo}" var="roomList" step="1">
 						<li class="swiper-slide slider_box single-room swiper-slide-active">
-							<%-- <a href="/stay/roomInfo/${list.STAYNAME }/${${roomList.ROOMNAME}"> --%>
 							<a href="/stay/roomInfo?stayName=${list.STAYNAME }&roomName=${roomList.ROOMNAME}">
 								<div role="presentation" class="img"
 									style="background-image: url(&quot;${roomList.FIELD}&quot;); background-repeat: no-repeat; background-position: center center; background-size: cover;">
