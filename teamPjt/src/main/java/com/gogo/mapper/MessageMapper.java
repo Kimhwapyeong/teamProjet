@@ -9,7 +9,7 @@ public interface MessageMapper {
 	
 	
 	public int insertMessage(MessageVO vo);
-	public List<MessageVO> getList(String messageRoom);
+	public List<MessageVO> getList(String roomId);
 	
 	public int insertMessageRoom(); 
 	public int insertMessageRoomCustom(String roomId);
