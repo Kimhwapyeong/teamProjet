@@ -5,7 +5,7 @@ var space = /\s/g;
 var title = "";
 var signup = {
 	common: {
-		empty: {code: 'invalid', desc: title + '입력하세요.'},
+		empty: {code: 'invalid', desc: title + '입력 란이 비어있습니다.'},
 		space: {code: 'invalid', desc: '공백 없이 입력하세요.'},
 		min: {code: 'invalid', desc: '최소 5자 이상 입력하세요.'},
 		max: {code: 'invalid', desc: '최대 10자 이내로 입력하세요.'}

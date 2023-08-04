@@ -277,7 +277,7 @@ function idCheck() {
 	console.log("data.code : ",data.code);
 	// 유효하지 않다면 중복확인 불필요
 	if(data.code != 'valid') {
-		alert('아이디 중복 확인 불필요\n' + data);
+		alert('아이디 중복 확인 불필요\n' + data.desc);
 		$id.focus();
 		 $('.valid').eq(0).html(data.desc);
 		return;
