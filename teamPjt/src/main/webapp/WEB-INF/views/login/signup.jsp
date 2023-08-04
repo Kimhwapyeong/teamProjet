@@ -10,6 +10,7 @@
 <!-- ?v=<new java.util.Date().getTime()>을 붙이면 수정사항이 바로바로 새로고침 됨-->
 <script src="/resources/js/member/signupCheck.js"></script>
 <head>
+<link rel="stylesheet" href="/resources/css/login/blink.css">
 <meta charset="UTF-8">
 <title>SIGN UP</title>
 </head>
@@ -43,7 +44,7 @@
 
 select.box {
 	width: 80%;
-	height: 50px;
+	height: 40px;
 	box-sizing: border-box;
 	margin-left: 3px;
 	padding: 2px 0 5px 6px;
@@ -108,7 +109,7 @@ label {
 
 select.box {
 	width: 100%;
-	height: 50px;
+	height: 40px;
 	box-sizing: border-box;
 	margin-left: 5px;
 	padding: 5px 0 5px 10px;
@@ -156,7 +157,16 @@ table tr td input[name=addr] {
 	font-weight: bold; 
 }
 
-.valid { color: green; }
+.valid, .invaild { margin-bottom : 20px; margin-top : 10px; 
+					  -webkit-animation:blink 1.0s ease-in-out infinite alternate;
+  -moz-animation:blink 1.0s ease-in-out infinite alternate;
+  animation:blink 1.0s ease-in-out infinite alternate;
+  
+  color:red; }
+
+input {border : 1px solid #f2f2f2;}
+
+.valid { color: gray; }
 
 .invalid { color: red; }	
 }
@@ -226,6 +236,10 @@ a:link, a:visited {
 	padding: 20px 0;
 	min-width: 1024px;	/* 창의 최소 크기 지정 */
 }
+
+.login_wrap { width : 760px;}
+
+
 
 </style>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -362,7 +376,7 @@ function item_check(item) {
 							    <td>
 							    <div style="display: flex">
 							      <input type="text" name="id" id="signUpId" class="chk" placeholder="아이디를 입력하세요." value="">
-							      <a id="btnid" class='btn-fill-s'>중복확인</a><br>
+							      <a id="btnid" style="width: 80px;" class='btn-fill-s'>중복확인</a><br>
 							    </div>  
 							      <div class='valid'>아이디를 입력하세요(영문 소문자, 숫자만 입력 가능)</div>
 							    </td>
@@ -371,6 +385,7 @@ function item_check(item) {
 							    <th class="tit">이름 *</th>
 							    <td>
 							      <input type="text" name="name" id="signUpName" placeholder="이용자 본인의 이름을 입력하세요." value="">
+							      <div class="valid">이름을 입력해 주세요</div>
 							    </td>
 							  </tr>
 							  <tr>
@@ -408,8 +423,8 @@ function item_check(item) {
 							  <!-- 성별 체크 -->
 							  <tr>
 							    <th class="tit">성별</th>
-							    <td id="genderForm">
-							      <label><input type="radio" name="gender" value="male">남</label>
+							    <td id="genderForm" style="line-height: 80px;">
+							      <label style="margin-right: 15px;"><input type="radio" name="gender" value="male">남</label>
 							      <label><input type="radio" name="gender" value="female" checked>여</label>
 							    </td>
 							  </tr>
@@ -417,9 +432,9 @@ function item_check(item) {
 							    <th class="tit">이메일 *</th>
 							    <td>
 							    <div style="display: flex">
-							      <input class="box" name="email" id="email-txt" type="text" placeholder="이메일 아이디를 입력하세요." /> @ <input class="box"
-							        name="emailDomain" id="domain-txt" type="text" />
-							      <select class="box" id="domain-list" onchange="updateEmailDomain()">
+							      <input class="box" name="email" id="email-txt" type="text" style="width: 120px; height: 35px;"/> <span style="font-weight:bold; font-size:1.2em; margin-left:10px; margin-right:10px; padding-top:8px;">@</span> <input class="box"
+							        name="emailDomain" id="domain-txt" type="text" style="width: 120px; height: 35px;"/>
+							      <select class="box" id="domain-list" style="width: 120px; height: 35px;" onchange="updateEmailDomain()">
 							        <option value="type">직접 입력</option>
 							        <option value="naver.com">naver.com</option>
 							        <option value="google.com">google.com</option>
@@ -433,7 +448,7 @@ function item_check(item) {
 							  <tr>
 							    <th class="tit">호스트이신가요?*</th>
 							    <td id="genderForm">
-							    	<div>
+							    	<div style="line-height: 80px;">
 							      	<input type="radio" name="hostyn" value="n" checked>아니요,일반이용자입니다.
 							     
 							      	<input type="radio" name="hostyn" value="y"> 네,숙소 호스트입니다.
@@ -504,15 +519,14 @@ function item_check(item) {
 				</div>
 				<div id='signupMsg'></div>
 				<div class="sns_login">
-					<div class="tit">SNS 계정으로 로그인하기</div>
 					<ul>
-						<li><a class="btn_naver" href="/">네이버</a>
+						<li style="padding-left: 200px;"><a style="position: absolute; top: 96%;" class="btn_naver" href="/">네이버</a>
 							<div id="naverIdLogin" style="display: none;">
 								<a id="naverIdLogin_loginButton" href="#"><img
 									src="https://static.nid.naver.com/oauth/big_g.PNG?version=js-2.0.1"
 									height="50"></a>
 							</div></li>
-						<li><a class="btn_kakao" href="/">카카오</a></li>
+						<li><a style="position: absolute; top: 96%; left:50%;" class="btn_kakao" href="/">카카오</a></li>
 					</ul>
 				</div>
 			</div>

@@ -19,11 +19,10 @@
 </head>
 
     <body style="overflow: visible;">
-    	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M24ZFBJ" height="0" width="0" title="googletagmanager-iframe" style="display:none;visibility:hidden">
+    	    	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M24ZFBJ" height="0" width="0" title="googletagmanager-iframe" style="display:none;visibility:hidden">
     	</iframe></noscript>
     <!-- 헤더 -->
 	<%@ include file="../../common/header.jsp" %>
-
         <div id="fb-root" class=" fb_reset">
             <script async="" src="https://connect.facebook.net/en_US/all.js"></script>
             <div style="position: absolute; top: -10000px; width: 0px; height: 0px;"> </div>
@@ -37,7 +36,7 @@
                         <div class="mypage_myinfo">
                             <!-- =============================== 이름 ============================================-->
                             <div class="tit">${sessionScope.memberId}님 반가워요!</div>
-                            <div class="my-count" role="link" tabindex="0">함께 0번의 여행을 했어요.</div>
+                            <div class="my-count" role="link" tabindex="0">함께  ${travelCnt }번의 여행을 했어요.</div>
                         </div>
                         <div class="newmypage_menu pc_only">
                             <ul>
@@ -48,50 +47,49 @@
 								<li><a href="./message">메시지</a></li>
                             </ul>
                         </div>
+                        <div class="mypage_content">
                         
                         <!-- ▶▶▶  forEach ▶▶▶  -->
                         <c:forEach items="${like}" var="like" step="1" varStatus="status">
                         <c:if test="${sessionScope.memberId == like.MEMBERID}">
                         
-                        <div class="mypage_content">
-                            <div class="likestay_wrap">
-                                <div class="likestay_box" role="presentation">
-                                    <div class="info_container">
-                                        <!-- =============================== 숙소정보 ============================================-->
-                                        <div class="name">
-                                        	<span class="ellipsis" style="padding-bottom: 0px;">${like.STAYNAME }</span>
-                                        	<small style="margin-bottom:0px">${like.STAYTYPE }</small>
-                                       	</div>
-                                        <div class="stay" style="margin-top:0px">
-                                            <p class="option">${like.STAYLOC }<br>최소 ${like.STDPERSON }명 / 최대 ${like.OVERPERSON }명<br>₩${like.PRICE }</p>
-                                        </div>
-                                        
-                                        <!-- =============================== 예약 링크 ============================================-->
-                                        <div class="btns"><button type="button" class="btn_bk"><a href="" style="color:white">예약하기</a></button></div>
-                                            <div class="likestay_img" role="presentation" style="padding:0px;">
-                                                <ul class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events slider1 flist_slider">
-                                                    <div class="swiper-wrapper" style="margin:20px">
-                                                        <li class="swiper-slide swiper-slide-active img"
-                                                            style="background: url(${like.MAINPIC1}) center center / cover no-repeat; 
-                                                            width: 372px;">
-                                                        </li>
-                                                    </div>
-                                                </ul>
-                                            </div>
-                                    	</div>
-                                	</div>
-                                </div>
-                            </div>
-                           
-                            </c:if>
-                            </c:forEach>
+					        <div class="likestay_wrap">
+					        <div class="likestay_box" role="presentation">
+					            <div class="info_container">
+					                <div class="name"><span class="ellipsis"
+					                        style="padding-bottom: 0px;">${like.STAYNAME }</span><small>${like.STAYTYPE }</small></div>
+					                <div class="stay">
+					                    <p class="txt mo_only"><span class="ellipsis">about-flow</span></p>
+					                    <p class="option">${like.STAYLOC }<br>최소 ${like.STDPERSON }명 / 최대 ${like.OVERPERSON }명<br>₩${like.PRICE }</p>
+					                </div>
+					                <div class="btns"><button type="button" class="btn_bk"><a href="../../../reserved/reserved" style="color:white">예약하기</a></button>
+					                </div><a href="/findstay/about-flow">
+					                    <div class="likestay_img" role="presentation" style="padding-top: 0px;">
+					                        <ul
+					                            class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events slider1 flist_slider">
+					                            <div class="swiper-wrapper">
+					                                <li class="swiper-slide swiper-slide-active img"
+					                                    style="background: url(${like.MAINPIC1 }) center center / cover no-repeat; width: 372px;">
+					                                </li>
+					                            </div>
+					                        </ul>
+					                    </div>
+					                </a>
+					            </div>
+					        </div>
+					        </div>
+					        
+					        </c:if>
+					        </c:forEach>
+					        
+					    </div>
+                    </div>
                             
                             <!-- ============ 페이징 =============== -->
                             <div class="paging">
                             	<a href="/" class="prev" title="이전 페이지">이전 페이지</a>
                             	<a href="/" class="on">1</a><a href="/" class="next" title="다음 페이지">다음 페이지</a>
                            	</div>
-                    </div>
                 </div>
         
         <!-- 푸터 -->
