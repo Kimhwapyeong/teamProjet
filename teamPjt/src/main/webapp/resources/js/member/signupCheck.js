@@ -5,7 +5,7 @@ var space = /\s/g;
 var title = "";
 var signup = {
 	common: {
-		empty: {code: 'invalid', desc: title + '입력 란이 비어있습니다.'},
+		empty: {code: 'invalid', desc: title + '입력란이 비어있습니다.'},
 		space: {code: 'invalid', desc: '공백 없이 입력하세요.'},
 		min: {code: 'invalid', desc: '최소 5자 이상 입력하세요.'},
 		max: {code: 'invalid', desc: '최대 10자 이내로 입력하세요.'}
@@ -27,8 +27,9 @@ var signup = {
 	},
 	
 	id_status: function(id) {
+		console.log("id : ", id)
 		var reg = /[^a-z0-9]/g;
-		title = $('[name=id]').attr('title');
+		title = $('[name=memberId]').attr('title');
 		if(id == '') { 
 			return this.common.empty;
 		} else if(id.match(space)) {
@@ -72,8 +73,10 @@ var signup = {
 		else return this.pw.notEqual; 
 	},
 	tag_status: function(tag) {
+		console.log("tag :", tag)
+		console.log("tag :", tag.val())
 	    var data;
-	    if (tag.attr('name') == 'id') {
+	    if (tag.attr('name') == 'memberId') {
 	        data = this.id_status(tag.val());
 	    } else if (tag.attr('name') == 'pw') {
 	        data = this.pw_status(tag.val());
@@ -86,7 +89,7 @@ var signup = {
 
 }
 
-//사용자약관체크(script)
+// 사용자약관체크(script)
 document.addEventListener("DOMContentLoaded", function() {
     // 사용자 약관 전체 동의 체크 박스를 클릭했을 때
     var checkAll = document.getElementById("check_all");

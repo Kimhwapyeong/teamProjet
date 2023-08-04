@@ -243,29 +243,63 @@ a:link, a:visited {
 </style>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script>
+window.addEventListener('load',function(){
+
+    // 입력 필드에 변경 사항이 있을 때 유효성 검사를 실행
+    var inputFields = document.querySelectorAll('input');
+    inputFields.forEach(function (input) {
+        input.addEventListener('input', function () {
+            validateInput(this);
+        });
+    });
+});
+
+    // 입력 유효성 검사와 오류 메시지 표시를 처리하는 함수
+    function validateInput(tag) {
+        var name = tag.getAttribute('name');
+        var value = tag.value.trim();
+        
+        
+        // 'pw' 필드 유효성 검사
+        if (name === 'pw') {
+            var pwStatus = signup.pw_status(value);
+            var pwMessageDiv = document.querySelector('#signUpPw + .valid');
+            pwMessageDiv.textContent = pwStatus.desc;
+            pwMessageDiv.style.display = pwStatus.code === 'valid' ? 'none' : 'block';
+        }
+
+        // 'pw_ck' 필드(비밀번호 확인) 유효성 검사
+        if (name === 'pw_ck') {
+            var pwCkStatus = signup.pw_ck_status(value);
+            var pwCkMessageDiv = document.querySelector('#pwCheck + .valid');
+            pwCkMessageDiv.textContent = pwCkStatus.desc;
+            pwCkMessageDiv.style.display = pwCkStatus.code === 'valid' ? 'none' : 'block';
+        }
+    }
+
 $(document).ready(function() {
 	// 아이디 중복 검사 
 	// 버튼 클릭 시 함수 실행
 	$('#btnid').on('click', function() {
 		idCheck();
 	});
-
-//유효성 검사
-$('.chk').on('keyup', function(){
-	if($(this).attr('name') == 'id') {
-		if(event.keyCode == 13) { idCheck(); }
-		else {
-			$(this).removeClass('chked');
-			validate( $(this) );
+	//유효성 검사
+	$('.chk').on('keyup', function(){
+		console.log('콘솔체크')
+		console.log('this' + $(this))
+		if($(this).attr('name') == 'memberId') {
+			if(event.keyCode == 13) { idCheck(); }
+			else {
+				$(this).removeClass('chked');
+				validate( $(this) );
+			}
+		} else {
+			validate($(this));
 		}
-	} else {
-		validate($(this));
-	}
-});	
-	
-})
+	})
+}); 
 function idCheck() {
-	var $id = $('[name=id]');
+	var $id = $('[name=memberId]').eq(1);
 	// 올바른 아이디 입력 형태인지 파악하여 
 	// 유효한 아이디의 경우 서버에서 중복확인
 	if($id.hasClass('chked')) return;
@@ -281,7 +315,6 @@ function idCheck() {
 		 $('.valid').eq(0).html(data.desc);
 		return;
 	}
-	 console.log("data1 :"+data);
 	   $.ajax({
 	        type: 'post',
 	        url: '/idCheck',
@@ -296,6 +329,7 @@ function idCheck() {
 
 	            data = signup.id_usable(res);
 	            console.log(res);
+	            
 	            // 중복 확인 결과에 따라 아이디 입력란 옆에 메시지를 표시
 	            $('.valid').eq(0).html(res.msg);
 	            display_status($id.siblings('div'), res);
@@ -306,6 +340,7 @@ function idCheck() {
 	        }
 	    });
 }
+
 // 입력 요소를 검증하고 검증 결과에 따라 상태를 업데이트
 function validate(t) {
 	var data = signup.tag_status(t);
@@ -321,37 +356,49 @@ function display_status(div, data) {
 }
 
 function go_join() {
-    if ($('[name=name]').val() == '') {
-        alert('이름을 입력하세요!');
-        $('[name=name]').focus();
+    if ($('[name=memberName]').val() == '') {
+        alert('이름을 입력하세요.');
+        $('[name=memberName]').focus();
         return;
     }
 
     // 필수 항목의 유효성을 판단
     // 중복확인 한 경우
-    if ($('[name=id]').hasClass('chked')) {
+    if ($('[name=memberId]').hasClass('chked')) {
         // 이미 사용중인 경우는 회원가입 불가
-        if ($('[name=id]').siblings('div').hasClass('invalid')) {
+        if ($('[name=memberId]').siblings('div').hasClass('invalid')) {
             alert('회원가입 불가\n' + signup.id.unusable.desc);
-            $('[name=id]').focus();
+            $('[name=memberId]').focus();
             return;
         }
     } else {
         // 중복 확인 하지 않은 경우
-        if (!item_check(signup.tag_status($('[name=id]')))) return;
+        if (!item_check(signup.tag_status($('[name=memberId]')))) return;
         else {
             alert('회원가입 불가\n' + signup.id.valid.desc);
-            $('[name=id]').focus();
+            $('[name=memberId]').focus();
             return;
         }
     }
-
     if (!item_check($('[name=pw]'))) return;
     if (!item_check($('[name=pw_ck]'))) return;
-    if (!item_check($('[name=email]'))) return;
+    if (!item_check($('[name=memberEmail]'))) return;
+    
+    // 필수 약관 동의 검사
+    if (!checkRequiredAgreements()) {
+        alert('필수 약관에 동의해야 회원가입이 가능합니다.');
+        return;
+    }
+    function checkRequiredAgreements() {
+        var serviceAgree = $("#check_service").prop("checked");
+        var privacyAgree = $("#check_privacy").prop("checked");
+        var aboveAgree = $("#check_above").prop("checked");
 
-    alert("회원가입되었습니다.")
+        return serviceAgree && privacyAgree && aboveAgree;
+    }
+
     $('form').submit();
+    alert("회원가입되었습니다.")
 }
 
 function item_check(item) {
@@ -359,7 +406,7 @@ function item_check(item) {
     if (data.code == 'invalid') {
         alert('회원가입 불가합니다. \n' + data.desc);
         item.focus();
-        return false;
+        return ;
     } else return true;
 }
 
@@ -381,7 +428,7 @@ function item_check(item) {
 							    <th class="tit">아이디 *</th>
 							    <td>
 							    <div style="display: flex">
-							      <input type="text" name="id" id="signUpId" class="chk" placeholder="아이디를 입력하세요." value="">
+							      <input type="text" name="memberId" id="signUpId" class="chk" placeholder="아이디를 입력하세요." value="">
 							      <a id="btnid" style="width: 80px;" class='btn-fill-s'>중복확인</a><br>
 							    </div>  
 							      <div class='valid'>아이디를 입력하세요(영문 소문자, 숫자만 입력 가능)</div>
@@ -390,7 +437,7 @@ function item_check(item) {
 							  <tr>
 							    <th class="tit">이름 *</th>
 							    <td>
-							      <input type="text" name="name" id="signUpName" placeholder="이용자 본인의 이름을 입력하세요." value="">
+							      <input type="text" name="memberName" id="signUpName" placeholder="이용자 본인의 이름을 입력하세요." value="">
 							      <div class="valid">이름을 입력해 주세요</div>
 							    </td>
 							  </tr>
@@ -455,7 +502,7 @@ function item_check(item) {
 							    <th class="tit">호스트이신가요?*</th>
 							    <td id="genderForm">
 							    	<div style="line-height: 80px;">
-							      	<input type="radio" name="hostyn" value="n" checked>아니요,일반이용자입니다.
+							      	<input type="radio" name="hostyn" value="n" checked>아니요, 일반이용자입니다.
 							     
 							      	<input type="radio" name="hostyn" value="y"> 네,숙소 호스트입니다.
 							      	</div>
@@ -467,9 +514,9 @@ function item_check(item) {
 				<!--사용자 약관-->
 				<div class="agree_box signup-agree">
 					<ul class="board_fold" id="listFold">
-						<li class="agree_all"><label class="check_skin"
-							for="check_all"> <input type="checkbox" id="check_all"
-								value="all"> <span>사용자 약관 전체 동의</span>
+						<li class="agree_all"><label class="check_skin" for="check_all">
+						 <input type="checkbox" id="check_all" value="all"> 
+							<span>사용자 약관 전체 동의 *</span>
 						</label></li>
 						<li><label class="check_skin" for="check_service"> <input
 								type="checkbox" id="check_service" value="serviceAgree">
@@ -480,48 +527,47 @@ function item_check(item) {
 								인원정보<br> 2. 수집 및 이용목적: 사업자회원과 예약이용자의 원활한 거래 진행, 고객상담, 불만처리
 								등 민원 처리, 분쟁조정 해결을 위한 기록보존<br>
 							</div></li>
-						<li><label class="check_skin" for="check_privacy"> <input
-								type="checkbox" id="check_privacy" value="privacyAgree">
+						<li><label class="check_skin" for="check_privacy"> 
+						<input type="checkbox" id="check_privacy" value="privacyAgree">
 								<span>개인정보처리방침 동의 (필수)</span></label>
 							<div class="agree_arrw_down" role="presentation"></div>
 							<div class="view" style="display: none;">
 								제 1조 (총칙)<br>1. 개인정보란 생존하는 개인에 관한 정보로서 당해 정보에 포함되어 있는 성명,
 								주민등록번호 등의 사항에 의하여 당해 개인을 식별할 수 있는 정보 (당해 정보만으로는 특정 개인을 식별할 수
 								없더라도 다른 정보와 용이하게 결합하여 식별할 수 있는 것을 포함합니다.) 를 말합니다.<br>2.
-								스테이폴리오는 귀하의 개인정보 보호를 매우 중요시하며, ‘정보통신망 이용촉진 및 정보보호에 관한 법률’ 상의
+								스테이올래는 귀하의 개인정보 보호를 매우 중요시하며, ‘정보통신망 이용촉진 및 정보보호에 관한 법률’ 상의
 								개인정보 보호규정 및 정보통신부가 제정한 ‘개인정보 보호지침’을 준수하고 있습니다.<br>3.
-								스테이폴리오는 개인정보처리방침을 정하고 이를 귀하께서 언제나 쉽게 확인할 수 있게 공개하도록 하고 있습니다.<br>
+								스테이올래는 개인정보처리방침을 정하고 이를 귀하께서 언제나 쉽게 확인할 수 있게 공개하도록 하고 있습니다.<br>
 							</div></li>
-						<li><label class="check_skin" for="check_above"><input
-								type="checkbox" id="check_above" value="aboveAgree"><span>만
-									14세 이상 확인 (필수)</span></label>
+						<li><label class="check_skin" for="check_above">
+						<input type="checkbox" id="check_above" value="aboveAgree">
+						<span>만 14세 이상 확인 (필수)</span></label>
 							<div class="agree_arrw_down" role="presentation"></div>
 							<div class="view" style="display: none;">
 								정보통신망 이용촉진 및 정보보호 등에 관한 법률에 따라 만 14세 미만 아동의 개인정보 수집 시 법정대리인의 동의를
 								받도록 규정하고 있습니다.<br> 만 14세 미만 아동이 법정대리인 동의 없이 회원가입을 할 경우 회원탈퇴
 								또는 서비스 이용에 제한이 있을 수 있습니다.
 							</div></li>
-						<li><label class="check_skin" for="check_lifetime"> <input
-								type="checkbox" id="check_lifetime" value="lifeTimeAgree">
+						<li><label class="check_skin" for="check_lifetime"> 
+						<input type="checkbox" id="check_lifetime" value="lifeTimeAgree">
 								<span>평생회원제동의 (선택)</span></label>
 							<div class="agree_arrw_down" role="presentation"></div>
 							<div class="view" style="display: none;">
 								평생회원제에 동의할 경우 1년 이상 서비스를 이용하지 않아도<br> 휴면 처리되지 않습니다.
 							</div></li>
 						<li><label class="check_skin" for="check_marketing">
-								<input type="checkbox" id="check_marketing"
-								value="marketingAgree"> <span>쿠폰,이벤트 등 혜택 알림 동의
-									(선택)</span>
+								<input type="checkbox" id="check_marketing" value="marketingAgree">
+								 <span>쿠폰,이벤트 등 혜택 알림 동의 (선택)</span>
 						</label>
 							<div class="agree_arrw_down" role="presentation"></div>
 							<div class="view" style="display: none;">
-								스테이폴리오에서 제공하는 이벤트 및 혜택 등 다양한 정보를 문자메시지, 이메일 등으로 볼 수 있습니다.<br>
+								스테이올래에서 제공하는 이벤트 및 혜택 등 다양한 정보를 문자메시지, 이메일 등으로 볼 수 있습니다.<br>
 								마케팅 정보 수신 및 활용 동의 여부와 관계없이 회원가입 및 서비스를 이용하실 수 있습니다.<br>
 							</div></li>
 					</ul>
 				</div>
 				<div class="login_btns">
-					<button type="submit" class="btn_bk" id="btnSignup" onclick="go_join()">회원가입</button>
+					<button type="button" class="btn_bk" id="btnSignup" onclick="go_join()">회원가입</button>
 				</div>
 				<div id='signupMsg'></div>
 				<div class="sns_login">
