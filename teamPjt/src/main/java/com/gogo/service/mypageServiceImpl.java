@@ -284,6 +284,7 @@ public class mypageServiceImpl implements mypageService {
 	
 	@Override
 	public int travelCnt(String memberId) {
+		//log.info("memberId : " + memberId);
 		return mypageMapper.travelCnt(memberId);
 	}
 

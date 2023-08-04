@@ -250,7 +250,7 @@
 	<select id="travelCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM reservation
-		WHERE memberid = #{memberID}
+		WHERE memberid = #{memberId}
 		AND reservationno NOT IN (
 		    SELECT v.reservationno
 		    FROM refund f

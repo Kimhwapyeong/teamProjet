@@ -107,7 +107,7 @@
                              <c:if test="${sessionScope.memberId == member.memberId}">
                              
                              
-                            <form name="infoFrm" method="post" action="/member/user/infoFrm">
+                            <form name="infoFrm" method="post" action="/member/user/infoFrm" enctype="multipart/form-data">
                                         <input type="hidden" name="memberId" value=${member.memberId } id ='id'>
                                         <!-- 프로필 사진 -->
                                   <div class="profile_photo">
