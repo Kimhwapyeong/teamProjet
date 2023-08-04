@@ -48,7 +48,8 @@
 					<div class="mypage_myinfo">
 						<!-- =================================== user 이름 !!!! =================================== -->
 						<div class="tit">${sessionScope.memberId}님 반가워요!</div>
-						<div class="my-count" role="link" tabindex="0">함께 0번의 여행을
+						<div class="my-count" role="link" tabindex="0">함께  ${travelCnt }
+번의 여행을
 							했어요.</div>
 					</div>
 					<div class="newmypage_menu pc_only">
