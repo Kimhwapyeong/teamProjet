@@ -67,6 +67,14 @@
 									style="padding-bottom: 0px;">다가올 예약</a></li>
 							</ul>
 						</div>
+						<c:if test="${not empty list}">
+							<div style="text-align: center;">
+								<img src="/resources/images/no.png" class="img-booking-waiting" alt="img-booking-wating">
+								<br>
+								<p style="line-height: 1.5;">아직 예약 정보가 없습니다.<br class="mo_only"> 새로운 스테이를 찾아 떠나보세요.</p>
+							</div>
+						</c:if>
+						
 						
 						<!-- ▶▶▶  forEach ▶▶▶  -->
                         <c:forEach items="${list}" var="list" step="1" varStatus="status">

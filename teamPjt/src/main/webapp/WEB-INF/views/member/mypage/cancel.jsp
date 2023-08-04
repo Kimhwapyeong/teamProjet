@@ -55,6 +55,14 @@
                         </div>
                         <div class="mypage_content">
                         
+                        <c:if test="${not empty list}">
+							<div style="text-align: center;">
+								<img src="/resources/images/no.png" class="img-booking-waiting" alt="img-booking-wating">
+								<br>
+								<p style="line-height: 1.5;">아직 예약 정보가 없습니다.<br class="mo_only"> 새로운 스테이를 찾아 떠나보세요.</p>
+							</div>
+						</c:if>
+                        
                          <c:forEach items="${list}" var="list" step="1">
                          <c:if test="${sessionScope.memberId == list.MEMBERID}">
                         
@@ -90,6 +98,7 @@
                             <!-- =============================== 페이징 ============================================-->
                             <div class="paging"><a href="/" class="prev" title="이전 페이지">이전 페이지</a><a href="/"
                                     class="on">1</a><a href="/" class="next" title="다음 페이지">다음 페이지</a></div>
+                            <a href="/stay/list"><button type="button" class="btn_bk btn_sm findstay_btn" style="margin-top: 20px; margin-bottom: 20px;">FIND STAY</button></a>
                         </div>
                     </div>
                 </div>
