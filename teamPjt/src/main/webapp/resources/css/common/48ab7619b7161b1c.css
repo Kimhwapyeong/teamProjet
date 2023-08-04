@@ -346,7 +346,7 @@ caption {
 }
 
 .header_wrap .logo a {
-    background: url(https://www.stayfolio.com/web/images/logo.png) no-repeat 50%;
+    background: url('/resources/images/stayNameImg/stay2.PNG') no-repeat 50%;
     background-size: cover;
     display: block;
     width: 86px;
