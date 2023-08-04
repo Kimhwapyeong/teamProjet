@@ -273,10 +273,13 @@ function idCheck() {
 	console.log('go check');
 	
 	var data = signup.tag_status($id);
+	console.log(data);
+	console.log("data.code : ",data.code);
 	// 유효하지 않다면 중복확인 불필요
 	if(data.code != 'valid') {
 		alert('아이디 중복 확인 불필요\n' + data);
 		$id.focus();
+		 $('.valid').eq(0).html(data.desc);
 		return;
 	}
 	 console.log("data1 :"+data);
@@ -285,14 +288,18 @@ function idCheck() {
 	        url: '/idCheck',
 	        contentType: 'application/json', // 데이터 전송 형식을 JSON으로 설정
 	        data: JSON.stringify({memberId: $id.val()}), // 아이디 정보를 JSON 형식으로 변환하여 전송
-	        success: function(data) {
-	            console.log("data :"+data);
-	        	
-	            data = signup.id_usable(data);
-	            console.log(data);
+	        success: function(res) {
+	           	console.log("res.success : ",res.success);
+	           	console.log("res.result : ",res.result);
+	           	console.log("res.msg : ",res.msg);
+	           	console.log("res : ", res);
+
+
+	            data = signup.id_usable(res);
+	            console.log(res);
 	            // 중복 확인 결과에 따라 아이디 입력란 옆에 메시지를 표시
-	            $('.valid').eq(0).html(data.desc);
-	            display_status($id.siblings('div'), data);
+	            $('.valid').eq(0).html(res.msg);
+	            display_status($id.siblings('div'), res);
 	            $id.addClass('chked');
 	        },
 	        error: function(req, text) {

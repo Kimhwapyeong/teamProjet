@@ -19,8 +19,11 @@ var signup = {
 	},
 	
 	id_usable: function(data) {
-		if(data) return this.id.usable;
-		else return this.id.unusable;
+		if(data.code=='vaild'){
+			return this.id.usable;
+		} else {
+			return this.id.unusable;
+		}
 	},
 	
 	id_status: function(id) {
