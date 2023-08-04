@@ -4,6 +4,9 @@ package com.gogo.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,27 +37,48 @@ public class UserController extends CommonRestController{
 	
 	
 	// 예약 정보
-	@GetMapping("reservation")
-	public void reservation(Model model) {
+	@GetMapping(value = {"reservation", "travelCnt"})
+	public void reservation(Model model, HttpServletRequest request) {
 		service.reservList(model);
+		
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("memberId");
+		int res = service.travelCnt(memberId);
+		model.addAttribute("travelCnt", res);
+		
 	}
 	
 	// 취소 내역
-	@GetMapping("cancel")
-	public void cancel(Model model) {
+	@GetMapping(value = {"cancel", "travelCnt"})
+	public void cancel(Model model, HttpServletRequest request) {
 		service.cancelList(model);
+		
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("memberId");
+		int res = service.travelCnt(memberId);
+		model.addAttribute("travelCnt", res);
 	}
 	
 	// 관심 스테이
-	@GetMapping("likestay")
-	public void likestay(Model model) {
+	@GetMapping(value = {"likestay", "travelCnt"})
+	public void likestay(Model model, HttpServletRequest request) {
 		service.likestay(model);
+		
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("memberId");
+		int res = service.travelCnt(memberId);
+		model.addAttribute("travelCnt", res);
 	}
 	
 	// 회원 정보 조회
-	@GetMapping("info")
-	public void info(Model model) {
+	@GetMapping(value = {"info", "travelCnt"})
+	public void info(Model model, HttpServletRequest request) {
 		service.mem(model);
+
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("memberId");
+		int res = service.travelCnt(memberId);
+		model.addAttribute("travelCnt", res);
 	}
 	
 	@PostMapping("infoFrm")
@@ -68,11 +92,12 @@ public class UserController extends CommonRestController{
 		}
 	}
 		
-	// 메세지
+	// 메세지 연결
 	@GetMapping("message")
 	public void message() {
 		
 	}
+	
 	
 	// 예약 상세 확인
 	@GetMapping("reserved_detail")
@@ -81,9 +106,15 @@ public class UserController extends CommonRestController{
 								, @RequestParam("price") String price
 								, @RequestParam("stayNo") String stayNo
 								, @RequestParam("reservationNo") String reservationNo
-								, Model model) {
+								, Model model, HttpServletRequest request) {
 		
 		service.reservation_detail(checkIn, checkOut, price, stayNo, reservationNo, model);
+		
+		
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("memberId");
+		int res = service.travelCnt(memberId);
+		model.addAttribute("travelCnt", res);
 		
 	}
 	

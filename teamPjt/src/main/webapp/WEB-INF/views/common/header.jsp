@@ -307,9 +307,9 @@
 		<header id="header" class="container_wide">
 			<div class="header_wrap gnb-responsive-css only-pc">
 				<div class='logo'>
-					<a href="/main">STAY FOLIO</a>
+					<a href="/main" >STAY OLLAE</a>
 				</div>
-				<div class="side-Menu" id="sideMenuMiddle" style="width: 44px; height: 44px; background-image: url(https://www.stayfolio.com/mobile-menu.svg);"></div>
+				<div class="side-Menu" id="sideMenuMiddle" style="width: 20px; height: 20px; background-image: url('/resources/images/stayNameImg/stay2_2.png');"></div>
 				<div class="whe gnb-responsive-margin" style="">
 					<button type="button" class="gnb-mo-small" id="btnWhere">
 						<span class="gnb-mo-small">어디로 떠날까요?</span>
@@ -327,7 +327,7 @@
 					<ul class="etc">
 						<div class="nav_etc">
 							<c:if test="${ empty sessionScope.member }" var="res">
-								<div class="box">
+								<div class="box" style="border:0px">
 									<a href="/login/login"><div class="nav_tit login">LOGIN</div></a>
 								</div>
 							</c:if>

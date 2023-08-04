@@ -45,6 +45,7 @@ public class mypageServiceImpl implements mypageService {
 			
 		}
 	
+	
 	@Override
 	public int deleteStay(String[] idArr) {
 		System.out.println(idArr[0]);
@@ -52,6 +53,7 @@ public class mypageServiceImpl implements mypageService {
 		paramMap.put("idArr", idArr);
 		return mypageMapper.deleteStay(paramMap);
 	}
+	
 	
 	// 회원 조회
 	@Override
@@ -63,6 +65,7 @@ public class mypageServiceImpl implements mypageService {
 		return null;
 	}
 	
+	
 	@Override
 	public int deleteArr(String[] idArr) {
 		System.out.println(idArr[0]);
@@ -71,10 +74,12 @@ public class mypageServiceImpl implements mypageService {
 		return mypageMapper.deleteArr(paramMap);
 	}
 	
+	
 	@Override
 	public int answering(AnswerVO vo) {
 		return mypageMapper.answering(vo);
 	}
+	
 	
 	@Override
 	public AnswerVO answerInfo(int queNo) {
@@ -90,6 +95,7 @@ public class mypageServiceImpl implements mypageService {
 	}
 	
 	
+	
 	// ▶▶▶  host ▶▶▶
 	// 숙소 관리
 	@Override
@@ -101,6 +107,7 @@ public class mypageServiceImpl implements mypageService {
 		return null;
 	}
 	
+	
 	@Override
 	public List<Map<String, String>> reservinfo(Model model) {
 		List<Map<String, String>> list = mypageMapper.reservinfo();
@@ -109,6 +116,7 @@ public class mypageServiceImpl implements mypageService {
 		model.addAttribute("list", list);
 		return null;
 	}
+	
 	
 	@Override
 	public List<Map<String, String>> reservpic(Model model) {
@@ -119,10 +127,12 @@ public class mypageServiceImpl implements mypageService {
 		return null;
 	}
 	
+	
 	@Override
 	public int insert(QuestionVO qa) {
 		return mypageMapper.insert(qa);
 	}
+	
 	
 	@Override
 	public List<QuestionVO> qaList(Model model, QuestionVO vo) {
@@ -143,11 +153,13 @@ public class mypageServiceImpl implements mypageService {
 		return null;
 	}
 	
+	
 	@Override
 	public QuestionVO getOne(int queNo) {
 		QuestionVO que = mypageMapper.getOne(queNo);
 		return que;
 	}
+	
 	
 	
 	// ▶▶▶  user ▶▶▶
@@ -171,6 +183,7 @@ public class mypageServiceImpl implements mypageService {
 		return null;
 	}
 	
+	
 	// 취소 정보
 	@Override
 	public List<Map<String, String>> cancelList(Model model) {
@@ -193,6 +206,7 @@ public class mypageServiceImpl implements mypageService {
 		return null;
 	}
 	
+	
 	// 회원정보 조회
 	@Override
 	public List<MemberVO> mem(Model model) {
@@ -204,12 +218,14 @@ public class mypageServiceImpl implements mypageService {
 		return null;
 	}
 	
+	
 	// 회원 정보 수정
 	@Override
 	public int update(MemberVO vo) {
 		return mypageMapper.update(vo);
 		
 	}
+	
 	
 	// 예약 상세보기
 	@Override
@@ -254,6 +270,7 @@ public class mypageServiceImpl implements mypageService {
 
 	}
 	
+	
 	// 관심스테이
 	@Override
 	public List<Map<String, String>> likestay(Model model) {
@@ -262,6 +279,12 @@ public class mypageServiceImpl implements mypageService {
 		log.info("like : " + like);
 		model.addAttribute("like", like);
 		return null;
+	}
+	
+	
+	@Override
+	public int travelCnt(String memberId) {
+		return mypageMapper.travelCnt(memberId);
 	}
 
 	

@@ -87,4 +87,8 @@ public interface mypageService {
 	// 관심 스테이
 	public List<Map<String, String>> likestay(Model model);
 	
+	
+	// ▶▶▶  함께  * 번의 여행을 했어요 ▶▶▶
+	public int travelCnt(String memberId);
+	
 }

@@ -87,7 +87,7 @@
                 <div class="container mypage_wrap">
                     <div class="mypage_myinfo">
                         <div class="tit">${sessionScope.memberId}님 반가워요!</div>
-                        <div class="my-count" role="link" tabindex="0">함께 0번의 여행을 했어요.</div>
+                        <div class="my-count" role="link" tabindex="0">함께  ${travelCnt }번의 여행을 했어요.</div>
                     </div>
                     <div class="newmypage_menu pc_only">
                         <ul>
@@ -112,7 +112,7 @@
                                         <!-- 프로필 사진 -->
                                   <div class="profile_photo">
                                     <div class="input_box">
-                                        <input type="file" id="imgFile" name="imgFile" title="프로필 사진" class="photo" style="">profile photo
+                                        <input type="file" id="imgFile" name="imgFile" title="프로필 사진" class="photo" style="">
                                         
                                         <input type="file" id="imgFile" name="imgFile" title="프로필 사진" class="btn_photo"
                                             accept="image/jpeg, image/png">
@@ -122,7 +122,7 @@
                                     <div class="input_box">
                                         <div class="tit">이메일</div>
                                         <div class="input">
-                                        <input type="email" name="memberEmail" placeholder="@이메일.com"
+                                        <input type="email" name="memberEmail" placeholder="@이메일 형식으로 입력해주세요"
                                                 style=" -webkit-text-fill-color: black; margin-left: 12px;" value=${member.memberEmail } id='email'>
                                         </div>
                                     </div>

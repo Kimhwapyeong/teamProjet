@@ -130,6 +130,13 @@ public class mypageTest {
 		log.info("answer: " + answer);
 	}
 	
+	@Test
+	public void travelCnt() {
+		int res = mapper.travelCnt("user2");
+		log.info("=========================");
+		log.info("res: " + res);
+	}
+	
 	
 	
 }
