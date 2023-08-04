@@ -308,8 +308,8 @@
 			<div class="header_wrap gnb-responsive-css only-pc">
 				<div class='logo'>
 					<a href="/main" >STAY OLLAE</a>
-				</div>
-				<div class="side-Menu" id="sideMenuMiddle" style="width: 20px; height: 20px; background-image: url('/resources/images/stayNameImg/stay2_2.png');"></div>
+				</div>										<!-- 사이즈 768-1024일 때 사이드바 메뉴 버튼 이미지 -->
+				<div class="side-Menu" id="sideMenuMiddle" style="width: 44px; height: 44px; background-image: url(https://www.stayfolio.com/mobile-menu.svg);"></div>
 				<div class="whe gnb-responsive-margin" style="">
 					<button type="button" class="gnb-mo-small" id="btnWhere">
 						<span class="gnb-mo-small">어디로 떠날까요?</span>
