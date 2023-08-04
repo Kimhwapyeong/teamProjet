@@ -161,14 +161,7 @@
 								<input type="checkbox" id="pool" value="Y" name="pool">
 									<span style="font-size: 12px">풀장</span>
 								</label>
-							<label for="mountain" class="radio_skin">
-								<input type="radio" id="mountain" name="viewRoom" value="산">
-									<span style="font-size: 12px">산</span>
-								</label>
-							<label for="ocean" class="radio_skin">
-								<input type="radio" id="ocean" name="viewRoom" value="바다">
-									<span style="font-size: 12px">바다</span>
-								</label>
+
 						<div class="dd" style="width:110px; display:flex">
 							<select style="width: 100%" class="form_style" value="Y" name="bed"><option
 									selected="" value="">침구 갯수</option>

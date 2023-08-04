@@ -1668,7 +1668,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 {
 	<li style="padding: 0px"><div class="dt">주소 *</div>
 		<div class="dd">
 			<input type="text" id="postcode" class="form_style"
-				style="width: 150px" placeholder="우편번호 *"> <input
+				style="width: 150px" placeholder="우편번호 *" readonly> <input
 				type="button" onclick="sample3_execDaumPostcode()" value="우편번호 찾기"
 				class="d_btn">
 		</div></li>
@@ -1685,7 +1685,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 {
 	<li><div class="dt"></div>
 		<div class="dd">
 			<input type="text" id="address" name="stayAdress" class="form_style"
-				placeholder="주소 *">
+				placeholder="주소 *" readonly>
 		</div></li>
 	<li style="padding-top: 0px"><div class="dt"></div>
 		<div class="dd">
@@ -1711,6 +1711,8 @@ li.L1,li.L3,li.L5,li.L7,li.L9 {
     }
 
     function sample3_execDaumPostcode() {
+    	document.querySelector('#postcode').style.backgroundColor='white';
+    	
         // 현재 scroll 위치를 저장해놓는다.
         var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
         new daum.Postcode({
