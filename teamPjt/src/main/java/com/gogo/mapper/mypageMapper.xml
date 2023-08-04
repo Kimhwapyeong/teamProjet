@@ -245,6 +245,20 @@
 	    <result property="mainPic1" column="MAINPIC1" />
 	    <result property="memberId" column="MEMBERID" />
 	</resultMap>
+	
+	
+	<select id="travelCnt" resultType="int">
+		SELECT COUNT(*)
+		FROM reservation
+		WHERE memberid = #{memberID}
+		AND reservationno NOT IN (
+		    SELECT v.reservationno
+		    FROM refund f
+		    JOIN payment p ON f.paymentno = p.paymentno
+		    JOIN reservation v ON p.reservationno = v.reservationno
+		    WHERE v.memberid = 'user1'
+		)
+	</select>
 
 	
 </mapper>
