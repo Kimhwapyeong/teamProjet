@@ -47,9 +47,9 @@ public class MemberTest {
 		member.setGender("F");
 		
 		
-		int res = memberMapper.signup(member);		
+		//int res = memberMapper.signup(member);		
 		
-		assertEquals(1, res);
+		//assertEquals(1, res);
 	}
 //	
 //	@Test

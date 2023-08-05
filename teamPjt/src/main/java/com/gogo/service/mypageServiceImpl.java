@@ -46,6 +46,9 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 	@Autowired
 	PaymentService service_p;
 	
+	@Autowired
+	MemberService service_m;
+	
 	// ▶▶▶  admin ▶▶▶
 	// 숙소 조회
 	@Override
@@ -337,7 +340,7 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 	    Files.copy(file.getInputStream(), copyOfLocation, StandardCopyOption.REPLACE_EXISTING);
 	    
 	    // 바뀐 프사로 세션에 다시 등록
-	    MemberVO original = new MemberVO();
+	    MemberVO original = service_m.selectOne(member);
 	    original.setProfile(save);
 	    session.setAttribute("member", original);
 	    
