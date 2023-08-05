@@ -217,13 +217,13 @@
 	
 	<!-- 회원 정보 조회 -->
 	<select id="mem" resultType="com.gogo.vo.MemberVO">
-		select memberid, membername, pw, memberemail from member
+		select memberid, membername, pw, profile, memberemail from member
 	</select>
 	
 	
 	<!-- 회원 정보 수정 -->
 	<update id="update">
-		update member set memberEmail = #{memberEmail} , pw = #{pw} where memberid = #{memberId}
+		update member set memberEmail = #{memberEmail} , pw = #{pw}, profile = #{profile} where memberid = #{memberId}
 	</update>
 	
 	

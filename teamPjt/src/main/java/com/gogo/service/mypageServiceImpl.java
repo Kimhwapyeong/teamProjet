@@ -1,13 +1,24 @@
 package com.gogo.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gogo.mapper.mypageMapper;
 import com.gogo.vo.AnswerVO;
@@ -22,7 +33,9 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Service
-public class mypageServiceImpl implements mypageService {
+public class mypageServiceImpl extends myPageUploadPath implements mypageService {
+	
+	private static final String uploadDir = DIR;
 	
 	@Autowired
 	mypageMapper mypageMapper;
@@ -294,6 +307,64 @@ public class mypageServiceImpl implements mypageService {
 		//log.info("memberId : " + memberId);
 		return mypageMapper.travelCnt(memberId);
 	}
+	
+	@Override
+	public int updateMember(MemberVO member, MultipartFile file, HttpSession session) {
+		
+		MemberVO vo = null;
+		
+		// 파일 랜덤 이름 짓기
+		LocalTime how = LocalTime.now();
+		String hour = String.valueOf(how.getHour());
+		String minutes = String.valueOf(how.getMinute());
+		String second = String.valueOf(how.getSecond());
+		String now = hour+minutes+second;
+		
+		
+		String ofile = file.getOriginalFilename();
+		String ext = ofile.substring(ofile.lastIndexOf("."),ofile.length());
+		
+		String saveName = ofile.substring(0,ofile.lastIndexOf("."));
+		String save = saveName+now+ext;
+		// 파일 랜덤 이름 짓기 끝
+		
+		
+		
+		Path copyOfLocation = Paths.get(uploadDir + File.separator + StringUtils.cleanPath(save));
+		
+		
+		try {
+	    Files.copy(file.getInputStream(), copyOfLocation, StandardCopyOption.REPLACE_EXISTING);
+	    
+	    // 바뀐 프사로 세션에 다시 등록
+	    MemberVO original = new MemberVO();
+	    original.setProfile(save);
+	    session.setAttribute("member", original);
+	    
+	    vo = new MemberVO();
+	    vo.setMemberId(member.getMemberId());
+	    vo.setProfile(save);
+	    vo.setPw(member.getPw());
+	    vo.setMemberEmail(member.getMemberEmail());
+	    
+	    // email, pw, memberId, profile 필요
+	    
+		} catch(IOException e){
+			e.printStackTrace();
+		}
+		// 파일 업로드 끝
+		
+		
+		int res = mypageMapper.update(vo);
+		
+		if(res>0) {
+			return res;
+		} else {
+			return 0;
+		}
+		
+	}
+
 
 	
 	

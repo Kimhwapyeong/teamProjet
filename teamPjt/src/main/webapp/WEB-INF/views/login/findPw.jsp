@@ -1,47 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<jsp:include page="../common/header.jsp" />
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<script>
-	/* 아이디 찾기 */
-	// 아이디 값 받고 출력하는 ajax
-	function findIdAction() {
-		var memberName = $('#memberName').val();
-		var memberEmail = $('#memberEmail').val();
-
-		$.ajax({
-			url : "/login/findIdAction",
-			type : "POST",
-			data : {
-				"memberName" : memberName,
-				"memberEmail" : memberEmail
-			},
-			success : function(data) {
-				if (data == 0) {
-					alert("회원 정보를 확인해주세요!");
-				} else {
-					alert("아이디: " + data);
-				}
-			},
-			error : function() {
-				alert("에러입니다");
-			}
-		});
-	};
-</script>		
 <body>
-
-
 	<div id="contents">
 		<div class="container sub_title">
-			<div class="tit">FIND ID</div>
-			<div class="txt">아이디 찾기</div>
+			<div class="tit">FIND PASSWORD</div>
+			<div class="txt">비밀번호 찾기</div>
 		</div>
 		<div class="container">
 			<div class="login_wrap">
@@ -86,7 +55,5 @@
 		</div>
 	</div>
 
-
 </body>
-<jsp:include page="../common/footer.jsp" />
 </html>

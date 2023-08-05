@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,13 +15,14 @@
     
     <script type="text/javascript">
     window.addEventListener('load', function(){
-    	
+    	/*
 	    changeInfo.addEventListener('click', function(e){
 	   		e.preventDefault();
 	   	 
 		   	let memberEmail = email.value;
 		   	let pw = newpww.value;
 		   	let newpw= newpwCheck.value;
+		   	let profile = imgFile.value;
 		   	let memberId = id.value;
 		   	
 		     if(!memberEmail){
@@ -46,12 +48,54 @@
 	       		 return;
 		     }
 		     
-	          obj ={memberEmail:memberEmail, pw:pw, memberId:memberId}
+		     
+		     
+		    
+		     
+	          obj ={memberEmail:memberEmail, pw:pw, profile:profile, memberId:memberId}
 	          
 	          console.log("회원정보수정 obj", obj)
 	          
 	          fetchPost('/member/mypage/infoFrm', obj, result);
+		     
 		});
+		     */
+    	
+	    changeInfo.addEventListener('click', function(e){
+	   		e.preventDefault();
+	   	 
+		   	let memberEmail = email.value;
+		   	let pw = newpww.value;
+		   	let newpw= newpwCheck.value;
+		   	let profile = imgFile.value;
+		   	let memberId = id.value;
+		   	
+		     if(!memberEmail){
+		   	  signupMsg.innerHTML="이메일을 입력해주세요";
+		   	  return;
+		     }
+		     if(!pw){
+		   	  signupMsg.innerHTML="비밀번호를 입력해주세요";
+		   	  return;
+		     }
+		     if(!newpw){
+		   	  signupMsg.innerHTML="비밀번호를 다시 한번 입력해주세요";
+		   	  return;
+		     }
+		     
+		     if(newpww.value == newpwCheck.value){
+		    	 
+		    	 infoFrm.submit();
+		    	 
+		     } else{
+		    	 signupMsg.innerHTML = "비밀번호가 일치하지 않습니다";
+		    	 newpww.focus();  // 비밀번호 재입력 포커스
+		    	 newpww.value='';  
+		    	 newpwCheck.value='';
+	       		 return;
+		     }
+
+    	});  	
 		
 	    
 	    // 비밀번호 보기
@@ -77,6 +121,7 @@
     });
     
     function result(map){
+    	console.log('map.result : ', map.result);
 		if(map.result == 'success'){   
   			location.href='/member/mypage/info?msg='+map.msg;
 		} else{
@@ -137,29 +182,30 @@
                     <div class="mypage_content">
                         <div class="myedit_wrap">
                             <h3 class="my_tit pc_only">회원 정보 수정</h3>
-                             
                              <!-- ▶▶▶  forEach ▶▶▶  -->
                              <c:forEach items="${mem}" var="member" step="1">
                              <c:if test="${sessionScope.memberId == member.memberId}">
                              
                             <!--  프로필 form -->
-                            <form name="infoFrm" method="post" action="/member/user/infoFrm"  enctype="multipart/form-data">
+                            <form id="infoFrm" name="infoFrm" method="post" action="/member/mypage/infoFrm"  enctype="multipart/form-data">
                                   <input type="hidden" name="memberId" value="${member.memberId }" id ='id'>
                                   
                                   <!-- 프로필 사진 -->
                                   <div class="profile_photo">
-                                    <div class="input_box">
-                                    	<input type="file" id="imgFile" name="imgFile" title="프로필 사진" class="photo" style="">
+                                    <div class="input_box">                                  	
+                                    		<input type="file" id="imgFile" name="imgFile" title="프로필 사진" class="photo" style="width: 150px; height: 150px; background-size: cover; border: 2px solid black; border-radius: 50%;" value="${sessionScope.member.profile}">
                                         <input type="button" onclick="imgFile.click()" id="imgFile2" name="imgFile2" title="프로필 사진" class="btn_photo"
                                             accept="image/jpeg, image/png">
-                                  </div>
+                                 	</div>
+                                    	 	
                                    <script>
                                     	$(function(){
                                     		
                                     		
                                     		if($('#imgFile').val()!=null){
                                     			
-                                    			$('#imgFile').attr("style", "background-image: url('${sessionScope.member.profile}'); background-size : cover;");
+											
+                                    			$('#imgFile').attr("style", "background-image: url(<spring:url value='/image/${sessionScope.member.profile}'/>); background-size : cover;");
                                     		}
                                     		
                                     		$('#imgFile').change(function(){
