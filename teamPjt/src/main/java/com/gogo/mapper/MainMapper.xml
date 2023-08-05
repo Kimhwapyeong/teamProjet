@@ -26,9 +26,9 @@
 	<!-- room 옵션 등록 -->
 	<insert id="insertRoomOption">
 		insert into roomoptionyn (roomno, stayno, bathroom, kitchen, parking
-						, babiqu, pet, terrace, pool, viewRoom, bed)
+						, babiqu, pet, terrace, pool, bed, beamprojector)
 		values (#{roomNo}, #{stayNo}, #{bathroom}, #{kitchen}, #{parking}
-						, #{babiqu}, #{pet}, #{terrace}, #{pool}, #{viewRoom}, #{bed})
+						, #{babiqu}, #{pet}, #{terrace}, #{pool}, #{bed}, #{beamProjector})
 	</insert>
 	
 	<!-- 사진 등록 -->
@@ -43,8 +43,8 @@
 			select stayseq.nextval from dual
 		</selectKey>
 		insert into stay (stayno, memberid, stayname, stayloc, stayadress
-						, stayinfo, staytype, badge, latitude, longitude)
+						, stayinfo, staytype, badge, latitude, longitude, stayview)
 		values (#{stayNo}, #{memberId}, #{stayName}, #{stayLoc}, #{stayAdress}
-				, #{stayInfo}, #{stayType}, #{badge}, #{latitude}, #{longitude})
+				, #{stayInfo}, #{stayType}, #{badge}, #{latitude}, #{longitude}, #{stayView})
 	</insert>
 </mapper>

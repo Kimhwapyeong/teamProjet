@@ -10,236 +10,7 @@ input ::placeholder{
 
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f7f4e3f6830b08acddb284ad285c5c0d&libraries=services"></script>
-<script>
-	// 정규표현식(띄어쓰기만 있는 경우)
-	let regex = /^\s*$/;
-	
-	window.addEventListener('load', ()=>{
-		
-		let inputStayName = document.querySelector('input[name=stayName]');
-		let inputPostCode = document.querySelector('#postcode');
-		let inputStayAdress = document.querySelector('input[name=stayAdress');
-		let inputSns = document.querySelector('input[name=sns]');
-		let notRegister = document.querySelector('input[name=not_register]');
-		let register = document.querySelector('input[name=register]');
-		let inputStayType = document.querySelector('select[name=stayType]');
-		let textareaStayInfo = document.querySelector('textarea[name=stayInfo]');
-		let inputBadge = document.querySelector('input[name=badge]');
-		let inputFiles = document.querySelector('input[name=files]');
-		
-		// input 요소 클릭 시 backgroundColor = white
-		let inputList = document.querySelectorAll('form[name=addStayForm] input');
-		console.log(inputList);
-		inputList.forEach( e => {
-			e.addEventListener('click', ()=>{
-				e.style.backgroundColor='white';
-			})
-		})	
-		
-		// area 요소 클릭 시 backgroundColor = white
-		let areaList = document.querySelectorAll('form[name=addStayForm] textarea');
-		areaList.forEach( e => {
-			e.addEventListener('click', ()=>{
-				e.style.backgroundColor='white';
-			})
-		})
-		
-			
-		// 등록 버튼 눌렸을 때의 이벤트. 유효성 검사, 좌표 저장, 지역저장, submit 처리
-		btnAddStay.addEventListener('click', (e)=>{
-			e.preventDefault();
-			
-			
-			console.log(regex.test(inputStayName.value));
-			if(valueCheck(inputStayName, '스테이 이름을 입력해주세요.')){
-				return;
-			}else{
-				let regex1 = new RegExp("^.{1,20}$");
-				if(valueLengthCheck(regex1, inputStayName, '스테이 이름은 20자 이내로 입력해야 합니다.')){
-					return;
-				}
-			}
-			
-			if(valueCheck(inputPostCode, '우편번호를 입력해주세요.')){
-				inputPostCode.style.width='250px';
-				return;
-			}
-			
-			if(valueCheck(inputStayAdress, '주소를 입력해주세요.')){
-				return;
-			}
-
-			// 숙소 등록
-			if(!notRegister.checked && !register.checked){
-				notRegister.focus(); /* 메시지 입력 해주어야 함 */
-				return;
-			}
-			
-	 		if(valueCheck(inputStayType, '')){
-	 			inputStayType.firstChild.innerHTML = '스테이 타입을 선택해주세요.';
-				return;
-		 	} 
-			
-	 		if(valueCheck(textareaStayInfo, '스테이 소개를 입력해주세요.')){
-	 			return;
-	 		}else{
-	 			let regex2 = new RegExp("^.{50,300}$");
-	 			if(valueLengthCheck(regex2, textareaStayInfo, '스테이 소개는 50자 이상 300자 이내로 입력해주세요.')){
-	 				return;
-	 			}
-	 		}
-	 		
-	 		if(valueCheck(inputBadge, '뱃지를 입력해주세요.')){
-	 			return;
-	 		}else{
-	 			let regex1 = new RegExp("^.{1,20}$");
-	 			if(valueLengthCheck(regex1, inputBadge, '뱃지는 20글자 이내로 입력해주세요.')){
-	 				return;
-	 			}
-	 		}
-	 		
-	 		if(inputFiles.value == ''){
-	 			/* 사진 올려줘 출력 */
-	 			alertPopOn('사진파일만올려줘잉');
-	 			inputFiles.focus();
-	 			return;
-	 		}
-	 		
-			// 개인정보 수집 동의 체크 유효성 검사
- 			if(!document.querySelector("input[id=check-policy1]").checked){
-				alertPopOn('개인정보 수집 및 이용 동의에 체크 해주세요.')
-				return;
-			} 
-			
-			// 좌표를 받아오기 위해 주소 value 변수에 저장
-			let address = document.querySelector("#address").value;
-			console.log('address', address);
-			
-			// 주소에서 앞 2글자로 지역저장
-			document.querySelector("input[name=stayLoc]").value = address.substr(0,2);
-			console.log(document.querySelector("input[name=stayLoc]").value);
-			// 좌표 받아오고 서브밋
-			getXY(address);
-			
-		})
-		
-		radioCheck3.addEventListener('change', ()=>{
-			console.log('와우')
-			if(radioCheck3.checked){
-				radioCheck4.checked=false;
-			} 
-		})
-		radioCheck4.addEventListener('change', ()=>{
-			if(radioCheck4.checked){
-				radioCheck3.checked=false;
-			}
-		}) 
-		
-	})
-	
-	function getXY(address){
-		// 주소-좌표 변환 객체를 생성합니다
-		var geocoder = new kakao.maps.services.Geocoder();
-	
-		// 주소로 좌표를 검색합니다
-		geocoder.addressSearch(address, function(result, status) {
-			
-		    // 정상적으로 검색이 완료됐으면 
-		    if (status === kakao.maps.services.Status.OK) {
-				
-		    	// 좌표를 input에 저장
-		    	document.querySelector("input[name=latitude]").value = result[0].y;
-				document.querySelector("input[name=longitude]").value = result[0].x;
-				
-				// 서브밋.
-				addStayForm.submit();
-		    }
-		})
-	}
-	
-	// 업로드 사진 미리보기
-    function setThumbnail(event) {
-    	document.querySelector("div.drag").style.display='none';
-    	document.querySelector('div[class=form_style]').style.backgroundColor='white';
-    	// 기존 사진 제거
-    	let imageContainer = document.querySelector("div#image_container");
-    	let images = document.querySelectorAll("#image_container img");
-    	images.forEach((image) => {
-    		imageContainer.removeChild(image);
-    	})
-    	
-    	var fileList = event.target.files;
-    	// 업로드 파일이 없으면 div.drag display:block;
-    	if(fileList.length == 0){
-    		document.querySelector("div.drag").style.display='block';
-    	}
-    	
-    	// 사진 파일 검사
-    	let regex = new RegExp("(.*?)\.(jpg|jpeg|png|gif)")
-    	for(let i=0; i<fileList.length; i++){
-    		if(!regex.test(fileList[i].name) && fileList.length!=0){
-    			document.querySelector('div[class=drag]').innerHTML = '사진파일만 업로드 가능합니다.';
-    			document.querySelector("div.drag").style.display='block';
-    			document.querySelector('div[class=drag]').focus();
-    			document.querySelector('input[name=files]').value='';
-    			document.querySelector('div[class=form_style]').style.backgroundColor='#eee';
-    			return;
-    		}
-    	}
-    	
-    	var totalSize = 0;
-    	for(let i=0; i<fileList.length; i++){
-	        var reader = new FileReader();
-	
-	        reader.onload = function(event) {
-	          var img = document.createElement("img");
-	          img.setAttribute("src", event.target.result);
-	          img.setAttribute("id", 'thumnailImg'+i);
-	          img.style='width:150px; height:85px; padding:5px; border-radius:12px';
-	       	  //document.querySelector("div#image_container").
-	          document.querySelector("div#image_container").appendChild(img);
-	        };
-	        totalSize += event.target.files[i].size;
-	        reader.readAsDataURL(event.target.files[i]);
-	    }
-    	console.log('totalSize', totalSize);
-    	totalSize = (totalSize/(1024*1024)).toFixed(3);
-    	document.querySelector("div[class=file_desc]").firstChild.textContent=totalSize;
-    	
-   	}
-	
-	// input value 빈문자열 혹은 띄어쓰기만 있는 경우 체크
-	function valueCheck(doc, msg){
-		if(doc.value == '' || regex.test(doc.value)){
-			doc.value = '';
-			doc.placeholder=msg;
-			doc.style.backgroundColor='#eee';
-			doc.focus();
-			return true;
-		}
-	}
-	
-	// input value 길이 체크
-	function valueLengthCheck(regex, doc, msg){
-		if(!regex.test(doc.value)){
-			doc.value = '';
-			doc.placeholder=msg;
-			doc.focus();
-			doc.style.backgroundColor='#eee';
-			return true;
-		}
-	}
-	
-	// 사진 업로드 미리보기 창 클릭 시 input:file 실행
-	function fileUpload(){
-		file_attach.click();
-	}
-	
-	function radioCancle(){
-		mountain.checked=false;
-		ocean.checked=false;
-	}
-</script>
+<script type="text/javascript" src="/resources/js/stay/addStay.js"></script>
 <style>
 	
 </style>
@@ -257,41 +28,16 @@ input ::placeholder{
 					<li><div class="dt">스테이 이름 *</div>
 						<div class="dd">
 							<input type="text" class="form_style" name="stayName" value=""
-								placeholder="스테이 이름을 입력해 주세요.">
+								placeholder="스테이 이름을 입력해 주세요. (30자 이내)">
 						</div></li>
-<!-- 					<li><div class="dt">지역 *</div>
-						<div class="dd">
-							<select style="width: 100%" class="form_style" name="stayLoc"><option
-									selected="" value="" disabled="" hidden="">지역을 선택해 주세요</option>
-								<option value="제주">제주</option>
-								<option value="서울">서울</option>
-								<option value="강원">강원</option>
-								<option value="부산">부산</option>
-								<option value="경기">경기</option>
-								<option value="충청">충청</option>
-								<option value="경상">경상</option>
-								<option value="전라">전라</option>
-								<option value="인천">인천</option>
-								<option value="광주">광주</option>
-								<option value="대전">대전</option>
-								<option value="대구">대구</option>
-								<option value="울산">울산</option>
-							</select>
-						</div></li> -->
-<!-- 					<li><div class="dt">상세 주소 *</div>
-						<div class="dd">
-							<input type="text" class="form_style" name="stayAdress" value=""
-								placeholder="정확한 주소를 입력해 주세요.">
-						</div></li> -->
-		<!-- 		</ul> -->
-
+					
+					<!-- 우편번호 검색 -->
 					<jsp:include page="joosoSearch.jsp"/>
 
-		<!-- 		<ul class="form_dl">	 -->
 					<li><div class="dt">웹사이트 및 SNS 주소</div>
 						<div class="dd">
 							<textarea class="form_style" name="sns"
-								placeholder="스테이 공간 / 브랜드를 살펴볼 수 있는 웹사이트 및 SNS 주소를 기재해 주세요."></textarea>
+								placeholder="스테이 공간 / 브랜드를 살펴볼 수 있는 instagram 주소를 기재해 주세요."></textarea>
 						</div></li>
 					<li><div class="dt">숙박업 사업자 등록 여부 *</div>
 						<div class="dd">
@@ -314,13 +60,13 @@ input ::placeholder{
 								<option value="호텔">호텔</option></select>
 						</div></li>
 						
-					<li><div class="dt">스테이 뷰 *</div>
+					<li><div class="dt">스테이 뷰</div>
 						<div class="dd">
 							<label for="mountain" class="radio_skin"> <input
-								type="radio" id="mountain" name="viewRoom" value="산"> <span
+								type="radio" id="mountain" name="stayView" value="산"> <span
 								style="font-size: 12px">산</span>
 							</label> <label for="ocean" class="radio_skin"> <input
-								type="radio" id="ocean" name="viewRoom" value="바다"> <span
+								type="radio" id="ocean" name="stayView" value="바다"> <span
 								style="font-size: 12px">바다</span>
 							</label> <input type="button"
 								onclick="radioCancle()" value="선택취소"
@@ -329,7 +75,7 @@ input ::placeholder{
 					<li><div class="dt">스테이 소개 *</div>
 						<div class="dd">
 							<textarea rows="5" class="form_style" name="stayInfo"
-								placeholder="공간의 구조, 컨셉, 스토리 등을 자유롭게 작성해 주세요. (최소 50자)"></textarea>
+								placeholder="공간의 구조, 컨셉, 스토리 등을 자유롭게 작성해 주세요. (최소 50자, 최대 300자)"></textarea>
 						</div></li>
 					<li><div class="dt">뱃지 *</div>
 						<div class="dd">
@@ -398,7 +144,8 @@ input ::placeholder{
 								</div>
 								<p class="lh-base" style="font-size: 12px; margin-top: 15px; color: #808080">*
 									대용량 파일의 경우 업로드까지 3분 이상 소요될 수 있습니다.<br>
-									* 숙소사진 2장은 필수 입니다.</p>
+									* 숙소사진 2장은 필수 입니다.<br>
+									* 최대 등록 가능 사진 수는 5장 입니다.</p>
 							</div>
 						</div></li>
 				</ul>
