@@ -6,10 +6,12 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.aspectj.weaver.bcel.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -109,11 +111,22 @@ public class MemberController extends CommonRestController {
 	}
 	
 	// 아이디 찾기
-	@RequestMapping(value = "/login/findId", method = RequestMethod.POST)
+	@RequestMapping(value = "/login/findIdAction", method = RequestMethod.POST)
 	@ResponseBody
 	public String findIdAction(@RequestParam("name") String memberName, @RequestParam("email") String memberEmail) {
-		String result = memberService.findIdAction(memberName, memberEmail);
-		return result;
+	        if (StringUtils.isEmpty(memberName)) {
+	            return "이름을 입력해주세요.";
+	        }
+
+	        if (StringUtils.isEmpty(memberEmail)) {
+	            return "이메일을 입력해주세요.";
+	        }
+
+	        String result = memberService.findIdAction(memberName, memberEmail);
+	        if (result == null) {
+	            return "입력하신 정보와 일치하는 회원이 없습니다.";
+	        }
+	        return result;
 	}
 	
 	//네이버 로그인
