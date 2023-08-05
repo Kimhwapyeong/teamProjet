@@ -21,6 +21,7 @@
 		   	let memberEmail = email.value;
 		   	let pw = newpww.value;
 		   	let newpw= newpwCheck.value;
+		   	let profile = imgFile.value;
 		   	let memberId = id.value;
 		   	
 		     if(!memberEmail){
@@ -46,7 +47,7 @@
 	       		 return;
 		     }
 		     
-	          obj ={memberEmail:memberEmail, pw:pw, memberId:memberId}
+	          obj ={memberEmail:memberEmail, pw:pw, profile:profile, memberId:memberId}
 	          
 	          console.log("회원정보수정 obj", obj)
 	          
@@ -137,7 +138,8 @@
                     <div class="mypage_content">
                         <div class="myedit_wrap">
                             <h3 class="my_tit pc_only">회원 정보 수정</h3>
-                             
+                            id : ${sessionScope.memberId } <br>
+                            profile : ${sessionScope.member.profile}
                              <!-- ▶▶▶  forEach ▶▶▶  -->
                              <c:forEach items="${mem}" var="member" step="1">
                              <c:if test="${sessionScope.memberId == member.memberId}">
@@ -149,10 +151,12 @@
                                   <!-- 프로필 사진 -->
                                   <div class="profile_photo">
                                     <div class="input_box">
-                                    	<input type="file" id="imgFile" name="imgFile" title="프로필 사진" class="photo" style="">
+                                    	<input type="file" id="imgFile" name="imgFile" title="프로필 사진" class="photo" style="" value="${sessionScope.member.profile}">
+                                    	<div id="imagePreview" style="width: 150px; height: 150px; background-size: cover; border: 2px solid black; border-radius: 50%;">f</div>
                                         <input type="button" onclick="imgFile.click()" id="imgFile2" name="imgFile2" title="프로필 사진" class="btn_photo"
                                             accept="image/jpeg, image/png">
                                   </div>
+                                    	 	
                                    <script>
                                     	$(function(){
                                     		
