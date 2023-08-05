@@ -10,7 +10,7 @@ input ::placeholder{
 
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f7f4e3f6830b08acddb284ad285c5c0d&libraries=services"></script>
-<script type="text/javascript" src="/resources/js/stay/addStay.js"></script>
+<script type="text/javascript" src="/resources/js/main/addStay.js"></script>
 <style>
 	
 </style>
