@@ -493,7 +493,7 @@ function item_check(item) {
 							      <select class="box" id="domain-list" style="width: 120px; height: 35px;" onchange="updateEmailDomain()">
 							        <option value="type">직접 입력</option>
 							        <option value="naver.com">naver.com</option>
-							        <option value="google.com">google.com</option>
+							        <option value="google.com">gmail.com</option>
 							        <option value="hanmail.net">hanmail.net</option>
 							        <option value="nate.com">nate.com</option>
 							      </select>
