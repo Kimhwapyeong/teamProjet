@@ -18,5 +18,6 @@ public class myPagingServiceImpl implements myPagingService {
 	public int hostayCnt(Criteria cri, String memberId) {
 		return mapper.hostayCnt(cri, memberId);
 	}
+	
 
 }

@@ -4,9 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gogo.vo.AnswerVO;
 import com.gogo.vo.MemberVO;
@@ -93,5 +96,7 @@ public interface mypageService {
 	
 	// ▶▶▶  함께  * 번의 여행을 했어요 ▶▶▶
 	public int travelCnt(String memberId);
+	
+	public int updateMember(MemberVO member, MultipartFile file, HttpSession session);
 	
 }
