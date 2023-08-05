@@ -6,13 +6,13 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
-import org.aspectj.weaver.bcel.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -86,9 +86,31 @@ public class MemberController extends CommonRestController {
 	@GetMapping("/login/signup")
 	public String signup(HttpSession session) {
 		// 세션에 "category"라는 이름으로 "signup"을 저장 
-		session.setAttribute("category", "signup");
+		//session.setAttribute("category", "signup");
 		return "/login/signup";
 	}
+	
+	// 회원가입 
+    @PostMapping("/login/signupAction")
+    public String signupAction(@ModelAttribute MemberVO member, Model model) {
+        try {
+            int res = memberService.signupAction(member);
+
+            if (res > 0) {
+                model.addAttribute("msg", "환영합니다. 회원가입되었습니다.");
+            } else {
+                model.addAttribute("msg", "회원가입에 실패하였습니다.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("msg", "회원가입 중 예외사항이 발생하였습니다.");
+        }
+
+        return "/main"; 
+    }
+
+
+	
 	
 	// 아이디 중복확인 요청
 	@PostMapping("/idCheck")
@@ -98,7 +120,7 @@ public class MemberController extends CommonRestController {
 		
 		if(res == 0) {
 			// count = 1이면 fail(회원가입 불가)
-			return responseMap(REST_SUCCESS,"사용가능한 아이디 입니다.");
+			return responseMap(REST_SUCCESS,"사용 가능한 아이디 입니다.");
 		}else {
 			return responseMap(REST_FAIL,"이미 사용중인 아이디 입니다.");	
 		}
@@ -110,10 +132,11 @@ public class MemberController extends CommonRestController {
 		return "/login/findId";
 	}
 	
+	
 	// 아이디 찾기
 	@RequestMapping(value = "/login/findIdAction", method = RequestMethod.POST)
 	@ResponseBody
-	public String findIdAction(@RequestParam("name") String memberName, @RequestParam("email") String memberEmail) {
+	public String findIdAction(@RequestParam("memberName") String memberName, @RequestParam("memberEmail") String memberEmail) {
 	        if (StringUtils.isEmpty(memberName)) {
 	            return "이름을 입력해주세요.";
 	        }
@@ -128,6 +151,14 @@ public class MemberController extends CommonRestController {
 	        }
 	        return result;
 	}
+	// 비밀번호 찾기 페이지 이동
+	@GetMapping("/login/findPw")
+	public String findPw() {
+		return "/login/findPw";
+	}
+	
+	
+	
 	
 	//네이버 로그인
 	@GetMapping("naverAction")
@@ -169,7 +200,7 @@ public class MemberController extends CommonRestController {
 	    	String naverPW = UUID.randomUUID().toString();
 	    	member.setPw(naverPW);
 
-	    	int res = memberService.signup(member);
+	    	int res = memberService.signupAction(member);
 	    	
 	    	if(res>0) {
 	    		memberService.updateNaver(member);

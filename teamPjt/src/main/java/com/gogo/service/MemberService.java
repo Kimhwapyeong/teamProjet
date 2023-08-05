@@ -9,7 +9,7 @@ public interface MemberService {
 	// 로그인
 	public MemberVO login(MemberVO member);
 	
-	// 이거뭐쥬
+	// 회원 정보 조회 
 	public MemberVO selectOne(MemberVO member);
 	
 	// 네이버를 위한 로직
@@ -20,10 +20,11 @@ public interface MemberService {
 	public int idCheck(MemberVO member);
 
 	// 회원가입
-	public int signup(MemberVO member);
+	public int signupAction(MemberVO member);
 
 	// 아이디 찾기 
 	public String findIdAction(String memberName, String memberEmail);
+
 	
 
 }

@@ -50,7 +50,10 @@ var signup = {
 		invalid: { code:'invalid', desc: '비밀번호는 영문 대/소문자, 숫자만 입력하세요.' },
 		lack: { code:'invalid', desc: '비밀번호는 영문 대/소문자, 숫자를 모두 포함해야 합니다.' },
 		equal: { code: 'valid', desc: '비밀번호가 일치합니다.' },
-		notEqual: { code: 'invalid', desc: '비밀번호가 일치하지 않습니다.' }
+		notEqual: { code: 'invalid', desc: '비밀번호가 일치하지 않습니다.' },
+		min: {code: 'invalid', desc: '최소 8자 이상 입력하세요.'}, 
+		max: {code: 'invalid', desc: '최대 20자 이내로 입력하세요.'}
+		
 	},
 	
 	pw_status: function(pw) {
@@ -60,8 +63,8 @@ var signup = {
 		if(pw == '') return this.common.empty;
 		else if(pw.match(space)) return this.common.space;
 		else if(reg.test(pw)) return this.pw.invalid;
-		else if(pw.length < 8) return this.common.min;
-		else if(pw.length > 20) return this.common.max;
+		else if(pw.length < 8) return this.pw.min;
+		else if(pw.length > 20) return this.pw.max;
 		else if ( !upper.test(pw) || !lower.test(pw) || !digit.test(pw) ) return this.pw.lack;
 		else return this.pw.valid;
 	},
@@ -89,7 +92,7 @@ var signup = {
 
 }
 
-// 사용자약관체크(script)
+// 사용자 약관체크(script)
 document.addEventListener("DOMContentLoaded", function() {
     // 사용자 약관 전체 동의 체크 박스를 클릭했을 때
     var checkAll = document.getElementById("check_all");

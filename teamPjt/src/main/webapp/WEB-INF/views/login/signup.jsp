@@ -363,7 +363,7 @@ function go_join() {
     }
 
     // 필수 항목의 유효성을 판단
-    // 중복확인 한 경우
+    // 중복확인한 경우
     if ($('[name=memberId]').hasClass('chked')) {
         // 이미 사용중인 경우는 회원가입 불가
         if ($('[name=memberId]').siblings('div').hasClass('invalid')) {
@@ -384,6 +384,7 @@ function go_join() {
     if (!item_check($('[name=pw_ck]'))) return;
     if (!item_check($('[name=memberEmail]'))) return;
     
+    
     // 필수 약관 동의 검사
     if (!checkRequiredAgreements()) {
         alert('필수 약관에 동의해야 회원가입이 가능합니다.');
@@ -396,9 +397,11 @@ function go_join() {
 
         return serviceAgree && privacyAgree && aboveAgree;
     }
-
+       
+    
+	//form 데이터를 서버로 제출 
     $('form').submit();
-    alert("회원가입되었습니다.")
+    
 }
 
 function item_check(item) {
@@ -417,7 +420,7 @@ function item_check(item) {
 			<div class="tit">JOIN</div>
 			<div class="txt">회원가입</div>
 		</div>
-	<form name='signupForm'>
+	<form action="/login/signupAction" name='signupForm' method="post">
 		<div class="container">
 			<div class="login_wrap">
 					<div class="form_wrap">
@@ -495,7 +498,6 @@ function item_check(item) {
 							        <option value="nate.com">nate.com</option>
 							      </select>
 							      </div>
-							        <div class="valid">이메일을 입력하세요</div>
 							    </td>
 							  </tr>
 							  <tr>

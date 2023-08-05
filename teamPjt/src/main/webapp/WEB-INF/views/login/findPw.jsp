@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<jsp:include page="../common/header.jsp"/>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +39,7 @@
 								</div>
 
 								<p class="w3-center findidBtn" style="display: flex; align-items: center; justify-content:center;">
-									<button type="button" id='findIdbtn' onclick="findIdAction()"
+									<button type="button" id='findPwbtn' onclick="findPwAction()"
 										class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round"
 										style="width: 45px; height: 30px; border: 1px solid #ebebeb; background-color: #fff; border-radius:20px;">find</button>
 									<button type="button" onclick="history.go(-1);"
@@ -54,6 +55,6 @@
 			</div>
 		</div>
 	</div>
-
 </body>
+<jsp:include page="../common/footer.jsp" />
 </html>

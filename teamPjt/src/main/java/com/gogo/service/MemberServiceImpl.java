@@ -39,14 +39,14 @@ public class MemberServiceImpl implements MemberService {
 		return member;
 	}
 	@Override
-	public int signup(MemberVO member) {
+	public int signupAction(MemberVO member) {
 		
 		// 암호화된 비번을 다시 비번에 넣어줌
 		member.setPw(encoder.encode(member.getPw()));
 		
 		System.out.println("pw : "+ member.getPw());
 		// Mapper의 쿼리 호출
-		return memberMapper.signup(member);
+		return memberMapper.signupAction(member);
 	}
 
 	@Override
@@ -69,9 +69,10 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String findIdAction(String memberName, String memberEmail) {
 		String result = "";
+		
 		try {
 			
-			result = memberMapper.findId(memberName, memberEmail);
+			result = memberMapper.findIdAction(memberName, memberEmail);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
