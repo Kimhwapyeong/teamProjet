@@ -172,7 +172,7 @@
 		    s.stayno = r.stayno
 		    AND r.roomno = v.roomno
 		    and v.reservationNo = p.reservationNo
-		    And v.memberid = m.memberid
+		    And v.memberid = #{memberId}
 			and p.cancleYN = 'N'
 		order by v.regdate desc		    
 	</select>
@@ -199,7 +199,7 @@
 		where f.paymentno = p.paymentno
 			and p.reservationno = v.reservationno
 			and v.roomno = r.roomno
-			and v.memberid = m.memberid
+			and v.memberid = #{memberId}
 			and r.stayno = s.stayno
 			and p.cancleyn = 'Y'
 		order by v.regdate desc

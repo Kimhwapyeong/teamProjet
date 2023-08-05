@@ -89,13 +89,13 @@ public class mypageTest {
 	
 	@Test
 	public void reservList() {
-		List<Map<String, String>> list = (List<Map<String, String>>) mapper.reservList();
+		List<Map<String, String>> list = (List<Map<String, String>>) mapper.reservList("user1");
 		log.info("list : " + list);
 	}
 	
 	@Test
 	public void cancelList() {
-		List<Map<String, String>> list = (List<Map<String, String>>) mapper.cancelList();
+		List<Map<String, String>> list = (List<Map<String, String>>) mapper.cancelList("user1");
 		log.info("list : " + list);
 	}
 	

@@ -64,10 +64,10 @@ public interface mypageService {
 	
 	// ▶▶▶  user ▶▶▶
 	// 예약 정보
-	public List<Map<String, String>> reservList(Model model);
+	public List<Map<String, String>> reservList(Model model, String memberId);
 	
 	// 취소 정보
-	public List<Map<String, String>> cancelList(Model model);
+	public List<Map<String, String>> cancelList(Model model, String memberId);
 	
 	// 회원 정보 조회
 	public List<MemberVO> mem(Model model);

@@ -55,7 +55,7 @@
                         </div>
                         <div class="mypage_content">
                         
-                        <c:if test="${not empty list}">
+                        <c:if test="${empty list}">
 							<div style="text-align: center;">
 								<img src="/resources/images/no.png" class="img-booking-waiting" alt="img-booking-wating">
 								<br>

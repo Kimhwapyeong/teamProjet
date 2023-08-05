@@ -39,10 +39,11 @@ public class UserController extends CommonRestController{
 	// 예약 정보
 	@GetMapping(value = {"reservation", "travelCnt"})
 	public void reservation(Model model, HttpServletRequest request) {
-		service.reservList(model);
+		
 		
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("memberId");
+		service.reservList(model, memberId);
 		int res = service.travelCnt(memberId);
 		model.addAttribute("travelCnt", res);
 		
@@ -51,10 +52,10 @@ public class UserController extends CommonRestController{
 	// 취소 내역
 	@GetMapping(value = {"cancel", "travelCnt"})
 	public void cancel(Model model, HttpServletRequest request) {
-		service.cancelList(model);
 		
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("memberId");
+		service.cancelList(model, memberId);
 		int res = service.travelCnt(memberId);
 		model.addAttribute("travelCnt", res);
 	}

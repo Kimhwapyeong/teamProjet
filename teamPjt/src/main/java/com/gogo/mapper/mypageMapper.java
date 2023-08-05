@@ -57,10 +57,10 @@ public interface mypageMapper {
 	
 	// ▶▶▶  user ▶▶▶
 	// 예약 정보
-	public List<Map<String, String>> reservList();
+	public List<Map<String, String>> reservList(String memberId);
 	
 	// 취소 정보
-	public List<Map<String, String>> cancelList();
+	public List<Map<String, String>> cancelList(String memberId);
 	
 	// 회원 정보 조회
 	public List<MemberVO> mem();

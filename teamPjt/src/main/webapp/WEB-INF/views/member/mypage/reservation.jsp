@@ -67,7 +67,7 @@
 									style="padding-bottom: 0px;">다가올 예약</a></li>
 							</ul>
 						</div>
-						<c:if test="${not empty list}">
+						<c:if test="${empty list}">
 							<div style="text-align: center;">
 								<img src="/resources/images/no.png" class="img-booking-waiting" alt="img-booking-wating">
 								<br>

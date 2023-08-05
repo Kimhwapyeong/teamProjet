@@ -165,8 +165,8 @@ public class mypageServiceImpl implements mypageService {
 	// ▶▶▶  user ▶▶▶
 	// 예약 정보
 	@Override
-	public List<Map<String, String>> reservList(Model model) {
-		List<Map<String, String>> list = mypageMapper.reservList();
+	public List<Map<String, String>> reservList(Model model, String memberId) {
+		List<Map<String, String>> list = mypageMapper.reservList(memberId);
 		
 		list.forEach(map->{
 			String day = service_r.reservedDay2(map.get("CHECKIN"), map.get("CHECKOUT"));
@@ -186,8 +186,8 @@ public class mypageServiceImpl implements mypageService {
 	
 	// 취소 정보
 	@Override
-	public List<Map<String, String>> cancelList(Model model) {
-		List<Map<String, String>> list = mypageMapper.cancelList();
+	public List<Map<String, String>> cancelList(Model model, String memberId) {
+		List<Map<String, String>> list = mypageMapper.cancelList(memberId);
 		
 		list.forEach(map->{
 			String day = service_r.reservedDay2(map.get("CHECKIN"), map.get("CHECKOUT"));
