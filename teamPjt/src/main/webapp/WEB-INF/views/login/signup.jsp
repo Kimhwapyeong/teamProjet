@@ -238,8 +238,6 @@ a:link, a:visited {
 
 .login_wrap { width : 760px;}
 
-
-
 </style>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script>
@@ -310,7 +308,7 @@ function idCheck() {
 	console.log("data.code : ",data.code);
 	// 유효하지 않다면 중복확인 불필요
 	if(data.code != 'valid') {
-		alert('아이디 중복 확인 불필요\n' + data.desc);
+		alert('아이디 중복 확인 불필요\n' + data.desc); // 추후 삭제 요망  
 		$id.focus();
 		 $('.valid').eq(0).html(data.desc);
 		return;
@@ -355,6 +353,16 @@ function display_status(div, data) {
 	div.addClass(data.code)
 }
 
+
+function validateEmail() {
+    var emailTxt = document.getElementById("email-txt").value;
+    var domainTxt = document.getElementById("domain-txt").value;
+
+
+    
+}
+
+// 로그인 폼 제출
 function go_join() {
     if ($('[name=memberName]').val() == '') {
         alert('이름을 입력하세요.');
@@ -363,7 +371,7 @@ function go_join() {
     }
 
     // 필수 항목의 유효성을 판단
-    // 중복확인한 경우
+    // 중복 확인한 경우
     if ($('[name=memberId]').hasClass('chked')) {
         // 이미 사용중인 경우는 회원가입 불가
         if ($('[name=memberId]').siblings('div').hasClass('invalid')) {
@@ -384,6 +392,18 @@ function go_join() {
     if (!item_check($('[name=pw_ck]'))) return;
     if (!item_check($('[name=memberEmail]'))) return;
     
+ 	// 이메일 유효성 검사
+    var emailInput = document.getElementById("email-txt");
+    var emailValue = emailInput.value;
+
+    var domainInput = document.getElementById("domain-txt");
+    var domainValue = domainInput.value;
+
+    if (emailValue.trim() === "" || domainValue.trim() === "") {
+        alert("이메일을 입력해주세요.");
+        return;
+    }
+
     
     // 필수 약관 동의 검사
     if (!checkRequiredAgreements()) {
@@ -431,7 +451,7 @@ function item_check(item) {
 							    <th class="tit">아이디 *</th>
 							    <td>
 							    <div style="display: flex">
-							      <input type="text" name="memberId" id="signUpId" class="chk" placeholder="아이디를 입력하세요." value="">
+							      <input type="text" name="memberId" id="signUpId" class="chk" placeholder="아이디를 입력하세요." value="user4">
 							      <a id="btnid" style="width: 80px;" class='btn-fill-s'>중복확인</a><br>
 							    </div>  
 							      <div class='valid'>아이디를 입력하세요(영문 소문자, 숫자만 입력 가능)</div>
@@ -440,14 +460,14 @@ function item_check(item) {
 							  <tr>
 							    <th class="tit">이름 *</th>
 							    <td>
-							      <input type="text" name="memberName" id="signUpName" placeholder="이용자 본인의 이름을 입력하세요." value="">
+							      <input type="text" name="memberName" id="signUpName" placeholder="이용자 본인의 이름을 입력하세요." value="금잔디">
 							      <div class="valid">이름을 입력해 주세요</div>
 							    </td>
 							  </tr>
 							  <tr>
 							    <th class="tit">비밀번호 *</th>
 							    <td>
-							      <input type="password" id="signUpPw" name="pw" placeholder="비밀번호를 입력하세요.">
+							      <input type="password" id="signUpPw" name="pw" placeholder="비밀번호를 입력하세요." value="User1234" >
 							     <div class="valid">영문 대/소문자, 숫자를 모두 포함, 8자 이상 20자 미만</div>
 							      
 							    </td>
@@ -455,7 +475,7 @@ function item_check(item) {
 							  <tr>
 							      <th class="tit">비밀번호 확인 *</th>
 							      	<td>
-							        	<input type="password" id="pwCheck" name="pw_ck" class="chk" placeholder="비밀번호를 한 번 더 입력하세요.">
+							        	<input type="password" id="pwCheck" name="pw_ck" class="chk" placeholder="비밀번호를 한 번 더 입력하세요." value="User1234">
 							        	<div class="valid">비밀번호를 한 번 더 입력하세요.</div>
 							    	</td>
 							   </tr> 	
@@ -488,8 +508,9 @@ function item_check(item) {
 							    <th class="tit">이메일 *</th>
 							    <td>
 							    <div style="display: flex">
-							      <input class="box" name="email" id="email-txt" type="text" style="width: 120px; height: 35px;"/> <span style="font-weight:bold; font-size:1.2em; margin-left:10px; margin-right:10px; padding-top:8px;">@</span> <input class="box"
-							        name="emailDomain" id="domain-txt" type="text" style="width: 120px; height: 35px;"/>
+							      <input class="box" name="memberEmail" id="email-txt" type="text" style="width: 120px; height: 35px;"/>
+							       <span style="font-weight:bold; font-size:1.2em; margin-left:10px; margin-right:10px; padding-top:8px;">@</span>
+							        <input class="box" name="memberEmail" id="domain-txt" type="text" style="width: 120px; height: 35px;"/>
 							      <select class="box" id="domain-list" style="width: 120px; height: 35px;" onchange="updateEmailDomain()">
 							        <option value="type">직접 입력</option>
 							        <option value="naver.com">naver.com</option>
@@ -643,20 +664,25 @@ function item_check(item) {
          this.appendChild(DayOption);
          }
      }
-     });       
-     function updateEmailDomain() {
-         var domainList = document.getElementById("domain-list");
-         var selectedDomain = domainList.value;
-         var domainTxt = document.getElementById("domain-txt");
-     
-         if (selectedDomain === "type") {
-           domainTxt.value = "";
-           domainTxt.removeAttribute("disabled");
-         } else {
-           domainTxt.value = selectedDomain;
-           domainTxt.setAttribute("disabled", "disabled");
-         }
-       }
+     });
+     // 이메일 도메인 입력 처리 
+    function updateEmailDomain() {
+        var domainList = document.getElementById("domain-list");
+        var selectedDomain = domainList.value;
+        var domainTxt = document.getElementById("domain-txt");
+
+        if (selectedDomain === "type") {
+            domainTxt.value = "";
+            domainTxt.removeAttribute("disabled");
+        } else {
+            domainTxt.value = selectedDomain;
+            domainTxt.setAttribute("disabled", "disabled");
+        }
+
+    }
+
+
+
 
         
 </script>
