@@ -1,13 +1,18 @@
 package com.gogo.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.gogo.mapper.FileuploadMapper;
 import com.gogo.mapper.MainMapper;
+import com.gogo.vo.FileuploadVO;
 import com.gogo.vo.RoomOptionVO;
 import com.gogo.vo.RoomVO;
 import com.gogo.vo.StayVO;
@@ -20,6 +25,9 @@ public class MainServiceImpl implements MainService{
 	
 	@Autowired
 	FileuploadService fileuploadService;
+	
+	@Autowired
+	FileuploadMapper fileuploadMapper;
 	
 	@Override
 	public int insert(StayVO vo) {
@@ -39,7 +47,12 @@ public class MainServiceImpl implements MainService{
 			res = mainMapper.insertRoomOption(optionVO);
 		}
 		if(res>0) {
-			res = roomFileupload(files, stayNo, vo.getRoomNo());
+			FileuploadVO fileuploadVO = new FileuploadVO();
+			fileuploadVO.setRoomNo(vo.getRoomNo());
+			fileuploadVO.setStayNo(stayNo);
+			fileuploadVO.setMemberId("");
+			String dir = "stay\\";
+			res = fileuploadService.fileupload(files, dir, fileuploadVO);
 		}
 		return res;
 	}
@@ -54,31 +67,53 @@ public class MainServiceImpl implements MainService{
 		  System.out.println("insertStay res : " + res);
  
 		  if(res>0) { 
-			  String roomNo = "";
-			  res = stayFileupload(files, vo.getStayNo(), roomNo); 
+			  FileuploadVO fileuploadVO = new FileuploadVO();
+			  fileuploadVO.setStayNo(vo.getStayNo());
+			  fileuploadVO.setRoomNo("");
+			  fileuploadVO.setMemberId("");
+			  String dir = "room\\";
+			  res = fileuploadService.fileupload(files, dir, fileuploadVO);
 			  System.out.println("mainservice insertstay res : " + res);
 		  }
 		 
 		  return res;
 	}
 
+	// stay 정보 불러오기
+	public void getStay(StayVO vo, Model model){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("stayVO", mainMapper.getStayOne(vo));
+		map.put("listPhoto", fileuploadMapper.getStayPhotoList(vo));
+		
+		model.addAttribute("map", map);
+	}
+
 	@Override
-	public int roomFileupload(List<MultipartFile> files, String stayNo, String roomNo) {
+	public int updateStay(StayVO vo, List<MultipartFile> files) {
 		
-		String dir = "room\\";
-		int res = fileuploadService.fileupload(files, dir, stayNo, roomNo);
-		
-		return res;
+		mainMapper.updateStay(vo);
+		// TODO 파일 삭제하고, 다시 업로드?
+
+		return 0;
 	}
 	
-	@Override
-	public int stayFileupload(List<MultipartFile> files, String stayNo, String roomNo) {
-		//System.out.println("stayFileupload 입장!!!!!");
-		String dir = "stay\\";
-		int res = fileuploadService.fileupload(files, dir, stayNo, roomNo);
-		
-		return res;
-	}
+//	@Override
+//	public int roomFileupload(List<MultipartFile> files, FileuploadVO vo) {
+//		
+//		String dir = "room\\";
+//		int res = fileuploadService.fileupload(files, dir, vo);
+//		
+//		return res;
+//	}
+//	
+//	@Override
+//	public int stayFileupload(List<MultipartFile> files, FileuploadVO vo) {
+//		//System.out.println("stayFileupload 입장!!!!!");
+//		String dir = "stay\\";
+//		int res = fileuploadService.fileupload(files, dir, vo);
+//		
+//		return res;
+//	}
 	
 
 

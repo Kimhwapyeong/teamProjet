@@ -10,6 +10,7 @@ public class FileuploadVO {
 	private String fileName;
 	private String stayNo;
 	private String roomNo;
+	private String memberId;
 	
 	// 저장된 파일경로
 	private String savePath;

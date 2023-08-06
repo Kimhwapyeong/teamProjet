@@ -8,8 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gogo.service.MainService;
+import com.gogo.vo.FileuploadVO;
 import com.gogo.vo.RoomOptionVO;
 import com.gogo.vo.RoomVO;
 import com.gogo.vo.StayVO;
@@ -34,31 +36,16 @@ public class MainController {
 
 	// 임시
 	@PostMapping("/addStayAction")
-	public String addStayAction(StayVO vo, List<MultipartFile> files, Model model) {
+	public String addStayAction(StayVO vo, List<MultipartFile> files, RedirectAttributes rttr) {
 		
 		int res = mainService.insertStay(vo, files);
 		if(res > 0) {
-			model.addAttribute("msg", "숙소 등록 완료");
+			rttr.addFlashAttribute("msg", "숙소 등록 완료");
 		}else {
-			model.addAttribute("msg", "숙소 등록 실패");
+			rttr.addFlashAttribute("msg", "숙소 등록 실패");
 		}
 		
-		return "/main";
-	}
-	
-	@PostMapping("/addRoomAction")
-	public String addRoomAction(RoomVO roomVO
-						, RoomOptionVO optionVO
-						, String stayNo
-						, List<MultipartFile> files, Model model) {
-		
-		int res = mainService.insertRoom(roomVO, optionVO, files, stayNo);
-		if(res > 0) {
-			model.addAttribute("msg", "room 등록 완료");
-		}else {
-			model.addAttribute("msg", "room 등록 실패");
-		}
-		return "/main";
+		return "redirect:/main";
 	}
 	
 	// 임시 매핑용
@@ -67,12 +54,37 @@ public class MainController {
 		
 		return "/stay/addroom";
 	}
+
+	@PostMapping("/addRoomAction")
+	public String addRoomAction(RoomVO roomVO
+						, RoomOptionVO optionVO
+						, String stayNo
+						, List<MultipartFile> files
+						, RedirectAttributes rttr) {
+		
+		int res = mainService.insertRoom(roomVO, optionVO, files, stayNo);
+		if(res > 0) {
+			rttr.addFlashAttribute("msg", "room 등록 완료");
+		}else {
+			rttr.addFlashAttribute("msg", "room 등록 실패");
+		}
+		return "redirect:/main";
+	}
 	
 	// 임시 매핑용
 	@GetMapping("/editstay")
-	public String editStay() {
+	public String editStay(StayVO vo, Model model) {
+		
+		mainService.getStay(vo, model);
 		
 		return "stay/editstay";
+	}
+	
+	public String editStayAction(StayVO vo, List<MultipartFile> files, Model model) {
+		
+		
+				// 마이페이지로 포워드
+		return "/main";
 	}
 
 	// 임시 매핑용
@@ -92,13 +104,14 @@ public class MainController {
 		
 		return "/fileupload";
 	}
-	
-	@PostMapping("/fileuploadAction")
-	public String fileuploadAction(List<MultipartFile> files, String stayNo, String roomNo) {
-		
-		int res = mainService.roomFileupload(files, stayNo, roomNo);
-		System.out.println("maincontroller : " + res);
-		return "/fileupload";
-	}
+
+	// fileupload test용
+//	@PostMapping("/fileuploadAction")
+//	public String fileuploadAction(List<MultipartFile> files, FileuploadVO vo) {
+//		
+//		int res = mainService.roomFileupload(files, vo);
+//		System.out.println("maincontroller : " + res);
+//		return "/fileupload";
+//	}
 
 }

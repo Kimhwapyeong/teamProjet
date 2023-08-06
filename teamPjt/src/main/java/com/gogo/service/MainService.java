@@ -1,10 +1,13 @@
 package com.gogo.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.gogo.vo.FileuploadVO;
 import com.gogo.vo.RoomOptionVO;
 import com.gogo.vo.RoomVO;
 import com.gogo.vo.StayVO;
@@ -17,13 +20,17 @@ public interface MainService {
 	public int insertRoom(RoomVO vo, RoomOptionVO optionVO
 					,List<MultipartFile> files, String stayNo);
 
-	public int roomFileupload(List<MultipartFile> files
-					,String stayNo, String roomNo) ;
-	
 	public int insertStay(StayVO vo, List<MultipartFile> files);
-
-	public int stayFileupload(List<MultipartFile> files
-						, String stayNo, String roomNo);
+	
+	public void getStay(StayVO vo, Model model);
+	
+	public int updateStay(StayVO vo, List<MultipartFile> files);
+	
+//	public int roomFileupload(List<MultipartFile> files
+//			, FileuploadVO vo) ;
+//
+//	public int stayFileupload(List<MultipartFile> files
+//						, FileuploadVO vo);
 
 
 }

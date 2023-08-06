@@ -25,7 +25,7 @@ public class FileuploadServiceImpl extends FileuploadPath implements FileuploadS
 	
 	private static final String ATTACHES_DIR = dirPath;
 	
-	public int fileupload(List<MultipartFile> files, String dir, String stayNo, String roomNo) {
+	public int fileupload(List<MultipartFile> files, String dir, FileuploadVO paramFileuploadVO) {
 		int insertRes = 0;
 		System.out.println("fileupload 입장");
 		for(MultipartFile file : files) {
@@ -63,8 +63,9 @@ public class FileuploadServiceImpl extends FileuploadPath implements FileuploadS
 				vo.setFileName(file.getOriginalFilename());
 				vo.setUuid(uuid.toString());
 				vo.setUploadPath(getFolder(dir));
-				vo.setStayNo(stayNo);
-				vo.setRoomNo(roomNo);
+				vo.setStayNo(paramFileuploadVO.getStayNo());
+				vo.setRoomNo(paramFileuploadVO.getRoomNo());
+				vo.setMemberId(paramFileuploadVO.getMemberId());
 				
 				insertRes += fileuploadMapper.insert(vo);
 				

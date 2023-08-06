@@ -60,10 +60,11 @@ window.addEventListener('load', ()=>{
 		}
 
 		let regex2 = new RegExp("^.{1,50}$");
-		if(valueLengthCheck(regex2, inputSns, 'sns 주소를 확인해주세요. (입력값이 너무 큽니다.)')){
-			return;
+		if(inputSns.value!=''){
+			if(valueLengthCheck(regex2, inputSns, 'sns 주소를 확인해주세요. (입력값이 너무 큽니다.)')){
+				return;
+			}
 		}
-		
 		// 숙소 사업자 등록
 		if(!notRegister.checked && !register.checked){
 			notRegister.focus(); /* 메시지 입력 해주어야 함 */

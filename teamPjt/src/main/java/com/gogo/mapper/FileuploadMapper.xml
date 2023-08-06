@@ -5,8 +5,25 @@
 <mapper namespace="com.gogo.mapper.FileuploadMapper">
 	
 	<insert id="insert">
-		insert into attach (uuid, uploadpath, filename, stayno, roomno)
-		values (#{uuid}, #{uploadPath}, #{fileName}, #{stayNo}, #{roomNo})
+		insert into attach (uuid, uploadpath, filename, stayno, roomno, memberid)
+		values (#{uuid}, #{uploadPath}, #{fileName}, #{stayNo}, #{roomNo}, #{memberId})
 	</insert>
+	
+	<!-- 스테이 사진  -->
+	<select id="getStayPhotoList" resultType="com.gogo.vo.FileuploadVO">
+		select t.*
+					, uploadpath||uuid||'_'||filename savePath
+		from attach t 
+		where stayno = #{stayNo} 
+		and roomno is null
+	</select>
+	
+	<!-- 업데이트 할 게 아니라 삭제 후 업로드인가? -->
+	<update id="updateStayPhoto">
+		update attach
+		set uuid = #{uuid}
+		, uploadpath = #{uploadPath}
+		, filename = #{fileName}
+	</update>
 
 </mapper>

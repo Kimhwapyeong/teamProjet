@@ -17,4 +17,8 @@ public interface MainMapper {
 	
 	public int insertStay(StayVO vo);
 	
+	public StayVO getStayOne(StayVO vo);
+	
+	public int updateStay(StayVO vo);
+	
 }

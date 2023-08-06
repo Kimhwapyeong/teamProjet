@@ -4,12 +4,18 @@
   				<!-- 경로 + xml 파일명 -->
 <mapper namespace="com.gogo.mapper.MainMapper">
 	
-	<!-- stay 등록 -->
+	<!-- stay 등록 (테스트)-->
 	<insert id="insert">
 		insert into stay (stayno, memberid, stayname, stayloc, stayadress
 						, stayinfo, staytype, badge, latitude, longitude)
 		values (stayseq.nextval, #{memberId}, #{stayName}, #{stayLoc}, #{stayAdress}
 				,#{stayInfo}, #{stayType}, #{badge}, #{latitude}, #{longitude})
+	</insert>
+
+	<!-- 사진 등록 (테스트)-->
+	<insert id="insertPhoto">
+		insert into attach (uuid, uploadpath, filename, stayno, roomno)
+		values (#{uuid}, #{uploadPath}, #{fileName}, #{stayNo}, #{roomNo})
 	</insert>
 	
 	<!-- room 등록 -->
@@ -31,12 +37,6 @@
 						, #{babiqu}, #{pet}, #{terrace}, #{pool}, #{bed}, #{beamProjector})
 	</insert>
 	
-	<!-- 사진 등록 -->
-	<insert id="insertPhoto">
-		insert into attach (uuid, uploadpath, filename, stayno, roomno)
-		values (#{uuid}, #{uploadPath}, #{fileName}, #{stayNo}, #{roomNo})
-	</insert>
-	
 	<!-- 스테이 등록 -->
 	<insert id="insertStay">
 		<selectKey keyProperty="stayNo" order="BEFORE" resultType="String">
@@ -47,4 +47,24 @@
 		values (#{stayNo}, #{memberId}, #{stayName}, #{stayLoc}, #{stayAdress}
 				, #{stayInfo}, #{stayType}, #{badge}, #{latitude}, #{longitude}, #{stayView})
 	</insert>
+	
+	<!-- 스테이 getOne -->
+	<select id="getStayOne" resultType="com.gogo.vo.StayVO">
+		select * from stay where stayno = #{stayNo}
+	</select>
+	
+	<update id="updateStay">
+		update stay
+		set stayname = #{stayName}
+		, stayloc = #{stayLoc}
+		, stayadress = #{stayAdress}
+		, stayinfo = #{stayInfo}
+		, stayType = #{stayType}
+		, badge = #{badge}
+		, latitude = #{latitude}
+		, longitude = #{longitude}
+		, stayview = #{stayView}
+		where stayno = #{stayNo}
+	</update>
+	
 </mapper>
