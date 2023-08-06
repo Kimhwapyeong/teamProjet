@@ -64,7 +64,7 @@
                                 
                             <!-- ========================= 회원 목록 조회 =================== -->
                             <div class="container">
-                                <h6 style="line-height:60px">문의 목록</h6>
+                            	<h3 class="my_tit pc_only">문의 목록</h3>
                                 
                                 <table class="table">
                                   <thead>

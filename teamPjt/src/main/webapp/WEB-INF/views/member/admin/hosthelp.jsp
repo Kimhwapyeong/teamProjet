@@ -71,9 +71,10 @@
                                     <tr>
                                       <th style="width:15%">문의 번호</th>
                                       <th style="width:15%">작성자</th>
-                                      <th style="width:25%">문의 제목</th>
-                                      <th style="width:45%; text-align:center">문의 내용</th>
+                                      <th style="width:30%">문의 제목</th>
+                                      <th style="width:40%; text-align:center">문의 내용</th>
                                       <th style="width:15%">작성일</th>
+                                      <th style="width:15%">답변</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -87,6 +88,11 @@
                                         <td><a href="/member/admin/answer?queNo=${qa.queNo }">${qa.title }</a></td>
                                         <td style="text-align:center">${qa.content }</td>
                                         <td>${qa.contentDate }</td>
+                                         <td style="font-weight:bold">
+	                                        <c:if test="${qa.answerYN eq 'Y'}">
+	                                        	답변 완료
+	                                        </c:if>
+                                        </td>
                                     </tr>
                                     
                                     </c:forEach>
