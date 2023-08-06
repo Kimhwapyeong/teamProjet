@@ -23,7 +23,7 @@ public interface MemberService {
 	public int signupAction(MemberVO member);
 
 	// 아이디 찾기 
-	public String findIdAction(String memberName, String memberEmail);
+	public MemberVO findIdAction(MemberVO member);
 
 	
 

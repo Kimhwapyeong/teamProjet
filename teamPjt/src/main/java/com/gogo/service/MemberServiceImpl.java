@@ -67,17 +67,8 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.selectOne(member);
 	}
 	@Override
-	public String findIdAction(String memberName, String memberEmail) {
-		String result = "";
-		
-		try {
-			
-			result = memberMapper.findIdAction(memberName, memberEmail);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
+	public MemberVO findIdAction(MemberVO member) {
+		return memberMapper.findIdAction(member);
 	}
 
 

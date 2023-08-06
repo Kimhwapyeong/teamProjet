@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,8 +86,8 @@ public class MemberController extends CommonRestController {
 	// 회원가입 페이지 이동
 	@GetMapping("/login/signup")
 	public String signup(HttpSession session) {
-		// 세션에 "category"라는 이름으로 "signup"을 저장 
-		//session.setAttribute("category", "signup");
+		// 세션에 member라는 이름으로 "signup"을 저장 
+		//session.setAttribute("member", "signup");
 		return "/login/signup";
 	}
 	
@@ -104,6 +105,7 @@ public class MemberController extends CommonRestController {
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("msg", "회원가입 중 예외사항이 발생하였습니다.");
+            
         }
 
         return "/main"; 
@@ -127,13 +129,15 @@ public class MemberController extends CommonRestController {
 	}
 	
 	// 아이디 찾기 페이지 이동
+	
 	@GetMapping("/login/findId")
-	public String findId() {
+	public String findId(HttpServletRequest request, Model model, MemberVO member) {
 		return "/login/findId";
 	}
 	
 	
 	// 아이디 찾기
+	/*
 	@RequestMapping(value = "/login/findIdAction", method = RequestMethod.POST)
 	@ResponseBody
 	public String findIdAction(@RequestParam("memberName") String memberName, @RequestParam("memberEmail") String memberEmail) {
@@ -146,11 +150,43 @@ public class MemberController extends CommonRestController {
 	        }
 
 	        String result = memberService.findIdAction(memberName, memberEmail);
+	        
+	        
 	        if (result == null) {
 	            return "입력하신 정보와 일치하는 회원이 없습니다.";
+	        
 	        }
 	        return result;
 	}
+	*/
+	
+	@RequestMapping(value = "/login/findIdAction", method = RequestMethod.POST)
+	public String findIdAction(HttpServletRequest request, Model model,
+			@RequestParam(required = true, value = "memberName") String memberName, 
+		    @RequestParam(required = true, value = "memberEmail") String memberEmail,
+			@ModelAttribute MemberVO member) {
+		try {
+		    
+			member.setMemberName(memberName);
+			member.setMemberEmail(memberEmail);
+		    MemberVO memberSearch = memberService.findIdAction(member);
+		    
+		    model.addAttribute("member", memberSearch);
+		 
+		} catch (Exception e) {
+		    System.out.println(e.toString());
+		    model.addAttribute("msg", "오류가 발생되었습니다.");
+		}
+	    
+	    return "/login/findIdAction";
+	}
+	
+	
+	
+	
+	
+	
+	
 	// 비밀번호 찾기 페이지 이동
 	@GetMapping("/login/findPw")
 	public String findPw() {

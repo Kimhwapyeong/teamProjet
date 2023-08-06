@@ -4,89 +4,108 @@
 <jsp:include page="../common/header.jsp" />
 <!DOCTYPE html>
 <html>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <script>
-	/* 아이디 찾기 */
-	// 아이디 값 받고 출력하는 ajax
-	function findIdAction() {
-		var memberName = $('#memberName').val();
-		var memberEmail = $('#memberEmail').val();
+var path = "${pageContext.request.contextPath }";
 
-		$.ajax({
-			url : "/login/findIdAction",
-			type : "POST",
-			data : {
-				"memberName" : memberName,
-				"memberEmail" : memberEmail
-			},
-			success : function(data) {
-				if (data == 0) {
-					alert("회원 정보를 확인해주세요!");
-				} else {
-					alert("아이디: " + data);
-				}
-			},
-			error : function() {
-				alert("에러입니다");
+$(document).ready(function() {
+var msg = "${msg}";
+if(msg != ""){
+alert(msg);    
+}
+});
+	// 아이디 찾기
+	function findIdAction() {
+		// 유효성 체크
+		var emailCk =  /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		
+		if ($("#memberName").val() == null || $("#memberName").val() == "") {
+			alert("이름을 입력해주세요.");
+			$("#memberName").focus();
+			 
+			return false;
 			}
-		});
+			 
+			if ($("#memberEmail").val() == null || $("#memberEmail").val() == "") {
+			alert("이메일을 입력해주세요.");
+			$("#memberEmail").focus();
+			 
+			return false;
+			}
+			 
+			if(!emailCk.test($("#memberEmail").val())){
+			alert("이메일 형식에 맞게 입력해주세요.");
+			return false;
+			}
+			 
+			 
+			if (confirm("아이디를 찾으시겠습니까?")) {
+			 
+			$("#findIdform").submit();
+			 
+			return false;
+			}
 	};
 </script>		
 <body>
 
-
-	<div id="contents">
-		<div class="container sub_title">
-			<div class="tit">FIND ID</div>
-			<div class="txt">아이디 찾기</div>
-		</div>
-		<div class="container">
-			<div class="login_wrap">
-				<div class="txt">이름과 이메일을 입력하세요.</div>
-				<div class="w3-content w3-container w3-margin-top">
-					<div class="w3-container w3-card-4">
-						<div class="w3-center w3-large w3-margin-top">
-							<div>
-								<p>
-									<label>이름</label> 
-									<input class="w3-input" type="text"
-										id="memberName" name="memberName" placeholder="이름을 입력해주세요."
-										value="user1" required>
-								</p>
-
-								<div class='input_box'>
-								
-								<p>
-									<label>Email</label> <input class="w3-input" type="text"
-										id="memberEmail" name="memberEmail"
-										placeholder="이메일을 입력해주세요." value="user1@naver.com" required>
-								</p>
-									<div class="input"></div>
-			
-								</div>
-
-								<p class="w3-center findidBtn" style="display: flex; align-items: center; justify-content:center;">
-									<button type="button" id='findIdbtn' onclick="findIdAction()"
-										class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round"
-										style="width: 45px; height: 30px; border: 1px solid #ebebeb; background-color: #fff; border-radius:20px;">find</button>
-									<button type="button" onclick="history.go(-1);"
-										class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round" 
-										style="width: 45px; height: 30px; border: 1px solid #ebebeb; background-color: #fff; border-radius:20px; margin:left;">Cancel</button>
-								</p>
-							</div>
-						</div>
-
-
+<form id="findIdform" name="findIdform" action="${path}/login/findIdAction" method="post">
+<div id="contents">
+	<div class="container sub_title">
+		<div class="tit">FIND ID</div>
+		<div class="txt">아이디 찾기</div>
+	</div>
+	<div class="container">
+		<div class="login_wrap">
+			<div class="txt">이름과 이메일을 입력하세요.</div>
+			<div class="w3-content w3-container w3-margin-top">
+				<div class="w3-container w3-card-4">
+					<div class="w3-center w3-large w3-margin-top">
+					<div>
+						<table style="width: 100%; height: 50%;">
+						  <tr>
+						    <td>
+						      <label for="memberName">이름</label>
+						    </td>
+						    <td style="border: 1px solid #ebebeb;">
+						      <input class="w3-input" type="text" id="memberName" name="memberName" placeholder="이름을 입력해주세요." value="user1" required>
+						    </td>
+						  </tr>
+						  <tr>
+						    <td>
+						      <label for="memberEmail">Email</label>
+						    </td>
+						    <td style="border: 1px solid #ebebeb;">
+						      <input class="w3-input" type="text" id="memberEmail" name="memberEmail" placeholder="이메일을 입력해주세요." value="user1@naver.com" required>
+						    </td>
+						  </tr>
+						</table>
+						<div id="resultDiv"></div>
 					</div>
+
+							<p class="w3-center findidBtn" style="display: flex; align-items: center; justify-content:center; margin:5em;" >
+								<button type="button" id='findIdbtn' onclick="findIdAction()"
+									class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round"
+									style="width: 45px; height: 30px; border: 1px solid #ebebeb; background-color: #fff; border-radius:20px; " >find</button>
+								<button type="button" onclick="history.go(-1);"
+									class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round" 
+									style="width: 45px; height: 30px; border: 1px solid #ebebeb; background-color: #fff; border-radius:20px; margin: right;">Cancel</button>
+							</p>
+						</div>
+					</div>
+
+
 				</div>
 			</div>
 		</div>
 	</div>
 
 
+</form>
 </body>
 <jsp:include page="../common/footer.jsp" />
 </html>

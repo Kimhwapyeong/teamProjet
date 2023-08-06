@@ -25,6 +25,5 @@ public interface MemberMapper {
 
 	public int idCheck(MemberVO member);
 
-	@Select("SELECT NVL(memberId, 0) FROM member WHERE memberName=#{memberName} AND memberEmail=#{memberEmail}")
-	public String findIdAction(@Param("memberName") String memberName, @Param("memberEmail") String memberEmail);
+	public MemberVO findIdAction(MemberVO member);
 }

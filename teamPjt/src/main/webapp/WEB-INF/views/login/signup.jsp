@@ -421,7 +421,7 @@ function go_join() {
     
 	//form 데이터를 서버로 제출 
     $('form').submit();
-    
+  
 }
 
 function item_check(item) {
@@ -500,7 +500,8 @@ function item_check(item) {
 							  <tr>
 							    <th class="tit">성별</th>
 							    <td id="genderForm" style="line-height: 80px;">
-							      <label style="margin-right: 15px;"><input type="radio" name="gender" value="male">남</label>
+							      <label style="margin-right: 15px;">
+							      <input type="radio" name="gender" value="male">남</label>
 							      <label><input type="radio" name="gender" value="female" checked>여</label>
 							    </td>
 							  </tr>
