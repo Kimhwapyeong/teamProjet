@@ -33,6 +33,10 @@ public class ReservedController {
 	@Autowired
 	PaymentService service_p;
 	
+	@GetMapping("Test")
+	public void Test() {
+		
+	}
 	
 	@GetMapping("reserved")
 	public void reservation(ReservedVO reserved, Model model, HttpSession session) {
