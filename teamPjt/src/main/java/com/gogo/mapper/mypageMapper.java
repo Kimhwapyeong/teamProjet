@@ -68,6 +68,15 @@ public interface mypageMapper {
 	// 회원 정보 수정
 	public int update(MemberVO vo);
 	
+	// 회원 사진
+	public String selectProfile(String memberId);
+	
+	// 사진 삭제
+	public int deleteProfile(String memberId);
+	
+	// 사진 추가
+	public int insertProfile(String memberId, String uploadPath);
+	
 	// 회원 탈퇴
 	public int memberQuit(String memberId);
 	

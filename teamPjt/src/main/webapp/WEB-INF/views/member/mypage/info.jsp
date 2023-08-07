@@ -15,51 +15,6 @@
     
     <script type="text/javascript">
     window.addEventListener('load', function(){
-    	/*
-	    changeInfo.addEventListener('click', function(e){
-	   		e.preventDefault();
-	   	 
-		   	let memberEmail = email.value;
-		   	let pw = newpww.value;
-		   	let newpw= newpwCheck.value;
-		   	let profile = imgFile.value;
-		   	let memberId = id.value;
-		   	
-		     if(!memberEmail){
-		   	  signupMsg.innerHTML="이메일을 입력해주세요";
-		   	  return;
-		     }
-		     if(!pw){
-		   	  signupMsg.innerHTML="비밀번호를 입력해주세요";
-		   	  return;
-		     }
-		     if(!newpw){
-		   	  signupMsg.innerHTML="비밀번호를 다시 한번 입력해주세요";
-		   	  return;
-		     }
-		     
-		     if(newpww.value == newpwCheck.value){
-		    	 
-		     } else{
-		    	 signupMsg.innerHTML = "비밀번호가 일치하지 않습니다";
-		    	 newpww.focus();  // 비밀번호 재입력 포커스
-		    	 newpww.value='';  
-		    	 newpwCheck.value='';
-	       		 return;
-		     }
-		     
-		     
-		     
-		    
-		     
-	          obj ={memberEmail:memberEmail, pw:pw, profile:profile, memberId:memberId}
-	          
-	          console.log("회원정보수정 obj", obj)
-	          
-	          fetchPost('/member/mypage/infoFrm', obj, result);
-		     
-		});
-		     */
     	
 	    changeInfo.addEventListener('click', function(e){
 	   		e.preventDefault();

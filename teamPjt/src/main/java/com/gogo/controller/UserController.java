@@ -2,6 +2,7 @@ package com.gogo.controller;
 
 
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gogo.service.ReservedService;
@@ -83,26 +85,50 @@ public class UserController extends CommonRestController{
 		model.addAttribute("travelCnt", res);
 	}
 	
+//	@PostMapping("infoFrm")
+//	public String infoFrm(MemberVO member
+//									, @RequestParam("imgFile")MultipartFile imgFile
+//									, HttpSession session
+//									, RedirectAttributes rttr) {
+//		
+//		System.out.println(member.getMemberId());
+//		System.out.println(member.getMemberEmail());
+//		System.out.println(member.getPw());
+//		System.err.println("imgFile : "+imgFile);
+//		
+//		try {
+//			int res = service.updateMember(member, imgFile, session);
+//			
+//			if(res>0) {
+//				rttr.addFlashAttribute("msg", "회원 정보 수정 성공!");
+//				return "redirect:/member/mypage/info";
+//				
+//			} else {
+//				rttr.addFlashAttribute("msg", "회원 정보 수정 실패..");
+//				return "redirect:/member/mypage/info";
+//
+//			}
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return "/main";
+//	}
+	
 	@PostMapping("infoFrm")
-	public String infoFrm(MemberVO member
-									, @RequestParam("imgFile")MultipartFile imgFile
-									, HttpSession session
-									, RedirectAttributes rttr) {
-		
-		System.out.println(member.getMemberId());
-		System.out.println(member.getMemberEmail());
-		System.out.println(member.getPw());
-		System.err.println("imgFile : "+imgFile);
+	public String infoFrm(RedirectAttributes rttr, MemberVO vo, List<MultipartFile> files, MultipartHttpServletRequest request) {
 		
 		try {
-			int res = service.updateMember(member, imgFile, session);
+			int res = service.update(vo, request.getFiles("imgFile"));
+			System.out.println("Frm file" + files);
 			
 			if(res>0) {
 				rttr.addFlashAttribute("msg", "회원 정보 수정 성공!");
 				return "redirect:/member/mypage/info";
 				
 			} else {
-				rttr.addFlashAttribute("msg", "회원 정보 수정 실패..");
+				rttr.addFlashAttribute("msg", "회원 정보 수정 실패");
 				return "redirect:/member/mypage/info";
 
 			}
@@ -111,7 +137,7 @@ public class UserController extends CommonRestController{
 			e.printStackTrace();
 		}
 		
-		return "/main";
+		return "redirect:/main";
 	}
 	
 	// 회원 탈퇴

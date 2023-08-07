@@ -230,8 +230,26 @@
 	
 	<!-- 회원 정보 수정 -->
 	<update id="update">
-		update member set memberEmail = #{memberEmail} , pw = #{pw}, profile = #{profile} where memberid = #{memberId}
+		update member set memberEmail = #{memberEmail} , pw = #{pw} where memberid = #{memberId}
 	</update>
+	
+	
+	<!-- 회원 사진 -->
+	<select id="selectProfile" resultType="String">
+		select uploadpath from attach where memberid = #{memberId} 	
+	</select>
+	
+	
+	<!-- 회원 사진 변경 -->
+	<update id="insertProfile">
+		update member set profile = #{profile} where memberid = #{memberId}
+	</update>	
+	
+	
+	<!-- 회원 사진 삭제 -->
+	<delete id="deleteProfile">
+		delete from attach where memberid = #{memberId}
+	</delete>
 	
 	
 	<!-- 회원 탈퇴 -->

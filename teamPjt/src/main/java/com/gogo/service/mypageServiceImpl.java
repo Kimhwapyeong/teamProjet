@@ -20,8 +20,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.gogo.mapper.FileuploadMapper;
 import com.gogo.mapper.mypageMapper;
 import com.gogo.vo.AnswerVO;
+import com.gogo.vo.FileuploadVO;
 import com.gogo.vo.MemberVO;
 import com.gogo.vo.PaymentVO;
 import com.gogo.vo.QuestionVO;
@@ -48,6 +50,9 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 	
 	@Autowired
 	MemberService service_m;
+	
+	@Autowired
+	FileuploadService fileuploadService;
 	
 	// ▶▶▶  admin ▶▶▶
 	// 숙소 조회
@@ -237,8 +242,29 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 	
 	// 회원 정보 수정
 	@Override
-	public int update(MemberVO vo) {
-		return mypageMapper.update(vo);
+	public int update(MemberVO vo, List<MultipartFile> files) {
+		int res =  mypageMapper.update(vo);
+		System.out.println("vo : " + vo);
+		System.out.println("update res : " + res);
+		
+		if(res>0) {
+			FileuploadVO fileuploadVO = new FileuploadVO();
+			fileuploadVO.setRoomNo("");
+			fileuploadVO.setStayNo("");
+			fileuploadVO.setMemberId(vo.getMemberId());
+			String dir = "profile\\";
+			res = fileuploadService.fileupload(files, dir, fileuploadVO);
+		}
+		
+		if(res>0) {
+			String uploadPath = mypageMapper.selectProfile(vo.getMemberId());
+			System.out.println("uploadPath : " + uploadPath);
+			int deleteres = mypageMapper.deleteProfile(vo.getMemberId());
+			System.out.println("deleteres : " + deleteres);
+			res = mypageMapper.insertProfile(vo.getMemberId(), uploadPath);
+		}
+		
+		return res;
 		
 	}
 	
@@ -311,64 +337,65 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 		return mypageMapper.travelCnt(memberId);
 	}
 	
-	@Override
-	public int updateMember(MemberVO member, MultipartFile file, HttpSession session) {
-		
-		MemberVO vo = null;
-		
-		// 파일 랜덤 이름 짓기
-		LocalTime how = LocalTime.now();
-		String hour = String.valueOf(how.getHour());
-		String minutes = String.valueOf(how.getMinute());
-		String second = String.valueOf(how.getSecond());
-		String now = hour+minutes+second;
-		
-		
-		String ofile = file.getOriginalFilename();
-		String ext = ofile.substring(ofile.lastIndexOf("."),ofile.length());
-		
-		String saveName = ofile.substring(0,ofile.lastIndexOf("."));
-		String save = saveName+now+ext;
-		// 파일 랜덤 이름 짓기 끝
-		
-		
-		
-		Path copyOfLocation = Paths.get(uploadDir + File.separator + StringUtils.cleanPath(save));
-		
-		
-		try {
-	    Files.copy(file.getInputStream(), copyOfLocation, StandardCopyOption.REPLACE_EXISTING);
-	    
-	    // 바뀐 프사로 세션에 다시 등록
-	    MemberVO original = service_m.selectOne(member);
-	    original.setProfile(save);
-	    session.setAttribute("member", original);
-	    
-	    vo = new MemberVO();
-	    vo.setMemberId(member.getMemberId());
-	    vo.setProfile(save);
-	    vo.setPw(member.getPw());
-	    vo.setMemberEmail(member.getMemberEmail());
-	    
-	    // email, pw, memberId, profile 필요
-	    
-		} catch(IOException e){
-			e.printStackTrace();
-		}
-		// 파일 업로드 끝
-		
-		
-		int res = mypageMapper.update(vo);
-		
-		if(res>0) {
-			return res;
-		} else {
-			return 0;
-		}
-		
-	}
+//	@Override
+//	public int updateMember(MemberVO member, MultipartFile file, HttpSession session) {
+//		
+//		MemberVO vo = null;
+//		
+//		// 파일 랜덤 이름 짓기
+//		LocalTime how = LocalTime.now();
+//		String hour = String.valueOf(how.getHour());
+//		String minutes = String.valueOf(how.getMinute());
+//		String second = String.valueOf(how.getSecond());
+//		String now = hour+minutes+second;
+//		
+//		
+//		String ofile = file.getOriginalFilename();
+//		String ext = ofile.substring(ofile.lastIndexOf("."),ofile.length());
+//		
+//		String saveName = ofile.substring(0,ofile.lastIndexOf("."));
+//		String save = saveName+now+ext;
+//		// 파일 랜덤 이름 짓기 끝
+//		
+//		
+//		
+//		Path copyOfLocation = Paths.get(uploadDir + File.separator + StringUtils.cleanPath(save));
+//		
+//		
+//		try {
+//	    Files.copy(file.getInputStream(), copyOfLocation, StandardCopyOption.REPLACE_EXISTING);
+//	    
+//	    // 바뀐 프사로 세션에 다시 등록
+//	    MemberVO original = service_m.selectOne(member);
+//	    original.setProfile(save);
+//	    session.setAttribute("member", original);
+//	    
+//	    vo = new MemberVO();
+//	    vo.setMemberId(member.getMemberId());
+//	    vo.setProfile(save);
+//	    vo.setPw(member.getPw());
+//	    vo.setMemberEmail(member.getMemberEmail());
+//	    
+//	    // email, pw, memberId, profile 필요
+//	    
+//		} catch(IOException e){
+//			e.printStackTrace();
+//		}
+//		// 파일 업로드 끝
+//		
+//		
+//		int res = mypageMapper.update(vo);
+//		
+//		if(res>0) {
+//			return res;
+//		} else {
+//			return 0;
+//		}
+//		
+//	}
 
 
 	
 	
 }
+

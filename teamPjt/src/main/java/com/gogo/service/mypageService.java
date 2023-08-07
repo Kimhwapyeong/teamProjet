@@ -76,7 +76,7 @@ public interface mypageService {
 	public List<MemberVO> mem(Model model);
 	
 	// 회원 정보 수정
-	public int update(MemberVO vo);
+	public int update(MemberVO vo, List<MultipartFile> files);
 	
 	// 회원 탈퇴
 	public int memberQuit(String memberId);
@@ -97,6 +97,7 @@ public interface mypageService {
 	// ▶▶▶  함께  * 번의 여행을 했어요 ▶▶▶
 	public int travelCnt(String memberId);
 	
-	public int updateMember(MemberVO member, MultipartFile file, HttpSession session);
+	//public int updateMember(MemberVO member, MultipartFile file, HttpSession session);
+
 	
 }
