@@ -370,12 +370,12 @@ function combineDate() {
 
 // 이메일 데이터 합산
 function combineEmail() {
-  const birth_year = document.getElementById("email-txt").value;
-  const birth_month = document.getElementById("domain-txt").value;
+	  const emailTxt = document.getElementById("email-txt").value;
+	  const domainTxt = document.getElementById("domain-txt").value;
+	  const memberEmail = emailTxt + "@" + domainTxt;
+	  document.getElementById("memberEmail").value = memberEmail;
+	}
 
-  const memberEmail = email-txt + "@" + domain-txt ;
-  document.getElementById("memberEmail").value = memberEmail;
-}
 
 // 로그인 폼 제출
 function go_join() {
@@ -522,21 +522,22 @@ function item_check(item) {
 							      <input type="radio" name="gender" value="F" checked>여</label>
 							    </td>
 							  </tr>
+							<!-- 이메일 체크 -->
 							  <tr>
 							    <th class="tit">이메일 *</th>
 							    <td>
-							    <div style="display: flex"  onchange="combineEmail()">
-							      <input class="box" name="memberemail" id="email-txt" type="text" style="width: 120px; height: 35px;"/>
+							    <div style="display: flex">
+							      <input class="box" name="memberemail" id="email-txt" type="text" style="width: 120px; height: 35px;" onchange="combineEmail()"/>
 							       <span style="font-weight:bold; font-size:1.2em; margin-left:10px; margin-right:10px; padding-top:8px;">@</span>
-							        <input class="box" name="memberdomain" id="domain-txt" type="text" style="width: 120px; height: 35px;"/>
-							      <select class="box" id="domain-list" style="width: 120px; height: 35px;" onchange="updateEmailDomain()">
+							        <input class="box" name="memberdomain" id="domain-txt" type="text" style="width: 120px; height: 35px;" onchange="combineEmail()"/>
+							      <select class="box" id="domain-list" name="test"style="width: 120px; height: 35px;" onchange="updateEmailDomain()">
 							        <option value="type">직접 입력</option>
 							        <option value="naver.com">naver.com</option>
 							        <option value="gmail.com">gmail.com</option>
 							        <option value="hanmail.net">hanmail.net</option>
 							        <option value="nate.com">nate.com</option>
 							      </select>
-							       <input type="hidden" name="memberEmail" id="memberEmail" value="">
+							       <input type="hidden" name="memberEmail" id="memberEmail" value=""/>
 							      </div>
 							    </td>
 							  </tr>
@@ -685,13 +686,18 @@ function item_check(item) {
         var domainList = document.getElementById("domain-list");
         var selectedDomain = domainList.value;
         var domainTxt = document.getElementById("domain-txt");
+        var emailTxt = document.getElementById("email-txt");
+        var memberEmail = document.getElementById("memberEmail");
 
         if (selectedDomain === "type") {
             domainTxt.value = "";
             domainTxt.removeAttribute("disabled");
+            memberEmail.value= emailTxt.value + "@"+ domainTxt
+            
         } else {
             domainTxt.value = selectedDomain;
             domainTxt.setAttribute("disabled", "disabled");
+            memberEmail.value= emailTxt.value + "@"+ selectedDomain
         }
 
     }
