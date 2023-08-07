@@ -102,6 +102,45 @@ public class MessageServiceImpl implements MessageService{
 
 	}
 	
+	// chattingGet 오버로딩 
+	// EchoHandler에서 WebSocketSession과 겹쳐서  HttpSession을 직접 주입받을 수 없기 때문
+	@Override
+	public void chattingGet(String roomId, MemberVO member) throws Exception {
+		
+		int res = insertMessageRoom();
+		
+		if(res>0) {
+			
+			String memberId = member.getMemberName();
+			
+			// 파라미터가 null이면 위의 insert문에서 사용한 시퀀스를 가져옴(currVal)
+			if(roomId==null || "".equals(roomId)) {
+				
+				roomId = getNewRoomId();
+			}
+			
+			// 체크해서 없는 roomId면 새로 insert
+			String check = getRoomId(roomId);
+			
+			if(check==null || "".equals(check)) {
+				
+				insertMessageRoomCustom(roomId);
+				
+			}
+			
+			
+			System.out.println(memberId+"님 "+roomId+"번 채팅방 입장");
+			
+			String enter = memberId+"님 "+roomId+"번 채팅방 입장";
+			
+
+		} else {
+			
+		}
+		
+
+	}
+	
 	@Override
 	public Map<String, Object> insertChatting(Map<String, Object> map){
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -118,7 +157,7 @@ public class MessageServiceImpl implements MessageService{
 		}
 		
 		
-		vo.setRegDate(String.valueOf(map.get("regDate")));
+		
 		vo.setMemberId(String.valueOf(map.get("writer")));
 		vo.setRoomId(String.valueOf(map.get("roomId")));
 		vo.setType(String.valueOf(map.get("type")));
