@@ -204,8 +204,14 @@
                                     		
                                     		if($('#imgFile').val()!=null){
                                     			
-											
-                                    			$('#imgFile').attr("style", "background-image: url(<spring:url value='/image/${sessionScope.member.profile}'/>); background-size : cover;");
+												if('${sessionScope.member.snsCk}' == 'Y'){
+													
+	                                    			$('#imgFile').attr("style", "background-image: url(${sessionScope.member.profile}); background-size : cover;");
+												
+												} else {
+													
+	                                    			$('#imgFile').attr("style", "background-image: url(<spring:url value='/image/${sessionScope.member.profile}'/>); background-size : cover;");
+												}
                                     		}
                                     		
                                     		$('#imgFile').change(function(){
