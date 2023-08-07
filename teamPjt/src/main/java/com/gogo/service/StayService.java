@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.gogo.vo.RoomPhotoVO;
 import com.gogo.vo.StayVO;
@@ -14,6 +15,8 @@ import com.gogo.vo.StayVO;
 public interface StayService {
 
 	List<StayVO> stayList(Model model);
+	
+	 List<StayVO> stayKeywordList(StayVO vo, Model model);
 	
 	Map<String, String> roomInfo(String stayName, Model model);
 	

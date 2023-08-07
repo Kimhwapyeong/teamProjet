@@ -1,5 +1,9 @@
 package com.gogo.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gogo.service.StayService;
+import com.gogo.vo.StayVO;
 
 @Controller
 @RequestMapping("/stay/*")
@@ -33,4 +38,14 @@ public class StayController {
 		stayService.roomInfoPageList(stayName, roomName, model);
 		stayService.roomInfoPagePic(stayName, roomName, model);
 	}
+	
+	/*
+	 * @GetMapping("keyword") public void stayKeywordList(String , Model model) {
+	 * stayService.stayKeywordList(vo, model); }
+	 */
+	/*
+	 * @GetMapping("keyword") public void zz() {
+	 * 
+	 * }
+	 */
 }

@@ -61,4 +61,12 @@ public class roomTest {
 		log.info("=========");
 		log.info(picInfo);
 	}
+	
+	@Test
+	public void styaKeywordList() {
+		StayVO vo = new StayVO();
+		List<StayVO> keyword = sm.stayKeywordList(vo);
+		log.info("=========");
+		log.info(keyword);
+	}
 }

@@ -66,5 +66,19 @@ public class StayServiceImpl implements StayService{
 		return null;
 	}
 
+
+	@Override
+	public List<StayVO> stayKeywordList(StayVO vo, Model model) {
+		List<StayVO> keywordList = stayMapper.stayKeywordList(vo);
+
+		log.info("===========");
+		log.info("keywordList : " + keywordList);
+		model.addAttribute("keywordList", keywordList);
+		return null;
+	}
+
+
+	
+
 	
 }

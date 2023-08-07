@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.gogo.vo.RoomPhotoVO;
 import com.gogo.vo.StayVO;
@@ -11,6 +13,8 @@ import com.gogo.vo.StayVO;
 public interface StayMapper {
 	
 	public List<StayVO> stayList();
+	
+	public List<StayVO> stayKeywordList(StayVO vo);
 	
 	public Map<String, String> roomInfo(String stayName);
 

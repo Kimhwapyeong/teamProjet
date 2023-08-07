@@ -55,7 +55,7 @@
         }
     </style>
     <script>
-        window.addEventListener('load', function () {
+    window.onload = function() {
 
             // 국내여행 버튼 띄우기
             travelbtn.addEventListener('click', function () {
@@ -201,67 +201,30 @@
 			setTimeout(showElement, 3000);            
 
             
-            
-
-            // likeBtn.addEventListener('click', function(){
-            //     console.log('a');
-            //     likeBtn.classList.add('on');
-            // });
-
-            // const buttons = document.querySelectorAll('#listpick li');
-            // buttons.forEach(button => {
-            //     button.addEventListener('click', () => {
-            //         buttons.forEach(otherButton => {
-            //             if (otherButton === button) {
-            //                 otherButton.classList.add('_selector_selected__ciPbE');
-            //             } else {
-            //                 otherButton.classList.remove('_selector_selected__ciPbE');
-            //             }
-            //         });
-            //     })
-            // })
-
-
-
-
-            // let bttn = document.querySelectorAll("#areaSelect>li>button");
-
-            // bttn.forEach(button => {
-            //     // 버튼이 클릭되면
-            //     button.addEventListener('click', () => {
-            //         // 클릭된 버튼만 active 클래스 추가, 나머지는 active 클래스 삭제
-            //         bttn.forEach(otherButton => {
-            //             if (otherButton === button) {
-            //                 otherButton.classList.add('active');
-            //             } else {
-            //                 otherButton.classList.remove('active');
-            //             }
-            //         });
-            //     })
-            // })
-
+           
+			// 날짜 선택 버튼
             let calendarContainer = document.querySelector('#iscalendar');
             let iscalendar = document.querySelectorAll('.DateInput input');
             let closeBtn222 = document.getElementById('closeBtn222');
 
             // Event listener for iscalendar inputs and closeBtn2
             function toggleCalendar() {
-            if (calendarContainer.style.display === 'none') {
-                calendarContainer.style.display = '';
-            } else {
-                calendarContainer.style.display = 'none';
-            }
+	            if (calendarContainer.style.display === 'none') {
+	                calendarContainer.style.display = '';
+	            } else {
+	                calendarContainer.style.display = 'none';
+	            }
             }
 
             iscalendar.forEach(input => {
             input.addEventListener('click', toggleCalendar);
             });
-
             closeBtn222.addEventListener('click', toggleCalendar);
-        })
+        
 
 
-        function searchlist() {
+        
+/*         function searchlist() {
             let where;
             document.querySelectorAll('.optionPick>li>button').forEach(button => {
                 if (button.classList.contains('active')) {
@@ -269,8 +232,183 @@
                     location.href = '/stay/list?=' + where;
                 }
             })
-        }
+        } */
+		
+				
+        		//  인원수 조정 버튼
+	            let plusBtns = document.querySelectorAll('.btn_plus');
+	            let minusBtns = document.querySelectorAll('.number_count .btn_minus');
+	            let inputNums = document.querySelectorAll('.input-num input');
+				let totalCnt = document.getElementById('totalPerson');
+	
+	            plusBtns.forEach((plusBtn, index) => {
+		              plusBtn.addEventListener('click', () => {
+		                let currentValue = parseInt(inputNums[index].value);
+		                console.log(inputNums[index].value);
+		                inputNums[index].value = currentValue + 1;
+		                
+		                calculateTotal();
+	              	});
+	            });
+	           
+	           
+	            
+	           minusBtns.forEach((minusBtn, index) => {
+	            	minusBtn.addEventListener('click', () => {
+		                let currentValue = parseInt(inputNums[index].value);
+		                if (currentValue > 0) {
+		                  inputNums[index].value = currentValue - 1;
+		                  calculateTotal();
+		                }
+	              	});
+	            }); 
+	           
+	           function calculateTotal() {
+	        	   let sum = 0;
+	        	   inputNums.forEach((input, index) => {
+	        	     sum += parseInt(input.value);
+	        	   });
+	        	   totalCnt.value = sum;
+	        	 }
+	           
+	           
+	          
+	           
+/* 	           let submitBtns = document.querySelectorAll('.btn-number-search');
+	           // let searchFrom = document.getElementById('searchFrom');
+	           
+	           submitBtns.forEach((subBtn) => {
+	        	   subBtn.addEventListener('click', (event) => {
+	        		    event.preventDefault(); 
+	        		    console.log('a');
+	        	     // stay(스테이) / region(지역) / totalPerson(인원) / startPrice(시작가격) ~ endPrice(끝가격) / 
+	        	     searchForm.action = "/stay/keyword";
+	        	     searchForm.submit();
+	        	     
+	        	   });
+	        	 }); */
+	           
+	           
+	           
+	           
+	           
+	           
+	           
+	           
+	           
+        	};
+        
+        	document.addEventListener('DOMContentLoaded', function() {
+        	  let searchBtn = document.querySelector('.btn_search');
+        	  let insertList = document.querySelector('.flist_wrap');
+        	  let searchFrom = document.getElementById('searchFrom');
 
+        	  
+     
+        	  
+        	  searchBtn.addEventListener('click', function() {
+        			event.preventDefault(); 
+        			console.log('a');
+        			// Get the form data and convert it to URL-encoded string
+        		    let formData = new FormData(searchFrom);
+        		    let urlSearchParams = new URLSearchParams(formData).toString();
+
+        		    // Append the form data as query parameters to the URL
+        		    let url = '/stay/keyword?' + urlSearchParams;
+
+        		    // Send the GET request
+        		    fetch(url)
+        		      .then(response => response.json())
+        		      .then(data => {
+        		        // Handle the response data here
+        		        console.log(data);
+        		      })
+        		});
+        			
+        			// 데이터
+        			
+         			/* let stay = document.getElementById('stay').value;
+        			if(stay == ""){
+        				stay == null;
+        			}
+        			let region = document.getElementById('region').value;
+        			if(region == ""){
+        				region == null;
+        			}
+        			let view = document.getElementById('view').value;
+        			if(view == ""){
+        				view == null;
+        			}
+        			let totalPerson = document.getElementById('totalPerson');
+        			if(totalPerson == ""){
+        				totalPerson == null;
+        			}
+        			let endPrice = document.getElementById('endPrice').value;
+        			if(endPrice == ""){
+        				endPrice == null;
+        			}
+        			let stayType = document.getElementById('stayType').value;
+        			if(stayType == ""){
+        				stayType == null;
+        			}
+        			let roomOption = document.getElementById('roomOption').value;
+        			if(roomOption == ""){
+        				roomOption == null;
+        			} */
+        			
+/*         			searchFrom.action = "/stay/keyword/"
+        			searchFrom.method = "Get";
+        			searchFrom.submit(); */
+        			
+        			// keyword?stay=&findStartDate=체크인&reserved_day=&reserved_checkIn=&reserved_checkOut=&findEndDate=&totalPerson=0&endPrice=100&stayType=&roomOption=babiqu&roomOption=pet
+        			
+        			/* fetch('/stay/keyword')
+        			// response.json() : 요청결과를 js object 형식으로 변환
+        			.then(response => response.json())
+        			// 반환받은 오브젝트를 이용하여 화면에 출력 // 반환을 map으로 할려고 map이라 적음
+        			.then(map => keywordList(map)); */
+        			
+        			
+	        	     // stay(스테이) / region(지역) / totalPerson(인원) / startPrice(시작가격) ~ endPrice(끝가격) /
+					
+	        	   /*   let replyObj = {
+	        	    		 stay : stay,
+	        	    		 region : region,
+	        	    		 view : view,
+	        	    		 totalPerson : totalPerson,
+	        	    		 endPrice : endPrice,
+	        	    		 stayType : stayType,
+	        	    		 roomOption : roomOption
+					}; */
+					
+					/* fetchPost('/reply/insert', replyObj, replyWriteRes); */
+					//------------------------------------------------------------------------------------------------------------
+					// 2. 객체를 json 타입으로 변환
+					/* let replyJson = JSON.stringify(replyObj);
+					
+					console.log(replyObj);
+					console.log(replyJson);
+					
+					// 3. 서버에 요청
+					fetch("/stay/keyword",{method : 'post', headers : {'content-Type' : 'application/json'}, body : replyJson})
+					// 4. 응답처리
+					.then(response => response.json())
+					.then(map => keywordList(map)); */
+	        	     
+	        	     /* fetch('/stay/keyword/'+stay + '/' + region + '/' + view + '/' + totalPerson + '/' + endPrice + '/' + stayType + '/' + roomoption)
+	        	 	// response.json() : 요청결과를 js object 형식으로 변환
+	        	 	.then(response => response.json())
+	        	 	// 반환받은 오브젝트를 이용하여 화면에 출력 // 반환을 map으로 할려고 map이라 적음
+	        	 	.then(map => replyView(map));
+        		}); */
+        	 
+        	
+        	  
+        	function keywordList(map){
+        		let list = map.list;
+        		console.log(list);
+        		}
+        	});
     </script>
 </head>
 
@@ -281,12 +419,12 @@
             <div class="tit">FIND STAY</div>
             <div class="txt">머무는 것 자체로 여행이 되는 공간</div>
         </div>
-        <form action="/stay/list/{region}">
+        <form name="searchFrom" id="searchFrom">
             <div class="container findstay_filter" role="presentation">
                 <div class="flist_sorting">
                     <div class="row filter_day">
-                        <div class="Keyword"><span class="tit">스테이/지역</span><input type="text" class="inp_keyword"
-                                value="">
+                        <div class="Keyword"><span class="tit">스테이/지역</span><input type="text" class="inp_keyword" name="stayName" id="stayName"
+                                >
                         </div>
                         <div class="filter_area"><button type="button" class="btn_select" id='travelbtn' style='margin-top: 16px;'>국내 전체</button>
 
@@ -301,40 +439,38 @@
                                             <ul class="clearfix">
                                                 <li><button type="button" class="active"
                                                         style="cursor: pointer;">국내전체</button></li>
-                                                <li><button type="button" class="" style="cursor: pointer;">제주</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="제주">제주</button>
                                                 </li>
-                                                <li><button type="button" class="" style="cursor: pointer;">서울</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="서울">서울</button>
                                                 </li>
-                                                <li><button type="button" class="" style="cursor: pointer;">강원</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="강원">강원</button>
                                                 </li>
-                                                <li><button type="button" class="" style="cursor: pointer;">부산</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="부산">부산</button>
                                                 </li>
-                                                <li><button type="button" class="" style="cursor: pointer;">경기</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="경기">경기</button>
                                                 </li>
-                                                <li><button type="button" class="" style="cursor: pointer;">충청</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="충청">충청</button>
                                                 </li>
-                                                <li><button type="button" class="" style="cursor: pointer;">경상</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="경상">경상</button>
                                                 </li>
-                                                <li><button type="button" class="" style="cursor: pointer;">전라</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="전라">전라</button>
                                                 </li>
-                                                <li><button type="button" class="" style="cursor: pointer;">인천</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="인천">인천</button>
                                                 </li>
-                                                <li><button type="button" class="" style="cursor: pointer;">광주</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="광주">광주</button>
                                                 </li>
-                                                <li><button type="button" class="" style="cursor: pointer;">대전</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="대전">대전</button>
                                                 </li>
-                                                <li><button type="button" class="" style="cursor: pointer;">대구</button>
-                                                </li>
-                                                <li><button type="button" class="" style="cursor: pointer;">울산</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="대구">대구</button>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="box">
                                             <div class="tit cate_stay" style="text-align: left;">주변 경치</div>
                                             <ul class="clearfix">
-                                             	<li><button type="button" class="" style="cursor: pointer;">바다</button>
+                                             	<li><button type="submit" class="" style="cursor: pointer;" id="stayView" name="stayView" value="바다">바다</button>
                                                 </li>
-                                                <li><button type="button" class="" style="cursor: pointer;">산</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" id="stayView" name="stayView" value="산">산</button>
                                                 </li>
                                              </ul>
                                         </div>
@@ -438,7 +574,7 @@
                                                         
                                                                   <div class="btn-wrapper" style="position:absolute; bottom:5%; left:35%;">
                                                                     <button style=" border:0px; cursor: pointer;" type="submit"
-                                                                      onclick="" class="btn-number-search">적용하기</button>
+                                                                      class="btn-number-search">적용하기</button>
                                                                   </div>
                                                                   <button
                                                                     style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer; position:absolute; top:3%; right:2%;"
@@ -652,7 +788,7 @@
                                 <dt style="float: left; margin: 12px 0px 0px;"><span>성인</span></dt>
                                 <dd class="">
                                     <div class="number_count"><button type="button" class="btn_minus"
-                                            disabled="">빼기</button><span class="input-num"><input type="number"
+                                            >빼기</button><span class="input-num"><input type="number"
                                                 value="0"><span class="person-count">명</span></span><button
                                             type="button" class="btn_plus">더하기</button></div>
                                 </dd>
@@ -661,18 +797,19 @@
                                 </dt>
                                 <dd class="">
                                     <div class="number_count"><button type="button" class="btn_minus"
-                                            disabled="">빼기</button><span class="input-num"><input type="number"
-                                                value="0"><span class="person-count">명</span></span><button
+                                            >빼기</button><span class="input-num"><input type="number"
+                                                value="0" id="person"><span class="person-count">명</span></span><button
                                             type="button" class="btn_plus">더하기</button></div>
                                 </dd>
                             </dl>
-                            <div class="btn-wrapper"><button type="button" class="btn-number-search">적용하기</button></div>
+                            <input type="hidden" name="stdPerson" id="stdPerson" value="0">
+                            <div class="btn-wrapper"><button type="submit" class="btn-number-search">적용하기</button></div>
                         </div>
                         <div id="selectPrice" class="layer_select price"><button type="button"
                                 class="btn_close">닫기</button>
                             <div class="tit">가격 범위</div>
                             <div class="price_wrap">
-                                <div class="price_slid">
+                                <!-- <div class="price_slid">
                                     <div aria-disabled="false" class="input-range">
                                         <span class="input-range__label input-range__label--min">
                                             <span class="input-range__label-container">0</span>
@@ -699,66 +836,72 @@
                                         </div><span class="input-range__label input-range__label--max"><span
                                                 class="input-range__label-container">100</span></span>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="price_input">
                                 <div class="input"><small>최저 요금</small><span><input type="text" pattern="[0-9]*"
                                             value="0"
-                                            style="width: 85px; font-size: 14px; text-align: right; height: 32px; vertical-align: middle; padding-bottom: 5px;">만원</span>
+                                            style="width: 85px; font-size: 14px; text-align: right; height: 32px; vertical-align: middle; padding-bottom: 5px;" naame="minPrice" id="minPrice">만원</span>
                                 </div><span class="divider" style="border: none; padding: 25px 5px 5px;">-</span>
                                 <div class="input"><small>최고 요금</small><span><input type="text" pattern="[0-9]*"
                                             value="100"
-                                            style="width: 85px; font-size: 14px; text-align: right; height: 32px; vertical-align: middle; padding-bottom: 5px;">만원~</span>
+                                            style="width: 85px; font-size: 14px; text-align: right; height: 32px; vertical-align: middle; padding-bottom: 5px;" name="maxPrice" id="maxPrice">만원~</span>
                                 </div>
                             </div>
-                            <div class="btn-wrapper"><button type="button" class="btn-number-search">적용하기</button></div>
+                            <div class="btn-wrapper"><button type="submit" class="btn-number-search">적용하기</button></div>
                         </div>
                         <div id="selectType" class="layer_select type "><button type="button"
                                 class="btn_close">닫기</button>
                             <div class="tit">스테이 유형</div>
-                            <div class="btn-wrapper"><button type="button" class="btn-number-search">적용하기</button></div>
+                            <div class="btn-wrapper"><button type="submit" class="btn-number-search">적용하기</button></div>
                             <ul class="check_list">
-                                <li class="ko"><label class="check_skin" for="all"><input type="checkbox" id="all"
-                                            checked=""><span>전체</span></label></li>
-                                <li class="ko"><label class="check_skin" for="rental_house"><input type="checkbox"
-                                            id="rental_house"><span>렌탈하우스</span></label></li>
+                                <li class="ko"><label class="check_skin" for="all"><input type="checkbox" id="all" name="stayType" value=""
+                                            ><span>전체</span></label></li>
                                 <li class="ko"><label class="check_skin" for="pension"><input type="checkbox"
-                                            id="pension"><span>펜션</span></label></li>
+                                            id="pension" name="stayType" value="펜션"><span>펜션</span></label></li>
                                 <li class="ko"><label class="check_skin" for="hanok"><input type="checkbox"
-                                            id="hanok"><span>한옥</span></label></li>
+                                            id="hanok" name="stayType" value="한옥"><span>한옥</span></label></li>
                                 <li class="ko"><label class="check_skin" for="hostel"><input type="checkbox"
-                                            id="hostel"><span>호스텔</span></label></li>
+                                            id="hostel" name="stayType" value="호스텔"><span>호스텔</span></label></li>
                                 <li class="ko"><label class="check_skin" for="bnb"><input type="checkbox"
-                                            id="bnb"><span>민박</span></label></li>
+                                            id="bnb" name="stayType" value="민박"><span>민박</span></label></li>
                                 <li class="ko"><label class="check_skin" for="hotel"><input type="checkbox"
-                                            id="hotel"><span>호텔</span></label></li>
+                                            id="hotel" name="stayType" value="호텔"><span>호텔</span></label></li>
                             </ul>
                         </div>
-                        <div id="selectTheme" class="layer_select theme "><button type="button"
-                                class="btn_close">닫기</button>
+                        <div id="selectTheme" class="layer_select theme ">
+                        <button type="button" class="btn_close">닫기</button>
                             <div class="tit">편의시설</div>
-                            <div class="btn-wrapper"><button type="button" class="btn-number-search">적용하기</button></div>
+                            <div class="btn-wrapper"><button type="submit" class="btn-number-search">적용하기</button></div>
                             <ul class="findstay_check_list">
 <!--                                 <li class="ko"><label class="check_skin" for="all_theme"><input type="checkbox"
                                             id="all_theme" ><span>전체</span></label></li> -->
                                 <li class="ko"><label class="check_skin" for="bbq_theme"><input type="checkbox"
-                                            id="bbq_theme" checked=""><span>바베큐</span></label></li>
+                                            name="roomOption" id="bbq_theme" value="babiqu"><span>바베큐</span></label></li>
                                 <li class="ko"><label class="check_skin" for="pets_theme"><input type="checkbox"
-                                            id="pets_theme"><span>반려동물</span></label></li>
+                                            name="roomOption" id="pets_theme" value="pet"><span>반려동물</span></label></li>
                                 <li class="ko"><label class="check_skin" for="display_theme"><input type="checkbox"
-                                            id="display_theme"><span>빔프로젝터, TV</span></label>
+                                            name="roomOption" id="display_theme" value="beamprojector"><span>빔프로젝터, TV</span></label>
                                 </li>
                                 <li class="ko"><label class="check_skin" for="pool_theme"><input type="checkbox"
-                                            id="pool_theme"><span>풀장</span></label></li>
+                                            name="roomOption" id="pool_theme" value="pool"><span>풀장</span></label></li>
                                 <li class="ko"><label class="check_skin" for="kitchenette_theme"><input type="checkbox"
-                                            id="kitchenette_theme"><span>테라스</span></label></li>
+                                            name="roomOption" id="kitchenette_theme" value="terrace"><span>테라스</span></label></li>
                             </ul>
+                           <!--  <fieldset>
+                            	<legend>편의시설</legend>
+                            	<input type="checkbox" name="roomOption" id="roomOption" value="babiqu">바베큐<br>
+                            	<input type="checkbox" name="roomOption" id="roomOption" value="pet">반려동물<br>
+                            	<input type="checkbox" name="roomOption" id="roomOption" value="beamprojector">빔프로젝터, TV<br>
+                            	<input type="checkbox" name="roomOption" id="roomOption" value="pool">풀장<br>
+                            	<input type="checkbox" name="roomOption" id="roomOption" value="terrace">테라스<br>
+                            </fieldset> -->
                         </div>
                     </div>
                     <div class="sel_map">
                         <!-- <div class="map_img_off" role="presentation"></div> -->
                     </div><button type="reset" class="btn_reset">초기화</button>
-                    <div class="search_btn_wrapper"><button type="button" class="btn_search">SEARCH</button>
+                    <div class="search_btn_wrapper"><button type="submit" class="btn_search">SEARCH</button>
                     </div>
         </form>
 

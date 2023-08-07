@@ -6,7 +6,7 @@ import lombok.Data;
 public class StayVO {
 
 	private String stayNo; // 숙소 시퀀스
-	private String stayName;
+	private String stayName; // 숙소 이름
 	private String memberId; // 호스트 아이디
 	private String stayLoc; // 숙소 위치 (지역 명)
 	private String stayAdress;
@@ -27,5 +27,8 @@ public class StayVO {
 	
 	private int likeCount; // 좋아요 수
 	private String stayView; // 주변 경치
+	
+	private String roomOption; 
+	
 
 }
