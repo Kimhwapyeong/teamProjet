@@ -24,9 +24,9 @@
 			select roomseq.nextval from dual
 		</selectKey>
 		insert into room (roomno, stayno, roomname, stdperson
-						, overperson, roominfo, price, roomtype, info)
+						, overperson, roominfo, price, info)
 		values (#{roomNo}, #{stayNo}, #{roomName}, #{stdPerson}
-				, #{overPerson}, #{roomInfo}, #{price}, #{roomType}, #{info})
+				, #{overPerson}, #{roomInfo}, #{price}, #{info})
 	</insert>
 	
 	<!-- room 옵션 등록 -->
