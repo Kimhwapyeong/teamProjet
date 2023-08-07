@@ -158,19 +158,21 @@ public class MemberController extends CommonRestController {
 	        return result;
 	}
 	*/
-	
+	// 아이디 찾기
 	@RequestMapping(value = "/login/findIdAction", method = RequestMethod.POST)
 	public String findIdAction(HttpServletRequest request, Model model,
 			@RequestParam(required = true, value = "memberName") String memberName, 
 		    @RequestParam(required = true, value = "memberEmail") String memberEmail,
 			@ModelAttribute MemberVO member) {
 		try {
-		    
+		    // 회원정보 검색
+			
 			member.setMemberName(memberName);
 			member.setMemberEmail(memberEmail);
-		    MemberVO memberSearch = memberService.findIdAction(member);
 		    
-		    model.addAttribute("member", memberSearch);
+			String memberId = memberService.findIdAction(member);
+		    model.addAttribute("memberId", memberId);
+		    
 		 
 		} catch (Exception e) {
 		    System.out.println(e.toString());

@@ -2,8 +2,6 @@ package com.gogo.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 
 import com.gogo.vo.MemberVO;
 
@@ -25,5 +23,5 @@ public interface MemberMapper {
 
 	public int idCheck(MemberVO member);
 
-	public MemberVO findIdAction(MemberVO member);
+	public String findIdAction(MemberVO member);
 }

@@ -72,7 +72,7 @@ alert(msg);
 						      <label for="memberName">이름</label>
 						    </td>
 						    <td style="border: 1px solid #ebebeb;">
-						      <input class="w3-input" type="text" id="memberName" name="memberName" placeholder="이름을 입력해주세요." value="user1" required>
+						      <input class="w3-input" type="text" id="memberName" name="memberName" placeholder="이름을 입력해주세요." value="차은우" required>
 						    </td>
 						  </tr>
 						  <tr>
@@ -80,7 +80,7 @@ alert(msg);
 						      <label for="memberEmail">Email</label>
 						    </td>
 						    <td style="border: 1px solid #ebebeb;">
-						      <input class="w3-input" type="text" id="memberEmail" name="memberEmail" placeholder="이메일을 입력해주세요." value="user1@naver.com" required>
+						      <input class="w3-input" type="text" id="memberEmail" name="memberEmail" placeholder="이메일을 입력해주세요." value="yuhhwa08@gmail.com" required>
 						    </td>
 						  </tr>
 						</table>

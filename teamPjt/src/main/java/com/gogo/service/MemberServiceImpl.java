@@ -67,7 +67,7 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.selectOne(member);
 	}
 	@Override
-	public MemberVO findIdAction(MemberVO member) {
+	public String findIdAction(MemberVO member) {
 		return memberMapper.findIdAction(member);
 	}
 
