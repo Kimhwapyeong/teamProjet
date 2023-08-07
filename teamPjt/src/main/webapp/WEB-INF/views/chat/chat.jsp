@@ -83,6 +83,7 @@
         </div>
         <jsp:include page="../common/footer.jsp" />
     </div>
+    <input type="hidden" id="currentRoomId" value="${roomId}">
 </body>
 
 <script type="text/javascript">

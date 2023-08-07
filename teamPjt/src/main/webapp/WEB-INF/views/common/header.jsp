@@ -40,47 +40,54 @@
 
 <script>
 	// 초대 메세지를 받기 위한 로직
-	
-		function initInviteSocket(targetMemberId) {
-		    let socketInvite = new SockJS("http://localhost:8080/echo?targetMemberId=" + targetMemberId);
-		    
-		    socketInvite.onmessage = function(event) {
-		        console.log(event);
-		        
-		        let receivedData = JSON.parse(event.data);
-		        
-		        console.log('receivedData : ', receivedData);
-		        
-		        if (receivedData && receivedData.type === 'invite') {
-		            let roomId = receivedData.roomId;
-		            let message = receivedData.message; // 여기에서는 메시지를 추가로 변경하거나 결합하지 않아야 합니다.
-		            
-		            if (confirm(roomId + "\n이 방으로 이동하시겠습니까?")) {
-		            	// 정규표현식을 사용하여 문자열에서 숫자를 추출
-		            	let match = roomId.match(/(\d+)번/);
-
-		            	if (match && match[1]) {
-		            	    let roomNumber = match[1];  // '628'라는 문자열로 반환됩니다.
-		            	    console.log("방 번호:", roomNumber);  // 방 번호: 628
-			                window.location.href = "/chat/chat?roomId=" + roomNumber;
-		            	} else {
-		            	    console.log("방 번호를 찾을 수 없습니다.");
-		            	}
-		            }
-		        }
-		    };
-		    
-		    socketInvite.onclose = function(event) {
-		        console.log('Invite socket closed:', event.reason);
-		    };
-		    
-		    socketInvite.onerror = function(error) {
-		        console.error('WebSocket Error:', error);
-		    };
-		}
+	document.addEventListener('DOMContentLoaded', function() {
+    function initInviteSocket(targetMemberId) {
+		        let socketInvite = new SockJS("http://localhost:8080/echo?targetMemberId=" + targetMemberId);
 		
-		// 현재 로그인한 사용자의 ID를 사용하여 초대 웹소켓 연결 초기화
-		initInviteSocket($("#currentLoggedInUserId").val());
+		        socketInvite.onmessage = function(event) {
+		            let receivedData = JSON.parse(event.data);
+		
+		            if (receivedData && receivedData.type === 'invite') {
+		                let roomId = receivedData.roomId;
+		                alertPopOn(roomId + "\n이 방으로 이동하시겠습니까?");
+		
+		                document.getElementById('acceptInvite').style.display = 'block';
+		                document.getElementById('declineInvite').style.display = 'block';
+		                document.getElementById('popup-focus').style.display = 'none';
+		            }
+		        };
+		
+		        document.getElementById('acceptInvite').addEventListener('click', function() {
+		            let roomId = document.getElementById('alertTxt').innerText;
+		            let match = roomId.match(/(\d+)번/);
+		
+		            if (match && match[1]) {
+		                let roomNumber = match[1];  
+		                window.location.href = "/chat/chat?roomId=" + roomNumber;
+		            } else {
+		                console.log("방 번호를 찾을 수 없습니다.");
+		            }
+		            
+		            document.getElementById('acceptInvite').style.display = 'none';
+		            document.getElementById('declineInvite').style.display = 'none';
+		            document.getElementById('popup-focus').style.display = 'block';
+		
+		            alertPopClose();
+		        });
+		
+		        document.getElementById('declineInvite').addEventListener('click', function() {
+		            document.getElementById('acceptInvite').style.display = 'none';
+		            document.getElementById('declineInvite').style.display = 'none';
+		            document.getElementById('popup-focus').style.display = 'block';
+		
+		            alertPopClose();
+		        });
+		    }
+		    // 현재 로그인한 사용자의 ID를 사용하여 초대 웹소켓 연결 초기화
+		    initInviteSocket($("#currentLoggedInUserId").val());
+		});
+	
+	
 	// 알림창을 위한 변수
 	let msg = '${msg}'
 	// let msg = '모달테스트';
@@ -225,6 +232,8 @@
 					<div class="txt" id="alertTxt">파일 업로드에 실패하였습니다.</div>
 				</div>
 				<div class="bt_btns">
+					<button id="acceptInvite" class="btn_bk" style="display:none">수락</button>
+					<button id="declineInvite" class="btn_bk" style="display:none">거절</button>
 					<button type="button" class="btn_bk" id="popup-focus" onclick="alertPopClose()">확인</button>
 				</div>
 			</div>
