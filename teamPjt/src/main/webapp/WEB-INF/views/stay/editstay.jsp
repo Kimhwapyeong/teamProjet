@@ -153,6 +153,7 @@ input ::placeholder{
 						</div></li>
 				</ul>
 			</div>
+
 			<div class="store_apply_agree" style='display:none'>
 				<div class="box">
 					<div class="tit">개인정보 수집 및 이용 동의</div>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../common/header.jsp"/>
 
 <link href="/resources/main/add.css">
@@ -9,7 +10,7 @@
 		<div class="txt">room 수정</div>
 	</div>
 	<div class="store_apply">
-		<form name="addRoomForm" method="post" enctype="multipart/form-data" action="/addRoomAction">
+		<form name="addRoomForm" method="post" enctype="multipart/form-data" action="/editRoomAction">
 			<div class="store_apply_form">
 				<ul class="form_dl">
 					<div class="_contactus_divider__BZ5eb"></div>
@@ -17,23 +18,16 @@
 					<span class="right">* 필수 입력 항목</span></li>
 					<li><div class="dt">room 이름 *</div>
 						<div class="dd">
-							<input type="text" class="form_style" name="roomName" value=""
+							<input type="text" class="form_style" name="roomName" value="${ map.roomVO.roomName }"
 								placeholder="room 이름을 입력해 주세요. (30자 이내)">
 						</div></li>
 					<li style="width:53%"><div class="dt">기준인원 *</div>
 						<div class="dd" style="width:200px">
 							<select style="width: 100%" class="form_style" name="stdPerson"><option
 									selected="" value="">선택해 주세요</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-								<option value="7">7</option>
-								<option value="8">8</option>
-								<option value="9">9</option>
-								<option value="10">10</option>
+								<c:forEach begin="1" end="10" step="1" var="i">
+									<option value=${ i } ${ map.roomVO.stdPerson eq i ? 'selected' : '' }>${ i }</option>
+								</c:forEach>
 							</select>
 						</div>
 					</li>
@@ -42,86 +36,79 @@
 						<div class="dd" style="width:200px" id="divOverPerson">
 							<select style="width: 100%" class="form_style" name="overPerson">
 								<option selected="" value="">선택해 주세요</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-								<option value="7">7</option>
-								<option value="8">8</option>
-								<option value="9">9</option>
-								<option value="10">10</option>
+								<c:forEach begin="1" end="10" step="1" var="i">
+									<option value=${ i } ${ map.roomVO.overPerson eq i ? 'selected' : '' }>${ i }</option>
+								</c:forEach>
 							</select>
 						</div>
 					</li>
 					<li><div class="dt">옵션 *</div>
 						<div class="dd">
 							<label for="bathroom" class="check_skin">
-								<input type="checkbox" id="bathroom" value="Y" name="bathroom">
+								<input type="checkbox" id="bathroom" value="Y" name="bathroom"
+											${ map.roomOption.bathroom eq 'Y' ? 'checked' : '' }>
 									<span style="font-size: 12px">화장실</span>
 								</label>
 							<label for="babiqu" class="check_skin">
-								<input type="checkbox" id="babiqu" value="Y" name="babiqu">
+								<input type="checkbox" id="babiqu" value="Y" name="babiqu"
+											${ map.roomOption.babiqu eq 'Y' ? 'checked' : '' }>
 									<span style="font-size: 12px">바비큐</span>
 								</label>
 							<label for="kitchen" class="check_skin">
-								<input type="checkbox" id="kitchen" value="Y" name="kitchen">
+								<input type="checkbox" id="kitchen" value="Y" name="kitchen"
+											${ map.roomOption.kitchen eq 'Y' ? 'checked' : '' }>
 									<span style="font-size: 12px">부엌</span>
 								</label>
 							<label for="pet" class="check_skin">
-								<input type="checkbox" id="pet" value="Y" name="pet">
+								<input type="checkbox" id="pet" value="Y" name="pet"
+											${ map.roomOption.pet eq 'Y' ? 'checked' : '' }>
 									<span style="font-size: 12px">반려동물</span>
 								</label>
 							<label for="pool" class="check_skin">
-								<input type="checkbox" id="pool" value="Y" name="pool">
+								<input type="checkbox" id="pool" value="Y" name="pool"
+											${ map.roomOption.pool eq 'Y' ? 'checked' : '' }>
 									<span style="font-size: 12px">풀장</span>
 								</label>
 							<label for="terrace" class="check_skin">
-								<input type="checkbox" id="terrace" value="Y" name="terrace">
+								<input type="checkbox" id="terrace" value="Y" name="terrace"
+											${ map.roomOption.terrace eq 'Y' ? 'checked' : '' }>
 									<span style="font-size: 12px">테라스</span>
 								</label>
 							<label for="parking" class="check_skin">
-								<input type="checkbox" id="parking" value="Y" name="parking">
+								<input type="checkbox" id="parking" value="Y" name="parking"
+											${ map.roomOption.parking eq 'Y' ? 'checked' : '' }>
 									<span style="font-size: 12px">주차장</span>
 								</label>
 							<label for="beamProjector" class="check_skin">
-								<input type="checkbox" id="beamProjector" value="Y" name="beamProjector">
+								<input type="checkbox" id="beamProjector" value="Y" name="beamProjector"
+											${ map.roomOption.beamProjector eq 'Y' ? 'checked' : '' }>
 									<span style="font-size: 12px">빔프로젝터</span>
 								</label>
 						
 						<div class="dd" style="width:200px; display:flex; padding-top:10px">
 							<select style="width: 100%" class="form_style" value="Y" name="bed"><option
-									selected="" value="">침구 갯수</option>
-								<option value="0">0</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-								<option value="7">7</option>
-								<option value="8">8</option>
-								<option value="9">9</option>
-								<option value="10">10</option>
+									selected="" value="">침구 갯수</option>								
+								<c:forEach begin="0" end="10" step="1" var="i">
+									<option value="${ i }" ${ map.roomOption.bed eq i ? 'selected' : '' }>${ i }</option>
+								</c:forEach>
 							</select>
 						</div>
 							</div>
 						</li>
 					<li><div class="dt">1박 가격 *</div>
 						<div class="dd">
-							<input type="text" class="form_style" name="price" value=""
+							<input type="text" class="form_style" name="price" value="${ map.roomVO.price }"
 								placeholder="단위 구분 기호(,) 사용하지 않고 숫자만으로 입력해주세요. 단위 : 원">
 						</div></li>
 					<li><div class="dt">room 소제목 *</div>
 						<div class="dd">
-							<input type="text" class="form_style" name="info" value=""
+							<input type="text" class="form_style" name="info" value="${ map.roomVO.info }"
 								placeholder="room의 소제목을  간단하게 입력해주세요. (최대 50자)">
 						</div></li>
 					<li><div class="dt">room 소개 *</div>
 						<div class="dd">
 							<textarea rows="5" class="form_style" name="roomInfo"
-								placeholder="공간의 구조, 컨셉, 스토리 등을 자유롭게 작성해 주세요. (최소 50자)"></textarea>
+								placeholder="공간의 구조, 컨셉, 스토리 등을 자유롭게 작성해 주세요. (최소 50자)">${ map.roomVO.roomInfo }</textarea>
 						</div></li>
 					<div class="_contactus_divider__BZ5eb"></div>
 					
@@ -173,7 +160,10 @@
 							<div class="file_wrap">
 								<div class="form_style" style="padding: 0; align-items: center" role="presentation"
 									tabindex="0" id="image_container" onclick="fileUpload()">
-									<div class="drag" role="button" style="cursor: pointer"
+									<c:forEach items="${ map.listPhoto }" var="photo">
+										<img src="/resources/images/${ photo.savePath }" style="width:150px; height:85px; padding:5px; border-radius:12px">
+									</c:forEach>
+									<div class="drag" role="button" style="cursor: pointer; display:none"
 										tabindex="0">
 										<i class="ico_addfile"></i>첨부파일 올리기/미리보기
 									</div>
@@ -202,6 +192,8 @@
 				<button type="submit" class="btn_bk" id="btnAddRoom">수정하기</button>
 				<button type="reset" class="btn_bk">초기화</button>
 			</div>
+			<input type="hidden" name="roomNo" value="${ map.roomVO.roomNo }">
+			<input type="hidden" name="stayNo" value="${ map.roomVO.stayNo }">
 		</form>
 	</div>
 </div>

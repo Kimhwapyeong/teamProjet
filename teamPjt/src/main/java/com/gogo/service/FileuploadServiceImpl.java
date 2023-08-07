@@ -77,7 +77,8 @@ public class FileuploadServiceImpl extends FileuploadPath implements FileuploadS
 		return insertRes;
 	}
 	
-	public String fileuploadStay(List<MultipartFile> files, String dir, FileuploadVO paramFileuploadVO) {
+	// stay 등록 시 mainPic을 저장하기 위해 첫 번째 사진 savePath를 반환해주는 메소드
+	public String fileuploadMainPic(List<MultipartFile> files, String dir, FileuploadVO paramFileuploadVO) {
 		int insertRes = 0;
 		String mainPic = "";
 		System.out.println("fileupload 입장");

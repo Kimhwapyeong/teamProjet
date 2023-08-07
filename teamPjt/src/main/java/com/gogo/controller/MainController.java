@@ -23,8 +23,8 @@ public class MainController {
 	MainService mainService;
 	
 	@GetMapping("/main")
-	public void getMain() {
-		
+	public void getMain(Model model) {
+		mainService.getMainList(model);
 	}
 	
 	// 임시 매핑용
@@ -58,6 +58,7 @@ public class MainController {
 	@PostMapping("/addRoomAction")
 	public String addRoomAction(RoomVO roomVO
 						, RoomOptionVO optionVO
+						// roomVO에 stayNo가 있음, 수정 TODO
 						, String stayNo
 						, List<MultipartFile> files
 						, RedirectAttributes rttr) {
@@ -81,9 +82,17 @@ public class MainController {
 	}
 	
 	@PostMapping("/editStayAction")
-	public String editStayAction(StayVO vo, List<MultipartFile> files, Model model) {
+	public String editStayAction(StayVO vo, List<MultipartFile> files
+								,RedirectAttributes rttr, Model model) {
 
-		mainService.updateStay(vo, files);
+		int res = mainService.updateStay(vo, files);
+		
+		if(res > 0) {
+			rttr.addFlashAttribute("msg", "수정 완료");
+		}else {
+			rttr.addFlashAttribute("msg", "수정 실패");
+		}
+		
 				// 마이페이지로 포워드
 		return "redirect:/main";
 	}
@@ -92,12 +101,26 @@ public class MainController {
 	@GetMapping("/editroom")
 	public String editRoom(RoomVO vo, Model model) {
 		
+		mainService.getRoom(vo, model);
+		
 		return "stay/editroom";
 	}
 
 	// 임시 매핑용
-	@GetMapping("/editroomAction")
-	public String editRoomAction(RoomVO vo, Model model) {
+	@PostMapping("/editRoomAction")
+	public String editRoomAction(RoomVO vo
+									, RoomOptionVO optionVO
+									, List<MultipartFile> files
+									, Model model
+									, RedirectAttributes rttr) {
+		
+		int res = mainService.updateRoom(vo, optionVO, files);
+		
+		if(res > 0) {
+			rttr.addFlashAttribute("msg", "수정 완료");
+		}else {
+			rttr.addFlashAttribute("msg", "수정 실패");
+		}
 		
 		return "redirect:/main";
 	}

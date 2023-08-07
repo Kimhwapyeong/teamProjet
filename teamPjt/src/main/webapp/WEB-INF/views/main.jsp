@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="common/header.jsp" />
 
@@ -33,8 +34,50 @@ h_logo img {
 	object-fit: contain
 }
 </style>
-
 <div id="carouselExampleIndicators" class="carousel slide">
+	<div class="carousel-indicators">
+		<c:forEach items="${ listStay }" var="i" varStatus="status">
+			<button type="button" data-bs-target="#carouselExampleIndicators"
+				data-bs-slide-to="${ status.index }" class="${ status.index eq 0 ? 'active' : ''}" aria-current="${ status.index eq 0 ? true : '' }"
+				aria-label="Slide ${ status.index + 1 }"></button>
+		</c:forEach>
+	</div>
+	<div class="carousel-inner main_visual">
+		<c:forEach items="${ listStay }" var="stay" varStatus="status">
+			<div class="carousel-item ${ status.index eq 0 ? 'active' : '' }">
+				<img
+					src="/resources/images/${ stay.mainPic1 }"
+					class="d-block w-100" alt="...">
+			</div>
+			<!-- 네모박스 (info) -->
+			<div class="house_info max-width900">
+				<p class="h_logo">
+					<img
+						src="//images.stayfolio.com/system/pictures/images/000/188/390/original/7a8a974ed01035f780b9246580258800b25c6a57.jpg?1689657777"
+						alt="logo_url">
+				</p>
+				<p class="txt">
+					역사와 현재가<br>공존하는 특별한 공간
+				</p>
+				<p class="event">LAUNCHING</p>
+				<p class="more">read more</p>
+			</div>
+		</c:forEach>
+	</div>
+	<button class="carousel-control-prev" type="button"
+		data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+			class="visually-hidden">Previous</span>
+	</button>
+	<button class="carousel-control-next" type="button"
+		data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span> <span
+			class="visually-hidden">Next</span>
+	</button>
+</div>
+
+
+<!-- <div id="carouselExampleIndicators" class="carousel slide">
 	<div class="carousel-indicators">
 		<button type="button" data-bs-target="#carouselExampleIndicators"
 			data-bs-slide-to="0" class="active" aria-current="true"
@@ -50,7 +93,7 @@ h_logo img {
 				src="https://www.stayfolio.com/_next/image?url=http%3A%2F%2F%2F%2Fimages.stayfolio.com%2Fsystem%2Fpictures%2Fimages%2F000%2F189%2F599%2Foriginal%2Fe8dbf1066b38f29e02f2d956869a3c56041db8f5.jpg%3F1690539716&w=3840&q=75"
 				class="d-block w-100" alt="...">
 		</div>
-		<!-- 네모박스 (info) -->
+		네모박스 (info)
 		<div class="house_info max-width900">
 			<p class="h_logo">
 				<img
@@ -84,7 +127,7 @@ h_logo img {
 		<span class="carousel-control-next-icon" aria-hidden="true"></span> <span
 			class="visually-hidden">Next</span>
 	</button>
-</div>
+</div> -->
 
 <div
 	style="height: 500px; text-align: center; padding-top: 200px; font-size: 30px">

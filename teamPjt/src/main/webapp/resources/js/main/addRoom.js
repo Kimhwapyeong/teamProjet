@@ -100,13 +100,13 @@
 			if(valueCheck(textareaRoomInfo, '객실 소개를 입력해주세요.')){
 				return;
 			}else{
-				let regex4 = new RegExp("^.{50,300}$","s");
+				let regex4 = new RegExp("^.{10,300}$","s");
 				if(valueLengthCheck(regex4, textareaRoomInfo, '객실 소개는 50자 이상 300자 이내로 입력해주세요.')){
 					return;
 				}
 			}
 			
-			if(inputFiles.value == ''){
+			if(inputFiles.value == '' && document.querySelector('#image_container').children[1] == null){
 				picCheck('사진 파일을 업로드 해주세요.');
 				return;
 			}

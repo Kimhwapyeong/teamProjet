@@ -80,7 +80,7 @@ window.addEventListener('load', ()=>{
  			return;
  		}else{
  									// s가 있어야 줄바꿈되어도 인식됨
- 			let regex3 = new RegExp("^.{50,300}$","s");
+ 			let regex3 = new RegExp("^.{10,300}$","s");
  			if(valueLengthCheck(regex3, textareaStayInfo, '스테이 소개는 50자 이상 300자 이내로 입력해주세요.')){
  				return;
  			}
@@ -95,7 +95,7 @@ window.addEventListener('load', ()=>{
  			}
  		}
  		
- 		if(inputFiles.value == ''){
+ 		if(inputFiles.value == '' && document.querySelector('#image_container').children[1] == null){
  			picCheck('사진 파일을 업로드해 주세요.')
  			return;
  		}

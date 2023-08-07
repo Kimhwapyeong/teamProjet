@@ -25,6 +25,12 @@ public interface MainService {
 	public void getStay(StayVO vo, Model model);
 	
 	public int updateStay(StayVO vo, List<MultipartFile> files);
+
+	public void getRoom(RoomVO vo, Model model);
+
+	public int updateRoom(RoomVO vo, RoomOptionVO optionVO, List<MultipartFile> files);
+
+	void getMainList(Model model);
 	
 //	public int roomFileupload(List<MultipartFile> files
 //			, FileuploadVO vo) ;

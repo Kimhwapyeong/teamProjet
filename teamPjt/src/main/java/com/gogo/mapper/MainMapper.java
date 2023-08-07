@@ -1,5 +1,7 @@
 package com.gogo.mapper;
 
+import java.util.List;
+
 import com.gogo.vo.FileuploadVO;
 import com.gogo.vo.RoomOptionVO;
 import com.gogo.vo.RoomVO;
@@ -23,5 +25,17 @@ public interface MainMapper {
 	
 	//
 	public int updateStayMainPic(StayVO vo);
+	
+	public RoomVO getRoomOne(RoomVO vo);
+
+	public RoomOptionVO getRoomOption(RoomVO vo);
+
+	public int updateRoom(RoomVO vo);
+
+	public int updateRoomOption(RoomOptionVO optionVO);
+	
+	public int deleteRoomPhoto(RoomVO vo);
+
+	public List<StayVO> getMainList();
 	
 }

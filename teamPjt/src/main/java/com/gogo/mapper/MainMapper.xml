@@ -73,4 +73,46 @@
 		where stayno = #{stayNo}
 	</update>
 	
+	<select id="getRoomOne" resultType="com.gogo.vo.RoomVO">
+		select * from room where roomno = #{roomNo}
+	</select>
+	
+	<select id="getRoomOption" resultType="com.gogo.vo.RoomOptionVO">
+		select * from roomoptionyn where roomno = #{roomNo}
+	</select>
+	
+	<update id="updateRoom">
+		update room
+		set roomName = #{roomName}
+					, info = #{info}
+					, roominfo = #{roomInfo}
+					, stdperson = #{stdPerson}
+					, overperson = #{overPerson}
+					, price = #{price}
+		where roomno = #{roomNo}
+	</update>
+	
+	<update id="updateRoomOption">
+		update roomoptionyn
+		set bathroom = #{bathroom}
+					, kitchen = #{kitchen}
+					, parking = #{parking}
+					, babiqu = #{babiqu}
+					, pet = #{pet}
+					, terrace = #{terrace}
+					, pool = #{pool}
+					, bed = #{bed}
+					, beamprojector = #{beamProjector}
+		where roomno = #{roomNo}
+	</update>
+	
+	<select id="getMainList" resultType="com.gogo.vo.StayVO">
+	  	select *
+		from (
+				select rownum rn, t2.*
+				from(
+			        	select to_number(stayno) no, t.* from stay t order by no desc) t2)
+		where rn between 1 and 5
+	</select>
+	
 </mapper>
