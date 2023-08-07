@@ -170,7 +170,7 @@ function setThumbnail(event) {
 	}
 	
 	// 사진 파일 검사
-	let regex = new RegExp("(.*?)\.(jpg|jpeg|png|gif)")
+	let regex = new RegExp("(.*?)\.(jpg|jpeg|png|gif|webp)")
 	for(let i=0; i<fileList.length; i++){
 		if(!regex.test(fileList[i].name) && fileList.length!=0){
 			picCheck('사진파일만 업로드 가능합니다.');
