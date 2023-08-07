@@ -357,9 +357,24 @@ function display_status(div, data) {
 function validateEmail() {
     var emailTxt = document.getElementById("email-txt").value;
     var domainTxt = document.getElementById("domain-txt").value;
+}
 
+// 생년월일 데이터 합산
+function combineDate() {
+  const birth_year = document.getElementById("birth-year").value;
+  const birth_month = document.getElementById("birth-month").value;
+  const birth_day = document.getElementById("birth-day").value;
+  const birthday = birth_year + "-" + birth_month + "-" + birth_day;
+  document.getElementById("birthday").value = birthday;
+}
 
-    
+// 이메일 데이터 합산
+function combineEmail() {
+  const birth_year = document.getElementById("email-txt").value;
+  const birth_month = document.getElementById("domain-txt").value;
+
+  const memberEmail = email-txt + "@" + domain-txt ;
+  document.getElementById("memberEmail").value = memberEmail;
 }
 
 // 로그인 폼 제출
@@ -451,7 +466,7 @@ function item_check(item) {
 							    <th class="tit">아이디 *</th>
 							    <td>
 							    <div style="display: flex">
-							      <input type="text" name="memberId" id="signUpId" class="chk" placeholder="아이디를 입력하세요." value="user4">
+							      <input type="text" name="memberId" id="signUpId" class="chk" placeholder="아이디를 입력하세요." value="user5">
 							      <a id="btnid" style="width: 80px;" class='btn-fill-s'>중복확인</a><br>
 							    </div>  
 							      <div class='valid'>아이디를 입력하세요(영문 소문자, 숫자만 입력 가능)</div>
@@ -484,15 +499,16 @@ function item_check(item) {
 							    <th class="tit">생년월일</th>
 							    <td>
 							      <div class="info" id="info__birth">
-							        <select class="box" id="birth-year">
-							          <option disabled selected >출생연도</option>
+							        <select class="box" id="birth-year" onchange="combineDate()">
+							          <option disabled selected value="birth_year" id="birth-year">출생연도</option>
 							        </select>
-							        <select class="box" id="birth-month">
-							          <option disabled selected>월</option>
+							        <select class="box" id="birth-month" onchange="combineDate()">
+							          <option disabled selected value="birth_month" id="birth-month">월</option>
 							        </select>
-							        <select class="box" id="birth-day">
-							          <option disabled selected>일</option>
+							        <select class="box" id="birth-day" onchange="combineDate()">
+							          <option disabled selected value="birth_day" id="birth-day">일</option>
 							        </select>
+							        <input type="hidden" name="birthday" id="birthday" value="">
 							      </div>
 							    </td>
 							  </tr>
@@ -501,17 +517,18 @@ function item_check(item) {
 							    <th class="tit">성별</th>
 							    <td id="genderForm" style="line-height: 80px;">
 							      <label style="margin-right: 15px;">
-							      <input type="radio" name="gender" value="male">남</label>
-							      <label><input type="radio" name="gender" value="female" checked>여</label>
+							      <input type="radio" name="gender" value="M">남</label>
+							      <label>
+							      <input type="radio" name="gender" value="F" checked>여</label>
 							    </td>
 							  </tr>
 							  <tr>
 							    <th class="tit">이메일 *</th>
 							    <td>
-							    <div style="display: flex">
-							      <input class="box" name="memberEmail" id="email-txt" type="text" style="width: 120px; height: 35px;"/>
+							    <div style="display: flex"  onchange="combineEmail()">
+							      <input class="box" name="memberemail" id="email-txt" type="text" style="width: 120px; height: 35px;"/>
 							       <span style="font-weight:bold; font-size:1.2em; margin-left:10px; margin-right:10px; padding-top:8px;">@</span>
-							        <input class="box" name="memberEmail" id="domain-txt" type="text" style="width: 120px; height: 35px;"/>
+							        <input class="box" name="memberdomain" id="domain-txt" type="text" style="width: 120px; height: 35px;"/>
 							      <select class="box" id="domain-list" style="width: 120px; height: 35px;" onchange="updateEmailDomain()">
 							        <option value="type">직접 입력</option>
 							        <option value="naver.com">naver.com</option>
@@ -519,6 +536,7 @@ function item_check(item) {
 							        <option value="hanmail.net">hanmail.net</option>
 							        <option value="nate.com">nate.com</option>
 							      </select>
+							       <input type="hidden" name="memberEmail" id="memberEmail" value="">
 							      </div>
 							    </td>
 							  </tr>
@@ -630,42 +648,38 @@ function item_check(item) {
 	  }
   });
 
- const birthMonthEl = document.querySelector('#birth-month')
-     // option 목록 생성 여부 확인
-     isMonthOptionExisted = false;
-     birthMonthEl.addEventListener('focus', function () {
-     // Month 목록 생성되지 않았을 때 (최초 클릭 시)
-     if(!isMonthOptionExisted) {
-         isMonthOptionExisted = true
-         for(var i = 1; i <= 12; i++) {
-         // option element 생성
-         const MonthOption = document.createElement('option')
-         MonthOption.setAttribute('value', i)
-         MonthOption.innerText = i
-         // birthMonthEl의 자식 요소로 추가
-         this.appendChild(MonthOption);
-         }
-     }
-     });
+	// Modify the code for Month dropdown
+	  const birthMonthEl = document.querySelector('#birth-month');
+	  isMonthOptionExisted = false;
+	  birthMonthEl.addEventListener('focus', function () {
+	    if (!isMonthOptionExisted) {
+	      isMonthOptionExisted = true;
+	      for (let i = 1; i <= 12; i++) {
+	        const MonthOption = document.createElement('option');
+	        const formattedMonth = i.toString().padStart(2, '0'); // Add leading zero
+	        MonthOption.setAttribute('value', formattedMonth);
+	        MonthOption.innerText = formattedMonth;
+	        this.appendChild(MonthOption);
+	      }
+	    }
+	  });
 
- // 
- const birthDayEl = document.querySelector('#birth-day')
-     // option 목록 생성 여부 확인
-     isDayOptionExisted = false;
-     birthDayEl.addEventListener('focus', function () {
-     // day 목록 생성되지 않았을 때 (최초 클릭 시)
-     if(!isDayOptionExisted) {
-         isDayOptionExisted = true
-         for(var i = 1; i <= 31; i++) {
-         // option element 생성
-         const DayOption = document.createElement('option')
-         DayOption.setAttribute('value', i)
-         DayOption.innerText = i
-         // birthDayEl의 자식 요소로 추가
-         this.appendChild(DayOption);
-         }
-     }
-     });
+	  // Modify the code for Day dropdown
+	  const birthDayEl = document.querySelector('#birth-day');
+	  isDayOptionExisted = false;
+	  birthDayEl.addEventListener('focus', function () {
+	    if (!isDayOptionExisted) {
+	      isDayOptionExisted = true;
+	      for (let i = 1; i <= 31; i++) {
+	        const DayOption = document.createElement('option');
+	        const formattedDay = i.toString().padStart(2, '0'); // Add leading zero
+	        DayOption.setAttribute('value', formattedDay);
+	        DayOption.innerText = formattedDay;
+	        this.appendChild(DayOption);
+	      }
+	    }
+	  });
+
      // 이메일 도메인 입력 처리 
     function updateEmailDomain() {
         var domainList = document.getElementById("domain-list");
