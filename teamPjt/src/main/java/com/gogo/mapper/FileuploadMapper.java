@@ -12,4 +12,6 @@ public interface FileuploadMapper {
 	public List<FileuploadVO> getStayPhotoList(StayVO vo);
 	
 	public int updateStayPhoto(FileuploadVO vo);
+
+	public int deleteStayPhoto(FileuploadVO vo);
 }

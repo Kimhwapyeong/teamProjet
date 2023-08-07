@@ -12,4 +12,9 @@ public interface FileuploadService {
 
 	public int fileupload(List<MultipartFile> files, String dir
 						,FileuploadVO vo);
+
+	public int deleteStayPhoto(FileuploadVO vo);
+	
+	//
+	public String fileuploadStay(List<MultipartFile> files, String dir, FileuploadVO paramFileuploadVO);
 }

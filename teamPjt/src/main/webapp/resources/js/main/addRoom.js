@@ -3,7 +3,6 @@
 	window.addEventListener('load', ()=>{
 		
 		let inputRoomName = document.querySelector('input[name=roomName]');
-		let selectRoomType = document.querySelector('select[name=roomType]');
 		let selectStdPerson = document.querySelector('select[name=stdPerson]');
 		let selectOverPerson = document.querySelector('select[name=overPerson]');
 		let selectBed = document.querySelector('select[name=bed]');
@@ -56,10 +55,6 @@
 				}
 			}
 			
-			if(valueCheck(selectRoomType, '객실 타입을 선택해주세요.')){
-				return;
-			}
-			
 			if(valueCheck(selectStdPerson, '기준 인원을 선택해주세요.')){
 				return;
 			}
@@ -73,7 +68,7 @@
 				selectOverPerson.value = '';
 				liOverPerson.style.width='78%';
 				divOverPerson.style.width='400px';
-				document.querySelector('select[name=overPerson]').firstElementChild.innerHTML='최대인원은 기준인원보다 작거나 같아야 합니다.';
+				document.querySelector('select[name=overPerson]').firstElementChild.innerHTML='최대인원은 기준인원보다 크거나 같아야 합니다.';
 				document.querySelector('select[name=overPerson]').firstElementChild.selected=true;
 				selectOverPerson.style.backgroundColor='#eee';
 				selectOverPerson.focus();

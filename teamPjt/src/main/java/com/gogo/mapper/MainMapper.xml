@@ -67,4 +67,10 @@
 		where stayno = #{stayNo}
 	</update>
 	
+	<update id="updateStayMainPic">
+		update stay
+		set mainpic1 = #{mainPic1}
+		where stayno = #{stayNo}
+	</update>
+	
 </mapper>

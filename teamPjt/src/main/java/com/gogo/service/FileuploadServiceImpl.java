@@ -77,6 +77,61 @@ public class FileuploadServiceImpl extends FileuploadPath implements FileuploadS
 		return insertRes;
 	}
 	
+	public String fileuploadStay(List<MultipartFile> files, String dir, FileuploadVO paramFileuploadVO) {
+		int insertRes = 0;
+		String mainPic = "";
+		System.out.println("fileupload 입장");
+		for(int i=0; i<files.size(); i++) {
+			System.out.println("fileupload for 입장");
+			log.info("getoriname : " + files.get(i).getOriginalFilename());
+			
+			try {
+				System.out.println("dir : " + dir);
+				UUID uuid = UUID.randomUUID();
+				String saveFileName = uuid + "_" + files.get(i).getOriginalFilename();
+				File sFile = new File(ATTACHES_DIR + getFolder(dir) + saveFileName);
+				if(i == 0) {
+					mainPic = getFolder(dir) + saveFileName;
+				}
+				// file 을  sFile에 저장
+				files.get(i).transferTo(sFile);
+				
+				FileuploadVO vo = new FileuploadVO();
+				
+				// 주어진 파일의 Mime유형
+				String contentType =
+						Files.probeContentType(sFile.toPath());
+				
+				// 이미지가 아니면 리턴 0
+				if(contentType == null && !contentType.startsWith("image")) {
+					System.out.println("이미지 아님");
+					return "";
+				}
+				
+				// 썸네일 생성 경로
+				String thmbnail = ATTACHES_DIR + getFolder(dir) + "s_" + saveFileName;
+				// 썸네일 생성
+				// 원본파일, 크기, 저장될 경로
+				Thumbnails.of(sFile).size(200, 200).toFile(thmbnail);
+				
+				System.out.println("sfile : " + sFile);
+				vo.setFileName(files.get(i).getOriginalFilename());
+				vo.setUuid(uuid.toString());
+				vo.setUploadPath(getFolder(dir));
+				vo.setStayNo(paramFileuploadVO.getStayNo());
+				vo.setRoomNo(paramFileuploadVO.getRoomNo());
+				vo.setMemberId(paramFileuploadVO.getMemberId());
+				
+				insertRes += fileuploadMapper.insert(vo);
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return mainPic;
+	}
+	
 	// 중복 방지용 
 	// 		업로드 날짜를 폴더 이름으로 사용
 	//		2023/07/18
@@ -99,5 +154,45 @@ public class FileuploadServiceImpl extends FileuploadPath implements FileuploadS
 			}
 		}
 		return uploadPath;
+	}
+	
+	@Override
+	public int deleteStayPhoto(FileuploadVO vo) {
+		int res = 0;
+		// 삭제할 파일 처리
+		String savePath = vo.getSavePath();
+		String s_savePath = vo.getS_savePath();
+		System.out.println("s_savePath : "+ s_savePath);
+		
+		if(savePath != null && !savePath.equals("")) {
+			File file = new File(ATTACHES_DIR + savePath);
+			
+			if(file.exists()) {
+				if(!file.delete()){
+					System.err.println("Path : " + savePath);
+					System.err.println("파일 삭제 실패!");
+					return 0;
+				}else{
+					res++;
+				};
+			}
+		}
+		
+		if(s_savePath != null && !s_savePath.equals("")) {
+			System.out.println("썸네일 삭제");
+			File file = new File(ATTACHES_DIR + s_savePath);
+			
+			if(file.exists()) {
+				if(!file.delete()){
+					System.err.println("Path : " + s_savePath);
+					System.err.println("파일 삭제 실패!");
+					return 0;
+				}else {
+					res++;
+				}
+			}
+		}
+	
+		return res;
 	}
 }

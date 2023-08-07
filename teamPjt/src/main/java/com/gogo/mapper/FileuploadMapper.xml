@@ -13,6 +13,7 @@
 	<select id="getStayPhotoList" resultType="com.gogo.vo.FileuploadVO">
 		select t.*
 					, uploadpath||uuid||'_'||filename savePath
+					, uploadpath||'s_'||uuid||'_'||filename s_savePath
 		from attach t 
 		where stayno = #{stayNo} 
 		and roomno is null
@@ -25,5 +26,10 @@
 		, uploadpath = #{uploadPath}
 		, filename = #{fileName}
 	</update>
+
+	<delete id="deleteStayPhoto">
+		delete attach
+		where stayno = #{stayNo}
+	</delete>
 
 </mapper>

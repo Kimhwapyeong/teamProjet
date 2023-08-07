@@ -20,7 +20,7 @@ input ::placeholder{
 		<div class="txt">Stay 수정</div>
 	</div>
 	<div class="store_apply">
-		<form name="addStayForm" method="post" enctype="multipart/form-data" action="/aditStayAction">
+		<form name="addStayForm" method="post" enctype="multipart/form-data" action="/editStayAction">
 			<div class="store_apply_form">
 				<ul class="form_dl">
 					<div class="_contactus_divider__BZ5eb"></div>
@@ -37,7 +37,7 @@ input ::placeholder{
 
 					<li><div class="dt">웹사이트 및 SNS 주소</div>
 						<div class="dd">
-							<textarea class="form_style" name="sns" value="<%-- ${ map.stayVO.sns } --%>"
+							<textarea class="form_style" name="sns" value=""
 								placeholder="스테이 공간 / 브랜드를 살펴볼 수 있는 instagram 주소를 기재해 주세요. db컬럼에 sns추가, mapper에도 추가"></textarea>
 						</div></li>
 					<li><div class="dt">숙박업 사업자 등록 여부 *</div>
@@ -181,6 +181,7 @@ input ::placeholder{
 			</div>
 			<!--  -->
 			<input type="hidden" name="memberId" value="${ empty sessionScope.memberId ? 'host1' : sessionScope.memberId}">
+			<input type="hidden" name="stayNo" value="${ map.stayVO.stayNo }">
 			<input type="hidden" name="stayLoc" value="">
 			<input type="hidden" name="latitude" value="">
 			<input type="hidden" name="longitude" value="">

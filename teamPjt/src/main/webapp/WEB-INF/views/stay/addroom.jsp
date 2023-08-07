@@ -19,19 +19,6 @@
 							<input type="text" class="form_style" name="roomName" value=""
 								placeholder="room 이름을 입력해 주세요. (30자 이내)">
 						</div></li>
-					<li><div class="dt">객실 유형 *</div>
-						<div class="dd">
-							<select class="form_style" name="roomType" style="width:100%">
-								<option selected="" value="">Type을 선택해 주세요.</option>
-								<option value="렌탈하우스">렌탈하우스</option>
-								<option value="펜션">펜션</option>
-								<option value="한옥">한옥</option>
-								<option value="호스텔">호스텔</option>
-								<option value="민박">민박</option>
-								<option value="호텔">호텔</option>
-							</select>
-						</div>
-					</li>
 					<li style="width:53%"><div class="dt">기준인원 *</div>
 						<div class="dd" style="width:200px">
 							<select style="width: 100%" class="form_style" name="stdPerson"><option

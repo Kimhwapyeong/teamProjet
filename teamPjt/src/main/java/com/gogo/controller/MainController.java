@@ -80,18 +80,26 @@ public class MainController {
 		return "stay/editstay";
 	}
 	
+	@PostMapping("/editStayAction")
 	public String editStayAction(StayVO vo, List<MultipartFile> files, Model model) {
-		
-		
+
+		mainService.updateStay(vo, files);
 				// 마이페이지로 포워드
-		return "/main";
+		return "redirect:/main";
 	}
 
 	// 임시 매핑용
 	@GetMapping("/editroom")
-	public String editRoom() {
+	public String editRoom(RoomVO vo, Model model) {
 		
 		return "stay/editroom";
+	}
+
+	// 임시 매핑용
+	@GetMapping("/editroomAction")
+	public String editRoomAction(RoomVO vo, Model model) {
+		
+		return "redirect:/main";
 	}
 	
 	@GetMapping("/joosoSearch")

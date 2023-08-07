@@ -21,4 +21,7 @@ public interface MainMapper {
 	
 	public int updateStay(StayVO vo);
 	
+	//
+	public int updateStayMainPic(StayVO vo);
+	
 }

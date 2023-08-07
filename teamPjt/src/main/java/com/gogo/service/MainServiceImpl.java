@@ -51,7 +51,7 @@ public class MainServiceImpl implements MainService{
 			fileuploadVO.setRoomNo(vo.getRoomNo());
 			fileuploadVO.setStayNo(stayNo);
 			fileuploadVO.setMemberId("");
-			String dir = "stay\\";
+			String dir = "room\\";
 			res = fileuploadService.fileupload(files, dir, fileuploadVO);
 		}
 		return res;
@@ -61,23 +61,43 @@ public class MainServiceImpl implements MainService{
 	@Transactional
 	public int insertStay(StayVO vo, List<MultipartFile> files) {
 		
+		int res = mainMapper.insertStay(vo);
+		System.out.println(vo.getStayNo());
+		System.out.println("insertStay res : " + res);
 		
-		  int res = mainMapper.insertStay(vo); 
-		  System.out.println(vo.getStayNo());
-		  System.out.println("insertStay res : " + res);
- 
-		  if(res>0) { 
-			  FileuploadVO fileuploadVO = new FileuploadVO();
-			  fileuploadVO.setStayNo(vo.getStayNo());
-			  fileuploadVO.setRoomNo("");
-			  fileuploadVO.setMemberId("");
-			  String dir = "room\\";
-			  res = fileuploadService.fileupload(files, dir, fileuploadVO);
-			  System.out.println("mainservice insertstay res : " + res);
-		  }
-		 
-		  return res;
+		String mainPic = "";
+		if (res > 0) {
+			FileuploadVO fileuploadVO = new FileuploadVO();
+			fileuploadVO.setStayNo(vo.getStayNo());
+			fileuploadVO.setRoomNo("");
+			fileuploadVO.setMemberId("");
+			String dir = "stay\\";
+			mainPic = fileuploadService.fileuploadStay(files, dir, fileuploadVO);
+			System.out.println("mainservice insertstay res : " + res);
+		}
+		vo.setMainPic1(mainPic);
+		mainMapper.updateStayMainPic(vo);
+		return res;
 	}
+//	public int insertStay(StayVO vo, List<MultipartFile> files) {
+//		
+//		
+//		  int res = mainMapper.insertStay(vo); 
+//		  System.out.println(vo.getStayNo());
+//		  System.out.println("insertStay res : " + res);
+// 
+//		  if(res>0) { 
+//			  FileuploadVO fileuploadVO = new FileuploadVO();
+//			  fileuploadVO.setStayNo(vo.getStayNo());
+//			  fileuploadVO.setRoomNo("");
+//			  fileuploadVO.setMemberId("");
+//			  String dir = "stay\\";
+//			  res = fileuploadService.fileupload(files, dir, fileuploadVO);
+//			  System.out.println("mainservice insertstay res : " + res);
+//		  }
+//		 
+//		  return res;
+//	}
 
 	// stay 정보 불러오기
 	public void getStay(StayVO vo, Model model){
@@ -89,12 +109,36 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
+	@Transactional
 	public int updateStay(StayVO vo, List<MultipartFile> files) {
+		System.out.println(vo);
+		// StayVO 정보 수정(사진 제외)
+		int res = mainMapper.updateStay(vo);
+		int deleteRes = 0;
 		
-		mainMapper.updateStay(vo);
-		// TODO 파일 삭제하고, 다시 업로드?
-
-		return 0;
+		if(files.size() > 0) {
+			// 로컬에서 사진 삭제
+			List<FileuploadVO> listPhoto = fileuploadMapper.getStayPhotoList(vo);
+			for(FileuploadVO photo : listPhoto) {
+				deleteRes += fileuploadService.deleteStayPhoto(photo);
+			}
+			System.out.println("deleteRes : " + deleteRes);
+			
+			FileuploadVO fileuploadVO = new FileuploadVO();
+			
+			fileuploadVO.setStayNo(vo.getStayNo());
+			// db 에서 사진 삭제
+			fileuploadMapper.deleteStayPhoto(fileuploadVO);
+			
+			fileuploadVO.setRoomNo("");
+			fileuploadVO.setMemberId("");
+			String dir = "stay\\";
+			
+			// 수정된 사진 업로드
+			int fileuploadRes = fileuploadService.fileupload(files, dir, fileuploadVO);
+			System.out.println("fileuploadRes" + fileuploadRes);
+		}
+		return res;
 	}
 	
 //	@Override
