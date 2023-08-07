@@ -14,7 +14,7 @@
 </head>
 <body>
     <jsp:include page="../common/header.jsp" />
-
+ 
     <div style="position: absolute; top: 80px; width: 100%; text-align: center; padding: 38px; border-bottom: 1px solid rgb(242, 242, 242); background-color: white;">
         <p style="letter-spacing: 15px; text-indent: 15px; margin-bottom: 12px; font-family: Lato-Bold;">MESSAGE</p>
         <p style="font-size: 12px;">호스트와 대화를 나눠보세요.</p>
@@ -28,7 +28,48 @@
                     <span id="backBtn" style="position: absolute; top: 20px; left: 80px; font-size: 20px; font-weight: bold;">
                         메시지
                     </span>
-                    <div id="messageRoom" style="position: absolute; background-color: white; width: 100%; height: 87.6%; top: 7%; overflow: scroll; vertical-align: text-bottom;"></div>
+                    <div id="messageRoom" style="position: absolute; background-color: white; width: 100%; height: 87.6%; top: 7%; overflow: scroll; vertical-align: text-bottom;">
+                    	
+						    <input type="hidden" id="myMemberId" value="${sessionScope.memberId}" required readonly><br>
+						    초대할 아이디: <input style="border:1px solid black; text-align:center;" type="text" id="targetMemberId" required><br>
+						   	<input type="hidden" id="roomId" value="${roomId}" required readonly><br>
+						    <button id="inviteBtn">초대하기</button>
+						
+                    </div>
+                    
+                    <script>
+                    
+                    $(document).ready(function() {
+                        $('#inviteBtn').click(function() {
+                            var inviteData = {
+                                myMemberId: $('#myMemberId').val(),
+                                targetMemberId: $('#targetMemberId').val(),
+                                roomId: $('#roomId').val()
+                            };
+
+                            $.ajax({
+                                url: '/chat/inviteAction',
+                                method: 'POST',
+                                contentType: 'application/json',
+                                data: JSON.stringify(inviteData),
+                                success: function(response) {
+                                    if (response.status === 'success') {
+                                        console.log('Invitation sent successfully:', response.msg);
+                                    } else {
+                                        console.log('Failed to send invitation:', response.msg);
+                                    }
+                                },
+                                error: function(error) {
+                                    console.log('Error:', error);
+                                }
+                            });
+                        });
+                    });
+                    </script>
+ 
+                    
+                    
+                    
                 </div>
                 <div id="messageArea" style="position: absolute; right: 0; display: inline-block; text-align: center; width: 70%; height: 100%; vertical-align: bottom;">
                     <div id="chatList" style="position: absolute; background-color: white; width: 100%; height: 87.6%; top: 7%; overflow: scroll; vertical-align: text-bottom;"></div>
@@ -105,6 +146,12 @@
         message = msg.data;
         let roomId = '${roomId}';
 		
+        // 초대 메시지 확인
+        if (message.includes("님이") && message.includes("번 방에 초대하였습니다.")) {
+            // 초대 메시지는 무시하고 반환
+            return;
+        }
+        
         if (type == 'ENTER' && memberId !== '${sessionScope.memberId}') {
             // 상대방의 ENTER 메시지는 무시합니다.
             return;

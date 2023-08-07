@@ -1,5 +1,6 @@
 package com.gogo.webSocket;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gogo.service.MessageService;
 import com.gogo.vo.MemberVO;
 
@@ -27,6 +29,8 @@ import org.slf4j.LoggerFactory;
 @RequestMapping("/echo")
 public class EchoHandler extends TextWebSocketHandler{
     private Map<String, List<WebSocketSession>> roomSessions = new ConcurrentHashMap<>();
+    private Map<String, WebSocketSession> userSessions = new ConcurrentHashMap<>(); // 사용자 세션을 관리하기 위한 Map 추가
+    
     private static Logger logger = LoggerFactory.getLogger(EchoHandler.class);
     
     @Autowired
@@ -35,7 +39,23 @@ public class EchoHandler extends TextWebSocketHandler{
  
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        String roomId = session.getUri().getQuery();
+        String writer = (String) session.getAttributes().get("memberId");
+        String queryString = session.getUri().getQuery();
+
+        // Query String에서 targetMemberId 파라미터 값을 추출
+        Map<String, String> params = parseQueryString(queryString);
+        String targetMemberId = params.get("targetMemberId");
+        
+        // targetMemberId 기반으로 사용자 세션을 관리
+        if (targetMemberId != null && targetMemberId.equals(writer)) {
+            userSessions.put(targetMemberId, session);
+        }
+
+        //String roomId = params.get("roomId");  // 이 부분은 roomId가 필요할 때 사용하면 됩니다.     
+        userSessions.put(writer, session); // 사용자 세션 등록
+    	
+    	
+    	String roomId = session.getUri().getQuery();
 
         // roomId가 null인 경우 처리
         if (roomId == null) {
@@ -49,7 +69,6 @@ public class EchoHandler extends TextWebSocketHandler{
         roomSessions.get(roomId).add(session);
 
         Map<String, Object> map = new HashMap<String, Object>();
-        String writer = (String)session.getAttributes().get("memberId");
         MemberVO member = (MemberVO)session.getAttributes().get("member");
         // writer가 null인 경우 처리
         if (writer == null) {
@@ -83,7 +102,7 @@ public class EchoHandler extends TextWebSocketHandler{
             for (WebSocketSession sess : sessionsInRoom) {
                 sess.sendMessage(new TextMessage(message.getPayload()));
             }
-            
+
             // 메시지가 도착할 때마다 메시지를 저장
             Map<String, Object> map = new HashMap<String, Object>();
             String writer = (String) session.getAttributes().get("memberId");
@@ -97,44 +116,79 @@ public class EchoHandler extends TextWebSocketHandler{
             int idx = roomId.indexOf("=");
             roomId = roomId.substring(idx+1);
 
-            map.put("content", message.getPayload());
-            map.put("roomId", roomId);
-            map.put("type", "TALK");
-            map.put("writer", writer);
-            service.insertChatting(map);
-
-            
+            if (!"undefined".equals(roomId)) {  // roomId가 undefined가 아닐 때만 실행
+                map.put("content", message.getPayload());
+                map.put("roomId", roomId);
+                map.put("type", "TALK");
+                map.put("writer", writer);
+                service.insertChatting(map);
+            } 
         } else {
             System.err.println("클라이언트가 비어있는 메세지를 send 하였습니다!");
         }
     }
-
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+        String writer = (String) session.getAttributes().get("memberId");
+        userSessions.remove(writer); // 사용자 세션 제거
+
         String roomId = session.getUri().getQuery();
         roomSessions.get(roomId).remove(session);
-        // 연결이 끊길 때마다 메시지를 저장
-        Map<String, Object> map = new HashMap<String, Object>();
-        String writer = (String) session.getAttributes().get("memberId");
-
+        
+        // roomId가 null인 경우 처리
+        if (roomId == null) {
+            // 예외를 던지거나, 기본값을 설정합니다.
+            throw new Exception("roomId는 null일 수 없습니다.");
+        }
+        
+        int idx = roomId.indexOf("=");
+        roomId = roomId.substring(idx+1);
+        
         // writer가 null인 경우 처리
         if (writer == null) {
             // 예외를 던지거나, 기본값을 설정합니다.
             throw new Exception("writer는 null일 수 없습니다.");
         }
 
-        int idx = roomId.indexOf("=");
-        roomId = roomId.substring(idx+1);
-
-        map.put("content", writer+"님 "+roomId+"번 채팅방 퇴장!");
-        map.put("roomId", roomId);
-        map.put("type", "OUT");
-        map.put("writer", writer);
-        service.insertChatting(map);
+        if (!"undefined".equals(roomId)) {  // roomId가 undefined가 아닐 때만 실행
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("content", writer + "님 " + roomId + "번 채팅방 퇴장!");
+            map.put("roomId", roomId);
+            map.put("type", "OUT");
+            map.put("writer", writer);
+            service.insertChatting(map);
+        }
         logger.info("{} 연결 끊김, roomId: {}", session.getId(), roomId);
     }	
-	
-	
+    public void sendInviteNotification(String senderId, String targetMemberId, String roomId) throws IOException {
+        WebSocketSession targetSession = userSessions.get(targetMemberId);
+
+        if (targetSession != null && targetSession.isOpen() && !senderId.equals(targetMemberId)) {
+            Map<String, String> payload = new HashMap<>();
+            payload.put("type", "invite");
+            payload.put("message", senderId + "님이 " + roomId + "번 방에 초대하였습니다.");
+            payload.put("roomId", roomId);
+
+            TextMessage message = new TextMessage(new ObjectMapper().writeValueAsString(payload));
+            targetSession.sendMessage(message);
+        }
+    }
+    
+    private Map<String, String> parseQueryString(String queryString) {
+        Map<String, String> map = new HashMap<>();
+        if (queryString == null || queryString.isEmpty()) {
+            return map;
+        }
+
+        String[] pairs = queryString.split("&");
+        for (String pair : pairs) {
+            int idx = pair.indexOf("=");
+            if (idx > 0 && pair.length() > idx+1) {
+                map.put(pair.substring(0, idx), pair.substring(idx+1));
+            }
+        }
+        return map;
+    }
 
 
 }

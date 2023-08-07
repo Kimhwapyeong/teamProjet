@@ -36,7 +36,51 @@
 <style type="text/css" data-styled-jsx="">a.jsx-a44b61ff91ee7fc6{padding-bottom:30px;border-bottom:1px solid#e6e6e6;margin-bottom:10px}p.jsx-a44b61ff91ee7fc6{font-size:12px;color:#999}.login.jsx-a44b61ff91ee7fc6{font-size:16px;color:#333;margin-bottom:10px}</style>
 </head>
 <script src="/resources/js/reserved/jquery-3.7.0.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
+
 <script>
+	// 초대 메세지를 받기 위한 로직
+	
+		function initInviteSocket(targetMemberId) {
+		    let socketInvite = new SockJS("http://localhost:8080/echo?targetMemberId=" + targetMemberId);
+		    
+		    socketInvite.onmessage = function(event) {
+		        console.log(event);
+		        
+		        let receivedData = JSON.parse(event.data);
+		        
+		        console.log('receivedData : ', receivedData);
+		        
+		        if (receivedData && receivedData.type === 'invite') {
+		            let roomId = receivedData.roomId;
+		            let message = receivedData.message; // 여기에서는 메시지를 추가로 변경하거나 결합하지 않아야 합니다.
+		            
+		            if (confirm(roomId + "\n이 방으로 이동하시겠습니까?")) {
+		            	// 정규표현식을 사용하여 문자열에서 숫자를 추출
+		            	let match = roomId.match(/(\d+)번/);
+
+		            	if (match && match[1]) {
+		            	    let roomNumber = match[1];  // '628'라는 문자열로 반환됩니다.
+		            	    console.log("방 번호:", roomNumber);  // 방 번호: 628
+			                window.location.href = "/chat/chat?roomId=" + roomNumber;
+		            	} else {
+		            	    console.log("방 번호를 찾을 수 없습니다.");
+		            	}
+		            }
+		        }
+		    };
+		    
+		    socketInvite.onclose = function(event) {
+		        console.log('Invite socket closed:', event.reason);
+		    };
+		    
+		    socketInvite.onerror = function(error) {
+		        console.error('WebSocket Error:', error);
+		    };
+		}
+		
+		// 현재 로그인한 사용자의 ID를 사용하여 초대 웹소켓 연결 초기화
+		initInviteSocket($("#currentLoggedInUserId").val());
 	// 알림창을 위한 변수
 	let msg = '${msg}'
 	// let msg = '모달테스트';
@@ -186,6 +230,7 @@
 			</div>
 		</div>
 	</div>
+	<input type="hidden" id="currentLoggedInUserId" value="${sessionScope.memberId}" />
 	<!-- where/when 모달 -->
 	<!-- where modal -->
 	<div class="modalOverlay" id="whereModal" style="display: none;">
