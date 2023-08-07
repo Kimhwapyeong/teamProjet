@@ -19,8 +19,6 @@
 
 <!-- 헤더 -->
 <%@ include file="../../common/header.jsp" %>
-<img alt="" src="/resources/images/${vo.mainPic1}">
-pic : ${list}
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M24ZFBJ" height="0" width="0"
                title="googletagmanager-iframe" style="display:none;visibility:hidden"></iframe></noscript>
        <div id="fb-root" class=" fb_reset">
@@ -58,7 +56,7 @@ pic : ${list}
                            <div class="reserv_wrap mypage-reservation-info">
                            	   <!-- ▶▶▶  forEach ▶▶▶  -->
                                <c:forEach items="${list}" var="vo" step="1">
-                               <img alt="" src="/resources/images/${vo.mainPic1 }">
+                               <!-- <img alt="" src="/resources/images/${vo.mainPic1 }"> -->
                                <c:if test="${sessionScope.memberId == vo.memberId}">
 
                                <div class="reserv_box accepted">
@@ -70,7 +68,7 @@ pic : ${list}
                                    </div>
                                    <div class="stay_view">
                                        <div class="photo" 
-                                           style="background-image: url('/resources/images/${vo.mainPic1}'); background-repeat: no-repeat; background-position: center center; background-size: cover;">
+                                           style="background-image: url('/resources/images/${vo.mainPic1.replace('\\','/')}'); background-repeat: no-repeat; background-position: center center; background-size: cover;">
                                             <!-- ========================== url 수정 하기 !!!!!!!!!! ============================================-->
                                             <a href="../../editstay">
                                            <span class="view">스테이 수정</span></a></div>

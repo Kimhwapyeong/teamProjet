@@ -8,7 +8,8 @@
 	<!--  ▶▶▶  admin ▶▶▶ -->
 	<!-- 숙소 관리 -->
 	<select id="getList" resultType="com.gogo.vo.StayVO">
-		select stayNo, stayname, memberId, stayInfo, mainpic1 from stay
+		select to_number(stayNo) stayNo, stayname, memberId, stayInfo, mainpic1 from stay
+		order by stayno desc
 	</select>
 	
 	
@@ -26,6 +27,7 @@
 		SELECT memberid, membername, memberemail,
 			TO_CHAR(registraiondate, 'YYYY-MM-DD') AS registraiondate
 		FROM member
+        ORDER BY MEMBERID ASC
 	</select>
 	
 	
@@ -134,7 +136,7 @@
 
 	<!-- 문의 list 출력 -->
 	<select id="qaList" resultType="com.gogo.vo.QuestionVO">
-		select queno, memberid, title, content, to_char(contentdate, 'yy-mm-dd') as contentdate
+		select to_number(queno) queno, memberid, title, content, to_char(contentdate, 'yy-mm-dd') as contentdate
 		from question
 		order by queno desc, contentdate desc
 	</select>
@@ -151,36 +153,41 @@
 	<!--  ▶▶▶  user ▶▶▶ -->
 	<!-- 예약 정보 -->
 	<select id="reservList" resultType="java.util.Map">
-		SELECT
-		    s.mainpic1,
+		SELECT DISTINCT
 		    s.stayname,
-		    s.stayno,
 		    r.price,
+		    s.stayno,
 		    v.reservationno,
-		    TO_CHAR(v.regdate, 'yyyy-mm-dd') as regdate,
-		    TO_CHAR(v.checkin, 'yyyy-mm-dd') as checkin,
-		    TO_CHAR(v.checkout, 'yyyy-mm-dd') as checkout,
+		    TO_CHAR(v.regdate, 'yyyy-mm-dd') AS regdate,
+		    TO_CHAR(v.checkin, 'yyyy-mm-dd') AS checkin,
+		    TO_CHAR(v.checkout, 'yyyy-mm-dd') AS checkout,
 		    v.membercount,
+		    s.mainpic1,
 		    m.memberid
 		FROM
 		    stay s,
 		    room r,
 		    reservation v,
+		    payment p,
 		    member m,
-		    payment p
+		    attach a
 		WHERE
 		    s.stayno = r.stayno
 		    AND r.roomno = v.roomno
-		    and v.reservationNo = p.reservationNo
-		    And v.memberid = #{memberId}
-			and p.cancleYN = 'N'
-		order by v.regdate desc		    
+		    AND v.reservationno = p.reservationno
+		    AND v.memberid = m.memberid
+		    AND v.memberid = #{memberid}
+		    AND p.cancleyn = 'N'
+		    AND a.roomno IS NULL
+
 	</select>
 	
 	<resultMap type="java.util.HashMap" id="reservMap">
 	    <result property="stayName" column="stayname" />
 	    <result property="mainPic1" column="MAINPIC1" />
 	    <result property="price" column="PRICE" />
+	    <result property="stayNo" column="STAYNO" />
+	    <result property="reservationNo" column="RESERVATIONNO" />
 	    <result property="regDate" column="REGDATE" />
 	    <result property="checkIn" column="CHECKIN" />
 	    <result property="checkOut" column="CHECKOUT" />

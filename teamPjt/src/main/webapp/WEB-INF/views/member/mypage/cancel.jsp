@@ -76,7 +76,7 @@
                                     <div class="stay_view">
                                         <!-- =============================== 숙소 썸네일 url ============================================-->
                                         <div id="mapi" class="photo"
-                                            style="background-image: url(${list.MAINPIC1 }); background-repeat: no-repeat; background-position: center center; background-size: cover; cursor: default !important;">
+                                            style="background-image: url('/resources/images/${list.MAINPIC1.replace('\\','/')}'); background-repeat: no-repeat; background-position: center center; background-size: cover; cursor: default !important;">
                                             <span class="view" style="display:none;">스테이 보기</span></div>
                                     </div>
                                         <div class="reserv_info">

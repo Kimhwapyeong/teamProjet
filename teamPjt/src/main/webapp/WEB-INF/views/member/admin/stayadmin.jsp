@@ -94,7 +94,7 @@
                                    </div>
                                    <div class="stay_view">
                                        <div class="photo"
-                                           style="background-image: url(${vo.mainPic1};); background-repeat: no-repeat; background-position: center center; background-size: cover;">
+                                           style="background-image: url('/resources/images/${vo.mainPic1.replace('\\','/')}'); background-repeat: no-repeat; background-position: center center; background-size: cover;">
                                            <!-- =============================== 수정 onclick 올리기  ============================================-->
                                            </div>
                                    </div>

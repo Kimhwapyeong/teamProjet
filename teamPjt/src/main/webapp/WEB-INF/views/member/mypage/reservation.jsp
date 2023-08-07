@@ -92,7 +92,7 @@
 								</div>
 								<div class="stay_view">
 									<div class="photo"
-										style="background-image: url('/resources/images/'${list.MAINPIC1 }); background-repeat: no-repeat; background-position: center center; background-size: cover;">
+										style="background-image: url('/resources/images/${list.MAINPIC1.replace('\\','/')}'); background-repeat: no-repeat; background-position: center center; background-size: cover;">
 										<!-- =============================== 스테이 자세히보기 연결 ============================================-->
 										<span class="view">스테이 보기</span>
 									</div>

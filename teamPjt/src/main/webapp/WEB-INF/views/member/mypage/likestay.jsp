@@ -69,7 +69,7 @@
 					                            class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events slider1 flist_slider">
 					                            <div class="swiper-wrapper">
 					                                <li class="swiper-slide swiper-slide-active img"
-					                                    style="background: url(${like.MAINPIC1 }) center center / cover no-repeat; width: 372px;">
+					                                    style="background: url('/resources/images/${like.MAINPIC1.replace('\\','/')}') center center / cover no-repeat; width: 372px;">
 					                                </li>
 					                            </div>
 					                        </ul>
