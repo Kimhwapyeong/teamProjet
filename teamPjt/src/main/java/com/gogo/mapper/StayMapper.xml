@@ -85,6 +85,14 @@
 		subq3.maxprice as maxprice,
 		subq3.minprice as minprice,
 		decode(like_count, null, 0, like_count) as likecount
+		<if test='roomOption != null and !"".equals(roomOption)'>
+			 ,subquery.roomNo,
+		     subquery.babiqu,
+		     subquery.pet,
+		     subquery.pool,
+		     subquery.terrace,
+		     subquery.beamprojector
+		</if>
 	FROM (
 		SELECT subq2.stayNo,
 		subq2.stayNo AS stayNo_subq3, subq2.stayname,
@@ -117,8 +125,23 @@
 		LEFT JOIN room ON stay.stayNo = room.stayNo
 		) subq2
 	) subq3
+	<if test='roomOption != null and !"".equals(roomOption)'>
+		left JOIN (
+		  SELECT
+		    stayNo,
+		    roomNo,
+		    babiqu,
+		    pet,
+		    pool,
+		    terrace,
+		    beamprojector,
+		    ROW_NUMBER() OVER (PARTITION BY stayNo ORDER BY roomNo) AS sequence_number
+		  FROM roomoptionyn
+		) subquery
+		ON subq3.stayNo_subq3 = subquery.stayNo
+	</if>
 		LEFT JOIN (
-		SELECT stayNo, COUNT(*) AS like_count
+		SELECT to_number(stayNo) stayNo, COUNT(*) AS like_count
 		FROM likestay
 		GROUP BY stayNo
 	) subq4
@@ -137,26 +160,51 @@
 				and minprice between 0 and #{maxPrice}
 			</if>	
 			<if test='stayType != null and !"".equals(stayType)'>
-				and staytype = '#{stayType}'
+				and staytype = '${stayType}'
 			</if>	
 			<if test='stayView != null and !"".equals(stayView)'>
-				and stayview = '#{stayView}'
+				and stayview = '${stayView}'
 			</if>	
-			<if test='roomOption != null and "BABIQU".equals(roomOption)'>
+			<if test='roomOption != null and "babiqu".equals(roomOption)'>
 				AND subquery.sequence_number = 1 and babiqu = 'Y' 
 			</if>	
-			<if test='roomOption != null and "PET".equals(roomOption)'>
+			<if test='roomOption != null and "pet".equals(roomOption)'>
 				AND subquery.sequence_number = 1 and pet = 'Y' 
 			</if>	
-			<if test='roomOption != null and "POOL".equals(roomOption)'>
+			<if test='roomOption != null and "pool".equals(roomOption)'>
 				AND subquery.sequence_number = 1 and pool = 'Y'
 			</if>	
-			<if test='roomOption != null and "TERRACE".equals(roomOption)'>
+			<if test='roomOption != null and "terrace".equals(roomOption)'>
 				AND subquery.sequence_number = 1 and terrace = 'Y'
 			</if>	
-			<if test='roomOption != null and "BEAMPROJECTOR".equals(roomOption)'>
+			<if test='roomOption != null and "beamprojector".equals(roomOption)'>
 				AND subquery.sequence_number = 1 and beamprojector = 'Y'
+			</if>
+			
+			<!-- 카테고리별 값 출력 -->
+			<if test='category != null and "최신순".equals(category)'>
+				order by stayno desc
+			</if>		
+			<if test='category != null and "인기순".equals(category)'>
+				order by likecount desc
+			</if>		
+			<if test='category != null and "높은 가격순".equals(category)'>
+				order by minprice desc
+			</if>		
+			<if test='category != null and "낮은 가격순".equals(category)'>
+				order by minprice asc
 			</if>	
+			
+			<!-- 왼쪽 카테고리 -->
+			<if test='category != null and "모든 스테이".equals(category)'>
+				order by likecount desc
+			</if>
+			<if test='category != null and "프로모션".equals(category)'>
+				and badge = 'EXCLUSIVE'
+			</if>			
+			<if test='category != null and "너랑 가고싶어".equals(category)'>
+				and badge = 'HOT'
+			</if>			
 	</select>
 	
 	

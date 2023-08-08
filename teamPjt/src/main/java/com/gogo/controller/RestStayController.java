@@ -28,30 +28,22 @@ public class RestStayController {
 	StayService stayService;
 	
 	@PostMapping("keyword")
-//	public void keywordList(@RequestParam("stayName") String stayName,
-//			@RequestParam("stayAdress") String stayAdress,
-//			@RequestParam("stayView") String stayView,
-//			@RequestParam("stdPerson") String stdPerson,
-//			@RequestParam("maxPrice") String maxPrice,
-//			@RequestParam("stayType") String stayType,
-//			@RequestParam("roomOption") String roomOption,
-//			@RequestParam("findStartDate") String findStartDate,
-//			@RequestParam("findEndDate") String findEndDate,
 	public Map<String, Object> keywordList(@RequestBody StayVO vo, Model model) {
-//		StayVO vo = new StayVO(); 
-//		vo.setStayName(stayName);
-//		vo.setStayAdress(stayAdress);
-//		vo.setStayView(stayView);
-//		vo.setStdPerson(stdPerson);
-//		vo.setMaxPrice(maxPrice);
-//		vo.setStayType(stayType);
-//		vo.setRoomOption(roomOption);
-//		vo.setRoomOption(findStartDate);
-//		vo.setRoomOption(findEndDate);
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<StayVO> list = stayService.stayKeywordList(vo, model);
 		System.out.println(list);
 		map.put("list", list);
 		return map;
+	}
+	
+	@GetMapping("category/{encodedCategoryName}")
+	public Map<String, Object> categoryList(@PathVariable("encodedCategoryName") String encodedCategoryName, Model model){
+		Map<String, Object> map = new HashMap<String, Object>();
+		StayVO vo = new StayVO();
+		vo.setCategory(encodedCategoryName);
+		List<StayVO> list = stayService.stayKeywordList(vo, model);
+		map.put("list", list);
+		return map;
+		
 	}
 }

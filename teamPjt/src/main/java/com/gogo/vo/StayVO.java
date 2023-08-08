@@ -28,10 +28,12 @@ public class StayVO {
 	private int likeCount; // 좋아요 수
 	private String stayView; // 주변 경치
 	
-	private String roomOption; 
+	private String roomOption; // 룸옵션 확인 변수
 	
-	private String findStartDate;
-	private String findEndDate;
+	private String findStartDate; // 체크인
+	private String findEndDate; // 체크아웃
+	
+	private String category; // 카테고리 출력 변수
 	
 	
 	

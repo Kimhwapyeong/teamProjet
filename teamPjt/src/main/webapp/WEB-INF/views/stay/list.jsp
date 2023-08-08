@@ -63,7 +63,7 @@
             })
 
             // 국내 여행 모달창 클릭
-            let searchbtn = document.querySelectorAll('.clearfix li button');
+            let searchbtn = document.querySelectorAll('#regionModal li button');
             searchbtn.forEach(button => {
                 // 버튼이 클릭되면
                 button.addEventListener('click', () => {
@@ -78,13 +78,33 @@
                     });
                 })
             })
+            
+            // 뷰 모달창 클릭
+            let viewModalBtn = document.querySelectorAll('#viewModal li button');
+            viewModalBtn.forEach(button => {
+                // 버튼이 클릭되면
+                button.addEventListener('click', () => {
+                    console.log('a');
+                    // 클릭된 버튼만 active 클래스 추가, 나머지는 active 클래스 삭제
+                    viewModalBtn.forEach(otherButton => {
+                        if (otherButton === button) {
+                            otherButton.classList.add('active');
+                        } else {
+                            otherButton.classList.remove('active');
+                        }
+                    });
+                })
+            })
 
             // x창
             let clsbtn = document.querySelector('#clsbtn');
             clsbtn.addEventListener('click', function () {
                 document.querySelector("#areaSelect").style.display = '';
             })
-
+			let clsbtn2 = document.querySelector('.btn-number-search');
+            clsbtn2.addEventListener('click', function () {
+                document.querySelector("#areaSelect").style.display = '';
+            })
 
 
             // 인원 버튼
@@ -221,18 +241,6 @@
             });
             closeBtn222.addEventListener('click', toggleCalendar);
         
-
-
-        
-/*         function searchlist() {
-            let where;
-            document.querySelectorAll('.optionPick>li>button').forEach(button => {
-                if (button.classList.contains('active')) {
-                    where = button.innerHTML;
-                    location.href = '/stay/list?=' + where;
-                }
-            })
-        } */
 		
 				
         		//  인원수 조정 버튼
@@ -272,145 +280,225 @@
 	        	 }
 	           
 	           
-	          
-	           
-/* 	           let submitBtns = document.querySelectorAll('.btn-number-search');
-	           // let searchFrom = document.getElementById('searchFrom');
-	           
-	           submitBtns.forEach((subBtn) => {
-	        	   subBtn.addEventListener('click', (event) => {
-	        		    event.preventDefault(); 
-	        		    console.log('a');
-	        	     // stay(스테이) / region(지역) / totalPerson(인원) / startPrice(시작가격) ~ endPrice(끝가격) / 
-	        	     searchForm.action = "/stay/keyword";
-	        	     searchForm.submit();
-	        	     
-	        	   });
-	        	 }); */
-	           
-	           
-	           
-	           
-	           
-	           
-	           
-	           
-	           
+	           	
+	           	
+	           	
+	           	
         	};
         
         	document.addEventListener('DOMContentLoaded', function() {
-        	  let searchBtn = document.querySelector('.btn_search');
-        	  let insertList = document.querySelector('.flist_wrap');
-        	  let searchFrom = document.getElementById('searchFrom');
-
-        	  
-     
-        	  
-        	  searchBtn.addEventListener('click', function() {
-        			event.preventDefault(); 
-        			console.log('a');
+        	  	
+        		
+	        		// 슬라이드 이미지
+		           	//let slideImgList = document.querySelectorAll('.swiper-wrapper'); // 슬라이드 이미지 인덱스 선택하기
+		           	//let slideImg = slideImgList.querySelectorAll('li'); // 선택된 index의 이미지
+		           	let slideBtn = document.querySelectorAll('.swiper-button-next');
+		           	slideBtn.forEach((button, index) => {
+		                button.addEventListener('click', () => {
+		                    console.log(index);
+		                    let slideImgList = document.querySelectorAll('.swiper-wrapper')[index];
+		                    let slideImg = slideImgList.querySelectorAll('li');
+		                    slideImg.forEach()
+		                    button[index].addEventListener('click', () => {
+		                    	
+		                    })
+		                })
+		            })
+        		
         			
-        			let stayName = document.getElementById('stayName').value;
-        			if(stayName === null){
-        				stayView == "";
-        			}
-        			console.log(stayName);
-        			
-        			let stayAdress = document.getElementById('stayAdress').value;
-        			if(stayAdress === null){
-        				stayAdress == "";
-        			}
-        			console.log(stayAdress);
-        			
-        			let stayView = document.getElementById('stayView').value;
-        			if(stayView === null){
-        				stayView == "";
-        			}
-        			console.log(stayView);
-        			
-        			let stdPerson = document.getElementById('stdPerson').value;
-        			if(stdPerson === null){
-        				stdPerson == "";
-        			}
-        			console.log(stdPerson);
-        			
-        			let maxPrice = document.getElementById('maxPrice').value * 10000;
-        			if(maxPrice === null){
-        				maxPrice == "";
-        			}
-        			console.log(maxPrice);
-        			
-        			// all로 바꿔야함
-        			let stayType = document.querySelector('#stayTypeList li label input').value;
-        			if(stayType === null){
-        				stayType == "";
-        			}
-        			console.log(stayType);
-        			
-        			// all로 바꿔야함
-        			let roomOption = document.querySelectorAll('#roomOptionList li label input').value;
-        			if(roomOption === null){
-        				roomOption == "";
-        			}
-        			console.log(roomOption);
-        			console.log('aaaaaaaaaaaaaaaaaaaaaaaaa');
-        			
-        			let option = document.querySelectorAll('#roomOptionList li label input');
-        			option.forEach((button)=>{
-        				// 체크되어있지 않으면
-        				if(button.checked){
-							option = button.value;
-							console.log(option);
-        				}
+        		
+        		
+        		
+        		
+        	  		// 오른쪽 카테고리
+        			let listCategory = document.querySelectorAll('#listpick li');
+        			listCategory.forEach(button => {
+                        button.addEventListener('click', () => {
+							let category = button.innerHTML;
+							let categoryName = category.replace('•', '').trim();
+							console.log(categoryName);
+							let encodedCategoryName = encodeURIComponent(categoryName);
+							
+		        			fetch('/stst/category/'+ categoryName)
+							.then(response => response.json())
+							.then(map => keywordList(map));
+        				})
         			})
-        			console.log('aaaaaaaaaaaaaaaaaaaaaaaaa');
         			
+     
+        	  		// 왼쪽 카테고리
+        			let promotionList = document.querySelectorAll('#motionList li');
+        			promotionList.forEach(button => {
+                        button.addEventListener('click', () => {
+							let promotion = button.innerHTML;
+							console.log(promotion);
+							let encodedPromotion = encodeURIComponent(promotion);
+							
+		        			fetch('/stst/category/'+ encodedPromotion)
+							.then(response => response.json())
+							.then(map => keywordList(map));
+        				})
+        			})
         			
-        			
-        			
-        			
-        			let findStartDate = document.getElementById('reserved_checkIn').value;
-        			if(findStartDate === null){
-        				findStartDate == "";
-        			}
-        			console.log(findStartDate);
-        			
-        			let findEndDate = document.getElementById('reserved_checkOut').value
-        			if(findEndDate === null){
-        				findEndDate == "";
-        			}
-        			console.log(findEndDate);
-        			
-        			let data = {
-        					stayName : stayName || "",
-        					stayAdress: stayAdress || "",
-        					stayView : stayView || "",
-        					stdPerson : stdPerson || "",
-        					maxPrice : maxPrice || "",
-        					stayType : stayType || "",
-        					roomOption : roomOption || "",
-        					findStartDate : findStartDate || "",
-        					findEndDate : findEndDate || ""
-        			      };
-
-        			      
-        			      fetch("/stst/keyword", {
-        			        method : 'post', 
-        			        headers : {
-        			          'Content-Type': 'application/json'
-        			        },
-        			        body : JSON.stringify(data)
-        			      })
-        			      .then(response => response.json())
-        			      .then(result =>{console.log(result);})
-        			});
+	        	  // 검색폼	
+	        	  let searchBtn = document.querySelector('.btn_search');
+	        	  let insertList = document.querySelector('.flist_wrap');
+	        	  let searchFrom = document.getElementById('searchFrom');
+	
+	        			
+	        			
+	        	  searchBtn.addEventListener('click', function() {
+	        			event.preventDefault(); 
+	        			console.log('a');
+	        			
+	        			
+	        			
+	        			let stayName = document.getElementById('stayName').value;
+	        			if(stayName === null){
+	        				stayView == "";
+	        			}
+	        			console.log(stayName);
+	        			
+	        			let stayAdress = document.querySelector('#regionModal li button.active').value;
+	        			if(stayAdress === null){
+	        				stayAdress == "";
+	        			}
+	        			console.log(stayAdress);
+	        			
+	        			let stayView = document.querySelector('#viewModal li button.active').value;
+	        			if(stayView === null){
+	        				stayView == "";
+	        			}
+	        			console.log(stayView);
+	        			
+	        			let stdPerson = document.getElementById('stdPerson').value;
+	        			if(stdPerson === null){
+	        				stdPerson == "";
+	        			}
+	        			console.log(stdPerson);
+	        			
+	        			let maxPrice = document.getElementById('maxPrice').value * 10000;
+	        			if(maxPrice === null){
+	        				maxPrice == "";
+	        			}
+	        			console.log(maxPrice);
+	        			
+	        			let stayType = document.querySelectorAll('#stayTypeList li label input');
+	        			stayType.forEach((button) => {
+							if(!button.checked){
+								stayType == "";
+							}else{
+								stayType = button.value;
+							}        				
+	        			})
+	        			console.log(stayType);
+	        			 			
+	        			
+	        			let roomOption = document.querySelectorAll('#roomOptionList li label input');
+	        			roomOption.forEach((button) => {
+							if(button.checked){
+								roomOption = button.value;
+							}else{
+								roomOption == "";
+							}        				
+	        			})
+	        			console.log(roomOption);
+	        			
+	        			let findStartDate = document.getElementById('reserved_checkIn').value;
+	        			if(findStartDate === null){
+	        				findStartDate == "";
+	        			}
+	        			console.log(findStartDate);
+	        			
+	        			let findEndDate = document.getElementById('reserved_checkOut').value
+	        			if(findEndDate === null){
+	        				findEndDate == "";
+	        			}
+	        			console.log(findEndDate);
+	        			
+	        			let data = {
+	        					stayName : stayName,
+	        					stayAdress: stayAdress,
+	        					stayView : stayView,
+	        					stdPerson : stdPerson,
+	        					maxPrice : maxPrice,
+	        					stayType : stayType,
+	        					roomOption : roomOption,
+	        					findStartDate : findStartDate,
+	        					findEndDate : findEndDate
+	        			      };
+	
+	        			      
+	        			      fetch("/stst/keyword", {
+	        			        method : 'post', 
+	        			        headers : {
+	        			          'Content-Type': 'application/json'
+	        			        },
+	        			        body : JSON.stringify(data)
+	        			      })
+	        			      .then(response => response.json())
+	        			      //.then(map => keywordList(map));
+	        			      .then(map => keywordList(map));
+	        			});
 
         	 
         	
         	  
-        	function keywordList(result){
-        		let list = result.list;
-        		console.log(list);
+        	function keywordList(map){
+        		let keyList = map.list;
+        		console.log(map);
+        		let pageBlock = '';
+        		stayList.innerHTML = '';
+        			if(keyList != 0){
+	        			keyList.forEach((list, index)=>{
+	        			pageBlock
+		        		+='<div class="flist_box">'
+		 				+'	<a href="/stay/room?stayName='+list.stayName+'">'
+		 				+'		<div class="info_container_wrapper">'
+		 				+'			<div class="name info_container" role="presentation">'+list.stayName+'<span>'+list.stayType+'</span></div>'
+		 				+'			<div class="clearfix"></div>'
+		 				+'			<div class="flist_info" role="presentation">'
+		 				+'				<p class="address info_container" role="presentation"><span>'+list.stayLoc+'</span><br>'
+		 				+'					 기준 '+list.stdPerson+'명&nbsp;(최대 '+list.overPerson+'명)<br>₩'+list.minPrice+' ~ ₩'+list.maxPrice+'</p>'
+		 				+'				<p class="btn_more " role="presentation" tabindex="-1" style="cursor: pointer;">예약하기</p>'
+		 				+'			</div>'
+		 				+'		</div>'
+		 				+'		<div class="flist_img" role="presentation"style="padding-top: 0px;">'
+		 				+'			<ul class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events slider1 flist_slider">'
+		 				+'				<div class="swiper-button-prev "></div>'
+		 				+'				<div class="swiper-button-next"></div>'
+		 				+'				<div class="swiper-wrapper">'
+		 				+'					<li class="swiper-slide img swiper-slide-active" style="background: url(&quot;'+list.mainPic1+'&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">'
+		 				+'					</li>'
+		 				+'					<li class="swiper-slide img swiper-slide-next" style="background: url(&quot;'+list.mainPic2+'&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">'
+		 				+'					</li>'
+		 				+'				</div>'
+		 				+'				<div class="_badge_badge_wrapper__h9IsV">'
+		 				+'					<div class="_badge_exclusive__prNZN">'
+		 				+'						<span class="_badge_txt__fonwF">'+list.badge+'</span>'
+		 				+'					</div>'
+		 				+'				</div>'
+		 				+'			</ul>'
+		 				+'		</div>'
+		 				+'	</a>'
+		 				+'	<button type="button" class="btn_like "><span>관심스테이</span></button>'
+		 				+'</div>';
+		       			});
+        			}else{
+        				pageBlock
+	        			+='<div class="mypage_content">'
+	        			+'	<div class="reserv_wrap mypage-reservation-info">'
+	        			+'		<div style="text-align: center;">'
+	        			+'			<img src="https://www.stayfolio.com/web/images/img-booking-waiting.png" class="img-booking-waiting" alt="img-booking-wating"><br>'
+	        			+'			<p style="line-height: 1.5;">'
+	        			+'				아직 예약 정보가 없습니다.<br class="mo_only"> 새로운 스테이를 찾아 떠나보세요.'
+	        			+'			</p>'
+	        			+'			<button type="button" class="btn_bk btn_sm findstay_btn" style="margin-top: 20px; margin-bottom: 20px; background-color: white; border:1px solid white; color: black; ">새로운 스테이를 찾아보세요~</button>'
+	        			+'		</div>'
+	        			+'	</div>'
+	        			+'</div>'; 
+	        		}
+        			stayList.innerHTML += pageBlock;
         		}
         	});
     </script>
@@ -440,47 +528,48 @@
                                     <div class="area_cont">
                                         <div class="box">
                                             <div class="tit cate_stay" style="text-align: left;">국내</div>
-                                            <ul class="clearfix">
+                                            <ul class="clearfix" id="regionModal">
                                                 <li><button type="button" class="active" name="stayAdress" id="stayAdress" value=""
                                                         style="cursor: pointer;">국내전체</button></li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="제주">제주</button>
+                                                <li><button type="button" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="제주">제주</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="서울">서울</button>
+                                                <li><button type="button" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="서울">서울</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="강원">강원</button>
+                                                <li><button type="button" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="강원">강원</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="부산">부산</button>
+                                                <li><button type="button" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="부산">부산</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="경기">경기</button>
+                                                <li><button type="button" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="경기">경기</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="충청">충청</button>
+                                                <li><button type="button" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="충청">충청</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="경상">경상</button>
+                                                <li><button type="button" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="경상">경상</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="전라">전라</button>
+                                                <li><button type="button" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="전라">전라</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="인천">인천</button>
+                                                <li><button type="button" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="인천">인천</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="광주">광주</button>
+                                                <li><button type="button" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="광주">광주</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="대전">대전</button>
+                                                <li><button type="button" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="대전">대전</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="대구">대구</button>
+                                                <li><button type="button" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="대구">대구</button>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="box">
                                             <div class="tit cate_stay" style="text-align: left;">주변 경치</div>
-                                            <ul class="clearfix">
-                                             	<li><button type="submit" class="" style="cursor: pointer;" id="stayView" name="stayView" value="">전체</button>
+                                            <ul class="clearfix" id="viewModal">
+                                             	<li><button type="button" class="active" style="cursor: pointer;" id="stayView" name="stayView" value="">전체</button>
                                                 </li>
-                                             	<li><button type="submit" class="" style="cursor: pointer;" id="stayView" name="stayView" value="바다">바다</button>
+                                             	<li><button type="button" class="" style="cursor: pointer;" id="stayView" name="stayView" value="바다">바다</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" id="stayView" name="stayView" value="산">산</button>
+                                                <li><button type="button" class="" style="cursor: pointer;" id="stayView" name="stayView" value="산">산</button>
                                                 </li>
                                              </ul>
                                         </div>
                                     </div>
+									<button style=" border:0px; cursor: pointer; margin-left: 500px;" type="button" onclick="" class="btn-number-search">적용하기</button>
                                 </div>
                             </div>
                         </div>
@@ -862,17 +951,17 @@
                             <div class="btn-wrapper"><button type="submit" class="btn-number-search">적용하기</button></div>
                             <ul class="check_list" id="stayTypeList">
                                 <li class="ko"><label class="check_skin" for="all"><input type="checkbox" 
-                                			id="all" name="stayType" value=""><span>전체</span></label></li>
+                                			id="all" name="staytype" value="" checked=""><span>전체</span></label></li>
                                 <li class="ko"><label class="check_skin" for="pension"><input type="checkbox"
-                                            id="pension" name="stayType" value="펜션"><span>펜션</span></label></li>
+                                            id="pension" name="staytype" value="펜션"><span>펜션</span></label></li>
                                 <li class="ko"><label class="check_skin" for="hanok"><input type="checkbox"
-                                            id="hanok" name="stayType" value="한옥"><span>한옥</span></label></li>
+                                            id="hanok" name="staytype" value="한옥"><span>한옥</span></label></li>
                                 <li class="ko"><label class="check_skin" for="hostel"><input type="checkbox"
-                                            id="hostel" name="stayType" value="호스텔"><span>호스텔</span></label></li>
+                                            id="hostel" name="staytype" value="호스텔"><span>호스텔</span></label></li>
                                 <li class="ko"><label class="check_skin" for="bnb"><input type="checkbox"
-                                            id="bnb" name="stayType" value="민박"><span>민박</span></label></li>
+                                            id="bnb" name="staytype" value="민박"><span>민박</span></label></li>
                                 <li class="ko"><label class="check_skin" for="hotel"><input type="checkbox"
-                                            id="hotel" name="stayType" value="호텔"><span>호텔</span></label></li>
+                                            id="hotel" name="staytype" value="호텔"><span>호텔</span></label></li>
                             </ul>
                         </div>
                         <div id="selectTheme" class="layer_select theme ">
@@ -881,27 +970,18 @@
                             <div class="btn-wrapper"><button type="submit" class="btn-number-search">적용하기</button></div>
                             <ul class="findstay_check_list" id="roomOptionList">
                                  <li class="ko"><label class="check_skin" for="all_theme"><input type="checkbox"
-                                            id="all_theme" name="roomOption" value=""><span>전체</span></label></li>
+                                            id="all_theme" name="roomOption" value="" checked=""><span>전체</span></label></li>
                                 <li class="ko"><label class="check_skin" for="bbq_theme"><input type="checkbox"
                                             name="roomOption" id="bbq_theme" value="babiqu"><span>바베큐</span></label></li>
                                 <li class="ko"><label class="check_skin" for="pets_theme"><input type="checkbox"
                                             name="roomOption" id="pets_theme" value="pet"><span>반려동물</span></label></li>
                                 <li class="ko"><label class="check_skin" for="display_theme"><input type="checkbox"
-                                            name="roomOption" id="display_theme" value="beamprojector"><span>빔프로젝터, TV</span></label>
-                                </li>
+                                            name="roomOption" id="display_theme" value="beamprojector"><span>빔프로젝터, TV</span></label></li>
                                 <li class="ko"><label class="check_skin" for="pool_theme"><input type="checkbox"
                                             name="roomOption" id="pool_theme" value="pool"><span>풀장</span></label></li>
                                 <li class="ko"><label class="check_skin" for="kitchenette_theme"><input type="checkbox"
                                             name="roomOption" id="kitchenette_theme" value="terrace"><span>테라스</span></label></li>
                             </ul>
-                           <!--  <fieldset>
-                            	<legend>편의시설</legend>
-                            	<input type="checkbox" name="roomOption" id="roomOption" value="babiqu">바베큐<br>
-                            	<input type="checkbox" name="roomOption" id="roomOption" value="pet">반려동물<br>
-                            	<input type="checkbox" name="roomOption" id="roomOption" value="beamprojector">빔프로젝터, TV<br>
-                            	<input type="checkbox" name="roomOption" id="roomOption" value="pool">풀장<br>
-                            	<input type="checkbox" name="roomOption" id="roomOption" value="terrace">테라스<br>
-                            </fieldset> -->
                         </div>
                     </div>
                     <div class="sel_map">
@@ -927,10 +1007,10 @@
                 </ul>
                 <div class="_selector_layer_toggle__U_ckA _selector_layer_sort__dTSl4 " role="button" tabindex="0">
                     <div class="_selector_layer_cover___d3pB">
-                        <ul class="_selector_filter_list__UUNfp">
+                        <ul class="_selector_filter_list__UUNfp" id="motionList">
                             <li class="_selector_selected__ciPbE">모든 스테이</li>
                             <li class="">프로모션</li>
-                            <li class="">오직 여기에서만</li>
+                            <li class="">너랑 가고싶어</li>
                         </ul>
                     </div>
                 </div>
@@ -957,7 +1037,7 @@
     </div>
 
 	<div class="container findstay_list  ">
-		<div class="flist_wrap">
+		<div class="flist_wrap" id="stayList">
 			<c:forEach items="${list}" var="list" step="1">
 				<div class="flist_box">
 					<a href="/stay/room?stayName=${list.stayName}">
@@ -970,11 +1050,15 @@
 								<p class="btn_more " role="presentation" tabindex="-1" style="cursor: pointer;">예약하기</p>
 							</div>
 						</div>
+						</a>
+						
 						<div class="flist_img" role="presentation"
 							style="padding-top: 0px;">
 							<ul class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events slider1 flist_slider">
+							
 								<div class="swiper-button-prev "></div>
 								<div class="swiper-button-next"></div>
+								<a href="/stay/room?stayName=${list.stayName}">
 								<div class="swiper-wrapper">
 									<li class="swiper-slide img swiper-slide-active"
 										style="background: url(&quot;${list.mainPic1}&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
@@ -983,6 +1067,7 @@
 										style="background: url(&quot;${list.mainPic2}&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
 									</li>
 								</div>
+								</a>
 								<div class="_badge_badge_wrapper__h9IsV">
 									<div class="_badge_exclusive__prNZN">
 										<span class="_badge_txt__fonwF">${list.badge }</span>
@@ -990,43 +1075,10 @@
 								</div>
 							</ul>
 						</div>
-					</a>
+					<!-- </a> -->
 					<button type="button" class="btn_like "><span>관심스테이</span></button>
 				</div>
 			</c:forEach>
-
-			<!--         <div class="flist_box">
-                    <div class="info_container_wrapper">
-                        <div class="name info_container" role="presentation">단심스테이<span>민박</span></div>
-                        <div class="clearfix"></div>
-                        <div class="flist_info" role="presentation">
-                            <p class="address info_container" role="presentation"><span>제주/서귀포시</span><br>
-                            기준 4명&nbsp;(최대 6명)<br>₩450,000 ~ ₩550,000</p>
-                            <p class="btn_more " role="presentation" tabindex="-1" style="cursor: pointer;">예약하기</p>
-                        </div>
-                    </div>
-                    <div class="flist_img" role="presentation" style="padding-top: 0px;">
-                        <ul class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events slider1 flist_slider">
-                            <div class="swiper-button-prev "></div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-wrapper"> 
-                                <li class="swiper-slide img swiper-slide-active"
-                                    style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/051/small/0c6d4f002d9ec019336717a93860bda6db5ddb8d.jpg?1674109162&quot;) center center / cover no-repeat; cursor: pointer; width: 389px;">
-                                </li>
-                                <li class="swiper-slide img swiper-slide-next"
-                                    style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/035/small/76c44f42cc10d2307b01076923a1a9af4252b1c8.jpg?1674109162&quot;) center center / cover no-repeat; cursor: pointer; width: 389px;">
-                                </li>
-                            </div>
-                            <div class="_badge_badge_wrapper__h9IsV">
-                                <div class="_badge_exclusive__prNZN"><span
-                                        class="_badge_txt__fonwF">EXCLUSIVE</span>
-                                </div>
-                            </div>
-                        </ul>
-                    </div>
-                <button type="button" class="btn_like "><span>관심스테이</span></button>
-            </a>
-        </div> -->
 
 
 

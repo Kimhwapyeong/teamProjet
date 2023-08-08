@@ -65,6 +65,15 @@ public class roomTest {
 	@Test
 	public void styaKeywordList() {
 		StayVO vo = new StayVO();
+		vo.setStayName("");
+		vo.setStayAdress("");
+		vo.setStayView("");
+		vo.setStdPerson("0");
+		vo.setMaxPrice("1000000");
+		vo.setStayType("");
+		vo.setRoomOption("babiqu");
+		vo.setFindStartDate("");
+		vo.setFindEndDate("");
 		List<StayVO> keyword = sm.stayKeywordList(vo);
 		log.info("=========");
 		log.info(keyword);
