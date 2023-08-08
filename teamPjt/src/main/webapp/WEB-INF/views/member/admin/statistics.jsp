@@ -55,15 +55,17 @@
                                 <li class="active"><a href="./staticPage">통계 및 분석</a></li>
                             </ul>
                         </div>
+                        
+                        
                         <div class="mypage_content">
                             <div class="reserv_wrap mypage-reservation-info">
                                 <div class="reserv_box accepted">
                                     <!-- script -->
-                                    
+                                     
 										<!--차트-->
 										<div style="margin-left: 5%;">
 											<h6 style="font-weight:bold; ">연령대별 이용자 현황</h6>
-										    <div style="width: 400px; height: 400px; margin-top : 20px; margine-left:30px">
+										    <div style="width: 350px; height: 350px; margin-top : 20px; margine-left:30px">
 											<canvas id="myChart"></canvas>
 										</div>
 									
@@ -97,7 +99,7 @@
 									                            labels: ageList,
 									                            datasets : [{
 									                                data: ageCount,
-									                                label: '연령대별 예약',
+									                                label: '연령대별 이용자 현황',
 									                                fill: false,
 									                                backgroundColor: [
 									                                    //색상
@@ -134,13 +136,10 @@
 									            })
 									        }
 									
-									
-									    
 									    </script>
-                             			
                                 </div>
+                                
                             </div>
-
                         </div>
                     </div>
                 </div>

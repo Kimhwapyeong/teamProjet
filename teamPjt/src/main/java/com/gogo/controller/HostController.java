@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gogo.service.myPagingService;
@@ -21,6 +22,7 @@ import com.gogo.vo.AnswerVO;
 import com.gogo.vo.Criteria;
 import com.gogo.vo.PageDto;
 import com.gogo.vo.QuestionVO;
+import com.gogo.vo.ReservedVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -62,9 +64,20 @@ public class HostController extends CommonRestController{
 	
 	// 수입 현황
 	@GetMapping("income")
-	public void income() {
-		
+	public String income() {
+		return "/member/host/profit";
 	}
+	
+	// 수입 현황
+	@RequestMapping("profit")
+	public @ResponseBody List<ReservedVO> profit(Model model){
+		List<ReservedVO> list = mypageService.profit();
+		model.addAttribute("chart", list);
+		log.info("============");
+	    log.info("chart : " + list);
+	    return list;
+	}
+	
 	
 	// 호스트 가이드
 	@GetMapping("guide")

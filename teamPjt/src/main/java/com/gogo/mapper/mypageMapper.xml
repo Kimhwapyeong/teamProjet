@@ -64,7 +64,6 @@
 		  END AS age_group,
 		  COUNT(*) AS count
 		FROM member m
-		JOIN reservation v ON v.memberid = m.memberid
 		GROUP BY 
 		  CASE 
 		    WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM birthday) + 1 BETWEEN 20 AND 29 THEN '20대'
@@ -121,6 +120,30 @@
 	    JOIN ROOM r ON s.STAYNO = r.STAYNO
 	    JOIN RESERVATION v ON r.ROOMNO = v.ROOMNO
 	</select>  
+	
+	
+	<!-- 수입 현황 -->
+	<!-- 일단 memberid where 절 x -->
+	<select id="profit" resultType="com.gogo.vo.ReservedVO">
+		SELECT
+		    TO_CHAR(v.regdate, 'YYYY-MM') AS month,
+		    SUM(price * v.membercount) AS total_price
+		FROM
+		    room r
+		JOIN
+		    reservation v ON r.roomno = v.roomno
+		JOIN
+		    stay s ON s.stayno = r.stayno
+		JOIN
+		    payment p ON v.reservationno = p.reservationno
+		JOIN
+		    refund f ON p.paymentno = f.paymentno
+		GROUP BY
+		    TO_CHAR(v.regdate, 'YYYY-MM')
+		ORDER BY
+		    TO_CHAR(v.regdate, 'YYYY-MM')
+	</select>
+	
 	
 	
 	<!-- 가이드 문의 요청 -->
@@ -282,7 +305,7 @@
 		    FROM refund f
 		    JOIN payment p ON f.paymentno = p.paymentno
 		    JOIN reservation v ON p.reservationno = v.reservationno
-		    WHERE v.memberid = 'user1'
+		    WHERE v.memberid = #{memberId}
 		)
 	</select>
 

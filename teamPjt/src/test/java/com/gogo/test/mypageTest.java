@@ -152,6 +152,13 @@ public class mypageTest {
 		log.info("profile: " + profile);
 	}
 	
+	@Test
+	public void profit() {
+		List<ReservedVO> vo = mapper.profit();
+		log.info("=========================");
+		log.info("vo: " + vo);
+	}
+	
 	
 	
 }

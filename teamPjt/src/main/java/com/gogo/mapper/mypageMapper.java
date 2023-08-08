@@ -48,6 +48,9 @@ public interface mypageMapper {
 	// 예약 관리 대표 사진
 	public List<Map<String, String>> reservpic();
 	
+	// 수입 현황
+	public List<ReservedVO> profit();
+	
 	// 가이드 질문
 	public int insert(QuestionVO qa);
 	

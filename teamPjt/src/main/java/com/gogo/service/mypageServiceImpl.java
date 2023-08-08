@@ -151,6 +151,12 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 	
 	
 	@Override
+	public List<ReservedVO> profit() {
+		List<ReservedVO> profit = mypageMapper.profit();
+		return profit;
+	}
+	
+	@Override
 	public int insert(QuestionVO qa) {
 		return mypageMapper.insert(qa);
 	}

@@ -148,7 +148,7 @@
                                   <div class="profile_photo">
                                     <div class="input_box">
                                     		<input type="file" id="imgFile" name="files" title="프로필 사진" class="photo" 
-                                    			style="width: 150px; height: 150px; background-size: cover; border: 2px solid black; border-radius: 50%;" value="${sessionScope.member.profile}">
+                                    			style="width: 150px; height: 150px; background-size: cover; border-radius: 50%;" value="${sessionScope.member.profile}">
                                         	<input type="button" onclick="imgFile.click()" id="imgFile2" name="imgFile2" title="프로필 사진" class="btn_photo"
                                             	accept="image/jpeg, image/png">
                                  	</div>
@@ -255,14 +255,6 @@
                                    
                                     <div class="input_box">
                                         <div class="tit">비밀번호</div>
-                                        
-                                        <div class="input">
-	                                        <label style="display: flex;">
-	                                        <input class="mypage_account_edit_password" type="password" name="password" id="currentpw"
-	                                                    placeholder="현재 비밀번호" value="${member.pw }" style="margin-left: 8px;">
-	                                        <button type="button"  class="togglePW" style="margin-right: -15px;"><img src="/resources/images/eyeoff.svg" alt=""></button>
-	                                        </label>
-                                        </div>
                                         
                                         <div class="input">
 	                                        <label style="display: flex;">
