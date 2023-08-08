@@ -28,24 +28,26 @@
 						<div class="w3-container w3-card-4">
 							<div class="w3-center w3-large w3-margin-top">
 						      <div class="text-center">
-						          <h1 class="h4 text-gray-900 mb-2">Please check your Password</h1><br><br>
-						                 <p class="mb-4">${newPwd}</p>    
+						          <h2 class="h4 text-gray-900 mb-2"></h2><br><br>
+						               
 						      </div>									
 
 							<div class="text-center">
-								<p class="w3-center findidBtn"
-									style="display: flex; align-items: center; justify-content: center;">
+							
+									<div style="display: flex; align-items: center; justify-content: center; margin-bottom: 1em; ">
 									<a class="small" href="/login/signup">아직 회원이 아니신가요?
 										<button type="button" id='findPwbtn' onclick=""
 											class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round"
 											style="width: 100px; height: 30px; border: 1px solid #ebebeb; background-color: #fff; border-radius: 20px;">회원가입</button>
 									</a>
-								</p>
-
+									</div>
+							
+<div style="display: flex; align-items: center; justify-content: center;">
 								<a class="small" href="/login/login">이미 회원이신가요?
 									<button type="button" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round"
 										style="width: 100px; height: 30px; border: 1px solid #ebebeb; background-color: #fff; border-radius: 20px; margin: left;">로그인</button>
 								</a>
+								</div>
 							</div>
 
 						</div>

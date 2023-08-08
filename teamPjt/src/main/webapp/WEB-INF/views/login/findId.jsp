@@ -90,7 +90,7 @@ alert(msg);
 							<p class="w3-center findidBtn" style="display: flex; align-items: center; justify-content:center; margin:5em;" >
 								<button type="button" id='findIdbtn' onclick="findIdAction()"
 									class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round"
-									style="width: 45px; height: 30px; border: 1px solid #ebebeb; background-color: #fff; border-radius:20px; " >find</button>
+									style="width: 45px; height: 30px; border: 1px solid #ebebeb; background-color: #fff; border-radius:20px;">find</button>
 								<button type="button" onclick="history.go(-1);"
 									class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round" 
 									style="width: 45px; height: 30px; border: 1px solid #ebebeb; background-color: #fff; border-radius:20px; margin: right;">Cancel</button>
