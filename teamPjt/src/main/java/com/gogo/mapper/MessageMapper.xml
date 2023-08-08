@@ -39,5 +39,14 @@
         AND roomId = #{roomId} 
         AND type = 'ENTER'
 	</select>
+	
+	<select id="joinYN2" resultType="int">
+		SELECT COUNT(*) 
+        FROM Message 
+        WHERE memberId = #{memberId} 
+        AND roomId = #{roomId} 
+        AND type = 'OUT'
+	</select>
+	
 
 </mapper>

@@ -53,7 +53,7 @@ public class EchoHandler extends TextWebSocketHandler{
         }
 
         //String roomId = params.get("roomId");  // 이 부분은 roomId가 필요할 때 사용하면 됩니다.     
-        userSessions.put(writer, session); // 사용자 세션 등록
+        //userSessions.put(writer, session); // 사용자 세션 등록
     	
     	
     	String roomId = (String) session.getAttributes().get("roomId");
@@ -61,7 +61,7 @@ public class EchoHandler extends TextWebSocketHandler{
         // roomId가 null인 경우 처리
         if (roomId == null) {
             // 예외를 던지거나, 기본값을 설정합니다.
-            throw new Exception("roomId는 null일 수 없습니다.");
+            return;
         }
 
         if (!roomSessions.containsKey(roomId)) {
@@ -75,12 +75,13 @@ public class EchoHandler extends TextWebSocketHandler{
         if (writer == null) {
             // 예외를 던지거나, 기본값을 설정합니다.
             throw new Exception("writer는 null일 수 없습니다.");
+            
         }
 
-        System.err.println("writer : "+ writer);
-        System.err.println("roomId : "+ roomId);
-        System.err.println("member : "+ member);
-        
+//        System.err.println("writer : "+ writer);
+//        System.err.println("roomId : "+ roomId);
+//        System.err.println("member : "+ member);
+//        
         int idx = roomId.indexOf("=");
         roomId = roomId.substring(idx+1);
         
@@ -139,46 +140,47 @@ public class EchoHandler extends TextWebSocketHandler{
     }
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        String writer = (String) session.getAttributes().get("memberId");
-        userSessions.remove(writer); // 사용자 세션 제거
-
-        String roomId = (String) session.getAttributes().get("roomId");
-        String type = (String) session.getAttributes().get("type");
-        roomSessions.get(roomId).remove(session);
-        System.err.println("연결닫 type : "+ type);
-        
-        // roomId가 null인 경우 처리
-        if (roomId == null) {
-            // 예외를 던지거나, 기본값을 설정합니다.
-            throw new Exception("roomId는 null일 수 없습니다.");
-        }
-        
-        int idx = roomId.indexOf("=");
-        roomId = roomId.substring(idx+1);
-        
-        // writer가 null인 경우 처리
-        if (writer == null) {
-            // 예외를 던지거나, 기본값을 설정합니다.
-            throw new Exception("writer는 null일 수 없습니다.");
-        }
-        	
-        Map<String, Object> map = new HashMap<String, Object>();
-        
-       if(session.getAttributes().get("memberId")!=null) {
-        	
-        	MessageVO checkMsg = new MessageVO();
-        	checkMsg.setMemberId((String)session.getAttributes().get("memberId"));
-        	checkMsg.setRoomId(roomId);
-	        	if(service.joinYN(checkMsg)) {
-	        		
-	        		map.put("content", writer+"님 "+roomId+"번 채팅방 퇴장!");
-	        		map.put("roomId", roomId);
-	        		map.put("type", "OUT");
-	        		map.put("writer", writer);
-	        		service.insertChatting(map);
-	        	}
-        }
-        
+    	String roomId = "";
+    	try {
+		    	String writer = (String) session.getAttributes().get("memberId");
+		        userSessions.remove(writer); // 사용자 세션 제거
+		
+		        roomId = (String) session.getAttributes().get("roomId");
+		        roomSessions.get(roomId).remove(session);
+		        // roomId가 null인 경우 처리
+		        if (roomId == null) {
+		            // 예외를 던지거나, 기본값을 설정합니다.
+		            throw new Exception("roomId는 null일 수 없습니다.");
+		        }
+		        
+		        int idx = roomId.indexOf("=");
+		        roomId = roomId.substring(idx+1);
+		        
+		        // writer가 null인 경우 처리
+		        if (writer == null) {
+		            // 예외를 던지거나, 기본값을 설정합니다.
+		            throw new Exception("writer는 null일 수 없습니다.");
+		        }
+		        	
+		        Map<String, Object> map = new HashMap<String, Object>();
+		        
+		       if(session.getAttributes().get("memberId")!=null) {
+		        	System.err.println("웹소켓 연결 닫힘 횟수 테스트");
+		        	MessageVO checkMsg = new MessageVO();
+		        	checkMsg.setMemberId((String)session.getAttributes().get("memberId"));
+		        	checkMsg.setRoomId(roomId);
+			        	if(service.joinYN2(checkMsg)) {
+			        		
+			        		map.put("content", writer+"님 "+roomId+"번 채팅방 퇴장!");
+			        		map.put("roomId", roomId);
+			        		map.put("type", "OUT");
+			        		map.put("writer", writer);
+			        		service.insertChatting(map);
+			        	}
+		        }
+    	} catch (Exception e) {
+    		return;
+    	}
        
         logger.info("{} 연결 끊김, roomId: {}", session.getId(), roomId);
     }	

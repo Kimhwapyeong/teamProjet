@@ -20,6 +20,7 @@ public interface MessageMapper {
 	public String getNewRoomId();
 	
 	public int joinYN(MessageVO vo); // 입 퇴장 기록이 있는지 체크
+	public int joinYN2(MessageVO vo); // 입 퇴장 기록이 있는지 체크
 	
 	
 }

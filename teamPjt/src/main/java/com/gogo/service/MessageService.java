@@ -28,6 +28,7 @@ public interface MessageService {
 	public Map<String, Object> insertChatting(Map<String, Object> map);
 	public String getNewRoomId();
 	public boolean joinYN(MessageVO vo);
+	public boolean joinYN2(MessageVO vo);
 
 
 }

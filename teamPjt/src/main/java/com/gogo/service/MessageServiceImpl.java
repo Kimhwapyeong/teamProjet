@@ -43,6 +43,12 @@ public class MessageServiceImpl implements MessageService{
 		
 		return res==0;
 	}
+	@Override
+	public boolean joinYN2(MessageVO vo) {
+		int res = messageMapper.joinYN2(vo);
+		
+		return res==0;
+	}
 
 
 	@Override
