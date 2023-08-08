@@ -1,5 +1,7 @@
 package com.gogo.service;
 
+
+
 import org.springframework.stereotype.Service;
 import com.gogo.vo.MemberVO;
 
@@ -24,6 +26,18 @@ public interface MemberService {
 
 	// 아이디 찾기 
 	public String findIdAction(MemberVO member);
+
+	// 비밀번호 찾기
+	public int findPwAction(MemberVO member);
+	
+	public void passwordUpdate(MemberVO member);
+
+	
+	// 이메일 발송
+	//public void sendEmail(MemberVO member, String div) throws Exception;
+
+
+
 
 	
 

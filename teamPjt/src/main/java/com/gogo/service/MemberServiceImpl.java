@@ -1,6 +1,7 @@
 package com.gogo.service;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -70,7 +71,19 @@ public class MemberServiceImpl implements MemberService {
 	public String findIdAction(MemberVO member) {
 		return memberMapper.findIdAction(member);
 	}
+	// 비밀번호 찾기 
+	@Override
+	public int findPwAction(MemberVO member) {
+		return memberMapper.findPwAction(member);
+	}
+	@Override
+	public void passwordUpdate(MemberVO member) {
+		memberMapper.passwordUpdate(member);
+	}
+	
 
+
+	
 
 	
 }

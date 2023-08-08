@@ -46,6 +46,20 @@
 	  	where memberName = #{memberName} and memberEmail = #{memberEmail}
 	</select>
 	
+	<!-- 비밀번호 찾기 -->
+	<select id="findPwAction" parameterType="com.gogo.vo.MemberVO" resultType="int" >
+	<![CDATA[
+		select count(*) from member 
+		where memberId = #{memberId} and memberName = #{memberName} and memberEmail = #{memberEmail} 
+	]]>	
+	</select>
+	
+	<!-- 비밀번호 업데이트 -->
+	<update id="passwordUpdate" parameterType="com.gogo.vo.MemberVO" >
+	    UPDATE member SET pw = #{pw}
+	    where memberId = #{memberId} and memberName = #{memberName} and memberEmail = #{memberEmail}
+	</update>
+	
 </mapper>
 
 

@@ -7,7 +7,9 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -29,8 +31,7 @@ public class MemberController extends CommonRestController {
 
     @Autowired
     private MemberService memberService;
-    
-    
+
 
     // 로그인 페이지 이동
 	@GetMapping("/login/login")
@@ -82,6 +83,8 @@ public class MemberController extends CommonRestController {
 		}  
 		
 	}
+
+	
 	// 회원가입 페이지 이동
 	@GetMapping("/login/signup")
 	public String signup(HttpSession session) {
@@ -104,15 +107,10 @@ public class MemberController extends CommonRestController {
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("msg", "회원가입 중 예외사항이 발생하였습니다.");
-            
         }
-
-        return "/main"; 
+        	return "/main"; 
     }
 
-
-	
-	
 	// 아이디 중복확인 요청
 	@PostMapping("/idCheck")
 	public @ResponseBody Map<String, Object> idCheck(@RequestBody MemberVO member){
@@ -128,36 +126,11 @@ public class MemberController extends CommonRestController {
 	}
 	
 	// 아이디 찾기 페이지 이동
-	
 	@GetMapping("/login/findId")
 	public String findId(HttpServletRequest request, Model model, MemberVO member) {
 		return "/login/findId";
 	}
-	
-	
-	// 아이디 찾기
-	/*
-	@RequestMapping(value = "/login/findIdAction", method = RequestMethod.POST)
-	@ResponseBody
-	public String findIdAction(@RequestParam("memberName") String memberName, @RequestParam("memberEmail") String memberEmail) {
-	        if (StringUtils.isEmpty(memberName)) {
-	            return "이름을 입력해주세요.";
-	        }
 
-	        if (StringUtils.isEmpty(memberEmail)) {
-	            return "이메일을 입력해주세요.";
-	        }
-
-	        String result = memberService.findIdAction(memberName, memberEmail);
-	        
-	        
-	        if (result == null) {
-	            return "입력하신 정보와 일치하는 회원이 없습니다.";
-	        
-	        }
-	        return result;
-	}
-	*/
 	// 아이디 찾기
 	@RequestMapping(value = "/login/findIdAction", method = RequestMethod.POST)
 	public String findIdAction(HttpServletRequest request, Model model,
@@ -165,28 +138,19 @@ public class MemberController extends CommonRestController {
 		    @RequestParam(required = true, value = "memberEmail") String memberEmail,
 			@ModelAttribute MemberVO member) {
 		try {
-		    // 회원정보 검색
-			
 			member.setMemberName(memberName);
 			member.setMemberEmail(memberEmail);
 		    
+			// 회원정보 검색
 			String memberId = memberService.findIdAction(member);
 		    model.addAttribute("memberId", memberId);
 		    
-		 
 		} catch (Exception e) {
 		    System.out.println(e.toString());
 		    model.addAttribute("msg", "오류가 발생되었습니다.");
 		}
-	    
 	    return "/login/findIdAction";
 	}
-	
-	
-	
-	
-	
-	
 	
 	// 비밀번호 찾기 페이지 이동
 	@GetMapping("/login/findPw")
@@ -194,9 +158,54 @@ public class MemberController extends CommonRestController {
 		return "/login/findPw";
 	}
 	
+	// 비밀번호 암호화
+	private String encryptPassword(String newPwd) {
+	    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	    return passwordEncoder.encode(newPwd);
+	}
 	
+	// 비밀번호 찾기
+	 @RequestMapping(value = "/login/findPwAction", method = RequestMethod.POST)
+	    public String findPwAction(HttpServletRequest request, Model model,
+				@RequestParam(required = true, value = "memberId") String memberId, 
+			    @RequestParam(required = true, value = "memberName") String memberName,
+			    @RequestParam(required = true, value = "memberEmail") String memberEmail,
+				@ModelAttribute MemberVO member) {
+	        
+		 
+		 try {
+			    
+			 member.setMemberId(memberId);
+			 member.setMemberName(memberName);
+			 member.setMemberEmail(memberEmail);
+			 
+			    int memberSearch = memberService.findPwAction(member);
+			    
+			    if(memberSearch == 0) {
+			        model.addAttribute("msg", "기입된 정보가 잘못되었습니다. 다시 입력해주세요.");
+			        return "/login/findPw";
+			    }
+			    // randomAlphanumeric : 새로운 패스워드 생성
+			    String newPwd = RandomStringUtils.randomAlphanumeric(10);
+			    // 암호화
+			    String enpassword = encryptPassword(newPwd);
+			    // 패스워드 업데이트
+			    member.setPw(enpassword);
+			    
+			    memberService.passwordUpdate(member);
+			    
+			    model.addAttribute("newPwd", newPwd);
+			 
+			} catch (Exception e) {
+			    System.out.println(e.toString());
+			    model.addAttribute("msg", "오류가 발생되었습니다.");
+			}
+			 
+			 
+			return "/login/findPwAction";
+	    }
 	
-	
+
 	//네이버 로그인
 	@GetMapping("naverAction")
 	public String naverAction() {

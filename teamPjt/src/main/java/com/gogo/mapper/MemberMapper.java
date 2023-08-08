@@ -24,4 +24,8 @@ public interface MemberMapper {
 	public int idCheck(MemberVO member);
 
 	public String findIdAction(MemberVO member);
+
+	public int findPwAction(MemberVO member);
+
+	public void passwordUpdate(MemberVO member);
 }
