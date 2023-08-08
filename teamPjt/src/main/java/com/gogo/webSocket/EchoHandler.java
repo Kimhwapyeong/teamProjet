@@ -84,7 +84,7 @@ public class EchoHandler extends TextWebSocketHandler{
         roomId = roomId.substring(idx+1);
         
         service.chattingGet(roomId, member);
-        map.put("enterMsg", writer+"님 "+roomId+"번 채팅방 입장!");
+        map.put("content", writer+"님 "+roomId+"번 채팅방 입장!");
         map.put("roomId", roomId);
         map.put("type", "ENTER");
         map.put("writer", writer);
@@ -166,14 +166,17 @@ public class EchoHandler extends TextWebSocketHandler{
         if (targetSession != null && targetSession.isOpen() && !senderId.equals(targetMemberId)) {
             Map<String, String> payload = new HashMap<>();
             payload.put("type", "invite");
-            payload.put("message", senderId + "님이 " + roomId + "번 방에 초대하였습니다.");
+
+            // 여기에서 초대 메시지를 생성합니다.
+            String inviteMessage = senderId + "님이 " + roomId + "번 방에 초대하였습니다.";
+            
+            payload.put("message", inviteMessage);
             payload.put("roomId", roomId);
 
             TextMessage message = new TextMessage(new ObjectMapper().writeValueAsString(payload));
             targetSession.sendMessage(message);
         }
-    }
-    
+    }    
     private Map<String, String> parseQueryString(String queryString) {
         Map<String, String> map = new HashMap<>();
         if (queryString == null || queryString.isEmpty()) {

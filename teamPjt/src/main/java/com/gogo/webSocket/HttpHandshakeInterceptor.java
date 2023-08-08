@@ -24,8 +24,10 @@ public class HttpHandshakeInterceptor implements HandshakeInterceptor {
             if (session != null) {
                 String memberId = (String) session.getAttribute("memberId"); // HTTP 세션에서 사용자 이름 가져오기
                 MemberVO member = (MemberVO) session.getAttribute("member");
+                String roomId = (String) session.getAttribute("roomId");
                 attributes.put("memberId", memberId); // WebSocket 세션 속성에 사용자 이름 설정
                 attributes.put("member", member); // WebSocket 세션 속성에 사용자 이름 설정
+                attributes.put("roomId", roomId);
             }
         }
         return true;

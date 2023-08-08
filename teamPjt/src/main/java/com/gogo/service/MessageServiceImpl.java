@@ -92,9 +92,13 @@ public class MessageServiceImpl implements MessageService{
 			
 			String enter = memberId+"님 "+roomId+"번 채팅방 입장";
 			
+			
+			
 			model.addAttribute("memberName", memberId);
 			model.addAttribute("enter", enter);
 			model.addAttribute("roomId", roomId);
+			session.setAttribute("roomId", roomId);
+			
 		} else {
 			
 		}
@@ -148,16 +152,9 @@ public class MessageServiceImpl implements MessageService{
 		System.out.println(map+"호출 성공");
 		MessageVO vo = new MessageVO();
 		
-		if(map.get("enterMsg")!=null && !"".equals(map.get("enterMsg"))) {
-			
-			vo.setContent(String.valueOf(map.get("enterMsg")));
-		} else {
-			
-			vo.setContent(String.valueOf(map.get("content")));
-		}
 		
 		
-		
+		vo.setContent(String.valueOf(map.get("content")));
 		vo.setMemberId(String.valueOf(map.get("writer")));
 		vo.setRoomId(String.valueOf(map.get("roomId")));
 		vo.setType(String.valueOf(map.get("type")));

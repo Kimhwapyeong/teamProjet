@@ -158,10 +158,11 @@
             return;
         }
         
-        
-        if (type == 'ENTER') {
-            enterMsg = memberId + '님 ${roomId}번 채팅방 입장';
+        if (type == 'ENTER'){
+        	
+        	content = '${sessionScope.memberId}님 ${roomId}번 채팅방 입장';
         }
+		
 
         var regDate = new Date(msg.timeStamp);
         var data = {
@@ -169,8 +170,7 @@
             regDate: regDate,
             writer: memberId,
             roomId: roomId,
-            type: type,
-            enterMsg: enterMsg
+            type: type
         };
             if (type == 'ENTER') {
                 $("#chatList").append("<p id='ENTER' style='padding:5px;'>" + message + "</p><br/>");

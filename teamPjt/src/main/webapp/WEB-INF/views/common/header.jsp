@@ -49,7 +49,17 @@
 		
 		            if (receivedData && receivedData.type === 'invite') {
 		                let roomId = receivedData.roomId;
-		                alertPopOn(roomId + "\n이 방으로 이동하시겠습니까?");
+		                let receivedMessage = receivedData.message;
+		                let receivedUserId = '';
+		                const pattern = /(.*?)(?=님이)/;
+
+		                const match = receivedMessage.match(pattern);
+
+		                if (match) {
+		                	receivedUserId = match[1];
+		                    console.log(receivedUserId);  // user1
+		                }
+		                alertPopOn(receivedUserId+"님이 "+roomId + "번 방으로 초대하셨습니다.\n이동하시겠습니까?");
 		
 		                document.getElementById('acceptInvite').style.display = 'block';
 		                document.getElementById('declineInvite').style.display = 'block';
