@@ -39,6 +39,10 @@ public class StayController {
 		stayService.roomInfoPagePic(stayName, roomName, model);
 	}
 	
+	
+	
+	
+	
 	/*
 	 * @GetMapping("keyword") public void stayKeywordList(String , Model model) {
 	 * stayService.stayKeywordList(vo, model); }

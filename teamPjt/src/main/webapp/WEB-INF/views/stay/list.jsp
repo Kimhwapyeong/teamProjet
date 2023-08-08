@@ -239,7 +239,7 @@
 	            let plusBtns = document.querySelectorAll('.btn_plus');
 	            let minusBtns = document.querySelectorAll('.number_count .btn_minus');
 	            let inputNums = document.querySelectorAll('.input-num input');
-				let totalCnt = document.getElementById('totalPerson');
+				let totalCnt = document.getElementById('stdPerson');
 	
 	            plusBtns.forEach((plusBtn, index) => {
 		              plusBtn.addEventListener('click', () => {
@@ -309,103 +309,107 @@
         	  searchBtn.addEventListener('click', function() {
         			event.preventDefault(); 
         			console.log('a');
-        			// Get the form data and convert it to URL-encoded string
-        		    let formData = new FormData(searchFrom);
-        		    let urlSearchParams = new URLSearchParams(formData).toString();
+        			
+        			let stayName = document.getElementById('stayName').value;
+        			if(stayName === null){
+        				stayView == "";
+        			}
+        			console.log(stayName);
+        			
+        			let stayAdress = document.getElementById('stayAdress').value;
+        			if(stayAdress === null){
+        				stayAdress == "";
+        			}
+        			console.log(stayAdress);
+        			
+        			let stayView = document.getElementById('stayView').value;
+        			if(stayView === null){
+        				stayView == "";
+        			}
+        			console.log(stayView);
+        			
+        			let stdPerson = document.getElementById('stdPerson').value;
+        			if(stdPerson === null){
+        				stdPerson == "";
+        			}
+        			console.log(stdPerson);
+        			
+        			let maxPrice = document.getElementById('maxPrice').value * 10000;
+        			if(maxPrice === null){
+        				maxPrice == "";
+        			}
+        			console.log(maxPrice);
+        			
+        			// all로 바꿔야함
+        			let stayType = document.querySelector('#stayTypeList li label input').value;
+        			if(stayType === null){
+        				stayType == "";
+        			}
+        			console.log(stayType);
+        			
+        			// all로 바꿔야함
+        			let roomOption = document.querySelectorAll('#roomOptionList li label input').value;
+        			if(roomOption === null){
+        				roomOption == "";
+        			}
+        			console.log(roomOption);
+        			console.log('aaaaaaaaaaaaaaaaaaaaaaaaa');
+        			
+        			let option = document.querySelectorAll('#roomOptionList li label input');
+        			option.forEach((button)=>{
+        				// 체크되어있지 않으면
+        				if(button.checked){
+							option = button.value;
+							console.log(option);
+        				}
+        			})
+        			console.log('aaaaaaaaaaaaaaaaaaaaaaaaa');
+        			
+        			
+        			
+        			
+        			
+        			let findStartDate = document.getElementById('reserved_checkIn').value;
+        			if(findStartDate === null){
+        				findStartDate == "";
+        			}
+        			console.log(findStartDate);
+        			
+        			let findEndDate = document.getElementById('reserved_checkOut').value
+        			if(findEndDate === null){
+        				findEndDate == "";
+        			}
+        			console.log(findEndDate);
+        			
+        			let data = {
+        					stayName : stayName || "",
+        					stayAdress: stayAdress || "",
+        					stayView : stayView || "",
+        					stdPerson : stdPerson || "",
+        					maxPrice : maxPrice || "",
+        					stayType : stayType || "",
+        					roomOption : roomOption || "",
+        					findStartDate : findStartDate || "",
+        					findEndDate : findEndDate || ""
+        			      };
 
-        		    // Append the form data as query parameters to the URL
-        		    let url = '/stay/keyword?' + urlSearchParams;
+        			      
+        			      fetch("/stst/keyword", {
+        			        method : 'post', 
+        			        headers : {
+        			          'Content-Type': 'application/json'
+        			        },
+        			        body : JSON.stringify(data)
+        			      })
+        			      .then(response => response.json())
+        			      .then(result =>{console.log(result);})
+        			});
 
-        		    // Send the GET request
-        		    fetch(url)
-        		      .then(response => response.json())
-        		      .then(data => {
-        		        // Handle the response data here
-        		        console.log(data);
-        		      })
-        		});
-        			
-        			// 데이터
-        			
-         			/* let stay = document.getElementById('stay').value;
-        			if(stay == ""){
-        				stay == null;
-        			}
-        			let region = document.getElementById('region').value;
-        			if(region == ""){
-        				region == null;
-        			}
-        			let view = document.getElementById('view').value;
-        			if(view == ""){
-        				view == null;
-        			}
-        			let totalPerson = document.getElementById('totalPerson');
-        			if(totalPerson == ""){
-        				totalPerson == null;
-        			}
-        			let endPrice = document.getElementById('endPrice').value;
-        			if(endPrice == ""){
-        				endPrice == null;
-        			}
-        			let stayType = document.getElementById('stayType').value;
-        			if(stayType == ""){
-        				stayType == null;
-        			}
-        			let roomOption = document.getElementById('roomOption').value;
-        			if(roomOption == ""){
-        				roomOption == null;
-        			} */
-        			
-/*         			searchFrom.action = "/stay/keyword/"
-        			searchFrom.method = "Get";
-        			searchFrom.submit(); */
-        			
-        			// keyword?stay=&findStartDate=체크인&reserved_day=&reserved_checkIn=&reserved_checkOut=&findEndDate=&totalPerson=0&endPrice=100&stayType=&roomOption=babiqu&roomOption=pet
-        			
-        			/* fetch('/stay/keyword')
-        			// response.json() : 요청결과를 js object 형식으로 변환
-        			.then(response => response.json())
-        			// 반환받은 오브젝트를 이용하여 화면에 출력 // 반환을 map으로 할려고 map이라 적음
-        			.then(map => keywordList(map)); */
-        			
-        			
-	        	     // stay(스테이) / region(지역) / totalPerson(인원) / startPrice(시작가격) ~ endPrice(끝가격) /
-					
-	        	   /*   let replyObj = {
-	        	    		 stay : stay,
-	        	    		 region : region,
-	        	    		 view : view,
-	        	    		 totalPerson : totalPerson,
-	        	    		 endPrice : endPrice,
-	        	    		 stayType : stayType,
-	        	    		 roomOption : roomOption
-					}; */
-					
-					/* fetchPost('/reply/insert', replyObj, replyWriteRes); */
-					//------------------------------------------------------------------------------------------------------------
-					// 2. 객체를 json 타입으로 변환
-					/* let replyJson = JSON.stringify(replyObj);
-					
-					console.log(replyObj);
-					console.log(replyJson);
-					
-					// 3. 서버에 요청
-					fetch("/stay/keyword",{method : 'post', headers : {'content-Type' : 'application/json'}, body : replyJson})
-					// 4. 응답처리
-					.then(response => response.json())
-					.then(map => keywordList(map)); */
-	        	     
-	        	     /* fetch('/stay/keyword/'+stay + '/' + region + '/' + view + '/' + totalPerson + '/' + endPrice + '/' + stayType + '/' + roomoption)
-	        	 	// response.json() : 요청결과를 js object 형식으로 변환
-	        	 	.then(response => response.json())
-	        	 	// 반환받은 오브젝트를 이용하여 화면에 출력 // 반환을 map으로 할려고 map이라 적음
-	        	 	.then(map => replyView(map));
-        		}); */
         	 
         	
         	  
-        	function keywordList(map){
-        		let list = map.list;
+        	function keywordList(result){
+        		let list = result.list;
         		console.log(list);
         		}
         	});
@@ -437,37 +441,39 @@
                                         <div class="box">
                                             <div class="tit cate_stay" style="text-align: left;">국내</div>
                                             <ul class="clearfix">
-                                                <li><button type="button" class="active"
+                                                <li><button type="button" class="active" name="stayAdress" id="stayAdress" value=""
                                                         style="cursor: pointer;">국내전체</button></li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="제주">제주</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="제주">제주</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="서울">서울</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="서울">서울</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="강원">강원</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="강원">강원</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="부산">부산</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="부산">부산</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="경기">경기</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="경기">경기</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="충청">충청</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="충청">충청</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="경상">경상</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="경상">경상</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="전라">전라</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="전라">전라</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="인천">인천</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="인천">인천</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="광주">광주</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="광주">광주</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="대전">대전</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="대전">대전</button>
                                                 </li>
-                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" value="대구">대구</button>
+                                                <li><button type="submit" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="대구">대구</button>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="box">
                                             <div class="tit cate_stay" style="text-align: left;">주변 경치</div>
                                             <ul class="clearfix">
+                                             	<li><button type="submit" class="" style="cursor: pointer;" id="stayView" name="stayView" value="">전체</button>
+                                                </li>
                                              	<li><button type="submit" class="" style="cursor: pointer;" id="stayView" name="stayView" value="바다">바다</button>
                                                 </li>
                                                 <li><button type="submit" class="" style="cursor: pointer;" id="stayView" name="stayView" value="산">산</button>
@@ -854,9 +860,9 @@
                                 class="btn_close">닫기</button>
                             <div class="tit">스테이 유형</div>
                             <div class="btn-wrapper"><button type="submit" class="btn-number-search">적용하기</button></div>
-                            <ul class="check_list">
-                                <li class="ko"><label class="check_skin" for="all"><input type="checkbox" id="all" name="stayType" value=""
-                                            ><span>전체</span></label></li>
+                            <ul class="check_list" id="stayTypeList">
+                                <li class="ko"><label class="check_skin" for="all"><input type="checkbox" 
+                                			id="all" name="stayType" value=""><span>전체</span></label></li>
                                 <li class="ko"><label class="check_skin" for="pension"><input type="checkbox"
                                             id="pension" name="stayType" value="펜션"><span>펜션</span></label></li>
                                 <li class="ko"><label class="check_skin" for="hanok"><input type="checkbox"
@@ -873,9 +879,9 @@
                         <button type="button" class="btn_close">닫기</button>
                             <div class="tit">편의시설</div>
                             <div class="btn-wrapper"><button type="submit" class="btn-number-search">적용하기</button></div>
-                            <ul class="findstay_check_list">
-<!--                                 <li class="ko"><label class="check_skin" for="all_theme"><input type="checkbox"
-                                            id="all_theme" ><span>전체</span></label></li> -->
+                            <ul class="findstay_check_list" id="roomOptionList">
+                                 <li class="ko"><label class="check_skin" for="all_theme"><input type="checkbox"
+                                            id="all_theme" name="roomOption" value=""><span>전체</span></label></li>
                                 <li class="ko"><label class="check_skin" for="bbq_theme"><input type="checkbox"
                                             name="roomOption" id="bbq_theme" value="babiqu"><span>바베큐</span></label></li>
                                 <li class="ko"><label class="check_skin" for="pets_theme"><input type="checkbox"

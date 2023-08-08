@@ -30,5 +30,9 @@ public class StayVO {
 	
 	private String roomOption; 
 	
-
+	private String findStartDate;
+	private String findEndDate;
+	
+	
+	
 }

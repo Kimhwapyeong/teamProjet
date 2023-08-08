@@ -142,19 +142,19 @@
 			<if test='stayView != null and !"".equals(stayView)'>
 				and stayview = '#{stayView}'
 			</if>	
-			<if test='roomOption != null and "babiqu".equals(roomOption)'>
+			<if test='roomOption != null and "BABIQU".equals(roomOption)'>
 				AND subquery.sequence_number = 1 and babiqu = 'Y' 
 			</if>	
-			<if test='roomOption != null and "pet".equals(roomOption)'>
+			<if test='roomOption != null and "PET".equals(roomOption)'>
 				AND subquery.sequence_number = 1 and pet = 'Y' 
 			</if>	
-			<if test='roomOption != null and "pool".equals(roomOption)'>
+			<if test='roomOption != null and "POOL".equals(roomOption)'>
 				AND subquery.sequence_number = 1 and pool = 'Y'
 			</if>	
-			<if test='roomOption != null and "terrace".equals(roomOption)'>
+			<if test='roomOption != null and "TERRACE".equals(roomOption)'>
 				AND subquery.sequence_number = 1 and terrace = 'Y'
 			</if>	
-			<if test='roomOption != null and "beamprojector".equals(roomOption)'>
+			<if test='roomOption != null and "BEAMPROJECTOR".equals(roomOption)'>
 				AND subquery.sequence_number = 1 and beamprojector = 'Y'
 			</if>	
 	</select>
