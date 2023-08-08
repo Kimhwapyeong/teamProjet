@@ -101,6 +101,8 @@ public class MemberController extends CommonRestController {
 
             if (res > 0) {
                 model.addAttribute("msg", "환영합니다. 회원가입되었습니다.");
+			   //메일 전송
+			   memberService.sendEmail(member,"signupAction");
             } else {
                 model.addAttribute("msg", "회원가입에 실패하였습니다.");
             }
@@ -171,7 +173,6 @@ public class MemberController extends CommonRestController {
 			    @RequestParam(required = true, value = "memberName") String memberName,
 			    @RequestParam(required = true, value = "memberEmail") String memberEmail,
 				@ModelAttribute MemberVO member) {
-	        
 		 
 		 try {
 			    
@@ -196,16 +197,15 @@ public class MemberController extends CommonRestController {
 			    memberService.passwordUpdate(member);
 			    
 			    member.setPw(newPwd);
+			    
 			    //메일 전송
-			   memberService.sendEmail(member,"findPwAction");
+			    memberService.sendEmail(member,"findPwAction");
 			    model.addAttribute("newPwd", newPwd);
 			 
 			} catch (Exception e) {
 			    System.out.println(e.toString());
 			    model.addAttribute("msg", "오류가 발생되었습니다.");
 			}
-			 
-			 
 			return "/login/findPwAction";
 	    }
 	

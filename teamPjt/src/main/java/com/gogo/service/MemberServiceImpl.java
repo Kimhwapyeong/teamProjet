@@ -100,10 +100,18 @@ public class MemberServiceImpl implements MemberService {
 			subject = "스테이 올래갈래 임시 비밀번호 입니다.";
 			msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
 			msg += "<h3 style='color: blue;'>";
-			msg += member.getMemberName()+"님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
+			msg += member.getMemberName()+"님의 임시 비밀번호 입니다.<br> 비밀번호를 변경하여 사용하세요.</h3>";
 			msg += "<p>임시 비밀번호 : ";
 			msg += member.getPw() + "</p></div>";
-		}
+		} 
+		if(div.equals("signupAction")) {
+			subject = "스테이 올래갈래 회원이 되신걸 환영합니다.";
+			msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+			msg += "<h4 style='color: green;'>";
+			msg += member.getMemberName()+"님 환영합니다.</h4>";
+			msg += "스테이 올래갈래와 함께 멋진 순간을 만들어봐요!<br>";
+			msg += "<a href='http://localhost:8080/main'>OLLE GALLE 바로가기</a></p></div>";
+		} 
 
 		// 받는 사람 E-Mail 주소
 		String mail = member.getMemberEmail();
