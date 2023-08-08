@@ -22,8 +22,8 @@
 	
 	<!--회원 등록 -->
 	<insert id="signupAction" parameterType="com.gogo.vo.MemberVO">
-		INSERT INTO MEMBER (memberId, memberName, birthday, pw, memberEmail, gender) 
-		VALUES (#{memberId}, #{memberName}, #{birthday}, #{pw}, #{memberEmail}, #{gender})
+		INSERT INTO MEMBER (memberId, memberName, birthday, pw, memberEmail, registraiondate, gender) 
+		VALUES (#{memberId}, #{memberName}, #{birthday}, #{pw}, #{memberEmail}, sysdate, #{gender})
 	</insert>
 	
 	<!-- sns 회원이면 snsCk = 'Y' -->
