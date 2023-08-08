@@ -127,7 +127,7 @@
 	<select id="profit" resultType="com.gogo.vo.ReservedVO">
 		SELECT
 		    TO_CHAR(v.regdate, 'YYYY-MM') AS month,
-		    SUM(price * v.membercount) AS total_price
+		    SUM(price) AS total_price
 		FROM
 		    room r
 		JOIN
