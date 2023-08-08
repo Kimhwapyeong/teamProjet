@@ -202,7 +202,7 @@ public class EchoHandler extends TextWebSocketHandler{
     private Map<String, String> parseQueryString(String queryString) {
         Map<String, String> map = new HashMap<>();
         if (queryString == null || queryString.isEmpty()) {
-            return map;
+            return  map;
         }
 
         String[] pairs = queryString.split("&");
