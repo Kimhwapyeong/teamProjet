@@ -139,7 +139,7 @@
     function sendMessage() {
        
         
-        sock.send("<span style='color:blue;'>"+ role + "</span>${memberName}님의 메세지 : <span style='color:black;'>"+$("#message").val()+"<span>");
+        sock.send("${memberName}님의 메세지 : <span style='color:black;'>"+$("#message").val()+"<span>");
     }
 
  // 서버로부터 메시지를 받았을 때
@@ -175,7 +175,7 @@
         };
         
         	// 채팅 메세지 출력
-           $("#chatList").append("<span style='color:skyblue; font-weight:bold;'>" + message + "</span><br>");
+           $("#chatList").append("<span style='color:blue;'>"+ role + "</span><span style='color:skyblue; font-weight:bold;'>" + message + "</span><br>");
             
     }
  	
@@ -199,7 +199,7 @@
     	shouldUnload = false;
         console.log('exit() 함수가 실행됩니다.');
         type = "OUT";
-        sock.send("<p id='OUT' style='padding:5px; color:red;'>${memberName}님 연결 해제</p>");
+        sock.send("<span id='OUT' style='padding:5px; color:red;'>${memberName}님 연결 해제</span>");
     }
     // 입장 메세지 출력
  	function sendEnterMessage() {
