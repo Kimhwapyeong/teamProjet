@@ -30,11 +30,11 @@ public interface MemberService {
 	// 비밀번호 찾기
 	public int findPwAction(MemberVO member);
 	
+	// 비밀번호 재생성 후 업데이트
 	public void passwordUpdate(MemberVO member);
 
-	
 	// 이메일 발송
-	//public void sendEmail(MemberVO member, String div) throws Exception;
+	public void sendEmail(MemberVO member, String div) throws Exception;
 
 
 

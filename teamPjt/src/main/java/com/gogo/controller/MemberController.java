@@ -192,8 +192,12 @@ public class MemberController extends CommonRestController {
 			    // 패스워드 업데이트
 			    member.setPw(enpassword);
 			    
+			    // 비밀번호 업데이트
 			    memberService.passwordUpdate(member);
 			    
+			    member.setPw(newPwd);
+			    //메일 전송
+			   memberService.sendEmail(member,"findPwAction");
 			    model.addAttribute("newPwd", newPwd);
 			 
 			} catch (Exception e) {
