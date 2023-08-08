@@ -16,5 +16,6 @@ public class FileuploadVO {
 	private String savePath;
 	private String s_savePath;
 	//uploadpath + uuid + "_" + filename;
+	private String profile;
 	
 }

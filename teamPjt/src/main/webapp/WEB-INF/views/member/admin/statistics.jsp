@@ -52,7 +52,7 @@
                                 <li class=""><a href="./stayadmin">숙소 관리</a></li>
                                 <li class=""><a href="./useradmin">사용자 관리 </a></li>
                                 <li class=""><a href="./hosthelp">호스트 지원</a></li>
-                                <li class="active"><a href="./statistics">통계 및 분석</a></li>
+                                <li class="active"><a href="./staticPage">통계 및 분석</a></li>
                             </ul>
                         </div>
                         <div class="mypage_content">
@@ -61,7 +61,7 @@
                                     <!-- script -->
                                     
 										<!--차트-->
-									    <div style="width: 300px; height: 300px;">
+									    <div style="width: 700px; height: 600px; margin-top : 50px">
 										<canvas id="myChart"></canvas>
 									
 									    <script type="text/javascript">
@@ -76,15 +76,18 @@
 									            
 									            
 									            $.ajax({
-									                url:"member/admin/statistics",
+									                url:"/member/admin/statistics",
 									                type:"get",
-									                data: {age_group: "${mb_id.age_group}", count: "${mb_id.count}"},
+									                data:{ },
 									                dataType:"json",
 									                success:function(data){
+									                    console.log("data : " , data)
 									                    for(let i=0; i<data.length; i++){
 									                        ageList.push(data[i].age_group);
 									                        ageCount.push(data[i].count)
 									                    }
+									                    console.log("ageList : ", ageList);
+									                    console.log("ageCount : " , ageCount);
 									                    new Chart(document.getElementById("myChart"),{
 									                        type:'line',
 									                        data : {
@@ -127,6 +130,7 @@
 									                }
 									            })
 									        }
+									
 									
 									    
 									    </script>

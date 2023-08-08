@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.gogo.mapper.mypageMapper;
 import com.gogo.vo.AnswerVO;
+import com.gogo.vo.FileuploadVO;
 import com.gogo.vo.MemberVO;
 import com.gogo.vo.QuestionVO;
 import com.gogo.vo.ReservedVO;
@@ -142,6 +143,13 @@ public class mypageTest {
 		int res = mapper.memberQuit("user1");
 		log.info("=========================");
 		log.info("res: " + res);
+	}
+	
+	@Test
+	public void selectProfile() {
+		FileuploadVO profile = mapper.selectProfile("user1");
+		log.info("=========================");
+		log.info("profile: " + profile);
 	}
 	
 	

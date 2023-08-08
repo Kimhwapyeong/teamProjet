@@ -224,7 +224,7 @@
 	
 	<!-- 회원 정보 조회 -->
 	<select id="mem" resultType="com.gogo.vo.MemberVO">
-		select memberid, membername, pw, profile, memberemail from member
+		select memberid, membername, pw, memberemail from member
 	</select>
 	
 	
@@ -235,15 +235,10 @@
 	
 	
 	<!-- 회원 사진 -->
-	<select id="selectProfile" resultType="String">
-		select uploadpath from attach where memberid = #{memberId} 	
+	<select id="selectProfile" resultType="com.gogo.vo.FileuploadVO">
+		select uploadpath||uuid||'_'||filename as profile from attach where memberid = #{memberId} 	
 	</select>
 	
-	
-	<!-- 회원 사진 변경 -->
-	<update id="insertProfile">
-		update member set profile = #{profile} where memberid = #{memberId}
-	</update>	
 	
 	
 	<!-- 회원 사진 삭제 -->

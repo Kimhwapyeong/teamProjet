@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.gogo.vo.AnswerVO;
+import com.gogo.vo.FileuploadVO;
 import com.gogo.vo.MemberVO;
 import com.gogo.vo.QuestionVO;
 import com.gogo.vo.ReservedVO;
@@ -69,13 +72,13 @@ public interface mypageMapper {
 	public int update(MemberVO vo);
 	
 	// 회원 사진
-	public String selectProfile(String memberId);
+	public FileuploadVO selectProfile(String memberId);
 	
 	// 사진 삭제
 	public int deleteProfile(String memberId);
 	
 	// 사진 추가
-	public int insertProfile(String memberId, String uploadPath);
+	public int insertProfile(@Param("uploadPath")String uploadPath, @Param("memberId") String memberId);
 	
 	// 회원 탈퇴
 	public int memberQuit(String memberId);

@@ -157,6 +157,11 @@ public class AdminController {
 	    log.info("mb_id : " + list);
 	    return list;
 	}
+	
+	@GetMapping("staticPage")
+	public String staticPage() {
+		return "/member/admin/statistics";
+	}
 
 
 

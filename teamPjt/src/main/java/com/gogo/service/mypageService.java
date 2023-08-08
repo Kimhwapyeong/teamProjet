@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gogo.vo.AnswerVO;
+import com.gogo.vo.FileuploadVO;
 import com.gogo.vo.MemberVO;
 import com.gogo.vo.QuestionVO;
 import com.gogo.vo.ReservedVO;
@@ -77,6 +78,9 @@ public interface mypageService {
 	
 	// 회원 정보 수정
 	public int update(MemberVO vo, List<MultipartFile> files);
+	
+	// 회원 사진
+	public FileuploadVO selectProfile(String memberId);
 	
 	// 회원 탈퇴
 	public int memberQuit(String memberId);

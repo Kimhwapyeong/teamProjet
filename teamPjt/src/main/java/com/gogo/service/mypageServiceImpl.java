@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -242,32 +243,31 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 	
 	// 회원 정보 수정
 	@Override
+	@Transactional
 	public int update(MemberVO vo, List<MultipartFile> files) {
 		int res =  mypageMapper.update(vo);
 		System.out.println("vo : " + vo);
 		System.out.println("update res : " + res);
 		
-		if(res>0) {
+		int deleteRes = mypageMapper.deleteProfile(vo.getMemberId());  // 프로필 삭제
+		System.out.println("deleteRes :" + deleteRes);
+		
 			FileuploadVO fileuploadVO = new FileuploadVO();
 			fileuploadVO.setRoomNo("");
 			fileuploadVO.setStayNo("");
 			fileuploadVO.setMemberId(vo.getMemberId());
 			String dir = "profile\\";
-			res = fileuploadService.fileupload(files, dir, fileuploadVO);
-		}
-		
-		if(res>0) {
-			String uploadPath = mypageMapper.selectProfile(vo.getMemberId());
+			String uploadPath = fileuploadService.fileuploadMainPic(files, dir, fileuploadVO);
 			System.out.println("uploadPath : " + uploadPath);
-			int deleteres = mypageMapper.deleteProfile(vo.getMemberId());
-			System.out.println("deleteres : " + deleteres);
-			res = mypageMapper.insertProfile(vo.getMemberId(), uploadPath);
-		}
-		
+			//res = mypageMapper.insertProfile(uploadPath, vo.getMemberId());
 		return res;
-		
 	}
 	
+	
+	@Override
+	public FileuploadVO selectProfile(String memberId) {
+		return mypageMapper.selectProfile(memberId);
+	}
 	
 	// 회원 탈퇴
 	@Override

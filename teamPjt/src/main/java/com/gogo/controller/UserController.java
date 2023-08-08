@@ -2,6 +2,9 @@ package com.gogo.controller;
 
 
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 
@@ -9,8 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +30,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gogo.service.ReservedService;
 import com.gogo.service.mypageService;
+import com.gogo.vo.FileuploadVO;
 import com.gogo.vo.MemberVO;
 
 import lombok.extern.log4j.Log4j;
@@ -75,14 +83,21 @@ public class UserController extends CommonRestController{
 	}
 	
 	// 회원 정보 조회
-	@GetMapping(value = {"info", "travelCnt"})
+	@GetMapping(value = {"info", "travelCnt", "selectProfile"})
 	public void info(Model model, HttpServletRequest request) {
+		// 회원 정보
 		service.mem(model);
-
+		
+		// 회원 id 여행 횟수
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("memberId");
 		int res = service.travelCnt(memberId);
 		model.addAttribute("travelCnt", res);
+		
+		// 회원 프로필사진
+		FileuploadVO file = service.selectProfile(memberId);
+		log.info("file" + file);
+		model.addAttribute("file", file);
 	}
 	
 //	@PostMapping("infoFrm")
@@ -117,11 +132,13 @@ public class UserController extends CommonRestController{
 //	}
 	
 	@PostMapping("infoFrm")
-	public String infoFrm(RedirectAttributes rttr, MemberVO vo, List<MultipartFile> files, MultipartHttpServletRequest request) {
+	public String infoFrm(RedirectAttributes rttr, MemberVO vo, List<MultipartFile> files) {
 		
 		try {
-			int res = service.update(vo, request.getFiles("imgFile"));
-			System.out.println("Frm file" + files);
+			int res = service.update(vo, files);
+			System.out.println("Frm files" + files);
+			System.out.println("res : " + res);
+			
 			
 			if(res>0) {
 				rttr.addFlashAttribute("msg", "회원 정보 수정 성공!");
@@ -136,8 +153,8 @@ public class UserController extends CommonRestController{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		return "redirect:/main";
+		rttr.addAttribute("msg", "실패");
+		return "redirect:/member/mypage/info";
 	}
 	
 	// 회원 탈퇴
@@ -190,4 +207,28 @@ public class UserController extends CommonRestController{
 	}
 	
 	
+	@GetMapping("/display")
+	// 이미지를 화면에 보여줍니다
+	public ResponseEntity<byte[]> display(String fileName) {
+		log.info("=====fileName : " + fileName);
+		String ATTACHES_DIR = "C:\\Users\\user\\git\\teamProjet\\teamPjt\\src\\main\\webapp\\resources\\images\\";
+		try {
+			// 파일 객체를 생성
+			File file = new File(ATTACHES_DIR+fileName);
+			HttpHeaders headers = new HttpHeaders();
+			
+			// 이미지 파일이 존재하면 파일을 이미지를 다운로드
+			if(file.exists()) {
+				// Mime타입을 설정
+				headers.add("Content-Type",Files.probeContentType(file.toPath()));
+				return new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), headers, HttpStatus.OK);
+			}else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+			
+		} catch (IOException e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}	
 }

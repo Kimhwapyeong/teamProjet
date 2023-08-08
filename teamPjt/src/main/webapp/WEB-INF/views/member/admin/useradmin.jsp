@@ -91,7 +91,7 @@
 							<li class=""><a href="./stayadmin">숙소 관리</a></li>
 							<li class="active"><a href="./useradmin">사용자 관리 </a></li>
 							<li class=""><a href="./hosthelp">호스트 지원</a></li>
-							<li class=""><a href="./statistics">통계 및 분석</a></li>
+							<li class=""><a href="./staticPage">통계 및 분석</a></li>
 						</ul>
 					</div>
 					<div class="mypage_content">

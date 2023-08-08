@@ -144,30 +144,44 @@
                             <!--  프로필 form -->
                             <form id="infoFrm" name="infoFrm" method="post" action="/member/mypage/infoFrm"  enctype="multipart/form-data">
                                   <input type="hidden" name="memberId" value="${member.memberId }" id ='id'>
-                                  
                                   <!-- 프로필 사진 -->
                                   <div class="profile_photo">
-                                    <div class="input_box">                                  	
-                                    		<input type="file" id="imgFile" name="imgFile" title="프로필 사진" class="photo" style="width: 150px; height: 150px; background-size: cover; border: 2px solid black; border-radius: 50%;" value="${sessionScope.member.profile}">
-                                        <input type="button" onclick="imgFile.click()" id="imgFile2" name="imgFile2" title="프로필 사진" class="btn_photo"
-                                            accept="image/jpeg, image/png">
+                                    <div class="input_box">
+                                    		<input type="file" id="imgFile" name="files" title="프로필 사진" class="photo" 
+                                    			style="width: 150px; height: 150px; background-size: cover; border: 2px solid black; border-radius: 50%;" value="${sessionScope.member.profile}">
+                                        	<input type="button" onclick="imgFile.click()" id="imgFile2" name="imgFile2" title="프로필 사진" class="btn_photo"
+                                            	accept="image/jpeg, image/png">
                                  	</div>
+                                            
                                     	 	
                                    <script>
                                     	$(function(){
+                                    		let imgURL = "${file.profile.replace('\\','/')}";
                                     		
+                                    		if(imgURL){
+												if('${sessionScope.member.snsCk}' == 'Y'){
+													
+	                                    			$('#imgFile').attr("style", "background-image: url('${sessionScope.member.profile}'); background-size : cover;");
+												
+												} else {
+													
+	                                    			$('#imgFile').attr("style", "background-image: url(/member/mypage/display?fileName="+imgURL+"); background-size : cover;");
+												}
+                                    		}
+                                    			
+                                    		/*$('#imgFile').attr("style", "background-image: url(/resources/images/${file.profile.replace('\\','/')}); background-size : cover;")
                                     		
                                     		if($('#imgFile').val()!=null){
                                     			
 												if('${sessionScope.member.snsCk}' == 'Y'){
 													
-	                                    			$('#imgFile').attr("style", "background-image: url(${sessionScope.member.profile}); background-size : cover;");
+	                                    			$('#imgFile').attr("style", "background-image: url('${sessionScope.member.profile}'); background-size : cover;");
 												
 												} else {
 													
 	                                    			$('#imgFile').attr("style", "background-image: url(<spring:url value='/image/${sessionScope.member.profile}'/>); background-size : cover;");
 												}
-                                    		}
+                                    		}*/
                                     		
                                     		$('#imgFile').change(function(){
                                     			
