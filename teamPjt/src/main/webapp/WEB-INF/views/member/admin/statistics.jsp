@@ -61,8 +61,11 @@
                                     <!-- script -->
                                     
 										<!--차트-->
-									    <div style="width: 700px; height: 600px; margin-top : 50px">
-										<canvas id="myChart"></canvas>
+										<div style="margin-left: 5%;">
+											<h6 style="font-weight:bold; ">연령대별 이용자 현황</h6>
+										    <div style="width: 400px; height: 400px; margin-top : 20px; margine-left:30px">
+											<canvas id="myChart"></canvas>
+										</div>
 									
 									    <script type="text/javascript">
 									
@@ -89,7 +92,7 @@
 									                    console.log("ageList : ", ageList);
 									                    console.log("ageCount : " , ageCount);
 									                    new Chart(document.getElementById("myChart"),{
-									                        type:'line',
+									                        type:'pie',
 									                        data : {
 									                            labels: ageList,
 									                            datasets : [{
