@@ -47,6 +47,10 @@ public class EchoHandler extends TextWebSocketHandler{
         Map<String, String> params = parseQueryString(queryString);
         String targetMemberId = params.get("targetMemberId");
         
+        String socketType = params.get("socketType");
+        //System.out.println("socketType : "+socketType );
+        
+        
         // targetMemberId 기반으로 사용자 세션을 관리
         if (targetMemberId != null && targetMemberId.equals(writer)) {
             userSessions.put(targetMemberId, session);
@@ -90,7 +94,7 @@ public class EchoHandler extends TextWebSocketHandler{
         	MessageVO checkMsg = new MessageVO();
         	checkMsg.setMemberId((String)session.getAttributes().get("memberId"));
         	checkMsg.setRoomId(roomId);
-	        	if(service.joinYN(checkMsg)) {
+	        	if(service.joinYN(checkMsg) && "chat".equals(socketType)) {
 	        		
 	        		service.chattingGet(roomId, member);
 	        		map.put("content", writer+"님 "+roomId+"번 채팅방 입장!");
@@ -144,6 +148,13 @@ public class EchoHandler extends TextWebSocketHandler{
     	try {
 		    	String writer = (String) session.getAttributes().get("memberId");
 		        userSessions.remove(writer); // 사용자 세션 제거
+		        
+		        String queryString = session.getUri().getQuery();
+
+		        // Query String에서 targetMemberId 파라미터 값을 추출
+		        Map<String, String> params = parseQueryString(queryString);
+		        String socketType = params.get("socketType");
+		        //System.err.println("socketType : "+socketType);
 		
 		        roomId = (String) session.getAttributes().get("roomId");
 		        roomSessions.get(roomId).remove(session);
@@ -165,11 +176,11 @@ public class EchoHandler extends TextWebSocketHandler{
 		        Map<String, Object> map = new HashMap<String, Object>();
 		        
 		       if(session.getAttributes().get("memberId")!=null) {
-		        	System.err.println("웹소켓 연결 닫힘 횟수 테스트");
+		        	//System.err.println("웹소켓 연결 닫힘 횟수 테스트");
 		        	MessageVO checkMsg = new MessageVO();
 		        	checkMsg.setMemberId((String)session.getAttributes().get("memberId"));
 		        	checkMsg.setRoomId(roomId);
-			        	if(service.joinYN2(checkMsg)) {
+			        	if(service.joinYN2(checkMsg) && "chat".equals(socketType)) {
 			        		
 			        		map.put("content", writer+"님 "+roomId+"번 채팅방 퇴장!");
 			        		map.put("roomId", roomId);

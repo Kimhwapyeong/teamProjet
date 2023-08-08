@@ -31,7 +31,8 @@
                     <div id="messageRoom" style="position: absolute; background-color: white; width: 100%; height: 87.6%; top: 7%; overflow: scroll; vertical-align: text-bottom;">
                     	
 						    <input type="hidden" id="myMemberId" value="${sessionScope.memberId}" required readonly><br>
-						    초대할 아이디: <input style="border:1px solid black; text-align:center;" type="text" id="targetMemberId" required><br>
+						    초대할 아이디:<br><br>
+						     <input style="border:1px solid #f2f2f2; width:80%; text-align:center;" type="text" id="targetMemberId" required><br>
 						   	<input type="hidden" id="roomId" value="${roomId}" required readonly><br>
 						    <button id="inviteBtn">초대하기</button>
 						
@@ -72,7 +73,7 @@
                     
                 </div>
                 <div id="messageArea" style="position: absolute; right: 0; display: inline-block; text-align: center; width: 70%; height: 100%; vertical-align: bottom;">
-                    <div id="chatList" style="position: absolute; background-color: white; width: 100%; height: 87.6%; top: 7%; overflow: scroll; vertical-align: text-bottom;"></div>
+                    <div id="chatList" style="position: absolute; background-color: white; width: 100%; height: 87.6%; top: 7%; overflow: scroll; vertical-align: text-bottom; line-height:40px;"></div>
                     <div id="messageBtn" style="position: absolute; bottom: 0; width: 100%; border: 1px solid #f2f2f2;">
                         <input type="text" id="message" style="width: 300px; border: 1px solid #f2f2f2;" />
                         <input type="button" class="btnStyle" id="sendBtn" value="전송" style="border: 1px solid #f2f2f2;" />
@@ -127,7 +128,7 @@
         }
     });
 
-    let sock = new SockJS("http://localhost:8080/echo?roomId=${roomId}");
+    let sock = new SockJS("http://localhost:8080/echo?roomId=${roomId}&socketType=chat");
     console.log('sock : ', sock);
     sock.onmessage = onMessage;
     sock.onclose = onClose;
@@ -137,8 +138,8 @@
     // 메시지 전송
     function sendMessage() {
        
-        type = "TALK";
-        sock.send("<span style='color:skyblue; font-weight:bold;'>" + role + "${memberName}님의 메세지</span> : " + $("#message").val());
+        
+        sock.send("<span style='color:blue;'>"+ role + "</span>${memberName}님의 메세지 : <span style='color:black;'>"+$("#message").val()+"<span>");
     }
 
  // 서버로부터 메시지를 받았을 때
@@ -172,11 +173,10 @@
             roomId: roomId,
             type: type
         };
-            if (type == 'ENTER') {
-                $("#chatList").append("<p style='padding:5px;'>" + message + "</p><br/>");
-            } else {
-                $("#chatList").append("<p style='padding:5px;'>" + message + "</p><br/>");
-            }
+        
+        	// 채팅 메세지 출력
+           $("#chatList").append("<span style='color:skyblue; font-weight:bold;'>" + message + "</span><br>");
+            
     }
  	
     // 서버와 연결을 끊었을 때
@@ -187,31 +187,31 @@
     }
 
     let shouldExit = false;
-
+	
+    // 브라우저를 강제로 닫거나 새로고침 했을 때
     window.addEventListener('beforeunload', function(event) {
-    	type = 'OUT';
+    	
         exit();
     });
 
-    // < 버튼으로 퇴장
+    // 퇴장 메세지 출력
     function exit() {
     	shouldUnload = false;
         console.log('exit() 함수가 실행됩니다.');
-        content = memberId + '님 연결 해제';
         type = "OUT";
-        sock.send("<p id='OUT' style='padding:5px; color:red;'>${memberName}님 연결 해제</p><br/>");
+        sock.send("<p id='OUT' style='padding:5px; color:red;'>${memberName}님 연결 해제</p>");
     }
-
-    // 메세지 페이지에 들어오면 초기 설정
+    // 입장 메세지 출력
  	function sendEnterMessage() {
     setTimeout(function() {
-        type = "ENTER";
-        sock.send('<span style="color:red">${enter}</span>');
+    	type ='ENTER'
+        sock.send('<span id="ENTER" style="color:red">${enter}</span>');
     }, 1000);
 
-    // 이벤트 핸들러를 제거합니다.
+    // 한번 동작 후 이벤트 핸들러를 제거합니다.
     window.removeEventListener('load', sendEnterMessage);
 	}
+        
 	// 페이지 로드 시 sendEnterMessage 함수를 호출합니다.
 	window.addEventListener('load', sendEnterMessage);   
 </script>
