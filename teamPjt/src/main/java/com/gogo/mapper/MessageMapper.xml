@@ -31,5 +31,13 @@
 	<select id="getNewRoomId" resultType="String">
 		select messageroomseq.currval from dual
 	</select>
+	
+	<select id="joinYN" resultType="int">
+		SELECT COUNT(*) 
+        FROM Message 
+        WHERE memberId = #{memberId} 
+        AND roomId = #{roomId} 
+        AND type = 'ENTER'
+	</select>
 
 </mapper>

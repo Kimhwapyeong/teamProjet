@@ -136,14 +136,14 @@
 
     // 메시지 전송
     function sendMessage() {
+       
         type = "TALK";
         sock.send("<span style='color:skyblue; font-weight:bold;'>" + role + "${memberName}님의 메세지</span> : " + $("#message").val());
     }
 
  // 서버로부터 메시지를 받았을 때
     function onMessage(msg) {
-        console.log('입력 값 : ', msg);
-        
+       	console.log('type : ',msg.type);
         message = msg.data;
         let roomId = '${roomId}';
 		
@@ -173,7 +173,7 @@
             type: type
         };
             if (type == 'ENTER') {
-                $("#chatList").append("<p id='ENTER' style='padding:5px;'>" + message + "</p><br/>");
+                $("#chatList").append("<p style='padding:5px;'>" + message + "</p><br/>");
             } else {
                 $("#chatList").append("<p style='padding:5px;'>" + message + "</p><br/>");
             }
@@ -189,6 +189,7 @@
     let shouldExit = false;
 
     window.addEventListener('beforeunload', function(event) {
+    	type = 'OUT';
         exit();
     });
 
@@ -198,7 +199,7 @@
         console.log('exit() 함수가 실행됩니다.');
         content = memberId + '님 연결 해제';
         type = "OUT";
-        sock.send("<p id='ENTER' style='padding:5px; color:red;'>${memberName}님 연결 해제</p><br/>");
+        sock.send("<p id='OUT' style='padding:5px; color:red;'>${memberName}님 연결 해제</p><br/>");
     }
 
     // 메세지 페이지에 들어오면 초기 설정

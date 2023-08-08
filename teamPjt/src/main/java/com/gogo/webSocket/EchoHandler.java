@@ -21,6 +21,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gogo.service.MessageService;
 import com.gogo.vo.MemberVO;
+import com.gogo.vo.MessageVO;
 
 import org.slf4j.LoggerFactory;
 
@@ -55,7 +56,7 @@ public class EchoHandler extends TextWebSocketHandler{
         userSessions.put(writer, session); // 사용자 세션 등록
     	
     	
-    	String roomId = session.getUri().getQuery();
+    	String roomId = (String) session.getAttributes().get("roomId");
 
         // roomId가 null인 경우 처리
         if (roomId == null) {
@@ -83,12 +84,21 @@ public class EchoHandler extends TextWebSocketHandler{
         int idx = roomId.indexOf("=");
         roomId = roomId.substring(idx+1);
         
-        service.chattingGet(roomId, member);
-        map.put("content", writer+"님 "+roomId+"번 채팅방 입장!");
-        map.put("roomId", roomId);
-        map.put("type", "ENTER");
-        map.put("writer", writer);
-        service.insertChatting(map);
+        if(session.getAttributes().get("memberId")!=null) {
+        	
+        	MessageVO checkMsg = new MessageVO();
+        	checkMsg.setMemberId((String)session.getAttributes().get("memberId"));
+        	checkMsg.setRoomId(roomId);
+	        	if(service.joinYN(checkMsg)) {
+	        		
+	        		service.chattingGet(roomId, member);
+	        		map.put("content", writer+"님 "+roomId+"번 채팅방 입장!");
+	        		map.put("roomId", roomId);
+	        		map.put("type", "ENTER");
+	        		map.put("writer", writer);
+	        		service.insertChatting(map);
+	        	}
+        }
 
         logger.info("{} 연결됨, roomId: {}", session.getId(), roomId);
     }
@@ -96,7 +106,7 @@ public class EchoHandler extends TextWebSocketHandler{
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         if (message != null && message.getPayload() != null) {
-            String roomId = session.getUri().getQuery();
+            String roomId = (String) session.getAttributes().get("roomId");
             logger.info("{}로 부터 {}받음, roomId: {}", session.getId(), message.getPayload(), roomId);
             List<WebSocketSession> sessionsInRoom = roomSessions.get(roomId);
             for (WebSocketSession sess : sessionsInRoom) {
@@ -132,8 +142,10 @@ public class EchoHandler extends TextWebSocketHandler{
         String writer = (String) session.getAttributes().get("memberId");
         userSessions.remove(writer); // 사용자 세션 제거
 
-        String roomId = session.getUri().getQuery();
+        String roomId = (String) session.getAttributes().get("roomId");
+        String type = (String) session.getAttributes().get("type");
         roomSessions.get(roomId).remove(session);
+        System.err.println("연결닫 type : "+ type);
         
         // roomId가 null인 경우 처리
         if (roomId == null) {
@@ -149,15 +161,25 @@ public class EchoHandler extends TextWebSocketHandler{
             // 예외를 던지거나, 기본값을 설정합니다.
             throw new Exception("writer는 null일 수 없습니다.");
         }
-
-        if (!"undefined".equals(roomId)) {  // roomId가 undefined가 아닐 때만 실행
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("content", writer + "님 " + roomId + "번 채팅방 퇴장!");
-            map.put("roomId", roomId);
-            map.put("type", "OUT");
-            map.put("writer", writer);
-            service.insertChatting(map);
+        	
+        Map<String, Object> map = new HashMap<String, Object>();
+        
+       if(session.getAttributes().get("memberId")!=null) {
+        	
+        	MessageVO checkMsg = new MessageVO();
+        	checkMsg.setMemberId((String)session.getAttributes().get("memberId"));
+        	checkMsg.setRoomId(roomId);
+	        	if(service.joinYN(checkMsg)) {
+	        		
+	        		map.put("content", writer+"님 "+roomId+"번 채팅방 퇴장!");
+	        		map.put("roomId", roomId);
+	        		map.put("type", "OUT");
+	        		map.put("writer", writer);
+	        		service.insertChatting(map);
+	        	}
         }
+        
+       
         logger.info("{} 연결 끊김, roomId: {}", session.getId(), roomId);
     }	
     public void sendInviteNotification(String senderId, String targetMemberId, String roomId) throws IOException {

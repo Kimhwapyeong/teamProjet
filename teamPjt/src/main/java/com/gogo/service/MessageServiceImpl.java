@@ -37,7 +37,12 @@ public class MessageServiceImpl implements MessageService{
 
 		return messageMapper.insertMessage(vo);
 	}
-
+	@Override
+	public boolean joinYN(MessageVO vo) {
+		int res = messageMapper.joinYN(vo);
+		
+		return res==0;
+	}
 
 
 	@Override

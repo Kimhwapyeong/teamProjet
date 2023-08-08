@@ -40,63 +40,73 @@
 
 <script>
 	// 초대 메세지를 받기 위한 로직
-	document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     function initInviteSocket(targetMemberId) {
-		        let socketInvite = new SockJS("http://localhost:8080/echo?targetMemberId=" + targetMemberId);
-		
-		        socketInvite.onmessage = function(event) {
-		            let receivedData = JSON.parse(event.data);
-		
-		            if (receivedData && receivedData.type === 'invite') {
-		                let roomId = receivedData.roomId;
-		                let receivedMessage = receivedData.message;
-		                let receivedUserId = '';
-		                const pattern = /(.*?)(?=님이)/;
+        let socketInvite = new SockJS("http://localhost:8080/echo?targetMemberId=" + targetMemberId);
 
-		                const match = receivedMessage.match(pattern);
+        socketInvite.onmessage = function(event) {
+            console.log("Received raw data:", event.data);
+			
+            // JSON 형식인지 확인
+            let receivedData;
+            try {
+                receivedData = JSON.parse(event.data);
+                
+            } catch (e) {
+                console.warn("Received non-JSON message:", event.data);
+                return;  // 현재 메시지 처리 종료
+            }
 
-		                if (match) {
-		                	receivedUserId = match[1];
-		                    console.log(receivedUserId);  // user1
-		                }
-		                alertPopOn(receivedUserId+"님이 "+roomId + "번 방으로 초대하셨습니다.\n이동하시겠습니까?");
-		
-		                document.getElementById('acceptInvite').style.display = 'block';
-		                document.getElementById('declineInvite').style.display = 'block';
-		                document.getElementById('popup-focus').style.display = 'none';
-		            }
-		        };
-		
-		        document.getElementById('acceptInvite').addEventListener('click', function() {
-		            let roomId = document.getElementById('alertTxt').innerText;
-		            let match = roomId.match(/(\d+)번/);
-		
-		            if (match && match[1]) {
-		                let roomNumber = match[1];  
-		                window.location.href = "/chat/chat?roomId=" + roomNumber;
-		            } else {
-		                console.log("방 번호를 찾을 수 없습니다.");
-		            }
-		            
-		            document.getElementById('acceptInvite').style.display = 'none';
-		            document.getElementById('declineInvite').style.display = 'none';
-		            document.getElementById('popup-focus').style.display = 'block';
-		
-		            alertPopClose();
-		        });
-		
-		        document.getElementById('declineInvite').addEventListener('click', function() {
-		            document.getElementById('acceptInvite').style.display = 'none';
-		            document.getElementById('declineInvite').style.display = 'none';
-		            document.getElementById('popup-focus').style.display = 'block';
-		
-		            alertPopClose();
-		        });
-		    }
-		    // 현재 로그인한 사용자의 ID를 사용하여 초대 웹소켓 연결 초기화
-		    initInviteSocket($("#currentLoggedInUserId").val());
-		});
-	
+            // JSON 데이터를 정상적으로 파싱한 후, 이후 로직 처리
+            if (receivedData && receivedData.type === 'invite') {
+                let roomId = receivedData.roomId;
+                let receivedMessage = receivedData.message;
+                let receivedUserId = '';
+                const pattern = /(.*?)(?=님이)/;
+
+                const match = receivedMessage.match(pattern);
+
+                if (match) {
+                    receivedUserId = match[1];
+                    console.log(receivedUserId);  // user1
+                }
+                alertPopOn(receivedUserId+"님이 "+roomId + "번 방으로 초대하셨습니다.\n이동하시겠습니까?");
+
+                document.getElementById('acceptInvite').style.display = 'block';
+                document.getElementById('declineInvite').style.display = 'block';
+                document.getElementById('popup-focus').style.display = 'none';
+            }
+        };
+
+        document.getElementById('acceptInvite').addEventListener('click', function() {
+            let roomId = document.getElementById('alertTxt').innerText;
+            let match = roomId.match(/(\d+)번/);
+
+            if (match && match[1]) {
+                let roomNumber = match[1];  
+                window.location.href = "/chat/chat?roomId=" + roomNumber;
+            } else {
+                console.log("방 번호를 찾을 수 없습니다.");
+            }
+            
+            document.getElementById('acceptInvite').style.display = 'none';
+            document.getElementById('declineInvite').style.display = 'none';
+            document.getElementById('popup-focus').style.display = 'block';
+
+            alertPopClose();
+        });
+
+        document.getElementById('declineInvite').addEventListener('click', function() {
+            document.getElementById('acceptInvite').style.display = 'none';
+            document.getElementById('declineInvite').style.display = 'none';
+            document.getElementById('popup-focus').style.display = 'block';
+
+            alertPopClose();
+        });
+    }
+    // 현재 로그인한 사용자의 ID를 사용하여 초대 웹소켓 연결 초기화
+    initInviteSocket($("#currentLoggedInUserId").val());
+});	
 	
 	// 알림창을 위한 변수
 	let msg = '${msg}'

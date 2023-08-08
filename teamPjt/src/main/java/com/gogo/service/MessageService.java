@@ -27,6 +27,7 @@ public interface MessageService {
 	public void chattingGet(String roomId, MemberVO member) throws Exception;
 	public Map<String, Object> insertChatting(Map<String, Object> map);
 	public String getNewRoomId();
+	public boolean joinYN(MessageVO vo);
 
 
 }
