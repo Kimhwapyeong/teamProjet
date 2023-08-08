@@ -15,16 +15,23 @@
 	
 }
 
-@media ( max-width : 1024px) {
+/* @media ( max-width : 1024px) {
 	#carouselExampleInterval {
 		top: 60px;
 	}
 }
+
 @media ( max-width : 1024px) {
 	#carouselExampleIndicators {
 		top: 60px;
 	}
-}
+} */
+
+@media ( max-width : 1024px ){
+	.main_visual .house_info{
+		top: 57%;
+	} 
+}	
 
 h_logo img {
 	height: 67px;
@@ -34,6 +41,28 @@ h_logo img {
 	object-fit: contain
 }
 </style>
+<script>
+window.addEventListener('load', ()=>{
+	setMainImgsHeight();
+	
+})
+window.addEventListener('resize', setMainImgsHeight);
+
+// 메인 이미지 height 값 조절 ( width 대비 0.45배 )
+function setMainImgsHeight(){
+	let mainImgs = document.querySelectorAll('div.carousel-item>a');
+	let mainImg = document.querySelector('div.carousel-item.active>a');
+	let height;
+	let width
+	
+	for(i=0; i<mainImgs.length; i++){
+		width = mainImg.clientWidth;
+		height = width * 0.45;
+		
+		mainImgs[i].style.height = height + 'px';
+	}
+}
+</script>
 <div id="carouselExampleIndicators" class="carousel slide">
 	<div class="carousel-indicators">
 		<c:forEach items="${ listStay }" var="i" varStatus="status">
@@ -42,25 +71,26 @@ h_logo img {
 				aria-label="Slide ${ status.index + 1 }"></button>
 		</c:forEach>
 	</div>
-	<div class="carousel-inner main_visual">
+	<div class="carousel-inner main_visual container_wide">
 		<c:forEach items="${ listStay }" var="stay" varStatus="status">
 			<div class="carousel-item ${ status.index eq 0 ? 'active' : '' }">
+				<a href="/stay/room?stayName=${ stay.stayName }" style="display:flex; align-items:center">
 				<img
 					src="/resources/images/${ stay.mainPic1 }"
-					class="d-block w-100" alt="...">
-			</div>
-			<!-- 네모박스 (info) -->
-			<div class="house_info max-width900">
-				<p class="h_logo">
-					<img
-						src="//images.stayfolio.com/system/pictures/images/000/188/390/original/7a8a974ed01035f780b9246580258800b25c6a57.jpg?1689657777"
-						alt="logo_url">
-				</p>
-				<p class="txt">
-					역사와 현재가<br>공존하는 특별한 공간
-				</p>
-				<p class="event">LAUNCHING</p>
-				<p class="more">read more</p>
+					class="d-block" style="width:100%" alt="..."></a>
+				<!-- 네모박스 (info) -->
+				<div class="house_info max-width900">
+					<p class="h_logo">
+						<img
+							src="//images.stayfolio.com/system/pictures/images/000/188/390/original/7a8a974ed01035f780b9246580258800b25c6a57.jpg?1689657777"
+							alt="logo_url">
+					</p>
+					<p class="txt">
+						${ stay.stayInfo }
+					</p>
+					<p class="event">${ stay.stayName }</p>
+					<p class="more">read more</p>
+				</div>
 			</div>
 		</c:forEach>
 	</div>
@@ -77,57 +107,6 @@ h_logo img {
 </div>
 
 
-<!-- <div id="carouselExampleIndicators" class="carousel slide">
-	<div class="carousel-indicators">
-		<button type="button" data-bs-target="#carouselExampleIndicators"
-			data-bs-slide-to="0" class="active" aria-current="true"
-			aria-label="Slide 1"></button>
-		<button type="button" data-bs-target="#carouselExampleIndicators"
-			data-bs-slide-to="1" aria-label="Slide 2"></button>
-		<button type="button" data-bs-target="#carouselExampleIndicators"
-			data-bs-slide-to="2" aria-label="Slide 3"></button>
-	</div>
-	<div class="carousel-inner main_visual">
-		<div class="carousel-item active">
-			<img
-				src="https://www.stayfolio.com/_next/image?url=http%3A%2F%2F%2F%2Fimages.stayfolio.com%2Fsystem%2Fpictures%2Fimages%2F000%2F189%2F599%2Foriginal%2Fe8dbf1066b38f29e02f2d956869a3c56041db8f5.jpg%3F1690539716&w=3840&q=75"
-				class="d-block w-100" alt="...">
-		</div>
-		네모박스 (info)
-		<div class="house_info max-width900">
-			<p class="h_logo">
-				<img
-					src="//images.stayfolio.com/system/pictures/images/000/188/390/original/7a8a974ed01035f780b9246580258800b25c6a57.jpg?1689657777"
-					alt="logo_url">
-			</p>
-			<p class="txt">
-				역사와 현재가<br>공존하는 특별한 공간
-			</p>
-			<p class="event">LAUNCHING</p>
-			<p class="more">read more</p>
-		</div>
-		<div class="carousel-item">
-			<img
-				src="https://www.stayfolio.com/_next/image?url=http%3A%2F%2F%2F%2Fimages.stayfolio.com%2Fsystem%2Fpictures%2Fimages%2F000%2F189%2F249%2Foriginal%2Feda1432e5b8e820c70878394eb7b3b82f0f893eb.jpg%3F1690249445&w=3840&q=75"
-				class="d-block w-100" alt="...">
-		</div>
-		<div class="carousel-item">
-			<img
-				src="https://www.stayfolio.com/_next/image?url=http%3A%2F%2F%2F%2Fimages.stayfolio.com%2Fsystem%2Fpictures%2Fimages%2F000%2F189%2F324%2Foriginal%2F8d7cdcb954c7aead4949f62290232de057461ef2.jpg%3F1690333777&w=3840&q=75"
-				class="d-block w-100" alt="...">
-		</div>
-	</div>
-	<button class="carousel-control-prev" type="button"
-		data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-		<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-			class="visually-hidden">Previous</span>
-	</button>
-	<button class="carousel-control-next" type="button"
-		data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-		<span class="carousel-control-next-icon" aria-hidden="true"></span> <span
-			class="visually-hidden">Next</span>
-	</button>
-</div> -->
 
 <div
 	style="height: 500px; text-align: center; padding-top: 200px; font-size: 30px">

@@ -112,7 +112,7 @@
 				select rownum rn, t2.*
 				from(
 			        	select to_number(stayno) no, t.* from stay t order by no desc) t2)
-		where rn between 1 and 5
+		where rn between 1 and 10
 	</select>
 	
 </mapper>
