@@ -211,7 +211,7 @@ public class UserController extends CommonRestController{
 	// 이미지를 화면에 보여줍니다
 	public ResponseEntity<byte[]> display(String fileName) {
 		log.info("=====fileName : " + fileName);
-		String ATTACHES_DIR = "C:\\Users\\user\\git\\teamProjet\\teamPjt\\src\\main\\webapp\\resources\\images\\";
+		String ATTACHES_DIR = dirPath;
 		try {
 			// 파일 객체를 생성
 			File file = new File(ATTACHES_DIR+fileName);

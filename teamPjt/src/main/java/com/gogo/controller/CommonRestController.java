@@ -3,8 +3,10 @@ package com.gogo.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.gogo.service.FileuploadPath;
 
-public class CommonRestController {
+
+public class CommonRestController extends FileuploadPath {
 	
 
 	protected final String REST_SUCCESS = "success";
