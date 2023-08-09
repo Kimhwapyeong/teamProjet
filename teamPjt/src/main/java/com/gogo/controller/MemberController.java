@@ -274,9 +274,19 @@ public class MemberController extends CommonRestController {
 	    }
 	    
 	    return result;
-	     
-
 	}
+	
+	//네이버 로그인
+	@GetMapping("kakaoAction")
+	public String kakaoAction() {
+		return "/login/kakaoAction";
+	}
+	
+	
+	
+	// 카카오 로그인 (인가 코드 받기, 토큰 받기, 로그인 처리)
+	
+	
 
 }
 

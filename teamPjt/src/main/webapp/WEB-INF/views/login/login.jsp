@@ -125,10 +125,9 @@
                 <li>
                 	
                     <a id="naverIdLogin" class="btn_naver" href="#">네이버</a>
-                    
                 </li>
                 <li>
-                    <a class="btn_kakao" href="/">카카오</a>
+                    <a id="kakaoIdLogin" class="btn_kakao" href="/login/kakaoAction">카카오</a>
                 </li>
             </ul>
           </div>
