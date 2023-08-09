@@ -94,7 +94,7 @@
 									                    console.log("ageList : ", ageList);
 									                    console.log("ageCount : " , ageCount);
 									                    new Chart(document.getElementById("myChart"),{
-									                        type:'pie',
+									                        type:'doughnut',
 									                        data : {
 									                            labels: ageList,
 									                            datasets : [{
@@ -103,15 +103,15 @@
 									                                fill: false,
 									                                backgroundColor: [
 									                                    //색상
-									                                    'rgba(232, 223, 202, 0.849)',
-									                                    'rgba(174, 189, 202, 0.829)',
-									                                    'rgba(120, 149, 178, 0.842)'
+									                                    'rgba(255, 99, 132, 0.2)',
+									                                    'rgba(75, 192, 192, 0.2)',
+									                                    'rgba(255, 159, 64, 0.2)'
 									                                ],
 									                                borderColor: [
 									                                    //경계선 색상
-									                                    'rgb(232, 223, 202)',
-									                                    'rgb(174, 189, 202)',
-									                                    'rgb(120, 149, 178)'
+									                                    'rgba(255, 99, 132, 0.2)',
+									                                    'rgba(75, 192, 192, 0.2)',
+									                                    'rgba(255, 159, 64, 0.2)'
 									                                ],
 									                                borderWidth: 1 //경계선 굵기
 									                            }]
@@ -119,11 +119,7 @@
 									                        options: {
 									                        scales: {
 									                            yAxes: [
-									                                {
-									                                    ticks: {
-									                                        beginAtZero: true
-									                                    }
-									                                }
+									                                
 									                            ]
 									                        }
 									                    }

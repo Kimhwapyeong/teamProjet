@@ -41,7 +41,7 @@
 			<div id="gnbBgColor"></div>
 			<div id="contents">
 				<div class="container sub_title">
-					<div class="tit" style="font-weight:bold">MY PAGE</div>
+					<div class="tit">MY PAGE</div>
 				</div>
 				<div class="container mypage_wrap">
 					<div class="mypage_myinfo">

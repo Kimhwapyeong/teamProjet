@@ -69,9 +69,8 @@
                                    <div class="stay_view">
                                        <div class="photo" 
                                            style="background-image: url('/resources/images/${vo.mainPic1.replace('\\','/')}'); background-repeat: no-repeat; background-position: center center; background-size: cover;">
-                                            <!-- ========================== url 수정 하기 !!!!!!!!!! ============================================-->
                                             <a href="../../editstay?stayNo=${vo.stayNo}">
-                                           <span class="view">스테이 수정</span></a></div>
+                                            <span class="view">스테이 수정</span></a></div>
                                    </div>
                                        <div class="reserv_info">
                                            <!-- =============================== 숙소 분류 ============================================-->
