@@ -105,11 +105,19 @@ public class MemberServiceImpl implements MemberService {
 
 		if(div.equals("findPwAction")) {
 			subject = "스테이 올래갈래 임시 비밀번호 입니다.";
-			msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
-			msg += "<h3 style='color: blue;'>";
-			msg += member.getMemberName()+"님의 임시 비밀번호 입니다.<br> 비밀번호를 변경하여 사용하세요.</h3>";
-			msg += "<p>임시 비밀번호 : ";
-			msg += member.getPw() + "</p></div>";
+			msg += "<div style=\"text-align: center; width: 470px; height: 850px; line-height: 70px;\">";
+			msg += "<img src=\"https://i.ibb.co/M7mS3X2/stay2.png\" alt=\"Facebook Logo\" height=\"33\" style='max-width: 100%; height: auto;'>";
+			msg += "<p style=\"color:#565a5c;font-size:18px;\">"+member.getMemberName()+"님, 안녕하세요.</p>";
+			msg += "<p style=\"color:#565a5c;font-size:18px;\">STAY OLLAE에 다시 로그인할 수 있는 방법을 안내해 드리겠습니다.</p>";
+			msg += "<p style=\"color:#565a5c;font-size:18px;\">임시 비밀번호를 통해 로그인을 시도해 주세요!</p>";
+			msg += "<p style=\"color:#565a5c;font-size:32px;\">"+member.getPw()+"</p>";
+			msg += " <p style=\"color:#565a5c;font-size:16px;\">\r\n" + 
+					"            로그인 링크나 비밀번호 재설정을 요청하지 않은 경우 이 메시지를 무시하고 ";
+			msg += "<a href=\"https://www.google.com/search?q=%EB%8B%88+%EC%95%8C%EC%95%84%EC%84%9C+%ED%95%B4%EB%9D%BC&sxsrf=AB5stBgrmFyK4Y01FqLnq9wBDtGVcOgngQ%3A1691547017698&source=hp&ei=ifXSZLnTKM3m1e8P9_6esA8&iflsig=AD69kcEAAAAAZNMDmX_RLDzcxmiHaOOB3o_gIut_TU8A&ved=0ahUKEwj5u-_Yv86AAxVNc_UHHXe_B_YQ4dUDCAs&uact=5&oq=%EB%8B%88+%EC%95%8C%EC%95%84%EC%84%9C+%ED%95%B4%EB%9D%BC&gs_lp=Egdnd3Mtd2l6IhTri4gg7JWM7JWE7IScIO2VtOudvDIFEAAYgARI3RdQAFiSF3AIeACQAQKYAYUBoAG9EaoBBDEuMTm4AQPIAQD4AQGoAgrCAgcQIxiKBRgnwgIEECMYJ8ICCxAAGIAEGLEDGIMBwgIREC4YgAQYsQMYgwEYxwEY0QPCAgsQLhiABBixAxiDAcICBxAjGOoCGCfCAgQQLhgDwgIIEAAYgAQYsQPCAg4QLhiABBixAxjHARjRA8ICCBAuGIAEGLEDwgIFEC4YgATCAggQLhiABBjUAsICCRAAGA0YExiABMICCBAAGB4YDRgTwgIKEAAYCBgeGA0YE8ICChAAGB4YDRgTGArCAgoQABgFGB4YDRgTwgIHEAAYDRiABMICCBAAGAgYHhgNwgIKEAAYBRgeGA0YD8ICBBAAGB7CAgYQABgFGB7CAggQABgFGB4YD8ICBhAAGAgYHg&sclient=gws-wiz\" style=\"color:#1b74e4;text-decoration:none;\">메시지를 받은 이유에 대해 자세히 알아보세요</a>.";
+			msg += "</p>";
+			msg += "<img src=\"https://static.xx.fbcdn.net/rsrc.php/v3/y3/r/Bqo9-L659wB.png\" alt=\"Facebook Logo\" height=\"26\" width='52'>";
+			msg += " <p style=\"color:#abadae;font-size:11px;\">© STAY OLLE. Meta Platforms, Inc., 1601 Willow Road, HWA YOU, CA 94025</p>";
+			msg += "</div>";
 		} 
 		if(div.equals("signupAction")) {
 			subject = "스테이 올래갈래 회원이 되신걸 환영합니다.";

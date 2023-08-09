@@ -9,6 +9,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+	.tit, .txt{
+		font-weight: bold;
+	}
+
+</style>
 <script>
 var path = "${pageContext.request.contextPath }";
 
@@ -57,7 +63,7 @@ alert(msg);
 <div id="contents">
 	<div class="container sub_title">
 		<div class="tit">FIND ID</div>
-		<div class="txt">아이디 찾기</div>
+		<div class="txt" style="font-weight: bold;">아이디 찾기</div>
 	</div>
 	<div class="container">
 		<div class="login_wrap">
@@ -72,7 +78,7 @@ alert(msg);
 						      <label for="memberName">이름</label>
 						    </td>
 						    <td style="border: 1px solid #ebebeb;">
-						      <input class="w3-input" type="text" id="memberName" name="memberName" placeholder="이름을 입력해주세요." value="차은우" required>
+						      <input style="padding-left:10px; font-size: 15px;" class="w3-input" type="text" id="memberName" name="memberName" placeholder="이름을 입력해주세요." value="차은우" required>
 						    </td>
 						  </tr>
 						  <tr>
