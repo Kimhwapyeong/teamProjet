@@ -2,6 +2,8 @@ package com.gogo.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.gogo.vo.MemberRoleVO;
 import com.gogo.vo.MemberVO;
 
@@ -29,5 +31,5 @@ public interface MemberMapper {
 
 	public void passwordUpdate(MemberVO member);
 
-	public void insertMemberRole(MemberRoleVO memberRole);
+	public void insertMemberRole(@Param("memberId") String memberId,@Param("role_id") String role_id);
 }

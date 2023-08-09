@@ -102,7 +102,7 @@ public class MemberController extends CommonRestController {
 
             if (res > 0) {
 			   
-			// role_id 설정
+            	// role_id 설정
 	            String role_id = "user";
 	            
 	            if ("y".equals(hostyn)) {
@@ -110,8 +110,13 @@ public class MemberController extends CommonRestController {
 	            }
 	            // 회원 역할 정보 저장
 	            MemberRoleVO role = new MemberRoleVO();
+	            
 	            role.setRole_id(role_id);
-	            memberService.insertMemberRole(role);
+	            
+	            System.out.println("member:"+member);
+	            
+	            // 매개변수 받기!
+	            memberService.insertMemberRole(member.getMemberId(), role_id);
 	            
 	            // 알림창
                 model.addAttribute("msg", "환영합니다. 회원가입되었습니다.");

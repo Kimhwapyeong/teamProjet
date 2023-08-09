@@ -39,7 +39,7 @@ public interface MemberService {
 	public void sendEmail(MemberVO member, String div) throws Exception;
 
 	// 회원 역할 저장
-	public void insertMemberRole(MemberRoleVO memberRole);
+	public void insertMemberRole(String memberId, String role_id);
 
 
 
