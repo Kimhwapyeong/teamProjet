@@ -407,7 +407,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							</c:if>
 							<c:if test="${ not res }">
 								<!-- 로그인 구현 되면 session에 저장된 값을 비교 -->
-								<c:if test="${ param.role eq 'user' or empty param.role }">
+								<c:if test="${ sessionScope.role_id eq '[user]' }">
 									<div class="box">
 										<div class="nav_tit mypage">MY PAGE</div>
 										<ul class="open_list" style="width: 125px;">
@@ -421,7 +421,7 @@ document.addEventListener('DOMContentLoaded', function() {
 										</ul>
 									</div>
 								</c:if>
-								<c:if test="${ param.role eq 'admin' }">
+								<c:if test="${ sessionScope.role_id eq '[admin]' }">
 									<div class="box">
 										<div class="nav_tit mypage">ADMIN PAGE</div>
 										<ul class="open_list" style="width: 125px;">
@@ -434,11 +434,11 @@ document.addEventListener('DOMContentLoaded', function() {
 											<li><a href="/member/admin/statistics?role=admin">통계
 													및 분석</a></li>
 											<li><a href="/chat">메시지</a></li>
-											<li class="login"><a href="/main">로그아웃</a></li>
+											<li class="login"><a href="/logout">로그아웃</a></li>
 										</ul>
 									</div>
 								</c:if>
-								<c:if test="${ param.role eq 'host' }">
+								<c:if test="${ sessionScope.role_id eq '[host]' }">
 									<div class="box">
 										<div class="nav_tit mypage">HOST PAGE</div>
 										<ul class="open_list" style="width: 125px;">
@@ -447,7 +447,7 @@ document.addEventListener('DOMContentLoaded', function() {
 											<li><a href="/member/host/income?role=host">수입 현황</a></li>
 											<li><a href="/member/host/guide?role=host">호스트 가이드</a></li>
 											<li><a href="/chat">메시지</a></li>
-											<li class="login"><a href="/main">로그아웃</a></li>
+											<li class="login"><a href="/logout">로그아웃</a></li>
 										</ul>
 									</div>
 								</c:if>
@@ -493,21 +493,21 @@ document.addEventListener('DOMContentLoaded', function() {
 			</a>
 			<div class="landing_menu">
 				<ul style="padding-left:0px;">
-					<c:if test="${ param.role eq 'user' or empty param.role }">
+					<c:if test="${ sessionScope.role_id eq '[user]' }">
 						<li><a href="/member/mypage/reservation">예약 정보</a></li>
 						<li><a href="/member/mypage/cancel">취소 내역</a></li>
 						<li><a href="/member/mypage/likestay">관심 스테이</a></li>
 						<li><a href="/member/mypage/info">회원 정보 수정</a></li>
 						<li><a href="/member/mypage/message">메시지</a></li>
 					</c:if>
-					<c:if test="${ param.role eq 'host' }">
+					<c:if test="${ sessionScope.role_id eq '[host]' }">
 						<li><a href="/member/host/stayhost?role=host">숙소 관리</a></li>
 						<li><a href="/member/host/reservation?role=host">예약 관리</a></li>
 						<li><a href="/member/host/income?role=host">수입 현황</a></li>
 						<li><a href="/member/host/guide?role=host">호스트 가이드</a></li>
 						<li><a href="/chat">메시지</a></li>
 					</c:if>
-					<c:if test="${ param.role eq 'admin' }">
+					<c:if test="${ sessionScope.role_id eq '[admin]' }">
 						<li><a href="/member/admin/stayadmin?role=admin">숙소 관리</a></li>
 						<li><a href="/member/admin/useradmin?role=admin">사용자 관리</a></li>
 						<li><a href="/member/admin/hosthelp?role=admin">호스트 지원</a></li>
@@ -524,7 +524,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				<li role="presentation" class="jsx-bc9726d7609f7d7f">1:1 문의</li>
 			</ul>
 			<div class="jsx-13bd1097de52bb6b">
-				<button type="button" class="jsx-13bd1097de52bb6b" onclick="goMain()">로그아웃</button>
+				<button type="button" class="jsx-13bd1097de52bb6b" onclick="location.href='/logout'">로그아웃</button>
 			</div>
 			</c:if>
 			
@@ -547,7 +547,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				<li role="presentation" class="jsx-bc9726d7609f7d7f">1:1 문의</li>
 			</ul>
 			<div class="jsx-13bd1097de52bb6b">
-				<button type="button" class="jsx-13bd1097de52bb6b">로그인</button>
+				<button type="button" class="jsx-13bd1097de52bb6b" onclick="location.href='/login/login'">로그인</button>
 			</div>
 			</c:if>
 		</div>

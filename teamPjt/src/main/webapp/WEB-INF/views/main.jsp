@@ -52,6 +52,46 @@ h_logo img {
 window.addEventListener('load', ()=>{
 	setMainImgsHeight();
 	
+
+   let timerId = 0;
+   
+   // 메인 케러셀 5초마다 넘겨주기
+   timerId = window.setInterval(()=>{
+	   BtnMainNext.click();
+   }, 5000);
+	
+   // 마우스가 올라가면 interval 멈춤
+   carouselExampleIndicators.addEventListener('mouseenter', ()=>{
+	   clearInterval(timerId);
+   })
+
+   // 마우스가 떠나면 interval 재실행
+   carouselExampleIndicators.addEventListener('mouseleave', () => {
+	    timerId = window.setInterval(() => {
+	        BtnMainNext.click();
+	    }, 5000);
+	});
+   
+   let newX = 0;
+   // 추천 스테이 다음 버튼으로 넘기기
+   BtnRecNext.addEventListener('click', ()=>{
+		newX -= 330;
+		recBox.style.transform='translate3d('+newX+'px, 0px, 0px)';
+   })
+	
+   // 추천 스테이 이전버튼
+   BtnRecPrev.addEventListener('click', ()=>{
+	   newX += 330;
+	   recBox.style.transform='translate3d('+newX+'px, 0px, 0px)';
+   })
+   
+   // 불릿 생성중 
+   let recBullets = document.querySelectorAll('span[name=recBullet]');
+   recBullets.forEach((recBullet) =>{
+	   recBullet.addEventListener('click', (e)=>{
+		   e.classList.add('swiper-pagination-bullet-active');
+	   })
+   })
 })
 window.addEventListener('resize', setMainImgsHeight);
 
@@ -107,7 +147,7 @@ function setMainImgsHeight(){
 		<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
 			class="visually-hidden">Previous</span>
 	</button>
-	<button class="carousel-control-next" type="button"
+	<button class="carousel-control-next" type="button" id="BtnMainNext"
 		data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
 		<span class="carousel-control-next-icon" aria-hidden="true"></span> <span
 			class="visually-hidden">Next</span>
@@ -141,11 +181,11 @@ function setMainImgsHeight(){
         </div>
         <div class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events stay_list"
             id="main-new-pc">
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev" id="BtnRecPrev"></div>
+            <div class="swiper-button-next" id="BtnRecNext"></div>
             <div class="swiper-pagination swiper-pagination-fraction"><span class="swiper-pagination-current">1</span> /
                 <span class="swiper-pagination-total">12</span></div>
-            <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-990px, 0px, 0px);">
+            <div class="swiper-wrapper" id="recBox" style="transition-duration: 0ms; transform: translate3d(-0px, 0px, 0px);">
                 <c:forEach items="${ listStay }" var="stay" varStatus="status">
 	                <div class="swiper-slide stay_box" data-swiper-slide-index="${ status.index }"
 	                    style="z-index: 1; width: 330px;"><button type="button"
@@ -166,96 +206,16 @@ function setMainImgsHeight(){
 	                    </ul>
 	                </div>
                 </c:forEach>
-                <div class="swiper-slide swiper-slide-duplicate-prev stay_box" data-swiper-slide-index="11"
-                    style="z-index: 1; width: 330px;"><button type="button"
-                        class="btn_like"><span>관심스테이</span></button><a href="/findstay/stay-naum">
-                        <div role="img" aria-label="main_image" class="img"
-                            style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/134/673/display/d8ee7ec92552ccc69322ad8676392fd09bed36fc.jpg?1659666077&quot;) center center / cover no-repeat;">
-                            <span>
-                                <div class="_badge_badge_wrapper__h9IsV">
-                                    <div class="_badge_exclusive__prNZN"><span
-                                            class="_badge_txt__fonwF">EXCLUSIVE</span></div>
-                                </div>
-                            </span></div>
-                        <div class="name">스테이 나음</div>
-                        <div class="other"><span>제주/제주시</span><span>₩400,000 ~ ₩500,000</span></div>
-                    </a>
-                    <ul>
-                        <li class="btn_more"><a href="/findstay/stay-naum">예약하기</a></li>
-                    </ul>
-                </div>
-                <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active stay_box"
-                    data-swiper-slide-index="0" style="z-index: 1; width: 330px;"><button type="button"
-                        class="btn_like"><span>관심스테이</span></button><a href="/findstay/dansim-stay">
-                        <div role="img" aria-label="main_image" class="img"
-                            style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/162/051/display/66998953044eca23ec4d6b6193929e301ae2e0b0.jpg?1674109162&quot;) center center / cover no-repeat;">
-                            <span>
-                                <div class="_badge_badge_wrapper__h9IsV">
-                                    <div class="_badge_exclusive__prNZN"><span
-                                            class="_badge_txt__fonwF">EXCLUSIVE</span></div>
-                                </div>
-                            </span></div>
-                        <div class="name">단심스테이</div>
-                        <div class="other"><span>제주/서귀포시</span><span>₩450,000 ~ ₩550,000</span></div>
-                    </a>
-                    <ul>
-                        <li class="btn_more"><a href="/findstay/dansim-stay">예약하기</a></li>
-                    </ul>
-                </div>
-                <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next stay_box"
-                    data-swiper-slide-index="1" style="z-index: 1; width: 330px;"><button type="button"
-                        class="btn_like"><span>관심스테이</span></button><a href="/findstay/stay-dayoff">
-                        <div role="img" aria-label="main_image" class="img"
-                            style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/048/085/display/a1e382fb988182231d04148e0d66e6f6289f9f24.jpg?1590983312&quot;) center center / cover no-repeat;">
-                            <span>
-                                <div class="_badge_badge_wrapper__h9IsV">
-                                    <div class="_badge_exclusive__prNZN"><span
-                                            class="_badge_txt__fonwF">EXCLUSIVE</span></div>
-                                </div>
-                            </span></div>
-                        <div class="name">스테이 데이오프</div>
-                        <div class="other"><span>서울/종로구</span><span>₩280,000 ~ ₩330,000</span></div>
-                    </a>
-                    <ul>
-                        <li class="btn_more"><a href="/findstay/stay-dayoff">예약하기</a></li>
-                    </ul>
-                </div>
-                <div class="swiper-slide swiper-slide-duplicate stay_box" data-swiper-slide-index="2"
-                    style="z-index: 1; width: 330px;"><button type="button"
-                        class="btn_like"><span>관심스테이</span></button><a href="/findstay/godo">
-                        <div role="img" aria-label="main_image" class="img"
-                            style="background: url(&quot;https://images.stayfolio.com/system/pictures/images/000/182/672/display/fae3d1d2fc8427661c5aca24ebce7882f714321f.JPG?1685942878&quot;) center center / cover no-repeat;">
-                            <span>
-                                <div class="_badge_badge_wrapper__h9IsV">
-                                    <div class="_badge_exclusive__prNZN"><span
-                                            class="_badge_txt__fonwF">EXCLUSIVE</span></div>
-                                </div>
-                            </span></div>
-                        <div class="name">고도</div>
-                        <div class="other"><span>강원/평창군</span><span>₩400,000 ~ ₩450,000</span></div>
-                    </a>
-                    <ul>
-                        <li class="btn_more"><a href="/findstay/godo">예약하기</a></li>
-                    </ul>
-                </div>
             </div>
         </div>
         <div class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events stay_list"
             id="main-new-mobile">
 		<div
 			class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
-			<span class="swiper-pagination-bullet"></span><span
-				class="swiper-pagination-bullet"></span><span
-				class="swiper-pagination-bullet"></span><span
-				class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span
-				class="swiper-pagination-bullet"></span><span
-				class="swiper-pagination-bullet"></span><span
-				class="swiper-pagination-bullet"></span><span
-				class="swiper-pagination-bullet"></span><span
-				class="swiper-pagination-bullet"></span><span
-				class="swiper-pagination-bullet"></span><span
-				class="swiper-pagination-bullet"></span><span
-				class="swiper-pagination-bullet"></span>
+			<c:forEach items="${ listStay }" var="stay" varStatus="status">
+				<span name="recBullet" class="swiper-pagination-bullet"></span>
+			</c:forEach>
+			
 		</div>
 		<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"></div>
             <div class="swiper-wrapper" style="transition-duration: 0ms;">
@@ -301,7 +261,7 @@ function setMainImgsHeight(){
 						class="swiper-pagination-total">6</span>
 				</div>
 				<div class="swiper-wrapper"
-					style="transition-duration: 0ms; transform: translate3d(-1320px, 0px, 0px);">
+					style="transition-duration: 0ms; transform: translate3d(-0px, 0px, 0px);">
 					<c:forEach items="${ listPopStay }" var="stay" varStatus="status">
 						<div class="swiper-slide stay_box"
 							data-swiper-slide-index="${ status.index }" style="z-index: 1; width: 440px;">
