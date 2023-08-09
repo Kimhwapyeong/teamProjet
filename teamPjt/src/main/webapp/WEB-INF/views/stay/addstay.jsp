@@ -60,7 +60,7 @@ input ::placeholder{
 								<option value="호텔">호텔</option></select>
 						</div></li>
 						
-					<li><div class="dt">스테이 뷰</div>
+					<li><div class="dt">스테이 뷰 *</div>
 						<div class="dd">
 							<label for="mountain" class="radio_skin"> <input
 								type="radio" id="mountain" name="stayView" value="산"> <span
@@ -75,7 +75,7 @@ input ::placeholder{
 					<li><div class="dt">스테이 소개 *</div>
 						<div class="dd">
 							<textarea rows="5" class="form_style" name="stayInfo"
-								placeholder="공간의 구조, 컨셉, 스토리 등을 자유롭게 작성해 주세요. (최소 50자, 최대 300자)"></textarea>
+								placeholder="공간의 구조, 컨셉, 스토리 등을 자유롭게 작성해 주세요. (최소 10자, 최대 150자)"></textarea>
 						</div></li>
 					<li><div class="dt">뱃지 *</div>
 						<div class="dd">

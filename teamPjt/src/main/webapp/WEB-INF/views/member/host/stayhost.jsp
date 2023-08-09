@@ -70,7 +70,7 @@
                                        <div class="photo" 
                                            style="background-image: url('/resources/images/${vo.mainPic1.replace('\\','/')}'); background-repeat: no-repeat; background-position: center center; background-size: cover;">
                                             <!-- ========================== url 수정 하기 !!!!!!!!!! ============================================-->
-                                            <a href="../../editstay?stayNo="+${vo.stayNo }>
+                                            <a href="../../editstay?stayNo=${vo.stayNo}">
                                            <span class="view">스테이 수정</span></a></div>
                                    </div>
                                        <div class="reserv_info">
@@ -90,7 +90,7 @@
                            <!-- =============================== 페이징 ============================================-->
                            <!-- <div class="paging"><a href="/" class="prev" title="이전 페이지">이전 페이지</a><a href="/"
                                    class="on">1</a><a href="/" class="next" title="다음 페이지">다음 페이지</a></div>  -->
-                                   <%@ include file= "../../common/pageNavi.jsp" %>
+                                  
                        </div>
                    </div>
                </div>

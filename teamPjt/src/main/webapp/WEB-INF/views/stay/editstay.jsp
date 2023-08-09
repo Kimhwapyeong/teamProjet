@@ -38,7 +38,7 @@ input ::placeholder{
 					<li><div class="dt">웹사이트 및 SNS 주소</div>
 						<div class="dd">
 							<textarea class="form_style" name="sns" value=""
-								placeholder="스테이 공간 / 브랜드를 살펴볼 수 있는 instagram 주소를 기재해 주세요. db컬럼에 sns추가, mapper에도 추가"></textarea>
+								placeholder="스테이 공간 / 브랜드를 살펴볼 수 있는 instagram 주소를 기재해 주세요"></textarea>
 						</div></li>
 					<li><div class="dt">숙박업 사업자 등록 여부 *</div>
 						<div class="dd">
@@ -60,7 +60,7 @@ input ::placeholder{
 								<option value="민박" ${ map.stayVO.stayType eq '민박' ? 'selected' : '' }>민박</option>
 								<option value="호텔" ${ map.stayVO.stayType eq '호텔' ? 'selected' : '' }>호텔</option></select>
 						</div></li>
-					<li><div class="dt">스테이 뷰</div>
+					<li><div class="dt">스테이 뷰 *</div>
 						<div class="dd">
 							<label for="mountain" class="radio_skin"> <input
 								type="radio" id="mountain" name="stayView" value="산" ${ map.stayVO.stayView eq '산' ? 'checked' : '' }> <span
@@ -75,7 +75,7 @@ input ::placeholder{
 					<li><div class="dt">스테이 소개 *</div>
 						<div class="dd">
 							<textarea rows="5" class="form_style" name="stayInfo" value=""
-								placeholder="공간의 구조, 컨셉, 스토리 등을 자유롭게 작성해 주세요. (최소 50자, 최대 300자)">${ map.stayVO.stayInfo }</textarea>
+								placeholder="공간의 구조, 컨셉, 스토리 등을 자유롭게 작성해 주세요. (최소 10자, 최대 150자)">${ map.stayVO.stayInfo }</textarea>
 						</div></li>
 					<li><div class="dt">뱃지 *</div>
 						<div class="dd">
