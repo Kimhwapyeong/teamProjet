@@ -58,34 +58,33 @@ function findPwAction() {
 <body>
 	<div id="contents">
 		<div class="container sub_title">
-			<div class="tit">FIND PASSWORD</div>
-			<div class="txt">비밀번호 찾기</div>
+			<div class="tit" style="font-weight:bold;">FIND PASSWORD</div>
+			<div class="txt" style="font-weight:bold;">비밀번호 찾기</div>
 		</div>
 		<form action="${path}/login/findPwAction" id="findPwform" method="post">
 		<div class="container">
 			<div class="login_wrap">
-				<div class="txt">회원정보를 입력하세요.</div>
+				<div class="txt" style="font-weight:bold;">회원정보를 입력하세요</div>
 					<div class="w3-content w3-container w3-margin-top">
 						<div class="w3-container w3-card-4">
 							<div class="w3-center w3-large w3-margin-top">
 									<div class='input_box'>
-								<table style="width: 100%; height: 50%;">
+								<table style="width: 100%; height: 50%; line-height: 60px;">
 										<tr>
-											<td><label>아이디</label></td>
-											<td style="border: 1px solid #ebebeb;"><input
+											
+											<td style="border-bottom: 1px solid #ebebeb;"><input
 												class="w3-input" type="text" id="memberId" name="memberId"
 												placeholder="아이디를 입력해주세요." value="user7" required></td>
 										</tr>
 										<tr>
-											<td><label>이름</label></td>
-											<td style="border: 1px solid #ebebeb;"><input
+											
+											<td style="border-bottom: 1px solid #ebebeb;"><input
 												class="w3-input" type="text" id="memberName"
 												name="memberName" placeholder="이름을 입력해주세요." value="차은우"
 												required></td>
 										</tr>
 										<tr>
-											<td><label>Email</label></td>
-											<td style="border: 1px solid #ebebeb;"><input
+											<td style="border-bottom: 1px solid #ebebeb;"><input
 												class="w3-input" type="text" id="memberEmail"
 												name="memberEmail" placeholder="이메일을 입력해주세요."
 												value="yuhhwa08@gmail.com" required></td>
@@ -98,23 +97,36 @@ function findPwAction() {
 								<a href="#" onclick="findPwAction();"
 									class="btn btn-primary btn-user btn-block"> 임시 비밀번호 발송 </a>
 							</p>
-
-							<div class="text-center">
-								<p class="w3-center findidBtn"
-									style="display: flex; align-items: center; justify-content: center;">
-									<a class="small" href="/login/signup">아직 회원이 아니신가요?
-										<button type="button" id='findPwbtn' onclick=""
-											class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round"
-											style="width: 100px; height: 30px; border: 1px solid #ebebeb; background-color: #fff; border-radius: 20px;">회원가입</button>
-									</a>
-								</p>
-
-								<a class="small" href="/login/login">이미 회원이신가요?
-									<button type="button" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round"
-										style="width: 100px; height: 30px; border: 1px solid #ebebeb; background-color: #fff; border-radius: 20px; margin: left;">로그인</button>
-								</a>
-							</div>
-
+							
+						<table>
+							<tr>
+								<td>
+									
+										<p class="w3-center findidBtn"
+											style="display: flex; padding-top:30px; align-items: center; justify-content: center;">
+											<a class="small" href="/login/signup">아직 회원이 아니신가요?
+												<button type="button" id='findPwbtn' onclick=""
+													class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round"
+													style="width: 100px; height: 30px; border: 1px solid #ebebeb; background-color: #fff; border-radius: 20px;">회원가입</button>
+											</a>
+										</p>
+									
+								</td>
+							</tr>
+							<tr>
+								<td>
+									
+										<p class="w3-center findidBtn"
+											style="display: flex; padding-top:30px; align-items: center; justify-content: center;">
+										<a class="small" href="/login/login">이미 회원이신가요?
+											<button type="button" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round"
+												style="width: 100px; height: 30px; border: 1px solid #ebebeb; background-color: #fff; border-radius: 20px; margin: left;">로그인</button>
+										</a>
+										</p>
+									
+								</td>
+							</tr>
+						</table>
 						</div>
 					</div>
 			</div>
