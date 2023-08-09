@@ -94,8 +94,8 @@ function findPwAction() {
 
 							<p class="w3-center findidBtn"
 								style="display: flex; align-items: center; justify-content: center; margin: 2em">
-								<a href="#" onclick="findPwAction();"
-									class="btn btn-primary btn-user btn-block"> 임시 비밀번호 발송 </a>
+								<button style="background-color:black; color:white;" type="button" class="btn-sign-in" onclick="findPwAction();"
+									class="btn btn-primary btn-user btn-block">임시 비밀번호 발송</button>
 							</p>
 							
 						<table>

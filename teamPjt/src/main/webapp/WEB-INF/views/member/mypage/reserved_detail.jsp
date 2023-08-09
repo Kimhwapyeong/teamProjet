@@ -62,7 +62,7 @@
 <div class="mypage_content reservation">
     <div class="reserv_detail">
         <div class="stay_info">
-            <div class="photo" style="background-image: url(${param.mainImg}); background-repeat: no-repeat; background-position: center center; background-size: cover;">
+            <div class="photo" style="background-image: url('/resources/images/${param.mainImg.replace('\\','/')}'); background-repeat: no-repeat; background-position: center center; background-size: cover;">
             </div>
             <div class="info">
                 <div class="name"><a style="color:white" href="/findstay/vintage-jeju">${param.stayName}</a></div>
