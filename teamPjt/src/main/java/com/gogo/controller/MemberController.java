@@ -64,6 +64,7 @@ public class MemberController extends CommonRestController {
 		if(member != null) {
 			session.setAttribute("member", user);
 			session.setAttribute("memberId", user.getMemberId());
+			session.setAttribute("role_id", user.getRole());
 			Map<String, Object> map = responseMap(REST_SUCCESS, "환영합니다.");
 			
 			// SNS 로그인 체크 로직		
@@ -116,7 +117,7 @@ public class MemberController extends CommonRestController {
 	            
 	            System.out.println("member:"+member);
 	            
-	            // 매개변수 받기!
+	            // 매개변수 받기
 	            memberService.insertMemberRole(member.getMemberId(), role_id);
 	            
 	            // 알림창
