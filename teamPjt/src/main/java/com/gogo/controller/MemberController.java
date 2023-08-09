@@ -307,14 +307,14 @@ public class MemberController extends CommonRestController {
 	    return result;
 	}
 	
-	// 카카오 로그인 
-	@GetMapping("kakaoAction")
-	public String kakaoAction() {
-		return "/login/kakaoAction";
-	}
+//	// 카카오 로그인 
+//	@GetMapping("kakaoAction")
+//	public String kakaoAction() {
+//		return "/login/kakaoAction";
+//	}
 	
 	// 카카오 로그인 (인가 코드 받기, 토큰 받기, 로그인 처리 access_token과 refresh_token
-	@PostMapping("/login/kakaoAction")
+	@GetMapping("/login/kakaoAction")
     public String kakaoSave(@RequestParam(value = "code", required = false) String code, 
     HttpSession session,  HttpServletRequest request) throws IOException {
 		 System.out.println(code);

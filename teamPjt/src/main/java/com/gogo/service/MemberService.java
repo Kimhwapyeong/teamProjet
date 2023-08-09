@@ -3,13 +3,11 @@ package com.gogo.service;
 
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.gogo.vo.MemberVO;
-import com.gogo.vo.MessageVO;
 
 @Service
 public interface MemberService {
