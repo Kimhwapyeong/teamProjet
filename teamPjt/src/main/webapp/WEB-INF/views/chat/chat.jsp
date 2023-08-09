@@ -3,6 +3,16 @@
 
 <!DOCTYPE html>
 <html>
+<style>
+	#ENTER > span , #OUT, #ENTER{
+    
+    font-style: italic;
+    
+    font-weight:300;
+    color: black;
+}
+
+</style>
 <head>
     <link href="/resources/css/reserved/calendar.css" rel="stylesheet" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -34,8 +44,7 @@
 						    초대할 아이디:<br><br>
 						     <input style="border:1px solid #f2f2f2; width:80%; text-align:center;" type="text" id="targetMemberId" required><br>
 						   	<input type="hidden" id="roomId" value="${roomId}" required readonly><br>
-						    <button id="inviteBtn">초대하기</button>
-						
+						    <button id="inviteBtn" style="padding-bottom:50px;">초대하기</button>
                     </div>
                     
                     <script>
@@ -73,7 +82,19 @@
                     
                 </div>
                 <div id="messageArea" style="position: absolute; right: 0; display: inline-block; text-align: center; width: 70%; height: 100%; vertical-align: bottom;">
-                    <div id="chatList" style="position: absolute; background-color: white; width: 100%; height: 87.6%; top: 7%; overflow: scroll; vertical-align: text-bottom; line-height:40px;"></div>
+                    <div id="chatList" style="position: absolute; background-color: white; width: 100%; height: 87.6%; top: 7%; overflow: scroll; vertical-align: text-bottom; line-height:40px;">
+                    
+                    <!-- 채팅이 생성되는 곳 -->
+                    
+                    <c:forEach items="${messageHistory}" var="history">
+                    	
+                    	<span style="font-weight:bold;">
+                    		${history.content}
+                    	</span>
+                    	<br>
+                    </c:forEach> 
+                    
+                    </div>
                     <div id="messageBtn" style="position: absolute; bottom: 0; width: 100%; border: 1px solid #f2f2f2;">
                         <input type="text" id="message" style="width: 300px; border: 1px solid #f2f2f2;" />
                         <input type="button" class="btnStyle" id="sendBtn" value="전송" style="border: 1px solid #f2f2f2;" />
@@ -146,10 +167,10 @@
        
     	if(role=='<유저>'){
     		
-	        sock.send("<span style='color:blue;'>"+ role +"</span>${memberName}님의 메세지 : <span style='color:black;'>"+$("#message").val()+"<span>");
+	        sock.send("<span style='color:blue;'>"+ role +"</span>${memberName}님의 메세지 : <span style='color:black;'>"+$("#message").val()+"</span>");
     	} else {
     		
-	        sock.send("<span style='color:brown;'>"+ role +"</span>${memberName}님의 메세지 : <span style='color:black;'>"+$("#message").val()+"<span>");
+	        sock.send("<span style='color:brown;'>"+ role +"</span>${memberName}님의 메세지 : <span style='color:black;'>"+$("#message").val()+"</span>");
     	}
     }
 
@@ -192,6 +213,9 @@
 			         
     }
  	
+ 
+ 
+ 	
     // 서버와 연결을 끊었을 때
     function onClose(evt) {
     	
@@ -206,7 +230,21 @@
     	
         exit();
     });
+	
+    // 현재 시간 출력 함수
+    function formatAndDisplayDate() {
+            const currentDate = new Date();
+            const year = (currentDate.getFullYear() % 100).toString();
+            const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+            const day = ('0' + currentDate.getDate()).slice(-2);
+            const hours = ('0' + currentDate.getHours()).slice(-2);
+            const minutes = ('0' + currentDate.getMinutes()).slice(-2);
 
+            const formattedDate = "(" + year + "/" + month + "/" + day + " " + hours + "시" + minutes + "분)";
+            
+            return formattedDate;
+     }
+    
     // 퇴장 메세지 출력
     function exit() {
     	shouldUnload = false;
@@ -214,10 +252,10 @@
         type = "OUT";
         if(role=='<호스트>'){
         	
-	        sock.send("<span style='color:brown;'>"+ role +"</span><span id='OUT' style='padding:5px; color:red;'>${memberName}님 연결 해제</span>");
+	        sock.send("<span style='color:brown;'>"+ role +"</span><span id='OUT' style='padding:5px; color:red;'>${memberName}님 연결 해제</span><span id='OUT'>"+formatAndDisplayDate()+"</span>");
         } else {
         	
-	        sock.send("<span style='color:blue;'>"+ role +"</span><span id='OUT' style='padding:5px; color:red;'>${memberName}님 연결 해제</span>");
+	        sock.send("<span style='color:blue;'>"+ role +"</span><span id='OUT' style='padding:5px; color:red;'>${memberName}님 연결 해제</span><span id='OUTT'>"+formatAndDisplayDate()+"</span>");
         }
     }
     // 입장 메세지 출력

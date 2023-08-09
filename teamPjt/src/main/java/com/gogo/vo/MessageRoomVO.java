@@ -14,6 +14,8 @@ public class MessageRoomVO {
 	
 	private String roomId;
 	private String roomName;
+	private String memberId; // 방 개설자
+	
 	
 	private Set<WebSocketSession> sessions = new HashSet<>();
 	

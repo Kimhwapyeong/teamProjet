@@ -21,6 +21,7 @@ import org.springframework.web.socket.WebSocketSession;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gogo.mapper.MessageMapper;
 import com.gogo.vo.MemberVO;
+import com.gogo.vo.MessageRoomVO;
 import com.gogo.vo.MessageVO;
 import com.gogo.webSocket.EchoHandler;
 
@@ -57,7 +58,6 @@ public class MessageServiceImpl implements MessageService{
 	}
 	
 
-
 	@Override
 	public String getRoomId(String roomId) {
 		return messageMapper.getRoomId(roomId);
@@ -70,6 +70,15 @@ public class MessageServiceImpl implements MessageService{
 	@Override
 	public int insertMessageRoomCustom(String roomId) {
 		return messageMapper.insertMessageRoomCustom(roomId);
+	}
+	@Override
+	public List<MessageVO> getList(String roomId){
+		return messageMapper.getList(roomId);
+	}
+	
+	@Override
+	public String getSysdate() {
+		return messageMapper.getSysdate();
 	}
 	
 	@Override
@@ -101,14 +110,17 @@ public class MessageServiceImpl implements MessageService{
 			
 			System.out.println(memberId+"님 "+roomId+"번 채팅방 입장");
 			
-			String enter = memberId+"님 "+roomId+"번 채팅방 입장";
+			String enter = memberId+"님 "+roomId+"번 채팅방 입장 "
+					+ "<span>("+getSysdate()+")</span>";
 			
-			
+			List<MessageVO> messageHistory = getList(roomId);
 			
 			model.addAttribute("memberName", memberId);
 			model.addAttribute("enter", enter);
 			model.addAttribute("roomId", roomId);
+			model.addAttribute("messageHistory", messageHistory);
 			session.setAttribute("roomId", roomId);
+			
 			
 		} else {
 			
@@ -116,6 +128,18 @@ public class MessageServiceImpl implements MessageService{
 		
 
 	}
+	
+	
+	@Override
+	public void chatListGet(Model model) {
+		
+		
+		List<MessageRoomVO> messageRoomList = messageRoomList();
+		model.addAttribute("messageRoomList", messageRoomList);
+
+		
+	}
+	
 	
 	// chattingGet 오버로딩 
 	// EchoHandler에서 WebSocketSession과 겹쳐서  HttpSession을 직접 주입받을 수 없기 때문
@@ -182,6 +206,18 @@ public class MessageServiceImpl implements MessageService{
 		return result;
 
 	}
+	
+	@Override
+	public List<MessageRoomVO> messageRoomList() {
+		return messageMapper.messageRoomList();
+	}
+	
+	
+	
+	@Override
+	public String getMessageRoomOwner(String roomId) {
+		return messageMapper.getMessageRoomOwner(roomId);
+	}
 
 
 
@@ -189,4 +225,5 @@ public class MessageServiceImpl implements MessageService{
 
 
 
+	
 }

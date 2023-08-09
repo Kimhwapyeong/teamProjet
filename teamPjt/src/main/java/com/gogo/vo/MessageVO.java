@@ -12,6 +12,7 @@ public class MessageVO {
 	private String content;
 	private String regDate;
 	private String memberId;
+	private String memberRole;
 	private String roomId;
 
 }

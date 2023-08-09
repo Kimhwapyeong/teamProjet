@@ -1,6 +1,7 @@
 package com.gogo.service;
 
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.socket.WebSocketSession;
 
 import com.gogo.vo.MemberVO;
+import com.gogo.vo.MessageRoomVO;
 import com.gogo.vo.MessageVO;
 
 @Service
@@ -29,6 +31,13 @@ public interface MessageService {
 	public String getNewRoomId();
 	public boolean joinYN(MessageVO vo);
 	public boolean joinYN2(MessageVO vo);
-
+	
+	public String getSysdate();
+	public List<MessageVO> getList(String roomId);
+	
+	
+	public List<MessageRoomVO> messageRoomList();
+	public void chatListGet(Model model);
+	public String getMessageRoomOwner(String roomId);
 
 }

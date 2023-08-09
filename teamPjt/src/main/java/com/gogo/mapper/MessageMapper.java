@@ -11,6 +11,8 @@ public interface MessageMapper {
 	public int insertMessage(MessageVO vo);
 	public List<MessageVO> getList(String roomId);
 	
+	public String getSysdate();
+	
 	public int insertMessageRoom(); 
 	public int insertMessageRoomCustom(String roomId);
 	
@@ -22,5 +24,11 @@ public interface MessageMapper {
 	public int joinYN(MessageVO vo); // 입 퇴장 기록이 있는지 체크
 	public int joinYN2(MessageVO vo); // 입 퇴장 기록이 있는지 체크
 	
+	// TALK 가 두개 이상인 roomID 의 모든 정보 (방 개설자도..)
+	public List<MessageRoomVO> messageRoomList();
+	
+	
+	// 방 개설자 구하기
+	public String getMessageRoomOwner(String roomId);
 	
 }
