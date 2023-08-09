@@ -27,6 +27,7 @@ public class MainController {
 	@GetMapping("/main")
 	public void getMain(Model model) {
 		mainService.getMainList(model);
+		mainService.getPopStayList(model);
 	}
 	
 	// 임시 매핑용

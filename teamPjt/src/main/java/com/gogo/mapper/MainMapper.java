@@ -40,4 +40,6 @@ public interface MainMapper {
 
 	public String getStayNo(String memberId);
 	
+	public List<StayVO> getPopStayList();
+	
 }

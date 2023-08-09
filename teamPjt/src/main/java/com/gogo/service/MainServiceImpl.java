@@ -205,6 +205,12 @@ public class MainServiceImpl implements MainService{
 		model.addAttribute("stayNo", stayNo);
 		
 	}
+
+	@Override
+	public void getPopStayList(Model model) {
+		List<StayVO> listPopStay = mainMapper.getPopStayList();
+		model.addAttribute("listPopStay", listPopStay);
+	}
 	
 //	@Override
 //	public int roomFileupload(List<MultipartFile> files, FileuploadVO vo) {

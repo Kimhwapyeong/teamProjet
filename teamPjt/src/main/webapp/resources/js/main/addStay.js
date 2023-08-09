@@ -106,6 +106,11 @@ window.addEventListener('load', ()=>{
 			return;
 		} 
 		
+		if(!document.querySelectorAll('input[name=stayView]')[0].checked && !document.querySelectorAll('input[name=stayView]')[1].checked){
+			document.querySelector('input[name=stayView]').value = '';
+			document.querySelector('input[name=stayView]').checked=true;
+		}
+		
 		// 좌표를 받아오기 위해 주소 value 변수에 저장
 		let address = document.querySelector("#address").value;
 		console.log('address', address);

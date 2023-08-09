@@ -30,9 +30,11 @@ public interface MainService {
 
 	public int updateRoom(RoomVO vo, RoomOptionVO optionVO, List<MultipartFile> files);
 
-	void getMainList(Model model);
+	public void getMainList(Model model);
 
 	public void getStayNo(String memberId, Model model);
+	
+	public void getPopStayList(Model model);
 	
 //	public int roomFileupload(List<MultipartFile> files
 //			, FileuploadVO vo) ;
