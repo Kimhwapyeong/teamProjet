@@ -128,8 +128,7 @@
                 </li>
                 <li>
                     <a id="kakaoIdLogin" class="btn_kakao" 
-                    href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=7801f55d59a73a55013d6f22a1a3e9a1
-                    &redirect_uri=http://localhost:8080/login/kakaoAction">카카오</a>
+                    href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=7801f55d59a73a55013d6f22a1a3e9a1&redirect_uri=http://localhost:8080/login/kakaoAction">카카오</a>
                 </li>
             </ul>
           </div>

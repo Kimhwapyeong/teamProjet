@@ -14,7 +14,7 @@
 		select role_id from memberrole  where memberId = #{memberId}	
 	</select>
 	
-	<!-- 권한 -->
+	<!-- 회원 권한 저장-->
 	<insert id="insertMemberRole" parameterType="com.gogo.vo.MemberRoleVO">
 	    INSERT INTO MEMBERROLE (memberId, role_id)
 	    VALUES (#{memberId}, #{role_id})

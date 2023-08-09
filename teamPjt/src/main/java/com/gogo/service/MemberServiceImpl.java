@@ -2,6 +2,16 @@ package com.gogo.service;
 
 
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.HashMap;
+
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -9,6 +19,9 @@ import org.springframework.stereotype.Service;
 
 import com.gogo.mapper.MemberMapper;
 import com.gogo.vo.MemberVO;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -141,11 +154,152 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 	
-
-
+	// 카카오 API - Access token 요청
+	// 화면에서 파라미터로 넘겨준 code값을 받아오고 POST로 요청을 보내서 토큰을 발급받기 
+	 public String getAccessToken(String authorize_code) {
+	     System.out.println("----------------------------토큰발급---------------------------");
+	     String access_Token = "";
+	     String refresh_Token = "";
+	     
+	     //토큰발급 요청을 보낼 주소
+	     String reqURL = "https://kauth.kakao.com/oauth/token";
+	        
+	        try {
+	            //URL객체 생성
+	            URL url = new URL(reqURL);
+	            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	            
+	            // POST 요청을 위해 기본값이 false인 setDoOutput을 true로 
+	            //.setDoOutput(true): URLConnection이 서버에 데이터출력할 수 있는 지의 여부를 설정
+	            conn.setRequestMethod("POST");
+	            conn.setDoOutput(true);
+	            
+	            // POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
+	            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+	            StringBuilder sb = new StringBuilder();
+	            
+	            sb.append("grant_type=authorization_code");
+	            sb.append("&client_id=7801f55d59a73a55013d6f22a1a3e9a1");
+	            sb.append("&redirect_uri=http://localhost:8080/login/kakaoAction");
+	            sb.append("&code=" + authorize_code);
+	            bw.write(sb.toString());
+	            bw.flush();
+	            
+	            // 결과코드 200이면 정상
+	            int responseCode = conn.getResponseCode();
+	            System.out.println("responseCode : " + responseCode);
+	 
+	            //요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
+	            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	            String line = "";
+	            String result = "";
+	            
+	            // 응답 데이터 반복문 돌려서 line에 담긴 데이터를 result로 만들기
+	            while ((line = br.readLine()) != null) {
+	                result += line;
+	            }
+	            System.out.println("response body : " + result);
+	            
+	            // Gson 라이브러리에 포함된 클래스로 JSON 파싱 객체 생성
+	            JsonParser jsonParser = new JsonParser();
+	            JsonElement jsonElement = jsonParser.parse(result);
+	            // jsonElement : 응답받은 데이터 저장
+	            
+	            access_Token = jsonElement.getAsJsonObject().get("access_token").getAsString();
+	            refresh_Token = jsonElement.getAsJsonObject().get("refresh_token").getAsString();
+	            
+	            System.out.println("access_token : " + access_Token);
+	            System.out.println("refresh_token : " + refresh_Token);
+	            
+	            br.close();
+	            bw.close();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        } 
+	        
+	        return access_Token;
+	 }
+	 
+	  // 카카오 API - Access token보내 사용자 정보 요청 
+	  public HashMap<String, Object> kakaoInfo(String access_Token) {
+	  System.out.println("-------------------------사용자 정보 보기---------------------------");  
+	 
+	  // 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
+		HashMap<String, Object> kakaoInfo = new HashMap<String, Object>();
+	 
+	  // 토큰을 이용하여 카카오에 회원의 정보를 요청 
+	  // v1을 통한 '사용자 정보 요청'은 만료됨
+	  String reqURl = "https://kapi.kakao.com/v2/user/me";
+	 
+	  try {
+	  // URL 객체 생성
+	  URL url = new URL(reqURl);
+		HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+		conn.setRequestMethod("POST");
+		// 연결 완료
+	
+		// 헤더 필드 읽기 
+		// 요청에 필요한 Header에 포함 될 내용 
+		// 문서에서 지정해둔 양식 
+		conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+	
+		// 응답코드 확인
+		int responseCode = conn.getResponseCode(); 
+		System.out.println("responseCode: "+ responseCode);
+	
+		// 입력스트림을 가지고 오고 데이터 읽기
+		// inputStream은 데이터를 바이트의 배열로 읽어 오는 low-level의 메서드
+		// 따라서 데이터를 문자 '데이터'로 읽기 위해서 InputStreamReader로 매핑
+		// 데이터를 문자'열'로 읽기 위해서 inputStream을 BufferedReader로 매핑하기
+		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));
+	
+		String line="";
+		String result ="";
+	
+		while((line= br.readLine()) != null) {
+		result += line;
+		}
+		System.out.println("response body: " + result);
+	
+		// Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
+	    JsonParser jsonParser = new JsonParser();
+	    JsonElement jsonElement = jsonParser.parse(result);
+	    // jsonElement : 응답받은 데이터 저장
+	    
+	    // JsonElement.getAsJsonObject().get("key value").getAs타입(); 의 형태로 파싱
+	    // 응답데이터(JSON)
+	    JsonObject properties = jsonElement.getAsJsonObject().get("properties").getAsJsonObject();
+	    JsonObject kakao_account = jsonElement.getAsJsonObject().get("kakao_account").getAsJsonObject();
+	    Long memberId = jsonElement.getAsJsonObject().get("id").getAsLong();
+	    
+	    // 파싱된 json데이터를 string에 담기
+	    // properties
+	    String nickname = properties.getAsJsonObject().get("nickname").getAsString();
+	  
+	    //kakao_account
+	    String name = kakao_account.getAsJsonObject().get("name").getAsString();
+	    String email = kakao_account.getAsJsonObject().get("email").getAsString();
+	    String gender = kakao_account.getAsJsonObject().get("gender").getAsString();
+	    String birthday = kakao_account.getAsJsonObject().get("birthday").getAsString();
+	    String age_range = kakao_account.getAsJsonObject().get("age_range").getAsString();
+	    
+	    System.out.println("memberId: "+ memberId);
+	    
+	    //setter이용하여 memberVO에 담기 
+	    
+	    //kakaoInfo.setMemberName(name);
+	    //kakaoInfo.setMemberEmail(email);
+	    //kakaoInfo.setGender(gender);
+	    //kakaoInfo.setBirthday(birthday);
+	    //kakaoInfo.setAge_group(age_range);
+	
+		} catch (IOException  e) {
+			e.printStackTrace();
+		}
+		  return kakaoInfo;
+		  }
 	
 
-	
 }
 
 

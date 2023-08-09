@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import javax.servlet.http.HttpServletRequest;
 
 import com.gogo.service.MemberService;
 import com.gogo.vo.MemberRoleVO;
@@ -213,16 +214,19 @@ public class MemberController extends CommonRestController {
 			    String newPwd = RandomStringUtils.randomAlphanumeric(10);
 			    // 암호화
 			    String enpassword = encryptPassword(newPwd);
-			    // 패스워드 업데이트
+			    
+			    // 암호화된 패스워드 생성
 			    member.setPw(enpassword);
 			    
 			    // 비밀번호 업데이트
 			    memberService.passwordUpdate(member);
 			    
+			    // 암호화 전 패스워드 생성
 			    member.setPw(newPwd);
 			    
 			    //메일 전송
 			    memberService.sendEmail(member,"findPwAction");
+			    
 			    model.addAttribute("newPwd", newPwd);
 			 
 			} catch (Exception e) {
@@ -299,25 +303,41 @@ public class MemberController extends CommonRestController {
 	    return result;
 	}
 	
-	// 카카오 로그인
+	// 카카오 로그인 
 	@GetMapping("kakaoAction")
 	public String kakaoAction() {
 		return "/login/kakaoAction";
 	}
 	
-	
-	
-	// 카카오 로그인 (인가 코드 받기, 토큰 받기, 로그인 처리)
-	 @RequestMapping(value = "/login/kakaoAction")
-	    public String login(@RequestParam("5pQ0Yso5Diig0ake3Z24") String code, HttpSession session) throws IOException {
-	            System.out.println(code);
-	            
-	        return "/login/kakaoAction";
-	    }
-	
-
-
-	
+	// 카카오 로그인 (인가 코드 받기, 토큰 받기, 로그인 처리 access_token과 refresh_token
+	@PostMapping("/login/kakaoAction")
+    public String kakaoSave(@RequestParam(value = "code", required = false) String code, 
+    HttpSession session,  HttpServletRequest request) throws IOException {
+		 System.out.println(code);
+		        
+		 //토큰 발급 받기
+		 String access_Token = memberService.getAccessToken(code);
+		
+		 //사용자 정보 가지고 오기 
+		 MemberVO kakaoInfo = memberService.KakaoInfo(access_Token);
+		 
+		 //세션 형성 + request 내장 객체 가지고 오기
+		 session = request.getSession();
+		
+		 System.out.println("accessToken: "+access_Token);
+		 System.out.println("code:"+ code);
+		 System.out.println("gender: "+ kakaoInfo.getGender());
+		
+		
+		 //세션에 담기
+		 if (kakaoInfo.getMemberName() != null) {
+		      session.setAttribute("memberName", kakaoInfo.getMemberName());
+		      session.setAttribute("access_Token", access_Token);
+		      session.setAttribute("memberId", kakaoInfo.getMemberId());
+		    }
+		
+		    return "/login/kakaoAction";
+		}
 
 }
 

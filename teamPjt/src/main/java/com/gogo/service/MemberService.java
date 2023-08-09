@@ -2,9 +2,10 @@ package com.gogo.service;
 
 
 
+import java.io.IOException;
+
 import org.springframework.stereotype.Service;
 
-import com.gogo.vo.MemberRoleVO;
 import com.gogo.vo.MemberVO;
 
 @Service
@@ -40,6 +41,13 @@ public interface MemberService {
 
 	// 회원 역할 저장
 	public void insertMemberRole(String memberId, String role_id);
+	
+	// 카카오 로그인 토큰 
+	public String getAccessToken(String authorize_code);
+
+	// 카카오 회원 정보 조회 
+	public MemberVO KakaoInfo(String access_Token)throws IOException;
+	
 
 
 
