@@ -126,4 +126,6 @@ profile/
 
 !stay/*.jsp
 
+!roomInfo.jsp
+
 FileuploadPath.java
