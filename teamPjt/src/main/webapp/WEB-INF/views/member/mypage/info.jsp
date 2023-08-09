@@ -39,7 +39,6 @@
 		     }
 		     
 		     if(newpww.value == newpwCheck.value){
-		    	 
 		    	 infoFrm.submit();
 		    	 
 		     } else{
@@ -50,7 +49,34 @@
 	       		 return;
 		     }
 
-    	});  	
+    	});
+	    
+	    
+	    $("#newpww").on("focusout", function() {
+	        checkPWMatch();
+	    });
+
+	    function checkPWMatch() {
+	        var pw = $("#newpww").val();
+	        var num = pw.search(/[0-9]/g);
+	        var eng = pw.search(/[A-Za-z]/g);
+	        var spe = pw.search(/[`~!@#\$%^&*|₩'";:₩\/?]/g);
+
+	        if (pw.length < 8 || pw.length > 20) {
+	        	signupMsg.innerHTML = "8자리 ~ 20자리 이내로 입력해주세요.";
+	            return false;
+	        } else if (pw.search(/\s/) != -1) {
+	        	signupMsg.innerHTML = "비밀번호는 공백 없이 입력해주세요.";
+	            return false;
+	        } else if (num < 0 || eng < 0 || spe < 0) {
+	        	signupMsg.innerHTML = "영문 대/소문자, 숫자, 특수문자를 혼합하여 입력해주세요.";
+	            return false;
+	        } else {
+	        	signupMsg.innerHTML = "";
+	            return true;
+	        }
+	    }
+
 		
 	    
 	    // 비밀번호 보기
