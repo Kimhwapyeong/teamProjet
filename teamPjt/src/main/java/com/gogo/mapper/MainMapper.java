@@ -37,5 +37,7 @@ public interface MainMapper {
 	public int deleteRoomPhoto(RoomVO vo);
 
 	public List<StayVO> getMainList();
+
+	public String getStayNo(String memberId);
 	
 }

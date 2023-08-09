@@ -2,6 +2,8 @@ package com.gogo.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,7 +52,11 @@ public class MainController {
 	
 	// 임시 매핑용
 	@GetMapping("/addroom")
-	public String addRoom() {
+	public String addRoom(HttpSession session, Model model) {
+		
+		String memberId = (String)(session.getAttribute("memberId"));
+		mainService.getStayNo(memberId, model);
+		System.out.println("memberId : " + memberId);
 		
 		return "/stay/addroom";
 	}

@@ -197,7 +197,7 @@
 					</li>
 				</ul>
 			</div>
-			<input type="hidden" name="stayNo" value="1">
+			<input type="hidden" name="stayNo" value="${ empty stayNo ? '1' : stayNo }">
 			<div class="bt_btns">
 				<button type="submit" class="btn_bk" id="btnAddRoom">등록하기</button>
 				<button type="reset" class="btn_bk">초기화</button>

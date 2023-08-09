@@ -198,6 +198,13 @@ public class MainServiceImpl implements MainService{
 		List<StayVO> listStay = mainMapper.getMainList();
 		model.addAttribute("listStay", listStay);
 	}
+
+	@Override
+	public void getStayNo(String memberId, Model model) {
+		String stayNo = mainMapper.getStayNo(memberId);
+		model.addAttribute("stayNo", stayNo);
+		
+	}
 	
 //	@Override
 //	public int roomFileupload(List<MultipartFile> files, FileuploadVO vo) {

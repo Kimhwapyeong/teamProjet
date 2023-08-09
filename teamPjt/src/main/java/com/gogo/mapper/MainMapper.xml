@@ -115,4 +115,8 @@
 		where rn between 1 and 10
 	</select>
 	
+	<select id="getStayNo" resultType="String">
+		select stayno from stay where memberid = #{memberId}
+	</select>
+	
 </mapper>
