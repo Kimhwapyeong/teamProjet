@@ -87,7 +87,7 @@ public interface mypageMapper {
 	public int memberQuit(String memberId);
 	
 	// 관심 스테이
-	public List<Map<String, String>> likestay();
+	public List<Map<String, String>> likestay(String memberId);
 
 	// ▶▶▶  함께  * 번의 여행을 했어요 ▶▶▶
 	public int travelCnt(String memberId);

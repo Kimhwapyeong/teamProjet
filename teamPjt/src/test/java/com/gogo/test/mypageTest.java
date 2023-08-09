@@ -119,8 +119,8 @@ public class mypageTest {
 	}
 	
 	@Test
-	public void likestay() {
-		List<Map<String, String>> list = (List<Map<String, String>>) mapper.likestay();
+	public void likestay(String memberId) {
+		List<Map<String, String>> list = (List<Map<String, String>>) mapper.likestay(memberId);
 		log.info("list : " + list);
 	}
 	

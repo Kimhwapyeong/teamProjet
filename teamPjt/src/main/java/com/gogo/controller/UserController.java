@@ -73,11 +73,11 @@ public class UserController extends CommonRestController{
 	
 	// 관심 스테이
 	@GetMapping(value = {"likestay", "travelCnt"})
-	public void likestay(Model model, HttpServletRequest request) {
-		service.likestay(model);
-		
+	public void likestay(String memberid, Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
+		
 		String memberId = (String)session.getAttribute("memberId");
+		service.likestay(memberId, model);
 		int res = service.travelCnt(memberId);
 		model.addAttribute("travelCnt", res);
 	}
