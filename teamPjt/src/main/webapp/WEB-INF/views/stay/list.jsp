@@ -193,26 +193,49 @@
             })
 
 
+           
+
+
+            /* -------------------------------------------------------------- */
+            let member = document.getElementById('memberId').value;
+            console.log(member);
+
             //좋아요
             let likeBtn = document.querySelectorAll('.flist_box .btn_like');
-            likeBtn.forEach(button => {
+            likeBtn.forEach((button,index) => {
                 button.addEventListener('click', () => {
-                    likeBtn.forEach(otherButton => {
-                        //누른 버튼의 index 번호가 같고
-                        if(otherButton === button ){
-                            //클래스가 포함되어 있으면
-                            if(button.classList.contains('on')){
-                                button.classList.remove('on');
-                            }else{
-                                button.classList.add('on');
-
-                            }
-                        }
-                    })
+                	if(member === null || member === ""){
+                		alertPopOn("로그인 후 이용하세요");
+                    }else{
+	                    likeBtn.forEach(otherButton => {
+		                    //누른 버튼의 index 번호가 같고
+		                    if(otherButton === button){
+		                    	//클래스가 포함되어 있으면
+		                        if(!button.classList.contains('on')){
+		                        	button.classList.add('on');
+		                        }else{
+		                            button.classList.remove('on');
+		                    	}
+	                    	}
+	                    })
+                    }
                 })
             })
-
-
+            
+            
+            // 모달창 띄우기
+        	function alertPopOn(msg){
+        		if(msg != ''){
+        			alertTxt.innerHTML=msg;
+        			alertPop.style.display='block';
+        		}
+        	}
+            /* -------------------------------------------------------------- */
+            
+            
+            
+            
+            
 			// 프로모션 보여줬다 사라지기            
             const messageElement = document.getElementById('rightnow');
 			function showElement() {
@@ -289,25 +312,59 @@
         	document.addEventListener('DOMContentLoaded', function() {
         	  	
         		
+        		
+        		
+        		
+        		
+        		
 	        		// 슬라이드 이미지
 		           	//let slideImgList = document.querySelectorAll('.swiper-wrapper'); // 슬라이드 이미지 인덱스 선택하기
 		           	//let slideImg = slideImgList.querySelectorAll('li'); // 선택된 index의 이미지
-		           	let slideBtn = document.querySelectorAll('.swiper-button-next');
-		           	slideBtn.forEach((button, index) => {
-		                button.addEventListener('click', () => {
+ 		           	let slideBtn = document.querySelectorAll('.swiper-button-next');
+		           	let idx = 0;
+		           	slideBtn.forEach((button, index) => { // 슬라이드 버튼의 인덱스 0
+		                button.addEventListener('click', () => { // 인덱스가 0인 슬라이드 버튼을 눌렀을 떄
 		                    console.log(index);
-		                    let slideImgList = document.querySelectorAll('.swiper-wrapper')[index];
-		                    let slideImg = slideImgList.querySelectorAll('li');
-		                    slideImg.forEach()
-		                    button[index].addEventListener('click', () => {
+		                    let slideImgList = document.querySelectorAll('.swiper-wrapper')[index]; // 그 해당하는 인덱스의 next버튼의 이미지가 보이는 칸
+		                   	//console.log(slideImgList);
+		                    let slideImg = slideImgList.querySelectorAll('li'); // 그 칸의 이미지
+		                    //console.log(slideImg);
 		                    	
-		                    })
+		                    idx = (idx + 1) % slideImg.length;
+		                    
+		                    
+		                    console.log(idx);
+		                    slideImgList.innerHTML = slideImg[idx].outerHTML;
 		                })
 		            })
         		
-        			
-        		
-        		
+		            /* let slideBtns = document.querySelectorAll('.swiper-button-next');
+		            let slideImgLists = document.querySelectorAll('.swiper-wrapper');
+		            let currentIdx = 0;
+
+		            slideBtns.forEach((button, index) => {
+		                button.addEventListener('click', () => {
+		                    let slideImgList = slideImgLists[index];
+		                    let slideImgs = slideImgList.querySelectorAll('li');
+		                    
+		                    currentIdx = (currentIdx + 1) % slideImgs.length;
+		                    
+		                    slideImgLists.forEach((imgList, listIndex) => {
+		                        imgList.innerHTML = listIndex === index ? slideImgs[currentIdx].outerHTML : '';
+		                    });
+		                });
+		            }); */
+		            
+		            
+		            
+		            
+		            
+		            
+		            
+		            
+		            
+		            
+		            
         		
         		
         	  		// 오른쪽 카테고리
@@ -500,6 +557,64 @@
 	        		}
         			stayList.innerHTML += pageBlock;
         		}
+        	
+        	
+        	
+        	
+        	
+        	
+        	
+        	let member = document.getElementById('memberId').value;
+            console.log(member);
+
+            //좋아요
+            let likeBtn = document.querySelectorAll('.flist_box .btn_like');
+            likeBtn.forEach((button,index) => {
+                button.addEventListener('click', () => {
+                	if(member === null || member === ""){
+                		alertPopOn("로그인 후 이용하세요");
+                    }else{
+	                    likeBtn.forEach(otherButton => {
+		                    //누른 버튼의 index 번호가 같고
+		                    if(otherButton === button){
+		                    	//클래스가 포함되어 있으면
+		                        if(!button.classList.contains('on')){
+		                        	button.classList.add('on');
+		                        	
+		                        	let data = {
+		    	        					stayNo : document.querySelectorAll('.btn_like')[index].value,
+		    	        					memberId: memberId
+		    	        			      };
+		                        	
+		                        	fetch("/stst/insertLike", {
+			        			        method : 'post', 
+			        			        headers : {
+			        			          'Content-Type': 'application/json'
+			        			        },
+			        			        body : JSON.stringify(data)
+			        			      })
+			        			      .then(response => response.json())
+			        			      //.then(map => keywordList(map));
+			        			      .then(map => {console.log(map);});
+		                        }else{
+		                            button.classList.remove('on');
+		                    	}
+	                    	}
+	                    })
+                    }
+                })
+            })
+            
+            
+            // 모달창 띄우기
+        	function alertPopOn(msg){
+        		if(msg != ''){
+        			alertTxt.innerHTML=msg;
+        			alertPop.style.display='block';
+        		}
+        	}
+        	
+	           
         	});
     </script>
 </head>
@@ -510,6 +625,7 @@
         <div class="container sub_title">
             <div class="tit">FIND STAY</div>
             <div class="txt">머무는 것 자체로 여행이 되는 공간</div>
+            <input type="hidden" value="${sessionScope.memberId}" id="memberId">
         </div>
         <form name="searchFrom" id="searchFrom">
             <div class="container findstay_filter" role="presentation">
@@ -1076,7 +1192,7 @@
 							</ul>
 						</div>
 					<!-- </a> -->
-					<button type="button" class="btn_like "><span>관심스테이</span></button>
+					<button type="button" class="btn_like " value="${list.stayNo }"><span>관심스테이</span></button>
 				</div>
 			</c:forEach>
 

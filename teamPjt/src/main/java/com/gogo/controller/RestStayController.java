@@ -44,6 +44,11 @@ public class RestStayController {
 		List<StayVO> list = stayService.stayKeywordList(vo, model);
 		map.put("list", list);
 		return map;
-		
+	}
+	
+	@PostMapping("insertLike")
+	public Map<String, Object> insertLike(@RequestBody StayVO vo, Model model){
+		Map<String, Object> map = new HashMap<String, Object>();
+		return map;
 	}
 }

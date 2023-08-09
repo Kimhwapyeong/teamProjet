@@ -23,4 +23,6 @@ public interface StayMapper {
 	public Map<String, String> roomInfoPageList(@Param("stayName")String stayName, @Param("roomName")String roomName);
 	
 	public List<RoomPhotoVO> roomInfoPagePic(@Param("stayName")String stayName, @Param("roomName")String roomName);
+	
+	
 }

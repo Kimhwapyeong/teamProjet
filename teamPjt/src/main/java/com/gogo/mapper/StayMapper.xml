@@ -207,7 +207,9 @@
 			</if>			
 	</select>
 	
-	
+	<insert id="insertLike">
+		insert into likestay values(#{stayNo}, #{memberId});
+	</insert>
 	
 	
 	
