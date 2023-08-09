@@ -10,8 +10,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -222,11 +220,10 @@ public class MemberServiceImpl implements MemberService {
 	 }
 	 
 	  // 카카오 API - Access token보내 사용자 정보 요청 
-	  public HashMap<String, Object> kakaoInfo(String access_Token) {
+	  public MemberVO KakaoInfo(String access_Token)throws IOException{
 	  System.out.println("-------------------------사용자 정보 보기---------------------------");  
 	 
-	  // 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
-		HashMap<String, Object> kakaoInfo = new HashMap<String, Object>();
+	  MemberVO kakaoInfo = new MemberVO();
 	 
 	  // 토큰을 이용하여 카카오에 회원의 정보를 요청 
 	  // v1을 통한 '사용자 정보 요청'은 만료됨
@@ -245,7 +242,7 @@ public class MemberServiceImpl implements MemberService {
 		conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 	
 		// 응답코드 확인
-		int responseCode = conn.getResponseCode(); 
+		int responseCode = conn.getResponseCode(); // set? get?
 		System.out.println("responseCode: "+ responseCode);
 	
 		// 입력스트림을 가지고 오고 데이터 읽기
@@ -287,28 +284,17 @@ public class MemberServiceImpl implements MemberService {
 	    System.out.println("memberId: "+ memberId);
 	    
 	    //setter이용하여 memberVO에 담기 
-	    
-	    //kakaoInfo.setMemberName(name);
-	    //kakaoInfo.setMemberEmail(email);
-	    //kakaoInfo.setGender(gender);
-	    //kakaoInfo.setBirthday(birthday);
-	    //kakaoInfo.setAge_group(age_range);
+	    kakaoInfo.setMemberName(name);
+	    kakaoInfo.setMemberEmail(email);
+	    kakaoInfo.setGender(gender);
+	    kakaoInfo.setBirthday(birthday);
+	    kakaoInfo.setAge_group(age_range);
 	
-		} catch (IOException  e) {
+		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
 		  return kakaoInfo;
 		  }
-	@Override
-	public MemberVO KakaoInfo(String access_Token) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
-	public List<String> getMemberRole(String memberId){
-		return memberMapper.getMemberRole(memberId);
-	}
 	
 
 }
