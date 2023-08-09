@@ -3,6 +3,7 @@ package com.gogo.service;
 
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,10 @@ import com.gogo.vo.MemberVO;
 
 @Service
 public interface MemberService {
-
+	
+	
+	public List<String> getMemberRole(String memberId);
+	
 	// 로그인
 	public MemberVO login(MemberVO member);
 	

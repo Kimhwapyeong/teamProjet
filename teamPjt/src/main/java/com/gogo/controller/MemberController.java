@@ -2,6 +2,7 @@ package com.gogo.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -61,6 +62,9 @@ public class MemberController extends CommonRestController {
 		
 		member = memberService.login(member);
 		MemberVO user = memberService.selectOne(member);
+		List<String> role = memberService.getMemberRole(member.getMemberId());
+		
+		user.setRole(role);
 		
 		if(member != null) {
 			session.setAttribute("member", user);

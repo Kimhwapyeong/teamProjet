@@ -17,7 +17,7 @@
  
     <div style="position: absolute; top: 80px; width: 100%; text-align: center; padding: 38px; border-bottom: 1px solid rgb(242, 242, 242); background-color: white;">
         <p style="letter-spacing: 15px; text-indent: 15px; margin-bottom: 12px; font-family: Lato-Bold;">MESSAGE</p>
-        <p style="font-size: 12px;">호스트와 대화를 나눠보세요.</p>
+        <p style="font-size: 12px;">호스트와 대화를 나눠보세요.${sessionScope.role_id}</p>
     </div>
     <div id="contents" style="position: absolute; top:200px; width: 100%; text-align: center;">
         <div>
@@ -89,7 +89,13 @@
 
 <script type="text/javascript">
     var message = '';
-    var role = "<유저>";
+    var role = '';
+    if('${sessionScope.role_id}'=='[host]'){
+    	role = '<호스트>';
+    } else {
+    	role = '<유저>';
+    }
+    
     var memberId = '${sessionScope.memberId}';
     var content = '';
     var type = '';
@@ -138,8 +144,13 @@
     // 메시지 전송
     function sendMessage() {
        
-        
-        sock.send("${memberName}님의 메세지 : <span style='color:black;'>"+$("#message").val()+"<span>");
+    	if(role=='<유저>'){
+    		
+	        sock.send("<span style='color:blue;'>"+ role +"</span>${memberName}님의 메세지 : <span style='color:black;'>"+$("#message").val()+"<span>");
+    	} else {
+    		
+	        sock.send("<span style='color:brown;'>"+ role +"</span>${memberName}님의 메세지 : <span style='color:black;'>"+$("#message").val()+"<span>");
+    	}
     }
 
  // 서버로부터 메시지를 받았을 때
@@ -175,8 +186,10 @@
         };
         
         	// 채팅 메세지 출력
-           $("#chatList").append("<span style='color:blue;'>"+ role + "</span><span style='color:skyblue; font-weight:bold;'>" + message + "</span><br>");
-            
+			
+		           $("#chatList").append("<span style='font-weight:bold;'>" + message + "</span><br>");
+			
+			         
     }
  	
     // 서버와 연결을 끊었을 때
@@ -199,13 +212,25 @@
     	shouldUnload = false;
         console.log('exit() 함수가 실행됩니다.');
         type = "OUT";
-        sock.send("<span id='OUT' style='padding:5px; color:red;'>${memberName}님 연결 해제</span>");
+        if(role=='<호스트>'){
+        	
+	        sock.send("<span style='color:brown;'>"+ role +"</span><span id='OUT' style='padding:5px; color:red;'>${memberName}님 연결 해제</span>");
+        } else {
+        	
+	        sock.send("<span style='color:blue;'>"+ role +"</span><span id='OUT' style='padding:5px; color:red;'>${memberName}님 연결 해제</span>");
+        }
     }
     // 입장 메세지 출력
  	function sendEnterMessage() {
     setTimeout(function() {
     	type ='ENTER'
-        sock.send('<span id="ENTER" style="color:red">${enter}</span>');
+    	if(role=='<호스트>'){
+    		
+	        sock.send("<span style='color:brown;'>"+ role +'</span><span id="ENTER" style="color:red">${enter}</span>');
+    	} else {
+    		
+	        sock.send("<span style='color:blue;'>"+ role +'</span><span id="ENTER" style="color:red">${enter}</span>');
+    	}
     }, 1000);
 
     // 한번 동작 후 이벤트 핸들러를 제거합니다.

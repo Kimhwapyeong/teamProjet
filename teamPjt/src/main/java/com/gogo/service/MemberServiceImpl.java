@@ -11,6 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -298,6 +299,16 @@ public class MemberServiceImpl implements MemberService {
 		}
 		  return kakaoInfo;
 		  }
+	@Override
+	public MemberVO KakaoInfo(String access_Token) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public List<String> getMemberRole(String memberId){
+		return memberMapper.getMemberRole(memberId);
+	}
 	
 
 }
