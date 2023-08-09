@@ -204,12 +204,24 @@
 			</if>			
 			<if test='category != null and "너랑 가고싶어".equals(category)'>
 				and badge = 'HOT'
-			</if>			
+			</if>	
+					
 	</select>
 	
+	<!-- 로그인 할 회원 좋아요 넣기 -->
 	<insert id="insertLike">
-		insert into likestay values(#{stayNo}, #{memberId});
+		insert into likestay values(#{stayNo}, #{memberId})
 	</insert>
+	
+	<!-- 좋아요 누른 리스트 -->
+	<select id="likeId" resultType="com.gogo.vo.StayVO">
+		select stayno from likestay where memberid = #{memberId}
+	</select>
+	
+	<!-- 로그인 한 좋아요 취소 -->
+	<delete id="deleteLike">
+		delete from likestay where memberid = #{memberId} and stayno = #{stayNo}
+	</delete>
 	
 	
 	

@@ -192,7 +192,7 @@
                 }
             })
 
-
+			
            
 
 
@@ -213,8 +213,40 @@
 		                    	//클래스가 포함되어 있으면
 		                        if(!button.classList.contains('on')){
 		                        	button.classList.add('on');
+		                        	
+		                        	let data = {
+		    	        					stayNo : document.querySelectorAll('.btn_like')[index].value,
+		    	        					memberId: member
+		    	        			      };
+		                        	
+		                        	fetch("/stst/insertLike", {
+			        			        method : 'post', 
+			        			        headers : {
+			        			          'Content-Type': 'application/json'
+			        			        },
+			        			        body : JSON.stringify(data)
+			        			      })
+			        			      .then(response => response.json())
+			        			      //.then(map => keywordList(map));
+			        			      .then(map => {console.log(map);});
 		                        }else{
 		                            button.classList.remove('on');
+		                            
+		                            let data = {
+		    	        					stayNo : document.querySelectorAll('.btn_like')[index].value,
+		    	        					memberId: member
+		    	        			      };
+		                        	
+		                        	fetch("/stst/deleteLike", {
+			        			        method : 'post', 
+			        			        headers : {
+			        			          'Content-Type': 'application/json'
+			        			        },
+			        			        body : JSON.stringify(data)
+			        			      })
+			        			      .then(response => response.json())
+			        			      //.then(map => keywordList(map));
+			        			      .then(map => {console.log(map);});
 		                    	}
 	                    	}
 	                    })
@@ -309,6 +341,9 @@
 	           	
         	};
         
+        	
+        	
+        	
         	document.addEventListener('DOMContentLoaded', function() {
         	  	
         		
@@ -564,7 +599,7 @@
         	
         	
         	
-        	let member = document.getElementById('memberId').value;
+        	/* let member = document.getElementById('memberId').value;
             console.log(member);
 
             //좋아요
@@ -583,7 +618,7 @@
 		                        	
 		                        	let data = {
 		    	        					stayNo : document.querySelectorAll('.btn_like')[index].value,
-		    	        					memberId: memberId
+		    	        					memberId: member
 		    	        			      };
 		                        	
 		                        	fetch("/stst/insertLike", {
@@ -603,7 +638,7 @@
 	                    })
                     }
                 })
-            })
+            }) */
             
             
             // 모달창 띄우기
@@ -1191,12 +1226,20 @@
 								</div>
 							</ul>
 						</div>
-					<!-- </a> -->
-					<button type="button" class="btn_like " value="${list.stayNo }"><span>관심스테이</span></button>
+						<c:if test="${sessionScope.memberId == null}">
+							<button type="button" class="btn_like " value="${list.stayNo }"><span>관심스테이</span></button>
+						</c:if>
+						<c:if test="${likeList != null and sessionScope.memberId != null}">
+							<button type="button" class="btn_like " value="${list.stayNo }"><span>관심스테이</span></button>
+							<c:forEach items="${likeList}" var="likeList" step="1">
+								<c:if test="${likeList.stayNo eq  list.stayNo}" var="res">
+									<button type="button" class="btn_like on" value="${list.stayNo }"><span>관심스테이</span></button>
+								</c:if>
+							</c:forEach>
+						</c:if>
 				</div>
 			</c:forEach>
-
-
+	
 
 			<!-- 페이지 -->
 			<div class="paging false">

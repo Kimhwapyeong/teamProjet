@@ -25,4 +25,10 @@ public interface StayService {
 	Map<String, String> roomInfoPageList(@Param("stayName")String stayName, @Param("roomName")String roomName, Model model);
 	
 	List<RoomPhotoVO> roomInfoPagePic(@Param("stayName")String stayName, @Param("roomName")String roomName, Model model);
+	
+	int insertLike(StayVO vo);
+	
+	List<StayVO> likeId(StayVO vo, Model model);
+	
+	int deleteLike(StayVO vo);
 }

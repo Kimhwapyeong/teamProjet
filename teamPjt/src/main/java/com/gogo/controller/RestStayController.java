@@ -49,6 +49,14 @@ public class RestStayController {
 	@PostMapping("insertLike")
 	public Map<String, Object> insertLike(@RequestBody StayVO vo, Model model){
 		Map<String, Object> map = new HashMap<String, Object>();
+		int res = stayService.insertLike(vo);
+		return map;
+	}
+	
+	@PostMapping("deleteLike")
+	public Map<String, Object> deleteLike(@RequestBody StayVO vo, Model model){
+		Map<String, Object> map = new HashMap<String, Object>();
+		int res = stayService.deleteLike(vo);
 		return map;
 	}
 }

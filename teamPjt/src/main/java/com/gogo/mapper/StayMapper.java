@@ -24,5 +24,9 @@ public interface StayMapper {
 	
 	public List<RoomPhotoVO> roomInfoPagePic(@Param("stayName")String stayName, @Param("roomName")String roomName);
 	
+	public int insertLike(StayVO vo);
 	
+	public List<StayVO> likeId(StayVO vo);
+	
+	public int deleteLike(StayVO vo);
 }

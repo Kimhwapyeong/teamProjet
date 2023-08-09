@@ -78,4 +78,34 @@ public class roomTest {
 		log.info("=========");
 		log.info(keyword);
 	}
+	
+	@Test
+	public void insertLike() {
+		StayVO vo = new StayVO();
+		vo.setStayNo("1");
+		vo.setMemberId("user1");
+		int res = sm.insertLike(vo);
+		log.info("=========");
+		log.info(res);
+	}
+	
+	@Test
+	public void likeId() {
+		StayVO vo = new StayVO();
+		vo.setStayNo("1");
+		vo.setMemberId("user1");
+		List<StayVO> list = sm.likeId(vo);
+		log.info("=========");
+		log.info(list);
+	}
+	
+	@Test
+	public void deleteLike() {
+		StayVO vo = new StayVO();
+		vo.setStayNo("1");
+		vo.setMemberId("user1");
+		int res = sm.deleteLike(vo);
+		log.info("=========");
+		log.info(res);
+	}
 }

@@ -72,6 +72,25 @@ public class StayServiceImpl implements StayService{
 		return stayMapper.stayKeywordList(vo);
 	}
 
+	@Override
+	public int insertLike(StayVO vo) {
+		return stayMapper.insertLike(vo);
+	}
+
+	@Override
+	public List<StayVO> likeId(StayVO vo, Model model) {
+		List<StayVO> likeList = stayMapper.likeId(vo);
+		log.info("===========");
+		log.info("likeList : " + likeList);
+		model.addAttribute("likeList", likeList);
+		return null;
+	}
+
+	@Override
+	public int deleteLike(StayVO vo) {
+		return stayMapper.deleteLike(vo);
+	}
+
 
 	
 
