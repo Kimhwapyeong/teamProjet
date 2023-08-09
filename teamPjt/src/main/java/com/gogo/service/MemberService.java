@@ -4,10 +4,12 @@ package com.gogo.service;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.gogo.vo.MemberVO;
+import com.gogo.vo.MessageVO;
 
 @Service
 public interface MemberService {
@@ -49,7 +51,8 @@ public interface MemberService {
 	// 카카오 회원 정보 조회 
 	public MemberVO KakaoInfo(String access_Token)throws IOException;
 	
-
+	// 회원 권한 검색
+	public List<String> getMemberRole(String memberId);
 
 
 
