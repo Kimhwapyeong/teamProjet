@@ -98,7 +98,7 @@ public interface mypageService {
 			, Model model);
 	
 	// 관심 스테이
-	public List<Map<String, String>> likestay(Model model);
+	public List<Map<String, String>> likestay(String memberId, Model model);
 	
 	
 	// ▶▶▶  함께  * 번의 여행을 했어요 ▶▶▶

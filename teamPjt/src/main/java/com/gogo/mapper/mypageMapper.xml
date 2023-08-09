@@ -77,7 +77,7 @@
 	<!--  ▶▶▶  host ▶▶▶ -->
 	<!-- 숙소 관리 -->
 	<select id="getStay" resultType="com.gogo.vo.StayVO">
-		SELECT s.stayname, s.stayloc, s.stayadress, s.staytype, s.mainpic1, s.memberId
+		SELECT s.stayname, s.stayno, s.stayloc, s.stayadress, s.staytype, s.mainpic1, s.memberId
 		FROM stay s
 	</select>
 	
@@ -277,11 +277,22 @@
 	
 	<!-- 관심스테이 -->
 	<select id="likestay" resultType="java.util.Map">
-		select s.stayname, s.staytype, s.stayadress, r.stdperson, r.overperson, r.price, l.memberid, s.mainpic1
-		from stay s, room r, likestay l
-		where s.stayno = r.stayno
-		and r.stayno = l.stayno
-		order by stayname
+		SELECT 
+		    s.stayname, 
+		    s.staytype, 
+		    s.stayadress, 
+		    r.stdperson, 
+		    r.overperson, 
+		    r.price, 
+		    l.memberid, 
+		    s.mainpic1
+		FROM stay s 
+		JOIN room r ON s.stayno = r.stayno
+		JOIN likestay l ON r.stayno = l.stayno
+		WHERE l.memberid = #{memberId} AND r.price = (
+		    SELECT MIN(price) FROM room WHERE stayno = s.stayno
+		)
+		ORDER BY stayname
 	</select>
 	
 	<resultMap type="java.util.HashMap" id="likeMap">

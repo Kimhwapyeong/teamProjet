@@ -328,8 +328,8 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 	
 	// 관심스테이
 	@Override
-	public List<Map<String, String>> likestay(Model model) {
-		List<Map<String, String>> like = mypageMapper.likestay();
+	public List<Map<String, String>> likestay(String memberId, Model model) {
+		List<Map<String, String>> like = mypageMapper.likestay(memberId);
 		log.info("===========");
 		log.info("like : " + like);
 		model.addAttribute("like", like);
