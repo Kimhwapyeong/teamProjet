@@ -118,14 +118,10 @@ MANIFEST.MF
 
 root-context.xml
 
-stay/
+**/images/stay/
 
-room/
+**/images/room/
 
-profile/
-
-!stay/*.jsp
-
-!roomInfo.jsp
+**/images/profile/
 
 FileuploadPath.java
