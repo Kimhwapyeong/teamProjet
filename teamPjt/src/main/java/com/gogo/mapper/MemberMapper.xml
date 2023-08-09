@@ -14,6 +14,12 @@
 		select role_id from memberrole  where memberId = #{memberId}	
 	</select>
 	
+	<!-- 권한 -->
+	<insert id="insertMemberRole" parameterType="com.gogo.vo.MemberRoleVO">
+	    INSERT INTO MEMBERROLE (memberId, role_id)
+	    VALUES (#{memberId}, #{role_id})
+	</insert>
+	
 	<!-- 아이디 중복체크 -->
 	<select id="idCheck" resultType="int">
 		SELECT COUNT(*) FROM member
@@ -60,6 +66,7 @@
 	    where memberId = #{memberId} and memberName = #{memberName} and memberEmail = #{memberEmail}
 	</update>
 	
+
 </mapper>
 
 

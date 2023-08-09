@@ -2,7 +2,7 @@ package com.gogo.mapper;
 
 import java.util.List;
 
-
+import com.gogo.vo.MemberRoleVO;
 import com.gogo.vo.MemberVO;
 
 
@@ -28,4 +28,6 @@ public interface MemberMapper {
 	public int findPwAction(MemberVO member);
 
 	public void passwordUpdate(MemberVO member);
+
+	public void insertMemberRole(MemberRoleVO memberRole);
 }

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gogo.service.MemberService;
+import com.gogo.vo.MemberRoleVO;
 import com.gogo.vo.MemberVO;
 
 @Controller
@@ -95,14 +96,29 @@ public class MemberController extends CommonRestController {
 	
 	// 회원가입 
     @PostMapping("/login/signupAction")
-    public String signupAction(@ModelAttribute MemberVO member, Model model) {
+    public String signupAction(@ModelAttribute MemberVO member,@RequestParam("hostyn") String hostyn ,Model model) {
         try {
             int res = memberService.signupAction(member);
 
             if (res > 0) {
+			   
+			// role_id 설정
+	            String role_id = "user";
+	            
+	            if ("y".equals(hostyn)) {
+	            	role_id = "host";
+	            }
+	            // 회원 역할 정보 저장
+	            MemberRoleVO role = new MemberRoleVO();
+	            role.setRole_id(role_id);
+	            memberService.insertMemberRole(role);
+	            
+	            // 알림창
                 model.addAttribute("msg", "환영합니다. 회원가입되었습니다.");
-			   //메일 전송
+                
+			   // 메일 전송
 			   memberService.sendEmail(member,"signupAction");
+	            
             } else {
                 model.addAttribute("msg", "회원가입에 실패하였습니다.");
             }

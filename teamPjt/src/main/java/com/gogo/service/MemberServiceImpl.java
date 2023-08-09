@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.gogo.mapper.MemberMapper;
+import com.gogo.vo.MemberRoleVO;
 import com.gogo.vo.MemberVO;
 
 @Service
@@ -54,6 +55,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int idCheck(MemberVO member) {
 		return memberMapper.idCheck(member);
+	}
+	
+	@Override
+	public void insertMemberRole(MemberRoleVO memberRole) {
+	    // 회원 역할 정보 저장 로직
+	    memberMapper.insertMemberRole(memberRole);
 	}
 	
 	@Override
@@ -134,6 +141,7 @@ public class MemberServiceImpl implements MemberService {
 			System.out.println("메일발송 실패 : " + e);
 		}
 	}
+	
 
 
 	
