@@ -1,5 +1,6 @@
 package com.gogo.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -297,7 +298,7 @@ public class MemberController extends CommonRestController {
 	    return result;
 	}
 	
-	//네이버 로그인
+	// 카카오 로그인
 	@GetMapping("kakaoAction")
 	public String kakaoAction() {
 		return "/login/kakaoAction";
@@ -306,7 +307,15 @@ public class MemberController extends CommonRestController {
 	
 	
 	// 카카오 로그인 (인가 코드 받기, 토큰 받기, 로그인 처리)
+	 @RequestMapping(value = "/login/kakaoAction")
+	    public String login(@RequestParam("5pQ0Yso5Diig0ake3Z24") String code, HttpSession session) throws IOException {
+	            System.out.println(code);
+	            
+	        return "/login/kakaoAction";
+	    }
 	
+
+
 	
 
 }
