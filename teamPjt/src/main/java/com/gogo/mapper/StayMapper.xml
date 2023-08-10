@@ -14,7 +14,7 @@
 		subq3.overperson,
 		subq3.badge,
 		subq3.mainpic1,
-		subq3.mainpic2,
+<!-- 		subq3.mainpic2, -->
 		subq3.stayview,
 		subq3.maxprice as maxprice,
 		subq3.minprice as minprice,
@@ -30,7 +30,7 @@
 		subq2.price,
 		subq2.badge,
 		subq2.mainpic1,
-		subq2.mainpic2,
+<!-- 		subq2.mainpic2, -->
 		subq2.stayview,
 		MAX(subq2.price) OVER (PARTITION BY subq2.stayname) AS maxprice,
 		MIN(subq2.price) OVER (PARTITION BY subq2.stayname) AS minprice,
@@ -45,7 +45,7 @@
 		price,
 		badge,
 		mainpic1,
-		mainpic2,
+<!-- 		mainpic2, -->
 		stayview
 		FROM stay
 		LEFT JOIN room ON stay.stayNo = room.stayNo
@@ -80,7 +80,7 @@
 		subq3.overperson,
 		subq3.badge,
 		subq3.mainpic1,
-		subq3.mainpic2,
+<!-- 		subq3.mainpic2, -->
 		subq3.stayview,
 		subq3.maxprice as maxprice,
 		subq3.minprice as minprice,
@@ -104,7 +104,7 @@
 		subq2.price,
 		subq2.badge,
 		subq2.mainpic1,
-		subq2.mainpic2,
+<!-- 		subq2.mainpic2, -->
 		subq2.stayview,
 		MAX(subq2.price) OVER (PARTITION BY subq2.stayname) AS maxprice,
 		MIN(subq2.price) OVER (PARTITION BY subq2.stayname) AS minprice,
@@ -119,7 +119,7 @@
 		price,
 		badge,
 		mainpic1,
-		mainpic2,
+<!-- 		mainpic2, -->
 		stayview
 		FROM stay
 		LEFT JOIN room ON stay.stayNo = room.stayNo

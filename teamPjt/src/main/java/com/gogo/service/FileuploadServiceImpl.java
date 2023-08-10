@@ -196,4 +196,7 @@ public class FileuploadServiceImpl extends FileuploadPath implements FileuploadS
 	
 		return res;
 	}
+	
+	
+	
 }

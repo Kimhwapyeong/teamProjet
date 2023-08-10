@@ -543,6 +543,15 @@
         		stayList.innerHTML = '';
         			if(keyList != 0){
 	        			keyList.forEach((list, index)=>{
+
+	        			console.log(list.mainPic1);	
+	        				
+	        			var mainPic1 = list.mainPic1.replace('\\', '/');	
+	        			console.log(mainPic1);
+	        			
+	        			var savePath= encodeURIComponent(list.mainPic1);
+	        			
+	        			
 	        			pageBlock
 		        		+='<div class="flist_box">'
 		 				+'	<a href="/stay/room?stayName='+list.stayName+'">'
@@ -560,9 +569,7 @@
 		 				+'				<div class="swiper-button-prev "></div>'
 		 				+'				<div class="swiper-button-next"></div>'
 		 				+'				<div class="swiper-wrapper">'
-		 				+'					<li class="swiper-slide img swiper-slide-active" style="background: url(&quot;'+list.mainPic1+'&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">'
-		 				+'					</li>'
-		 				+'					<li class="swiper-slide img swiper-slide-next" style="background: url(&quot;'+list.mainPic2+'&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">'
+		 				+'					<li class="swiper-slide img swiper-slide-active" style="background: url(/display?fileName='+savePath+') center center / cover no-repeat; cursor: pointer; width: 410px;">'
 		 				+'					</li>'
 		 				+'				</div>'
 		 				+'				<div class="_badge_badge_wrapper__h9IsV">'
@@ -593,52 +600,6 @@
         			stayList.innerHTML += pageBlock;
         		}
         	
-        	
-        	
-        	
-        	
-        	
-        	
-        	/* let member = document.getElementById('memberId').value;
-            console.log(member);
-
-            //좋아요
-            let likeBtn = document.querySelectorAll('.flist_box .btn_like');
-            likeBtn.forEach((button,index) => {
-                button.addEventListener('click', () => {
-                	if(member === null || member === ""){
-                		alertPopOn("로그인 후 이용하세요");
-                    }else{
-	                    likeBtn.forEach(otherButton => {
-		                    //누른 버튼의 index 번호가 같고
-		                    if(otherButton === button){
-		                    	//클래스가 포함되어 있으면
-		                        if(!button.classList.contains('on')){
-		                        	button.classList.add('on');
-		                        	
-		                        	let data = {
-		    	        					stayNo : document.querySelectorAll('.btn_like')[index].value,
-		    	        					memberId: member
-		    	        			      };
-		                        	
-		                        	fetch("/stst/insertLike", {
-			        			        method : 'post', 
-			        			        headers : {
-			        			          'Content-Type': 'application/json'
-			        			        },
-			        			        body : JSON.stringify(data)
-			        			      })
-			        			      .then(response => response.json())
-			        			      //.then(map => keywordList(map));
-			        			      .then(map => {console.log(map);});
-		                        }else{
-		                            button.classList.remove('on');
-		                    	}
-	                    	}
-	                    })
-                    }
-                })
-            }) */
             
             
             // 모달창 띄우기
@@ -1212,10 +1173,7 @@
 								<a href="/stay/room?stayName=${list.stayName}">
 								<div class="swiper-wrapper">
 									<li class="swiper-slide img swiper-slide-active"
-										style="background: url(&quot;${list.mainPic1}&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
-									</li>
-									<li class="swiper-slide img swiper-slide-next"
-										style="background: url(&quot;${list.mainPic2}&quot;) center center / cover no-repeat; cursor: pointer; width: 410px;">
+										style="background: url(/resources/images/${list.mainPic1.replace('\\','/')}) center center / cover no-repeat; cursor: pointer; width: 410px;">
 									</li>
 								</div>
 								</a>
