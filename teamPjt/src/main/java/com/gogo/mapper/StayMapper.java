@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.gogo.vo.FileuploadVO;
 import com.gogo.vo.RoomPhotoVO;
 import com.gogo.vo.StayVO;
 
@@ -29,4 +30,8 @@ public interface StayMapper {
 	public List<StayVO> likeId(StayVO vo);
 	
 	public int deleteLike(StayVO vo);
+	
+	public List<FileuploadVO>stayRoomImg(String stayName);
+	
+	public List<FileuploadVO> stayImgList();
 }

@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.gogo.mapper.StayMapper;
 import com.gogo.mapper.TestMapper;
+import com.gogo.vo.FileuploadVO;
 import com.gogo.vo.RoomPhotoVO;
 import com.gogo.vo.StayVO;
 
@@ -105,6 +106,13 @@ public class roomTest {
 		vo.setStayNo("1");
 		vo.setMemberId("user1");
 		int res = sm.deleteLike(vo);
+		log.info("=========");
+		log.info(res);
+	}
+	
+	@Test
+	public void stayImg() {
+		List<FileuploadVO> res = sm.stayImgList();
 		log.info("=========");
 		log.info(res);
 	}

@@ -194,7 +194,7 @@
 			      content: {
 			        title: '${list.STAYNAME }',
 			        description: '${list.STAYINFO }',
-			        imageUrl: "https://images.prismic.io/stayfolio-production/abc8ac48-3810-47d2-9727-5e6d7553a2cf_20230726_%E1%84%87%E1%85%B3%E1%84%85%E1%85%A2%E1%86%AB%E1%84%83%E1%85%B3%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%85%E1%85%B5.jpg?auto=compress,format&rect=0,0,2880,525&w=2880&h=525",
+			        imageUrl: "https://images.stayfolio.com/system/pictures/images/000/189/235/original/b192523dfeb1178a83595753a4800548b70271cf.jpg?1690248886",
 			        link: {
 			          // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함 // 들어갈 링크
 			          mobileWebUrl: link,
@@ -515,9 +515,13 @@
 						<c:forEach items="${stayRoomInfo}" var="roomList" step="1">
 						<li class="swiper-slide slider_box single-room swiper-slide-active">
 							<a href="/stay/roomInfo?stayName=${list.STAYNAME }&roomName=${roomList.ROOMNAME}">
-								<div role="presentation" class="img"
-									style="background-image: url(&quot;${roomList.FIELD}&quot;); background-repeat: no-repeat; background-position: center center; background-size: cover;">
-								</div>
+								<c:forEach items="${stayRoomImg}" var="roomImg" step="1">
+									<c:if test="${roomImg.roomNo eq roomList.ROOMNO }">
+										<div role="presentation" class="img"
+											style="background-image: url(/resources/images/${roomImg.fileName.replace('\\','/')}); background-repeat: no-repeat; background-position: center center; background-size: cover;">
+										</div>
+									</c:if>
+								</c:forEach>
 								<div class="room-info">
 									<p class="name" style="width: 100%;">
 										<small>특실</small>${roomList.ROOMNAME}
@@ -555,7 +559,7 @@
 			<!-- 옵션 추출 -->
 			<div class="container_full fdetail_special"
 				<%-- style="background-image: url(/resources/images/${list.MAINPIC1.replace('\\','/')}); background-repeat: no-repeat; background-position: center center; background-size: cover;"> --%>
-				style="background-image: url(/resources/images/jyp.jpg); background-repeat: no-repeat; background-position: center center; background-size: cover;">
+				style="background-image: url(&quot;https://images.stayfolio.com/system/pictures/images/000/161/864/original/2a59990a4d4b5571dc5112459261660fdc589946.jpg?1673939220&quot;); background-repeat: no-repeat; background-position: center center; background-size: cover;">
 				<div class="container special_wrap">
 					<div class="special_tit">
 						<small>SPECIAL</small>
@@ -616,7 +620,7 @@
 								rel="noreferrer">dansim.stay@gmail.com</a>
 						</div>
 						<div class="links">
-							<a href="http://instagram.com/dansim.stay" target="_blank"
+							<a href="http://instagram.com" target="_blank"
 								rel="noopener noreferrer" class="insta">
 								<div class="icon-insta"></div>
 							</a>

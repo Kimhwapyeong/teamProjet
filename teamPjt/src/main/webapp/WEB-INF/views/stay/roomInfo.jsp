@@ -319,7 +319,7 @@
                                     data-swiper-slide-index="23" style="width: 950px;">
 	                                    <div class="img"
 	                                        <%-- style="background-image: url(&quot;${picList.field}&quot;); background-repeat: no-repeat; background-position: center center; background-size: cover; "> --%>
-	                                        style="background-image: url(/resources/images/jyp.jpg);; background-repeat: no-repeat; background-position: center center; background-size: cover; ">
+	                                        style="background-image: url(/resources/images/${picList.fileName.replace('\\','/')}); background-repeat: no-repeat; background-position: center center; background-size: cover; ">
 	                                    </div>
                                 </li>
                                 	</c:forEach>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.gogo.vo.FileuploadVO;
 import com.gogo.vo.RoomPhotoVO;
 import com.gogo.vo.StayVO;
 
@@ -31,4 +32,8 @@ public interface StayService {
 	List<StayVO> likeId(StayVO vo, Model model);
 	
 	int deleteLike(StayVO vo);
+	
+	List<FileuploadVO>stayRoomImg(String stayName, Model model);
+	
+	List<FileuploadVO> stayImgList(Model model);
 }

@@ -37,12 +37,14 @@ public class StayController {
 		}
 		stayService.stayList(model);
 		stayService.likeId(vo, model);
+		stayService.stayImgList(model);
 	}
 	
 	@GetMapping("room")
 	public void roomInfo(String stayName , Model model) {
 		stayService.stayRoomList(stayName, model);
 		stayService.roomInfo(stayName, model);
+		stayService.stayRoomImg(stayName, model);
 	}
 	
 	@GetMapping("roomInfo")

@@ -1098,7 +1098,8 @@
                     </div>
                     <div class="sel_map">
                         <!-- <div class="map_img_off" role="presentation"></div> -->
-                    </div><button type="reset" class="btn_reset">초기화</button>
+                    </div>
+                    <a href="#"><button type="reset" class="btn_reset">초기화</button></a>
                     <div class="search_btn_wrapper"><button type="submit" class="btn_search">SEARCH</button>
                     </div>
         </form>
@@ -1175,6 +1176,14 @@
 									<li class="swiper-slide img swiper-slide-active"
 										style="background: url(/resources/images/${list.mainPic1.replace('\\','/')}) center center / cover no-repeat; cursor: pointer; width: 410px;">
 									</li>
+									
+									<c:forEach items="${stayImg}" var="stayImg" step="1">
+										<c:if test="${stayImg.stayNo eq list.stayNo}">
+											<li class="swiper-slide img swiper-slide-active"
+												style="background: url(/resources/images/jyp.jpg) center center / cover no-repeat; cursor: pointer; width: 410px;">
+											</li>
+										</c:if>
+									</c:forEach>
 								</div>
 								</a>
 								<div class="_badge_badge_wrapper__h9IsV">

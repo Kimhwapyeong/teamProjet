@@ -57,6 +57,10 @@
 	WHERE subq3.rn = 1
 	</select>
 	
+	<!-- stay 이미지 -->
+	<select id="stayImgList" resultType="com.gogo.vo.FileuploadVO">
+		select stayno, (uploadpath ||uuid|| '_' ||filename) as filename from attach where roomno is null
+	</select>
 	
 	
 	
@@ -370,6 +374,18 @@
 	    <result property="bed" column="BED" />
 	    <result property="field" column="FIELD" />
 	</resultMap>
+	<!-- 숙수 페이지에서 방 이미지 뽑기 -->
+	<select id="stayRoomImg" resultType="com.gogo.vo.FileuploadVO">
+	SELECT (uploadpath ||uuid|| '_' ||filename) as filename, stayno, roomno
+	FROM (
+	    SELECT uuid, memberid, uploadpath, filename, stayno, roomno,
+	           ROW_NUMBER() OVER (PARTITION BY roomno ORDER BY uuid) AS rn
+	    FROM attach
+	    WHERE stayno = (SELECT stayno FROM stay WHERE stayname = #{stayName}) AND roomno IS NOT NULL
+	)
+	WHERE rn = 1
+	</select>
+	
 	
 	<!-- 객실 페이지에서 정보 뽑기 -->
 	<select id="roomInfoPageList" resultType="java.util.Map">
@@ -411,7 +427,7 @@
 	</resultMap>
 	<!-- 객실 페이지에서 객실 사진 뽑아오기 -->
 	<select id="roomInfoPagePic" resultType="com.gogo.vo.FileuploadVO">
-		select * from attach where stayno = (SELECT STAYNO FROM STAY WHERE STAYNAME=#{stayName}) and roomno = (select roomno from room where roomname=#{roomName})
+		select stayno, roomno, (uploadpath ||uuid|| '_' ||filename) as filename from attach where stayno = (SELECT STAYNO FROM STAY WHERE STAYNAME=#{stayName}) and roomno = (select roomno from room where roomname=#{roomName})
 	</select>
 	
 </mapper>

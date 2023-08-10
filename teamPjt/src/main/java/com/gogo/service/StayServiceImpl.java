@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.gogo.mapper.StayMapper;
+import com.gogo.vo.FileuploadVO;
 import com.gogo.vo.RoomPhotoVO;
 import com.gogo.vo.StayVO;
 
@@ -89,6 +90,24 @@ public class StayServiceImpl implements StayService{
 	@Override
 	public int deleteLike(StayVO vo) {
 		return stayMapper.deleteLike(vo);
+	}
+
+	@Override
+	public List<FileuploadVO> stayRoomImg(String stayName, Model model) {
+		List<FileuploadVO> stayRoomImg = stayMapper.stayRoomImg(stayName);
+		log.info("===========");
+		log.info("stayRoomImg : " + stayRoomImg);
+		model.addAttribute("stayRoomImg", stayRoomImg);
+		return null;
+	}
+
+	@Override
+	public List<FileuploadVO> stayImgList(Model model) {
+		List<FileuploadVO> stayImg = stayMapper.stayImgList();
+		log.info("===========");
+		log.info("stayImg : " + stayImg);
+		model.addAttribute("stayImg", stayImg);
+		return null;
 	}
 
 
