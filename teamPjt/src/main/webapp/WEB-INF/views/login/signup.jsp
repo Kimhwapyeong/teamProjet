@@ -103,8 +103,16 @@ function idCheck() {
 	            console.log(res);
 	            
 	            // 중복 확인 결과에 따라 아이디 입력란 옆에 메시지를 표시
-	            $('.valid').eq(0).html(res.msg);
-	            display_status($('#validplz'), data);
+	            $('#validplz').html(res.msg);
+	            let valClass = '';
+	            if(res.result == 'success'){
+	            	valClass = 'valid';
+	            } else {
+	            	valClass = 'invalid'
+	            }
+	            $('#validplz').removeClass();
+	            $('#validplz').addClass(valClass);
+	            //display_status($('#validplz'), data);
 	            $id.addClass('chked');
 	        },
 	        error: function(req, text) {
