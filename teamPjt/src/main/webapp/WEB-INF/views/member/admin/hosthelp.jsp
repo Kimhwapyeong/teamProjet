@@ -71,8 +71,8 @@
                                     <tr>
                                       <th style="width:15%">문의 번호</th>
                                       <th style="width:15%">작성자</th>
-                                      <th style="width:30%">문의 제목</th>
-                                      <th style="width:40%; text-align:center">문의 내용</th>
+                                      <th style="width:35%">문의 제목</th>
+                                      <th style="width:25%; text-align:center">문의 내용</th>
                                       <th style="width:15%">작성일</th>
                                       <th style="width:15%">답변</th>
                                     </tr>
