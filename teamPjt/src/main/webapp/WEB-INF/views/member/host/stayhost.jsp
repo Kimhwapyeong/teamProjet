@@ -77,7 +77,12 @@
                                            <div class="stay">${vo.stayType } / ${vo.stayLoc }</div>
                                            <p></p>
                                                <!-- =============================== 숙소 설명 ============================================-->
-                                           <div class="option">${vo.stayAdress }<br></div>
+                                           <div class="option" style="line-height: 1.5;">${vo.stayInfo}<br></div>
+                                           <div>
+	                                           <button type="button" class="btn_bk btn_sm findstay_btn" style=" width:130px; margin-left:0px; margin-top:30px; background-color:white">
+	                                           <a href="/addroom?stayNo=${vo.stayNo}" style='color: black;'>객실 추가 등록</a></button>
+                                           </div>
+                                           
                                        </div>
                                </div>
                                

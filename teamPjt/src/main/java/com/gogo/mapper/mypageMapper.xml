@@ -77,7 +77,7 @@
 	<!--  ▶▶▶  host ▶▶▶ -->
 	<!-- 숙소 관리 -->
 	<select id="getStay" resultType="com.gogo.vo.StayVO">
-		SELECT s.stayname, s.stayno, s.stayloc, s.stayadress, s.staytype, s.mainpic1, s.memberId
+		SELECT s.stayname, s.stayno, s.stayloc, s.stayadress, s.stayinfo, s.staytype, s.mainpic1, s.memberId
 		FROM stay s
 	</select>
 	
