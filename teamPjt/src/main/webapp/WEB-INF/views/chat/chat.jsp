@@ -38,7 +38,7 @@
                     <span id="backBtn" style="position: absolute; top: 20px; left: 80px; font-size: 20px; font-weight: bold;">
                         메시지
                     </span>
-                    <div id="messageRoom" style="position: absolute; background-color: white; width: 100%; height: 87.6%; top: 7%; overflow: scroll; vertical-align: text-bottom;">
+                    <div id="messageRoom" style="position: absolute; background-color: white; width: 100%; height: 87.6%; top: 7%; vertical-align: text-bottom;">
                     	
 						    <input type="hidden" id="myMemberId" value="${sessionScope.memberId}" required readonly><br>
 						    초대할 아이디:<br><br>
@@ -82,7 +82,7 @@
                     
                 </div>
                 <div id="messageArea" style="position: absolute; right: 0; display: inline-block; text-align: center; width: 70%; height: 100%; vertical-align: bottom;">
-                    <div id="chatList" style="position: absolute; background-color: white; width: 100%; height: 87.6%; top: 7%; overflow: scroll; vertical-align: text-bottom; line-height:40px;">
+                    <div id="chatList" style="position: absolute; background-color: white; width: 100%; height: 87.6%; top: 7%; overflow-y: scroll; vertical-align: text-bottom; line-height:40px;">
                     
                     <!-- 채팅이 생성되는 곳 -->
                     
@@ -99,6 +99,7 @@
                         <input type="text" id="message" style="width: 300px; border: 1px solid #f2f2f2;" />
                         <input type="button" class="btnStyle" id="sendBtn" value="전송" style="border: 1px solid #f2f2f2;" />
                         <input type="button" class="btnStyle" onclick="location.href='/main'" value="퇴장" style="border: 1px solid #f2f2f2;" />
+                        <input type="button" class="btnStyle" id="cleanBtn" value="clean" style="border: 1px solid #f2f2f2;" />                    	
                     </div>
                 </div>
             </div>
@@ -278,6 +279,28 @@
 	// 페이지 로드 시 sendEnterMessage 함수를 호출합니다.
 	window.addEventListener('load', sendEnterMessage);   
 </script>
+
+<script>
+	const chatList = document.getElementById("chatList");
+	
+	// 스크롤이 활성화되었을 때 맨 아래로 스크롤하는 함수
+	function scrollToBottom() {
+	  chatList.scrollTop = chatList.scrollHeight;
+	}
+	
+	// 페이지 로드 후 처음에도 맨 아래로 스크롤
+	scrollToBottom();
+	
+	// 내용이 업데이트되었을 때마다 맨 아래로 스크롤 유지
+	chatList.addEventListener("DOMSubtreeModified", scrollToBottom);
+	
+	
+	cleanBtn.addEventListener("click", function(){
+		
+		chatList.innerHTML = "";
+	});
+</script>
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="/resources/js/reserved/calendar.js"></script>

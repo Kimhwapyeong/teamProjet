@@ -133,10 +133,10 @@ public class MessageServiceImpl implements MessageService{
 	
 	
 	@Override
-	public void chatListGet(Model model) {
+	public void chatListGet(Model model, String memberId) {
 		
 		
-		List<MessageRoomVO> messageRoomList = messageRoomList();
+		List<MessageRoomVO> messageRoomList = messageRoomList(memberId);
 		model.addAttribute("messageRoomList", messageRoomList);
 
 		
@@ -211,8 +211,8 @@ public class MessageServiceImpl implements MessageService{
 	}
 	
 	@Override
-	public List<MessageRoomVO> messageRoomList() {
-		return messageMapper.messageRoomList();
+	public List<MessageRoomVO> messageRoomList(String memberId) {
+		return messageMapper.messageRoomList(memberId);
 	}
 	
 	
@@ -220,6 +220,27 @@ public class MessageServiceImpl implements MessageService{
 	@Override
 	public String getMessageRoomOwner(String roomId) {
 		return messageMapper.getMessageRoomOwner(roomId);
+	}
+	
+	@Override
+	public List<MessageRoomVO> messageRoomListUser(String memberId){
+		
+		return messageMapper.messageRoomListUser(memberId);
+	}
+	
+	@Override
+	public void messageRoomListUser(String memberId, Model model) {
+		
+		List<MessageRoomVO> list = messageRoomListUser(memberId);
+		
+		list.forEach(vo->{
+			
+			System.err.println(vo.getStayNo());
+			
+		});
+		
+		model.addAttribute("messageRoomList", list);
+		
 	}
 
 

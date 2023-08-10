@@ -204,7 +204,13 @@
                     </ul>
                 </div>
             </div>
-            <div class="bt_btns"><button style="background-color:black; color:white;" type="button" class="btn_wh">예약 취소</button><button type="button" style="border: 1px solid black;" onclick="location.href='https://www.easylaw.go.kr/CSP/CnpClsMain.laf?csmSeq=835&ccfNo=4&cciNo=1&cnpClsNo=2'">이용 안내 및 환불 규정</button></div>
+            
+            <div class="bt_btns">
+            <button id="canclePayBtn" style="background-color:black; color:white;" type="button" class="btn_wh">예약 취소</button>
+            <button id="messageBtn" style="background-color:#f2f2f2; color: black;" type="button" class="btn_wh">문의 하기</button>
+            <button type="button" style="border: 1px solid black;" onclick="location.href='https://www.easylaw.go.kr/CSP/CnpClsMain.laf?csmSeq=835&ccfNo=4&cciNo=1&cnpClsNo=2'">이용 안내 및 환불 규정</button>
+            </div>
+            
         </div>
     </div>
 </div>				</div>
@@ -240,9 +246,15 @@
 			
 		});
 		
-		$('.btn_wh').click(function(){
+		$('#canclePayBtn').click(function(){
 			
 			canclePayFunction();
+			
+		});
+		
+		$('#messageBtn').click(function(){
+			
+			location.href='/chat/chat?stayNoMsg=${param.stayNo}';
 			
 		});
 		

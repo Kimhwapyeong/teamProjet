@@ -25,7 +25,9 @@ public interface MessageMapper {
 	public int joinYN2(MessageVO vo); // 입 퇴장 기록이 있는지 체크
 	
 	// TALK 가 두개 이상인 roomID 의 모든 정보 (방 개설자도..)
-	public List<MessageRoomVO> messageRoomList();
+	public List<MessageRoomVO> messageRoomList(String memberId);
+	
+	public List<MessageRoomVO> messageRoomListUser(String memberId);
 	
 	
 	// 방 개설자 구하기

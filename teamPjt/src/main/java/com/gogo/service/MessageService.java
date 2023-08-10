@@ -36,8 +36,10 @@ public interface MessageService {
 	public List<MessageVO> getList(String roomId);
 	
 	
-	public List<MessageRoomVO> messageRoomList();
-	public void chatListGet(Model model);
+	public List<MessageRoomVO> messageRoomList(String memberId);
+	public List<MessageRoomVO> messageRoomListUser(String memberId);
+	public void messageRoomListUser(String memberId, Model model);
+	public void chatListGet(Model model, String memberId);
 	public String getMessageRoomOwner(String roomId);
 
 }

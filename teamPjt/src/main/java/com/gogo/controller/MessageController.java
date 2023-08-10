@@ -32,11 +32,7 @@ public class MessageController {
     private EchoHandler echoHandler;
 	
 	
-	@GetMapping("chatList")
-	public void chatList(Model model) {
-		
-		service.chatListGet(model);
-	}
+
 	
 	
 	@GetMapping("chat")

@@ -415,7 +415,7 @@ document.addEventListener('DOMContentLoaded', function() {
 											<li><a href="/member/mypage/cancel">취소 내역</a></li>
 											<li><a href="/member/mypage/likestay">관심 스테이</a></li>
 											<li><a href="/member/mypage/info">회원 정보 수정</a></li>
-											<li><a href="/chat/chat">메시지</a></li>
+											<li><a href="/member/mypage/message">메시지</a></li>
 											<!-- 편의를 위해 우선  main 페이지로 설정 -->
 											<li class="login"><a onclick="location.href='/logout'" style="cursor:pointer;">로그아웃</a></li>
 										</ul>
@@ -433,7 +433,7 @@ document.addEventListener('DOMContentLoaded', function() {
 													지원</a></li>
 											<li><a href="/member/admin/statistics?role=admin">통계
 													및 분석</a></li>
-											<li><a href="/chat">메시지</a></li>
+											
 											<li class="login"><a href="/logout">로그아웃</a></li>
 										</ul>
 									</div>
@@ -446,7 +446,7 @@ document.addEventListener('DOMContentLoaded', function() {
 											<li><a href="/member/host/reservation?role=host">예약 관리</a></li>
 											<li><a href="/member/host/income?role=host">수입 현황</a></li>
 											<li><a href="/member/host/guide?role=host">호스트 가이드</a></li>
-											<li><a href="/chat">메시지</a></li>
+											<li><a href="/member/host/message">메시지</a></li>
 											<li class="login"><a href="/logout">로그아웃</a></li>
 										</ul>
 									</div>

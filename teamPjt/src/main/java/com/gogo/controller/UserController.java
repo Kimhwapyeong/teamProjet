@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.gogo.service.MessageService;
 import com.gogo.service.ReservedService;
 import com.gogo.service.mypageService;
 import com.gogo.vo.FileuploadVO;
@@ -46,6 +47,9 @@ public class UserController extends CommonRestController{
 	
 	@Autowired
 	ReservedService service_r;
+	
+	@Autowired
+	MessageService service_msg;
 	
 	
 	// 예약 정보
@@ -186,8 +190,11 @@ public class UserController extends CommonRestController{
 		
 	// 메세지 연결
 	@GetMapping("message")
-	public void message() {
+	public void message(HttpSession session, Model model) {
 		
+		String memberId = (String)session.getAttribute("memberId");
+		
+		service_msg.messageRoomListUser(memberId, model);
 	}
 	
 	

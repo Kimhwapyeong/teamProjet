@@ -90,8 +90,8 @@
     		
     		<c:forEach items="${messageRoomList}" var="messageRoom">
     			<c:if test="${not empty messageRoom.memberId}">
-		            <li class="room-item">
-		                방 번호: ${messageRoom.roomId} | 회원 아이디: ${messageRoom.memberId} | 방 이름: ${messageRoom.roomName}
+		            <li class="room-item" onclick="location.href='/chat/chat?roomId=${messageRoom.roomId}&stayNoMsg=${messageRoom.stayNo}'">
+		                방 번호: ${messageRoom.roomId} | 회원 아이디: ${messageRoom.memberId} | 방 이름: ${messageRoom.roomName} | 스테이 번호 : ${messageRoom.stayNo}
 		            </li>
 	            </c:if>
             </c:forEach>

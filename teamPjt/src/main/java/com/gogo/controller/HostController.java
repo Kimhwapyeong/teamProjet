@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gogo.service.MessageService;
+import com.gogo.service.ReservedService;
 import com.gogo.service.myPagingService;
 import com.gogo.service.mypageService;
 import com.gogo.vo.AnswerVO;
@@ -37,6 +38,9 @@ public class HostController extends CommonRestController{
 	
 	@Autowired
 	MessageService service_msg;
+	
+	@Autowired
+	ReservedService service_r;
 	
 	@Autowired
 	myPagingService paging;
@@ -136,8 +140,12 @@ public class HostController extends CommonRestController{
 	
 	// 호스트 스테이 메세지 관리
 	@GetMapping("message")
-	public void message(Model model) {
-		service_msg.chatListGet(model);
+	public void message(Model model
+						, HttpSession session) {
+		String memberId = (String)session.getAttribute("memberId");
+		
+		
+		service_msg.chatListGet(model, memberId);
 	}
 	
 	
