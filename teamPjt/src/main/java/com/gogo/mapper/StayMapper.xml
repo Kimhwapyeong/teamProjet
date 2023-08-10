@@ -14,7 +14,6 @@
 		subq3.overperson,
 		subq3.badge,
 		subq3.mainpic1,
-<!-- 		subq3.mainpic2, -->
 		subq3.stayview,
 		subq3.maxprice as maxprice,
 		subq3.minprice as minprice,
@@ -30,7 +29,6 @@
 		subq2.price,
 		subq2.badge,
 		subq2.mainpic1,
-<!-- 		subq2.mainpic2, -->
 		subq2.stayview,
 		MAX(subq2.price) OVER (PARTITION BY subq2.stayname) AS maxprice,
 		MIN(subq2.price) OVER (PARTITION BY subq2.stayname) AS minprice,
@@ -45,7 +43,6 @@
 		price,
 		badge,
 		mainpic1,
-<!-- 		mainpic2, -->
 		stayview
 		FROM stay
 		LEFT JOIN room ON stay.stayNo = room.stayNo
@@ -80,7 +77,6 @@
 		subq3.overperson,
 		subq3.badge,
 		subq3.mainpic1,
-<!-- 		subq3.mainpic2, -->
 		subq3.stayview,
 		subq3.maxprice as maxprice,
 		subq3.minprice as minprice,
@@ -104,7 +100,6 @@
 		subq2.price,
 		subq2.badge,
 		subq2.mainpic1,
-<!-- 		subq2.mainpic2, -->
 		subq2.stayview,
 		MAX(subq2.price) OVER (PARTITION BY subq2.stayname) AS maxprice,
 		MIN(subq2.price) OVER (PARTITION BY subq2.stayname) AS minprice,
@@ -119,7 +114,6 @@
 		price,
 		badge,
 		mainpic1,
-<!-- 		mainpic2, -->
 		stayview
 		FROM stay
 		LEFT JOIN room ON stay.stayNo = room.stayNo
@@ -269,7 +263,7 @@
        subq3.stayadress,
        subq3.badge,
        subq3.mainpic1,
-       subq3.mainpic2,
+       <!-- subq3.mainpic2, -->
        subq3.stayview,
        subq3.info,
        subq3.stayinfo,
@@ -293,7 +287,7 @@
 	         subq2.price,
 	         subq2.badge,
 	         subq2.mainpic1,
-	         subq2.mainpic2,
+	        <!--  subq2.mainpic2, -->
 	         subq2.stayview,
 	         subq2.info,
 	         subq2.stayinfo,
@@ -311,7 +305,7 @@
 	           price,
 	           badge,
 	           mainpic1,
-	           mainpic2,
+	           <!-- mainpic2, -->
 	           stayview,
 	           info,
 	           stayinfo,
@@ -363,13 +357,11 @@
 			  stdperson,
 			  overperson,
 			  TO_CHAR(PRICE, '999,999') AS price,
-			  roomtype,
 			  bed,
-			  roomphoto.field as field,
 			  ROW_NUMBER() OVER (PARTITION BY room.roomno ORDER BY room.roomno) AS rn
 			FROM room
 			LEFT JOIN roomoptionyn ON room.roomno = roomoptionyn.roomno
-			LEFT JOIN roomphoto ON room.roomno = roomphoto.roomno
+			LEFT JOIN attach ON room.roomno = attach.roomno
 			WHERE room.stayNo = (SELECT stayNo FROM stay WHERE stayName = #{stayName})
 		) subquery
 		where rn = 1
@@ -383,7 +375,23 @@
 	<select id="roomInfoPageList" resultType="java.util.Map">
 		SELECT 
 		(SELECT STAYNAME FROM STAY WHERE STAYNO = (select STAYNO from room where roomname=#{roomName})) AS STAYNAME, 
-		room.roomno as roomno , room.stayno as stayno, roomname, stdperson, overperson, roominfo, bed, price, roomtype, info, bathroom, kitchen, parking, babiqu, pet, terrace, pool, beamprojector
+		room.roomno as roomno ,
+		room.stayno as stayno, 
+		roomname, 
+		stdperson, 
+		overperson, 
+		roominfo, 
+		bed, 
+		price, 
+		info, 
+		bathroom, 
+		kitchen, 
+		parking, 
+		babiqu, 
+		pet, 
+		terrace, 
+		pool, 
+		beamprojector
 		FROM ROOM 
 		LEFT JOIN ROOMOPTIONYN
 		ON ROOM.ROOMNO = ROOMOPTIONYN.ROOMNO
@@ -402,8 +410,8 @@
 	    <result property="beamprojector" column="BEAMPROJECTOR" />
 	</resultMap>
 	<!-- 객실 페이지에서 객실 사진 뽑아오기 -->
-	<select id="roomInfoPagePic" resultType="com.gogo.vo.RoomPhotoVO">
-		select * from roomphoto where stayno = (SELECT STAYNO FROM STAY WHERE STAYNAME=#{stayName}) and roomno = (select roomno from room where roomname=#{roomName})
+	<select id="roomInfoPagePic" resultType="com.gogo.vo.FileuploadVO">
+		select * from attach where stayno = (SELECT STAYNO FROM STAY WHERE STAYNAME=#{stayName}) and roomno = (select roomno from room where roomname=#{roomName})
 	</select>
 	
 </mapper>

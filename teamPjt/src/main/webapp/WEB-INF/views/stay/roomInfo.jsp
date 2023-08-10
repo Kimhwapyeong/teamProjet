@@ -104,8 +104,7 @@
 					<div class="dayday" role="presentation">
 						<div class="btn_select ">날짜를 선택해주세요.</div>
 					</div>
-					<button type="button" class="btn_bk pc_only">결제하기</button>
-
+					<a href="/reserved/reserved?stayName=${roomInfo.STAYNAME }&roomName=${roomInfo.ROOMNAME }&roomNo=${roomInfo.ROOMNO}"><button type="button" class="btn_bk pc_only">결제하기</button></a>
 
 
 
@@ -319,7 +318,8 @@
                                 <li class="swiper-slide swiper-slide-duplicate swiper-slide-prev"
                                     data-swiper-slide-index="23" style="width: 950px;">
 	                                    <div class="img"
-	                                        style="background-image: url(&quot;${picList.field}&quot;); background-repeat: no-repeat; background-position: center center; background-size: cover; ">
+	                                        <%-- style="background-image: url(&quot;${picList.field}&quot;); background-repeat: no-repeat; background-position: center center; background-size: cover; "> --%>
+	                                        style="background-image: url(/resources/images/jyp.jpg);; background-repeat: no-repeat; background-position: center center; background-size: cover; ">
 	                                    </div>
                                 </li>
                                 	</c:forEach>

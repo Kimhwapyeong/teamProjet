@@ -176,6 +176,17 @@
 			var link =  document.location.href;
 			console.log(link);
 			
+			
+			
+	 		/* var pic = "${list.MAINPIC1}";
+			console.log(pic);
+			var pp = pic.replace('\\', '/');
+			var savePath= encodeURIComponent(pp);
+			console.log(savePath);
+			console.log('/display?fileName='+savePath);
+			var p = '/display?fileName='+savePath; */
+			
+			
 			// 카카오 링크 공유 api
 			 Kakao.Share.createDefaultButton({
 			      container: '#kakaotalk-sharing-btn',
@@ -183,8 +194,7 @@
 			      content: {
 			        title: '${list.STAYNAME }',
 			        description: '${list.STAYINFO }',
-			        imageUrl:
-			          '${list.MAINPIC1 }',
+			        imageUrl: "https://images.prismic.io/stayfolio-production/abc8ac48-3810-47d2-9727-5e6d7553a2cf_20230726_%E1%84%87%E1%85%B3%E1%84%85%E1%85%A2%E1%86%AB%E1%84%83%E1%85%B3%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%85%E1%85%B5.jpg?auto=compress,format&rect=0,0,2880,525&w=2880&h=525",
 			        link: {
 			          // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함 // 들어갈 링크
 			          mobileWebUrl: link,
@@ -269,7 +279,7 @@
 					<div class="stay-main-img">
 						<span id="show-pictures-button">사진 모아보기</span> <span
 							style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
-							<img alt="Stay Main Image" sizes="100vw" src="${list.MAINPIC1 }"
+							<img alt="Stay Main Image" sizes="100vw" src="/resources/images/${list.MAINPIC1 }"
 							decoding="async" data-nimg="fill"
 							style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">
 						</span>
@@ -544,7 +554,8 @@
 
 			<!-- 옵션 추출 -->
 			<div class="container_full fdetail_special"
-				style="background-image: url(&quot;${list.MAINPIC2}&quot;); background-repeat: no-repeat; background-position: center center; background-size: cover;">
+				<%-- style="background-image: url(/resources/images/${list.MAINPIC1.replace('\\','/')}); background-repeat: no-repeat; background-position: center center; background-size: cover;"> --%>
+				style="background-image: url(/resources/images/jyp.jpg); background-repeat: no-repeat; background-position: center center; background-size: cover;">
 				<div class="container special_wrap">
 					<div class="special_tit">
 						<small>SPECIAL</small>
