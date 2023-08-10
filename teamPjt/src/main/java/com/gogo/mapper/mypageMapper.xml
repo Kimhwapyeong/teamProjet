@@ -190,7 +190,7 @@
 		JOIN room r ON r.roomno = v.roomno
 		JOIN stay s ON s.stayno = r.stayno
 		LEFT JOIN refund f ON p.paymentno = f.paymentno
-		WHERE v.memberid = 'user1' AND f.paymentno IS NULL
+		WHERE v.memberid = #{memberId} AND f.paymentno IS NULL
 		AND v.checkout > SYSDATE
 		ORDER BY v.regdate DESC
 
