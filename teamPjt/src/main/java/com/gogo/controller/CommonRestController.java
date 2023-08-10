@@ -27,8 +27,7 @@ public class CommonRestController extends FileuploadPath {
 		return map;
 	}
 	
-	public Map<String, Object> responseMap(String result
-													, String msg){
+	public Map<String, Object> responseMap(String result, String msg){
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("result", result);

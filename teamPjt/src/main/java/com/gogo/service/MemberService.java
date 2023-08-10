@@ -13,7 +13,7 @@ import com.gogo.vo.MemberVO;
 public interface MemberService {
 
 	// 로그인
-	public MemberVO login(MemberVO member);
+	public MemberVO loginAction(MemberVO member);
 	
 	// 회원 정보 조회 
 	public MemberVO selectOne(MemberVO member);

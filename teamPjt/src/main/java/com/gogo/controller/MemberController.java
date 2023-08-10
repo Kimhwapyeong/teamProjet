@@ -71,16 +71,19 @@ public class MemberController extends CommonRestController {
 		System.out.println("id : " + member.getMemberId());
 		System.out.println("pw : " + member.getPw());
 		
-		member = memberService.login(member);
+		MemberVO membervo = memberService.loginAction(member);
 		MemberVO user = memberService.selectOne(member);
 		List<String> role = memberService.getMemberRole(member.getMemberId());
 		
 		user.setRole(role);
 		
-		if(member != null) {
+		
+		if(membervo != null) {
+			
 			session.setAttribute("member", user);
 			session.setAttribute("memberId", user.getMemberId());
 			session.setAttribute("role_id", user.getRole());
+			
 			Map<String, Object> map = responseMap(REST_SUCCESS, "환영합니다.");
 			
 			// SNS 로그인 체크 로직		
@@ -98,9 +101,11 @@ public class MemberController extends CommonRestController {
 			}
 				return map;
 		} else {
-			// 로그인 실패 처리
-			return responseMap(REST_FAIL, "아이디와 비밀번호를 확인해주세요.");
-		}  
+	        // 로그인 실패 처리
+	        Map<String, Object> failureMap = responseMap(REST_FAIL, "아이디와 비밀번호를 확인해주세요.");
+	        failureMap.put("msg", "아이디와 비밀번호를 확인해주세요.");
+	        return failureMap;
+	    }
 		
 	}
 

@@ -33,9 +33,9 @@ public class MemberServiceImpl implements MemberService {
 	BCryptPasswordEncoder encoder;
 	
 	@Override
-	public MemberVO login(MemberVO paramMember) {
+	public MemberVO loginAction(MemberVO paramMember) {
 		// 사용자 정보 조회
-		MemberVO member = memberMapper.login(paramMember);
+		MemberVO member = memberMapper.loginAction(paramMember);
 		
 		if(member != null) {
 			// 사용자가 입력한 비밀번호가 일치하는지 확인
@@ -50,7 +50,7 @@ public class MemberServiceImpl implements MemberService {
 				
 				return member;
 			}
-			return member;
+			return memberMapper.loginAction(member);
 		}
         // 로그인 실패
         return member;

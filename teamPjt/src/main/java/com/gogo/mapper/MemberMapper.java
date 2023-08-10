@@ -10,7 +10,7 @@ import com.gogo.vo.MemberVO;
 
 public interface MemberMapper {
 	
-	public MemberVO login(MemberVO member);
+	public MemberVO loginAction(MemberVO member);
 	
 	// 멤버의 정보를 불러오기 위한 함수
 	public MemberVO selectOne(MemberVO member);
