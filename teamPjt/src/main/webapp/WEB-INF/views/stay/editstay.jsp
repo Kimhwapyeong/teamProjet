@@ -43,10 +43,10 @@ input ::placeholder{
 					<li><div class="dt">숙박업 사업자 등록 여부 *</div>
 						<div class="dd">
 							<label for="radioCheck3" class="radio_skin"><input
-								type="radio" id="radioCheck3" name="not_register"><span
+								type="radio" id="radioCheck3" name="not_register" ${ map.stayVO.registrationYN eq 'N' ? 'checked' : ''}><span
 								style="font-size: 12px">준비 중</span></label><label for="radioCheck4"
 								class="radio_skin"><input type="radio" id="radioCheck4"
-								name="register"><span style="font-size: 12px">등록
+								name="register" ${ map.stayVO.registrationYN eq 'Y' ? 'checked' : ''}><span style="font-size: 12px">등록
 									완료</span></label>
 						</div></li>
 					<li><div class="dt">분류 *</div>
@@ -186,6 +186,7 @@ input ::placeholder{
 			<input type="hidden" name="stayLoc" value="">
 			<input type="hidden" name="latitude" value="">
 			<input type="hidden" name="longitude" value="">
+			<input type="hidden" name="registrationYN" value="Y">
 		</form>
 	</div>
 </div>

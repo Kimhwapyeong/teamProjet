@@ -1667,8 +1667,8 @@ li.L1,li.L3,li.L5,li.L7,li.L9 {
 <body>
 	<li style="padding: 0px"><div class="dt">주소 *</div>
 		<div class="dd">
-			<input type="text" id="postcode" class="form_style"
-				style="width: 150px" placeholder="우편번호 *" readonly> <input
+			<input type="text" id="postcode" class="form_style" name="postNum"
+				style="width: 150px" placeholder="우편번호 *" readonly value="${ map.stayVO.postNum }"> <input
 				type="button" onclick="sample3_execDaumPostcode()" value="우편번호 찾기"
 				class="d_btn">
 		</div></li>
@@ -1685,17 +1685,17 @@ li.L1,li.L3,li.L5,li.L7,li.L9 {
 	<li><div class="dt"></div>
 		<div class="dd">
 			<input type="text" id="address" name="stayAdress" class="form_style"
-				placeholder="주소 *" readonly>
+				placeholder="주소 *" readonly value="${ map.stayVO.stayAdress }">
 		</div></li>
 	<li style="padding-top: 0px"><div class="dt"></div>
 		<div class="dd">
-			<input type="text" id="detailAddress" class="form_style"
-				placeholder="상세주소">
+			<input type="text" id="detailAddress" class="form_style" name="detailAds"
+				placeholder="상세주소" value="${ map.stayVO.detailAds }">
 		</div></li>
 	<li style="padding-top: 0px"><div class="dt"></div>
 		<div class="dd">
-			<input type="text" id="extraAddress" class="form_style"
-				placeholder="참고항목">
+			<input type="text" id="extraAddress" class="form_style" name="refs"
+				placeholder="참고항목" value="${ map.stayVO.refs }">
 		</div></li>
 
 

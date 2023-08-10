@@ -340,10 +340,10 @@ function setMainImgsHeight(){
 								</div>
 								<div class="name">${ stay.stayName }</div>
 								<div class="other">
-									<span>${ stay.stayLoc }</span><span>₩90,000 ~ ₩196,000</span>
+									<span>${ stay.stayLoc }</span><span>₩${ stay.minPrice } ~ ₩${ stay.maxPrice }</span>
 								</div></a>
 							<ul>
-								<li class="btn_more"><a href="/stay/room?stayName=${ stay.stayName }">예약하기</a></li>
+								<li class="btn_more"><a href="/stay/room?stayName=${ stay.stayName }" style="color:white;">예약하기</a></li>
 							</ul>
 						</div>
 					</c:forEach>
@@ -360,7 +360,7 @@ function setMainImgsHeight(){
 								</div>
 								<div class="name">${ listPopStay[i].stayName }</div>
 								<div class="other">
-									<span>${ listPopStay[i].stayLoc }</span><span>₩90,000 ~ ₩196,000</span>
+									<span>${ listPopStay[i].stayLoc }</span><span>₩${ listPopStay[i].minPrice } ~ ₩${ listPopStay[i].maxPrice }</span>
 								</div></a>
 							<ul>
 								<li class="btn_more"><a href="/stay/room?stayName=${ listPopStay[i].stayName }">예약하기</a></li>
@@ -403,7 +403,7 @@ function setMainImgsHeight(){
 								</div>
 								<div class="name">${ stay.stayName }</div>
 								<div class="other">
-									<span>${ stay.stayLoc }</span><span>₩260,000 ~ ₩360,000</span>
+									<span>${ stay.stayLoc }</span><span>₩${ stay.minPrice } ~ ₩${ stay.maxPrice }</span>
 								</div></a>
 							<ul>
 								<li class="btn_more"><a href="/stay/room?stayName=${ stay.stayName }">예약하기</a></li>

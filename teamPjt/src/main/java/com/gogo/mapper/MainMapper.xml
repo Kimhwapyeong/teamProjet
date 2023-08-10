@@ -43,9 +43,11 @@
 			select stayseq.nextval from dual
 		</selectKey>
 		insert into stay (stayno, memberid, stayname, stayloc, stayadress
-						, stayinfo, staytype, badge, latitude, longitude, stayview)
+						, stayinfo, staytype, badge, latitude, longitude, stayview
+						, postnum, detailads, refs, registrationyn)
 		values (#{stayNo}, #{memberId}, #{stayName}, #{stayLoc}, #{stayAdress}
-				, #{stayInfo}, #{stayType}, #{badge}, #{latitude}, #{longitude}, #{stayView})
+				, #{stayInfo}, #{stayType}, #{badge}, #{latitude}, #{longitude}, #{stayView}
+				, #{postNum}, #{detailAds}, #{refs}, #{registrationYN})
 	</insert>
 	
 	<!-- 스테이 getOne -->
@@ -64,6 +66,10 @@
 		, latitude = #{latitude}
 		, longitude = #{longitude}
 		, stayview = #{stayView}
+		, postnum = #{postNum}
+		, detailads = #{detailAds}
+		, refs = #{refs}
+		, registrationYN = #{registrationYN}
 		where stayno = #{stayNo}
 	</update>
 	
@@ -137,12 +143,14 @@
 		    select t.*, rownum rn
 		    from(
 		        SELECT s.stayno, s.stayname
-		        		, s.memberid, s.stayloc, s.stayadress, s.stayinfo, s.staytype
-		        		, s.badge, s.latitude, s.longitude, s.mainpic1, s.stayview, COUNT(ls.stayNo) AS likeCount
+		                , s.memberid, s.stayloc, s.stayadress, s.stayinfo, s.staytype
+		                , s.badge, s.latitude, s.longitude, s.mainpic1, s.stayview, COUNT(ls.stayNo) AS likeCount
+		                , to_char(max(r.price), 'FM999,999,999') maxPrice, to_char(min(r.price), 'FM999,999,999') minPrice
 		        FROM stay s
 		        LEFT JOIN likestay ls ON s.stayNo = ls.stayNo
+		        left JOIN room r ON s.stayno = r.stayno
 		        GROUP BY s.stayNo, s.stayname, s.memberid, s.stayloc, s.stayadress, s.stayinfo
-		        		, s.staytype, s.badge, s.latitude, s.longitude, s.mainpic1, s.stayview
+		                , s.staytype, s.badge, s.latitude, s.longitude, s.mainpic1, s.stayview
 		        ORDER BY likeCount DESC) t)
 		where rn between 1 and 10
 	</select>

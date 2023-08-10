@@ -181,6 +181,7 @@ input ::placeholder{
 			<input type="hidden" name="stayLoc" value="">
 			<input type="hidden" name="latitude" value="">
 			<input type="hidden" name="longitude" value="">
+			<input type="hidden" name="registrationYN" value="Y">
 		</form>
 	</div>
 </div>

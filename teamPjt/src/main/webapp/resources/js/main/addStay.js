@@ -80,8 +80,8 @@ window.addEventListener('load', ()=>{
  			return;
  		}else{
  									// s가 있어야 줄바꿈되어도 인식됨
- 			let regex3 = new RegExp("^.{10,300}$","s");
- 			if(valueLengthCheck(regex3, textareaStayInfo, '스테이 소개는 50자 이상 300자 이내로 입력해주세요.')){
+ 			let regex3 = new RegExp("^.{10,150}$","s");
+ 			if(valueLengthCheck(regex3, textareaStayInfo, '스테이 소개는 10자 이상 150자 이내로 입력해주세요.')){
  				return;
  			}
  		}
@@ -109,6 +109,10 @@ window.addEventListener('load', ()=>{
 		if(!document.querySelectorAll('input[name=stayView]')[0].checked && !document.querySelectorAll('input[name=stayView]')[1].checked){
 			document.querySelector('input[name=stayView]').value = '';
 			document.querySelector('input[name=stayView]').checked=true;
+		}
+		
+		if(radioCheck3.checked){
+			document.querySelector('input[name=registrationYN]').value = 'N';
 		}
 		
 		// 좌표를 받아오기 위해 주소 value 변수에 저장

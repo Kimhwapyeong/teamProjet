@@ -20,6 +20,11 @@ public class StayVO {
 	private double latitude; 	// 위도
 	private double longitude;	// 경도
     
+	private String postNum; // 우편번호
+	private String detailAds; // 상세주소
+	private String refs; 	// 참고항목
+	private String registrationYN; // 사업자 등록 여부
+	
 	private String stdPerson; 	// 기준 인원
 	private String overPerson; 	// 최대 인원
 	private String minPrice; // 가격
