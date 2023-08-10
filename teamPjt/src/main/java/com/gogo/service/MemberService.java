@@ -44,7 +44,7 @@ public interface MemberService {
 	public void insertMemberRole(String memberId, String role_id);
 	
 	// 카카오 로그인 토큰 
-	public String getAccessToken(String authorize_code);
+	//public String getAccessToken(String authorize_code);
 
 	// 카카오 회원 정보 조회 
 	public MemberVO KakaoInfo(String access_Token)throws IOException;

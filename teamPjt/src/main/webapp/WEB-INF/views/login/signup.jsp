@@ -60,8 +60,7 @@ $(document).ready(function() {
 	});
 	//유효성 검사
 	$('.chk').on('keyup', function(){
-		console.log('콘솔체크')
-		console.log('this' + $(this))
+
 		if($(this).attr('name') == 'memberId') {
 			if(event.keyCode == 13) { idCheck(); }
 			else {
@@ -85,7 +84,6 @@ function idCheck() {
 	console.log("data.code : ",data.code);
 	// 유효하지 않다면 중복확인 불필요
 	if(data.code != 'valid') {
-		alert('아이디 중복 확인 불필요\n' + data.desc); // 추후 삭제 요망  
 		$id.focus();
 		 $('.valid').eq(0).html(data.desc);
 		return;
@@ -101,13 +99,12 @@ function idCheck() {
 	           	console.log("res.msg : ",res.msg);
 	           	console.log("res : ", res);
 
-
 	            data = signup.id_usable(res);
 	            console.log(res);
 	            
 	            // 중복 확인 결과에 따라 아이디 입력란 옆에 메시지를 표시
 	            $('.valid').eq(0).html(res.msg);
-	            display_status($id.siblings('div'), res);
+	            display_status($('#validplz'), data);
 	            $id.addClass('chked');
 	        },
 	        error: function(req, text) {
@@ -164,18 +161,21 @@ function go_join() {
 
     // 필수 항목의 유효성을 판단
     // 중복 확인한 경우
-    if ($('[name=memberId]').hasClass('chked')) {
+    if ($('[name=memberId]').eq(1).hasClass('chked')) {
         // 이미 사용중인 경우는 회원가입 불가
-        if ($('[name=memberId]').siblings('div').hasClass('invalid')) {
+        if ($('#validplz').hasClass('invalid')) {
             alert('회원가입 불가\n' + signup.id.unusable.desc);
             $('[name=memberId]').focus();
+            //event.preventDefault(); // 폼 제출 막기
             return;
         }
+        
     } else {
         // 중복 확인 하지 않은 경우
-        if (!item_check(signup.tag_status($('[name=memberId]')))) return;
+        if (!item_check(signup.tag_status($('[name=memberId]')))	
+        ) return;	
         else {
-            alert('회원가입 불가\n' + signup.id.valid.desc);
+            alert('회원가입 불가\n');
             $('[name=memberId]').focus();
             return;
         }
@@ -246,7 +246,7 @@ function item_check(item) {
 							      <input type="text" name="memberId" id="signUpId" class="chk" placeholder="아이디를 입력하세요." value="user5">
 							      <a id="btnid" style="width: 80px;" class='btn-fill-s'>중복확인</a><br>
 							    </div>  
-							      <div class='valid'>아이디를 입력하세요(영문 소문자, 숫자만 입력 가능)</div>
+							      <div id="validplz" class='valid'>아이디를 입력하세요(영문 소문자, 숫자만 입력 가능)</div>
 							    </td>
 							  </tr>
 							  <tr>
