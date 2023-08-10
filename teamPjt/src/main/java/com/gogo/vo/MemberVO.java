@@ -19,6 +19,13 @@ public class MemberVO {
 	private String age_group;
 	private String count;
 	
+	// 카카오 토큰 발급 정보
+	private String access_token;
+	private String token_type;
+	private String refresh_token;
+	private int expires_in;
+	private String scope;
+	private int refresh_token_expires_in;
 	
 	// 사용자 권한
 	private List<String> role;

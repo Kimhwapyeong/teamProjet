@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+카카오 인증 완료
 </body>
 </html>

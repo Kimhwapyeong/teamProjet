@@ -59,7 +59,7 @@
 	
 	<!-- stay 이미지 -->
 	<select id="stayImgList" resultType="com.gogo.vo.FileuploadVO">
-		select stayno, (uploadpath ||uuid|| '_' ||filename) as filename from attach where roomno is null
+		select stayNo, (uploadpath ||uuid|| '_' ||fileName) as fileName from attach where roomno is null
 	</select>
 	
 	

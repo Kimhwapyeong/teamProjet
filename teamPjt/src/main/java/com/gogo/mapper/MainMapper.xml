@@ -107,12 +107,21 @@
 	</update>
 	
 	<select id="getMainList" resultType="com.gogo.vo.StayVO">
-	  	select *
-		from (
-				select rownum rn, t2.*
-				from(
-			        	select to_number(stayno) no, t.* from stay t order by no desc) t2)
-		where rn between 1 and 10
+		SELECT 
+		    TO_NUMBER(t.stayno) AS no, 
+		    t.stayno, t.stayname, t.stayloc, t.stayadress, t.stayinfo, t.staytype
+		    , t.badge, t.latitude, t.longitude, t.stayview, t.sns, t.tel, t.postnum
+		    , t.detailads, t.refs, t.registrationyn, t.mainpic1
+		    , to_char(max(r.price), 'FM999,999,999') maxPrice, to_char(min(r.price), 'FM999,999,999') minPrice
+		FROM 
+		    stay t
+		left JOIN 
+		    room r ON t.stayno = r.stayno
+		group by t.stayno, t.stayname, t.stayloc, t.stayadress, t.stayinfo, t.staytype
+				, t.badge, t.latitude, t.longitude, t.stayview, t.sns, t.tel, t.postnum
+				, t.detailads, t.refs, t.registrationyn, t.mainpic1
+		ORDER BY 
+		no DESC
 	</select>
 	
 	<select id="getStayNo" resultType="String">

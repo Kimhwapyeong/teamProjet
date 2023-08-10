@@ -58,11 +58,11 @@
                         
                         
                         <div class="mypage_content">
-                            <div class="reserv_wrap mypage-reservation-info">
+                            <div class="reserv_wrap mypage-reservation-info" style="border-bottom: none;">
                                 <div class="reserv_box accepted">
                                     <!-- script -->
                                      
-										<!--차트-->
+										<!-- 차트-->
 										<div style="margin-left: 5%;">
 											<h6 style="font-weight:bold; ">연령대별 이용자 현황</h6>
 										    <div style="width: 350px; height: 350px; margin-top : 20px; margine-left:30px">

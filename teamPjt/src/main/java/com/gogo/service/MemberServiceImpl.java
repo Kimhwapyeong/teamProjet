@@ -118,6 +118,7 @@ public class MemberServiceImpl implements MemberService {
 		String msg = "";
 
 		if(div.equals("findPwAction")) {
+			subject = "스테이 올래갈래 임시 비밀번호 입니다.";
 			msg += "<div style=\"text-align: center; width: 470px; height: 850px; line-height: 70px;\">";
 			msg += "<img src=\"https://i.ibb.co/M7mS3X2/stay2.png\" alt=\"Facebook Logo\" height=\"33\" style='max-width: 100%; height: auto;'>";
 			msg += "<p style=\"color:#565a5c;font-size:18px;\">"+member.getMemberName()+"님, 안녕하세요.</p>";
@@ -230,81 +231,81 @@ public class MemberServiceImpl implements MemberService {
 //	 }
 //	 
 //	  // 카카오 API - Access token보내 사용자 정보 요청 
-//	  public MemberVO KakaoInfo(String access_Token)throws IOException{
-//	  System.out.println("-------------------------사용자 정보 보기---------------------------");  
-//	 
-//	  MemberVO kakaoInfo = new MemberVO();
-//	 
-//	  // 토큰을 이용하여 카카오에 회원의 정보를 요청 
-//	  // v1을 통한 '사용자 정보 요청'은 만료됨
-//	  String reqURl = "https://kapi.kakao.com/v2/user/me";
-//	 
-//	  try {
-//	  // URL 객체 생성
-//	  URL url = new URL(reqURl);
-//		HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-//		conn.setRequestMethod("POST");
-//		// 연결 완료
-//	
-//		// 헤더 필드 읽기 
-//		// 요청에 필요한 Header에 포함 될 내용 
-//		// 문서에서 지정해둔 양식 
-//		conn.setRequestProperty("Authorization", "Bearer " + access_Token);
-//	
-//		// 응답코드 확인
-//		int responseCode = conn.getResponseCode(); // set? get?
-//		System.out.println("responseCode: "+ responseCode);
-//	
-//		// 입력스트림을 가지고 오고 데이터 읽기
-//		// inputStream은 데이터를 바이트의 배열로 읽어 오는 low-level의 메서드
-//		// 따라서 데이터를 문자 '데이터'로 읽기 위해서 InputStreamReader로 매핑
-//		// 데이터를 문자'열'로 읽기 위해서 inputStream을 BufferedReader로 매핑하기
-//		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));
-//	
-//		String line="";
-//		String result ="";
-//	
-//		while((line= br.readLine()) != null) {
-//		result += line;
-//		}
-//		System.out.println("response body: " + result);
-//	
-//		// Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
-//	    JsonParser jsonParser = new JsonParser();
-//	    JsonElement jsonElement = jsonParser.parse(result);
-//	    // jsonElement : 응답받은 데이터 저장
-//	    
-//	    // JsonElement.getAsJsonObject().get("key value").getAs타입(); 의 형태로 파싱
-//	    // 응답데이터(JSON)
-//	    JsonObject properties = jsonElement.getAsJsonObject().get("properties").getAsJsonObject();
-//	    JsonObject kakao_account = jsonElement.getAsJsonObject().get("kakao_account").getAsJsonObject();
-//	    Long memberId = jsonElement.getAsJsonObject().get("id").getAsLong();
-//	    
-//	    // 파싱된 json데이터를 string에 담기
-//	    // properties
-//	    String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-//	  
-//	    //kakao_account
-//	    String name = kakao_account.getAsJsonObject().get("name").getAsString();
-//	    String email = kakao_account.getAsJsonObject().get("email").getAsString();
-//	    String gender = kakao_account.getAsJsonObject().get("gender").getAsString();
-//	    String birthday = kakao_account.getAsJsonObject().get("birthday").getAsString();
-//	    String age_range = kakao_account.getAsJsonObject().get("age_range").getAsString();
-//	    
-//	    System.out.println("memberId: "+ memberId);
-//	    
-//	    //setter이용하여 memberVO에 담기 
-//	    kakaoInfo.setMemberName(name);
-//	    kakaoInfo.setMemberEmail(email);
-//	    kakaoInfo.setGender(gender);
-//	    kakaoInfo.setBirthday(birthday);
-//	    kakaoInfo.setAge_group(age_range);
-//	
-//		} catch (MalformedURLException e) {
-//			e.printStackTrace();
-//		}
-//		  return kakaoInfo;
-//		  }
+	  public MemberVO KakaoInfo(String access_Token)throws IOException{
+	  System.out.println("-------------------------사용자 정보 보기---------------------------");  
+	 
+	  MemberVO kakaoInfo = new MemberVO();
+	 
+	  // 토큰을 이용하여 카카오에 회원의 정보를 요청 
+	  // v1을 통한 '사용자 정보 요청'은 만료됨
+	  String reqURl = "https://kapi.kakao.com/v2/user/me";
+	 
+	  try {
+	  // URL 객체 생성
+	  URL url = new URL(reqURl);
+		HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+		conn.setRequestMethod("POST");
+		// 연결 완료
+	
+		// 헤더 필드 읽기 
+		// 요청에 필요한 Header에 포함 될 내용 
+		// 문서에서 지정해둔 양식 
+		conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+	
+		// 응답코드 확인
+		int responseCode = conn.getResponseCode(); 
+		System.out.println("responseCode: "+ responseCode);
+	
+		// 입력스트림을 가지고 오고 데이터 읽기
+		// inputStream은 데이터를 바이트의 배열로 읽어 오는 low-level의 메서드
+		// 따라서 데이터를 문자 '데이터'로 읽기 위해서 InputStreamReader로 매핑
+		// 데이터를 문자'열'로 읽기 위해서 inputStream을 BufferedReader로 매핑하기
+		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));
+	
+		String line="";
+		String result ="";
+	
+		while((line= br.readLine()) != null) {
+		result += line;
+		}
+		System.out.println("response body: " + result);
+	
+		// Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
+	    JsonParser jsonParser = new JsonParser();
+	    JsonElement jsonElement = jsonParser.parse(result);
+	    // jsonElement : 응답받은 데이터 저장
+	    
+	    // JsonElement.getAsJsonObject().get("key value").getAs타입(); 의 형태로 파싱
+	    // 응답데이터(JSON)
+	    JsonObject properties = jsonElement.getAsJsonObject().get("properties").getAsJsonObject();
+	    JsonObject kakao_account = jsonElement.getAsJsonObject().get("kakao_account").getAsJsonObject();
+	    Long memberId = jsonElement.getAsJsonObject().get("id").getAsLong();
+	    
+	    // 파싱된 json데이터를 string에 담기
+	    // properties
+	    String nickname = properties.getAsJsonObject().get("nickname").getAsString();
+	  
+	    //kakao_account
+	    String name = kakao_account.getAsJsonObject().get("name").getAsString();
+	    String email = kakao_account.getAsJsonObject().get("email").getAsString();
+	    String gender = kakao_account.getAsJsonObject().get("gender").getAsString();
+	    String birthday = kakao_account.getAsJsonObject().get("birthday").getAsString();
+	    String age_range = kakao_account.getAsJsonObject().get("age_range").getAsString();
+	    
+	    System.out.println("memberId: "+ memberId);
+	    
+	    //setter이용하여 memberVO에 담기 
+	    kakaoInfo.setMemberName(name);
+	    kakaoInfo.setMemberEmail(email);
+	    kakaoInfo.setGender(gender);
+	    kakaoInfo.setBirthday(birthday);
+	    kakaoInfo.setAge_group(age_range);
+	
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		  return kakaoInfo;
+		  }
 	@Override
 	public List<String> getMemberRole(String memberId) {
 		return memberMapper.getMemberRole(memberId);

@@ -1,6 +1,8 @@
 package com.gogo.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,10 +13,17 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,12 +32,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import javax.servlet.http.HttpServletRequest;
 
 import com.gogo.service.MemberService;
 import com.gogo.vo.MemberRoleVO;
 import com.gogo.vo.MemberVO;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 @Controller
 public class MemberController extends CommonRestController {
@@ -87,6 +98,7 @@ public class MemberController extends CommonRestController {
 			}
 				return map;
 		} else {
+			// 로그인 실패 처리
 			return responseMap(REST_FAIL, "아이디와 비밀번호를 확인해주세요.");
 		}  
 		
@@ -103,7 +115,8 @@ public class MemberController extends CommonRestController {
 	
 	// 회원가입 
     @PostMapping("/login/signupAction")
-    public String signupAction(@ModelAttribute MemberVO member,@RequestParam("hostyn") String hostyn ,Model model) {
+    public String signupAction(@ModelAttribute MemberVO member,
+    		@RequestParam("hostyn") String hostyn ,Model model,RedirectAttributes redirectAttributes) {
         try {
             int res = memberService.signupAction(member);
 
@@ -126,19 +139,19 @@ public class MemberController extends CommonRestController {
 	            memberService.insertMemberRole(member.getMemberId(), role_id);
 	            
 	            // 알림창
-                model.addAttribute("msg", "환영합니다. 회원가입되었습니다.");
+	            redirectAttributes.addFlashAttribute("msg", "환영합니다. 회원가입되었습니다.");
                 
 			   // 메일 전송
 			   memberService.sendEmail(member,"signupAction");
 	            
             } else {
-                model.addAttribute("msg", "회원가입에 실패하였습니다.");
+            	redirectAttributes.addFlashAttribute("msg", "회원가입에 실패하였습니다.");
             }
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("msg", "회원가입 중 예외사항이 발생하였습니다.");
         }
-        	return "/main"; 
+        	return "redirect:/main"; 
     }
 
 	// 아이디 중복확인 요청
@@ -307,41 +320,78 @@ public class MemberController extends CommonRestController {
 	    return result;
 	}
 	
-//	// 카카오 로그인 
-//	@GetMapping("kakaoAction")
-//	public String kakaoAction() {
-//		return "/login/kakaoAction";
-//	}
 	
-	// 카카오 로그인 (인가 코드 받기, 토큰 받기, 로그인 처리 access_token과 refresh_token
+	// 카카오 로그인 (인가 코드 받기, 토큰 받기, 로그인 처리 access_token과 refresh_token)
 	@GetMapping("/login/kakaoAction")
-    public String kakaoSave(@RequestParam(value = "code", required = false) String code, 
-    HttpSession session,  HttpServletRequest request) throws IOException {
-		 System.out.println(code);
-		        
-		 //토큰 발급 받기
-		 String access_Token = memberService.getAccessToken(code);
+    public @ResponseBody String kakaoSave(String code){
+		System.out.println(code);
 		
-		 //사용자 정보 가지고 오기 
-		 MemberVO kakaoInfo = memberService.KakaoInfo(access_Token);
-		 
-		 //세션 형성 + request 내장 객체 가지고 오기
-		 session = request.getSession();
+		// 카카오에게 post방식으로 key=value 데이터 요청
+		// RestTemplate 라이브러리 사용 - 편리한 http 요청
+		RestTemplate rt = new RestTemplate();
 		
-		 System.out.println("accessToken: "+access_Token);
-		 System.out.println("code:"+ code);
-		 System.out.println("gender: "+ kakaoInfo.getGender());
+		// http헤더 생성
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-type" , "application/x-www-form-urlencoded;charset=utf-8");
 		
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		params.add("grant_type", "authorization_code");
+		params.add("client_id", "7801f55d59a73a55013d6f22a1a3e9a1");
+		params.add("redirect_uri", "http://localhost:8080/login/kakaoAction");
+		params.add("code", code);
 		
-		 //세션에 담기
-		 if (kakaoInfo.getMemberName() != null) {
-		      session.setAttribute("memberName", kakaoInfo.getMemberName());
-		      session.setAttribute("access_Token", access_Token);
-		      session.setAttribute("memberId", kakaoInfo.getMemberId());
-		    }
+		// httpHeader와 httpBody를 하나의 object에 담기 
+		HttpEntity<MultiValueMap<String,String>> getAccessToken =
+				new HttpEntity<>(params, headers);
 		
-		    return "/login/kakaoAction";
+		// 토큰 발급 요청 
+		ResponseEntity<String> response = rt.exchange(
+			// 토큰 발급 주소
+			"https://kauth.kakao.com/oauth/token",
+			// 요청 메서드 
+			HttpMethod.POST,
+			// 데이터
+			getAccessToken,
+			// 응답 받을 데이터 타입
+			String.class
+		);
+		
+		// json파싱 라이브러리
+		Gson gson = new Gson();
+
+		MemberVO kakaoToken = null;
+
+		try {
+		    kakaoToken = gson.fromJson(response.getBody(), MemberVO.class);
+		} catch (JsonSyntaxException e) {
+		    e.printStackTrace();
 		}
+		System.out.println("카카오 엑세스 토큰"+kakaoToken.getAccess_token()+kakaoToken.getRefresh_token());		
+		
+		return kakaoToken.getAccess_token();
+	}
+		 //토큰 발급 받기
+		 //String access_Token = memberService.getAccessToken(code);
+		 //System.out.println(access_Token);
+		 
+//		 //사용자 정보 가지고 오기 
+//		 MemberVO kakaoInfo = memberService.KakaoInfo(access_Token);
+//		 
+//		 //세션 형성 + request 내장 객체 가지고 오기
+//		 session = request.getSession();
+//		
+//		 System.out.println("accessToken: "+access_Token);
+//		 System.out.println("code:"+ code);
+//		 System.out.println("gender: "+ kakaoInfo.getGender());
+//		
+//		
+//		 //세션에 담기
+//		 if (kakaoInfo.getMemberName() != null) {
+//		      session.setAttribute("memberName", kakaoInfo.getMemberName());
+//		      session.setAttribute("access_Token", access_Token);
+//		      session.setAttribute("memberId", kakaoInfo.getMemberId());
+//		    }
+//		
 
 }
 

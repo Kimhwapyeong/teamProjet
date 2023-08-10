@@ -73,16 +73,33 @@ window.addEventListener('load', ()=>{
 	});
    
    let newX = 0;
+   let recPageNo = 1;
    // 추천 스테이 다음 버튼으로 넘기기
    BtnRecNext.addEventListener('click', ()=>{
 		newX -= 330;
+		if(document.querySelector('#recBox').style.transform.substr(12,5) == '-2970'){
+			newX = 0;
+		}
 		recBox.style.transform='translate3d('+newX+'px, 0px, 0px)';
+		recPageNo += 1;
+		if(recPageNo == 11){
+			recPageNo = 1;
+		}
+		recPage.innerHTML = recPageNo;
    })
 	
    // 추천 스테이 이전버튼
    BtnRecPrev.addEventListener('click', ()=>{
 	   newX += 330;
+	   if(document.querySelector('#recBox').style.transform.substr(12,3) == '0px'){
+		   newX = -2970;
+	   }
 	   recBox.style.transform='translate3d('+newX+'px, 0px, 0px)';
+		recPageNo -= 1;
+		if(recPageNo == 0){
+			recPageNo = 10;
+		}
+		recPage.innerHTML = recPageNo;
    })
    
    // 불릿 생성중 
@@ -91,6 +108,34 @@ window.addEventListener('load', ()=>{
 	   recBullet.addEventListener('click', (e)=>{
 		   e.classList.add('swiper-pagination-bullet-active');
 	   })
+   })
+   
+   let popNewX = 0;
+   let popPageNo = 1;
+   btnPopNext.addEventListener('click', ()=>{
+	   popNewX -= 440;
+	   if(document.querySelector('#popBox').style.transform.substr(12,5) == '-3960'){
+		   popNewX = 0;
+	   }
+	   popBox.style.transform='translate3d('+ popNewX +'px, 0px, 0px)';
+	   popPageNo += 1;
+	   if(popPageNo == 11){
+		   popPageNo = 1;
+	   }
+	   popPage.innerHTML = popPageNo;
+   })
+   
+   btnPopPrev.addEventListener('click', ()=>{
+	   popNewX += 440;
+	   if(document.querySelector('#popBox').style.transform.substr(12,3) == '0px'){
+		   popNewX = -3960;
+	   }
+	   popBox.style.transform='translate3d('+ popNewX +'px, 0px, 0px)';
+	   popPageNo -= 1;
+	   if(popPageNo == 0){
+		   popPageNo = 10;
+	   }
+	   popPage.innerHTML = popPageNo;
    })
 })
 window.addEventListener('resize', setMainImgsHeight);
@@ -183,8 +228,8 @@ function setMainImgsHeight(){
             id="main-new-pc">
             <div class="swiper-button-prev" id="BtnRecPrev"></div>
             <div class="swiper-button-next" id="BtnRecNext"></div>
-            <div class="swiper-pagination swiper-pagination-fraction"><span class="swiper-pagination-current">1</span> /
-                <span class="swiper-pagination-total">12</span></div>
+            <div class="swiper-pagination swiper-pagination-fraction"><span id="recPage" class="swiper-pagination-current">1</span> /
+                <span class="swiper-pagination-total">10</span></div>
             <div class="swiper-wrapper" id="recBox" style="transition-duration: 0ms; transform: translate3d(-0px, 0px, 0px);">
                 <c:forEach items="${ listStay }" var="stay" varStatus="status">
 	                <div class="swiper-slide stay_box" data-swiper-slide-index="${ status.index }"
@@ -198,11 +243,31 @@ function setMainImgsHeight(){
 	                                            class="_badge_txt__fonwF">EXCLUSIVE</span></div>
 	                                </div>
 	                            </span></div>
-	                        <div class="name">글림스</div>
-	                        <div class="other"><span>서울/중구</span><span>₩800,000 ~ ₩1,500,000</span></div>
+	                        <div class="name">${ stay.stayName }</div>
+	                        <div class="other"><span>${ stay.stayLoc }</span><span>₩${ stay.minPrice } ~ ₩${ stay.maxPrice }</span></div>
 	                    </a>
 	                    <ul>
-	                        <li class="btn_more"><a href="/findstay/glimpse">예약하기</a></li>
+	                        <li class="btn_more"><a href="/stay/room?stayName=${ stay.stayName }">예약하기</a></li>
+	                    </ul>
+	                </div>
+                </c:forEach>
+                <c:forEach begin="0" end="2" step="1" var="i">
+	                <div class="swiper-slide stay_box" data-swiper-slide-index="${ i+9 }"
+	                    style="z-index: 1; width: 330px;"><button type="button"
+	                        class="btn_like"><span>관심스테이</span></button><a href="/stay/room?stayName=${ listStay[i].stayName }">
+	                        <div role="img" aria-label="main_image" class="img"
+	                            style="background: url(/resources/images/${listStay[i].mainPic1.replace('\\','/')}) center center / cover no-repeat;">
+	                            <span>
+	                                <div class="_badge_badge_wrapper__h9IsV">
+	                                    <div class="_badge_exclusive__prNZN"><span
+	                                            class="_badge_txt__fonwF">EXCLUSIVE</span></div>
+	                                </div>
+	                            </span></div>
+	                        <div class="name">${ listStay[i].stayName }</div>
+	                        <div class="other"><span>${ listStay[i].stayLoc }</span><span>₩${ stay.minPrice } ~ ₩${ stay.maxPrice }</span></div>
+	                    </a>
+	                    <ul>
+	                        <li class="btn_more"><a href="/stay/room?stayName=${ stay.stayName }">예약하기</a></li>
 	                    </ul>
 	                </div>
                 </c:forEach>
@@ -232,10 +297,10 @@ function setMainImgsHeight(){
 	                                </div>
 	                            </span></div>
 	                        <div class="name">${ stay.stayName }</div>
-	                        <div class="other"><span>${ stay.stayLoc }</span><span>₩400,000 ~ ₩500,000</span></div>
+	                        <div class="other"><span>${ stay.stayLoc }</span><span>₩${ stay.minPrice } ~ ₩${ stay.maxPrice }</span></div>
 	                    </a>
 	                    <ul>
-	                        <li class="btn_more"><a href="/findstay/stay-naum">예약하기</a></li>
+	                        <li class="btn_more"><a href="/stay/room?stayName=${ stay.stayName }">예약하기</a></li>
 	                    </ul>
 	                </div>
             	</c:forEach>
@@ -249,18 +314,18 @@ function setMainImgsHeight(){
 	<!-- 인기순 -->
 	<div class="container_full main_viprecom">
 		<div class="container main_recommend">
-			<div class="recom_title false">당신께만 추천하는 스테이</div>
+			<div class="recom_title false">추천 인기 스테이</div>
 			<button type="button" class="btn_refresh">새로고침</button>
 			<div
 				class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events stay_list"
 				id="main-recommend-pc">
-				<div class="swiper-button-prev"></div>
-				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev" id="btnPopPrev"></div>
+				<div class="swiper-button-next" id="btnPopNext"></div>
 				<div class="swiper-pagination swiper-pagination-fraction">
-					<span class="swiper-pagination-current">1</span> / <span
-						class="swiper-pagination-total">6</span>
+					<span id="popPage" class="swiper-pagination-current">1</span> / <span
+						class="swiper-pagination-total">10</span>
 				</div>
-				<div class="swiper-wrapper"
+				<div class="swiper-wrapper" id="popBox"
 					style="transition-duration: 0ms; transform: translate3d(-0px, 0px, 0px);">
 					<c:forEach items="${ listPopStay }" var="stay" varStatus="status">
 						<div class="swiper-slide stay_box"
@@ -278,7 +343,27 @@ function setMainImgsHeight(){
 									<span>${ stay.stayLoc }</span><span>₩90,000 ~ ₩196,000</span>
 								</div></a>
 							<ul>
-								<li class="btn_more"><a href="/findstay/daily_rental_house">예약하기</a></li>
+								<li class="btn_more"><a href="/stay/room?stayName=${ stay.stayName }">예약하기</a></li>
+							</ul>
+						</div>
+					</c:forEach>
+					<c:forEach begin="0" end="1" step="1" var="i">
+						<div class="swiper-slide stay_box"
+							data-swiper-slide-index="${ i+9 }" style="z-index: 1; width: 440px;">
+							<button type="button" class="btn_like">
+								<span>관심스테이</span>
+							</button>
+							<a href="/stay/room?stayName=${ listPopStay[i].stayName }"><div role="img"
+									aria-label="main_image" class="img"
+									style="background: url(/resources/images/${listPopStay[i].mainPic1.replace('\\','/')}) center center/cover no-repeat;">
+									<span><div class="_badge_badge_wrapper__h9IsV"></div></span>
+								</div>
+								<div class="name">${ listPopStay[i].stayName }</div>
+								<div class="other">
+									<span>${ listPopStay[i].stayLoc }</span><span>₩90,000 ~ ₩196,000</span>
+								</div></a>
+							<ul>
+								<li class="btn_more"><a href="/stay/room?stayName=${ listPopStay[i].stayName }">예약하기</a></li>
 							</ul>
 						</div>
 					</c:forEach>
@@ -288,7 +373,15 @@ function setMainImgsHeight(){
 				class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events stay_list"
 				id="main-recommend-mobile">
 				<div
-					class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"></div>
+					class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+					<span
+						class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span
+						class="swiper-pagination-bullet"></span><span
+						class="swiper-pagination-bullet"></span><span
+						class="swiper-pagination-bullet"></span><span
+						class="swiper-pagination-bullet"></span><span
+						class="swiper-pagination-bullet"></span>
+				</div>
 				<div class="swiper-wrapper" style="transition-duration: 0ms;">
 					<c:forEach items="${ listPopStay }" var="stay" varStatus="status">
 						<div class="swiper-slide stay_box"
@@ -313,7 +406,7 @@ function setMainImgsHeight(){
 									<span>${ stay.stayLoc }</span><span>₩260,000 ~ ₩360,000</span>
 								</div></a>
 							<ul>
-								<li class="btn_more"><a href="/findstay/bengdi-1967">예약하기</a></li>
+								<li class="btn_more"><a href="/stay/room?stayName=${ stay.stayName }">예약하기</a></li>
 							</ul>
 						</div>
 					

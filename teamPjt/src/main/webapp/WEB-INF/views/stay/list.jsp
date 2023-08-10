@@ -335,9 +335,7 @@
 	        	 }
 	           
 	           
-	           	
-	           	
-	           	
+	           		           	
 	           	
         	};
         
@@ -356,7 +354,7 @@
 		           	//let slideImgList = document.querySelectorAll('.swiper-wrapper'); // 슬라이드 이미지 인덱스 선택하기
 		           	//let slideImg = slideImgList.querySelectorAll('li'); // 선택된 index의 이미지
  		           	let slideBtn = document.querySelectorAll('.swiper-button-next');
-		           	let idx = 0;
+		           	var idx = 0;
 		           	slideBtn.forEach((button, index) => { // 슬라이드 버튼의 인덱스 0
 		                button.addEventListener('click', () => { // 인덱스가 0인 슬라이드 버튼을 눌렀을 떄
 		                    console.log(index);
@@ -365,10 +363,14 @@
 		                    let slideImg = slideImgList.querySelectorAll('li'); // 그 칸의 이미지
 		                    //console.log(slideImg);
 		                    	
-		                    idx = (idx + 1) % slideImg.length;
-		                    
+		                    //idx = (idx + 1) % slideImg.length;
+		                    idx = (1 + idx);
+		                    if(slideImg === idx){
+		                    	idx = 0;
+		                    }
 		                    
 		                    console.log(idx);
+		                    
 		                    slideImgList.innerHTML = slideImg[idx].outerHTML;
 		                })
 		            })
@@ -1099,7 +1101,8 @@
                     <div class="sel_map">
                         <!-- <div class="map_img_off" role="presentation"></div> -->
                     </div>
-                    <button type="reset" class="btn_reset">초기화</button>
+                    <!-- <a href=""><button type="button" class="btn_reset" id="refreshButton">초기화</button></a> -->
+                    <a href="" class="btn_reset">초기화</button></a>
                     <div class="search_btn_wrapper"><button type="submit" class="btn_search">SEARCH</button>
                     </div>
         </form>
@@ -1148,7 +1151,7 @@
     </div>
     </div>
     </div>
-
+    
 	<div class="container findstay_list  ">
 		<div class="flist_wrap" id="stayList">
 			<c:forEach items="${list}" var="list" step="1">
@@ -1177,13 +1180,13 @@
 										style="background: url(/resources/images/${list.mainPic1.replace('\\','/')}) center center / cover no-repeat; cursor: pointer; width: 410px;">
 									</li>
 									
-									<c:forEach items="${stayImg}" var="stayImg" step="1">
-										<c:if test="${stayImg.stayNo eq list.stayNo}">
-											<li class="swiper-slide img swiper-slide-active"
-												style="background: url(/resources/images/jyp.jpg) center center / cover no-repeat; cursor: pointer; width: 410px;">
-											</li>
+ 									<c:forEach items="${stayImg}" var="img" step="1">
+										<c:if test="${img.stayNo eq list.stayNo}">
+											<!-- <li class="swiper-slide img swiper-slide-active" style="background: url(/resources/images/jyp.jpg) center center / cover no-repeat; cursor: pointer; width: 410px;"></li> -->
+											<li class="swiper-slide img swiper-slide-active" style="background-img: url(/resources/images/${img.fileName.replace('\\','/')}) center center / cover no-repeat; cursor: pointer; width: 410px;"></li>
 										</c:if>
 									</c:forEach>
+									
 								</div>
 								</a>
 								<div class="_badge_badge_wrapper__h9IsV">
