@@ -129,6 +129,13 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 		return null;
 	}
 	
+	// 숙소 관리 - 객실 관리
+	@Override
+	public List<RoomVO> roomInfo(String memberId, Model model) {
+		List<RoomVO> room = mypageMapper.roomInfo(memberId);
+		model.addAttribute("room", room);
+		return null;
+	}
 	
 	@Override
 	public List<Map<String, String>> reservinfo(Model model) {

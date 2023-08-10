@@ -16,6 +16,7 @@ import com.gogo.vo.FileuploadVO;
 import com.gogo.vo.MemberVO;
 import com.gogo.vo.QuestionVO;
 import com.gogo.vo.ReservedVO;
+import com.gogo.vo.RoomVO;
 import com.gogo.vo.StayVO;
 
 import lombok.extern.log4j.Log4j;
@@ -50,6 +51,8 @@ public interface mypageService {
 	// 숙소 관리
 	public List<StayVO> getStay(Model model);
 	
+	// 숙소 관리 - 객실 조회
+	public List<RoomVO> roomInfo(String memberId, Model model);
 	
 	// 예약 관리
 	public List<Map<String, String>> reservinfo(Model model);

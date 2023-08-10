@@ -82,6 +82,27 @@
 	</select>
 	
 	
+	<!-- 숙소 관리 - 객실 보기 -->
+	<select id="roomInfo" resultType="com.gogo.vo.RoomVO">
+		SELECT
+		    r.roomname,
+		    r.roominfo AS roominfo,
+		    a.uploadpath || a.uuid || '_' || a.filename AS roomPhoto
+		FROM
+		    room r
+		JOIN
+		    stay s ON r.stayno = s.stayno
+		JOIN
+		    attach a ON s.stayno = a.stayno
+		JOIN
+		    member m ON s.memberid = m.memberid
+		WHERE
+		    m.memberid = #{memberId}
+		    AND a.uploadpath LIKE 'room%'
+		    AND a.filename LIKE '%1.jpg'
+		    AND a.filename LIKE '%' || r.roomname || '%'
+	</select>
+	
 	<!-- 예약 관리 -->
 	<select id="reservinfo" resultType="java.util.Map">
 		SELECT

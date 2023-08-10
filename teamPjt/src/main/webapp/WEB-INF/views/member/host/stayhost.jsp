@@ -14,6 +14,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>stayhost</title>
     <link rel="stylesheet" href="./css/host/host.css">
+    
+<script type="text/javascript">
+
+window.addEventListener('load', function(){
+    var roomView = document.getElementById('roomView');
+    var roomViewBtn = document.getElementById('roomViewBtn');
+    // 기본값 보여주지 않기
+    var isRoomViewVisible = false;
+
+    roomView.style.display = 'none';
+
+    roomViewBtn.addEventListener('click', function(){ 
+        if (isRoomViewVisible) {
+            roomView.style.display = 'none';
+        } else {
+            roomView.style.display = '';
+        }
+        
+        // 버튼 누를 때 마다 true / false 변경
+        isRoomViewVisible = !isRoomViewVisible;
+    });
+});
+
+
+</script>
+
 </head>
 <body style="">
 
@@ -79,14 +105,35 @@
                                            <p></p>
                                                <!-- =============================== 숙소 설명 ============================================-->
                                            <div class="option" style="line-height: 1.5;">${vo.stayInfo}<br></div>
-                                           <div>
+                                           <div style="display: flex; gap: 10px;">
 	                                           <button type="button" class="btn_bk btn_sm findstay_btn" style=" width:130px; margin-left:0px; margin-top:30px; background-color:white">
 	                                           <a href="/addroom?stayNo=${vo.stayNo}" style='color: black;'>객실 추가 등록</a></button>
                                            </div>
-                                           
+                                           <button id="roomViewBtn" style="margin-top:20px; text-decoration: underline;">객실 보기</button>
                                        </div>
                                </div>
-                               
+                                
+                                
+                                
+                                <!-- 객실 정보 -->
+                                <!-- ▶▶▶  forEach ▶▶▶  -->
+                                <div class="stay_view" id="roomView" style="display:flex; justify-content: center; width:400px">
+                               		<c:forEach items="${room}" var="room" step="1">
+	                                	<div id="divRoom">
+	                                	<a href="../../../stay/roomInfo?stayName=${vo.stayName }&roomName=${room.roomName}">
+	                                       <div class="photo" style="background-image: url('/resources/images/${room.roomPhoto.replace('\\','/')}'); background-repeat: no-repeat;
+	                                        background-position: center center; background-size: cover; width: 330px; height: 200px; margin-top:50px;">
+	                                        </div>
+	                                    </a>  
+	                                    <div class="reserv_info" style="margin-top:10px;">
+	                                           <div class="stay" style= "font-size:15px;font-weight:bold">${room.roomName }</div>
+	                                           <p></p>
+	                                           <div class="option" style="line-height: 2.5;">${room.roomInfo }<br></div>
+	                                       </div>
+	                                    </div>
+                                	</c:forEach>
+                                 </div>
+                                 
                                </c:if>
                                </c:forEach>
                            </div>

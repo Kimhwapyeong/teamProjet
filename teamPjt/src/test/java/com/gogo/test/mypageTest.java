@@ -16,6 +16,7 @@ import com.gogo.vo.FileuploadVO;
 import com.gogo.vo.MemberVO;
 import com.gogo.vo.QuestionVO;
 import com.gogo.vo.ReservedVO;
+import com.gogo.vo.RoomVO;
 import com.gogo.vo.StayVO;
 
 import lombok.extern.log4j.Log4j;
@@ -164,6 +165,12 @@ public class mypageTest {
 		List<Map<String, String>> list = mapper.completedList("user1");
 		log.info("list : " + list);
 		
+	}
+	
+	@Test
+	public void roomInfo() {
+		List<RoomVO> list = mapper.roomInfo("host1");
+		log.info("list : " + list);
 	}
 	
 	

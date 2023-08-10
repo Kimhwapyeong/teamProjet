@@ -63,7 +63,7 @@
                                     <!-- script -->
                                      
 										<!-- 차트-->
-										<div style="margin-left: 5%;">
+										<div style="margin:0px; margind-right:0px; width : 400px; display : flex">
 											<h6 style="font-weight:bold; ">연령대별 이용자 현황</h6>
 										    <div style="width: 350px; height: 350px; margin-top : 20px; margine-left:30px">
 											<canvas id="myChart"></canvas>

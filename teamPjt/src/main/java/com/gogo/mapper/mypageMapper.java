@@ -11,6 +11,7 @@ import com.gogo.vo.FileuploadVO;
 import com.gogo.vo.MemberVO;
 import com.gogo.vo.QuestionVO;
 import com.gogo.vo.ReservedVO;
+import com.gogo.vo.RoomVO;
 import com.gogo.vo.StayVO;
 
 public interface mypageMapper {
@@ -41,6 +42,9 @@ public interface mypageMapper {
 	// ▶▶▶  host ▶▶▶
 	// 숙소 관리
 	public List<StayVO> getStay();
+	
+	// 숙소 관리 - 객실 조회
+	public List<RoomVO> roomInfo(String memberId);
 	
 	// 예약 관리
 	public List<Map<String, String>> reservinfo();

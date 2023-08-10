@@ -46,21 +46,16 @@ public class HostController extends CommonRestController{
 	myPagingService paging;
 	
 	// 숙소 관리
-	@GetMapping("stayhost")
-	public void stayhost(Model model, Criteria cri, HttpServletRequest request) {
+	@GetMapping(value = {"stayhost", "roomInfo"})
+	public String stayhost(Model model, Criteria cri, HttpServletRequest request) {
 		mypageService.getStay(model);
 		HttpSession session = request.getSession();
-		System.out.println((String)session.getAttribute("memberId"));
 		String memberId = (String)session.getAttribute("memberId");
-		cri = new Criteria();
-		cri.setAmount(5);
-		cri.setPageNo(1);
-		int totalCnt = paging.hostayCnt(cri, memberId);
-		
 		log.info("memberId : " + memberId);
-		log.info("totalCnt : " + totalCnt);
-		PageDto pageDto = new PageDto(cri, totalCnt);
-		model.addAttribute("pageDto", pageDto);
+		
+		mypageService.roomInfo(memberId, model);
+		
+		return "member/host/stayhost";
 	}
 	
 	// 예약 관리
