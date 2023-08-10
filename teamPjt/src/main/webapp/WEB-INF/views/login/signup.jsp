@@ -267,7 +267,7 @@ function item_check(item) {
 							  <tr>
 							      <th class="tit">비밀번호 확인 *</th>
 							      	<td>
-							        	<input type="password" id="pwCheck" name="pw_ck" class="chk" placeholder="비밀번호를 한 번 더 입력하세요." value="User1234">
+							        	<input type="password" id="pwCheck" name="pw_ck" class="chk" placeholder="비밀번호를 한 번 더 입력하세요." value="">
 							        	<div class="valid">비밀번호를 한 번 더 입력하세요.</div>
 							    	</td>
 							   </tr> 	
