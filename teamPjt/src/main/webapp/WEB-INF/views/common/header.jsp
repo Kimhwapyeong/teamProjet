@@ -433,7 +433,6 @@ document.addEventListener('DOMContentLoaded', function() {
 													지원</a></li>
 											<li><a href="/member/admin/statistics?role=admin">통계
 													및 분석</a></li>
-											
 											<li class="login"><a href="/logout">로그아웃</a></li>
 										</ul>
 									</div>
