@@ -1099,7 +1099,7 @@
                     <div class="sel_map">
                         <!-- <div class="map_img_off" role="presentation"></div> -->
                     </div>
-                    <a href="#"><button type="reset" class="btn_reset">초기화</button></a>
+                    <button type="reset" class="btn_reset">초기화</button>
                     <div class="search_btn_wrapper"><button type="submit" class="btn_search">SEARCH</button>
                     </div>
         </form>

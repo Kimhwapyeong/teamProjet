@@ -104,7 +104,8 @@
 					<div class="dayday" role="presentation">
 						<div class="btn_select ">날짜를 선택해주세요.</div>
 					</div>
-					<a href="/reserved/reserved?stayName=${roomInfo.STAYNAME }&roomName=${roomInfo.ROOMNAME }&roomNo=${roomInfo.ROOMNO}"><button type="button" class="btn_bk pc_only">결제하기</button></a>
+					<%-- <a href="/reserved/reserved?stayName=${roomInfo.STAYNAME }&roomName=${roomInfo.ROOMNAME }&roomNo=${roomInfo.ROOMNO}"><button type="button" class="btn_bk pc_only">결제하기</button></a> --%>
+					<a href="/reserved/reserved?roomNo=${roomInfo.ROOMNO}"><button type="button" class="btn_bk pc_only">결제하기</button></a>
 
 
 
