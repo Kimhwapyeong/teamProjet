@@ -58,7 +58,7 @@
                         
                         
                         <div class="mypage_content">
-                            <div class="reserv_wrap mypage-reservation-info">
+                            <div class="reserv_wrap mypage-reservation-info" style="border-bottom: none;">
                                 <div class="reserv_box accepted">
                                     <!-- script -->
                                      
