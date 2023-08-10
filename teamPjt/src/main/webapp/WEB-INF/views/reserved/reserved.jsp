@@ -6,6 +6,14 @@
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	<script src='/resources/js/reserved/payment.js'></script>
 <head>
+<style>
+	.quantity-button{
+	
+		position: absolute;
+		left: 35.5%;
+	}
+
+</style>
 <script>
 
 			
@@ -57,8 +65,8 @@
 					
 					
 						<div class="dd">
-							<c:if test="${not empty reserved_day}" var="res">
-								<input style="font-size: 12px; color:#666; background-color:#e6e6e6;" type="text" class="form_style" name="reserved_date" value='' disabled>
+							<c:if test="${empty reserved.checkIn}" var="res">
+								<input style="font-size: 12px; color:#666; background-color:#e6e6e6;" type="text" class="form_style" name="checkInOut" value='예약 날짜를 선택해 주세요!' disabled>
 								<button onclick="btnWhenFunction()" style="font-size: 12px; color:black;  text-align:left;" class="form_style" >예약 날짜 선택하기</button>
 							</c:if>
 							<c:if test="${not res}">
@@ -77,24 +85,63 @@
 							</script>			
 						</div></li>
 					
-					<hr>	
+					<hr>
+						<li><div class="dt" style="position:relative;">인원 수</div>
+							<div class="dd">
+								
+									<input style="width:50px; text-align:center;font-size: 12px; color:#666; background-color:#e6e6e6;" type="text" class="form_style" id="quantity" name="quantity" value="${room.stdPerson}" disabled>
+									<button type="button" style="top:46.7%;" class="quantity-button" onclick="adjustQuantity(1)">△</button>
+									<button type="button" style="top:48%;" class="quantity-button" onclick="adjustQuantity(-1)">▽</button>
+								
+								
+								<script>
+									
+									var stdPerson = '${room.stdPerson}'; // 최소 인원
+									var overPerson = '${room.overPerson}'; // 최대 인원
+								
+							        function adjustQuantity(change) {
+							            var quantityInput = document.getElementById("quantity");
+							            var currentValue = parseInt(quantityInput.value);
+							            var newValue = currentValue + change;
+							            
+							            if (newValue >= 1 && newValue <= overPerson) {
+							                quantityInput.value = newValue;
+							                memberCountValue.innerHTML = newValue+'명';
+							                changeMemberCount(newValue);
+							                
+							            } else if (newValue > overPerson) {
+							                alert('해당 스테이의 최대 인원은 ' + overPerson + '명입니다.');
+							            }
+							        }
+								</script>			
+							</div>
+						</li>
+					
+					<hr>
+					
+						
 					<li style="height:200px;"><div class="dt" style="position:relative;">가격</div>
 						<div class="dd">
-							<span style="font-size:0.85em; position:absolute; right:40%; top:50%; color: #66666682;">객실 요금</span><br>
-							<span style="font-size:0.85em; position:absolute; right:3%; top:50%; color: #66666682;">₩${room.price}</span><br>
-							<span style="font-size:0.85em; position:absolute; right:40%; top:53%; color: #66666682;">옵션</span><br>
-							<span style="font-size:0.85em; position:absolute; right:5%; top:53%; color: #66666682;">-</span><br>
-							<span style="font-size:0.85em; position:absolute; right:40%; top:56%; color: #66666682;">할인 금액</span><br>
-							<span style="font-size:0.85em; position:absolute; right:5%; top:56%; color: #66666682;">-</span><br>
-							<span style="font-size:0.85em; position:absolute; right:40%; top:59%; color: #66666682;">예약일 수</span><br>
-								
-						<c:if test="${not empty reservedDay or reservedDay ne 0}" var="res">									
-							<span style="font-size:0.85em; position:absolute; right:4%; top:59%; color: #66666682;">${reservedDay}일</span><br>
-						</c:if>	
-						<c:if test="${not res}">
+							<span style="font-size:0.85em; position:absolute; right:40%; top:56%; color: #66666682;">객실 요금</span><br>
+							<span style="font-size:0.85em; position:absolute; right:3%; top:56%; color: #66666682;">₩${room.price}</span><br>
+							<span style="font-size:0.85em; position:absolute; right:40%; top:59%; color: #66666682;">옵션</span><br>
 							<span style="font-size:0.85em; position:absolute; right:5%; top:59%; color: #66666682;">-</span><br>
+							<span style="font-size:0.85em; position:absolute; right:40%; top:62%; color: #66666682;">인원 수</span><br>
+							<span style="font-size:0.85em; position:absolute; right:4%; top:62%; color: #66666682;" id="memberCountValue">${room.stdPerson}명</span><br>
+							<span style="font-size:0.85em; position:absolute; right:40%; top:65%; color: #66666682;">예약일 수</span><br>
+								
+						<c:if test="${not empty reservedDay and reservedDay ne '0'}">									
+							<span style="font-size:0.85em; position:absolute; right:4%; top:65%; color: #66666682;">${reservedDay}일</span><br>
 						</c:if>	
-							<span style="font-size:2em; position:absolute; right:3%; top:64%;" id="amount" data-amount="${room.price}">₩${room.price}</span>						
+						<c:if test="${reserved.checkIn eq '' or empty reserved.checkIn}" var='res'>
+							<span style="font-size:0.85em; position:absolute; right:5%; top:65%; color: #66666682;">-</span><br>
+						</c:if>
+						<c:if test="${res}">
+							<span style="font-size:2em; position:absolute; right:3%; top:68%;" id="amount" data-amount="">₩0</span>						
+						</c:if>
+						<c:if test="${not res}">
+							<span style="font-size:2em; position:absolute; right:3%; top:68%;" id="amount" data-amount="${room.price}">₩${room.price}</span>						
+						</c:if>
 						</div></li>
 					
 					<hr>
@@ -128,12 +175,21 @@
 		var roomNo = '${reserved.roomNo}';
 		var r_checkIn = '${reserved.checkIn}';
 		var r_checkOut = '${reserved.checkOut}';
-		var memberCount = '${reserved.memberCount}';
+		var memberCount = '${room.stdPerson}';
+				
 		var memberId = '${sessionScope.memberId}'; // sessionScope.userId 받아와야 함
 		var talkSome = $('#talk').val();
 		
+		function changeMemberCount(value){
+			
+			memberCount = value;
+		}
+		
+		
 		
 		$(function(){
+			
+			
 			
 			$('#talk').change(function(){
 				
@@ -211,6 +267,10 @@
 					} else if(pg==''){
 						http://localhost:8080/addstay
 						alert('결제 수단을 선택해 주세요.');
+						return false;
+					} else if('${reserved.checkIn}'==''){
+						
+						alert('예약 날짜를 선택해 주세요.');
 						return false;
 					}
 						

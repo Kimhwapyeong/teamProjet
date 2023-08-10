@@ -155,7 +155,7 @@
         }
     });
 
-    let sock = new SockJS("http://localhost:8080/echo?roomId=${roomId}&socketType=chat");
+    let sock = new SockJS("http://localhost:8080/echo?roomId=${roomId}&socketType=chat&stayNoMsg=${stayNoMsg}");
     console.log('sock : ', sock);
     sock.onmessage = onMessage;
     sock.onclose = onClose;
@@ -240,7 +240,7 @@
             const hours = ('0' + currentDate.getHours()).slice(-2);
             const minutes = ('0' + currentDate.getMinutes()).slice(-2);
 
-            const formattedDate = "(" + year + "/" + month + "/" + day + " " + hours + "시" + minutes + "분)";
+            const formattedDate = "(" + year + "/" + month + "/" + day + " " + hours + ":" + minutes + ")";
             
             return formattedDate;
      }
@@ -252,10 +252,10 @@
         type = "OUT";
         if(role=='<호스트>'){
         	
-	        sock.send("<span style='color:brown;'>"+ role +"</span><span id='OUT' style='padding:5px; color:red;'>${memberName}님 연결 해제</span><span id='OUT'>"+formatAndDisplayDate()+"</span>");
+	        sock.send("<span style='color:brown;'>"+ role +"</span><span id='OUT' style='padding:5px; color:red;'>${memberName}님 "+roomId.value+"번 채팅방 연결 해제</span><span id='OUT'>"+formatAndDisplayDate()+"</span>");
         } else {
         	
-	        sock.send("<span style='color:blue;'>"+ role +"</span><span id='OUT' style='padding:5px; color:red;'>${memberName}님 연결 해제</span><span id='OUTT'>"+formatAndDisplayDate()+"</span>");
+	        sock.send("<span style='color:blue;'>"+ role +"</span><span id='OUT' style='padding:5px; color:red;'>${memberName}님 "+roomId.value+"번 채팅방 연결 해제</span><span id='OUT'>"+formatAndDisplayDate()+"</span>");
         }
     }
     // 입장 메세지 출력

@@ -100,7 +100,7 @@
 				
 				
 				} else {
-					alert('[결제 오류] 거래 번호(imp_uid)가 존재하지 않습니다.');
+					alert('[결제 오류] 거래 번호(imp_uid)가 존재하지 않습니다.\n다시 시도해 주세요!');
 					location.href='/main';
 				}
 			})

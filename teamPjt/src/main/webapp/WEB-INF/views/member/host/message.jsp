@@ -6,10 +6,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>reservation</title>
+    <title>Message</title>
     <link rel="stylesheet" href="./css/host/host.css">
 </head>
-
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .room-list {
+            list-style: none;
+            padding: 0;
+        }
+        .room-item {
+            border-bottom: 1px solid #ddd; /* 변경: border-bottom 추가 */
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+            width: 500px;
+        }
+        .room-title {
+            font-weight: bold;
+            margin-top: 20px; /* 추가: 타이틀 위 여백 */
+            margin-left: 15px;
+        }
+        .divider {
+            border-top: 1px solid #ddd; /* 추가: 분할선 디자인 */
+            margin-top: 20px; /* 추가: 분할선 위 여백 */
+            width: 500px;
+            margin-left: 5px;
+        }
+    </style>
    <body style="">
    
    <!-- 헤더 -->
@@ -43,10 +69,10 @@
                        <div class="newmypage_menu pc_only">
                            <ul>
                                <li class=""><a href="./stayhost">숙소 관리</a></li>
-                               <li class="active"><a href="./reservation">예약 관리 </a></li>
+                               <li class=""><a href="./reservation">예약 관리 </a></li>
                                <li class=""><a href="./income">수입 현황</a></li>
                                <li class=""><a href="./guide">호스트가이드</a></li>
-                               <li class=""><a href="./message">메세지</a></li>
+                               <li class="active"><a href="./message">메세지</a></li>
                            </ul>
                        </div>
                        <div class="mypage_content">
@@ -57,74 +83,29 @@
 								    
                                  </div>
                                  
-                                       <p class="name"><span class="ellipsis"></span></p>
+                                     
+<div class="room-title">방 목록</div>
+    <div class="divider"></div> <!-- 추가: 분할선 -->
+    <ul class="room-list">
+    		
+    		<c:forEach items="${messageRoomList}" var="messageRoom">
+    			<c:if test="${not empty messageRoom.memberId}">
+		            <li class="room-item">
+		                방 번호: ${messageRoom.roomId} | 회원 아이디: ${messageRoom.memberId} | 방 이름: ${messageRoom.roomName}
+		            </li>
+	            </c:if>
+            </c:forEach>
+    </ul>			
+										
+								    
 								
-                                <table class="table">
-								    <thead>
-								        <tr>
-								            <th>객실 번호</th>
-								            <th>회원 아이디</th>
-								            <th>예약일</th>
-								            <th>체크인</th>
-								            <th>체크아웃</th>
-								            <th>예약 인원</th>
-								        </tr>
-								    </thead>
-								    <tbody>
-								        <c:set var="prevRoomNo" value="" />
-								        <c:set var="firstRow" value="true" />
 								
-								        <!-- ▶▶▶ forEach ▶▶▶ -->
-								        <c:forEach items="${list}" var="reserve" step="1">
-				                        <c:if test="${sessionScope.memberId == reserve.STAYMEMBERID}">
-				                        
-								            <c:set var="currentRoomNo" value="${reserve.ROOMNO}" />
-											
-											<!-- 전객실번호 존재 x or 현객실번호=전객실번호 -> 출력x -->
-								            <c:if test="${not empty prevRoomNo and !currentRoomNo.equals(prevRoomNo)}">
-								                </tbody>
-								            </c:if>
-											
-											<!-- 현객실번호 != 전객실번호 <hr> 태그로 구분 -->
-								            <c:if test="${firstRow or not currentRoomNo.equals(prevRoomNo)}">
-								                <tbody>
-								                    <tr>
-								                        <td colspan="6"><hr></td>
-								                    </tr>
-								                </tbody>
-								            </c:if>
-								
-								            <tbody>
-								                <tr>
-								                    <td>${reserve.ROOMNO}</td>
-								                    <td>${reserve.RESERVATIONMEMBERID}</td>
-								                    <td>${reserve.REGDATE}</td>
-								                    <td>${reserve.CHECKIN}</td>
-								                    <td>${reserve.CHECKOUT}</td>
-								                    <td>${reserve.MEMBERCOUNT}</td>
-								                </tr>
-								            </tbody>
-								
-								            <!-- 변수 업데이트 -->
-								            <c:set var="prevRoomNo" value="${currentRoomNo}" />
-								            <c:set var="firstRow" value="false" />
-			                           
-			                            </c:if>
-								        </c:forEach>
-								
-								        <!-- 마지막 그룹 닫기 -->
-								        <c:if test="${not firstRow}">
-								            </tbody>
-								        </c:if>
-								    </tbody>
-								</table>
-								
-                                </div>
+                                
                            </div>
                            
 
                            <!-- =============================== 페이징 ============================================-->
-                           <div class="paging"><a href="/" class="prev" title="이전 페이지">이전 페이지</a><a href="/"
+                           <div style="height:100px;" class="paging"><a href="/" class="prev" title="이전 페이지">이전 페이지</a><a href="/"
                                    class="on">1</a><a href="/" class="next" title="다음 페이지">다음 페이지</a></div>
                        </div>
                    </div>

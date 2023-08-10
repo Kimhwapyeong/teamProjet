@@ -43,13 +43,9 @@ public class ReservedController {
 		
 		String memberId = String.valueOf(session.getAttribute("memberId"));
 		
-		// 테스트를 위해 임의로 정보 삽입
 		// 여기서 예약 페이지에서 보여줄 데이터를 설정한다.
-		reserved.setRoomNo("3");
+		reserved.setRoomNo(reserved.getRoomNo());
 		reserved.setMemberId(memberId);
-		reserved.setCheckIn("2023/08/21");
-		reserved.setCheckOut("2023/08/23");
-		reserved.setMemberCount("3");
 		
 		service.goReserved(reserved, model);
 	}
@@ -78,7 +74,8 @@ public class ReservedController {
 				
 		reserved.setCheckIn(reserved_checkIn);
 		reserved.setCheckOut(reserved_checkOut);
-		String res =service.goReserved(reserved, model);
+		
+		String res = service.goReserved(reserved, model);
 		
 		if("search".equals(btnYN)) {
 			res = "/stay/list";

@@ -61,7 +61,7 @@ public class EchoHandler extends TextWebSocketHandler{
     	
     	
     	String roomId = (String) session.getAttributes().get("roomId");
-
+    	String stayNoMsg = (String) session.getAttributes().get("stayNoMsg");
         // roomId가 null인 경우 처리
         if (roomId == null) {
             // 예외를 던지거나, 기본값을 설정합니다.
@@ -101,6 +101,7 @@ public class EchoHandler extends TextWebSocketHandler{
 	        		map.put("roomId", roomId);
 	        		map.put("type", "ENTER");
 	        		map.put("writer", writer);
+	        		map.put("stayNoMsg", stayNoMsg);
 	        		service.insertChatting(map);
 	        	}
         }
@@ -121,7 +122,7 @@ public class EchoHandler extends TextWebSocketHandler{
             // 메시지가 도착할 때마다 메시지를 저장
             Map<String, Object> map = new HashMap<String, Object>();
             String writer = (String) session.getAttributes().get("memberId");
-
+            String stayNoMsg = (String) session.getAttributes().get("stayNoMsg");
             // writer가 null인 경우 처리
             if (writer == null) {
                 // 예외를 던지거나, 기본값을 설정합니다.
@@ -136,6 +137,7 @@ public class EchoHandler extends TextWebSocketHandler{
                 map.put("roomId", roomId);
                 map.put("type", "TALK");
                 map.put("writer", writer);
+                map.put("stayNoMsg", stayNoMsg);
                 service.insertChatting(map);
             } 
         } else {
@@ -157,6 +159,7 @@ public class EchoHandler extends TextWebSocketHandler{
 		        //System.err.println("socketType : "+socketType);
 		
 		        roomId = (String) session.getAttributes().get("roomId");
+		        String stayNoMsg = (String) session.getAttributes().get("stayNoMsg");
 		        roomSessions.get(roomId).remove(session);
 		        // roomId가 null인 경우 처리
 		        if (roomId == null) {
@@ -186,6 +189,8 @@ public class EchoHandler extends TextWebSocketHandler{
 			        		map.put("roomId", roomId);
 			        		map.put("type", "OUT");
 			        		map.put("writer", writer);
+			        		map.put("stayNo", stayNoMsg);
+			        		map.put("stayNoMsg", stayNoMsg);
 			        		service.insertChatting(map);
 			        	}
 		        }

@@ -4,11 +4,11 @@
 <mapper namespace="com.gogo.mapper.MessageMapper">
 
 	<insert id="insertMessage">
-		insert into message values(messageseq.nextval, #{content}, sysdate, #{memberId}, #{roomId}, #{type})
+		insert into message values(messageseq.nextval, #{content}, sysdate, #{memberId}, #{roomId}, #{type}, #{stayNo})
 	</insert>
 	
 	<select id="getSysdate" resultType="String">
-		SELECT TO_CHAR(sysdate, 'YY/MM/DD HH24"시"MI"분"') AS formatted_date
+		SELECT TO_CHAR(sysdate, 'YY/MM/DD HH24:MI') AS formatted_date
 		FROM dual
 	</select>
 	
@@ -72,7 +72,7 @@
 		    SELECT MIN(regdate)
 		    FROM Message
 		    WHERE roomId = m.roomId
-		  )
+		  ) order by regdate desc
 	</select>
 
 	

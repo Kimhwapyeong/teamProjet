@@ -40,11 +40,12 @@ public class MessageController {
 	
 	
 	@GetMapping("chat")
-	public void chatGet(@RequestParam(required = false) String roomId
+	public void chatGet(@RequestParam(required = false) String stayNoMsg
+						, @RequestParam(required = false) String roomId
 						, HttpSession session
 						, Model model) throws Exception {
 		
-		service.chattingGet(roomId ,session, model);
+		service.chattingGet(stayNoMsg, roomId, session, model);
 		
 	}
 	

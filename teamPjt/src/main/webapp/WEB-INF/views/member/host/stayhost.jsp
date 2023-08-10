@@ -50,6 +50,7 @@
                                <li class=""><a href="./reservation">예약 관리 </a></li>
                                <li class=""><a href="./income">수입 현황</a></li>
                                <li class=""><a href="./guide">호스트가이드</a></li>
+                               <li class=""><a href="./message">메세지</a></li>                               
                            </ul>
                        </div>
                        <div class="mypage_content">

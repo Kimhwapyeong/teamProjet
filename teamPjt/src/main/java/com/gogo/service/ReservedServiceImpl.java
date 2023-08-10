@@ -81,10 +81,15 @@ public class ReservedServiceImpl implements ReservedService{
 		StayVO stay = selectOne_stay(room.getStayNo());
 		
 		
+		int reservedDay = 0;
 		
-		// 총 예약일 계산
-		int reservedDay = Integer.parseInt(reservedDay2(reserved.getCheckIn(), reserved.getCheckOut()));
-		
+		if(reserved.getCheckIn()!=null && !"".equals(reserved.getCheckIn())
+				&& reserved.getCheckOut()!=null && !"".equals(reserved.getCheckOut())) {
+			
+			// 총 예약일 계산
+			reservedDay = Integer.parseInt(reservedDay2(reserved.getCheckIn(), reserved.getCheckOut()));
+			
+		}
 		// 3자리 콤마
 		// DecimalFormat은 Number형만 받음
 		
@@ -108,10 +113,8 @@ public class ReservedServiceImpl implements ReservedService{
 		System.out.println("reservationNo : "+ reservationNo);
 		System.out.println("reserved.roomNo : "+reserved.getRoomNo());
 		System.out.println("reserved.memberid : "+reserved.getMemberId());
-		//System.out.println("reserved.regDate : "+reserved.getRegDate());
 		System.out.println("reserved.checkIn : "+reserved.getCheckIn());
 		System.out.println("reserved.checkOut : "+reserved.getCheckOut());
-		System.out.println("reserved.memberCount : "+reserved.getMemberCount());
 		System.out.println("reserved.paymentNo : "+ paymentNo);
 		
 		model.addAttribute("reserved", reserved);

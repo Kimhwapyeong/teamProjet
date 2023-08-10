@@ -82,7 +82,7 @@ public class MessageServiceImpl implements MessageService{
 	}
 	
 	@Override
-	public void chattingGet(String roomId, HttpSession session, Model model) throws Exception {
+	public void chattingGet(String stayNoMsg, String roomId, HttpSession session, Model model) throws Exception {
 		
 		int res = insertMessageRoom();
 		
@@ -118,8 +118,10 @@ public class MessageServiceImpl implements MessageService{
 			model.addAttribute("memberName", memberId);
 			model.addAttribute("enter", enter);
 			model.addAttribute("roomId", roomId);
+			model.addAttribute("stayNoMsg", stayNoMsg);
 			model.addAttribute("messageHistory", messageHistory);
 			session.setAttribute("roomId", roomId);
+			session.setAttribute("stayNoMsg", stayNoMsg);
 			
 			
 		} else {
@@ -193,6 +195,7 @@ public class MessageServiceImpl implements MessageService{
 		vo.setMemberId(String.valueOf(map.get("writer")));
 		vo.setRoomId(String.valueOf(map.get("roomId")));
 		vo.setType(String.valueOf(map.get("type")));
+		vo.setStayNo(String.valueOf(map.get("stayNoMsg")));
 		int res = insertMessage(vo);
 		
 		if(res>0) {

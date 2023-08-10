@@ -177,21 +177,22 @@
 	<!-- 예약 정보 -->
 	<select id="reservList" resultType="java.util.Map">
 		SELECT s.stayname, r.price, s.stayno,
-        v.reservationno,
+		    v.reservationno,
 		    TO_CHAR(v.regdate, 'yyyy-mm-dd') AS regdate,
 		    TO_CHAR(v.checkin, 'yyyy-mm-dd') AS checkin,
 		    TO_CHAR(v.checkout, 'yyyy-mm-dd') AS checkout,
 		    v.membercount,
 		    s.mainpic1,
 		    m.memberid
-	    FROM reservation v
-        JOIN member m ON m.memberid = v.memberid
-	    JOIN payment p ON v.reservationno = p.reservationno
-        JOIN room r ON r.roomno = v.roomno
-        JOIN stay s ON s.stayno = r.stayno
-	    LEFT JOIN refund f ON p.paymentno = f.paymentno
-	    WHERE v.memberid = #{memberId} AND f.paymentno IS NULL
-	    AND v.checkout > SYSDATE
+		FROM reservation v
+		JOIN member m ON m.memberid = v.memberid
+		JOIN payment p ON v.reservationno = p.reservationno
+		JOIN room r ON r.roomno = v.roomno
+		JOIN stay s ON s.stayno = r.stayno
+		LEFT JOIN refund f ON p.paymentno = f.paymentno
+		WHERE v.memberid = 'user1' AND f.paymentno IS NULL
+		AND v.checkout > SYSDATE
+		ORDER BY v.regdate DESC
 
 	</select>
 	
@@ -247,18 +248,23 @@
 	
 	<!-- 취소 정보 -->
 	<select id="cancelList" resultType="java.util.Map">
-		select s.stayname, s.mainpic1, s.stayno, v.reservationno, r.price,
-			TO_CHAR(v.checkin, 'yyyy-mm-dd') as checkin,
-		    TO_CHAR(v.checkout, 'yyyy-mm-dd') as checkout,
-			v.membercount, m.memberid
-		from refund f, payment p, reservation v, member m, room r, stay s
-		where f.paymentno = p.paymentno
-			and p.reservationno = v.reservationno
-			and v.roomno = r.roomno
-			and v.memberid = #{memberId}
-			and r.stayno = s.stayno
-			and p.cancleyn = 'Y'
-		order by v.regdate desc
+		SELECT s.stayname, r.price, s.stayno,
+        v.reservationno,
+		    TO_CHAR(v.regdate, 'yyyy-mm-dd') AS regdate,
+		    TO_CHAR(v.checkin, 'yyyy-mm-dd') AS checkin,
+		    TO_CHAR(v.checkout, 'yyyy-mm-dd') AS checkout,
+		    v.membercount,
+		    s.mainpic1,
+		    m.memberid
+	    FROM reservation v
+        JOIN member m ON m.memberid = v.memberid
+	    JOIN payment p ON v.reservationno = p.reservationno
+        JOIN room r ON r.roomno = v.roomno
+        JOIN stay s ON s.stayno = r.stayno
+	    LEFT JOIN refund f ON p.paymentno = f.paymentno
+	    WHERE v.memberid = 'user1' AND f.paymentno IS not NULL
+	    AND v.checkout > SYSDATE
+        order by v.regdate desc
 	</select>
 	
 	<resultMap type="java.util.HashMap" id="cancelMap">

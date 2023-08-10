@@ -14,5 +14,6 @@ public class MessageVO {
 	private String memberId;
 	private String memberRole;
 	private String roomId;
+	private String stayNo; // 해당 stay에 대해서만 메세지를 보낼 수 있다 
 
 }

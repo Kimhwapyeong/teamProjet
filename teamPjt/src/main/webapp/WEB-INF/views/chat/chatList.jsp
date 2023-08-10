@@ -7,6 +7,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+	#messageList > input{ border:0px;}
+	#messageList{
+		
+		height: 100px;
+	}
+	
+	
+
+</style>
 <body>
 
 						<!-- 여기다 메세지 룸 리스트 ForEach -->
