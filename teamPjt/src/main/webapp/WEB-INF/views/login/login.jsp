@@ -72,7 +72,7 @@
 		} else {
 			// 로그인 실패 시 메시지 처리
 			alert(map.msg);
-			model.addAttribute("msg", "아이디와 비밀번호를 확인해주세요.");
+			//model.addAttribute("msg", "아이디와 비밀번호를 확인해주세요.");
 			msg.innerHTML = map.msg;
 		}
 		console.log(map);

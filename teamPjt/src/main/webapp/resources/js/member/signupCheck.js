@@ -15,7 +15,7 @@ var signup = {
 		valid: { code:'valid', desc: '아이디를 중복 확인하세요.' },
 		invalid: { code:'invalid', desc: '아이디는 영문 소문자, 숫자만 입력하세요.' },
 		usable: { code: 'valid', desc: '사용 가능한 아이디입니다.'},
-		unusable: { code: 'invalid', desc: '이미 사용 중인 아이디입니다.	' }
+		unusable: { code: 'invalid', desc: '이미 사용 중인 아이디입니다.' }
 	},
 	
 	id_usable: function(data) {
@@ -88,9 +88,8 @@ var signup = {
 	    }
 	    return data;
 	}
-
-
 }
+
 
 // 사용자 약관체크(script)
 document.addEventListener("DOMContentLoaded", function() {

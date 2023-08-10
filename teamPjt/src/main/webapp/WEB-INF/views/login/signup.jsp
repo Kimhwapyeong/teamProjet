@@ -6,7 +6,6 @@
 <html>
 	<!-- jQuery 라이브러리 추가 -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- ?v=<new java.util.Date().getTime()>을 붙이면 수정사항이 바로바로 새로고침 됨-->
 <script src="/resources/js/member/signupCheck.js"></script>
 <head>
@@ -16,7 +15,6 @@
 <title>SIGN UP</title>
 </head>
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script>
 window.addEventListener('load',function(){
 
@@ -72,6 +70,7 @@ $(document).ready(function() {
 		}
 	})
 }); 
+// 아이디 체크 
 function idCheck() {
 	var $id = $('[name=memberId]').eq(1);
 	// 올바른 아이디 입력 형태인지 파악하여 
@@ -136,11 +135,6 @@ function display_status(div, data) {
 }
 
 
-function validateEmail() {
-    var emailTxt = document.getElementById("email-txt").value;
-    var domainTxt = document.getElementById("domain-txt").value;
-}
-
 // 생년월일 데이터 합산
 function combineDate() {
   const birth_year = document.getElementById("birth-year").value;
@@ -183,7 +177,7 @@ function go_join() {
         if (!item_check(signup.tag_status($('[name=memberId]')))	
         ) return;	
         else {
-            alert('회원가입 불가\n');
+            alert('회원가입 불가\n'+data.desc);
             $('[name=memberId]').focus();
             return;
         }

@@ -100,11 +100,11 @@ public class MemberController extends CommonRestController {
 				map.put("url", "/main");
 			}
 				return map;
+		
 		} else {
-	        // 로그인 실패 처리
-	        Map<String, Object> failureMap = responseMap(REST_FAIL, "아이디와 비밀번호를 확인해주세요.");
-	        failureMap.put("msg", "아이디와 비밀번호를 확인해주세요.");
-	        return failureMap;
+	        // 로그인 실패 처리  
+	        Map<String, Object> map = responseMap(REST_FAIL, "아이디와 비밀번호를 확인해주세요.");
+	        return map;
 	    }
 		
 	}
