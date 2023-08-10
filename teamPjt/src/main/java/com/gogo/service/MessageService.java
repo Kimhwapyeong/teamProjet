@@ -6,9 +6,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.socket.WebSocketSession;
 
 import com.gogo.vo.MemberVO;
@@ -36,10 +38,17 @@ public interface MessageService {
 	public List<MessageVO> getList(String roomId);
 	
 	
-	public List<MessageRoomVO> messageRoomList(String memberId);
-	public List<MessageRoomVO> messageRoomListUser(String memberId);
-	public void messageRoomListUser(String memberId, Model model);
-	public void chatListGet(Model model, String memberId);
+	public List<MessageRoomVO> messageRoomList(String memberId, int pageNo);
+	
+	public int messageRoomListCount(String memberId);
+	
+	
+	public List<MessageRoomVO> messageRoomListUser(String memberId, int pageNo);
+	
+	public int messageRoomListUserCount(String memberId);
+	
+	public void messageRoomListUser(String memberId, Model model, int pageNo);
+	public void chatListGet(Model model, String memberId, int pageNo);
 	public String getMessageRoomOwner(String roomId);
 
 }

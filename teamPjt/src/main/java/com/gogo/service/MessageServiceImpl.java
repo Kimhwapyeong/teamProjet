@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -132,17 +133,6 @@ public class MessageServiceImpl implements MessageService{
 	}
 	
 	
-	@Override
-	public void chatListGet(Model model, String memberId) {
-		
-		
-		List<MessageRoomVO> messageRoomList = messageRoomList(memberId);
-		model.addAttribute("messageRoomList", messageRoomList);
-
-		
-	}
-	
-	
 	// chattingGet 오버로딩 
 	// EchoHandler에서 WebSocketSession과 겹쳐서  HttpSession을 직접 주입받을 수 없기 때문
 	@Override
@@ -211,8 +201,16 @@ public class MessageServiceImpl implements MessageService{
 	}
 	
 	@Override
-	public List<MessageRoomVO> messageRoomList(String memberId) {
-		return messageMapper.messageRoomList(memberId);
+	public List<MessageRoomVO> messageRoomList(String memberId, int pageNo) {
+		
+		
+		
+		return messageMapper.messageRoomList(memberId, String.valueOf(pageNo));
+	}
+	
+	@Override
+	public int messageRoomListCount(String memberId) {
+		return messageMapper.messageRoomListCount(memberId);
 	}
 	
 	
@@ -223,23 +221,46 @@ public class MessageServiceImpl implements MessageService{
 	}
 	
 	@Override
-	public List<MessageRoomVO> messageRoomListUser(String memberId){
+	public List<MessageRoomVO> messageRoomListUser(String memberId, int pageNo){
 		
-		return messageMapper.messageRoomListUser(memberId);
+		
+		return messageMapper.messageRoomListUser(memberId, String.valueOf(pageNo));
 	}
 	
 	@Override
-	public void messageRoomListUser(String memberId, Model model) {
+	public void messageRoomListUser(String memberId, Model model, int pageNo) {
 		
-		List<MessageRoomVO> list = messageRoomListUser(memberId);
 		
-		list.forEach(vo->{
-			
-			System.err.println(vo.getStayNo());
-			
-		});
+		List<MessageRoomVO> list = messageRoomListUser(memberId, pageNo);
 		
+		int pageEnd = (int) Math.ceil((double)messageRoomListUserCount(memberId)/(double)10);
+		
+		System.err.println("page END!!!!!!!! : "+ pageEnd);
+		
+		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("messageRoomList", list);
+		model.addAttribute("pageEnd", pageEnd);
+	}
+	
+	@Override
+	public void chatListGet(Model model, String memberId, int pageNo) {
+		
+		
+		List<MessageRoomVO> messageRoomList = messageRoomList(memberId, pageNo);
+		
+		int pageEnd = (int) Math.ceil((double)messageRoomListCount(memberId)/(double)10);
+		
+		System.err.println("page END!!!!!!!! : "+ pageEnd);
+		
+		model.addAttribute("messageRoomList", messageRoomList);
+		model.addAttribute("pageEnd", pageEnd);
+		model.addAttribute("pageNo", pageNo);
+	}
+	
+	@Override
+	public int messageRoomListUserCount(String memberId) {
+		
+		return messageMapper.messageRoomListUserCount(memberId);
 		
 	}
 

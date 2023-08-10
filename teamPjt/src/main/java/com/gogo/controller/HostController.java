@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -141,11 +142,14 @@ public class HostController extends CommonRestController{
 	// 호스트 스테이 메세지 관리
 	@GetMapping("message")
 	public void message(Model model
-						, HttpSession session) {
+						, HttpSession session
+						, @RequestParam(required=false, name="pageNo", defaultValue = "1")
+								int pageNo) {
+		
 		String memberId = (String)session.getAttribute("memberId");
 		
 		
-		service_msg.chatListGet(model, memberId);
+		service_msg.chatListGet(model, memberId, pageNo);
 	}
 	
 	

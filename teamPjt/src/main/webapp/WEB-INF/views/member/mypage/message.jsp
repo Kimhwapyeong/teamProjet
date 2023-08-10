@@ -3,7 +3,8 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,40 +38,14 @@
 
 
 <head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <!-- css -->
 <link rel="stylesheet" href="/resources/css/mypage/reservation.css">
 
-<script type="text/javascript">
-window.addEventListener('load', function(){
-	
-	listOne.style.display=''; 
-	comList.style.display='none';
-	ReservationButton.style.fontWeight = 'bold';
-	CompleteButton.style.fontWeight = '';
-	
-	
-	ReservationButton.addEventListener('click', function(){ 
-		listOne.style.display=''; 
-		comList.style.display='none';
-		ReservationButton.style.fontWeight = 'bold';
-		CompleteButton.style.fontWeight = '';
-	  });
-	
-	  
-	CompleteButton.addEventListener('click', function(){ 
-		listOne.style.display='none';  
-		comList.style.display='';
-		CompleteButton.style.fontWeight = 'bold';
-		ReservationButton.style.fontWeight = '';
-	  });
-	
-	
-});
 
-</script>
 </head>
 
 
@@ -132,9 +107,11 @@ window.addEventListener('load', function(){
 
 						<!-- =============================== 페이징 ============================================-->
 						<div class="paging">
-							<a href="/" class="prev" title="이전 페이지">이전 페이지</a><a href="/"
-								class="on">1</a><a href="/" class="next" title="다음 페이지">다음
-								페이지</a>
+							<a id="messageRoomPrevBtn" class="prev" title="이전 페이지">이전 페이지</a>
+							<a class="on">${pageNo}</a>
+							<a id="messageRoomNextBtn" class="next" title="다음 페이지">다음 페이지</a>
+							<input type="hidden" id="pageNow" value="${pageNo}">
+							
 						</div>
 						<a href="/stay/list"><button type="button" class="btn_bk btn_sm findstay_btn" style="margin-top: 20px; margin-bottom: 20px;">FIND STAY</button></a>
 					</div>
@@ -154,6 +131,53 @@ window.addEventListener('load', function(){
 		<button class="custom-button-1"></button>
 	</div>
 </body>
+
+<script>
+	
+	window.addEventListener('load', function(){
+		
+		
+
+		
+		
+		var pageNow = $('#pageNow').val();
+		
+		$('#pageNow').change(function(){
+			
+			pageNow = $('#pageNow').val();
+			
+		});
+		
+		$('#messageRoomPrevBtn').click(function(){
+			
+			var pageCal = parseInt(pageNow);
+			var pageMove = pageCal-1;
+			
+			if(pageMove>=1){
+				
+				location.href='/member/mypage/message?pageNo='+pageMove;
+				
+			}
+			
+			
+		});
+		
+		$('#messageRoomNextBtn').click(function(){
+			
+			var pageCal = parseInt(pageNow);
+			var pageMove = pageCal+1;
+			
+			if(pageCal<parseInt('${pageEnd}')){
+				
+				location.href='/member/mypage/message?pageNo='+pageMove;
+			}
+			
+		});
+		
+		
+	});
+
+</script>
 
 <!-- 푸터 -->
 <%@ include file="../../common/footer.jsp" %>

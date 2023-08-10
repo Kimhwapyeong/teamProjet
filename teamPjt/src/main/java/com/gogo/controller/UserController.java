@@ -190,11 +190,20 @@ public class UserController extends CommonRestController{
 		
 	// 메세지 연결
 	@GetMapping("message")
-	public void message(HttpSession session, Model model) {
+	public void message(HttpSession session
+						, Model model
+						, @RequestParam(required=false, name="pageNo", defaultValue = "1")
+													int pageNo) {
+		
+		
 		
 		String memberId = (String)session.getAttribute("memberId");
 		
-		service_msg.messageRoomListUser(memberId, model);
+		System.err.println("message memberId : "+memberId);
+		
+		service_msg.messageRoomListUser(memberId, model, pageNo);
+		
+		
 	}
 	
 	
