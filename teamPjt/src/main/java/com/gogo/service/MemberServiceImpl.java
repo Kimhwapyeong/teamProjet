@@ -310,15 +310,4 @@ public class MemberServiceImpl implements MemberService {
 	public List<String> getMemberRole(String memberId) {
 		return memberMapper.getMemberRole(memberId);
 	}
-	@Override
-	public String getAccessToken(String authorize_code) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public MemberVO KakaoInfo(String access_Token) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
