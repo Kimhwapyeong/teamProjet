@@ -72,6 +72,7 @@
 		} else {
 			// 로그인 실패 시 메시지 처리
 			alert(map.msg);
+			model.addAttribute("msg", "아이디와 비밀번호를 확인해주세요.");
 			msg.innerHTML = map.msg;
 		}
 		console.log(map);
@@ -97,10 +98,10 @@
                <div class="form_wrap">
                    <div class="input_box">
                        <div class="input">
-                           <input type="text" name="memberId" id="id" placeholder="아이디" value="user1" required="required"/>
+                           <input type="text" name="memberId" id="id" placeholder="아이디" value="" required="required"/>
                        </div>
                        <div class="input">
-                           <input type="password" name="pw" id="password" placeholder="비밀번호" value="1234" required="required"/>
+                           <input type="password" name="pw" id="password" placeholder="비밀번호" value="" required="required"/>
                        </div>
                    </div>
                </div>
@@ -124,7 +125,7 @@
             <ul>
                 <li>
                 	
-                    <a id="naverIdLogin" class="btn_naver" href="#">네이버</a>
+                    <a id="naverIdLogin" class="btn_naver" href="#"style="margin: right">네이버</a>
                 </li>
                 <li> <!-- 띄어쓰기 조심 -->
                     <a id="kakaoIdLogin" class="btn_kakao" 

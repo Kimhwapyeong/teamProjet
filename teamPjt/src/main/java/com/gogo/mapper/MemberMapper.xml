@@ -4,7 +4,7 @@
 <mapper namespace="com.gogo.mapper.MemberMapper">
 
 	<!-- 로그인 -->
-	<select id="login" resultType="com.gogo.vo.MemberVO">
+	<select id="loginAction" resultType="com.gogo.vo.MemberVO">
 		select * from member 
 		where memberId = #{memberId}
 	</select>

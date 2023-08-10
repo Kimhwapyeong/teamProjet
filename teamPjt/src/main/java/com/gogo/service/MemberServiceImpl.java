@@ -33,9 +33,9 @@ public class MemberServiceImpl implements MemberService {
 	BCryptPasswordEncoder encoder;
 	
 	@Override
-	public MemberVO login(MemberVO paramMember) {
+	public MemberVO loginAction(MemberVO paramMember) {
 		// 사용자 정보 조회
-		MemberVO member = memberMapper.login(paramMember);
+		MemberVO member = memberMapper.loginAction(paramMember);
 		
 		if(member != null) {
 			// 사용자가 입력한 비밀번호가 일치하는지 확인
@@ -50,7 +50,7 @@ public class MemberServiceImpl implements MemberService {
 				
 				return member;
 			}
-			return member;
+			return memberMapper.loginAction(member);
 		}
         // 로그인 실패
         return member;
@@ -102,7 +102,13 @@ public class MemberServiceImpl implements MemberService {
 	public void passwordUpdate(MemberVO member) {
 		memberMapper.passwordUpdate(member);
 	}
-	//비밀번호 찾기 이메일발송
+	@Override
+	public List<String> getMemberRole(String memberId) {
+		return memberMapper.getMemberRole(memberId);
+	}
+	
+	
+	// 이메일 발송
 	@Override
 	public void sendEmail(MemberVO member, String div) throws Exception {
 		// Mail Server 설정
@@ -306,8 +312,5 @@ public class MemberServiceImpl implements MemberService {
 		}
 		  return kakaoInfo;
 		  }
-	@Override
-	public List<String> getMemberRole(String memberId) {
-		return memberMapper.getMemberRole(memberId);
-	}
+
 }

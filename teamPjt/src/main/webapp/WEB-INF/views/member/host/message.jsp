@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Message</title>
     <link rel="stylesheet" href="./css/host/host.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 </head>
     <style>
         body {
@@ -105,8 +106,12 @@
                            
 
                            <!-- =============================== 페이징 ============================================-->
-                           <div style="height:100px;" class="paging"><a href="/" class="prev" title="이전 페이지">이전 페이지</a><a href="/"
-                                   class="on">1</a><a href="/" class="next" title="다음 페이지">다음 페이지</a></div>
+                         <div style="height:100px;" class="paging">
+							<a id="messageRoomPrevBtn" class="prev" title="이전 페이지">이전 페이지</a>
+							<a class="on">${pageNo}</a>
+							<a id="messageRoomNextBtn" class="next" title="다음 페이지">다음 페이지</a>
+							<input type="hidden" id="pageNow" value="${pageNo}">
+						</div>
                        </div>
                    </div>
                </div>
@@ -120,6 +125,52 @@
 <%@ include file="../../common/footer.jsp" %>
 
 </body>
+<script>
+	
+	window.addEventListener('load', function(){
+		
+		
+
+		
+		
+		var pageNow = $('#pageNow').val();
+		
+		$('#pageNow').change(function(){
+			
+			pageNow = $('#pageNow').val();
+			
+		});
+		
+		$('#messageRoomPrevBtn').click(function(){
+			
+			var pageCal = parseInt(pageNow);
+			var pageMove = pageCal-1;
+			
+			if(pageMove>=1){
+				
+				location.href='/member/host/message?pageNo='+pageMove;
+				
+			}
+			
+			
+		});
+		
+		$('#messageRoomNextBtn').click(function(){
+			
+			var pageCal = parseInt(pageNow);
+			var pageMove = pageCal+1;
+			
+			if(pageCal<parseInt('${pageEnd}')){
+				
+				location.href='/member/host/message?pageNo='+pageMove;
+			}
+			
+		});
+		
+		
+	});
+
+</script>
 
 </html>
 </html>

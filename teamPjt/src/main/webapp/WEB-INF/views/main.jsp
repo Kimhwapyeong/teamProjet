@@ -201,7 +201,7 @@ function setMainImgsHeight(){
 
 <!-- 추천 스테이 -->
 <div class="container main_new">
-        <div class="recom_title">오직 스테이폴리오에서만</div>
+        <div class="recom_title">오직 스테이올레에서만</div>
         <div class="_routerWithArrow_wrapper__v67Nt"><button id="router_mobile" type="button">오직 스테이폴리오에서만<span
                     style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"><span
                         style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"><img
@@ -416,12 +416,5 @@ function setMainImgsHeight(){
 			</div>
 		</div>
 	</div>
-
-
-<div
-	style="height: 500px; text-align: center; padding-top: 200px; font-size: 30px">
-	<a href="/reserved/reserved">예약</a><br> <a href="/addstay">숙소등록</a><br>
-	<a href="/addroom">room등록</a>
-</div>
 
 <jsp:include page="common/footer.jsp" />
