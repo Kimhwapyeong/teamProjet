@@ -298,7 +298,7 @@
 	                                        </label>
                                         </div>
                                     </div>
-                                    <div id="signupMsg" style="display: flex; justify-content: center; color:red"></div>  <!-- msg 출력 -->
+                                    <div id="signupMsg" style="display: flex; justify-content: center; color:gray; font-weight:bold"></div>  <!-- msg 출력 -->
                                     <div class="bt_btns btn_submit">
                                     	<button type="button" class="btn_bk btn_sm" style="margin: 20px 0px; width: 100%;" id='changeInfo'>회원정보 변경</button>
                                     </div>

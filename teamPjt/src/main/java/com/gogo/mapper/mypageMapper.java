@@ -65,6 +65,9 @@ public interface mypageMapper {
 	// 예약 정보
 	public List<Map<String, String>> reservList(String memberId);
 	
+	// 이용 완료
+	public List<Map<String, String>> completedList(String memberId);
+	
 	// 취소 정보
 	public List<Map<String, String>> cancelList(String memberId);
 	

@@ -176,32 +176,22 @@
 	<!--  ▶▶▶  user ▶▶▶ -->
 	<!-- 예약 정보 -->
 	<select id="reservList" resultType="java.util.Map">
-		SELECT DISTINCT
-		    s.stayname,
-		    r.price,
-		    s.stayno,
-		    v.reservationno,
+		SELECT s.stayname, r.price, s.stayno,
+        v.reservationno,
 		    TO_CHAR(v.regdate, 'yyyy-mm-dd') AS regdate,
 		    TO_CHAR(v.checkin, 'yyyy-mm-dd') AS checkin,
 		    TO_CHAR(v.checkout, 'yyyy-mm-dd') AS checkout,
 		    v.membercount,
 		    s.mainpic1,
 		    m.memberid
-		FROM
-		    stay s,
-		    room r,
-		    reservation v,
-		    payment p,
-		    member m,
-		    attach a
-		WHERE
-		    s.stayno = r.stayno
-		    AND r.roomno = v.roomno
-		    AND v.reservationno = p.reservationno
-		    AND v.memberid = m.memberid
-		    AND v.memberid = #{memberid}
-		    AND p.cancleyn = 'N'
-		    AND a.roomno IS NULL
+	    FROM reservation v
+        JOIN member m ON m.memberid = v.memberid
+	    JOIN payment p ON v.reservationno = p.reservationno
+        JOIN room r ON r.roomno = v.roomno
+        JOIN stay s ON s.stayno = r.stayno
+	    LEFT JOIN refund f ON p.paymentno = f.paymentno
+	    WHERE v.memberid = #{memberId} AND f.paymentno IS NULL
+	    AND v.checkout > SYSDATE
 
 	</select>
 	
@@ -216,6 +206,42 @@
 	    <result property="checkOut" column="CHECKOUT" />
 	    <result property="memberCount" column="MEMBERCOUNT" />
 	    <result property="memberId" column="MEMBERID" />
+	</resultMap>
+	
+	
+	<!-- 이용완료 정보 -->
+	<select id="completedList" resultType="java.util.Map">
+		SELECT s.stayname, r.price, s.stayno,
+        v.reservationno,
+		    TO_CHAR(v.regdate, 'yyyy-mm-dd') AS regdate,
+		    TO_CHAR(v.checkin, 'yyyy-mm-dd') AS checkin,
+		    TO_CHAR(v.checkout, 'yyyy-mm-dd') AS checkout,
+		    v.membercount,
+		    s.mainpic1,
+		    m.memberid
+	    FROM reservation v
+        JOIN member m ON m.memberid = v.memberid
+	    JOIN payment p ON v.reservationno = p.reservationno
+        JOIN room r ON r.roomno = v.roomno
+        JOIN stay s ON s.stayno = r.stayno
+	    LEFT JOIN refund f ON p.paymentno = f.paymentno
+	    WHERE v.memberid = 'user1' AND f.paymentno IS NULL
+	    <![CDATA[
+	    AND v.checkout < SYSDATE
+	    ]]>
+	</select>
+
+	<resultMap type="java.util.HashMap" id="completedMap">
+		    <result property="stayName" column="stayname" />
+		    <result property="mainPic1" column="MAINPIC1" />
+		    <result property="price" column="PRICE" />
+		    <result property="stayNo" column="STAYNO" />
+		    <result property="reservationNo" column="RESERVATIONNO" />
+		    <result property="regDate" column="REGDATE" />
+		    <result property="checkIn" column="CHECKIN" />
+		    <result property="checkOut" column="CHECKOUT" />
+		    <result property="memberCount" column="MEMBERCOUNT" />
+		    <result property="memberId" column="MEMBERID" />
 	</resultMap>
 	
 	

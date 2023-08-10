@@ -32,6 +32,7 @@ import com.gogo.service.ReservedService;
 import com.gogo.service.mypageService;
 import com.gogo.vo.FileuploadVO;
 import com.gogo.vo.MemberVO;
+import com.gogo.vo.ReservedVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -48,17 +49,20 @@ public class UserController extends CommonRestController{
 	
 	
 	// 예약 정보
-	@GetMapping(value = {"reservation", "travelCnt"})
+	@GetMapping(value = {"reservation", "travelCnt", "completedList"})
 	public void reservation(Model model, HttpServletRequest request) {
 		
 		
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession();  
 		String memberId = (String)session.getAttribute("memberId");
-		service.reservList(model, memberId);
+		service.reservList(model, memberId);  // 예약 
 		int res = service.travelCnt(memberId);
-		model.addAttribute("travelCnt", res);
+		model.addAttribute("travelCnt", res);  // 횟수
+		
+		service.completedList(model, memberId);
 		
 	}
+	
 	
 	// 취소 내역
 	@GetMapping(value = {"cancel", "travelCnt"})

@@ -211,6 +211,16 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 		return null;
 	}
 	
+	// 이용완료 
+	@Override
+	public List<Map<String, String>> completedList(Model model, String memberId) {
+		List<Map<String, String>> complete = mypageMapper.completedList(memberId);
+		model.addAttribute("complete", complete);
+		log.info("-=====");
+		log.info("complete : " + complete);
+		return null;
+	}
+	
 	
 	// 취소 정보
 	@Override

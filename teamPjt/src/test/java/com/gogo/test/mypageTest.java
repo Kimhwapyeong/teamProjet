@@ -118,11 +118,11 @@ public class mypageTest {
 		log.info("vo: " + vo);
 	}
 	
-	@Test
-	public void likestay(String memberId) {
-		List<Map<String, String>> list = (List<Map<String, String>>) mapper.likestay(memberId);
-		log.info("list : " + list);
-	}
+//	@Test
+//	public void likestay(String memberId) {
+//		List<Map<String, String>> list = (List<Map<String, String>>) mapper.likestay(memberId);
+//		log.info("list : " + list);
+//	}
 	
 	@Test
 	public void answerInfo() {
@@ -157,6 +157,13 @@ public class mypageTest {
 		List<ReservedVO> vo = mapper.profit();
 		log.info("=========================");
 		log.info("vo: " + vo);
+	}
+	
+	@Test
+	public void completedList() {
+		List<Map<String, String>> list = mapper.completedList("user1");
+		log.info("list : " + list);
+		
 	}
 	
 	

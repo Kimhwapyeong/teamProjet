@@ -14,6 +14,34 @@
 <!-- css -->
 <link rel="stylesheet" href="/resources/css/mypage/reservation.css">
 
+<script type="text/javascript">
+window.addEventListener('load', function(){
+	
+	listOne.style.display=''; 
+	comList.style.display='none';
+	ReservationButton.style.fontWeight = 'bold';
+	CompleteButton.style.fontWeight = '';
+	
+	
+	ReservationButton.addEventListener('click', function(){ 
+		listOne.style.display=''; 
+		comList.style.display='none';
+		ReservationButton.style.fontWeight = 'bold';
+		CompleteButton.style.fontWeight = '';
+	  });
+	
+	  
+	CompleteButton.addEventListener('click', function(){ 
+		listOne.style.display='none';  
+		comList.style.display='';
+		CompleteButton.style.fontWeight = 'bold';
+		ReservationButton.style.fontWeight = '';
+	  });
+	
+	
+});
+
+</script>
 </head>
 
 
@@ -63,60 +91,108 @@
 					<div class="mypage_content">
 						<div class="tab_mypage">
 							<ul>
-								<li class="active"><a id="info" href="/"
-									style="padding-bottom: 0px;">다가올 예약</a></li>
+								<li class="active"><button id="ReservationButton" style="padding-bottom: 0px;">다가올 예약</button></li>
+								<li class=""><button id="CompleteButton" style="padding-bottom: 0px;">이용 완료</button></li>
 							</ul>
 						</div>
-						<c:if test="${empty list}">
-							<div style="text-align: center;">
-								<img src="/resources/images/no.png" class="img-booking-waiting" alt="img-booking-wating">
-								<br>
-								<p style="line-height: 1.5;">아직 예약 정보가 없습니다.<br class="mo_only"> 새로운 스테이를 찾아 떠나보세요.</p>
-							</div>
-						</c:if>
 						
-						
-						<!-- ▶▶▶  forEach ▶▶▶  -->
-                        <c:forEach items="${list}" var="list" step="1" varStatus="status">
-                        <c:if test="${sessionScope.memberId == list.MEMBERID}">
-						
-						<div class="reserv_wrap mypage-reservation-info">
-							<div class="reserv_box accepted">
-								<div class="reserv_name">
-									<!-- ================================ 예약 확정 시 ==============================================-->
-									<p class="label">예약 확정</p>
-									<!-- =============================== 숙소이름  ============================================-->
-									<p class="name">
-										<span class="ellipsis">${list.STAYNAME }</span>
-									</p>
+						<!-- 다가올 예약 -->
+						<div id="listOne">
+							<c:if test="${empty list}">
+								<div style="text-align: center;">
+									<img src="/resources/images/no.png" class="img-booking-waiting" alt="img-booking-wating">
+									<br>
+									<p style="line-height: 1.5;">아직 예약 정보가 없습니다.<br class="mo_only"> 새로운 스테이를 찾아 떠나보세요.</p>
 								</div>
-								<div class="stay_view">
-									<div class="photo"
-										style="background-image: url('/resources/images/${list.MAINPIC1.replace('\\','/')}'); background-repeat: no-repeat; background-position: center center; background-size: cover;">
-										<!-- =============================== 스테이 자세히보기 연결 ============================================-->
-										<span class="view">스테이 보기</span>
+							</c:if>
+							
+							<!-- ▶▶▶  forEach ▶▶▶  -->
+	                        <c:forEach items="${list}" var="list" step="1" varStatus="status">
+	                        <c:if test="${sessionScope.memberId == list.MEMBERID}">
+							
+							<div class="reserv_wrap mypage-reservation-info">
+								<div class="reserv_box accepted">
+									<div class="reserv_name">
+										<!-- ================================ 예약 확정 시 ==============================================-->
+										<p class="label">예약 확정</p>
+										<!-- =============================== 숙소이름  ============================================-->
+										<p class="name">
+											<span class="ellipsis">${list.STAYNAME }</span>
+										</p>
 									</div>
-								</div>
-									<div class="reserv_info">
-										<!-- =============================== 숙소 체크인 / 체크아웃 ============================================-->
-										<div class="day">${list.CHECKIN} ~ ${list.CHECKOUT}</div>
-										<!-- =============================== 예약 인원 ============================================-->
-										<div class="option">
-											성인 ${list.MEMBERCOUNT }명<br>
+									<div class="stay_view">
+										<div class="photo"
+											style="background-image: url('/resources/images/${list.MAINPIC1.replace('\\','/')}'); background-repeat: no-repeat; background-position: center center; background-size: cover;">
+											<!-- =============================== 스테이 자세히보기 연결 ============================================-->
+											<span class="view">스테이 보기</span>
 										</div>
 									</div>
-									<!-- =============================== 가격 & view ============================================-->
-									<div class="price">₩ ${list.amount }</div> <br>
-									<!-- =============================== 예약 상세 연결 ============================================-->
-									<button type="button" class="btn_reserv_detail"
-											onclick="location.href='/member/mypage/reserved_detail'
-												+'?stayName=${list.STAYNAME}&mainImg=${list.MAINPIC1}&'
-												+'checkIn=${list.CHECKIN}&checkOut=${list.CHECKOUT}&'
-												+'memberCount=${list.MEMBERCOUNT}&price=${list.PRICE}&stayNo=${list.STAYNO}&reservationNo=${list.RESERVATIONNO}';">예약 상세 확인</button>
-							</div>
-						</div>							
-						</c:if>
-                        </c:forEach>
+										<div class="reserv_info">
+											<!-- =============================== 숙소 체크인 / 체크아웃 ============================================-->
+											<div class="day">${list.CHECKIN} ~ ${list.CHECKOUT}</div>
+											<!-- =============================== 예약 인원 ============================================-->
+											<div class="option">
+												성인 ${list.MEMBERCOUNT }명<br>
+											</div>
+										</div>
+										<!-- =============================== 가격 & view ============================================-->
+										<div class="price">₩ ${list.PRICE }</div> <br>
+										<!-- =============================== 예약 상세 연결 ============================================-->
+										<button type="button" class="btn_reserv_detail"
+												onclick="location.href='/member/mypage/reserved_detail'
+													+'?stayName=${list.STAYNAME}&mainImg=${list.MAINPIC1}&'
+													+'checkIn=${list.CHECKIN}&checkOut=${list.CHECKOUT}&'
+													+'memberCount=${list.MEMBERCOUNT}&price=${list.PRICE}&stayNo=${list.STAYNO}&reservationNo=${list.RESERVATIONNO}';">예약 상세 확인</button>
+								</div>
+							</div>							
+							</c:if>
+	                        </c:forEach>
+                        </div>
+                        
+                        <!-- 이용 완료 -->
+                        <div id="comList">
+	                        <c:if test="${empty complete}">
+								<div style="text-align: center;">
+									<img src="/resources/images/no.png" class="img-booking-waiting" alt="img-booking-wating">
+									<br>
+									<p style="line-height: 1.5;">아직 예약 정보가 없습니다.<br class="mo_only"> 새로운 스테이를 찾아 떠나보세요.</p>
+								</div>
+							</c:if>
+							
+	                        <!-- ▶▶▶  forEach ▶▶▶  -->
+	                        <c:forEach items="${complete}" var="list" step="1" varStatus="status">
+	                        <c:if test="${sessionScope.memberId == list.MEMBERID}">
+							
+							<div class="reserv_wrap mypage-reservation-info">
+								<div class="reserv_box accepted">
+									<div class="reserv_name">
+										<p class="name">
+											<span class="ellipsis">${list.STAYNAME }</span>
+										</p>
+									</div>
+									<div class="stay_view">
+										<div class="photo"
+											style="background-image: url('/resources/images/${list.MAINPIC1.replace('\\','/')}'); background-repeat: no-repeat; background-position: center center; background-size: cover;">
+											<span class="view">스테이 보기</span>
+										</div>
+									</div>
+										<div class="reserv_info">
+											<div class="day">${list.CHECKIN} ~ ${list.CHECKOUT}</div>
+											<div class="option">
+												성인 ${list.MEMBERCOUNT }명<br>
+											</div>
+										</div>
+										<div class="price">₩ ${list.PRICE }</div> <br>
+										<button type="button" class="btn_reserv_detail"
+												onclick="location.href='/member/mypage/reserved_detail'
+													+'?stayName=${list.STAYNAME}&mainImg=${list.MAINPIC1}&'
+													+'checkIn=${list.CHECKIN}&checkOut=${list.CHECKOUT}&'
+													+'memberCount=${list.MEMBERCOUNT}&price=${list.PRICE}&stayNo=${list.STAYNO}&reservationNo=${list.RESERVATIONNO}';">예약 상세 확인</button>
+								</div>
+							</div>							
+							</c:if>
+	                        </c:forEach>
+                        </div>
 						
 						
 						<!-- =============================== 페이징 ============================================-->

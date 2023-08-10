@@ -50,6 +50,7 @@ public interface mypageService {
 	// 숙소 관리
 	public List<StayVO> getStay(Model model);
 	
+	
 	// 예약 관리
 	public List<Map<String, String>> reservinfo(Model model);
 	
@@ -72,6 +73,9 @@ public interface mypageService {
 	// ▶▶▶  user ▶▶▶
 	// 예약 정보
 	public List<Map<String, String>> reservList(Model model, String memberId);
+	
+	// 이용 완료
+	public List<Map<String, String>> completedList(Model model, String memberId);
 	
 	// 취소 정보
 	public List<Map<String, String>> cancelList(Model model, String memberId);
