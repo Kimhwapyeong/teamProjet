@@ -251,7 +251,7 @@ function item_check(item) {
 							    <th class="tit">아이디 *</th>
 							    <td>
 							    <div style="display: flex">
-							      <input type="text" name="memberId" id="signUpId" class="chk" placeholder="아이디를 입력하세요." value="user5">
+							      <input type="text" name="memberId" id="signUpId" class="chk" placeholder="아이디를 입력하세요." value="">
 							      <a id="btnid" style="width: 80px;" class='btn-fill-s'>중복확인</a><br>
 							    </div>  
 							      <div id="validplz" class='valid'>아이디를 입력하세요(영문 소문자, 숫자만 입력 가능)</div>
@@ -260,14 +260,14 @@ function item_check(item) {
 							  <tr>
 							    <th class="tit">이름 *</th>
 							    <td>
-							      <input type="text" name="memberName" id="signUpName" placeholder="이용자 본인의 이름을 입력하세요." value="금잔디">
+							      <input type="text" name="memberName" id="signUpName" placeholder="이용자 본인의 이름을 입력하세요." value="">
 							      <div class="valid">이름을 입력해 주세요</div>
 							    </td>
 							  </tr>
 							  <tr>
 							    <th class="tit">비밀번호 *</th>
 							    <td>
-							      <input type="password" id="signUpPw" name="pw" placeholder="비밀번호를 입력하세요." value="User1234" >
+							      <input type="password" id="signUpPw" name="pw" placeholder="비밀번호를 입력하세요." value="" >
 							     <div class="valid">영문 대/소문자, 숫자를 모두 포함, 8자 이상 20자 미만</div>
 							      
 							    </td>
@@ -275,7 +275,7 @@ function item_check(item) {
 							  <tr>
 							      <th class="tit">비밀번호 확인 *</th>
 							      	<td>
-							        	<input type="password" id="pwCheck" name="pw_ck" class="chk" placeholder="비밀번호를 한 번 더 입력하세요." value="User1234">
+							        	<input type="password" id="pwCheck" name="pw_ck" class="chk" placeholder="비밀번호를 한 번 더 입력하세요." value="">
 							        	<div class="valid">비밀번호를 한 번 더 입력하세요.</div>
 							    	</td>
 							   </tr> 	

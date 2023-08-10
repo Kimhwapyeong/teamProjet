@@ -74,20 +74,20 @@ function findPwAction() {
 											
 											<td style="border-bottom: 1px solid #ebebeb;"><input
 												class="w3-input" type="text" id="memberId" name="memberId"
-												placeholder="아이디를 입력해주세요." value="user7" required></td>
+												placeholder="아이디를 입력해주세요." value="" required></td>
 										</tr>
 										<tr>
 											
 											<td style="border-bottom: 1px solid #ebebeb;"><input
 												class="w3-input" type="text" id="memberName"
-												name="memberName" placeholder="이름을 입력해주세요." value="차은우"
+												name="memberName" placeholder="이름을 입력해주세요." value=""
 												required></td>
 										</tr>
 										<tr>
 											<td style="border-bottom: 1px solid #ebebeb;"><input
 												class="w3-input" type="text" id="memberEmail"
 												name="memberEmail" placeholder="이메일을 입력해주세요."
-												value="yuhhwa08@gmail.com" required></td>
+												value="" required></td>
 										</tr>
 								</table>
 							</div>
