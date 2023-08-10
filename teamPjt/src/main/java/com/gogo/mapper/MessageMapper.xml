@@ -114,7 +114,7 @@
 		SELECT roomId, memberId, roomName, stayNo
 		FROM (
 		    SELECT m.roomId, m.memberId, mr.roomName, m.stayNo, 
-		           ROWNUM as rnum
+		           ROW_NUMBER() OVER (ORDER BY m.regdate DESC) as rnum
 		    FROM Message m
 		    JOIN MessageRoom mr ON m.roomId = mr.roomId
 		    WHERE m.type = 'ENTER'
