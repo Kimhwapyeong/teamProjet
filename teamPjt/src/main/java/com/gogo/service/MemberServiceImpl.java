@@ -102,7 +102,13 @@ public class MemberServiceImpl implements MemberService {
 	public void passwordUpdate(MemberVO member) {
 		memberMapper.passwordUpdate(member);
 	}
-	//비밀번호 찾기 이메일발송
+	@Override
+	public List<String> getMemberRole(String memberId) {
+		return memberMapper.getMemberRole(memberId);
+	}
+	
+	
+	// 이메일 발송
 	@Override
 	public void sendEmail(MemberVO member, String div) throws Exception {
 		// Mail Server 설정
@@ -306,8 +312,5 @@ public class MemberServiceImpl implements MemberService {
 		}
 		  return kakaoInfo;
 		  }
-	@Override
-	public List<String> getMemberRole(String memberId) {
-		return memberMapper.getMemberRole(memberId);
-	}
+
 }

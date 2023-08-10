@@ -76,13 +76,13 @@ alert(msg);
 						  <tr>
 						   
 						    <td style="border-bottom: 1px solid #ebebeb;">
-						      <input style="padding-left:10px; font-size: 15px;" class="w3-input" type="text" id="memberName" name="memberName" placeholder="이름을 입력해주세요." value="차은우" required>
+						      <input style="padding-left:10px; font-size: 15px;" class="w3-input" type="text" id="memberName" name="memberName" placeholder="이름을 입력해주세요." value="" required>
 						    </td>
 						  </tr>
 						  <tr>
 						    
 						    <td style="border-bottom: 1px solid #ebebeb;">
-						      <input style="padding-left:10px; font-size: 15px;" class="w3-input" type="text" id="memberEmail" name="memberEmail" placeholder="이메일을 입력해주세요." value="yuhhwa08@gmail.com" required>
+						      <input style="padding-left:10px; font-size: 15px;" class="w3-input" type="text" id="memberEmail" name="memberEmail" placeholder="이메일을 입력해주세요." value="" required>
 						    </td>
 						  </tr>
 						</table>
