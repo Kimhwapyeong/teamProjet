@@ -216,6 +216,10 @@
 		select stayno from likestay where memberid = #{memberId}
 	</select>
 	
+	<select id="likeIdRest" resultType="com.gogo.vo.StayVO">
+		select stayno from likestay where memberid = #{memberId}
+	</select>
+	
 	<!-- 로그인 한 좋아요 취소 -->
 	<delete id="deleteLike">
 		delete from likestay where memberid = #{memberId} and stayno = #{stayNo}

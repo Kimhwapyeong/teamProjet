@@ -118,6 +118,11 @@ public class StayServiceImpl implements StayService{
 		model.addAttribute("list", list);
 	}
 
+	@Override
+	public List<StayVO> likeIdRest(StayVO vo) {
+		return stayMapper.likeIdRest(vo);
+	}
+
 
 	
 

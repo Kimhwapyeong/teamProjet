@@ -31,20 +31,43 @@ public class RestStayController {
 	StayService stayService;
 	
 	@PostMapping("keyword")
-	public Map<String, Object> keywordList(@RequestBody StayVO vo, Model model) {
+	public Map<String, Object> keywordList(@RequestBody StayVO vo, Model model, HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<StayVO> list = stayService.stayKeywordList(vo, model);
 		System.out.println(list);
+		
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("memberId");
+		if(id != null) {
+			vo.setMemberId(id);
+		}else {
+			vo.setMemberId("");
+		}
+		List<StayVO> likeList = stayService.likeIdRest(vo);
+		
+		map.put("likeList", likeList);
 		map.put("list", list);
 		return map;
 	}
 	
 	@GetMapping("category/{encodedCategoryName}")
-	public Map<String, Object> categoryList(@PathVariable("encodedCategoryName") String encodedCategoryName, Model model){
+	public Map<String, Object> categoryList(@PathVariable("encodedCategoryName") String encodedCategoryName, Model model, HttpServletRequest request){
 		Map<String, Object> map = new HashMap<String, Object>();
 		StayVO vo = new StayVO();
 		vo.setCategory(encodedCategoryName);
 		List<StayVO> list = stayService.stayKeywordList(vo, model);
+		
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("memberId");
+		System.out.println(id);
+		if(id != null) {
+			vo.setMemberId(id);
+		}else {
+			vo.setMemberId("");
+		}
+		List<StayVO> likeList = stayService.likeIdRest(vo);
+		
+		map.put("likeList", likeList);
 		map.put("list", list);
 		return map;
 	}
