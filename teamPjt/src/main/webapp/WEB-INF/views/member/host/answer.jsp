@@ -15,6 +15,12 @@
 		window.location.assign('/member/host/qaList');
 	};
 </script>
+
+<style>
+	.form-control {
+	    border-radius: 0 !important;
+	}
+</style>
 </head>
 
 

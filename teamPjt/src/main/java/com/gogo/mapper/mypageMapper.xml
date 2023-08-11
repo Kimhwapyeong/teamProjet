@@ -175,10 +175,9 @@
 		    stay s ON s.stayno = r.stayno
 		JOIN
 		    payment p ON v.reservationno = p.reservationno
-		JOIN
-		    refund f ON p.paymentno = f.paymentno
 		WHERE
-			s.memberid = #{memberId}
+		    s.memberid = #{memberId}
+		    AND p.paymentno NOT IN (SELECT paymentno FROM refund)
 		GROUP BY
 		    TO_CHAR(v.regdate, 'YYYY-MM')
 		ORDER BY

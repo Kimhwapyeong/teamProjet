@@ -40,6 +40,35 @@ window.addEventListener('load', function(){
 
 </script>
 
+<style>
+.photo-container:hover .photo {
+    filter: brightness(70%); 
+}
+
+.image-overlay {
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    padding: 10px; 
+    text-align: center; 
+    display: none;
+}
+
+.image-overlay p {
+    color: white; /* 텍스트 색상을 화이트로 설정 */
+    margin: 0; /* 기본 마진 제거 */
+    font-size:15px;
+    font-weight:bold;
+}
+
+
+.photo-container:hover .image-overlay {
+    display: block;
+}
+</style>
+
+
 </head>
 <body style="">
 
@@ -120,16 +149,19 @@ window.addEventListener('load', function(){
                                 <div class="stay_view" id="roomView" style="display:flex; justify-content: center; width:100%;">
                                		<c:forEach items="${room}" var="room" step="1">
 	                                	<div id="divRoom" style="width:100%">
-	                                	<a href="../../../stay/roomInfo?stayName=${vo.stayName }&roomName=${room.roomName}" style="display:flex; justify-content: center;">
-	                                       <div class="photo" style="border:1px solid black;background-image: url('/resources/images/${room.roomPhoto.replace('\\','/')}'); background-repeat: no-repeat;
-	                                        background-position: center center; background-size: cover; width: 330px; height: 200px; margin-top:50px;">
-	                                        </div>
-	                                    </a>  
-	                                    <div class="reserv_info" style="margin-top:10px;">
+	                                		<div class="photo-container">
+			                                	<a href="../../../stay/roomInfo?stayName=${vo.stayName }&roomName=${room.roomName}" style="display:flex; justify-content: center;">
+			                                       <div class="photo" style="background-image: url('/resources/images/${room.roomPhoto.replace('\\','/')}'); background-repeat: no-repeat;
+			                                        background-position: center center; background-size: cover; width: 330px; height: 200px; margin-top:50px;">
+			                                        	 <div class="image-overlay"><p>객실 보기</p></div>
+			                                        </div>
+			                                    </a>  
+		                                    </div>
+	                                        <div class="reserv_info" style="margin-top:10px;">
 	                                           <div class="stay" style= "font-size:15px;font-weight:bold; justify-content: center; display:flex; ">${room.roomName }</div>
 	                                           <p></p>
 	                                           <div class="option" style="line-height: 2.5; justify-content: center; display:flex;">${room.roomInfo }<br></div>
-	                                       </div>
+	                                        </div>
 	                                    </div>
                                 	</c:forEach>
                                  </div>

@@ -11,6 +11,8 @@
 
 <script type="text/javascript">
 window.addEventListener('load', function(){
+	signButton.style.fontWeight = 'bold';
+	
 	signButton.addEventListener('click', function(){ 
 		signUp.style.display=''; 
 		qa.style.display='none';
@@ -39,6 +41,10 @@ window.addEventListener('load', function(){
     background-color: red;
     color: white;
   }
+  
+	.form-control {
+	    border-radius: 0 !important;
+	}
 </style>
 
 </head>
@@ -123,7 +129,7 @@ window.addEventListener('load', function(){
                      </div>
                      
                      <!-- 문의 요청 -->
-                     <form name='qa' style='display: none;' method="post" action="/member/host/write">
+                     <form name='qa' style='display: none;' method="post" action="/member/host/write" >
 	                    <div class="mb-3">
 							  <label for="title" class="form-label" required>제목  <span style="color: red">*</span></label>
 							  <input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요" name="title" style="font-size:15px" required>

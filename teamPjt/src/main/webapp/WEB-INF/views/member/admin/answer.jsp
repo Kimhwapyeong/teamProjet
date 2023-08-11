@@ -35,10 +35,14 @@ window.addEventListener('load', function(){
 </script>
 
 <style>
-    input:focus, textarea:focus {
-        outline-color: black;
-        borer-color: black;
-    }
+	.form-control {
+	    border-radius: 0 !important;
+	}
+	
+	.form-control:focus {
+	    border-color: initial; /* 포커스 시 테두리 색상 초기화 */
+	    box-shadow: none; /* 포커스 시 그림자 효과 제거 */
+	}
 </style>
 
 </head>
