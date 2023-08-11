@@ -46,6 +46,9 @@ public interface mypageService {
 	// 통계
 	public List<MemberVO> chartAge(MemberVO vo);
 	
+	// 통계
+	public List<MemberVO> chartGender(MemberVO vo);
+	
 	
 	// ▶▶▶  host ▶▶▶
 	// 숙소 관리
@@ -61,7 +64,7 @@ public interface mypageService {
 	public List<Map<String, String>> reservpic(Model model);
 	
 	// 수입 현황
-	public List<ReservedVO> profit();
+	public List<ReservedVO> profit(String memberId);
 	
 	// 가이드 문의 요청 ->
 	public int insert(QuestionVO qa);

@@ -155,7 +155,7 @@ public class mypageTest {
 	
 	@Test
 	public void profit() {
-		List<ReservedVO> vo = mapper.profit();
+		List<ReservedVO> vo = mapper.profit("host1");
 		log.info("=========================");
 		log.info("vo: " + vo);
 	}
@@ -171,6 +171,13 @@ public class mypageTest {
 	public void roomInfo() {
 		List<RoomVO> list = mapper.roomInfo("host1");
 		log.info("list : " + list);
+	}
+	
+	@Test
+	public void chartGender() {
+		MemberVO vo = new MemberVO();
+		List<MemberVO> member = mapper.chartGender(vo);
+		log.info("member : " + member);
 	}
 	
 	

@@ -117,18 +117,18 @@ window.addEventListener('load', function(){
                                 
                                 <!-- 객실 정보 -->
                                 <!-- ▶▶▶  forEach ▶▶▶  -->
-                                <div class="stay_view" id="roomView" style="display:flex; justify-content: center; width:400px">
+                                <div class="stay_view" id="roomView" style="display:flex; justify-content: center; width:100%;">
                                		<c:forEach items="${room}" var="room" step="1">
-	                                	<div id="divRoom">
-	                                	<a href="../../../stay/roomInfo?stayName=${vo.stayName }&roomName=${room.roomName}">
-	                                       <div class="photo" style="background-image: url('/resources/images/${room.roomPhoto.replace('\\','/')}'); background-repeat: no-repeat;
+	                                	<div id="divRoom" style="width:100%">
+	                                	<a href="../../../stay/roomInfo?stayName=${vo.stayName }&roomName=${room.roomName}" style="display:flex; justify-content: center;">
+	                                       <div class="photo" style="border:1px solid black;background-image: url('/resources/images/${room.roomPhoto.replace('\\','/')}'); background-repeat: no-repeat;
 	                                        background-position: center center; background-size: cover; width: 330px; height: 200px; margin-top:50px;">
 	                                        </div>
 	                                    </a>  
 	                                    <div class="reserv_info" style="margin-top:10px;">
-	                                           <div class="stay" style= "font-size:15px;font-weight:bold">${room.roomName }</div>
+	                                           <div class="stay" style= "font-size:15px;font-weight:bold; justify-content: center; display:flex; ">${room.roomName }</div>
 	                                           <p></p>
-	                                           <div class="option" style="line-height: 2.5;">${room.roomInfo }<br></div>
+	                                           <div class="option" style="line-height: 2.5; justify-content: center; display:flex;">${room.roomInfo }<br></div>
 	                                       </div>
 	                                    </div>
                                 	</c:forEach>

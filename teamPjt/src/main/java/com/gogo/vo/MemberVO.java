@@ -16,8 +16,13 @@ public class MemberVO {
 	private String registraionDate; // 가입일
 	private String snsCk;	// 소셜계정 로그인 체크
 	private String profile;
+	
+	// 통계
 	private String age_group;
 	private String count;
+	private String gender_group;
+	private String gender_Count;
+	
 	
 	// 카카오 토큰 발급 정보
 	private String access_token;

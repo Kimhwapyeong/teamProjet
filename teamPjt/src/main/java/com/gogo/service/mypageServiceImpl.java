@@ -116,6 +116,13 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 		return member;
 	}
 	
+	@Override
+	public List<MemberVO> chartGender(MemberVO vo) {
+		List<MemberVO> gender = mypageMapper.chartGender(vo);
+		log.info("gender : " + gender);
+		return gender;
+	}
+	
 	
 	
 	// ▶▶▶  host ▶▶▶
@@ -158,8 +165,8 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 	
 	
 	@Override
-	public List<ReservedVO> profit() {
-		List<ReservedVO> profit = mypageMapper.profit();
+	public List<ReservedVO> profit(String memberId) {
+		List<ReservedVO> profit = mypageMapper.profit(memberId);
 		return profit;
 	}
 	

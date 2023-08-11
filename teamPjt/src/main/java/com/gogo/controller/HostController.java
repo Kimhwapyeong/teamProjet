@@ -74,9 +74,13 @@ public class HostController extends CommonRestController{
 	
 	// 수입 현황
 	@RequestMapping("profit")
-	public @ResponseBody List<ReservedVO> profit(Model model){
-		List<ReservedVO> list = mypageService.profit();
+	public @ResponseBody List<ReservedVO> profit(Model model, HttpServletRequest request){
+		HttpSession session = request.getSession();
+		
+		String memberId = (String)session.getAttribute("memberId");
+		List<ReservedVO> list = mypageService.profit(memberId);
 		model.addAttribute("chart", list);
+		
 		log.info("============");
 	    log.info("chart : " + list);
 	    return list;
