@@ -70,11 +70,11 @@ public class UserController extends CommonRestController{
 	
 	// 취소 내역
 	@GetMapping(value = {"cancel", "travelCnt"})
-	public void cancel(Model model, HttpServletRequest request) {
+	public void cancel(Model model, HttpServletRequest request, @RequestParam(defaultValue="1")String pageNo) {
 		
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("memberId");
-		service.cancelList(model, memberId);
+		service.cancelList(model, memberId, pageNo);
 		int res = service.travelCnt(memberId);
 		model.addAttribute("travelCnt", res);
 	}

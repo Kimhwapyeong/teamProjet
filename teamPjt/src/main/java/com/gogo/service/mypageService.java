@@ -85,7 +85,8 @@ public interface mypageService {
 	public List<Map<String, String>> completedList(Model model, String memberId);
 	
 	// 취소 정보
-	public List<Map<String, String>> cancelList(Model model, String memberId);
+	public List<Map<String, String>> cancelList(Model model, String memberId, String pageNo);
+	public int cancleListCount(String memberId);
 	
 	// 회원 정보 조회
 	public List<MemberVO> mem(Model model);

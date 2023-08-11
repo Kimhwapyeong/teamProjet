@@ -77,7 +77,8 @@ public interface mypageMapper {
 	public List<Map<String, String>> completedList(String memberId);
 	
 	// 취소 정보
-	public List<Map<String, String>> cancelList(String memberId);
+	public List<Map<String, String>> cancelList(@Param("memberId")String memberId, @Param("pageNo")String pageNo);
+	public int cancleListCount(String memberId);
 	
 	// 회원 정보 조회
 	public List<MemberVO> mem();
