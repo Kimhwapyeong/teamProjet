@@ -26,7 +26,7 @@ public class StayController {
 	StayService stayService;
 	
 	@GetMapping("list")
-	public void getList(Model model, HttpServletRequest request) {
+	public void getList(String stayLoc, Model model, HttpServletRequest request) {
 		StayVO vo = new StayVO();
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("memberId");
@@ -35,26 +35,20 @@ public class StayController {
 		}else {
 			vo.setMemberId("");
 		}
-		stayService.stayList(model);
+		if(stayLoc != null && !stayLoc.contentEquals("")) {
+			stayService.stayLocList(stayLoc, model);
+		}else {
+			stayService.stayList(model);
+		}
 		stayService.likeId(vo, model);
 		stayService.stayImgList(model);
 	}
 	
 	@GetMapping("room")
-	public void roomInfo(String stayName , Model model, HttpServletRequest request) {
+	public void roomInfo(String stayName , Model model) {
 		stayService.stayRoomList(stayName, model);
 		stayService.roomInfo(stayName, model);
 		stayService.stayRoomImg(stayName, model);
-		
-		StayVO vo = new StayVO();
-		HttpSession session = request.getSession();
-		String id = (String)session.getAttribute("memberId");
-		if(id != null) {
-			vo.setMemberId(id);
-		}else {
-			vo.setMemberId("");
-		}
-		stayService.likeId(vo, model);
 	}
 	
 	@GetMapping("roomInfo")
