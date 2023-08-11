@@ -32,7 +32,7 @@ public interface MainService {
 
 	public void getMainList(Model model);
 
-	public void getStayNo(String memberId, Model model);
+	public String getStayNo(String memberId, Model model);
 	
 	public void getPopStayList(Model model);
 	

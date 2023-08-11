@@ -30,6 +30,7 @@
 	<delete id="deleteStayPhoto">
 		delete attach
 		where stayno = #{stayNo}
+		and roomno is null
 	</delete>
 	
 	<select id="getRoomPhotoList" resultType="com.gogo.vo.FileuploadVO">

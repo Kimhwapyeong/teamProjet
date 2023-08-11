@@ -32,8 +32,13 @@ public class MainController {
 	
 	// 임시 매핑용
 	@GetMapping("/addstay")
-	public String addStay() {
-		
+	public String addStay(HttpSession session, Model model, RedirectAttributes rttr) {
+		String memberId = (String)(session.getAttribute("memberId"));
+		String stayNo = mainService.getStayNo(memberId, model);
+		if(stayNo != null && !stayNo.contentEquals("")){
+			rttr.addFlashAttribute("msg", "이미 등록된 스테이가 있습니다.<br>한 명의 호스트는<br>하나의 스테만 등록할 수 있습니다.");
+			return "redirect:/member/host/guide";
+		}
 		return "/stay/addstay";
 	}
 
@@ -101,7 +106,7 @@ public class MainController {
 		}
 		
 				// 마이페이지로 포워드
-		return "redirect:/main";
+		return "redirect:/member/host/stayhost";
 	}
 
 	// 임시 매핑용
@@ -129,7 +134,7 @@ public class MainController {
 			rttr.addFlashAttribute("msg", "수정 실패");
 		}
 		
-		return "redirect:/main";
+		return "redirect:/member/host/stayhost";
 	}
 	
 	@GetMapping("/joosoSearch")

@@ -49,10 +49,10 @@ h_logo img {
 </style>
 <link href="/resources/css/main/mainList.css" rel="stylesheet">
 <script>
+
 window.addEventListener('load', ()=>{
 	setMainImgsHeight();
 	
-
    let timerId = 0;
    
    // 메인 케러셀 5초마다 넘겨주기
@@ -102,6 +102,7 @@ window.addEventListener('load', ()=>{
 		recPage.innerHTML = recPageNo;
    })
    
+
    // 불릿 생성중 
    let recBullets = document.querySelectorAll('span[name=recBullet]');
    recBullets.forEach((recBullet) =>{
@@ -109,6 +110,8 @@ window.addEventListener('load', ()=>{
 		   e.classList.add('swiper-pagination-bullet-active');
 	   })
    })
+
+   
    
    let popNewX = 0;
    let popPageNo = 1;
@@ -139,6 +142,7 @@ window.addEventListener('load', ()=>{
    })
 })
 window.addEventListener('resize', setMainImgsHeight);
+
 
 // 메인 이미지 height 값 조절 ( width 대비 0.45배 )
 function setMainImgsHeight(){
@@ -201,8 +205,8 @@ function setMainImgsHeight(){
 
 <!-- 추천 스테이 -->
 <div class="container main_new">
-        <div class="recom_title">오직 스테이올레에서만</div>
-        <div class="_routerWithArrow_wrapper__v67Nt"><button id="router_mobile" type="button">오직 스테이폴리오에서만<span
+        <div class="recom_title">오직 올래갈래에서만</div>
+        <div class="_routerWithArrow_wrapper__v67Nt"><button id="router_mobile" type="button">오직 올래갈래에서만<span
                     style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"><span
                         style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"><img
                             alt="" aria-hidden="true"
@@ -283,9 +287,9 @@ function setMainImgsHeight(){
 			
 		</div>
 		<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"></div>
-            <div class="swiper-wrapper" style="transition-duration: 0ms;">
+            <div class="swiper-wrapper" id="recBox2" style="transition-duration: 0ms; transform: translate3d(-0px, 0px, 0px);">
             	<c:forEach items="${ listStay }" var="stay" varStatus="status">
-	                <div class="swiper-slide stay_box" data-swiper-slide-index="${ status.index }"
+	                <div class="swiper-slide stay_box recStay" data-swiper-slide-index="${ status.index }"
 	                    style="z-index: 1;"><button type="button" class="btn_like"><span>관심스테이</span></button><a
 	                        href="/findstay/stay-naum">
 	                        <div role="img" aria-label="main_image" class="img"

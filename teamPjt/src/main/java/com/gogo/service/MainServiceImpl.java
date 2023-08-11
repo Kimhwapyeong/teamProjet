@@ -200,10 +200,11 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
-	public void getStayNo(String memberId, Model model) {
+	public String getStayNo(String memberId, Model model) {
 		String stayNo = mainMapper.getStayNo(memberId);
 		model.addAttribute("stayNo", stayNo);
 		
+		return stayNo;
 	}
 
 	@Override
