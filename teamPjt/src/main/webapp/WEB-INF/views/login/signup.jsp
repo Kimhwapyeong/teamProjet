@@ -222,7 +222,6 @@ $(document).ready(function() {
 
     if (!item_check(signup.tag_status($('[name=pw]')))) return;
     if (!item_check(signup.tag_status($('[name=pw_ck]')))) return;
-    if (!item_check(signup.tag_status($('[name=memberEmail]')))) return;
     
 	//form 데이터를 서버로 제출 
     $('form').submit();
