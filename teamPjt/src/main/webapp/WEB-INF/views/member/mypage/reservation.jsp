@@ -122,7 +122,7 @@ window.addEventListener('load', function(){
 										<div class="photo"
 											style="background-image: url('/resources/images/${list.MAINPIC1.replace('\\','/')}'); background-repeat: no-repeat; background-position: center center; background-size: cover;">
 											<!-- =============================== 스테이 자세히보기 연결 ============================================-->
-											<span class="view">스테이 보기</span>
+											<span class="view" onclick="location.href='/stay/room?stayName=${list.STAYNAME}'">스테이 보기</span>
 										</div>
 									</div>
 										<div class="reserv_info">
@@ -209,6 +209,7 @@ window.addEventListener('load', function(){
 											style="background-image: url('/resources/images/${list.MAINPIC1.replace('\\','/')}'); background-repeat: no-repeat; background-position: center center; background-size: cover;">
 											<span class="view">스테이 보기</span>
 										</div>
+									
 									</div>
 										<div class="reserv_info">
 											<div class="day">${list.CHECKIN} ~ ${list.CHECKOUT}</div>

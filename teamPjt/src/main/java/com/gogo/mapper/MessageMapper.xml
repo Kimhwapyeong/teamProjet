@@ -4,7 +4,7 @@
 <mapper namespace="com.gogo.mapper.MessageMapper">
 
 	<insert id="insertMessage">
-		insert into message values(messageseq.nextval, #{content}, sysdate, #{memberId}, #{roomId}, #{type}, #{stayNo})
+		insert into message values(messageseq.nextval, #{content}, sysdate, #{type}, #{memberId}, #{roomId}, #{stayNo})
 	</insert>
 	
 	<select id="getSysdate" resultType="String">

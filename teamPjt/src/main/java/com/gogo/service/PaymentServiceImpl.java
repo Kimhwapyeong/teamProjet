@@ -284,26 +284,7 @@ public class PaymentServiceImpl implements PaymentService {
 		String memberCount = String.valueOf(map.get("memberCount"));
 		String talkSome = String.valueOf(map.get("talkSome"));
 		
-		// 예약 insert
-		ReservedVO reserved = new ReservedVO();
-		reserved.setReservationNo(reservationNo);
-		reserved.setRoomNo(roomNo);
-		reserved.setMemberId(memberId);
-		reserved.setCheckIn(checkIn);
-		reserved.setCheckOut(checkOut);
-		reserved.setMemberCount(memberCount);
-		reserved.setTalk(talkSome);
-		
-		int reservedRes = service_r.insertReserved(reserved);
-		
-		if(reservedRes>0) {
-			System.out.println("예약 정보 저장 성공");
-		} else {
-			System.out.println("예약 정보 저장 실패");
-		}
-		
-		// 결제 정보 저장
-		int res = paymentSave(impUid,token, reserved.getReservationNo(), paymentNo);
+		int res = 0;
 		
 		// success 가 false일시 error 메세지 저장
 		String success = String.valueOf(map.get("success"));
@@ -324,7 +305,31 @@ public class PaymentServiceImpl implements PaymentService {
 			} else {
 				System.out.println("결제 취소 정보 업데이트 실패!");
 			}
-		} 
+		} else {
+			
+			// 예약 insert
+			ReservedVO reserved = new ReservedVO();
+			reserved.setReservationNo(reservationNo);
+			reserved.setRoomNo(roomNo);
+			reserved.setMemberId(memberId);
+			reserved.setCheckIn(checkIn);
+			reserved.setCheckOut(checkOut);
+			reserved.setMemberCount(memberCount);
+			reserved.setTalk(talkSome);
+			
+			int reservedRes = service_r.insertReserved(reserved);
+			
+			if(reservedRes>0) {
+				System.out.println("예약 정보 저장 성공");
+			} else {
+				System.out.println("예약 정보 저장 실패");
+			}
+			
+			// 결제 정보 저장
+			res = paymentSave(impUid,token, reserved.getReservationNo(), paymentNo);
+		}
+		
+		
 		
 		if(res>0) {
 			System.out.println("결제 정보 저장 성공!");
