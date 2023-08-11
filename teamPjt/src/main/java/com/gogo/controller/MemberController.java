@@ -72,17 +72,17 @@ public class MemberController extends CommonRestController {
 		System.out.println("pw : " + member.getPw());
 		
 		MemberVO membervo = memberService.loginAction(member);
-		MemberVO user = memberService.selectOne(member);
-		List<String> role = memberService.getMemberRole(member.getMemberId());
-		
-		user.setRole(role);
+//		MemberVO user = memberService.selectOne(member);
+//		List<String> role = memberService.getMemberRole(member.getMemberId());
+//		
+//		user.setRole(role);
 		
 		
 		if(membervo != null) {
 			
-			session.setAttribute("member", user);
-			session.setAttribute("memberId", user.getMemberId());
-			session.setAttribute("role_id", user.getRole());
+			session.setAttribute("member", membervo);
+			session.setAttribute("memberId", membervo.getMemberId());
+			session.setAttribute("role_id", membervo.getRole());
 			
 			Map<String, Object> map = responseMap(REST_SUCCESS, "환영합니다.");
 			

@@ -50,10 +50,10 @@ public class MemberServiceImpl implements MemberService {
 				
 				return member;
 			}
-			return memberMapper.loginAction(member);
+//			return memberMapper.loginAction(member);
 		}
         // 로그인 실패
-        return member;
+        return null;
 	}
 	@Override
 	public int signupAction(MemberVO member) {
