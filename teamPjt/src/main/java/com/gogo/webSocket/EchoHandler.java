@@ -18,10 +18,15 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gogo.mapper.MessageMapper;
 import com.gogo.service.MessageService;
+import com.gogo.service.ReservedService;
 import com.gogo.vo.MemberVO;
+import com.gogo.vo.MessageRoomVO;
 import com.gogo.vo.MessageVO;
+import com.gogo.vo.StayVO;
 
 import org.slf4j.LoggerFactory;
 
@@ -31,23 +36,32 @@ import org.slf4j.LoggerFactory;
 public class EchoHandler extends TextWebSocketHandler{
     private Map<String, List<WebSocketSession>> roomSessions = new ConcurrentHashMap<>();
     private Map<String, WebSocketSession> userSessions = new ConcurrentHashMap<>(); // 사용자 세션을 관리하기 위한 Map 추가
-    
+    private Map<String, WebSocketSession> roomUpdateSessions = new ConcurrentHashMap<>();  // 실시간 리스트 업데이트를 위한 세션을 저장하는 맵
     private static Logger logger = LoggerFactory.getLogger(EchoHandler.class);
     
     @Autowired
     MessageService service;
-  
- 
+    @Autowired
+    ReservedService service_reserved;
+    
+    
+    
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         String writer = (String) session.getAttributes().get("memberId");
         String queryString = session.getUri().getQuery();
+        
+        
 
         // Query String에서 targetMemberId 파라미터 값을 추출
         Map<String, String> params = parseQueryString(queryString);
         String targetMemberId = params.get("targetMemberId");
         
         String socketType = params.get("socketType");
+        
+        if ("updateRooms".equals(socketType)) {
+            roomUpdateSessions.put(writer, session);
+        }
         //System.out.println("socketType : "+socketType );
         
         
@@ -111,7 +125,9 @@ public class EchoHandler extends TextWebSocketHandler{
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        if (message != null && message.getPayload() != null) {
+    	
+    	
+    	if (message != null && message.getPayload() != null) {
             String roomId = (String) session.getAttributes().get("roomId");
             logger.info("{}로 부터 {}받음, roomId: {}", session.getId(), message.getPayload(), roomId);
             List<WebSocketSession> sessionsInRoom = roomSessions.get(roomId);
@@ -140,9 +156,17 @@ public class EchoHandler extends TextWebSocketHandler{
                 map.put("stayNoMsg", stayNoMsg);
                 service.insertChatting(map);
             } 
+            
+            if(message.getPayload().contains("ENTER")) {
+            	
+            	sendUpdatedRoomList(session);
+            }
+            
+        
         } else {
             System.err.println("클라이언트가 비어있는 메세지를 send 하였습니다!");
         }
+        
     }
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
@@ -235,6 +259,40 @@ public class EchoHandler extends TextWebSocketHandler{
             }
         }
         return map;
+    }
+    
+    private void sendUpdatedRoomList(WebSocketSession session) throws IOException {
+    	
+    	String memberId = "";
+    	int pageNo = 1;
+    	String stayNo = (String)session.getAttributes().get("stayNoMsg");
+    	if(session.getAttributes().get("hostMsgPageNo")!=null
+    			&& !"".equals(session.getAttributes().get("hostMsgPageNo"))) {
+    		
+    		pageNo = (int) session.getAttributes().get("hostMsgPageNo");
+    	}
+    	
+    	StayVO stay = service_reserved.selectOne_stay(stayNo);
+    	
+    	memberId = stay.getMemberId();
+    	
+    	System.err.println("핸들러 memberId : "+memberId);
+    	System.err.println("핸들러 pageNo : "+pageNo);
+    	
+        List<MessageRoomVO> updatedRooms = service.messageRoomList(memberId, pageNo);  // 방 목록을 가져오는 서비스 로직
+        
+        System.err.println("핸들러 updatedRooms"+updatedRooms);
+        
+        
+        Map<String, Object> map = new HashMap<>();
+        map.put("type", "ROOM_UPDATE");
+        map.put("rooms", updatedRooms);
+
+        String messagePayload = new ObjectMapper().writeValueAsString(map);
+
+        for (WebSocketSession sess : roomUpdateSessions.values()) {
+            sess.sendMessage(new TextMessage(messagePayload));
+        }
     }
 
 

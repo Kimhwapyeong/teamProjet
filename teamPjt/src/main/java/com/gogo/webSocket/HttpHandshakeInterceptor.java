@@ -26,11 +26,13 @@ public class HttpHandshakeInterceptor implements HandshakeInterceptor {
                 MemberVO member = (MemberVO) session.getAttribute("member");
                 String roomId = (String) session.getAttribute("roomId");
                 String stayNoMsg = (String)session.getAttribute("stayNoMsg");
+                String hostMsgPageNo = (String)session.getAttribute("hostMsgPageNo");
                 
                 attributes.put("memberId", memberId); // WebSocket 세션 속성에 사용자 이름 설정
                 attributes.put("member", member); // WebSocket 세션 속성에 사용자 이름 설정
                 attributes.put("roomId", roomId);
                 attributes.put("stayNoMsg", stayNoMsg);
+                attributes.put("hostMsgPageNo", hostMsgPageNo);
                 
             }
         }
