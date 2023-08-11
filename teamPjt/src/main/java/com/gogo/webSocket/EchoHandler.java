@@ -204,12 +204,16 @@ public class EchoHandler extends TextWebSocketHandler{
         WebSocketSession targetSession = userSessions.get(targetMemberId);
 
         if (targetSession != null && targetSession.isOpen() && !senderId.equals(targetMemberId)) {
+        	
+        	String stayNoMsg = service.getStayNoMsg(roomId);
+        	
             Map<String, String> payload = new HashMap<>();
             payload.put("type", "invite");
-
+            
             // 여기에서 초대 메시지를 생성합니다.
             String inviteMessage = senderId + "님이 " + roomId + "번 방에 초대하였습니다.";
             
+            payload.put("stayNoMsg", stayNoMsg);
             payload.put("message", inviteMessage);
             payload.put("roomId", roomId);
 

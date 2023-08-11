@@ -39,4 +39,8 @@ public interface MessageMapper {
 	// 방 개설자 구하기
 	public String getMessageRoomOwner(String roomId);
 	
+	
+	// 해당 메세지 방의 stayNo 구하기
+	public String getStayNoMsg(String roomId);
+	
 }

@@ -41,6 +41,12 @@ public class MessageController {
 						, HttpSession session
 						, Model model) throws Exception {
 		
+		if(stayNoMsg==null || "".equals(stayNoMsg)) {
+			
+			stayNoMsg = service.getStayNoMsg(roomId);
+			
+		}
+		
 		service.chattingGet(stayNoMsg, roomId, session, model);
 		
 	}

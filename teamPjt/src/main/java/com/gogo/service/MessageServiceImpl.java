@@ -263,6 +263,11 @@ public class MessageServiceImpl implements MessageService{
 		return messageMapper.messageRoomListUserCount(memberId);
 		
 	}
+	
+	@Override
+	public String getStayNoMsg(String roomId) {
+		return messageMapper.getStayNoMsg(roomId);
+	}
 
 
 

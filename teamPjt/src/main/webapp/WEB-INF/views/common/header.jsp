@@ -44,9 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function initInviteSocket(targetMemberId) {
         let socketInvite = new SockJS("http://localhost:8080/echo?targetMemberId=" + targetMemberId);
 
+	var stayNoMsg = '';
         socketInvite.onmessage = function(event) {
             console.log("Received raw data:", event.data);
-			
             // JSON 형식인지 확인
             let receivedData;
             try {
@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // JSON 데이터를 정상적으로 파싱한 후, 이후 로직 처리
             if (receivedData && receivedData.type === 'invite') {
                 let roomId = receivedData.roomId;
+                stayNoMsg = receivedData.stayNoMsg;
                 let receivedMessage = receivedData.message;
                 let receivedUserId = '';
                 const pattern = /(.*?)(?=님이)/;
@@ -80,11 +81,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.getElementById('acceptInvite').addEventListener('click', function() {
             let roomId = document.getElementById('alertTxt').innerText;
+            
             let match = roomId.match(/(\d+)번/);
 
             if (match && match[1]) {
                 let roomNumber = match[1];  
-                window.location.href = "/chat/chat?roomId=" + roomNumber;
+                window.location.href = "/chat/chat?roomId=" + roomNumber + "&stayNoMsg="+ stayNoMsg;
             } else {
                 console.log("방 번호를 찾을 수 없습니다.");
             }
