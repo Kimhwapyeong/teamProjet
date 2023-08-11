@@ -53,6 +53,7 @@
             opacity: 0;
             transition: visibility .3s ease-out, opacity .3s ease-out;
         }
+        
     </style>
     <script>
     window.onload = function() {
@@ -64,6 +65,7 @@
 
             // 국내 여행 모달창 클릭
             let searchbtn = document.querySelectorAll('#regionModal li button');
+           
             searchbtn.forEach(button => {
                 // 버튼이 클릭되면
                 button.addEventListener('click', () => {
@@ -74,6 +76,7 @@
                             otherButton.classList.add('active');
                         } else {
                             otherButton.classList.remove('active');
+                            travelbtn.innerHTML = otherButton.innerHTML;
                         }
                     });
                 })
@@ -101,10 +104,10 @@
             clsbtn.addEventListener('click', function () {
                 document.querySelector("#areaSelect").style.display = '';
             })
-			let clsbtn2 = document.querySelector('.btn-number-search');
+/* 			let clsbtn2 = document.querySelector('.btn-number-search');
             clsbtn2.addEventListener('click', function () {
                 document.querySelector("#areaSelect").style.display = '';
-            })
+            }) */
 
 
             // 인원 버튼
@@ -113,8 +116,10 @@
                 selectNumber.classList.add('open');
             })
             let clsbtn3 = document.querySelectorAll('.btn_close')[3];
+            
             clsbtn3.addEventListener('click', function () {
                 selectNumber.classList.remove('open');
+                peopleNum.innerHTML = '성인 : ' + document.querySelectorAll('.input-num input')[0].value + '/' + '아동 : '+ document.querySelectorAll('.input-num input')[1].value;  
             })
 
             // 가격범위
@@ -125,6 +130,7 @@
             let clsbtn4 = document.querySelectorAll('.btn_close')[4];
             clsbtn4.addEventListener('click', function () {
                 selectPrice.classList.remove('open');
+                btn3.innerHTML = document.querySelector('#minPrice').value +'~' + document.querySelector('#maxPrice').value;
             })
 
             // 스테이 유형
@@ -147,11 +153,44 @@
                 selectTheme.classList.remove('open');
             })
 
-
-            const bb = document.querySelectorAll('#listpick li');
-            bb.forEach(button => {
+			let btnSearch = document.querySelectorAll('.btn-number-search');
+			let searchModal = document.querySelectorAll('.searchModal');
+			let DayPicker = document.querySelector('.DayPicker');
+            
+			// 각 적용하기 버튼 모두 닫기
+            btnSearch.forEach((button,index) => {
                 button.addEventListener('click', () => {
-                    bb.forEach(otherButton => {
+								console.log('a');
+                	btnSearch.forEach((otherbutton,idx) => {
+							if(index == idx){
+								console.log('a');
+								console.log(idx);
+								console.log(searchModal[idx]);
+								if(idx === 0){
+									document.querySelector("#areaSelect").style.display = '';
+								}else if(idx === 1){
+									DayPicker.style.display = 'none';
+								}else{
+									searchModal[idx-1].classList.remove('open');
+								}
+							}
+                    }) 
+                })
+            }) 
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            // 인기순, 최신순, ..
+           /*  const rightCategory = document.querySelectorAll('#listpick li');
+            rightCategory.forEach(button => {
+                button.addEventListener('click', () => {
+                	rightCategory.forEach(otherButton => {
                         if (otherButton === button) {
                             otherButton.classList.add('oepn');
                         } else {
@@ -160,7 +199,7 @@
                     });
                 })
             })
-
+ */
 
 
             
@@ -172,8 +211,10 @@
                     buttons.forEach(otherButton => {
                         if (otherButton === button) {
                             otherButton.classList.add('_selector_selected__ciPbE');
+                            otherButton.classList.add('oepn');
                         } else {
                             otherButton.classList.remove('_selector_selected__ciPbE');
+                            otherButton.classList.remove('oepn');
                         }
                     });
                 })
@@ -683,7 +724,7 @@
                                              </ul>
                                         </div>
                                     </div>
-									<button style=" border:0px; cursor: pointer; margin-left: 500px;" type="button" onclick="" class="btn-number-search">적용하기</button>
+									<button style=" border:0px; cursor: pointer; margin-left: 500px;" type="button" onclick="" class="btn-number-search regionBtn" >적용하기</button>
                                 </div>
                             </div>
                         </div>
@@ -711,9 +752,9 @@
                                             <div class="DayPicker DayPicker_1 DayPicker__horizontal DayPicker__horizontal_2 DayPicker__withBorder DayPicker__withBorder_3"
                                                 style="width: 619px; display: none;" id='iscalendar'>
                                                 <div>
-                                                    <div class="" style="width: 618px; height: 450px; border: 1px solid #e4e4e4; background: #fff; border-radius: 5px;">
+                                                    <div class="searchModal" style="width: 618px; height: 450px; border: 1px solid #e4e4e4; background: #fff; border-radius: 5px;">
 
-                                                        <div class="calendar-wrap" style="padding-top: 0px ">
+                                                        <div class="calendar-wrap " style="padding-top: 0px ">
                                                             <div class="calendar-middle-wrap" style='height: 400px;'>
                                                               <div class="cal_nav">
                                                                 <a href="javascript:;" class="nav-btn go-prev"></a>
@@ -782,7 +823,7 @@
                                                                   <input type="hidden" id="reserved_checkOut" name="reserved_checkOut" value="">
                                                         
                                                                   <div class="btn-wrapper" style="position:absolute; bottom:5%; left:35%;">
-                                                                    <button style=" border:0px; cursor: pointer;" type="submit"
+                                                                    <button style=" border:0px; cursor: pointer;" type="button"
                                                                       class="btn-number-search">적용하기</button>
                                                                   </div>
                                                                   <button
@@ -990,7 +1031,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div id="selectNumber" class="layer_select number  "><button type="button"
+                        <div id="selectNumber" class="layer_select number searchModal"><button type="button"
                                 class="btn_close">닫기</button>
                             <div class="tit">인원</div>
                             <dl>
@@ -1012,9 +1053,9 @@
                                 </dd>
                             </dl>
                             <input type="hidden" name="stdPerson" id="stdPerson" value="0">
-                            <div class="btn-wrapper"><button type="submit" class="btn-number-search">적용하기</button></div>
+                            <div class="btn-wrapper"><button type="button" class="btn-number-search">적용하기</button></div>
                         </div>
-                        <div id="selectPrice" class="layer_select price"><button type="button"
+                        <div id="selectPrice" class="layer_select price searchModal"><button type="button"
                                 class="btn_close">닫기</button>
                             <div class="tit">가격 범위</div>
                             <div class="price_wrap">
@@ -1057,12 +1098,12 @@
                                             style="width: 85px; font-size: 14px; text-align: right; height: 32px; vertical-align: middle; padding-bottom: 5px;" name="maxPrice" id="maxPrice">만원~</span>
                                 </div>
                             </div>
-                            <div class="btn-wrapper"><button type="submit" class="btn-number-search">적용하기</button></div>
+                            <div class="btn-wrapper"><button type="button" class="btn-number-search">적용하기</button></div>
                         </div>
-                        <div id="selectType" class="layer_select type "><button type="button"
+                        <div id="selectType" class="layer_select type searchModal"><button type="button"
                                 class="btn_close">닫기</button>
                             <div class="tit">스테이 유형</div>
-                            <div class="btn-wrapper"><button type="submit" class="btn-number-search">적용하기</button></div>
+                            <div class="btn-wrapper"><button type="button" class="btn-number-search">적용하기</button></div>
                             <ul class="check_list" id="stayTypeList">
                                 <li class="ko"><label class="check_skin" for="all"><input type="checkbox" 
                                 			id="all" name="staytype" value="" checked=""><span>전체</span></label></li>
@@ -1078,10 +1119,10 @@
                                             id="hotel" name="staytype" value="호텔"><span>호텔</span></label></li>
                             </ul>
                         </div>
-                        <div id="selectTheme" class="layer_select theme ">
+                        <div id="selectTheme" class="layer_select theme searchModal">
                         <button type="button" class="btn_close">닫기</button>
                             <div class="tit">편의시설</div>
-                            <div class="btn-wrapper"><button type="submit" class="btn-number-search">적용하기</button></div>
+                            <div class="btn-wrapper"><button type="button" class="btn-number-search">적용하기</button></div>
                             <ul class="findstay_check_list" id="roomOptionList">
                                  <li class="ko"><label class="check_skin" for="all_theme"><input type="checkbox"
                                             id="all_theme" name="roomOption" value="" checked=""><span>전체</span></label></li>
@@ -1152,6 +1193,7 @@
     </div>
     </div>
     
+    
 	<div class="container findstay_list  ">
 		<div class="flist_wrap" id="stayList">
 			<c:forEach items="${list}" var="list" step="1">
@@ -1176,16 +1218,17 @@
 								<div class="swiper-button-next"></div>
 								<a href="/stay/room?stayName=${list.stayName}">
 								<div class="swiper-wrapper">
-									<li class="swiper-slide img swiper-slide-active"
+									<<li class="swiper-slide img swiper-slide-active"
 										style="background: url(/resources/images/${list.mainPic1.replace('\\','/')}) center center / cover no-repeat; cursor: pointer; width: 410px;">
 									</li>
-									
- 									<c:forEach items="${stayImg}" var="img" step="1">
-										<c:if test="${img.stayNo eq list.stayNo}">
-											<!-- <li class="swiper-slide img swiper-slide-active" style="background: url(/resources/images/jyp.jpg) center center / cover no-repeat; cursor: pointer; width: 410px;"></li> -->
-											<li class="swiper-slide img swiper-slide-active" style="background-img: url(/resources/images/${img.fileName.replace('\\','/')}) center center / cover no-repeat; cursor: pointer; width: 410px;"></li>
+									<li class="swiper-slide img swiper-slide-active" style="background-image: url(/resources/images/스테이 엔 다이닝 산.jpg) center center / cover no-repeat; cursor: pointer; width: 410px;"></li>
+ 									
+<%--  									<c:forEach items="${stayImg}" var="img" step="1">
+										<c:if test="${img.stayNo == list.stayNo}">
+<!-- 											<li class="swiper-slide img swiper-slide-active" style="background-img: url(/resources/images/벵디.jpg) center center / cover no-repeat; cursor: pointer; width: 410px;"></li> -->
+											<li class="swiper-slide img" style="background: url(/resources/images/${img.fileName.replace('\\','/')}) center center / cover no-repeat; cursor: pointer; width: 410px;"></li>
 										</c:if>
-									</c:forEach>
+									</c:forEach> --%>
 									
 								</div>
 								</a>

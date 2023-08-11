@@ -251,9 +251,23 @@
 			<div class="top_title">
 				<div class="name" style='font-size: 40px; font-weight: bold;'>${list.STAYNAME }</div>
 				<ul class="links_area">
-					<li><button type="button" class="btn_like2">
-							<span>관심스테이</span>
-						</button>
+					<li>
+					
+						<button type="button" class="btn_like2"><span>관심스테이</span></button>
+					
+						<%-- <c:if test="${sessionScope.memberId == null}">
+							<button type="button" class="btn_like2"><span>관심스테이</span></button>
+						</c:if>
+						<c:if test="${likeList != null and sessionScope.memberId != null}">
+							<button type="button" class="btn_like2"><span>관심스테이</span></button>
+							<c:forEach items="${likeList}" var="likeList" step="1">
+								<c:if test="${likeList.stayNo eq  list.STAYNO}" var="res">
+									<button type="button" class="btn_like2 on"><span>관심스테이</span></button>
+								</c:if>
+							</c:forEach>
+						</c:if> --%>
+					
+					
 						<small class="small">${list.LIKECOUNT }</small></li>
 					<li><button type="button" class="btn_share">공유하기</button>
 						<div class="share_layer" style="display: none;">

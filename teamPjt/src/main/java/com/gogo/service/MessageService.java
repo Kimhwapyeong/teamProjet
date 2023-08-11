@@ -50,5 +50,5 @@ public interface MessageService {
 	public void messageRoomListUser(String memberId, Model model, int pageNo);
 	public void chatListGet(Model model, String memberId, int pageNo);
 	public String getMessageRoomOwner(String roomId);
-
+	public String getStayNoMsg(String roomId);
 }
