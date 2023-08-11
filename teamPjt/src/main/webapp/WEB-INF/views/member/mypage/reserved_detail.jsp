@@ -100,7 +100,7 @@
             <div class="reserv_guide">
                 <ul class="dl">
                     <li>
-                        <div class="dt">01. 예약 번호</div>
+                        <div class="dt">01. 예약 번호 </div>
                         <div class="dd">${param.reservationNo}<small>(예약 확정 : 2023-07-26 10:05)</small></div>
                     </li>
                     <li>
