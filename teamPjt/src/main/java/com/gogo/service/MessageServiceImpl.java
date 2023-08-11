@@ -203,6 +203,9 @@ public class MessageServiceImpl implements MessageService{
 	@Override
 	public List<MessageRoomVO> messageRoomList(String memberId, int pageNo) {
 		
+		System.err.println("messageRoomList : "+ messageMapper.messageRoomList(memberId, String.valueOf(pageNo)));
+		System.err.println("서비스 memberId : "+memberId);
+		System.err.println("서비스 pageNo : "+pageNo);
 		
 		
 		return messageMapper.messageRoomList(memberId, String.valueOf(pageNo));
@@ -243,7 +246,7 @@ public class MessageServiceImpl implements MessageService{
 	}
 	
 	@Override
-	public void chatListGet(Model model, String memberId, int pageNo) {
+	public void chatListGet(Model model, String memberId, int pageNo, HttpSession session) {
 		
 		
 		List<MessageRoomVO> messageRoomList = messageRoomList(memberId, pageNo);
@@ -255,6 +258,7 @@ public class MessageServiceImpl implements MessageService{
 		model.addAttribute("messageRoomList", messageRoomList);
 		model.addAttribute("pageEnd", pageEnd);
 		model.addAttribute("pageNo", pageNo);
+		session.setAttribute("hostMsgPageNo", pageNo);
 	}
 	
 	@Override

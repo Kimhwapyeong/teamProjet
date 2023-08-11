@@ -36,6 +36,14 @@
             width: 500px;
             margin-left: 5px;
         }
+		.room-item {
+		    opacity: 0; 
+		    transition: opacity 0.5s; 
+		}
+		
+		.fade-in {
+		    opacity: 1; 
+		}
     </style>
    <body style="">
    
@@ -96,7 +104,48 @@
 		            </li>
 	            </c:if>
             </c:forEach>
-    </ul>			
+    </ul>		
+    
+			<script>
+			    var socket = new SockJS('http://localhost:8080/echo?socketType=updateRooms');
+			    
+			    socket.onmessage = function(event) {
+			        var data = JSON.parse(event.data);
+			        if (data.type === "ROOM_UPDATE") {
+			            console.log('Received room update', data);
+			            updateRoomList(data.rooms);
+			        }
+			    };
+			    
+			    function updateRoomList(rooms) {
+			        var roomListElement = document.querySelector(".room-list");
+			        roomListElement.innerHTML = '';
+
+			        rooms.forEach(function(room, index) {
+			            
+			            var listItem = document.createElement('li');
+			            listItem.className = "room-item";
+			            listItem.onclick = function() {
+			                location.href = '/chat/chat?roomId=' + room.roomId + '&stayNoMsg=' + room.stayNoMsg;
+			            };
+			            listItem.textContent = '방 번호: ' + room.roomId + ' | 회원 아이디: ' + room.memberId + ' | 방 이름: ' + room.roomName + ' | 스테이 번호 : ' + room.stayNo;
+			            roomListElement.appendChild(listItem);
+			            
+			            // Add a slight delay to give the fade-in effect
+			            setTimeout(function() {
+			                listItem.classList.add('fade-in');
+			            }, 100 * index); // 100ms delay for each item, you can adjust this value to control the delay between fade-ins
+			        });
+			    }
+			    
+			    $(function(){
+			    	
+			    	$('.room-item').attr('style','opacity:1');
+			    	
+			    });
+			</script>
+    
+
 										
 								    
 								

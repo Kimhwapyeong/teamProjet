@@ -207,8 +207,8 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 	// ▶▶▶  user ▶▶▶
 	// 예약 정보
 	@Override
-	public List<Map<String, String>> reservList(Model model, String memberId) {
-		List<Map<String, String>> list = mypageMapper.reservList(memberId);
+	public List<Map<String, String>> reservList(Model model, String memberId, String pageNo) {
+		List<Map<String, String>> list = mypageMapper.reservList(memberId, pageNo);
 		
 		list.forEach(map->{
 			String day = service_r.reservedDay2(map.get("CHECKIN"), map.get("CHECKOUT"));
@@ -219,10 +219,20 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 			map.put("amount", service_r.comma(res));
 		});
 		
+		int a = reservListCount(memberId);
+		int pageEnd = (int)Math.ceil((double)a/(double)5);
+		
 		log.info("===========");
 		log.info("list : " + list);
 		model.addAttribute("list", list);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("pageEnd", pageEnd);
 		return null;
+	}
+	
+	@Override
+	public int reservListCount(String memberId) {
+		return mypageMapper.reservListCount(memberId);
 	}
 	
 	// 이용완료 

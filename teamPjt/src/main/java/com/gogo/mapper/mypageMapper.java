@@ -70,7 +70,8 @@ public interface mypageMapper {
 	
 	// ▶▶▶  user ▶▶▶
 	// 예약 정보
-	public List<Map<String, String>> reservList(String memberId);
+	public List<Map<String, String>> reservList(@Param("memberId")String memberId, @Param("pageNo")String pageNo);
+	public int reservListCount(String memberId);
 	
 	// 이용 완료
 	public List<Map<String, String>> completedList(String memberId);

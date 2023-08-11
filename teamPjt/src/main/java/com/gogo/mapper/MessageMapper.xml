@@ -95,7 +95,6 @@
 			          FROM Message
 			          WHERE type = 'TALK'
 			          GROUP BY roomId
-			          HAVING COUNT(type) >= 2
 			      )
 			      AND s.memberId = #{memberId}
 			      AND m.regdate = (

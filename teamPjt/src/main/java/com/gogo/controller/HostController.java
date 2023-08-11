@@ -148,7 +148,7 @@ public class HostController extends CommonRestController{
 		String memberId = (String)session.getAttribute("memberId");
 		
 		
-		service_msg.chatListGet(model, memberId, pageNo);
+		service_msg.chatListGet(model, memberId, pageNo, session);
 	}
 	
 	
