@@ -27,28 +27,28 @@ window.addEventListener('load',function(){
     });
 });
 
-    // 입력 유효성 검사와 오류 메시지 표시를 처리하는 함수
-    function validateInput(tag) {
-        var name = tag.getAttribute('name');
-        var value = tag.value.trim();
-        
-        
-        // 'pw' 필드 유효성 검사
-        if (name === 'pw') {
-            var pwStatus = signup.pw_status(value);
-            var pwMessageDiv = document.querySelector('#signUpPw + .valid');
-            pwMessageDiv.textContent = pwStatus.desc;
-            pwMessageDiv.style.display = pwStatus.code === 'valid' ? 'none' : 'block';
-        }
-
-        // 'pw_ck' 필드(비밀번호 확인) 유효성 검사
-        if (name === 'pw_ck') {
-            var pwCkStatus = signup.pw_ck_status(value);
-            var pwCkMessageDiv = document.querySelector('#pwCheck + .valid');
-            pwCkMessageDiv.textContent = pwCkStatus.desc;
-            pwCkMessageDiv.style.display = pwCkStatus.code === 'valid' ? 'none' : 'block';
-        }
-    }
+	// 입력 유효성 검사와 오류 메시지 표시를 처리하는 함수
+	function validateInput(tag) {
+	    var name = tag.getAttribute('name');
+	    var value = tag.value.trim();
+	    
+	    
+	    // 'pw' 필드 유효성 검사
+	    if (name === 'pw') {
+	        var pwStatus = signup.pw_status(value);
+	        var pwMessageDiv = document.querySelector('#signUpPw + .valid');
+	        pwMessageDiv.textContent = pwStatus.desc;
+	        pwMessageDiv.style.display = pwStatus.code === 'valid' ? 'none' : 'block';
+	    }
+	
+	    // 'pw_ck' 필드(비밀번호 확인) 유효성 검사
+	    if (name === 'pw_ck') {
+	        var pwCkStatus = signup.pw_ck_status(value);
+	        var pwCkMessageDiv = document.querySelector('#pwCheck + .valid');
+	        pwCkMessageDiv.textContent = pwCkStatus.desc;
+	        pwCkMessageDiv.style.display = pwCkStatus.code === 'valid' ? 'none' : 'block';
+	    }
+	}
 
 $(document).ready(function() {
 	// 아이디 중복 검사 
@@ -56,6 +56,7 @@ $(document).ready(function() {
 	$('#btnid').on('click', function() {
 		idCheck();
 	});
+	
 	//유효성 검사
 	$('.chk').on('keyup', function(){
 
@@ -70,122 +71,119 @@ $(document).ready(function() {
 		}
 	})
 }); 
-// 아이디 체크 
-function idCheck() {
-	var $id = $('[name=memberId]').eq(1);
-	// 올바른 아이디 입력 형태인지 파악하여 
-	// 유효한 아이디의 경우 서버에서 중복확인
-	if($id.hasClass('chked')) return;
-	console.log('go check');
+	// 아이디 체크 
+	function idCheck() {
+		var $id = $('[name=memberId]').eq(1);
+		// 올바른 아이디 입력 형태인지 파악하여 
+		// 유효한 아이디의 경우 서버에서 중복확인
+		if($id.hasClass('chked')) return;
+		console.log('go check');
+		
+		var data = signup.tag_status($id);
+		console.log(data);
+		console.log("data.code : ",data.code);
+		// 유효하지 않다면 중복확인 불필요
+		if(data.code != 'valid') {
+			$id.focus();
+			 $('.valid').eq(0).html(data.desc);
+			return;
+		}
+		   $.ajax({
+		        type: 'post',
+		        url: '/idCheck',
+		        contentType: 'application/json', // 데이터 전송 형식을 JSON으로 설정
+		        data: JSON.stringify({memberId: $id.val()}), // 아이디 정보를 JSON 형식으로 변환하여 전송
+		        success: function(res) {
+		           	console.log("res.success : ",res.success);
+		           	console.log("res.result : ",res.result);
+		           	console.log("res.msg : ",res.msg);
+		           	console.log("res : ", res);
 	
-	var data = signup.tag_status($id);
-	console.log(data);
-	console.log("data.code : ",data.code);
-	// 유효하지 않다면 중복확인 불필요
-	if(data.code != 'valid') {
-		$id.focus();
-		 $('.valid').eq(0).html(data.desc);
-		return;
+		            data = signup.id_usable(res);
+		            console.log(res);
+		            
+		            // 중복 확인 결과에 따라 아이디 입력란 옆에 메시지를 표시
+		            $('#validplz').html(res.msg);
+		            let valClass = '';
+		            if(res.result == 'success'){
+		            	valClass = 'valid';
+		            } else {
+		            	valClass = 'invalid'
+		            }
+		            $('#validplz').removeClass();
+		            $('#validplz').addClass(valClass);
+		            //display_status($('#validplz'), data);
+		            $id.addClass('chked');
+		        },
+		        error: function(req, text) {
+		            alert(text + ': ' + req.status);
+		        }
+		    });
 	}
-	   $.ajax({
-	        type: 'post',
-	        url: '/idCheck',
-	        contentType: 'application/json', // 데이터 전송 형식을 JSON으로 설정
-	        data: JSON.stringify({memberId: $id.val()}), // 아이디 정보를 JSON 형식으로 변환하여 전송
-	        success: function(res) {
-	           	console.log("res.success : ",res.success);
-	           	console.log("res.result : ",res.result);
-	           	console.log("res.msg : ",res.msg);
-	           	console.log("res : ", res);
 
-	            data = signup.id_usable(res);
-	            console.log(res);
-	            
-	            // 중복 확인 결과에 따라 아이디 입력란 옆에 메시지를 표시
-	            $('#validplz').html(res.msg);
-	            let valClass = '';
-	            if(res.result == 'success'){
-	            	valClass = 'valid';
-	            } else {
-	            	valClass = 'invalid'
-	            }
-	            $('#validplz').removeClass();
-	            $('#validplz').addClass(valClass);
-	            //display_status($('#validplz'), data);
-	            $id.addClass('chked');
-	        },
-	        error: function(req, text) {
-	            alert(text + ': ' + req.status);
+	// 입력 요소를 검증하고 검증 결과에 따라 상태를 업데이트
+	function validate(t) {
+		var data = signup.tag_status(t);
+		display_status(t.siblings('div'), data);
+	}
+	
+	// 요소의 내용과 클래스를 업데이트
+	function display_status(div, data) {
+		div.text(data.desc);
+		// 이전에 적용된 클래스들 모두 제거
+		div.removeClass();
+		div.addClass(data.code)
+	}
+	
+	
+	// 생년월일 데이터 합산
+	function combineDate() {
+	  const birth_year = document.getElementById("birth-year").value;
+	  const birth_month = document.getElementById("birth-month").value;
+	  const birth_day = document.getElementById("birth-day").value;
+	  const birthday = birth_year + "-" + birth_month + "-" + birth_day;
+	  document.getElementById("birthday").value = birthday;
+	}
+	
+	// 이메일 데이터 합산
+	function combineEmail() {
+		  const emailTxt = document.getElementById("email-txt").value;
+		  const domainTxt = document.getElementById("domain-txt").value;
+		  const memberEmail = emailTxt + "@" + domainTxt;
+		  document.getElementById("memberEmail").value = memberEmail;
+		}
+
+
+	// 로그인 폼 제출
+	function go_join() {
+	    if ($('[name=memberName]').val() == '') {
+	        alert('이름을 입력하세요.');
+	        $('[name=memberName]').focus();
+	        return;
+	    }
+	
+	    // 필수 항목의 유효성을 판단
+	    // 중복 확인한 경우
+	    if ($('[name=memberId]').eq(1).hasClass('chked')) {
+	        // 이미 사용중인 경우는 회원가입 불가
+	        if ($('#validplz').hasClass('invalid')) {
+	            alert('회원가입 불가\n' + signup.id.unusable.desc);
+	            $('[name=memberId]').focus();
+	            //event.preventDefault(); // 폼 제출 막기
+	            return;
 	        }
-	    });
-}
-
-// 입력 요소를 검증하고 검증 결과에 따라 상태를 업데이트
-function validate(t) {
-	var data = signup.tag_status(t);
-	display_status(t.siblings('div'), data);
-}
-
-// 요소의 내용과 클래스를 업데이트
-function display_status(div, data) {
-	div.text(data.desc);
-	// 이전에 적용된 클래스들 모두 제거
-	div.removeClass();
-	div.addClass(data.code)
-}
-
-
-// 생년월일 데이터 합산
-function combineDate() {
-  const birth_year = document.getElementById("birth-year").value;
-  const birth_month = document.getElementById("birth-month").value;
-  const birth_day = document.getElementById("birth-day").value;
-  const birthday = birth_year + "-" + birth_month + "-" + birth_day;
-  document.getElementById("birthday").value = birthday;
-}
-
-// 이메일 데이터 합산
-function combineEmail() {
-	  const emailTxt = document.getElementById("email-txt").value;
-	  const domainTxt = document.getElementById("domain-txt").value;
-	  const memberEmail = emailTxt + "@" + domainTxt;
-	  document.getElementById("memberEmail").value = memberEmail;
-	}
-
-
-// 로그인 폼 제출
-function go_join() {
-    if ($('[name=memberName]').val() == '') {
-        alert('이름을 입력하세요.');
-        $('[name=memberName]').focus();
-        return;
-    }
-
-    // 필수 항목의 유효성을 판단
-    // 중복 확인한 경우
-    if ($('[name=memberId]').eq(1).hasClass('chked')) {
-        // 이미 사용중인 경우는 회원가입 불가
-        if ($('#validplz').hasClass('invalid')) {
-            alert('회원가입 불가\n' + signup.id.unusable.desc);
-            $('[name=memberId]').focus();
-            //event.preventDefault(); // 폼 제출 막기
-            return;
-        }
-        
-    } else {
-        // 중복 확인 하지 않은 경우
-        if (!item_check(signup.tag_status($('[name=memberId]')))	
-        ) return;	
-        else {
-            alert('회원가입 불가\n'+data.desc);
-            $('[name=memberId]').focus();
-            return;
-        }
-    }
-    if (!item_check($('[name=pw]'))) return;
-    if (!item_check($('[name=pw_ck]'))) return;
-    if (!item_check($('[name=memberEmail]'))) return;
-    
+	        
+	    } else {
+	        // 중복 확인 하지 않은 경우
+	        if (!item_check(signup.tag_status($('[name=memberId]')))	
+	        ) return;	
+	        else {
+	            alert('회원가입 불가\n'+data.desc);
+	            $('[name=memberId]').focus();
+	            return;
+	        }
+	    }
+	    
  	// 이메일 유효성 검사
     var emailInput = document.getElementById("email-txt");
     var emailValue = emailInput.value;
@@ -213,19 +211,24 @@ function go_join() {
     }
        
     
+	function item_check(item) {
+	    var data = item;
+	    if (data.code == 'invalid') {
+	        alert('회원가입 불가합니다. \n' + data.desc);
+	        item.focus();
+	        return ;
+	    } else return true;
+	}
+
+    if (!item_check(signup.tag_status($('[name=pw]')))) return;
+    if (!item_check(signup.tag_status($('[name=pw_ck]')))) return;
+    if (!item_check(signup.tag_status($('[name=memberEmail]')))) return;
+    
 	//form 데이터를 서버로 제출 
     $('form').submit();
   
 }
 
-function item_check(item) {
-    var data = item;
-    if (data.code == 'invalid') {
-        alert('회원가입 불가합니다. \n' + data.desc);
-        item.focus();
-        return ;
-    } else return true;
-}
 
 </script>
 <body>
