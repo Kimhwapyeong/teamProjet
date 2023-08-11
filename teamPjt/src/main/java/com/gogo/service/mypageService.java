@@ -57,6 +57,9 @@ public interface mypageService {
 	// 숙소 관리 - 객실 조회
 	public List<RoomVO> roomInfo(String memberId, Model model);
 	
+	// 숙소 관리 - 객실 삭제
+	public int deleteRoom(String roomName);
+	
 	// 예약 관리
 	public List<Map<String, String>> reservinfo(Model model);
 	

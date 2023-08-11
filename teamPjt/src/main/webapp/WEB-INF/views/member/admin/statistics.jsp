@@ -64,16 +64,16 @@
                                      
 										<!-- 차트-->
 											<h6 style="font-weight:bold; width:100%">연령대별 이용자 현황</h6>
-										<div style="margin:0px; margind-right:0px; width : 600px; display:flex">
+										<div style="margin:0px; margin-right:0px; width : 600px; display:flex">
 										    <div style="width: 350px; height: 350px; margin-top : 20px; margine-left:30px">
 											<canvas id="myChart"></canvas>
 										</div>
 										
-										<!-- <div style="margin:0px; margind-right:0px; width : 600px; display:flex; margin-left:100px">
+										 <div style="margin:0px; margin-right:0px; width : 600px; display:flex; margin-left:100px">
 											<h6 style="font-weight:bold; width:100%">성비</h6>
 										    <div style="width: 350px; height: 350px; margin-top : 20px; margine-left:30px">
 											<canvas id="myGender"></canvas>
-										</div>  -->
+										</div> 
 										
 									
 									    <script type="text/javascript">
@@ -142,7 +142,7 @@
 									    </script>
 									    
 									    <!-- 두번째차트 -->
-									   <!--  <script type="text/javascript">
+									   <script type="text/javascript">
 									
 									        $(document).ready(function(){
 									            getGender();
@@ -154,7 +154,7 @@
 									            
 									            
 									            $.ajax({
-									                url:"/member/admin/chartGender",
+									                url:"/member/admin/statistics",
 									                type:"get",
 									                data:{ },
 									                dataType:"json",
@@ -165,8 +165,6 @@
 									                    	countList.push(data[i].gender_Count)
 									                    }
 									                    
-									                    console.log("gender_group : ", gender_group);
-									                    console.log("gender_Count : " , gender_Count);
 									                    console.log("genderList : ", genderList);
 									                    console.log("countList : " , countList);
 									                    
@@ -207,7 +205,7 @@
 									            })
 									        }
 									
-									    </script>  -->
+									    </script> 
                                 </div>
                                 
                             </div>

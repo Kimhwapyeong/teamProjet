@@ -180,6 +180,4 @@ public class mypageTest {
 		log.info("member : " + member);
 	}
 	
-	
-	
 }

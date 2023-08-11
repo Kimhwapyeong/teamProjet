@@ -149,9 +149,10 @@ public class AdminController {
 	    model.addAttribute("mb_id", list);
 	    log.info("============");
 	    log.info("mb_id : " + list);
-	    
-//	    List<MemberVO> gender = mypageService.chartGender(vo);
-//	    model.addAttribute("mb_id", gender);
+	    log.info("===========================");
+	    List<MemberVO> gender = mypageService.chartGender(vo);
+	    log.info("gender : " + gender);
+	    model.addAttribute("gender", gender);
 	    
 	    return list;
 	}

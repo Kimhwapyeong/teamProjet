@@ -101,11 +101,13 @@
 	
 	
 	<!-- 숙소 관리 - 객실 보기 -->
-	<select id="roomInfo" resultType="com.gogo.vo.RoomVO">
+	<select id="roomInfo" resultType="java.util.Map">
 		SELECT
 		    r.roomname,
 		    r.roominfo AS roominfo,
-		    a.uploadpath || a.uuid || '_' || a.filename AS roomPhoto
+		    r.roomno,
+		    a.uploadpath || a.uuid || '_' || a.filename AS roomPhoto,
+		    s.stayname
 		FROM
 		    room r
 		JOIN
@@ -120,6 +122,22 @@
 		    AND a.filename LIKE '%1.jpg'
 		    AND a.filename LIKE '%' || r.roomname || '%'
 	</select>
+	
+	<resultMap type="java.util.HashMap" id="roomMap">
+	
+	    <result property="roomName" column="ROOMNAME" />
+	    <result property="roomNo" column="ROOMNO" />
+	    <result property="roomInfo" column="ROOMINFO" />
+	    <result property="roomPhoto" column="ROOMPHOTO" />
+	    <result property="stayName" column="STAYNAME" />
+	</resultMap>
+	
+	
+	<!-- 숙소 관리 - 숙소 삭제 -->
+	<delete id="deleteRoom">
+		delete from room where roomname= #{roomName}
+	</delete>	
+	
 	
 	<!-- 예약 관리 -->
 	<select id="reservinfo" resultType="java.util.Map">

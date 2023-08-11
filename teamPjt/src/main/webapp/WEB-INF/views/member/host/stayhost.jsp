@@ -35,6 +35,19 @@ window.addEventListener('load', function(){
         // 버튼 누를 때 마다 true / false 변경
         isRoomViewVisible = !isRoomViewVisible;
     });
+    
+    /*deleteRoom.addEventListener('click', function(){
+    	deleteFrm.action = '/member/admin/deleteRoom';
+    	deleteFrm.submit();
+	});*/
+    
+    var deleteBtn = document.getElementById('delete')
+    deleteBtn.addEventListener('click', function() {
+        console.log('삭제');
+        deleteFrm.action = '/member/host/deleteRoom';
+    	deleteFrm.submit();
+    });
+    
 });
 
 
@@ -56,12 +69,17 @@ window.addEventListener('load', function(){
 }
 
 .image-overlay p {
-    color: white; /* 텍스트 색상을 화이트로 설정 */
-    margin: 0; /* 기본 마진 제거 */
+    color: white; 
+    margin: 0; 
     font-size:15px;
     font-weight:bold;
+}   
+ 
+.custom-modal {
+  border-radius: 0;
+  border: 1px solid #ced4da; 
+  box-shadow: none; 
 }
-
 
 .photo-container:hover .image-overlay {
     display: block;
@@ -109,7 +127,7 @@ window.addEventListener('load', function(){
                            </ul>
                        </div>
                        <div class="mypage_content">
-                           <div class="reserv_wrap mypage-reservation-info">
+                           <div class="reserv_wrap mypage-reservation-info"">
                            	   <!-- ▶▶▶  forEach ▶▶▶  -->
                                <c:forEach items="${list}" var="vo" step="1">
                                <!-- <img alt="" src="/resources/images/${vo.mainPic1 }"> -->
@@ -141,34 +159,62 @@ window.addEventListener('load', function(){
                                            <button id="roomViewBtn" style="margin-top:20px; text-decoration: underline;">객실 보기</button>
                                        </div>
                                </div>
-                                
-                                
-                                
-                                <!-- 객실 정보 -->
-                                <!-- ▶▶▶  forEach ▶▶▶  -->
-                                <div class="stay_view" id="roomView" style="display:flex; justify-content: center; width:100%;">
-                               		<c:forEach items="${room}" var="room" step="1">
-	                                	<div id="divRoom" style="width:100%">
-	                                		<div class="photo-container">
-			                                	<a href="../../../stay/roomInfo?stayName=${vo.stayName }&roomName=${room.roomName}" style="display:flex; justify-content: center;">
-			                                       <div class="photo" style="background-image: url('/resources/images/${room.roomPhoto.replace('\\','/')}'); background-repeat: no-repeat;
-			                                        background-position: center center; background-size: cover; width: 330px; height: 200px; margin-top:50px;">
-			                                        	 <div class="image-overlay"><p>객실 보기</p></div>
-			                                        </div>
-			                                    </a>  
-		                                    </div>
-	                                        <div class="reserv_info" style="margin-top:10px;">
-	                                           <div class="stay" style= "font-size:15px;font-weight:bold; justify-content: center; display:flex; ">${room.roomName }</div>
-	                                           <p></p>
-	                                           <div class="option" style="line-height: 2.5; justify-content: center; display:flex;">${room.roomInfo }<br></div>
-	                                        </div>
-	                                    </div>
-                                	</c:forEach>
-                                 </div>
-                                 
                                </c:if>
                                </c:forEach>
-                           </div>
+                            </div>
+                                <form name= "deleteFrm"method="get">
+	                                <div class="reserv_wrap mypage-reservation-info" style="width:1200px; border-bottom: none;">
+		                                <!-- 객실 정보 -->
+		                                <!-- ▶▶▶  forEach ▶▶▶  -->
+		                                <div class="stay_view" id="roomView" style="display:flex;width:100%;">
+		                               		<c:forEach items="${room}" var="room" step="1">
+		                               			
+			                                	<div id="divRoom" style="width:350px; margin: 0px; display: inline-block;">
+			                                		<div class="photo-container">
+			                                		
+			                                			<input type="hidden" name="roomNo" id="roomNo" value="${room.ROOMNO }">
+			                                			
+					                                	<a href="../../../stay/roomInfo?stayName=${room.STAYNAME }&roomName=${room.ROOMNAME}" style="display:flex;">
+					                                       <div class="photo" style="background-image: url('/resources/images/${room.ROOMPHOTO.replace('\\','/')}'); background-repeat: no-repeat;
+					                                        background-position: center center; background-size: cover; width: 330px; height: 200px; margin-top:50px;">
+					                                        	 <div class="image-overlay"><p>객실 보기</p></div>
+					                                        </div>
+					                                    </a>  
+				                                    </div>
+			                                        <div class="reserv_info" style="margin-top:10px;">
+			                                           <div class="stay" style= "font-size:15px;font-weight:bold;display:flex; justify-content:center"><button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">${room.ROOMNAME }</button></div>
+			                                           
+			                                           
+			                                           
+			                                           <!-- Modal -->
+														<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top:100px">
+														  <div class="modal-dialog" style="width:500px">
+														    <div class="modal-content">
+														      <div class="modal-header" style="background-color: black; color: white;">
+														        <h2 class="modal-title fs-5" id="exampleModalLabel">객실 삭제</h2>
+														        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+														      </div>
+														      <div class="modal-body" style="height:70px; text-align:center">
+														        	객실을 삭제하시겠습니까?
+														      </div>
+														      <div class="modal-footer">
+														        <button type="button" class="btn btn-light" data-bs-dismiss="modal">아니오</button>
+														        <button type="button" class="btn btn-dark" style="width:60px" id="delete">네</button>
+														      </div>
+														    </div>
+														  </div>
+														</div>
+			                                           
+			                                           
+			                                           
+			                                           <p></p>
+			                                           <div class="option" style="line-height: 2.5;display:flex; justify-content:center">${room.ROOMINFO }<br></div>
+			                                        </div>
+			                                    </div>
+		                                	</c:forEach>
+			                             </div>
+		                             </div>
+	                           </form>
 
 
                            <!-- =============================== 페이징 ============================================-->

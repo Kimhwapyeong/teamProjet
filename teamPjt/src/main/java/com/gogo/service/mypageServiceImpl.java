@@ -119,7 +119,7 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 	@Override
 	public List<MemberVO> chartGender(MemberVO vo) {
 		List<MemberVO> gender = mypageMapper.chartGender(vo);
-		log.info("gender : " + gender);
+		log.info("========= gender : " + gender);
 		return gender;
 	}
 	
@@ -142,6 +142,11 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 		List<RoomVO> room = mypageMapper.roomInfo(memberId);
 		model.addAttribute("room", room);
 		return null;
+	}
+	
+	@Override
+	public int deleteRoom(String roomName) {
+		return mypageMapper.deleteRoom(roomName);
 	}
 	
 	@Override

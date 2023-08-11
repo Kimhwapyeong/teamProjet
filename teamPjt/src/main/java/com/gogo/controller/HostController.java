@@ -59,6 +59,26 @@ public class HostController extends CommonRestController{
 		return "member/host/stayhost";
 	}
 	
+	// 객실 삭제
+	@GetMapping("deleteRoom")
+	public String delete(Model model, RedirectAttributes rttr, String roomName) {
+		System.out.println("roomName: " + roomName);
+		return null;
+//		int res = mypageService.deleteRoom(roomName);
+//		System.out.println("삭제res:" + res);
+//		
+//		String msg = "";
+//		if(res > 0) {
+//			msg = roomName + "객실이 삭제되었습니다";
+//			rttr.addFlashAttribute("msg", msg);  
+//			return "redirect:/member/host/stayhost";
+//		} else {
+//			msg = "객실 삭제에 실패하였습니다";
+//			rttr.addFlashAttribute("msg", msg);  
+//			return "redirect:/member/host/stayhost";
+//		}
+	}
+	
 	// 예약 관리
 	@GetMapping("reservation")
 	public void reservation(Model model) {
