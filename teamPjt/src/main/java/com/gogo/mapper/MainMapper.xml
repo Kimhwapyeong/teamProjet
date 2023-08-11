@@ -130,7 +130,7 @@
 		                , t.badge, t.latitude, t.longitude, t.stayview, t.mainpic1
 		        ORDER BY 
 		        no DESC) t)
-		where rn between 1 and 10
+		where rn between 1 and 8
 	</select>
 	
 	<select id="getStayNo" resultType="String">
@@ -152,7 +152,7 @@
 		        GROUP BY s.stayNo, s.stayname, s.memberid, s.stayloc, s.stayadress, s.stayinfo
 		                , s.staytype, s.badge, s.latitude, s.longitude, s.mainpic1, s.stayview
 		        ORDER BY likeCount DESC) t)
-		where rn between 1 and 10
+		where rn between 1 and 8
 	</select>
 	
 </mapper>

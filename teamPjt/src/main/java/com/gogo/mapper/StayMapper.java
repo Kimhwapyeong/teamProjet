@@ -34,4 +34,6 @@ public interface StayMapper {
 	public List<FileuploadVO>stayRoomImg(String stayName);
 	
 	public List<FileuploadVO> stayImgList();
+
+	public List<StayVO> stayLocList(String stayLoc);
 }

@@ -101,7 +101,7 @@
 				return;
 			}else{
 				let regex4 = new RegExp("^.{10,300}$","s");
-				if(valueLengthCheck(regex4, textareaRoomInfo, '객실 소개는 50자 이상 300자 이내로 입력해주세요.')){
+				if(valueLengthCheck(regex4, textareaRoomInfo, '객실 소개는 10자 이상 300자 이내로 입력해주세요.')){
 					return;
 				}
 			}

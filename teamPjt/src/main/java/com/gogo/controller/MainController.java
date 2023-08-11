@@ -48,7 +48,7 @@ public class MainController {
 			rttr.addFlashAttribute("msg", "숙소 등록 실패");
 		}
 		
-		return "redirect:/main";
+		return "redirect:/member/host/stayhost";
 	}
 	
 	// 임시 매핑용
@@ -76,7 +76,7 @@ public class MainController {
 		}else {
 			rttr.addFlashAttribute("msg", "room 등록 실패");
 		}
-		return "redirect:/main";
+		return "redirect:/member/host/stayhost";
 	}
 	
 	// 임시 매핑용

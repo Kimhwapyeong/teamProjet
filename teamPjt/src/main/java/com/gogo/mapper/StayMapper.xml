@@ -430,4 +430,27 @@
 		select stayno, roomno, (uploadpath ||uuid|| '_' ||filename) as filename from attach where stayno = (SELECT STAYNO FROM STAY WHERE STAYNAME=#{stayName}) and roomno = (select roomno from room where roomname=#{roomName})
 	</select>
 	
+	<select id="stayLocList" resultType="com.gogo.vo.StayVO">
+		select *
+			from(
+			    select t.*, rownum rn
+			    from
+			        (SELECT 
+			            TO_NUMBER(t.stayno) AS no, 
+			            t.stayno, t.stayname, t.stayloc, t.stayadress, t.stayinfo, t.staytype
+			            , t.badge, t.latitude, t.longitude, t.stayview, t.mainpic1
+			            , to_char(max(r.price), 'FM999,999,999') maxPrice, to_char(min(r.price), 'FM999,999,999') minPrice
+			            , max(r.overPerson) overperson, min(r.stdperson) stdperson
+			        FROM 
+			            stay t
+			        left JOIN 
+			            room r ON t.stayno = r.stayno
+			        group by t.stayno, t.stayname, t.stayloc, t.stayadress, t.stayinfo, t.staytype
+			                , t.badge, t.latitude, t.longitude, t.stayview, t.mainpic1
+			        having t.stayloc =  #{stayLoc}
+			        ORDER BY 
+			        no DESC) t)
+		where rn between 1 and 10
+	</select>
+	
 </mapper>

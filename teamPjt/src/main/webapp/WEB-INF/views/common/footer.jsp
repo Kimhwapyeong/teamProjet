@@ -45,8 +45,8 @@
                 </ul>
                 <div class="copyright">Copyright©STAYFOLIO</div>
             </div>
-            <div class="footer_address"><span class="info" style="word-break:keep-all">상호명 (주) 스테이폴리오<!-- --> |<!-- -->
-                    <!-- --> <!-- -->대표자 올래갈래<!-- --> | <!-- -->주소 서울특별시 이대<!-- --> | <!-- -->전화
+            <div class="footer_address"><span class="info" style="word-break:keep-all">상호명 (주) 스테이올래<!-- --> |<!-- -->
+                    <!-- --> <!-- -->대표자 올래갈래<!-- --> | <!-- -->주소 서울특별시 중앙정보처리학원<!-- --> | <!-- -->전화
                     1234-5678<!-- --> |<!-- --> <!-- -->go@naver.com<br>사업자등록번호 123-45-6789<!-- --> |<!-- -->
                     <!-- -->통신판매업신고 제2015-서울종로-0499호<a class="info"
                         href="http://www.ftc.go.kr/bizCommPop.do?wrkr_no=6768700055" target="_blank"
@@ -59,9 +59,9 @@
 	<nav id="moMenu" class="mo-samll-only">
 		<ul>
 			<li><a class="" href="/stay/list"><span>FIND STAY</span></a></li>
-			<li><a class="" href="/promotions"><span>PROMOTION</span></a></li>
+	<!-- 		<li><a class="" href="/promotions"><span>PROMOTION</span></a></li>
 			<li><a class="" href="/journal"><span>JOURNAL</span></a></li>
-			<li><a class="" href="/preorder"><span>PRE-ORDER</span></a></li>
+			<li><a class="" href="/preorder"><span>PRE-ORDER</span></a></li> -->
 			<li><a class=" false" href="/chat"><span>MESSAGE</span></a></li>
 		</ul>
 	</nav>

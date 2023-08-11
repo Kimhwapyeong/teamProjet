@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			console.log(button.classList.contains('active'));
 	        if(button.classList.contains('active')){
 			 	where = button.innerHTML;
-			 	location.href='/stay/list?='+where;
+			 	location.href='/stay/list?stayLoc='+where;
 			}
 	    })
 	}
@@ -396,7 +396,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				<div class="nav">
 					<ul class="menu">
 						<li class=""><a href="/stay/list">FIND STAY</a></li>
-						<li class=""><a href="#none">메뉴</a></li>
+						<!-- <li class=""><a href="#none">메뉴</a></li> -->
 					</ul>
 					<ul class="etc">
 						<div class="nav_etc">
@@ -516,10 +516,10 @@ document.addEventListener('DOMContentLoaded', function() {
 				</ul>
 			</div>
 			<ul style="padding-left:0px;" class="jsx-bc9726d7609f7d7f setting-menu">
-				<li role="presentation" class="jsx-bc9726d7609f7d7f lang-menu">
+<!-- 				<li role="presentation" class="jsx-bc9726d7609f7d7f lang-menu">
 					<div class="jsx-bc9726d7609f7d7f">언어 설정</div>
 					<div class="jsx-bc9726d7609f7d7f lang">한국어</div>
-				</li>
+				</li> -->
 				<li role="presentation" class="jsx-bc9726d7609f7d7f">1:1 문의</li>
 			</ul>
 			<div class="jsx-13bd1097de52bb6b">
@@ -539,10 +539,10 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 				</a>
 				<ul class="jsx-bc9726d7609f7d7f setting-menu">
-				<li role="presentation" class="jsx-bc9726d7609f7d7f lang-menu">
+<!-- 				<li role="presentation" class="jsx-bc9726d7609f7d7f lang-menu">
 					<div class="jsx-bc9726d7609f7d7f">언어 설정</div>
 					<div class="jsx-bc9726d7609f7d7f lang">한국어</div>
-				</li>
+				</li> -->
 				<li role="presentation" class="jsx-bc9726d7609f7d7f">1:1 문의</li>
 			</ul>
 			<div class="jsx-13bd1097de52bb6b">

@@ -77,12 +77,12 @@ window.addEventListener('load', ()=>{
    // 추천 스테이 다음 버튼으로 넘기기
    BtnRecNext.addEventListener('click', ()=>{
 		newX -= 330;
-		if(document.querySelector('#recBox').style.transform.substr(12,5) == '-2970'){
+		if(document.querySelector('#recBox').style.transform.substr(12,5) == '-2310'){
 			newX = 0;
 		}
 		recBox.style.transform='translate3d('+newX+'px, 0px, 0px)';
 		recPageNo += 1;
-		if(recPageNo == 11){
+		if(recPageNo == 9){
 			recPageNo = 1;
 		}
 		recPage.innerHTML = recPageNo;
@@ -92,12 +92,12 @@ window.addEventListener('load', ()=>{
    BtnRecPrev.addEventListener('click', ()=>{
 	   newX += 330;
 	   if(document.querySelector('#recBox').style.transform.substr(12,3) == '0px'){
-		   newX = -2970;
+		   newX = -2310;
 	   }
 	   recBox.style.transform='translate3d('+newX+'px, 0px, 0px)';
 		recPageNo -= 1;
 		if(recPageNo == 0){
-			recPageNo = 10;
+			recPageNo = 8;
 		}
 		recPage.innerHTML = recPageNo;
    })
@@ -114,12 +114,12 @@ window.addEventListener('load', ()=>{
    let popPageNo = 1;
    btnPopNext.addEventListener('click', ()=>{
 	   popNewX -= 440;
-	   if(document.querySelector('#popBox').style.transform.substr(12,5) == '-3960'){
+	   if(document.querySelector('#popBox').style.transform.substr(12,5) == '-3080'){
 		   popNewX = 0;
 	   }
 	   popBox.style.transform='translate3d('+ popNewX +'px, 0px, 0px)';
 	   popPageNo += 1;
-	   if(popPageNo == 11){
+	   if(popPageNo == 9){
 		   popPageNo = 1;
 	   }
 	   popPage.innerHTML = popPageNo;
@@ -128,12 +128,12 @@ window.addEventListener('load', ()=>{
    btnPopPrev.addEventListener('click', ()=>{
 	   popNewX += 440;
 	   if(document.querySelector('#popBox').style.transform.substr(12,3) == '0px'){
-		   popNewX = -3960;
+		   popNewX = -3080;
 	   }
 	   popBox.style.transform='translate3d('+ popNewX +'px, 0px, 0px)';
 	   popPageNo -= 1;
 	   if(popPageNo == 0){
-		   popPageNo = 10;
+		   popPageNo = 8;
 	   }
 	   popPage.innerHTML = popPageNo;
    })
@@ -229,7 +229,7 @@ function setMainImgsHeight(){
             <div class="swiper-button-prev" id="BtnRecPrev"></div>
             <div class="swiper-button-next" id="BtnRecNext"></div>
             <div class="swiper-pagination swiper-pagination-fraction"><span id="recPage" class="swiper-pagination-current">1</span> /
-                <span class="swiper-pagination-total">10</span></div>
+                <span class="swiper-pagination-total">8</span></div>
             <div class="swiper-wrapper" id="recBox" style="transition-duration: 0ms; transform: translate3d(-0px, 0px, 0px);">
                 <c:forEach items="${ listStay }" var="stay" varStatus="status">
 	                <div class="swiper-slide stay_box" data-swiper-slide-index="${ status.index }"
@@ -323,7 +323,7 @@ function setMainImgsHeight(){
 				<div class="swiper-button-next" id="btnPopNext"></div>
 				<div class="swiper-pagination swiper-pagination-fraction">
 					<span id="popPage" class="swiper-pagination-current">1</span> / <span
-						class="swiper-pagination-total">10</span>
+						class="swiper-pagination-total">8</span>
 				</div>
 				<div class="swiper-wrapper" id="popBox"
 					style="transition-duration: 0ms; transform: translate3d(-0px, 0px, 0px);">

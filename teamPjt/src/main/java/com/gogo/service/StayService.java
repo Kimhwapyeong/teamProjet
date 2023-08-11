@@ -36,4 +36,6 @@ public interface StayService {
 	List<FileuploadVO>stayRoomImg(String stayName, Model model);
 	
 	List<FileuploadVO> stayImgList(Model model);
+
+	void stayLocList(String stayLoc, Model model);
 }

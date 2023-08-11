@@ -120,7 +120,7 @@
 					<li><div class="dt">room 소개 *</div>
 						<div class="dd">
 							<textarea rows="5" class="form_style" name="roomInfo"
-								placeholder="공간의 구조, 컨셉, 스토리 등을 자유롭게 작성해 주세요. (최소 50자)"></textarea>
+								placeholder="공간의 구조, 컨셉, 스토리 등을 자유롭게 작성해 주세요. (최소 10자, 최대 300자)"></textarea>
 						</div></li>
 					<div class="_contactus_divider__BZ5eb"></div>
 					

@@ -110,6 +110,14 @@ public class StayServiceImpl implements StayService{
 		return null;
 	}
 
+	@Override
+	public void stayLocList(String stayLoc, Model model) {
+		List<StayVO> list = stayMapper.stayLocList(stayLoc);
+		log.info("===========");
+		log.info("list : " + list);
+		model.addAttribute("list", list);
+	}
+
 
 	
 
