@@ -346,6 +346,9 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 		model.addAttribute("checkOut", reserved.getCheckOut());
 		model.addAttribute("paymentMethod", payment.getPaymentMethod());
 		model.addAttribute("paymentRegDate", payment.getRegDate());
+		model.addAttribute("mainImg", stay.getMainPic1());
+		model.addAttribute("memberCount", reserved.getMemberCount());
+		model.addAttribute("stayName", stay.getStayName());
 
 	}
 	

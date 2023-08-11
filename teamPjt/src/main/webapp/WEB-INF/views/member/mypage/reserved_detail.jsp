@@ -62,10 +62,10 @@
 <div class="mypage_content reservation">
     <div class="reserv_detail">
         <div class="stay_info">
-            <div class="photo" style="background-image: url('/resources/images/${param.mainImg.replace('\\','/')}'); background-repeat: no-repeat; background-position: center center; background-size: cover;">
+            <div class="photo" style="background-image: url('/resources/images/${mainImg.replace('\\','/')}'); background-repeat: no-repeat; background-position: center center; background-size: cover;">
             </div>
             <div class="info">
-                <div class="name"><a style="color:white" href="/findstay/vintage-jeju">${param.stayName}</a></div>
+                <div class="name"><a style="color:white" href="/findstay/vintage-jeju">${stayName}</a></div>
                 <div class="contact">제주특별자치도 제주시 한경면 용수리 1502<br><a class="phone" href="tel:0504-0904-2034">0504-0904-2034</a><a class="email" href="mailto:vintagejeju@gmail.com" target="_blank" rel="noreferrer">vintagejeju@gmail.com</a></div>
             </div>
         </div>
@@ -105,11 +105,11 @@
                     </li>
                     <li>
                         <div class="dt">02. 스테이 및 객실</div>
-                        <div class="dd">${param.stayName} / ${roomName}</div>
+                        <div class="dd">${stayName} / ${roomName}</div>
                     </li>
                     <li>
                         <div class="dt">03. 예약 인원</div>
-                        <div class="dd">총 ${param.memberCount}명<small> (성인: ${param.memberCount}명 / 아동: 0명 / 영아: 0명)</small></div>
+                        <div class="dd">총 ${memberCount}명<small> (성인: ${memberCount}명 / 아동: 0명 / 영아: 0명)</small></div>
                     </li>
                     <li>
                         <div class="dt">04. 체크인</div>
@@ -186,7 +186,7 @@
                             <div class="dt">01. 결제 금액</div>
                             <div class="dd">
                                 <div class="price">
-                                    <div>${param.stayName} / ${roomName}<span class="desc">${day} 박</span></div>
+                                    <div>${stayName} / ${roomName}<span class="desc">${day} 박</span></div>
                                     <div>₩${dayPrice}</div>
                                 </div>
                                 <div class="price total">

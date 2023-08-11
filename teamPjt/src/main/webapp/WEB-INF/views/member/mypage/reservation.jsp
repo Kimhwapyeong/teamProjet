@@ -137,15 +137,51 @@ window.addEventListener('load', function(){
 										<div class="price">₩ ${list.PRICE }</div> <br>
 										<!-- =============================== 예약 상세 연결 ============================================-->
 										<button type="button" class="btn_reserv_detail"
-												onclick="location.href='/member/mypage/reserved_detail'
-													+'?stayName=${list.STAYNAME}&mainImg=${list.MAINPIC1}&'
-													+'checkIn=${list.CHECKIN}&checkOut=${list.CHECKOUT}&'
-													+'memberCount=${list.MEMBERCOUNT}&price=${list.PRICE}&stayNo=${list.STAYNO}&reservationNo=${list.RESERVATIONNO}';">예약 상세 확인</button>
+												onclick="goReserved_Detail('${list.CHECKIN}', '${list.CHECKOUT}', '${list.PRICE}', '${list.STAYNO}', '${list.RESERVATIONNO}', '${list.MEMBERCOUNT}')">예약 상세 확인</button>
+								
 								</div>
 							</div>							
 							</c:if>
 	                        </c:forEach>
                         </div>
+                        
+                        <script>
+                        function goReserved_Detail(checkIn, checkOut, price, stayNo, reservationNo, mainImg, memberCount, stayName) {
+                            
+                        	
+                        	
+                        	console.log(mainImg);
+                        	
+                            const encodedParams = {
+                                checkIn: checkIn,
+                                checkOut: checkOut,
+                                price: price,
+                                stayNo: stayNo,
+                                reservationNo: reservationNo,
+                                memberCount : memberCount,
+                                stayName : stayName
+    
+                            };
+
+                            const baseUrl = '/member/mypage/reserved_detail';
+                            const encodedParamsStr = encodeURL(encodedParams);
+                            const finalUrl = baseUrl + '?' + encodedParamsStr;
+
+                            // 이 부분에서 페이지 이동 또는 다른 동작을 수행합니다.
+                            console.log('Redirecting to: ' + finalUrl);
+                            location.href = finalUrl;
+                        }
+
+                        function encodeURL(params) {
+                            return Object.keys(params)
+                                .map(function (key) {
+                                    return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
+                                })
+                                .join('&');
+                        }
+
+                        </script>
+                        
                         
                         <!-- 이용 완료 -->
                         <div id="comList">
