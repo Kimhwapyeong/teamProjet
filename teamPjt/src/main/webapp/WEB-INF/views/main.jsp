@@ -49,6 +49,28 @@ h_logo img {
 </style>
 <link href="/resources/css/main/mainList.css" rel="stylesheet">
 <script>
+let recStayArr;
+let recStayWidth;
+
+// mobile 모드 스테이 리스트 사이즈 조정 및 사이즈 변수 저장
+window.addEventListener('resize', ()=>{
+	recStayArr = document.querySelectorAll('div.recStay');
+  	for(i=0; i<recStayArr.length; i++){
+  		if(recStayArr[i].clientWidth != 0){
+  			// 사이즈 변수 저장
+  			recStayWidth = recStayArr[i].clientWidth;
+  		}
+  	}
+  	let recBullets = document.querySelectorAll('span[name=recBullet]');
+  	// 선택된 불릿의 index 저장
+  	let index = Array.from(recBullets).findIndex(item => item.classList.contains('swiper-pagination-bullet-active'));
+  	// 반응형 크기 조절을 위한 코드
+  	recBox2.style.transform='translate3d('+ -recStayWidth*index +'px, 0px, 0px)';
+  	
+  	let popBullets = document.querySelectorAll('span[name=popBullet]');
+  	let index2 = Array.from(popBullets).findIndex(item => item.classList.contains('swiper-pagination-bullet-active'));
+  	popBox2.style.transform='translate3d('+ -recStayWidth*index2 +'px, 0px, 0px)';
+});
 
 window.addEventListener('load', ()=>{
 	setMainImgsHeight();
@@ -101,17 +123,47 @@ window.addEventListener('load', ()=>{
 		}
 		recPage.innerHTML = recPageNo;
    })
+
+   // 처음 윈도우 로드시 width 변수 저장
+   recStayArr = document.querySelectorAll('div.recStay');
+  	for(i=0; i<recStayArr.length; i++){
+  		if(recStayArr[i].clientWidth != 0){
+  			recStayWidth = recStayArr[i].clientWidth;
+  		}
+  	}
    
 
-   // 불릿 생성중 
+   // 최신 스테이 불릿 클릭 시 검정색 
    let recBullets = document.querySelectorAll('span[name=recBullet]');
-   recBullets.forEach((recBullet) =>{
-	   recBullet.addEventListener('click', (e)=>{
-		   e.classList.add('swiper-pagination-bullet-active');
+   // 첫 번째 불릿 검정색 설정
+   recBullets[0].classList.add('swiper-pagination-bullet-active');
+   recBullets.forEach((recBullet, index) =>{
+	   recBullet.addEventListener('click', ()=>{
+		   // 검정색인 불릿 선택
+		   let activeBullet = document.querySelector('.swiper-pagination-bullet-active');
+		   // 클래스 제거(검정색 제거)
+		   activeBullet.classList.remove('swiper-pagination-bullet-active');
+		   // 선택된 불릿 검정색으로 변경
+		   recBullet.classList.add('swiper-pagination-bullet-active');
+		   recBox2.style.transform='translate3d('+ -recStayWidth*index +'px, 0px, 0px)';
 	   })
    })
 
-   
+   // 인기 스테이 불릿 클릭 시 검정색 
+   let popBullets = document.querySelectorAll('span[name=popBullet]');
+   // 첫 번째 불릿 검정색 설정
+   popBullets[0].classList.add('swiper-pagination-bullet-active');
+   popBullets.forEach((popBullet, index) =>{
+	   popBullet.addEventListener('click', ()=>{
+		   // 검정색인 불릿 선택
+		   let activeBullet = document.querySelectorAll('.swiper-pagination-bullet-active')[1];
+		   // 클래스 제거(검정색 제거)
+		   activeBullet.classList.remove('swiper-pagination-bullet-active');
+		   // 선택된 불릿 검정색으로 변경
+		   popBullet.classList.add('swiper-pagination-bullet-active');
+		   popBox2.style.transform='translate3d('+ -recStayWidth*index +'px, 0px, 0px)';
+	   })
+   })
    
    let popNewX = 0;
    let popPageNo = 1;
@@ -286,12 +338,11 @@ function setMainImgsHeight(){
 			</c:forEach>
 			
 		</div>
-		<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"></div>
             <div class="swiper-wrapper" id="recBox2" style="transition-duration: 0ms; transform: translate3d(-0px, 0px, 0px);">
             	<c:forEach items="${ listStay }" var="stay" varStatus="status">
 	                <div class="swiper-slide stay_box recStay" data-swiper-slide-index="${ status.index }"
 	                    style="z-index: 1;"><button type="button" class="btn_like"><span>관심스테이</span></button><a
-	                        href="/findstay/stay-naum">
+	                        href="/stay/room?stayName=${ stay.stayName }">
 	                        <div role="img" aria-label="main_image" class="img"
 	                            style="background: url(/resources/images/${stay.mainPic1.replace('\\','/')}) center center / cover no-repeat;">
 	                            <span>
@@ -378,17 +429,13 @@ function setMainImgsHeight(){
 				id="main-recommend-mobile">
 				<div
 					class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
-					<span
-						class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span
-						class="swiper-pagination-bullet"></span><span
-						class="swiper-pagination-bullet"></span><span
-						class="swiper-pagination-bullet"></span><span
-						class="swiper-pagination-bullet"></span><span
-						class="swiper-pagination-bullet"></span>
+					<c:forEach items="${ listPopStay }">
+						<span name="popBullet" class="swiper-pagination-bullet"></span>
+					</c:forEach>
 				</div>
-				<div class="swiper-wrapper" style="transition-duration: 0ms;">
+				<div class="swiper-wrapper" id="popBox2" style="transition-duration: 0ms; transform: translate3d(-0px, 0px, 0px);">
 					<c:forEach items="${ listPopStay }" var="stay" varStatus="status">
-						<div class="swiper-slide stay_box"
+						<div class="swiper-slide stay_box popStay"
 							data-swiper-slide-index="${ status.index }" style="z-index: 1;">
 							<button type="button" class="btn_like">
 								<span>관심스테이</span>
@@ -410,7 +457,7 @@ function setMainImgsHeight(){
 									<span>${ stay.stayLoc }</span><span>₩${ stay.minPrice } ~ ₩${ stay.maxPrice }</span>
 								</div></a>
 							<ul>
-								<li class="btn_more"><a href="/stay/room?stayName=${ stay.stayName }">예약하기</a></li>
+								<li class="btn_more"><a href="/stay/room?stayName=${ stay.stayName }" style="color:white">예약하기</a></li>
 							</ul>
 						</div>
 					
