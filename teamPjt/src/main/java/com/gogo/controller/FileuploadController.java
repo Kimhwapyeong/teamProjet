@@ -19,17 +19,20 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-public class FileuploadController extends FileuploadPath {
+public class FileuploadController {
 
 	
 	@Autowired
 	FileuploadService fileuploadService;
 	
+	@Autowired
+	FileuploadPath fileuploadPath;
+	
 	@GetMapping("/display")
 	// 이미지를 화면에 보여줍니다
 	public ResponseEntity<byte[]> display(String fileName) {
 		log.info("=====fileName : " + fileName);
-		String ATTACHES_DIR = dirPath+"profile\\";
+		String ATTACHES_DIR = fileuploadPath.dirPath;
 		try {
 			// 파일 객체를 생성
 			File file = new File(ATTACHES_DIR+fileName);
