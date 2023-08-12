@@ -163,7 +163,7 @@
     function connection(){
     	
     	
-	    sock = new SockJS("http://localhost:8080/echo?roomId=${roomId}&socketType=chat&stayNoMsg=${stayNoMsg}");
+    	sock = new SockJS(`http://localhost:8080/echo?roomId=${roomId}&socketType=chat&stayNoMsg=${stayNoMsg}`);
 	    console.log('sock : ', sock);
 	    sock.onmessage = onMessage;
 	    sock.onclose = onClose;
@@ -173,6 +173,15 @@
 	//zzz
     window.addEventListener('load', connection);
     
+    window.addEventListener('popstate', function(event) {
+        // 웹소켓 연결이 없거나 닫혀있으면 재연결
+        if(!sock || sock.readyState === WebSocket.CLOSED) {
+        	setTimeout(connection, 2000);
+        }
+    });
+    sock.onerror = function(event) {
+    	setTimeout(connection, 2000);
+    };
 
     // 메시지 전송
     function sendMessage() {
@@ -188,7 +197,7 @@
 
  // 서버로부터 메시지를 받았을 때
     function onMessage(msg) {
-       	console.log('type : ',msg.type);
+       	
         message = msg.data;
         let roomId = '${roomId}';
 		
@@ -198,15 +207,7 @@
             return;
         }
         
-        if (type == 'ENTER' && memberId !== '${sessionScope.memberId}') {
-            // 상대방의 ENTER 메시지는 무시합니다.
-            return;
-        }
-        
-        if (type == 'ENTER'){
-        	
-        	content = '${sessionScope.memberId}님 ${roomId}번 채팅방 입장';
-        }
+
 		
 
         var regDate = new Date(msg.timeStamp);
@@ -215,7 +216,6 @@
             regDate: regDate,
             writer: memberId,
             roomId: roomId,
-            type: type
         };
         
         	// 채팅 메세지 출력
@@ -262,7 +262,7 @@
     
     // 퇴장 메세지 출력
     function exit() {
-    	shouldUnload = false;
+    	shouldExit = false;
         console.log('exit() 함수가 실행됩니다.');
         type = "OUT";
         if(role=='<호스트>'){

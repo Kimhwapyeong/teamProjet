@@ -60,7 +60,7 @@ public class EchoHandler extends TextWebSocketHandler{
         String socketType = params.get("socketType");
         
         if ("updateRooms".equals(socketType)) {
-            roomUpdateSessions.put(writer,session);
+            roomUpdateSessions.put(writer, session);
         }
         //System.out.println("socketType : "+socketType );
         
@@ -75,7 +75,7 @@ public class EchoHandler extends TextWebSocketHandler{
     	
     	
     	String roomId = (String) session.getAttributes().get("roomId");
-    	String stayNoMsg = (String) session.getAttributes().get("stayNoMsg");
+    	 String stayNoMsg = service.getStayNoMsg(roomId);
         // roomId가 null인 경우 처리
         if (roomId == null) {
             // 예외를 던지거나, 기본값을 설정합니다.
@@ -132,21 +132,23 @@ public class EchoHandler extends TextWebSocketHandler{
             logger.info("{}로 부터 {}받음, roomId: {}", session.getId(), message.getPayload(), roomId);
             List<WebSocketSession> sessionsInRoom = roomSessions.get(roomId);
             for (WebSocketSession sess : sessionsInRoom) {
-              	if(sess.isOpen()) { 
-             		 
-              		sess.sendMessage(new TextMessage(message.getPayload()));
-              		 
-              	}else{ 
-              		 
-              		sessionsInRoom.remove(sess);
-              	} 
-                
+            	
+            	if(sess != null && !"".equals(sess)) {
+            		if(sess.isOpen()) {
+            			
+            			sess.sendMessage(new TextMessage(message.getPayload()));
+            		} else {
+            			
+            			sessionsInRoom.remove(sess);
+            		}
+            	}
+            	
             }
 
             // 메시지가 도착할 때마다 메시지를 저장
             Map<String, Object> map = new HashMap<String, Object>();
             String writer = (String) session.getAttributes().get("memberId");
-            String stayNoMsg = (String) session.getAttributes().get("stayNoMsg");
+            String stayNoMsg = service.getStayNoMsg(roomId);
             // writer가 null인 경우 처리
             if (writer == null) {
                 // 예외를 던지거나, 기본값을 설정합니다.
@@ -191,18 +193,9 @@ public class EchoHandler extends TextWebSocketHandler{
 		        //System.err.println("socketType : "+socketType);
 		
 		        roomId = (String) session.getAttributes().get("roomId");
-		        
-		        // 여기에 해당 로직을 추가
-		        if (roomSessions.get(roomId) == null) {
-		            roomSessions.put(roomId, new ArrayList<WebSocketSession>());
-		        }
-		        
-		        String stayNoMsg = (String) session.getAttributes().get("stayNoMsg");
+		        String stayNoMsg = service.getStayNoMsg(roomId);
 		        roomSessions.get(roomId).remove(session);
 		        // roomId가 null인 경우 처리
-		       
-		        roomUpdateSessions.remove(writer);
-		        
 		        if (roomId == null) {
 		            // 예외를 던지거나, 기본값을 설정합니다.
 		            throw new Exception("roomId는 null일 수 없습니다.");
@@ -278,44 +271,36 @@ public class EchoHandler extends TextWebSocketHandler{
         return map;
     }
     
+
     private void sendUpdatedRoomList(WebSocketSession session) throws IOException {
-    	
-    	String memberId = "";
-    	int pageNo = 1;
-    	String stayNo = (String)session.getAttributes().get("stayNoMsg");
-    	if(session.getAttributes().get("hostMsgPageNo")!=null
-    			&& !"".equals(session.getAttributes().get("hostMsgPageNo"))) {
-    		
-    		pageNo = (int) session.getAttributes().get("hostMsgPageNo");
-    	}
-    	
-    	StayVO stay = service_reserved.selectOne_stay(stayNo);
-    	
-    	memberId = stay.getMemberId();
-    	
-    	System.err.println("핸들러 memberId : "+memberId);
-    	System.err.println("핸들러 pageNo : "+pageNo);
-    	
-        List<MessageRoomVO> updatedRooms = service.messageRoomList(memberId, pageNo);  // 방 목록을 가져오는 서비스 로직
         
+        String stayNo = (String)session.getAttributes().get("stayNoMsg");
+        int pageNo = session.getAttributes().containsKey("hostMsgPageNo") && session.getAttributes().get("hostMsgPageNo") != null 
+                        ? (int)session.getAttributes().get("hostMsgPageNo") : 1;
+
+        StayVO stay = service_reserved.selectOne_stay(stayNo);
+        String memberId = stay.getMemberId();
+
+        System.err.println("핸들러 memberId : "+memberId);
+        System.err.println("핸들러 pageNo : "+pageNo);
+
+        List<MessageRoomVO> updatedRooms = service.messageRoomList(memberId, pageNo); // 방 목록을 가져오는 서비스 로직
         System.err.println("핸들러 updatedRooms"+updatedRooms);
-        
-        
+
         Map<String, Object> map = new HashMap<>();
         map.put("type", "ROOM_UPDATE");
         map.put("rooms", updatedRooms);
 
         String messagePayload = new ObjectMapper().writeValueAsString(map);
 
-        for (WebSocketSession sess : roomUpdateSessions.values()) {
-        	if(sess.isOpen()) { 
-             sess.sendMessage(new TextMessage(messagePayload));
-        	} else {
-        		
-        		System.out.println("nonono");
-        	}
+        // Send to all connected clients
+        for (WebSocketSession currentSession : roomUpdateSessions.values()) {
+        
+        if(currentSession!=null && !"".equals(currentSession))
+            if (currentSession.isOpen()) {
+                currentSession.sendMessage(new TextMessage(messagePayload));
+            }
         }
-     
     }
 
 
