@@ -12,13 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.gogo.service.FileuploadPath;
 import com.gogo.service.FileuploadService;
 
 import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-public class FileuploadController {
+public class FileuploadController extends FileuploadPath {
 
 	
 	@Autowired
@@ -28,7 +29,7 @@ public class FileuploadController {
 	// 이미지를 화면에 보여줍니다
 	public ResponseEntity<byte[]> display(String fileName) {
 		log.info("=====fileName : " + fileName);
-		String ATTACHES_DIR = "D:\\jungang_project\\teamProjet\\teamPjt\\src\\main\\webapp\\resources\\images\\";
+		String ATTACHES_DIR = dirPath+"profile\\";
 		try {
 			// 파일 객체를 생성
 			File file = new File(ATTACHES_DIR+fileName);

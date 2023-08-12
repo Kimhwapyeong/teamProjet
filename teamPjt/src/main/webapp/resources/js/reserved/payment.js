@@ -90,7 +90,7 @@
 							
 					} else {
 						var msg = '결제에 실패하였습니다.';
-						msg += '에러내용 : '+ rsp.error_msg;
+						msg += '\n에러내용 : '+ rsp.error_msg;
 					}
 					
 				
