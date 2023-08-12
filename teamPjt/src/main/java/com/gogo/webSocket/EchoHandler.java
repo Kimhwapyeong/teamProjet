@@ -7,20 +7,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gogo.mapper.MessageMapper;
+
 import com.gogo.service.MessageService;
 import com.gogo.service.ReservedService;
 import com.gogo.vo.MemberVO;
@@ -75,12 +73,10 @@ public class EchoHandler extends TextWebSocketHandler{
     	
     	
     	String roomId = (String) session.getAttributes().get("roomId");
-    	 String stayNoMsg = service.getStayNoMsg(roomId);
+    	 String stayNoMsg = (String) session.getAttributes().get("stayNoMsg");
         // roomId가 null인 경우 처리
-        if (roomId == null) {
-            // 예외를 던지거나, 기본값을 설정합니다.
-            return;
-        }
+        
+        System.out.println("씨발!!"+ stayNoMsg);
 
         if (!roomSessions.containsKey(roomId)) {
             roomSessions.put(roomId, new ArrayList<>());
@@ -148,12 +144,15 @@ public class EchoHandler extends TextWebSocketHandler{
             // 메시지가 도착할 때마다 메시지를 저장
             Map<String, Object> map = new HashMap<String, Object>();
             String writer = (String) session.getAttributes().get("memberId");
-            String stayNoMsg = service.getStayNoMsg(roomId);
+            String stayNoMsg = (String) session.getAttributes().get("stayNoMsg");
             // writer가 null인 경우 처리
             if (writer == null) {
                 // 예외를 던지거나, 기본값을 설정합니다.
                 throw new Exception("writer는 null일 수 없습니다.");
+                
             }
+            
+            
 
             int idx = roomId.indexOf("=");
             roomId = roomId.substring(idx+1);
@@ -193,13 +192,13 @@ public class EchoHandler extends TextWebSocketHandler{
 		        //System.err.println("socketType : "+socketType);
 		
 		        roomId = (String) session.getAttributes().get("roomId");
-		        String stayNoMsg = service.getStayNoMsg(roomId);
+		        
+		        String stayNoMsg = (String) session.getAttributes().get("stayNoMsg");
+		        
+		       
 		        roomSessions.get(roomId).remove(session);
 		        // roomId가 null인 경우 처리
-		        if (roomId == null) {
-		            // 예외를 던지거나, 기본값을 설정합니다.
-		            throw new Exception("roomId는 null일 수 없습니다.");
-		        }
+
 		        
 		        int idx = roomId.indexOf("=");
 		        roomId = roomId.substring(idx+1);

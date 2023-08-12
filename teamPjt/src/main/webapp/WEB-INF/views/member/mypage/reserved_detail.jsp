@@ -254,7 +254,7 @@
 		
 		$('#messageBtn').click(function(){
 			
-			location.href='/chat/chat?stayNoMsg=${param.stayNo}';
+			location.href='/chat/chat?reservationNo=${param.reservationNo}';
 			
 		});
 		

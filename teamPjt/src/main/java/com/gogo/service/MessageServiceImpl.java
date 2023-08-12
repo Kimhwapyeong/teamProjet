@@ -83,6 +83,11 @@ public class MessageServiceImpl implements MessageService{
 	}
 	
 	@Override
+	public String getStayNo(String reservationNo) {
+		return messageMapper.getStayNo(reservationNo);
+	}
+	
+	@Override
 	public void chattingGet(String stayNoMsg, String roomId, HttpSession session, Model model) throws Exception {
 		
 		int res = insertMessageRoom();
@@ -175,6 +180,10 @@ public class MessageServiceImpl implements MessageService{
 	@Override
 	public Map<String, Object> insertChatting(Map<String, Object> map){
 		Map<String, Object> result = new HashMap<String, Object>();
+		
+		System.out.println("호출 성공 : "+map.get("roomId"));
+		System.out.println("호출 성공 : "+map.get("stayNoMsg"));
+	
 		
 		System.out.println(map+"호출 성공");
 		MessageVO vo = new MessageVO();

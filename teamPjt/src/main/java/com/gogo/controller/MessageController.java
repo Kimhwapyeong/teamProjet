@@ -36,16 +36,30 @@ public class MessageController {
 	
 	
 	@GetMapping("chat")
-	public void chatGet(@RequestParam(required = false) String stayNoMsg
+	public void chatGet(@RequestParam(required = false, value="stayNoMsg") String stayNoMsg
 						, @RequestParam(required = false) String roomId
+						, @RequestParam(required = false, value="reservationNo") String reservationNo
 						, HttpSession session
 						, Model model) throws Exception {
 		
-		if(stayNoMsg==null || "".equals(stayNoMsg)) {
+		if(roomId==null || "".equals(roomId)) {
 			
-			stayNoMsg = service.getStayNoMsg(roomId);
+			service.insertMessageRoom();
+			roomId = service.getNewRoomId();
 			
 		}
+		if(stayNoMsg==null || "".equals(stayNoMsg) || "undefined".equals(stayNoMsg)) {
+			
+			stayNoMsg = service.getStayNo(reservationNo);
+		}
+		
+			
+		
+		
+		session.setAttribute("stayNoMsg", stayNoMsg);
+		System.err.println("stayNoMsg : "+stayNoMsg);
+		System.err.println("roomId : "+roomId);
+		
 		
 		service.chattingGet(stayNoMsg, roomId, session, model);
 		

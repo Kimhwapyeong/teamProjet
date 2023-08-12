@@ -178,5 +178,12 @@
 	<select id="getStayNoMsg" resultType="String">
 		select distinct(stayNo) from message where roomId = #{roomId}
 	</select>
+	
+	<select id="getStayNo" resultType="String">
+		SELECT ro.stayNo
+		FROM Reservation r
+		JOIN room ro ON r.roomNo = ro.roomNo
+		WHERE r.reservationNo = ${reservationNo}
+	</select>
 
 </mapper>

@@ -43,4 +43,6 @@ public interface MessageMapper {
 	// 해당 메세지 방의 stayNo 구하기
 	public String getStayNoMsg(String roomId);
 	
+	public String getStayNo(String reservationNo);
+	
 }

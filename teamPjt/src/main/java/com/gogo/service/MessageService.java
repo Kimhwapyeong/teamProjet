@@ -51,4 +51,5 @@ public interface MessageService {
 	public void chatListGet(Model model, String memberId, int pageNo, HttpSession session);
 	public String getMessageRoomOwner(String roomId);
 	public String getStayNoMsg(String roomId);
+	public String getStayNo(String reservationNo);
 }

@@ -34,7 +34,7 @@
             <div class="chat-list-pc" style="position: relative; align:right;">
                 <hr style="position:absolute;color: #f2f2f2; opacity: 1; height:30px; width:100%; top:5%;">
                 <div id="messageList" style=" position:absolute; left:0;display: inline-block;text-align: center;  width:30%; height: 100%; border:1px solid #f2f2f2;">
-                    <img onclick="location.href='/main'" src="https://chat.stayfolio.com/img/back.svg" style="vertical-align: middle; border: 0; position: absolute; top: 7px; left: 20px; cursor: pointer;">
+                    <img onclick="exit()" src="https://chat.stayfolio.com/img/back.svg" style="vertical-align: middle; border: 0; position: absolute; top: 7px; left: 20px; cursor: pointer;">
                     <span id="backBtn" style="position: absolute; top: 20px; left: 80px; font-size: 20px; font-weight: bold;">
                         메시지
                     </span>
@@ -98,7 +98,7 @@
                     <div id="messageBtn" style="position: absolute; bottom: 0; width: 100%; border: 1px solid #f2f2f2;">
                         <input type="text" id="message" style="width: 300px; border: 1px solid #f2f2f2;" />
                         <input type="button" class="btnStyle" id="sendBtn" value="전송" style="border: 1px solid #f2f2f2;" />
-                        <input type="button" class="btnStyle" onclick="location.href='/main'" value="퇴장" style="border: 1px solid #f2f2f2;" />
+                        <input type="button" class="btnStyle" onclick="exit()" value="퇴장" style="border: 1px solid #f2f2f2;" />
                         <input type="button" class="btnStyle" id="cleanBtn" value="clean" style="border: 1px solid #f2f2f2;" />                    	
                     </div>
                 </div>
@@ -159,6 +159,19 @@
     
     let sock;
     
+    // 현재 history 상태에 state를 추가하여 초기화
+    history.pushState({ page: 1 }, "title", "");
+
+    let isExiting = false;
+
+    window.onpopstate = async function(event) {
+        if (event.state && !isExiting) {
+            isExiting = true;
+            await exit();
+        }
+    }
+    
+    let wantExit = false;
     
     function connection(){
     	
@@ -173,12 +186,12 @@
 	//zzz
     window.addEventListener('load', connection);
     
-    window.addEventListener('popstate', function(event) {
-        // 웹소켓 연결이 없거나 닫혀있으면 재연결
-        if(!sock || sock.readyState === WebSocket.CLOSED) {
-        	setTimeout(connection, 2000);
-        }
-    });
+   // window.addEventListener('popstate', function(event) {
+        
+    //	console.log('exit pop!!!');
+    	
+   // 	exit();
+   // });
     sock.onerror = function(event) {
     	setTimeout(connection, 2000);
     };
@@ -207,6 +220,10 @@
             return;
         }
         
+        if(message.includes("OUT")){
+        	
+        	location.href="/main";
+        }
 
 		
 
@@ -230,15 +247,15 @@
  	
     // 서버와 연결을 끊었을 때
 	function onClose(evt) {
+		
+    	exit();
     	
     	sock = null;
-    	
-    	
     	
 	    setTimeout(connection, 2000);
 	}
 
-    let shouldExit = false;
+	let shouldExit = false;
 	
     // 브라우저를 강제로 닫거나 새로고침 했을 때
     window.addEventListener('beforeunload', function(event) {
@@ -261,18 +278,21 @@
      }
     
     // 퇴장 메세지 출력
-    function exit() {
-    	shouldExit = false;
-        console.log('exit() 함수가 실행됩니다.');
-        type = "OUT";
-        if(role=='<호스트>'){
-        	
-	        sock.send("<span style='color:brown;'>"+ role +"</span><span id='OUT' style='padding:5px; color:red;'>${memberName}님 "+roomId.value+"번 채팅방 연결 해제</span><span id='OUT'>"+formatAndDisplayDate()+"</span>");
-        } else {
-        	
-	        sock.send("<span style='color:blue;'>"+ role +"</span><span id='OUT' style='padding:5px; color:red;'>${memberName}님 "+roomId.value+"번 채팅방 연결 해제</span><span id='OUT'>"+formatAndDisplayDate()+"</span>");
-        }
+async function exit() {
+    if (shouldUnload) return;
+    console.log('exit() 함수가 실행됩니다.');
+
+    // 메시지 전송
+    if (role == '<호스트>') {
+        sock.send("<span style='color:brown;'>" + role + "</span><span id='OUT' style='padding:5px; color:red;'>${memberName}님 " + roomId.value + "번 채팅방 연결 해제</span><span id='OUT'>" + formatAndDisplayDate() + "</span>");
+    } else {
+        sock.send("<span style='color:blue;'>" + role + "</span><span id='OUT' style='padding:5px; color:red;'>${memberName}님 " + roomId.value + "번 채팅방 연결 해제</span><span id='OUT'>" + formatAndDisplayDate() + "</span>");
     }
+
+    // 메시지를 전송한 후 약간의 시간 대기
+    await new Promise(resolve => setTimeout(resolve, 1000));
+}
+    
     // 입장 메세지 출력
  	function sendEnterMessage() {
     setTimeout(function() {
