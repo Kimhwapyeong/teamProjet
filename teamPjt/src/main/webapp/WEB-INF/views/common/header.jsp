@@ -41,9 +41,19 @@
 <script>
 	// 초대 메세지를 받기 위한 로직
 document.addEventListener('DOMContentLoaded', function() {
-    function initInviteSocket(targetMemberId) {
+    	
+	
+	function initInviteSocket(targetMemberId) {
+    	
         let socketInvite = new SockJS("http://localhost:8080/echo?targetMemberId=" + targetMemberId);
-
+		
+        socketInvite.onclose = function(event) {
+            // 연결이 끊어졌을 때의 로직을 여기에 작성하면 됩니다.
+            console.warn("Socket connection closed. Trying to reconnect in 1 second.");
+            setTimeout(() => {
+                initInviteSocket(targetMemberId);  // 1초 후 재연결 시도
+            }, 1000);
+        };
 	var stayNoMsg = '';
         socketInvite.onmessage = function(event) {
             console.log("Received raw data:", event.data);

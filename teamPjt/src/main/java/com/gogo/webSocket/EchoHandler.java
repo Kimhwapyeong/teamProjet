@@ -60,7 +60,7 @@ public class EchoHandler extends TextWebSocketHandler{
         String socketType = params.get("socketType");
         
         if ("updateRooms".equals(socketType)) {
-            roomUpdateSessions.put(writer, session);
+            roomUpdateSessions.put(writer,session);
         }
         //System.out.println("socketType : "+socketType );
         
@@ -132,7 +132,15 @@ public class EchoHandler extends TextWebSocketHandler{
             logger.info("{}로 부터 {}받음, roomId: {}", session.getId(), message.getPayload(), roomId);
             List<WebSocketSession> sessionsInRoom = roomSessions.get(roomId);
             for (WebSocketSession sess : sessionsInRoom) {
-                sess.sendMessage(new TextMessage(message.getPayload()));
+              	if(sess.isOpen()) { 
+             		 
+              		sess.sendMessage(new TextMessage(message.getPayload()));
+              		 
+              	}else{ 
+              		 
+              		sessionsInRoom.remove(sess);
+              	} 
+                
             }
 
             // 메시지가 도착할 때마다 메시지를 저장
@@ -183,9 +191,18 @@ public class EchoHandler extends TextWebSocketHandler{
 		        //System.err.println("socketType : "+socketType);
 		
 		        roomId = (String) session.getAttributes().get("roomId");
+		        
+		        // 여기에 해당 로직을 추가
+		        if (roomSessions.get(roomId) == null) {
+		            roomSessions.put(roomId, new ArrayList<WebSocketSession>());
+		        }
+		        
 		        String stayNoMsg = (String) session.getAttributes().get("stayNoMsg");
 		        roomSessions.get(roomId).remove(session);
 		        // roomId가 null인 경우 처리
+		       
+		        roomUpdateSessions.remove(writer);
+		        
 		        if (roomId == null) {
 		            // 예외를 던지거나, 기본값을 설정합니다.
 		            throw new Exception("roomId는 null일 수 없습니다.");
@@ -291,8 +308,14 @@ public class EchoHandler extends TextWebSocketHandler{
         String messagePayload = new ObjectMapper().writeValueAsString(map);
 
         for (WebSocketSession sess : roomUpdateSessions.values()) {
-            sess.sendMessage(new TextMessage(messagePayload));
+        	if(sess.isOpen()) { 
+             sess.sendMessage(new TextMessage(messagePayload));
+        	} else {
+        		
+        		System.out.println("nonono");
+        	}
         }
+     
     }
 
 

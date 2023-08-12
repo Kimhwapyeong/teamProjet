@@ -156,11 +156,22 @@
         }
     });
 
-    let sock = new SockJS("http://localhost:8080/echo?roomId=${roomId}&socketType=chat&stayNoMsg=${stayNoMsg}");
-    console.log('sock : ', sock);
-    sock.onmessage = onMessage;
-    sock.onclose = onClose;
-
+    
+    let sock;
+    
+    
+    function connection(){
+    	
+    	
+	    sock = new SockJS("http://localhost:8080/echo?roomId=${roomId}&socketType=chat&stayNoMsg=${stayNoMsg}");
+	    console.log('sock : ', sock);
+	    sock.onmessage = onMessage;
+	    sock.onclose = onClose;
+    	
+	    sendEnterMessage();
+    }
+	//zzz
+    window.addEventListener('load', connection);
     
 
     // 메시지 전송
@@ -218,11 +229,14 @@
  
  	
     // 서버와 연결을 끊었을 때
-    function onClose(evt) {
+	function onClose(evt) {
     	
-    	exit();
+    	sock = null;
     	
-    }
+    	
+    	
+	    setTimeout(connection, 2000);
+	}
 
     let shouldExit = false;
 	
@@ -273,11 +287,11 @@
     }, 1000);
 
     // 한번 동작 후 이벤트 핸들러를 제거합니다.
-    window.removeEventListener('load', sendEnterMessage);
+    //window.removeEventListener('load', sendEnterMessage);
 	}
         
 	// 페이지 로드 시 sendEnterMessage 함수를 호출합니다.
-	window.addEventListener('load', sendEnterMessage);   
+	//window.addEventListener('load', sendEnterMessage);   
 </script>
 
 <script>
