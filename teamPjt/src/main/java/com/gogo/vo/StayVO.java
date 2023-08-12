@@ -40,6 +40,9 @@ public class StayVO {
 	
 	private String category; // 카테고리 출력 변수
 	
+	private String sns; // 숙소 sns
+	private String tel; // 숙소 번호
+	
 	
 	
 	

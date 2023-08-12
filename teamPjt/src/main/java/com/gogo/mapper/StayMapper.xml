@@ -277,6 +277,8 @@
        subq3.stayinfo,
        subq3.latitude,
        subq3.longitude,
+       subq3.sns,
+       subq3.tel,
        TO_CHAR(subq3.minprice, '999,999') as minprice,
        decode(like_count, null, 0, like_count) as likecount
        ,subquery.babiqu,
@@ -301,6 +303,8 @@
 	         subq2.stayinfo,
 	         subq2.latitude,
          	 subq2.longitude,
+         	 subq2.sns,
+         	 subq2.tel,
 	         MIN(subq2.price) OVER (PARTITION BY subq2.stayname) AS minprice,
 	         ROW_NUMBER() OVER (PARTITION BY subq2.stayname ORDER BY subq2.stayname) AS rn
 	  FROM (
@@ -318,7 +322,9 @@
 	           info,
 	           stayinfo,
 	           latitude,
-               longitude
+               longitude,
+               sns,
+           	   tel
 	    FROM stay
 	    LEFT JOIN room ON stay.stayNo = room.stayNo
 	  ) subq2
@@ -347,6 +353,8 @@
 	
 	<resultMap type="java.util.HashMap" id="roomInfo">
 	    <result property="stayName" column="STAYNO" />
+	    <result property="sns" column="SNS" />
+	    <result property="tel" column="TEL" />
 	    <result property="info" column="INFO" />
 	    <result property="babiqu" column="BABIQU" />
 	    <result property="pet" column="PET" />

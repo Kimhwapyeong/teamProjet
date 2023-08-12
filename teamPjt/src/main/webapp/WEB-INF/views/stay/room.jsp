@@ -16,7 +16,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="/resources/js/list/list.js"></script>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=09bf24dddad83867e65996ffe53d6185"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=124076e69929aa6f11bd182ef5993338"></script>
 
 <style>
 	.reveal {
@@ -72,7 +72,7 @@
             
             
             // 카카오 지도 
-            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+           /*  var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = { 
 		        center: new kakao.maps.LatLng(${list.LATITUDE}, ${list.LONGITUDE}), // 지도의 중심좌표
 		        level: 4 // 지도의 확대 레벨
@@ -85,13 +85,22 @@
 			
 			// 마커를 생성합니다
 			var marker = new kakao.maps.Marker({
-			    position: markerPosition
+			    position: markerPosition,
+			    title : '${list.STAYNAME }'
+			    
 			});
 			
 			// 마커가 지도 위에 표시되도록 설정합니다
-			marker.setMap(map);
+			marker.setMap(map); */
 			
             
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			 let nextBtn = document.querySelector('.swiper-button-next-room');
@@ -233,7 +242,146 @@
 				});
 			});
 			
+			
+			
+			
+			// 주변 맛집
+			
+			let address = '${list.STAYADRESS }';
+			let mapx = '${list.LATITUDE}';
+			let mapy = '${list.LONGITUDE}';
+			
+			let parts = address.split(' ', 3); // 최대 3개의 부분으로 나눔
+			
+			let shortenedAddress = parts.join(' ');
+			let ch = shortenedAddress +'주변 맛집';
+			
+			let encodedPromotion = encodeURIComponent(ch); // endoce
+			
+			fetch('/stst/matjip/'+encodedPromotion+'/'+mapx+'/'+mapy)
+			.then(response => response.json())
+			.then(map => {kk(map); initializeKakaoMap();}); 
+			
+			
+			var positions = [];
+			
+			async function kk(map){
+				let rs = map.rs;
+				//console.log(rs);
+				
+				let parsedData = JSON.parse(rs);
+				//console.log(parsedData);
+				
+				
+				let matjip = document.querySelector('#matjip ul'); 
+				matjip.innerHTML = '';
+				let pageBlock = '';
+				
+				
+				parsedData.documents.forEach((list,index)=>{
+					
+					
+					if (index < 6) {
+						
+						let categoryString =  list.category_name;
+						const categories = categoryString.split(" > ");
+						const categoryObject = {
+						  main: categories[0],
+						  type: categories[1],
+						  subType: categories[2],
+						  name: categories[3]
+						};
+						
+						let cnt = index + 1;
+						
+						pageBlock
+						+='<a href='+list.place_url+' target="_blank">'
+						+'<li>'
+	                    +'<div class="map_marker" role="presentation" style="cursor: pointer;">'+cnt+'</div>';
+	                    if(categoryObject.subType == null){
+	                    	pageBlock
+	                    	+='<div class="tit">'+list.place_name+'<em>'+categoryObject.main +'>'+categoryObject.type+'</em></div>';
+	                    }else{
+		                    pageBlock                  	
+		                    +='<div class="tit">'+list.place_name+'<em>'+categoryObject.main +'>'+categoryObject.type+'>'+categoryObject.subType+'</em></div>';
+	                    }
+	                    pageBlock
+	                    +='<div class="desc">'+list.address_name+'</div>'
+	                	+'</li>'
+						+'</a>';
+						
+	                    matjip.innerHTML = pageBlock;
+	                    
+	                    // 맛집 좌표 배열에 넣기
+	                    positions.push({
+	                        title: list.place_name,
+	                        latlng: new kakao.maps.LatLng(list.y, list.x)
+	                    });
+					}
+				})
+				
+				console.log(positions);
+			}
+			console.log(positions.length);
+				// 마커 이미지의 이미지 주소입니다
+				
+				function initializeKakaoMap() {
+					console.log(positions);
+					
+					 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+					    mapOption = { 
+					        center: new kakao.maps.LatLng(${list.LATITUDE}, ${list.LONGITUDE}), // 지도의 중심좌표
+					        level: 4 // 지도의 확대 레벨
+					    };
+					
+						var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+						
+						// 마커가 표시될 위치입니다 
+						var markerPosition  = new kakao.maps.LatLng(${list.LATITUDE}, ${list.LONGITUDE}); 
+						
+						// 마커를 생성합니다
+						var marker = new kakao.maps.Marker({
+						    position: markerPosition,
+						    title : '${list.STAYNAME }'
+						    
+						});
+						
+						// 마커가 지도 위에 표시되도록 설정합니다
+						marker.setMap(map);	
+					
+					
+				var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+				//var imageSrc = "https://www.stayfolio.com/web/images/map-stay.png"; 
+				    
+				for (var i = 0; i < positions.length; i ++) {
+				    console.log(positions[i].latlng);
+				    // 마커 이미지의 이미지 크기 입니다
+				    var imageSize = new kakao.maps.Size(24, 35); 
+				    
+				    // 마커 이미지를 생성합니다    
+				    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+				    
+				    // 마커를 생성합니다
+				    var marker = new kakao.maps.Marker({
+				        map: map, // 마커를 표시할 지도
+				        position: positions[i].latlng, // 마커를 표시할 위치
+				        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+				        image : markerImage // 마커 이미지 
+				    });
+				}
+			
+				}
+			
+			
+			
+			
+			
+			
+			
         });
+        
+        
+        
         
     </script>
     
@@ -621,6 +769,7 @@
 				<div class="map_container">
 					<div id="naver-map-detail" tabindex="0"
 						style="height: inherit; position: relative; overflow: hidden; background: rgb(248, 249, 250);">
+						<!-- 카카오 지도 들어가는곳 -->
 						<div id="map" style="width: 100%; height: 550px;"></div>
 					</div>
 					<div class="map_tit" style='margin-top: 40px'>
@@ -629,9 +778,9 @@
 						</div>
 						<div class="desc">
 							${list.STAYADRESS }<br> <a class="phone"
-								href="tel:0504-0904-2702">0504-0904-2702</a> <a class="email"
+								href="tel:0504-0904-2702">${list.TEL}</a> <a class="email"
 								href="mailto:dansim.stay@gmail.com" target="_blank"
-								rel="noreferrer">dansim.stay@gmail.com</a>
+								rel="noreferrer">${list.SNS}</a>
 						</div>
 						<div class="links">
 							<a href="http://instagram.com" target="_blank"
@@ -641,6 +790,11 @@
 						</div>
 					</div>
 				</div>
+			<div class="container map_info" id="matjip">
+            <ul class="info_list">
+                
+            </ul>
+        </div>
 			</div>
 
 
