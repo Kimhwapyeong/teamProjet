@@ -27,8 +27,21 @@
 		SELECT memberid, membername, memberemail,
 			TO_CHAR(registraiondate, 'YYYY-MM-DD') AS registraiondate
 		FROM member
+		WHERE memberid != 'admin'
+		<include refid="search"/>
         ORDER BY MEMBERID ASC
 	</select>
+	
+	<sql id="search">
+		<choose>
+			<when test="searchField == 'memberId'">
+				and memberId like '%'||#{searchWord}||'%'
+			</when>
+			<when test="searchField == 'memberName'">
+				and memberName like '%'||#{searchWord}||'%'
+			</when>
+		</choose>
+	</sql>
 	
 	
 	<!-- 멤버 여러명 삭제 -->
@@ -135,7 +148,7 @@
 	
 	<!-- 숙소 관리 - 숙소 삭제 -->
 	<delete id="deleteRoom">
-		delete from room where roomname= #{roomName}
+		delete from room where roomno= #{roomNo}
 	</delete>	
 	
 	

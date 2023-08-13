@@ -81,7 +81,7 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 	@Override
 	public List<MemberVO> getMember(Model model) {
 		List<MemberVO> member = mypageMapper.getMember();
-		log.info("===========");
+		log.info("==============");
 		log.info("member : " + member);
 		model.addAttribute("member", member);
 		return null;
@@ -145,8 +145,8 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 	}
 	
 	@Override
-	public int deleteRoom(String roomName) {
-		return mypageMapper.deleteRoom(roomName);
+	public int deleteRoom(String roomNo) {
+		return mypageMapper.deleteRoom(roomNo);
 	}
 	
 	@Override

@@ -47,7 +47,7 @@ public interface mypageMapper {
 	public List<StayVO> getStay();
 	
 	// 숙소 관리 - 객실 삭제
-	public int deleteRoom(String roomName);
+	public int deleteRoom(String roomNo);
 	
 	// 숙소 관리 - 객실 조회
 	public List<RoomVO> roomInfo(String memberId);

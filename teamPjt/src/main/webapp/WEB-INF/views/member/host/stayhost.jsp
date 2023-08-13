@@ -36,17 +36,34 @@ window.addEventListener('load', function(){
         isRoomViewVisible = !isRoomViewVisible;
     });
     
-    /*deleteRoom.addEventListener('click', function(){
-    	deleteFrm.action = '/member/admin/deleteRoom';
-    	deleteFrm.submit();
-	});*/
+ 
     
-    var deleteBtn = document.getElementById('delete')
-    deleteBtn.addEventListener('click', function() {
-        console.log('삭제');
-        deleteFrm.action = '/member/host/deleteRoom';
-    	deleteFrm.submit();
+    const deleteButtons = document.querySelectorAll('[data-bs-toggle="modal"][data-bs-target="#deleteModal"]');
+    const deleteModalButton = document.getElementById("delete");
+    
+    console.log("deleteButtons",deleteButtons);
+    console.log("deleteModalButton",deleteModalButton);
+
+    deleteButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            const roomNo = button.getAttribute("data-roomno");
+            console.log("roomNo", roomNo);
+            deleteModalButton.setAttribute("data-roomno", roomNo);
+        });
     });
+
+
+    deleteModalButton.addEventListener("click", function() {
+        const selectedRoomNo = deleteModalButton.getAttribute("data-roomno");
+        if (selectedRoomNo !== "") {
+            const form = document.forms["deleteFrm"];
+            const roomNoInput = form.querySelector('input[name="roomNo"]');
+            roomNoInput.value = selectedRoomNo;
+            form.submit();
+        }
+    });
+
+
     
 });
 
@@ -182,7 +199,8 @@ window.addEventListener('load', function(){
 					                                    </a>  
 				                                    </div>
 			                                        <div class="reserv_info" style="margin-top:10px;">
-			                                           <div class="stay" style= "font-size:15px;font-weight:bold;display:flex; justify-content:center"><button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">${room.ROOMNAME }</button></div>
+			                                           <div class="stay" style= "font-size:15px;font-weight:bold;display:flex; justify-content:center">
+			                                           	  <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" data-roomno="${room.ROOMNO }">${room.ROOMNAME }</button></div>
 			                                           
 			                                           
 			                                           
@@ -199,7 +217,7 @@ window.addEventListener('load', function(){
 														      </div>
 														      <div class="modal-footer">
 														        <button type="button" class="btn btn-light" data-bs-dismiss="modal">아니오</button>
-														        <button type="button" class="btn btn-dark" style="width:60px" id="delete">네</button>
+														        <button type="button" class="btn btn-dark" style="width:60px" id="delete" data-roomno="">네</button>
 														      </div>
 														    </div>
 														  </div>
