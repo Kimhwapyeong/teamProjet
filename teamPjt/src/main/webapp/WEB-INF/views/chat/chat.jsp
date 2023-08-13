@@ -22,7 +22,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 </head>
-<body>
+<body onbeforeunload="exit()">
     <jsp:include page="../common/header.jsp" />
  
     <div style="position: absolute; top: 80px; width: 100%; text-align: center; padding: 38px; border-bottom: 1px solid rgb(242, 242, 242); background-color: white;">
@@ -34,7 +34,7 @@
             <div class="chat-list-pc" style="position: relative; align:right;">
                 <hr style="position:absolute;color: #f2f2f2; opacity: 1; height:30px; width:100%; top:5%;">
                 <div id="messageList" style=" position:absolute; left:0;display: inline-block;text-align: center;  width:30%; height: 100%; border:1px solid #f2f2f2;">
-                    <img onclick="exit()" src="https://chat.stayfolio.com/img/back.svg" style="vertical-align: middle; border: 0; position: absolute; top: 7px; left: 20px; cursor: pointer;">
+                    <img onclick="userWantsToExit()" src="https://chat.stayfolio.com/img/back.svg" style="vertical-align: middle; border: 0; position: absolute; top: 7px; left: 20px; cursor: pointer;">
                     <span id="backBtn" style="position: absolute; top: 20px; left: 80px; font-size: 20px; font-weight: bold;">
                         메시지
                     </span>
@@ -98,7 +98,7 @@
                     <div id="messageBtn" style="position: absolute; bottom: 0; width: 100%; border: 1px solid #f2f2f2;">
                         <input type="text" id="message" style="width: 300px; border: 1px solid #f2f2f2;" />
                         <input type="button" class="btnStyle" id="sendBtn" value="전송" style="border: 1px solid #f2f2f2;" />
-                        <input type="button" class="btnStyle" onclick="exit()" value="퇴장" style="border: 1px solid #f2f2f2;" />
+                        <input type="button" class="btnStyle" onclick="userWantsToExit()" value="퇴장" style="border: 1px solid #f2f2f2;" />
                         <input type="button" class="btnStyle" id="cleanBtn" value="clean" style="border: 1px solid #f2f2f2;" />                    	
                     </div>
                 </div>
@@ -159,17 +159,6 @@
     
     let sock;
     
-    // 현재 history 상태에 state를 추가하여 초기화
-    history.pushState({ page: 1 }, "title", "");
-
-    let isExiting = false;
-
-    window.onpopstate = async function(event) {
-        if (event.state && !isExiting) {
-            isExiting = true;
-            await exit();
-        }
-    }
     
     let wantExit = false;
     
@@ -183,15 +172,16 @@
     	
 	    sendEnterMessage();
     }
-	//zzz
+    
+ 	// 사용자가 의도적으로 나가는 경우의 함수
+    function userWantsToExit() {
+        wantExit = true;
+        exit2();
+    }
+
     window.addEventListener('load', connection);
     
-   // window.addEventListener('popstate', function(event) {
-        
-    //	console.log('exit pop!!!');
-    	
-   // 	exit();
-   // });
+
     sock.onerror = function(event) {
     	setTimeout(connection, 2000);
     };
@@ -219,11 +209,6 @@
             // 초대 메시지는 무시하고 반환
             return;
         }
-        
-        if(message.includes("OUT")){
-        	
-        	location.href="/main";
-        }
 
 		
 
@@ -248,20 +233,20 @@
     // 서버와 연결을 끊었을 때
 	function onClose(evt) {
 		
-    	exit();
-    	
-    	sock = null;
-    	
-	    setTimeout(connection, 2000);
+	    if(!wantExit) {
+		    sock = null;
+	        console.log('님 컴이 꾸져서 연결이 끊겼습니다... 재접속합니다');
+	        setTimeout(connection, 2000);
+	    } else {
+	        console.log('당신 스스로 퇴장을 선택하였습니다');
+	        location.href='/main';
+	    }
+
+	    
 	}
 
-	let shouldExit = false;
 	
-    // 브라우저를 강제로 닫거나 새로고침 했을 때
-    window.addEventListener('beforeunload', function(event) {
-    	
-        exit();
-    });
+	
 	
     // 현재 시간 출력 함수
     function formatAndDisplayDate() {
@@ -278,21 +263,40 @@
      }
     
     // 퇴장 메세지 출력
-async function exit() {
-    if (shouldUnload) return;
-    console.log('exit() 함수가 실행됩니다.');
-
-    // 메시지 전송
-    if (role == '<호스트>') {
-        sock.send("<span style='color:brown;'>" + role + "</span><span id='OUT' style='padding:5px; color:red;'>${memberName}님 " + roomId.value + "번 채팅방 연결 해제</span><span id='OUT'>" + formatAndDisplayDate() + "</span>");
-    } else {
-        sock.send("<span style='color:blue;'>" + role + "</span><span id='OUT' style='padding:5px; color:red;'>${memberName}님 " + roomId.value + "번 채팅방 연결 해제</span><span id='OUT'>" + formatAndDisplayDate() + "</span>");
-    }
-
-    // 메시지를 전송한 후 약간의 시간 대기
-    await new Promise(resolve => setTimeout(resolve, 1000));
-}
+	async function exit() {
+	    console.log('exit() 함수가 실행됩니다.');
+		
+	    // 메시지 전송
+	    if (role == '<호스트>') {
+	        sock.send("<span style='color:brown;'>" + role + "</span><span id='OUT' style='padding:5px; color:red;'>${memberName}님 " + roomId.value + "번 채팅방 연결 해제</span><span id='OUT'>" + formatAndDisplayDate() + "</span>");
+	    } else {
+	        sock.send("<span style='color:blue;'>" + role + "</span><span id='OUT' style='padding:5px; color:red;'>${memberName}님 " + roomId.value + "번 채팅방 연결 해제</span><span id='OUT'>" + formatAndDisplayDate() + "</span>");
+	    }
+		
+	    // 메시지를 전송한 후 약간의 시간 대기
+	    await new Promise(resolve => setTimeout(resolve, 4000)); // 500ms 대기. 필요한 경우 시간을 조절해볼 수 있습니다.
+		
+	    // 연결 종료
+	    sock.close();
+	}
     
+	async function exit2() {
+	    console.log('exit() 함수가 실행됩니다.');
+		
+	    // 메시지 전송
+	    if (role == '<호스트>') {
+	        sock.send("<span style='color:brown;'>" + role + "</span><span id='OUT' style='padding:5px; color:red;'>${memberName}님 " + roomId.value + "번 채팅방 연결 해제</span><span id='OUT'>" + formatAndDisplayDate() + "</span>");
+	    } else {
+	        sock.send("<span style='color:blue;'>" + role + "</span><span id='OUT' style='padding:5px; color:red;'>${memberName}님 " + roomId.value + "번 채팅방 연결 해제</span><span id='OUT'>" + formatAndDisplayDate() + "</span>");
+	    }
+		
+	    // 메시지를 전송한 후 약간의 시간 대기
+	    await new Promise(resolve => setTimeout(resolve, 500)); // 500ms 대기. 필요한 경우 시간을 조절해볼 수 있습니다.
+		
+	    // 연결 종료
+	    sock.close();
+	}
+	    
     // 입장 메세지 출력
  	function sendEnterMessage() {
     setTimeout(function() {

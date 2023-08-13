@@ -70,51 +70,33 @@ public class EchoHandler extends TextWebSocketHandler{
 
         //String roomId = params.get("roomId");  // 이 부분은 roomId가 필요할 때 사용하면 됩니다.     
         //userSessions.put(writer, session); // 사용자 세션 등록
+    	String roomId= "";
+    	String stayNoMsg = "";
+    	if(session.getAttributes().get("roomId")!=null) {
+    		
     	
+	    	roomId = (String) session.getAttributes().get("roomId");
+	    	stayNoMsg = (String) session.getAttributes().get("stayNoMsg");
+	        // roomId가 null인 경우 처리
+	        
+	        System.err.println("afterConnectionEstablished stayNoMsg : "+stayNoMsg);
+	
+	        if (!roomSessions.containsKey(roomId)) {
+	            roomSessions.put(roomId, new ArrayList<>());
+	        }
+	        roomSessions.get(roomId).add(session);
     	
-    	String roomId = (String) session.getAttributes().get("roomId");
-    	 String stayNoMsg = (String) session.getAttributes().get("stayNoMsg");
-        // roomId가 null인 경우 처리
-        
-        System.out.println("씨발!!"+ stayNoMsg);
-
-        if (!roomSessions.containsKey(roomId)) {
-            roomSessions.put(roomId, new ArrayList<>());
-        }
-        roomSessions.get(roomId).add(session);
-
-        Map<String, Object> map = new HashMap<String, Object>();
-        MemberVO member = (MemberVO)session.getAttributes().get("member");
         // writer가 null인 경우 처리
         if (writer == null) {
             // 예외를 던지거나, 기본값을 설정합니다.
             throw new Exception("writer는 null일 수 없습니다.");
             
         }
-
-//        System.err.println("writer : "+ writer);
-//        System.err.println("roomId : "+ roomId);
-//        System.err.println("member : "+ member);
-//        
+      
         int idx = roomId.indexOf("=");
         roomId = roomId.substring(idx+1);
+    	}
         
-        if(session.getAttributes().get("memberId")!=null) {
-        	
-        	MessageVO checkMsg = new MessageVO();
-        	checkMsg.setMemberId((String)session.getAttributes().get("memberId"));
-        	checkMsg.setRoomId(roomId);
-	        	if(service.joinYN(checkMsg) && "chat".equals(socketType)) {
-	        		
-	        		service.chattingGet(roomId, member);
-	        		map.put("content", writer+"님 "+roomId+"번 채팅방 입장!");
-	        		map.put("roomId", roomId);
-	        		map.put("type", "ENTER");
-	        		map.put("writer", writer);
-	        		map.put("stayNoMsg", stayNoMsg);
-	        		service.insertChatting(map);
-	        	}
-        }
 
         logger.info("{} 연결됨, roomId: {}", session.getId(), roomId);
     }
@@ -156,17 +138,27 @@ public class EchoHandler extends TextWebSocketHandler{
 
             int idx = roomId.indexOf("=");
             roomId = roomId.substring(idx+1);
-
+            String type = "";
             if (!"undefined".equals(roomId)) {  // roomId가 undefined가 아닐 때만 실행
                 map.put("content", message.getPayload());
                 map.put("roomId", roomId);
-                map.put("type", "TALK");
+                
+                
+                if(message.getPayload().contains("id=\"ENTER\"")) {
+                	type = "ENTER";
+                } else if(message.getPayload().contains("id='OUT'")) {
+                	type = "OUT";	
+                } else {
+                	type = "TALK";
+                }
+                
+                map.put("type", type);
                 map.put("writer", writer);
                 map.put("stayNoMsg", stayNoMsg);
                 service.insertChatting(map);
             } 
             
-            if(message.getPayload().contains("ENTER")) {
+            if("ENTER".equals(type)) {
             	
             	sendUpdatedRoomList(session);
             }
@@ -180,22 +172,19 @@ public class EchoHandler extends TextWebSocketHandler{
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
     	String roomId = "";
-    	try {
-		    	String writer = (String) session.getAttributes().get("memberId");
+    	String writer = "";
+    		if(session.getAttributes().get("memberId")!=null 
+    				&& session.getAttributes().get("roomId")!=null) {
+		    	writer = (String) session.getAttributes().get("memberId");
 		        userSessions.remove(writer); // 사용자 세션 제거
 		        
 		        String queryString = session.getUri().getQuery();
 
 		        // Query String에서 targetMemberId 파라미터 값을 추출
 		        Map<String, String> params = parseQueryString(queryString);
-		        String socketType = params.get("socketType");
-		        //System.err.println("socketType : "+socketType);
-		
+		        
 		        roomId = (String) session.getAttributes().get("roomId");
 		        
-		        String stayNoMsg = (String) session.getAttributes().get("stayNoMsg");
-		        
-		       
 		        roomSessions.get(roomId).remove(session);
 		        // roomId가 null인 경우 처리
 
@@ -208,28 +197,9 @@ public class EchoHandler extends TextWebSocketHandler{
 		            // 예외를 던지거나, 기본값을 설정합니다.
 		            throw new Exception("writer는 null일 수 없습니다.");
 		        }
-		        	
-		        Map<String, Object> map = new HashMap<String, Object>();
-		        
-		       if(session.getAttributes().get("memberId")!=null) {
-		        	//System.err.println("웹소켓 연결 닫힘 횟수 테스트");
-		        	MessageVO checkMsg = new MessageVO();
-		        	checkMsg.setMemberId((String)session.getAttributes().get("memberId"));
-		        	checkMsg.setRoomId(roomId);
-			        	if(service.joinYN2(checkMsg) && "chat".equals(socketType)) {
-			        		
-			        		map.put("content", writer+"님 "+roomId+"번 채팅방 퇴장!");
-			        		map.put("roomId", roomId);
-			        		map.put("type", "OUT");
-			        		map.put("writer", writer);
-			        		map.put("stayNo", stayNoMsg);
-			        		map.put("stayNoMsg", stayNoMsg);
-			        		service.insertChatting(map);
-			        	}
-		        }
-    	} catch (Exception e) {
-    		return;
-    	}
+    		}   	
+		       
+    	
        
         logger.info("{} 연결 끊김, roomId: {}", session.getId(), roomId);
     }	

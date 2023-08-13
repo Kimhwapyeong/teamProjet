@@ -18,8 +18,7 @@
 			FROM Message m
 			JOIN MemberRole mr ON m.memberId = mr.memberId
 			WHERE m.roomId = #{roomId}
-			  AND m.type = 'TALK'
-			  order by m.regdate
+			order by m.regdate
 	</select>
 
 
@@ -64,11 +63,9 @@
 			    FROM Message m
 			    JOIN MessageRoom mr ON m.roomId = mr.roomId
 			    JOIN Stay s ON m.stayNo = s.stayNo
-			    WHERE m.type = 'ENTER'
 			      AND m.roomId IN (
 			          SELECT roomId
 			          FROM Message
-			          WHERE type = 'TALK'
 			          GROUP BY roomId
 			      )
 			      AND s.memberId = #{memberId}
@@ -89,11 +86,9 @@
 			    FROM Message m
 			    JOIN MessageRoom mr ON m.roomId = mr.roomId
 			    JOIN Stay s ON m.stayNo = s.stayNo
-			    WHERE m.type = 'ENTER'
 			      AND m.roomId IN (
 			          SELECT roomId
 			          FROM Message
-			          WHERE type = 'TALK'
 			          GROUP BY roomId
 			      )
 			      AND s.memberId = #{memberId}
@@ -115,13 +110,10 @@
 		           ROW_NUMBER() OVER (ORDER BY m.regdate DESC) as rnum
 		    FROM Message m
 		    JOIN MessageRoom mr ON m.roomId = mr.roomId
-		    WHERE m.type = 'ENTER'
 		      AND m.roomId IN (
 		          SELECT roomId
 		          FROM Message
-		          WHERE type = 'TALK'
 		          GROUP BY roomId
-		          HAVING COUNT(type) >= 2
 		      )
 		      AND m.memberId = #{memberId}
 		      AND m.regdate = (
@@ -143,13 +135,10 @@
 		           ROWNUM as rnum
 		    FROM Message m
 		    JOIN MessageRoom mr ON m.roomId = mr.roomId
-		    WHERE m.type = 'ENTER'
 		      AND m.roomId IN (
 		          SELECT roomId
 		          FROM Message
-		          WHERE type = 'TALK'
 		          GROUP BY roomId
-		          HAVING COUNT(type) >= 2
 		      )
 		      AND m.memberId = #{memberId}
 		      AND m.regdate = (
