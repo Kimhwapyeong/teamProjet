@@ -139,6 +139,7 @@
 		          SELECT roomId
 		          FROM Message
 		          GROUP BY roomId
+		          
 		      )
 		      AND m.memberId = #{memberId}
 		      AND m.regdate = (
