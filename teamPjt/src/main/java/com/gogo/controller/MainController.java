@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gogo.service.MainService;
+import com.gogo.service.StayService;
 import com.gogo.vo.FileuploadVO;
 import com.gogo.vo.RoomOptionVO;
 import com.gogo.vo.RoomVO;
@@ -24,10 +25,21 @@ public class MainController {
 	@Autowired
 	MainService mainService;
 	
+	@Autowired
+	StayService stayService;
+	
 	@GetMapping("/main")
-	public void getMain(Model model) {
+	public void getMain(Model model, HttpSession session) {
 		mainService.getMainList(model);
 		mainService.getPopStayList(model);
+		StayVO vo = new StayVO();
+		
+		String memberId = (String)session.getAttribute("memberId");
+		System.out.println("mainController memberId : " + memberId);
+		if(memberId != null && !memberId.equals("")) {
+			vo.setMemberId(memberId);
+			stayService.likeId(vo, model);
+		}
 	}
 	
 	// 임시 매핑용
@@ -147,7 +159,7 @@ public class MainController {
 		
 		return "/fileupload";
 	}
-
+	
 	// fileupload test용
 //	@PostMapping("/fileuploadAction")
 //	public String fileuploadAction(List<MultipartFile> files, FileuploadVO vo) {

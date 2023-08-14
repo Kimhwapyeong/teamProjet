@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 		
 	    // a 요소 (button 의 자식 a)
-	    let buttons = document.querySelectorAll("button>a");
+	    let buttons = document.querySelectorAll("#whereBox a");
 	    
 	    buttons.forEach(button => {
 	    	// 버튼이 클릭되면
@@ -165,6 +165,21 @@ document.addEventListener('DOMContentLoaded', function() {
 	            });
 	        })
 	    })
+	    
+	    let typeButtons = document.querySelectorAll('#typeBox a');
+	    
+	    typeButtons.forEach(button =>{
+	    	button.addEventListener('click', ()=>{
+	    		typeButtons.forEach(otherButton => {
+	                if (otherButton === button) {
+	                    otherButton.classList.add('active');
+	                } else {
+	                    otherButton.classList.remove('active');
+	                }
+	            })
+	    	})
+	    })
+	    
 	    
 	    // 사이드메뉴 버튼 클릭시 사이드메뉴
 	    sideMenuMiddle.addEventListener('click', ()=>{
@@ -192,13 +207,19 @@ document.addEventListener('DOMContentLoaded', function() {
 	// active 클래스가 있는 버튼의 innerHTML 값을 파라메터로 가지고 list 페이지 이동
 	function searchWhere(){
 		let where;
-		document.querySelectorAll('button>a').forEach(button =>{
+		let type;
+		document.querySelectorAll('#whereBox a').forEach(button =>{
 			console.log(button.classList.contains('active'));
 	        if(button.classList.contains('active')){
 			 	where = button.innerHTML;
-			 	location.href='/stay/list?stayLoc='+where;
 			}
 	    })
+	    document.querySelectorAll('#typeBox a').forEach(button =>{
+	    	if(button.classList.contains('active')){
+	    		type = button.innerHTML;
+	    	}
+	    })
+	 	location.href='/stay/list?stayLoc='+where+'&type='+type;
 	}
 	
 	// 화면이 사이즈가 재조정 될 때마다 함수 실행
@@ -280,7 +301,7 @@ document.addEventListener('DOMContentLoaded', function() {
 								<input type="text" placeholder="원하는 스테이 혹은 지역을 검색해 보세요.">
 							</div>
 							<div class="whe_cont">
-								<div class="box">
+								<div class="box" id="whereBox">
 									<div class="tit" style="text-align: left;">국내</div>
 									<ul class="clearfix">
 										<li><button type="button">
@@ -327,15 +348,9 @@ document.addEventListener('DOMContentLoaded', function() {
 											</button></li>
 									</ul>
 								</div>
-								<div class="box">
+								<div class="box" id="typeBox">
 									<div class="tit" style="text-align: left;">스테이유형</div>
 									<ul class="clearfix">
-										<li><button type="button">
-												<a class="">게스트하우스</a>
-											</button></li>
-										<li><button type="button">
-												<a class="">렌탈하우스</a>
-											</button></li>
 										<li><button type="button">
 												<a class="">펜션</a>
 											</button></li>
@@ -343,13 +358,7 @@ document.addEventListener('DOMContentLoaded', function() {
 												<a class="">한옥</a>
 											</button></li>
 										<li><button type="button">
-												<a class="">캠핑&아웃도어</a>
-											</button></li>
-										<li><button type="button">
 												<a class="">호스텔</a>
-											</button></li>
-										<li><button type="button">
-												<a class="">리조트</a>
 											</button></li>
 										<li><button type="button">
 												<a class="">민박</a>
