@@ -29,8 +29,36 @@
 </style>
 
 <script type="text/javascript">
-	window.addEventListener('load', function(){
+	window.addEventListener('DOMContentLoaded', function(){
+		const searchBtn = document.querySelector('.col-auto .btn-outline-dark');
+		let searchField = document.getElementsByName("searchField")[0].value;
+	    let searchWord = document.getElementsByName("searchWord")[0].value;
+			console.log("searchField : ", searchField);
+			console.log("searchWord : ", searchWord);
+
 		
+		searchBtn.addEventListener('click', () => {
+			event.preventDefault();
+			console.log("ddd");
+			console.log("searchField : ", searchField);
+			console.log("searchWord : ", searchWord);
+			let data = {
+					searchField: searchField,
+					searchWord: searchWord
+			      };
+        	
+        	fetch("/adminRest/search", {
+		        method : 'post', 
+		        headers : {
+		          'Content-Type': 'application/json'
+		        },
+		        body : JSON.stringify(data)
+		      })
+		      .then(response => response.json())
+		      //.then(map => keywordList(map));
+		      .then(map => {console.log(map);});
+			
+		});
 		
 	});
 	
@@ -104,7 +132,7 @@
 								
 								<h6 style="line-height: 60px">회원목록</h6>
 								
-								<form method="get" name="searchForm" action="/member/admin/useradmin">
+								<form method="post" name="searchForm">
 									<!-- 가운데 정렬 -->
 										<div class="row g-3 justify-content-center">
 										 	 <div class="col-auto" >
@@ -116,10 +144,10 @@
 										  <!-- col-sm-5 : 칸 넓게 -->
 										  <div class="col-sm-5" style="padding:0px">
 											    <label for="searchWord" class="visually-hidden">text</label>
-											    <input type="text" class="form-control" id="searchWord" name="searchWord" placeholder="Search Text" value="${pageDto.criteria.searchWord }">
+											    <input type="text" class="form-control" id="searchWord" name="searchWord" placeholder="Search Text" >
 										  </div>
 										  <div class="col-auto">
-										  		<button type="submit" class="btn btn-outline-dark">Search</button>
+										  		<button type="button" class="btn btn-outline-dark">Search</button>
 										  </div>
 									  </div>
 								</form>

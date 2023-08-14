@@ -28,6 +28,16 @@
 			TO_CHAR(registraiondate, 'YYYY-MM-DD') AS registraiondate
 		FROM member
 		WHERE memberid != 'admin'
+        ORDER BY MEMBERID ASC
+	</select>
+	
+	
+	<!-- 사용자 관리 - 검색 -->
+	<select id="getMemberSearch" resultType="com.gogo.vo.MemberVO">
+		SELECT memberid, membername, memberemail,
+			TO_CHAR(registraiondate, 'YYYY-MM-DD') AS registraiondate
+		FROM member
+		WHERE memberid != 'admin'
 		<include refid="search"/>
         ORDER BY MEMBERID ASC
 	</select>

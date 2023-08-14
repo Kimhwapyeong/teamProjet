@@ -23,6 +23,10 @@ public class MemberVO {
 	private String gender_group;
 	private String gender_Count;
 	
+	// search
+	private String searchField;
+	private String searchWord;
+	
 	
 	// 카카오 토큰 발급 정보
 	private String access_token;

@@ -34,6 +34,9 @@ public interface mypageService {
 	// 회원 조회
 	public List<MemberVO> getMember(Model model);
 	
+	// 회원 조회 - 검색
+	public List<MemberVO> getMemberSearch(MemberVO vo);
+	
 	// 회원 여러명 삭제
 	public int deleteArr(String[] idArr);
 	

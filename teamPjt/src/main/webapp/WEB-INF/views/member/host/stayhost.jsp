@@ -37,7 +37,7 @@ window.addEventListener('load', function(){
     });
     
  
-    
+    // roomName
     const deleteButtons = document.querySelectorAll('[data-bs-toggle="modal"][data-bs-target="#deleteModal"]');
     const deleteModalButton = document.getElementById("delete");
     
@@ -46,7 +46,7 @@ window.addEventListener('load', function(){
 
     deleteButtons.forEach(button => {
         button.addEventListener("click", function() {
-            const roomNo = button.getAttribute("data-roomno");
+            const roomNo = button.getAttribute("data-roomno");  // 삭제할 roomNo
             console.log("roomNo", roomNo);
             deleteModalButton.setAttribute("data-roomno", roomNo);
         });
@@ -179,7 +179,7 @@ window.addEventListener('load', function(){
                                </c:if>
                                </c:forEach>
                             </div>
-                                <form name= "deleteFrm"method="get">
+                                <form name= "deleteFrm" method="post" action="/member/admin/deleteRoom">
 	                                <div class="reserv_wrap mypage-reservation-info" style="width:1200px; border-bottom: none;">
 		                                <!-- 객실 정보 -->
 		                                <!-- ▶▶▶  forEach ▶▶▶  -->

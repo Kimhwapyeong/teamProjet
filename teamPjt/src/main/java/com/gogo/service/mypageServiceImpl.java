@@ -84,7 +84,14 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 		log.info("==============");
 		log.info("member : " + member);
 		model.addAttribute("member", member);
+		
 		return null;
+	}
+	
+	// 회원 조회
+	@Override
+	public List<MemberVO> getMemberSearch(MemberVO vo) {
+		return mypageMapper.getMemberSearch(vo);
 	}
 	
 	

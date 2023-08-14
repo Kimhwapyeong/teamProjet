@@ -26,6 +26,9 @@ public interface mypageMapper {
 	// 회원 조회
 	public List<MemberVO> getMember();
 	
+	// 회원 조회 - 검색
+	public List<MemberVO> getMemberSearch(MemberVO vo);
+	
 	// 회원 삭제
 	public int deleteArr(HashMap<String, Object> idArr);
 	

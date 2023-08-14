@@ -28,14 +28,14 @@ public class mypageTest {
 
 	@Autowired
 	mypageMapper mapper;
-	
-	@Test
-	public void getMember() {
-		List<MemberVO> member = mapper.getMember();
-		log.info("=========");
-		log.info("member : " + member);
-	}
-	
+//	
+//	@Test
+//	public void getMember() {
+//		List<MemberVO> member = mapper.getMember();
+//		log.info("=========");
+//		log.info("member : " + member);
+//	}
+//	
 	@Test
 	public void getStay() {
 		List<StayVO> list = mapper.getStay();
@@ -89,24 +89,18 @@ public class mypageTest {
 		log.info("one : " + mem);
 	}
 	
-	@Test
-	public void reservList() {
-		List<Map<String, String>> list = (List<Map<String, String>>) mapper.reservList("user1");
-		log.info("list : " + list);
-	}
-	
-	@Test
-	public void cancelList() {
-		List<Map<String, String>> list = (List<Map<String, String>>) mapper.cancelList("user1");
-		log.info("list : " + list);
-	}
-	
 //	@Test
-//	public void chartAge(MemberVO vo) {
-//		List<MemberVO> member = mapper.chartAge(vo);
-//		log.info("=========================");
-//		log.info("member: " + member);
+//	public void reservList() {
+//		List<Map<String, String>> list = (List<Map<String, String>>) mapper.reservList("user1");
+//		log.info("list : " + list);
 //	}
+//	
+//	@Test
+//	public void cancelList() {
+//		List<Map<String, String>> list = (List<Map<String, String>>) mapper.cancelList("user1");
+//		log.info("list : " + list);
+//	}
+	
 	
 	@Test
 	public void update() {
@@ -180,4 +174,13 @@ public class mypageTest {
 		log.info("member : " + member);
 	}
 	
+	@Test
+	public void search() {
+		MemberVO vo = new MemberVO();
+		vo.setSearchField("memberId");
+		vo.setSearchWord("host");
+		List<MemberVO> list = mapper.getMemberSearch(vo);
+		log.info("list : " + list);
+		
+	}
 }
