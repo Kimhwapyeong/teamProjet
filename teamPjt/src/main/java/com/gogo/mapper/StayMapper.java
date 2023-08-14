@@ -38,4 +38,5 @@ public interface StayMapper {
 	public List<StayVO> stayLocList(String stayLoc);
 	
 	public List<StayVO> likeIdRest(StayVO vo);
+	
 }

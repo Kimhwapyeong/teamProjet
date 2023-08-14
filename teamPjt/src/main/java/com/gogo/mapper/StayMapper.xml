@@ -178,6 +178,9 @@
 			<if test='roomOption != null and "beamprojector".equals(roomOption)'>
 				AND subquery.sequence_number = 1 and beamprojector = 'Y'
 			</if>
+			<if test='findStartDate != null and findEndDate != null'>
+				and subq3.stayno != (select stayno from room where roomno = (select roomno from reservation where to_char(checkin, 'yyyy/mm/dd') >= #{findStartDate} and #{findEndDate} >= to_char(checkout, 'yyyy/mm/dd')))
+			</if>
 			
 			<!-- 카테고리별 값 출력 -->
 			<if test='category != null and "최신순".equals(category)'>
@@ -203,8 +206,8 @@
 			<if test='category != null and "너랑 가고싶어".equals(category)'>
 				and badge = 'HOT'
 			</if>	
-					
 	</select>
+	
 	
 	<!-- 로그인 할 회원 좋아요 넣기 -->
 	<insert id="insertLike">
@@ -385,6 +388,8 @@
 	<resultMap type="java.util.HashMap" id="stayRoomList">
 	    <result property="bed" column="BED" />
 	    <result property="field" column="FIELD" />
+	    <result property="findStartDate" column="FINDSTARTDATE" />
+	    <result property="findEndDate" column="FINDENDDATE" />
 	</resultMap>
 	<!-- 숙수 페이지에서 방 이미지 뽑기 -->
 	<select id="stayRoomImg" resultType="com.gogo.vo.FileuploadVO">
@@ -397,6 +402,11 @@
 	)
 	WHERE rn = 1
 	</select>
+	
+	
+	
+	
+	
 	
 	
 	<!-- 객실 페이지에서 정보 뽑기 -->

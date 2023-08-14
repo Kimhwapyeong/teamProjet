@@ -84,7 +84,29 @@
                 }
             })
             
+			
+	
+			
+			let reservedBtn = document.querySelector('.btn-number-search');
+            reservedBtn.addEventListener('click', function(){
+				
+				checkIn = document.querySelector('#reserved_checkIn').value.replaceAll('-','/');
+				console.log(checkIn);
+				checkOut = document.querySelector('#reserved_checkOut').value.replaceAll('-','/');
+				console.log(checkOut);
+			    
+			    document.querySelector('.booking_summary .modalOverlay').style.display='none';
+			});
+			
+			document.getElementById('paymentButton').addEventListener('click', function () {
+			    // 가져올 값들
+			    
+			    // URL 생성
+			    const url = '/reserved/reserved?roomNo='+${roomInfo.ROOMNO}+'&checkIn='+document.querySelector('#reserved_checkIn').value.replaceAll('-','/')+'&checkOut='+document.querySelector('#reserved_checkOut').value.replaceAll('-','/');
+			    
+			    location.href = url;
 
+			});
             
             
             
@@ -105,7 +127,8 @@
 						<div class="btn_select ">날짜를 선택해주세요.</div>
 					</div>
 					<%-- <a href="/reserved/reserved?stayName=${roomInfo.STAYNAME }&roomName=${roomInfo.ROOMNAME }&roomNo=${roomInfo.ROOMNO}"><button type="button" class="btn_bk pc_only">결제하기</button></a> --%>
-					<a href="/reserved/reserved?roomNo=${roomInfo.ROOMNO}"><button type="button" class="btn_bk pc_only">결제하기</button></a>
+					<button type="button" class="btn_bk pc_only" id="paymentButton">결제하기</button>
+					<%-- <a href="/reserved/reserved?roomNo=${roomInfo.ROOMNO}"><button type="button" class="btn_bk pc_only">결제하기</button></a> --%>
 
 
 

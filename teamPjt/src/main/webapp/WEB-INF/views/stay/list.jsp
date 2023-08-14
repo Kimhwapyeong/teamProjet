@@ -173,7 +173,9 @@
                 });
 
                 if (selectedValues.length > 0) {
-                    if (selectedValues.length === 1) {
+                    if (selectedValues.includes("")) {
+                        btn4.innerHTML = '전체';
+                    } else if (selectedValues.length === 1) {
                         btn4.innerHTML = selectedValues[0];
                     } else {
                         const firstValue = selectedValues[0];
@@ -228,16 +230,18 @@
 				
                 // 배열에 넣고 조건에 맞게 뿌려주기
                 if (selectedValues.length > 0) {
-                    if (selectedValues.length === 1) {
-                    	btn5.innerHTML = selectedValues[0];
-                    } else {
-                        const firstValue = selectedValues[0];
-                        const otherValuesCount = selectedValues.length - 1;
-                        btn5.innerHTML = firstValue + '외 ' + otherValuesCount + '건';
-                    }
-                } else {
-                	btn5.innerHTML = '선택된 값 없음';
-                }
+			        if (selectedValues.includes("")) {
+			            btn5.innerHTML = '전체';
+			        } else if (selectedValues.length === 1) {
+			            btn5.innerHTML = selectedValues[0];
+			        } else {
+			            const firstValue = selectedValues[0];
+			            const otherValuesCount = selectedValues.length - 1;
+			            btn5.innerHTML = firstValue + '외 ' + otherValuesCount + '건';
+			        }
+			    } else {
+			        btn5.innerHTML = '선택된 값 없음';
+			    }
             });
             
             
@@ -266,6 +270,21 @@
 								if(idx === 0){
 									document.querySelector("#areaSelect").style.display = '';
 								}else if(idx === 1){
+									// 체크인 값
+									let checkIn = document.querySelector('#reserved_checkIn').value;
+						            console.log(checkIn);
+						            // 체크아웃 값
+						            let checkOut = document.querySelector('#reserved_checkOut').value;
+						            console.log(checkOut);
+						            
+						            document.querySelectorAll('.DateInput input')[0].value = checkIn;
+						            document.querySelectorAll('.DateInput input')[1].value = checkOut;
+						            
+						            
+						            
+						            
+						            
+						            
 									DayPicker.style.display = 'none';
 								}else{
 									searchModal[idx-1].classList.remove('open');
@@ -578,37 +597,42 @@
 	        			console.log('a');
 	        			
 	        			
-	        			
+	        			// 숙소 이름
 	        			let stayName = document.getElementById('stayName').value;
 	        			if(stayName === null){
 	        				stayView == "";
 	        			}
 	        			console.log(stayName);
 	        			
+						// 지역	        			
 	        			let stayAdress = document.querySelector('#regionModal li button.active').value;
 	        			if(stayAdress === null){
 	        				stayAdress == "";
 	        			}
 	        			console.log(stayAdress);
 	        			
+	        			// 주변 뷰
 	        			let stayView = document.querySelector('#viewModal li button.active').value;
 	        			if(stayView === null){
 	        				stayView == "";
 	        			}
 	        			console.log(stayView);
 	        			
+	        			// 기준 인원
 	        			let stdPerson = document.getElementById('stdPerson').value;
 	        			if(stdPerson === null){
 	        				stdPerson == "";
 	        			}
 	        			console.log(stdPerson);
 	        			
+	        			// 최대값
 	        			let maxPrice = document.getElementById('maxPrice').value * 10000;
 	        			if(maxPrice === null){
 	        				maxPrice == "";
 	        			}
 	        			console.log(maxPrice);
 	        			
+	        			// 숙소 유형
 	        			let stayType = document.querySelectorAll('#stayTypeList li label input');
 	        			stayType.forEach((button) => {
 							if(!button.checked){
@@ -619,7 +643,7 @@
 	        			})
 	        			console.log(stayType);
 	        			 			
-	        			
+	        			// 숙소 옵션
 	        			let roomOption = document.querySelectorAll('#roomOptionList li label input');
 	        			roomOption.forEach((button) => {
 							if(button.checked){
@@ -630,17 +654,21 @@
 	        			})
 	        			console.log(roomOption);
 	        			
-	        			let findStartDate = document.getElementById('reserved_checkIn').value;
+	        			
+	        			// 체크인
+	        			let findStartDate = document.querySelector('#reserved_checkIn').value.replaceAll('-','/');
 	        			if(findStartDate === null){
 	        				findStartDate == "";
 	        			}
 	        			console.log(findStartDate);
 	        			
-	        			let findEndDate = document.getElementById('reserved_checkOut').value
+	        			// 체크아웃
+	        			let findEndDate = document.querySelector('#reserved_checkOut').value.replaceAll('-','/');
 	        			if(findEndDate === null){
 	        				findEndDate == "";
 	        			}
 	        			console.log(findEndDate);
+	        			
 	        			
 	        			let data = {
 	        					stayName : stayName,
@@ -664,7 +692,7 @@
 	        			      })
 	        			      .then(response => response.json())
 	        			      //.then(map => keywordList(map));
-	        			      .then(map => keywordList(map));
+	        			      .then(map => keywordList(map)); 
 	        			});
 
         	 
@@ -772,7 +800,33 @@
         		}
         	}
         	
-	           
+	        
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
         	});
     </script>
 </head>
@@ -860,7 +914,7 @@
                                                 class="DateInput_input DateInput_input_1 DateInput_input__readOnly DateInput_input__readOnly_2 DateInput_input__focused DateInput_input__focused_3"
                                                 aria-label="체크인" id="findStartDate" name="findStartDate"
                                                 value="체크인" placeholder="체크인" autocomplete="off" readonly=""
-                                                aria-describedby="DateInput__screen-reader-message-findStartDate">
+                                                aria-describedby="DateInput__screen-reader-message-findStartDate" id="checkIn">
                                             <p class="DateInput_screenReaderMessage DateInput_screenReaderMessage_1"
                                                 id="DateInput__screen-reader-message-findStartDate">Navigate forward to
                                                 interact with the calendar and select a date. Press the question mark
@@ -952,18 +1006,20 @@
                                                                   </button>
                                                                 </form>
                                                               </div>
-                                                            <script>
+                                                              
+                                                              
+                                                            <!-- <script>
                                                       
                                                               window.addEventListener('load', function () {
                                                       
-                                                                /*
+                                                                
                                                                 // 예약 페이지에선 닫기 버튼 안보여주기
                                                                 if($('.modalOverlay2').attr('style') == null){
                                                                     
                                                                   $('#closeBtn2').attr('style', 'display:none;');
                                                                     
                                                                 }
-                                                                */
+                                                                
                                                       
                                                                 if (checkInDate == '' || checkOutDate == '') {
                                                       
@@ -973,8 +1029,8 @@
                                                       
                                                       
                                                       
-                                                      			// 초기화 버튼
-                                                                /* reload.addEventListener('click', function (e) {
+                                                      			 //초기화 버튼
+                                                                 reload.addEventListener('click', function (e) {
                                                       
                                                                   e.preventDefault();            <button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer;"
                                                                       id="reload">초기화</button><br><br>
@@ -1002,13 +1058,13 @@
                                                                 }); */
                                                       
                                                                 // 뒤로가기 버튼
-                                                                /* back.addEventListener('click', function (e) {
+                                                                back.addEventListener('click', function (e) {
                                                       
                                                                   e.preventDefault();
                                                       
                                                                   location.href = '/main';
                                                       
-                                                                }); */
+                                                                });
                                                       
                                                               });
                                                       
@@ -1038,10 +1094,8 @@
                                                               }
                                                       
                                                             </script>
-                                                      
+                                                       -->
                                                           </div>
-
-
                                                     </div>
                                                 </div> 
                                             </div>
@@ -1056,9 +1110,9 @@
                                             </svg></div>
                                         <div class="DateInput DateInput_1"><input type="text"
                                                 class="DateInput_input DateInput_input_1 DateInput_input__readOnly DateInput_input__readOnly_2"
-                                                aria-label="체크아웃" id="findEndDate" name="findEndDate" value=""
+                                                aria-label="체크아웃" id="findEndDate" name="findEndDate" value="체크아웃"
                                                 placeholder="체크아웃" autocomplete="off" readonly=""
-                                                aria-describedby="DateInput__screen-reader-message-findEndDate">
+                                                aria-describedby="DateInput__screen-reader-message-findEndDate" id="checkOut">
                                             <p class="DateInput_screenReaderMessage DateInput_screenReaderMessage_1"
                                                 id="DateInput__screen-reader-message-findEndDate">Navigate backward to
                                                 interact with the calendar and select a date. Press the question mark

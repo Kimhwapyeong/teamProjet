@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,14 +47,15 @@
                 })
             });
             
-            let likeBtn = document.querySelector('.btn_like2');
+            // 좋아요
+/*             let likeBtn = document.querySelector('.btn_like2');
             likeBtn.addEventListener('click', () => {
                 if (likeBtn.classList.contains('on')) {
                     likeBtn.classList.remove('on');
                 } else {
                     likeBtn.classList.add('on');
                 }
-            })
+            }) */
             
             
             // 날짜 선택 버튼
@@ -373,12 +374,129 @@
 				}
 			
 			
+		
+				// 좋아요
+				let member = document.getElementById('memberId').value;
+	            console.log(member);
+	            console.log('like.stayNo');
+
+	            //좋아요
+	            let likeBtn = document.querySelector('.links_area li .btn_like2');
+	            	likeBtn.addEventListener('click', () => {
+	                	if(member === null || member === ""){
+	                		alertPopOn("로그인 후 이용하세요");
+	                    }else{
+			                        if(!likeBtn.classList.contains('on')){
+			                        	likeBtn.classList.add('on');
+			                        	
+			                        	let data = {
+			    	        					stayNo : '${list.STAYNO}',
+			    	        					memberId: member
+			    	        			      };
+			                        	
+			                        	fetch("/stst/insertLike", {
+				        			        method : 'post', 
+				        			        headers : {
+				        			          'Content-Type': 'application/json'
+				        			        },
+				        			        body : JSON.stringify(data)
+				        			      })
+				        			      .then(response => response.json())
+				        			      //.then(map => keywordList(map));
+				        			      .then(map => likeValue(map));
+			                        }else{
+			                        	likeBtn.classList.remove('on');
+			                            
+			                            let data = {
+			    	        					stayNo : '${list.STAYNO}',
+			    	        					memberId: member
+			    	        			      };
+			                        	
+			                        	fetch("/stst/deleteLike", {
+				        			        method : 'post', 
+				        			        headers : {
+				        			          'Content-Type': 'application/json'
+				        			        },
+				        			        body : JSON.stringify(data)
+				        			      })
+				        			      .then(response => response.json())
+				        			      //.then(map => keywordList(map));
+				        			      .then(map => likeValue(map));
+			                    	}
+	                    }
+	                })
+	            
+	            
+	            // 모달창 띄우기
+	        	function alertPopOn(msg){
+	        		if(msg != ''){
+	        			alertTxt.innerHTML=msg;
+	        			alertPop.style.display='block';
+	        		}
+	        	}
+			 
+	            // 실시간 하트값 출력
+				function likeValue(map){
+					let value = map.value;
+					
+					let likeValue = document.querySelector('.links_area li .small');
+					if(value == '1' && value != null){
+						likeValue.innerHTML  = ( Number(likeValue.innerHTML) + 1);
+					}else{
+						likeValue.innerHTML  = (likeValue.innerHTML - 1);
+					}
+				}
 			
-			
-			
-			
-			
+        
+        
+				let dayBtn = document.querySelector('.btn-number-search');
+				dayBtn.addEventListener('click', () => {
+	            	console.log('aa');
+	            	
+	            	let findStartDate = document.querySelector('#reserved_checkIn').value.replaceAll('-','/');
+        			if(findStartDate === null){
+        				findStartDate == "";
+        			}
+        			console.log(findStartDate);
+        			
+        			// 체크아웃
+        			let findEndDate = document.querySelector('#reserved_checkOut').value.replaceAll('-','/');
+        			if(findEndDate === null){
+        				findEndDate == "";
+        			}
+        			console.log(findEndDate);
+        			
+        			let data = {
+        					findStartDate : findStartDate,
+        					findEndDate : findEndDate
+        			      };
+
+        			      
+        			      fetch("/stst/room", {
+        			        method : 'post', 
+        			        headers : {
+        			          'Content-Type': 'application/json'
+        			        },
+        			        body : JSON.stringify(data)
+        			      })
+        			      .then(response => response.json())
+        			      //.then(map => keywordList(map));
+        			      .then(map => {console.log(map);});
+	            	
+	            	document.querySelector('.booking_summary .modalOverlay').style.display='';
+	            })
+        
+        		
+        
+        
+        
+        
+        
+        
         });
+        
+        
+        
         
         
         
@@ -394,27 +512,29 @@
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
+	<input type="hidden" value="${sessionScope.memberId}" id="memberId"> 
 	<div id="contents" class="findstay-detail-container">
 		<div class="container_wide fdetail_top">
 			<div class="top_title">
 				<div class="name" style='font-size: 40px; font-weight: bold;'>${list.STAYNAME }</div>
 				<ul class="links_area">
 					<li>
-					
-						<button type="button" class="btn_like2"><span>관심스테이</span></button>
-					
-						<%-- <c:if test="${sessionScope.memberId == null}">
-							<button type="button" class="btn_like2"><span>관심스테이</span></button>
-						</c:if>
-						<c:if test="${likeList != null and sessionScope.memberId != null}">
-							<button type="button" class="btn_like2"><span>관심스테이</span></button>
-							<c:forEach items="${likeList}" var="likeList" step="1">
-								<c:if test="${likeList.stayNo eq  list.STAYNO}" var="res">
-									<button type="button" class="btn_like2 on"><span>관심스테이</span></button>
-								</c:if>
-							</c:forEach>
-						</c:if> --%>
-					
+  						<c:choose>
+						    <c:when test="${sessionScope.memberId == null}">
+						        <button type="button" class="btn_like2"><span>관심스테이</span></button>
+						    </c:when>
+						    <c:when test="${likeList != null and sessionScope.memberId != null}">
+						        <c:set var="isLiked" value="false" />
+						        <c:forEach items="${likeList}" var="like" step="1" varStatus="status">
+						            <c:if test="${like.stayNo eq list.STAYNO}">
+						                <c:set var="isLiked" value="true" />
+						            </c:if>
+						        </c:forEach>
+						        
+						        <button type="button" class="btn_like2 ${isLiked ? 'on' : ''}"><span>관심스테이</span></button>
+						    </c:when>
+						</c:choose>
+
 					
 						<small class="small">${list.LIKECOUNT }</small></li>
 					<li><button type="button" class="btn_share">공유하기</button>
@@ -542,7 +662,7 @@
                                                                   <input type="hidden" id="reserved_checkOut" name="reserved_checkOut" value="">
                                                         
                                                                   <div class="btn-wrapper" style="position:absolute; bottom:5%; left:35%;">
-                                                                    <button style=" border:0px; cursor: pointer;" type="submit" onclick="" class="btn-number-search">예약하기</button>
+                                                                    <button style=" border:0px; cursor: pointer;" type="button" onclick="" class="btn-number-search">찾아보기</button>
                                                                   </div>
                                                                   <!-- <button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer; position:absolute; top:3%; right:2%;" type="button" id="closeBtn2">
                                                                     <img src="https://www.stayfolio.com/web/images/btn_layer_close.png">

@@ -45,10 +45,20 @@ public class StayController {
 	}
 	
 	@GetMapping("room")
-	public void roomInfo(String stayName , Model model) {
+	public void roomInfo(String stayName , Model model, HttpServletRequest request) {
 		stayService.stayRoomList(stayName, model);
 		stayService.roomInfo(stayName, model);
 		stayService.stayRoomImg(stayName, model);
+		
+		StayVO vo = new StayVO();
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("memberId");
+		if(id != null) {
+			vo.setMemberId(id);
+		}else {
+			vo.setMemberId("");
+		}
+		stayService.likeId(vo, model);
 	}
 	
 	@GetMapping("roomInfo")

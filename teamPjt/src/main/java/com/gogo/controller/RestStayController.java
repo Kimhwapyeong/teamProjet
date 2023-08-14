@@ -84,6 +84,7 @@ public class RestStayController {
 	public Map<String, Object> insertLike(@RequestBody StayVO vo, Model model){
 		Map<String, Object> map = new HashMap<String, Object>();
 		int res = stayService.insertLike(vo);
+		map.put("value", '1');
 		return map;
 	}
 	
@@ -98,28 +99,8 @@ public class RestStayController {
     public Map<String, Object> searchKakao(@PathVariable("encodedPromotion") String encodedPromotion, @PathVariable("mapx") double mapx, @PathVariable("mapy") double mapy) {
         Map<String, Object> map = new HashMap<String, Object>();
     	
-    	//String kakaoRestApiKey = "9d5258d378cbe587f835e4711d24dcb5";
-		/*
-		 * try { // Kakao API 요청을 위한 URL 생성 String apiUrl =
-		 * "https://dapi.kakao.com/v2/local/search/keyword.json" +
-		 * "?page=1&size=15&sort=accuracy&query=" + encodedPromotion +
-		 * "&radius=20000&x=" + mapx + "&y=" + mapy;
-		 * 
-		 * log.info(apiUrl); Map<String, String> requestHeaders = new HashMap<String,
-		 * String>(); requestHeaders.put("Authorization", "KakaoAK " + kakaoRestApiKey);
-		 * String responseBody = get(apiUrl,requestHeaders);
-		 * 
-		 * log.info(responseBody);
-		 * 
-		 * map.put("rs", responseBody); return map;
-		 * 
-		 * } catch (Exception e) { // 예외 처리 로직 // ... return (Map<String, Object>)
-		 * ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); }
-		 */
-    	
         String kakaoRestApiKey = "9d5258d378cbe587f835e4711d24dcb5";
 		 
-        
         String text = null;
         try {
             text = URLEncoder.encode(encodedPromotion, "UTF-8");
