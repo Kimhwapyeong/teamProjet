@@ -125,7 +125,7 @@
             <ul>
                 <li>
                 	
-                    <a id="naverIdLogin" class="btn_naver" href="#"style="margin: right">네이버</a>
+                    <a id="naverIdLogin" class="btn_naver" href="#" style="margin: right;">네이버</a>
                 </li>
                 <li> 
                     <a id="kakaoIdLogin" class="btn_kakao" onclick="kakaoLogin();"
