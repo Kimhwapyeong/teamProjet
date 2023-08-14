@@ -31,14 +31,13 @@
 <script type="text/javascript">
 	window.addEventListener('DOMContentLoaded', function(){
 		const searchBtn = document.querySelector('.col-auto .btn-outline-dark');
-		let searchField = document.getElementsByName("searchField")[0].value;
-	    let searchWord = document.getElementsByName("searchWord")[0].value;
-			console.log("searchField : ", searchField);
-			console.log("searchWord : ", searchWord);
-
 		
 		searchBtn.addEventListener('click', () => {
 			event.preventDefault();
+			
+			let searchField = document.getElementsByName("searchField")[0].value;
+			let searchWord = document.getElementsByName("searchWord")[0].value;
+			
 			console.log("ddd");
 			console.log("searchField : ", searchField);
 			console.log("searchWord : ", searchWord);
@@ -55,12 +54,41 @@
 		        body : JSON.stringify(data)
 		      })
 		      .then(response => response.json())
-		      //.then(map => keywordList(map));
-		      .then(map => {console.log(map);});
+		      .then(map => keywordList(map));
+		      //.then(map => {console.log(map);});
 			
-		});
+		}); 
 		
-	});
+		
+		function keywordList(map){
+			const keyList = map.list;
+			console.log("keyList : " , keyList);
+			
+			let pageBlock = '';
+			memberList.innerHTML = '';
+			
+			if(keyList != 0){
+				keyList.forEach((list, index)=>{         
+					pageBlock
+					+= '<tr style="line-height:50px;">                                             '
+					+ '	<td>                                                                   '
+					+ '		<label class="check_skin">                                         '
+					+ '		<input type="checkbox"name="memberId" value="'+list.memberId+'"> '
+					+ '		<span style="font-size: 12px"></span>                              '
+					+ '		</label>                                                           '
+					+ '	</td>                                                                  '
+					+ '	<td>'+list.memberId+'</td>                                           '
+					+ '	<td>'+list.memberName+'</td>                                         '
+					+ '	<td>'+list.memberEmail +'</td>                                        '
+					+ '	<td>'+list.registraionDate+'</td>                                    '
+					+ '</tr>                                                                      '
+				});   
+				
+			} // if
+				memberList.innerHTML += pageBlock;
+		} // function
+		
+	});  // window
 	
 		function deleteMember(){
 		 	delNoList = document.querySelectorAll("[type=checkbox]:checked");
@@ -172,7 +200,7 @@
 
 												<!-- ▶▶▶  forEach ▶▶▶  -->
 												<c:forEach items="${member}" var="member" step="1">
-													<tr style="line-height:50px;">
+													<tr style="line-height:50px;" id="memberList">
 														<td>
 															<label class="check_skin">
 															<input type="checkbox"name="memberId" value="${member.memberId }">
