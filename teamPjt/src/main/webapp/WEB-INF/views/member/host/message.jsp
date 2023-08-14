@@ -126,7 +126,7 @@
 			            var listItem = document.createElement('li');
 			            listItem.className = "room-item";
 			            listItem.onclick = function() {
-			                location.href = '/chat/chat?roomId=' + room.roomId + '&stayNoMsg=' + room.stayNoMsg;
+			                location.href = '/chat/chat?roomId=' + room.roomId + '&stayNoMsg=' + room.stayNo;
 			            };
 			            listItem.textContent = '방 번호: ' + room.roomId + ' | 회원 아이디: ' + room.memberId + ' | 방 이름: ' + room.roomName + ' | 스테이 번호 : ' + room.stayNo;
 			            roomListElement.appendChild(listItem);
