@@ -1,8 +1,6 @@
 package com.gogo.service;
 
-
-
-import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -22,6 +20,9 @@ public interface MemberService {
 	public int updateNaver(MemberVO member);
 	public String getPw(MemberVO member);
 
+	// 카카오 로그인
+	public int updateKakao(MemberVO member);
+	
 	// 아이디 중복 체크
 	public int idCheck(MemberVO member);
 
@@ -44,13 +45,16 @@ public interface MemberService {
 	public void insertMemberRole(String memberId, String role_id);
 	
 	// 카카오 로그인 토큰 
-	//public String getAccessToken(String authorize_code);
+	public String getAccessToken(String authorize_code);
 
 	// 카카오 회원 정보 조회 
-	public MemberVO KakaoInfo(String access_Token)throws IOException;
+	public HashMap<String, Object> getUserInfo(String access_Token) throws Throwable;
 	
 	// 회원 권한 검색
 	public List<String> getMemberRole(String memberId);
+
+
+
 
 
 

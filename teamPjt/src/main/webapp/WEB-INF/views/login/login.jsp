@@ -127,9 +127,9 @@
                 	
                     <a id="naverIdLogin" class="btn_naver" href="#"style="margin: right">네이버</a>
                 </li>
-                <li> <!-- 띄어쓰기 조심 -->
-                    <a id="kakaoIdLogin" class="btn_kakao" 
-                    href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=7801f55d59a73a55013d6f22a1a3e9a1&redirect_uri=http://localhost:8080/login/kakaoAction">카카오</a>
+                <li> 
+                    <a id="kakaoIdLogin" class="btn_kakao" onclick="kakaoLogin();"
+                    href="javascript:void(0)">카카오</a>
                 </li>
             </ul>
           </div>
@@ -150,6 +150,19 @@
         }
     );
 naverLogin.init();
+</script>
+<script type="text/javascript">
+	function kakaoLogin() {
+		$.ajax({
+			url: '/login/kakaoAction',
+			type: 'get',
+			async: false,
+			dataType: 'text',
+			success: function (res) {
+				location.href = res;
+			}
+		});
+	}
 </script>
 
 <jsp:include page="../common/footer.jsp" />

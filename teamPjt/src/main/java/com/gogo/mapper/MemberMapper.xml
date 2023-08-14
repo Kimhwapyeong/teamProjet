@@ -37,6 +37,11 @@
 		update member set snsck = #{snsCk}, profile = #{profile} where memberId = #{memberId}
 	</update>
 	
+	<!-- sns 회원이면 snsCk = 'Y' -->
+	<update id="updateKakao">
+		update member set snsck = #{snsCk}, profile = #{profile} where memberId = #{memberId}
+	</update>
+	
 	<!-- sns 회원의 로그인을 위한 pw 조회 -->
 	<select id="getPw" resultType="String">
 		select pw from member where memberId = #{memberId}
