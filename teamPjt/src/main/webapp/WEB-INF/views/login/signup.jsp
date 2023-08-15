@@ -483,6 +483,7 @@ $(document).ready(function() {
 
     }
      // 약관 세부 내용 펼침 
+     // 페이지의 모든 구성 요소가 로드된 후에 JavaScript 코드 실행 
     document.addEventListener("DOMContentLoaded", function() {
         const foldButtons = document.querySelectorAll(".agree_arrw_down");
 

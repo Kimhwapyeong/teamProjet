@@ -30,7 +30,7 @@
                     data : param,    // 인가코드 보내기
                     contentType: "application/json; charset=UTF-8",
                     success : function(res){
-                        location.href="/main"    // 연동 성공 시 메인페이지로 이동하기
+                        location.href="/main"    // 연동 성공 시 메인페이지로 이동
                     },
                     error: function(xhr, type){
                         console.log(xhr);
