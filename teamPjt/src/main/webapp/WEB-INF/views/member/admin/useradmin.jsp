@@ -180,9 +180,6 @@
 									  </div>
 								</form>
 								
-								<p>searchField: ${param.searchField}</p>
-								<p>searchWord: ${param.searchWord}</p>
-								
 								<div style="height:50px"></div>
 								
 									<form action="./delete" name="memberFrm" >

@@ -179,7 +179,7 @@ window.addEventListener('load', function(){
                                </c:if>
                                </c:forEach>
                             </div>
-                                <form name= "deleteFrm" method="post" action="/member/admin/deleteRoom">
+                                <form name= "deleteFrm" method="post" action="/member/host/deleteRoom">
 	                                <div class="reserv_wrap mypage-reservation-info" style="width:1200px; border-bottom: none;">
 		                                <!-- 객실 정보 -->
 		                                <!-- ▶▶▶  forEach ▶▶▶  -->

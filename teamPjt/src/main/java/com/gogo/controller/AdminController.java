@@ -147,15 +147,20 @@ public class AdminController {
 	public @ResponseBody List<MemberVO> statistics(Model model, MemberVO vo){
 		List<MemberVO> list = mypageService.chartAge(vo);
 	    model.addAttribute("mb_id", list);
-	    log.info("============");
 	    log.info("mb_id : " + list);
 	    log.info("===========================");
-	    List<MemberVO> gender = mypageService.chartGender(vo);
-	    log.info("gender : " + gender);
-	    model.addAttribute("gender", gender);
 	    
 	    return list;
 	}
+	
+	@RequestMapping("profit")
+	public @ResponseBody List<MemberVO> profit(Model model, MemberVO vo){
+	    List<MemberVO> gender = mypageService.chartGender(vo);  // model -> gender
+	    model.addAttribute("gender", gender);
+	    log.info("gender : " + gender);
+	    return gender;
+	}
+	
 	
 	@GetMapping("staticPage")
 	public String staticPage() {

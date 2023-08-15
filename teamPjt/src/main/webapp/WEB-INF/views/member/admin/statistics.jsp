@@ -154,7 +154,7 @@
 									            
 									            
 									            $.ajax({
-									                url:"/member/admin/statistics",
+									                url:"/member/admin/profit",
 									                type:"get",
 									                data:{ },
 									                dataType:"json",
@@ -178,12 +178,12 @@
 									                                fill: false,
 									                                backgroundColor: [
 									                                    //색상
-									                                    'rgba(255, 99, 132, 0.2)',
-									                                    'rgba(255, 159, 64, 0.2)'
+									                                    'rgba(31, 31, 130, 0.271)',
+									                                    'rgba(255, 99, 132, 0.2)'
 									                                ],
 									                                borderColor: [
 									                                    //경계선 색상
-									                                    'rgba(255, 99, 132, 0.2)',
+									                                    ' rgb(21, 21, 115, 0.2)',
 									                                    'rgba(255, 159, 64, 0.2)'
 									                                ],
 									                                borderWidth: 1 //경계선 굵기
