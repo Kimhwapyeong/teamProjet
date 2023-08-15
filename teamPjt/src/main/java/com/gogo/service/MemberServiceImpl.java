@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gogo.mapper.MemberMapper;
+import com.gogo.mapper.mypageMapper;
+import com.gogo.vo.FileuploadVO;
 import com.gogo.vo.MemberVO;
 
 
@@ -33,6 +35,9 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	BCryptPasswordEncoder encoder;
 	
+	@Autowired
+	mypageMapper mypageMapper; 
+	
 	@Override
 	public MemberVO loginAction(MemberVO paramMember) {
 		// 사용자 정보 조회
@@ -42,6 +47,9 @@ public class MemberServiceImpl implements MemberService {
 			
 			if(member.getPw().contentEquals(paramMember.getPw())) {
 				member.setRole(memberMapper.getMemberRole(member.getMemberId()));
+				FileuploadVO fileVO = mypageMapper.selectProfile(member.getMemberId());
+				System.out.println(fileVO.getProfile());
+				member.setProfile(fileVO.getProfile());
 				return member;
 			}
 			
@@ -54,7 +62,9 @@ public class MemberServiceImpl implements MemberService {
 			if(res) {
 				// 사용자 권한을 조회
 				member.setRole(memberMapper.getMemberRole(member.getMemberId()));
-				
+				FileuploadVO fileVO = mypageMapper.selectProfile(member.getMemberId());
+				System.out.println(fileVO.getProfile());
+				member.setProfile(fileVO.getProfile());
 				return member;
 			}
 //			return memberMapper.loginAction(member);

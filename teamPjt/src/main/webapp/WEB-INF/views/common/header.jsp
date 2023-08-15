@@ -494,7 +494,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			<c:if test="${ not empty sessionScope.memberId }" var="res">
 			<a href="/member/mypage/reservation" class="jsx-c4e7717c5657cc43">
 				<div class="jsx-c4e7717c5657cc43 profile">
-					<div class="jsx-c4e7717c5657cc43 profile-img"></div>
+					<div class="jsx-c4e7717c5657cc43 profile-img" style="background: url(/resources/images/${sessionScope.member.profile.replace('\\','/')});background-size:cover"></div>
 					<div class="jsx-c4e7717c5657cc43 profile-right">
 						<div class="jsx-c4e7717c5657cc43 name">
 							${ sessionScope.member.memberName }님 환영합니다
