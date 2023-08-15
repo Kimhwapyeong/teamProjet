@@ -47,7 +47,13 @@
 				<div class="container mypage_wrap">
 					<div class="mypage_myinfo">
 						<!-- =================================== user 이름 !!!! =================================== -->
-						<div class="tit">${sessionScope.memberId}님 반가워요!</div>
+						                            <c:if test="${sessionScope.member.snsCk eq 'Y'}" var="sns">
+                            	<div class="tit">${sessionScope.member.memberName}님 반가워요!</div>
+                            </c:if>
+                            <c:if test="${not sns}">
+                            	<div class="tit">${sessionScope.memberId}님 반가워요!</div>
+                            </c:if>
+
 						<div class="my-count" role="link" tabindex="0">함께  ${travelCnt } 번의 여행을 했어요.</div>
 					</div>
 					<div class="newmypage_menu pc_only">

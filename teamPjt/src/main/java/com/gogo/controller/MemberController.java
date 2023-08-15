@@ -289,6 +289,7 @@ public class MemberController extends CommonRestController {
 	    	int res = memberService.signupAction(member);
 	    	
 	    	if(res>0) {
+	    		memberService.insertMemberRole(member.getMemberId(), "user");
 	    		memberService.updateNaver(member);
 	    		result.put("msg", "네이버 회원가입 성공");
 	    		loginAction(member, model, session);
