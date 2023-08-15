@@ -51,7 +51,7 @@ ul {
 .calendar-middle-wrap {
     background: white;
     width: 34%;
-    padding: 40px 32px;
+    /* padding: 40px 32px; */
     padding-bottom: 100px;
 }
 
@@ -269,12 +269,12 @@ ul {
     }
 
     .calendar-middle-wrap {
-        width: 49%;
+        /* width: 49%; */
         padding: 40px 7%;
     }
 
     .checkInOutInfo {
-        width: 100%;
+        width: 650px;
         margin-top: 2%;
         padding: 50px;
     }
@@ -284,22 +284,26 @@ ul {
         width: 100%;
     }
 
-    .checkInOutInfo p:nth-child(1) {
-        width: 50%;
+    .checkInOutInfo span:nth-child(1) {
+        width: 250px;
     }
 
-    .checkInOutInfo p:nth-child(2) {
-        width: 50px;
+    .checkInOutInfo span:nth-child(2) {
+        width: 250px;
     }
 
-    .checkInOutInfo p:nth-child(3) {
-        width: 50%;
+    .checkInOutInfo span:nth-child(3) {
+        width: 150px;
+    }
+    
+    .reserveBox{
+    	  width: 680px!important;
     }
 }
 
 @media screen and (max-width:768px) {
     .calendar-middle-wrap {
-        width: 100%;
+        width: 50%;
         padding: 40px 10%;
     }
 
@@ -316,15 +320,15 @@ ul {
     }
 
     .checkInOutInfo p:nth-child(1) {
-        width: 100%;
+        width: 70%;
     }
 
-    .checkInOutInfo p:nth-child(2) {
-        width: 100%;
+    .checkInOutInfo p:nth-child(6) {
+        width: 70%;
     }
 
     .checkInOutInfo p:nth-child(3) {
-        width: 100%;
+        width: 70%;
     }
 
     .checkInOutInfo p.space {
@@ -338,5 +342,10 @@ ul {
 
     .checkInOutInfo p label {
         font-size: 20px;
+    }
+    
+    .reserveBox{
+    	  top: 1140px!important;
+	  	  left: 0px!important;
     }
 }

@@ -52,7 +52,6 @@ input ::placeholder{
 						<div class="dd">
 							<select style="width: 100%" class="form_style" name="stayType"><option
 									selected="" value="" disabled="" hidden="">선택해 주세요</option>
-								<option value="렌탈하우스">렌탈하우스</option>
 								<option value="펜션">펜션</option>
 								<option value="한옥">한옥</option>
 								<option value="호스텔">호스텔</option>

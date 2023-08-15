@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <footer id="footer">
         <div class="container_wide">
             <div class="footer_cont">
-                <div class="logo"><img src="/resources/images/stayNameImg/stay2.PNG" alt="STAYFOLIO"></div>
+                <div class="logo"><img src="/resources/images/stayNameImg/stay2_footer.PNG" alt="STAYFOLIO"></div>
                 <div class="menu-cs">
                     <ul class="menu">
-                        <li><a target="_self" rel="noreferrer" href="/about">ABOUT</a></li>
+                        <li><a target="_self" rel="noreferrer" href="#none">ABOUT</a></li>
                         <li><a target="_self" rel="noreferrer" href="/4-point-approach">4 POINT APPROACH</a></li>
                         <li><a target="_blank" rel="noreferrer"
                                 href="https://page.stibee.com/subscriptions/243310?groupIds=238993">NEWSLETTER</a></li>
@@ -32,26 +33,24 @@
                     </div>
                 </div>
                 <ul class="sns">
-                    <li><a href="https://www.facebook.com/stayfolio" target="_blank" rel="noreferrer"
+                    <li><a href="https://www.facebook.com" target="_blank" rel="noreferrer"
                             class="facebook">facebook</a></li>
-                    <li><a href="https://www.instagram.com/stayfolio" target="_blank" rel="noreferrer"
+                    <li><a href="https://www.instagram.com" target="_blank" rel="noreferrer"
                             class="instagram">instagram</a></li>
-                    <li><a href="https://blog.naver.com/stayfolio" target="_blank" rel="noreferrer"
+                    <li><a href="https://blog.naver.com" target="_blank" rel="noreferrer"
                             class="naver">naver</a></li>
-                    <li><a href="https://brunch.co.kr/@stayfolio#magazines" target="_blank" rel="noreferrer"
-                            class="brunch">brunch</a></li>
-                    <li><a href="https://www.youtube.com/channel/UCyxHiHdFLxmnNxl5435Q0eA" target="_blank"
+                    <li><a href="https://www.youtube.com" target="_blank"
                             rel="noreferrer" class="youtube">youtube</a></li>
                 </ul>
-                <div class="copyright">Copyright©STAYFOLIO</div>
+                <div class="copyright">Copyright©STAYOLLAE</div>
             </div>
             <div class="footer_address"><span class="info" style="word-break:keep-all">상호명 (주) 스테이올래<!-- --> |<!-- -->
                     <!-- --> <!-- -->대표자 올래갈래<!-- --> | <!-- -->주소 서울특별시 중앙정보처리학원<!-- --> | <!-- -->전화
                     1234-5678<!-- --> |<!-- --> <!-- -->go@naver.com<br>사업자등록번호 123-45-6789<!-- --> |<!-- -->
-                    <!-- -->통신판매업신고 제2015-서울종로-0499호<a class="info"
+                    <!-- -->통신판매업신고 제2023-서울종로-0499호<a class="info"
                         href="http://www.ftc.go.kr/bizCommPop.do?wrkr_no=6768700055" target="_blank"
-                        rel="noreferrer">[사업자정보확인]</a> <!-- -->| <!-- -->관광사업자등록 일반여행업 2018-000049호(종로구청)<!-- -->
-                    <div class="info">(주)스테이폴리오는 통신판매 중개자로서 통신판매의 당사자가 아니며 상품의 예약, 이용 및 환불 등과 관련한 의무와 책임은 각 판매자에게 있습니다.
+                        rel="noreferrer">[사업자정보확인]</a> <!-- -->| <!-- -->관광사업자등록 일반여행업 2023-000049호(종로구청)<!-- -->
+                    <div class="info">(주)스테이올래는 통신판매 중개자로서 통신판매의 당사자가 아니며 상품의 예약, 이용 및 환불 등과 관련한 의무와 책임은 각 판매자에게 있습니다.
                     </div>
                 </span></div>
         </div>
@@ -62,7 +61,12 @@
 	<!-- 		<li><a class="" href="/promotions"><span>PROMOTION</span></a></li>
 			<li><a class="" href="/journal"><span>JOURNAL</span></a></li>
 			<li><a class="" href="/preorder"><span>PRE-ORDER</span></a></li> -->
-			<li><a class=" false" href="/chat"><span>MESSAGE</span></a></li>
+			<c:if test="${ sessionScope.role_id eq '[admin]' }" var="res">
+				<li><a class=" false" href="/member/admin/hosthelp"><span>MESSAGE</span></a></li>
+			</c:if>
+			<c:if test="${ not res }">
+				<li><a class=" false" href="/member/mypage/message"><span>MESSAGE</span></a></li>
+			</c:if>
 		</ul>
 	</nav>
 <!-- bootstrap script -->

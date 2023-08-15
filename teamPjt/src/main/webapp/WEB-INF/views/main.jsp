@@ -204,6 +204,36 @@ window.addEventListener('load', ()=>{
 			   let stayNo = btnLike.children.likeStayNo.value;
 			   if(!btnLike.classList.contains('on')){
 				   btnLike.classList.add('on');
+				   if(index == 0){
+					   btnLikes[8].classList.add('on');
+				   }
+				   if(index == 1){
+					   btnLikes[9].classList.add('on');
+				   }
+				   if(index == 2){
+					   btnLikes[10].classList.add('on');
+				   }
+				   if(index == 8){
+					   btnLikes[0].classList.add('on');
+				   }
+				   if(index == 9){
+					   btnLikes[1].classList.add('on');
+				   }
+				   if(index == 10){
+					   btnLikes[2].classList.add('on');
+				   }
+				   if(index == 19){
+					   btnLikes[27].classList.add('on');
+				   }
+				   if(index == 20){
+					   btnLikes[28].classList.add('on');
+				   }
+				   if(index == 27){
+					   btnLikes[19].classList.add('on');
+				   }
+				   if(index == 28){
+					   btnLikes[20].classList.add('on');
+				   }
 				   
 	               	let data = {
 	    					stayNo : stayNo
@@ -222,6 +252,36 @@ window.addEventListener('load', ()=>{
 				      .then(map => {console.log(map);});
 			   }else{
 				   btnLike.classList.remove('on');
+				   if(index == 0){
+					   btnLikes[8].classList.remove('on');
+				   }
+				   if(index == 1){
+					   btnLikes[9].classList.remove('on');
+				   }
+				   if(index == 2){
+					   btnLikes[10].classList.remove('on');
+				   }
+				   if(index == 8){
+					   btnLikes[0].classList.remove('on');
+				   }
+				   if(index == 9){
+					   btnLikes[1].classList.remove('on');
+				   }
+				   if(index == 10){
+					   btnLikes[2].classList.remove('on');
+				   }
+				   if(index == 19){
+					   btnLikes[27].classList.remove('on');
+				   }
+				   if(index == 20){
+					   btnLikes[28].classList.remove('on');
+				   }
+				   if(index == 27){
+					   btnLikes[19].classList.remove('on');
+				   }
+				   if(index == 28){
+					   btnLikes[20].classList.remove('on');
+				   }
 				   
                    let data = {
        					stayNo : stayNo
@@ -415,8 +475,8 @@ function setMainImgsHeight(){
 						</div>
 						<div class="name">${ listStay[i].stayName }</div>
 						<div class="other">
-							<span>${ listStay[i].stayLoc }</span><span>₩${ stay.minPrice }
-								~ ₩${ stay.maxPrice }</span>
+							<span>${ listStay[i].stayLoc }</span><span>₩${ listStay[i].minPrice }
+								~ ₩${ listStay[i].maxPrice }</span>
 						</div>
 					</a>
 					<ul>
@@ -486,7 +546,7 @@ function setMainImgsHeight(){
 <div class="container_full main_viprecom">
 	<div class="container main_recommend">
 		<div class="recom_title false">추천 인기 스테이</div>
-		<button type="button" class="btn_refresh">새로고침</button>
+		<!-- <button type="button" class="btn_refresh">새로고침</button> -->
 		<div
 			class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events stay_list"
 			id="main-recommend-pc">
@@ -507,7 +567,7 @@ function setMainImgsHeight(){
 								<c:set var="res" value="on"></c:set>
 							</c:if>
 						</c:forEach>
-						<button type="button" class="btn_liken ${ res }">
+						<button type="button" class="btn_like ${ res }">
 							<input type="hidden" name="likeStayNo" value="${ stay.stayNo }">
 							<span>관심스테이</span>
 						</button>
@@ -534,12 +594,12 @@ function setMainImgsHeight(){
 						data-swiper-slide-index="${ i+9 }"
 						style="z-index: 1; width: 440px;">
 						<c:forEach items="${ likeList }" var="like">
-							<c:if test="${ like.stayNo eq listStay[i].stayNo }">
+							<c:if test="${ like.stayNo eq listPopStay[i].stayNo }">
 								<c:set var="res" value="on"></c:set>
 							</c:if>
 						</c:forEach>
 						<button type="button" class="btn_like ${ res }">
-							<input type="hidden" name="likeStayNo" value="${ listStay[i].stayNo }">
+							<input type="hidden" name="likeStayNo" value="${ listPopStay[i].stayNo }">
 							<span>관심스테이</span>
 						</button>
 						<c:set var="res" value=""></c:set>
@@ -555,7 +615,7 @@ function setMainImgsHeight(){
 							</div></a>
 						<ul>
 							<li class="btn_more"><a
-								href="/stay/room?stayName=${ listPopStay[i].stayName }">예약하기</a></li>
+								href="/stay/room?stayName=${ listPopStay[i].stayName }" style="color:white">예약하기</a></li>
 						</ul>
 					</div>
 				</c:forEach>

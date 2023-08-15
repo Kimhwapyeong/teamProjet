@@ -26,7 +26,7 @@
 	</div>
 	<br><br><br>
 	<hr style="border-top: 2.8px solid;color: #00000061;width:1150px;position:absolute;left:3%;">
-	<hr style="border-top: 2.9px solid;color: #00000061;width:1150px;position:absolute;left:3%;bottom:20%;">
+	<hr style="border-top: 2.9px solid;color: #00000061;width:1150px;position:absolute;left:3%;top:620px;">
 
 
   <div class="calendar-wrap" style="padding-left:40px;">
@@ -84,8 +84,6 @@
         <br><br>
         <p>
           <span>총 예약일</span>
-        </p>
-        <p>  
           <label id="check_out_day" class="check_day_count"></label>          
         </p>
         
@@ -103,7 +101,7 @@
 		<input type="hidden" name="memberCount" value="${reserved.memberCount}">
 		<input type="hidden" name="btnYN" value="${btnYN}">
 		
-		    <div style="position:absolute; bottom:5%; left:10%; width:1000px;">   
+		    <div style="position:absolute; top:660px; left:10%; width:1000px;" class="reserveBox">   
 		    	<button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer;" type="submit" onclick="check(form)">예약하기</button><br><br>
 		    	<button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer;" id="reload">초기화</button><br><br>
 		    	<button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer;" id="back">메인으로</button><br><br>
