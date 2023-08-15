@@ -482,6 +482,17 @@ $(document).ready(function() {
         }
 
     }
+     // 약관 세부 내용 펼침 
+    document.addEventListener("DOMContentLoaded", function() {
+        const foldButtons = document.querySelectorAll(".agree_arrw_down");
+
+        foldButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                const view = this.nextElementSibling;
+                view.style.display = (view.style.display === 'none') ? 'block' : 'none';
+            });
+        });
+    });
 
 
 
