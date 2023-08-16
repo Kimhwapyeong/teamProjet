@@ -453,8 +453,6 @@
 					}
 				}
 			
-        
-        
 				let dayBtn = document.querySelector('.btn-number-search');
 				dayBtn.addEventListener('click', () => {
 	            	console.log('aa');

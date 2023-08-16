@@ -14,7 +14,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="/resources/js/list/list.js"></script>
+<!-- <script src="/resources/js/list/list.js"></script> -->
 
 
 <style>
@@ -583,22 +583,22 @@
 					        let slideImgList = document.querySelectorAll('.flist_img')[index]; // 해당 버튼의 이미지가 보이는 칸
 					        let slideImgs = slideImgList.querySelectorAll('.swiper-wrapper li'); // 해당 칸의 이미지들
 					        
-					        if (idx < slideImgs.length) {
+					        if (idx < slideImgs.length-1) {
+					            idx++;
+					        } else {
+					            idx = 0; // 인덱스가 이미지 개수를 넘어가면 초기화
+					        }
 					            // 현재 인덱스의 이미지 스타일을 가져옴
 					            let slideImgStyle = slideImgs[idx].getAttribute('style');
 					            
 					            // 첫 번째 li 요소의 스타일을 변경하여 이미지를 바꿈
 					            let img = document.querySelectorAll('.swiper-wrapper')[index];
 					            img.querySelectorAll('li')[0].setAttribute('style', slideImgStyle);
-					            
-					            idx++;
-					        } else {
-					            idx = 0; // 인덱스가 이미지 개수를 넘어가면 초기화
-					        }
+					            console.log(idx);
 					    });
 					});
 					
-					let prev = document.querySelectorAll('.swiper-button-prev');
+					/* let prev = document.querySelectorAll('.swiper-button-prev');
 					
 					slideBtn.forEach((button, index) => {
 					    button.addEventListener('click', () => {
@@ -620,7 +620,7 @@
 					            idx--;
 					        }
 					    });
-					});
+					}); */
 		            
 		            
         		
