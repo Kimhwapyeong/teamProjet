@@ -38,7 +38,6 @@
 			let searchField = document.getElementsByName("searchField")[0].value;
 			let searchWord = document.getElementsByName("searchWord")[0].value;
 			
-			console.log("ddd");
 			console.log("searchField : ", searchField);
 			console.log("searchWord : ", searchWord);
 			let data = {
@@ -63,14 +62,17 @@
 		function keywordList(map){
 			const keyList = map.list;
 			console.log("keyList : " , keyList);
+			//console.log("[0] : "keyList[0].memberName);
 			
 			let pageBlock = '';
 			memberList.innerHTML = '';
 			
+			
 			if(keyList != 0){
 				keyList.forEach((list, index)=>{         
 					pageBlock
-					+= '<tr style="line-height:50px;">                                             '
+					+= '<div>'
+					+ '<tr style="line-height:50px;">                                             '
 					+ '	<td>                                                                   '
 					+ '		<label class="check_skin">                                         '
 					+ '		<input type="checkbox"name="memberId" value="'+list.memberId+'"> '
@@ -82,6 +84,7 @@
 					+ '	<td>'+list.memberEmail +'</td>                                        '
 					+ '	<td>'+list.registraionDate+'</td>                                    '
 					+ '</tr>                                                                      '
+					+ '</div>'
 				});   
 				
 			} // if
@@ -194,10 +197,10 @@
 												</tr>
 											</thead>
 											<tbody>
-
+												<div id="memberList">
 												<!-- ▶▶▶  forEach ▶▶▶  -->
 												<c:forEach items="${member}" var="member" step="1">
-													<tr style="line-height:50px;" id="memberList">
+													<tr style="line-height:50px;">
 														<td>
 															<label class="check_skin">
 															<input type="checkbox"name="memberId" value="${member.memberId }">
@@ -210,7 +213,7 @@
 														<td>${member.registraionDate }</td>
 													</tr>
 												</c:forEach>
-
+												</div>
 											</tbody>
 										</table>
 									</form>
