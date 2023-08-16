@@ -74,7 +74,6 @@
                     searchbtn.forEach(otherButton => {
                         if (otherButton === button) {
                             otherButton.classList.add('active');
-                            travelbtn.innerHTML = otherButton.innerHTML;
                         } else {
                             otherButton.classList.remove('active');
                         }
@@ -102,6 +101,11 @@
             // x창
             let clsbtn = document.querySelector('#clsbtn');
             clsbtn.addEventListener('click', function () {
+            	if(document.querySelector('#viewModal #stayView.active').innerHTML === '전체'){
+            		travelbtn.innerHTML = document.querySelector('#regionModal li button.active').value;
+            	}else{
+	            	travelbtn.innerHTML = document.querySelector('#regionModal li button.active').value + ' / ' + document.querySelector('#viewModal #stayView.active').innerHTML;
+            	}
                 document.querySelector("#areaSelect").style.display = '';
             })
 /* 			let clsbtn2 = document.querySelector('.btn-number-search');
@@ -268,6 +272,11 @@
 								console.log(idx);
 								console.log(searchModal[idx]);
 								if(idx === 0){
+									if(document.querySelector('#viewModal #stayView.active').innerHTML === '전체'){
+					            		travelbtn.innerHTML = document.querySelector('#regionModal li button.active').value;
+					            	}else{
+						            	travelbtn.innerHTML = document.querySelector('#regionModal li button.active').value + ' / ' + document.querySelector('#viewModal #stayView.active').innerHTML;
+					            	}
 									document.querySelector("#areaSelect").style.display = '';
 								}else if(idx === 1){
 									// 체크인 값
@@ -280,13 +289,63 @@
 						            document.querySelectorAll('.DateInput input')[0].value = checkIn;
 						            document.querySelectorAll('.DateInput input')[1].value = checkOut;
 						            
-						            
-						            
-						            
-						            
-						            
 									DayPicker.style.display = 'none';
-								}else{
+								/* }else{
+									searchModal[idx-1].classList.remove('open');
+								} */
+								}else if(idx === 2){
+									peopleNum.innerHTML = '성인 : ' + document.querySelectorAll('.input-num input')[0].value + ' / ' + '아동 : '+ document.querySelectorAll('.input-num input')[1].value;
+									searchModal[idx-1].classList.remove('open');
+								}else if(idx === 3){
+									btn3.innerHTML = document.querySelector('#minPrice').value +'만원 ~ ' + document.querySelector('#maxPrice').value + '만원';
+									searchModal[idx-1].classList.remove('open');
+								}else if(idx === 4){
+									const checkedInputs = document.querySelectorAll('.check_list input:checked');
+					                const selectedValues = [];
+
+					                checkedInputs.forEach(input => {
+					                    selectedValues.push(input.value);
+					                });
+
+					                if (selectedValues.length > 0) {
+					                    if (selectedValues.includes("")) {
+					                        btn4.innerHTML = '전체';
+					                    } else if (selectedValues.length === 1) {
+					                        btn4.innerHTML = selectedValues[0];
+					                    } else {
+					                        const firstValue = selectedValues[0];
+					                        const otherValuesCount = selectedValues.length - 1;
+					                        btn4.innerHTML = firstValue + '외 ' + otherValuesCount + '건';
+					                    }
+					                } else {
+					                    btn4.innerHTML = '선택된 값 없음';
+					                }
+									searchModal[idx-1].classList.remove('open');
+								}else if(idx === 5){
+									// checked된 요소 선택
+					                const checkedInputs = document.querySelectorAll('.findstay_check_list input:checked');
+					                const selectedValues = [];
+						
+					                // 선택된 요소들 배열에 담아주기
+					                checkedInputs.forEach(input => {
+					                	const spanText = input.parentElement.querySelector('.convenient').textContent;
+					                    selectedValues.push(spanText);
+					                });
+									
+					                // 배열에 넣고 조건에 맞게 뿌려주기
+					                if (selectedValues.length > 0) {
+								        if (selectedValues.includes("")) {
+								            btn5.innerHTML = '전체';
+								        } else if (selectedValues.length === 1) {
+								            btn5.innerHTML = selectedValues[0];
+								        } else {
+								            const firstValue = selectedValues[0];
+								            const otherValuesCount = selectedValues.length - 1;
+								            btn5.innerHTML = firstValue + '외 ' + otherValuesCount + '건';
+								        }
+								    } else {
+								        btn5.innerHTML = '선택된 값 없음';
+								    }
 									searchModal[idx-1].classList.remove('open');
 								}
 							}
@@ -337,20 +396,35 @@
             })
 
 
+			
             // 모든 스테이 버튼
             const allstaybtn = document.querySelector('._findstay_sort_selb__JhhC5 li button');
-            const allstaylist = document.querySelector('._selector_layer_toggle__U_ckA');
+            let allstaylist = document.querySelector('._selector_layer_toggle__U_ckA');
             allstaybtn.addEventListener('click', () => {
-                console.log('a');
-                if (allstaylist.classList.contains('_open_toggle')) {
+            	if (allstaylist.classList.contains('_open_toggle')) {
                     allstaylist.classList.remove('_open_toggle');
-                } else {
+                } 
+            	else {
                     allstaylist.classList.add('_open_toggle');
                 }
             })
-
-			
-           
+            
+            let dd = document.querySelectorAll('#motionList li');
+            dd.forEach((button,idx)=>{
+           		button.addEventListener('click', () => {
+           			dd.forEach(otherButton => {
+                        if (otherButton === button) {
+                            otherButton.classList.add('_selector_selected__ciPbE');
+                            otherButton.classList.add('oepn');
+                            allstaylist.classList.remove('_open_toggle');
+                        } else {
+                            otherButton.classList.remove('_selector_selected__ciPbE');
+                            otherButton.classList.remove('oepn');
+                            allstaylist.classList.remove('_open_toggle');
+                        }
+                    });
+           		})
+           	})
 
 
             /* -------------------------------------------------------------- */
@@ -384,7 +458,6 @@
 			        			        body : JSON.stringify(data)
 			        			      })
 			        			      .then(response => response.json())
-			        			      //.then(map => keywordList(map));
 			        			      .then(map => {console.log(map);});
 		                        }else{
 		                            button.classList.remove('on');
@@ -502,29 +575,54 @@
 
         		
 	        		// 슬라이드 이미지
-		           	//let slideImgList = document.querySelectorAll('.swiper-wrapper'); // 슬라이드 이미지 인덱스 선택하기
-		           	//let slideImg = slideImgList.querySelectorAll('li'); // 선택된 index의 이미지
- 		           	let slideBtn = document.querySelectorAll('.swiper-button-next');
-		           	var idx = 0;
-		           	slideBtn.forEach((button, index) => { // 슬라이드 버튼의 인덱스 0
-		                button.addEventListener('click', () => { // 인덱스가 0인 슬라이드 버튼을 눌렀을 떄
-		                    console.log(index);
-		                    let slideImgList = document.querySelectorAll('.swiper-wrapper')[index]; // 그 해당하는 인덱스의 next버튼의 이미지가 보이는 칸
-		                   	//console.log(slideImgList);
-		                    let slideImg = slideImgList.querySelectorAll('li'); // 그 칸의 이미지
-		                    //console.log(slideImg);
-		                    	
-		                    //idx = (idx + 1) % slideImg.length;
-		                    idx = (1 + idx);
-		                    if(slideImg === idx){
-		                    	idx = 0;
-		                    }
-		                    
-		                    console.log(idx);
-		                    
-		                    slideImgList.innerHTML = slideImg[idx].outerHTML;
-		                })
-		            })
+		           	let slideBtn = document.querySelectorAll('.swiper-button-next');
+					let idx = 0;
+					
+					slideBtn.forEach((button, index) => {
+					    button.addEventListener('click', () => {
+					        let slideImgList = document.querySelectorAll('.flist_img')[index]; // 해당 버튼의 이미지가 보이는 칸
+					        let slideImgs = slideImgList.querySelectorAll('.swiper-wrapper li'); // 해당 칸의 이미지들
+					        
+					        if (idx < slideImgs.length) {
+					            // 현재 인덱스의 이미지 스타일을 가져옴
+					            let slideImgStyle = slideImgs[idx].getAttribute('style');
+					            
+					            // 첫 번째 li 요소의 스타일을 변경하여 이미지를 바꿈
+					            let img = document.querySelectorAll('.swiper-wrapper')[index];
+					            img.querySelectorAll('li')[0].setAttribute('style', slideImgStyle);
+					            
+					            idx++;
+					        } else {
+					            idx = 0; // 인덱스가 이미지 개수를 넘어가면 초기화
+					        }
+					    });
+					});
+					
+					let prev = document.querySelectorAll('.swiper-button-prev');
+					
+					slideBtn.forEach((button, index) => {
+					    button.addEventListener('click', () => {
+					        let slideImgList = document.querySelectorAll('.flist_img')[index]; // 해당 버튼의 이미지가 보이는 칸
+					        let slideImgs = slideImgList.querySelectorAll('.swiper-wrapper li'); // 해당 칸의 이미지들
+					        
+					        ldx = slideImgs.length;
+					        
+					        if (idx < 0) {
+					        	ldx = slideImgs.length; // 인덱스가 이미지 개수를 넘어가면 초기화
+					        } else {
+					            // 현재 인덱스의 이미지 스타일을 가져옴
+					            let slideImgStyle = slideImgs[idx].getAttribute('style');
+					            
+					            // 첫 번째 li 요소의 스타일을 변경하여 이미지를 바꿈
+					            let img = document.querySelectorAll('.swiper-wrapper')[index];
+					            img.querySelectorAll('li')[0].setAttribute('style', slideImgStyle);
+					            
+					            idx--;
+					        }
+					    });
+					});
+		            
+		            
         		
 		            /* let slideBtns = document.querySelectorAll('.swiper-button-next');
 		            let slideImgLists = document.querySelectorAll('.swiper-wrapper');
@@ -1318,7 +1416,7 @@
                         <!-- <div class="map_img_off" role="presentation"></div> -->
                     </div>
                     <!-- <a href=""><button type="button" class="btn_reset" id="refreshButton">초기화</button></a> -->
-                    <a href="" class="btn_reset">초기화</button></a>
+                    <a href="/stay/list" class="btn_reset">초기화</button></a>
                     <div class="search_btn_wrapper"><button type="submit" class="btn_search">SEARCH</button>
                     </div>
         </form>
@@ -1369,6 +1467,12 @@
     </div>
     
     
+<%--     								<c:forEach items="${stayImg}" var="imgList" step="1">
+    									<c:if test="${imgList.stayNo eq '1'}">
+    										<div>${imgList.fileName.replace('\\','/') }</div>
+    									</c:if>
+									</c:forEach> --%>
+    
 	<div class="container findstay_list  ">
 		<div class="flist_wrap" id="stayList">
 			<c:forEach items="${list}" var="list" step="1">
@@ -1393,9 +1497,9 @@
 								
 								<a href="/stay/room?stayName=${list.stayName}">
 								<div class="swiper-wrapper">
-									<li class="swiper-slide img swiper-slide-active"
+									<%-- <li class="swiper-slide img swiper-slide-active"
 										style="background: url(/resources/images/${list.mainPic1.replace('\\','/')}) center center / cover no-repeat; cursor: pointer; width: 410px;">
-									</li>
+									</li> --%>
  									
 <%--  									<c:forEach items="${stayImg}" var="img" step="1">
 										<c:if test="${img.stayNo == list.stayNo}">
@@ -1404,6 +1508,21 @@
 										</c:if>
 									</c:forEach> --%>
 									
+									<%-- <c:forEach items="${stayImg}" var="imgList" step="1">
+										<c:if test="${imgList.stayNo eq list.stayNo}">
+											<li class="swiper-slide img swiper-slide-active"
+												style="background: url(/resources/images/${imgList.fileName.replace('\\','/')}) center center / cover no-repeat; cursor: pointer; width: 410px;">
+											</li>
+										</c:if>
+									</c:forEach> --%>
+									
+									<c:forEach items="${stayImg}" var="imgList" step="1">
+    									<c:if test="${list.stayNo eq imgList.stayNo}">
+    										<li class="swiper-slide img swiper-slide-active"
+												style="background: url(/resources/images/${imgList.fileName.replace('\\','/') }) center center / cover no-repeat; cursor: pointer; width: 410px;">
+											</li>
+    									</c:if>
+									</c:forEach>
 								</div>
 								</a>
 								<div class="_badge_badge_wrapper__h9IsV">

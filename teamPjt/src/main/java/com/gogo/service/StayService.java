@@ -41,4 +41,8 @@ public interface StayService {
 	
 	List<StayVO> likeIdRest(StayVO vo);
 	
+	List<Map<String, String>> stayRoomListDate(@Param("stayName")String stayName, @Param("findStartDate")String findStartDate, @Param("findEndDate")String findEndDate);
+	
+	List<Map<String, String>> stayRoomImgDate(@Param("stayName")String stayName, @Param("findStartDate")String findStartDate, @Param("findEndDate")String findEndDate);
+	
 }

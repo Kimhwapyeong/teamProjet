@@ -116,4 +116,18 @@ public class roomTest {
 		log.info("=========");
 		log.info(res);
 	}
+	
+	@Test
+	public void stayRoomListDate() {
+		List<Map<String,String>> res = sm.stayRoomListDate("제주스테이 비우다", "2023-08-14", "2023-08-21");
+		log.info("=========");
+		log.info(res);
+	}
+	
+	@Test
+	public void stayRoomListImg() {
+		List<Map<String,String>> res = sm.stayRoomImgDate("제주스테이 비우다", "2023-08-14", "2023-08-21");
+		log.info("=========");
+		log.info(res);
+	}
 }
