@@ -55,6 +55,10 @@ public interface mypageMapper {
 	// 숙소 관리 - 객실 조회
 	public List<RoomVO> roomInfo(String memberId);
 	
+	// 숙소관리 - 객실 조회
+	public List<RoomVO> getRoomArr(String memberId);
+	public String getRoomFirstPic(String roomNo);
+	
 	// 예약 관리
 	public List<Map<String, String>> reservinfo();
 	

@@ -21,4 +21,5 @@ public class RoomVO {
 	
 	private List<String> roomImg; // 이미지 사진
 	private String roomPhoto; // 객실 사진
+	private String stayName; // 스테이 이름
 }

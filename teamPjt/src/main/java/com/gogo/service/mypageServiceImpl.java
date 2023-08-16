@@ -144,9 +144,20 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 	}
 	
 	// 숙소 관리 - 객실 관리
+//	@Override
+//	public List<RoomVO> roomInfo(String memberId, Model model) {
+//		List<RoomVO> room = mypageMapper.roomInfo(memberId);
+//		model.addAttribute("room", room);
+//		return null;
+//	}
+	// 숙소 관리 - 객실 관리
 	@Override
 	public List<RoomVO> roomInfo(String memberId, Model model) {
-		List<RoomVO> room = mypageMapper.roomInfo(memberId);
+		List<RoomVO> room = mypageMapper.getRoomArr(memberId);
+		for(RoomVO vo : room) {
+			vo.setRoomPhoto(mypageMapper.getRoomFirstPic(vo.getRoomNo()));
+			System.out.println(vo.getRoomPhoto());
+		}
 		model.addAttribute("room", room);
 		return null;
 	}

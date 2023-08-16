@@ -146,6 +146,29 @@
 		    AND a.filename LIKE '%' || r.roomname || '%'
 	</select>
 	
+	<!-- memberId 로 room 조회 -->
+	<select id="getRoomArr" resultType="com.gogo.vo.RoomVO">
+		select *
+		from room r
+        join stay s on r.stayno = s.stayno
+		where memberId = #{memberId}
+	</select>
+	
+	<!-- room에서 사진 한 장 조회 -->
+	<select id="getRoomFirstPic" resultType="String">
+	 	select uploadpath || uuid || '_' || filename as roomPhoto 
+	 	from (
+	 		select t.*, rownum rn 
+	 		from (
+	 			select * 
+	 			from attach 
+	 			where roomno = #{roomNo}
+	 			) t
+	 		) 
+	 	where rn = 1
+	</select>
+	
+	
 	<resultMap type="java.util.HashMap" id="roomMap">
 	
 	    <result property="roomName" column="ROOMNAME" />

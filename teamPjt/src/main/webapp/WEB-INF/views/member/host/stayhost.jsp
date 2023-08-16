@@ -222,11 +222,11 @@ window.addEventListener('load', function(){
 			                                	<div id="divRoom" style="width:350px; margin: 0px; display: inline-block;">
 			                                		<div class="photo-container">
 			                                		
-			                                			<!-- <input type="text" name="roomNo" id="roomNo" value="${room.ROOMNO }"> -->
-			                                			<input type="text" name="deleteNo" id="deleteNo" value="${room.ROOMNO }">
+			                                			<!-- <input type="text" name="roomNo" id="roomNo" value="${room.roomNo }"> -->
+			                                			<input type="text" name="deleteNo" id="deleteNo" value="${room.roomNo }">
 			                                			
-					                                	<a href="../../../stay/roomInfo?stayName=${room.STAYNAME }&roomName=${room.ROOMNAME}" style="display:flex;">
-					                                       <div class="photo" style="background-image: url('/display?fileName=${room.ROOMPHOTO.replace('\\','/')}'); background-repeat: no-repeat;
+					                                	<a href="../../../stay/roomInfo?stayName=${room.stayName }&roomName=${room.roomName}" style="display:flex;">
+					                                       <div class="photo" style="background-image: url('/display?fileName=${room.roomPhoto.replace('\\','/')}'); background-repeat: no-repeat;
 					                                        background-position: center center; background-size: cover; width: 330px; height: 200px; margin-top:50px;">
 					                                        	 <div class="image-overlay"><p>객실 보기</p></div>
 					                                        </div>
@@ -234,7 +234,7 @@ window.addEventListener('load', function(){
 				                                    </div>
 			                                        <div class="reserv_info" style="margin-top:10px;">
 			                                           <div class="stay" style= "font-size:15px;font-weight:bold;display:flex; justify-content:center">
-			                                           	  <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" data-roomno="${room.ROOMNO }">${room.ROOMNAME }</button></div>
+			                                           	  <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" data-roomno="${room.roomNo }">${room.roomName }</button></div>
 			                                           
 			                                           
 			                                           
@@ -260,7 +260,7 @@ window.addEventListener('load', function(){
 			                                           
 			                                           
 			                                           <p></p>
-			                                           <div class="option" style="line-height: 2.5;display:flex; justify-content:center">${room.ROOMINFO }<br></div>
+			                                           <div class="option" style="line-height: 2.5;display:flex; justify-content:center">${room.roomInfo }<br></div>
 			                                        </div>
 			                                    </div>
 		                                	</c:forEach>
