@@ -190,10 +190,6 @@ window.addEventListener('load', function(){
 		                               			
 			                                	<div id="divRoom" style="width:350px; margin: 0px; display: inline-block;">
 			                                		<div class="photo-container">
-			                                		
-			                                			<!-- <input type="text" name="roomNo" id="roomNo" value="${room.roomNo }"> -->
-			                                			<input type="text" name="deleteNo" id="deleteNo" value="${room.roomNo }">
-			                                			
 					                                	<a href="../../../stay/roomInfo?stayName=${room.stayName }&roomName=${room.roomName}" style="display:flex;">
 					                                       <div class="photo" style="background-image: url('/display?fileName=${room.roomPhoto.replace('\\','/')}'); background-repeat: no-repeat;
 					                                        background-position: center center; background-size: cover; width: 330px; height: 200px; margin-top:50px;">
@@ -204,30 +200,24 @@ window.addEventListener('load', function(){
 			                                        <div class="reserv_info" style="margin-top:10px;">
 			                                           <div class="stay" style= "font-size:15px;font-weight:bold;display:flex; justify-content:center">
 			                                           	  <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" data-roomno="${room.roomNo }">${room.roomName }</button></div>
-			                                           
-			                                           
-			                                           
-			                                           <!-- Modal -->
-														<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top:100px">
-														  <div class="modal-dialog" style="width:500px">
-														    <div class="modal-content">
-														      <div class="modal-header" style="background-color: black; color: white;">
-														        <h2 class="modal-title fs-5" id="exampleModalLabel">객실 삭제</h2>
-														        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-														      </div>
-														      <div class="modal-body" style="height:70px; text-align:center">
-														        	객실을 삭제하시겠습니까?
-														      </div>
-														      <div class="modal-footer">
-														        <button type="button" class="btn btn-light" data-bs-dismiss="modal">아니오</button>
-														        <button type="button" class="btn btn-dark" style="width:60px" id="delete" data-roomno="">네</button>
-														      </div>
-														    </div>
-														  </div>
-														</div>
-			                                           
-			                                           
-			                                           
+					                                           <!-- Modal -->
+																<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top:100px">
+																  <div class="modal-dialog" style="width:500px">
+																    <div class="modal-content">
+																      <div class="modal-header" style="background-color: black; color: white;">
+																        <h2 class="modal-title fs-5" id="exampleModalLabel">객실 삭제</h2>
+																        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+																      </div>
+																      <div class="modal-body" style="height:70px; text-align:center; font-size:16px; padding-top:30px">
+																        	객실을 삭제하시겠습니까?
+																      </div>
+																      <div class="modal-footer">
+																        <button type="button" class="btn btn-light" data-bs-dismiss="modal">아니오</button>
+																        <button type="button" class="btn btn-dark" style="width:60px" id="delete" data-roomno="">네</button>
+																      </div>
+																    </div>
+																  </div>
+																</div>
 			                                           <p></p>
 			                                           <div class="option" style="line-height: 2.5;display:flex; justify-content:center">${room.roomInfo }<br></div>
 			                                        </div>
