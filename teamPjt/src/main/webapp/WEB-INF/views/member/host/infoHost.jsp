@@ -162,13 +162,14 @@
                         <div class="my-count" role="link" tabindex="0">함께  ${travelCnt }번의 여행을 했어요.</div>
                     </div>
                     <div class="newmypage_menu pc_only">
-                        <ul>
-                            <li class=""><a href="./reservation">예약 정보</a></li>
-                            <li class=""><a href="./cancel">취소 내역</a></li>
-                            <li class=""><a href="./likestay">관심 스테이</a></li>
-                            <li class="active"><a href="./info">회원 정보 수정</a></li>
-                        </ul>
-                    </div>
+                           <ul>
+                               <li class="active"><a href="./stayhost">숙소 관리</a></li>
+                               <li class=""><a href="./reservation">예약 관리 </a></li>
+                               <li class=""><a href="./income">수입 현황</a></li>
+                               <li class=""><a href="./guide">호스트가이드</a></li>
+                               <li class=""><a href="./infoHost">회원 정보 수정</a></li>                               
+                           </ul>
+                       </div>
                     <div class="mypage_content">
                         <div class="myedit_wrap">
                             <h3 class="my_tit pc_only">회원 정보 수정</h3>
@@ -177,7 +178,7 @@
                              <c:if test="${sessionScope.memberId == member.memberId}">
                              
                             <!--  프로필 form -->
-                            <form id="infoFrm" name="infoFrm" method="post" action="/member/mypage/infoFrm"  enctype="multipart/form-data">
+                            <form id="infoFrm" name="infoFrm" method="post" action="/member/host/infoFrm"  enctype="multipart/form-data">
                                   <input type="hidden" name="memberId" value="${member.memberId }" id ='id'>
                                   <!-- 프로필 사진 -->
                                   <div class="profile_photo">

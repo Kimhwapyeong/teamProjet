@@ -49,54 +49,23 @@ window.addEventListener('load', function(){
             const roomNo = button.getAttribute("data-roomno");  // 삭제할 roomNo
             console.log("roomNo", roomNo);
             deleteModalButton.setAttribute("data-roomno", roomNo);
-            alert(roomNo);
         });
     });
 
 
     deleteModalButton.addEventListener("click", function() {
         const selectedRoomNo = deleteModalButton.getAttribute("data-roomno");
-        alert("selectedRoomNo : " + selectedRoomNo);
         if (selectedRoomNo !== "") {
             const form = document.forms["deleteFrm"];
-            //const roomNoInput = form.querySelector('input[name="roomNo"]');
             const roomNoInput = form.querySelector('input[name="deleteNo"]');
             roomNoInput.value = selectedRoomNo;
 			
             document.querySelector('input[name=delNo]').value = roomNoInput.value;
             
-            alert("roomNoInput : " + roomNoInput.value);
             form.submit();
         }
     });  
     
-    
-    /*deleteModalButton.addEventListener("click", function() {
-            const form = document.forms["deleteFrm"];
-            const roomNoInput = form.querySelector('input[name="deleteNo"]');
-            roomNoInput.value = selectedRoomNo;
-            alert("roomNoInput : " + roomNoInput.value);
-            form.submit();
-    });  */
-    
-    
-/*     deleteModalButton.addEventListener("click", function() {
-    	const form = document.forms["deleteFrm"];
-    	const delNoList = document.querySelectorAll("[type=checkbox]:checked");
-	 	
-	 	let deleteNo = "";
-	 	
-	 	delNoList.forEach((checkRoom) =>{
-	 		deleteNo += checkRoom.value + ',';
-	 	});
-	 	
-	 	deleteNo = deleteNo.substr(0, deleteNo.length-1);
-	 	console.log(deleteNo);
-	 	
-	 	deleteFrm.action = "/member/host/deleteRoom";
-	 	deleteFrm.submit();  
-    });   */
- 	
  	
     
 });
@@ -174,7 +143,7 @@ window.addEventListener('load', function(){
                                <li class=""><a href="./reservation">예약 관리 </a></li>
                                <li class=""><a href="./income">수입 현황</a></li>
                                <li class=""><a href="./guide">호스트가이드</a></li>
-                               <li class=""><a href="./message">메세지</a></li>                               
+                               <li class=""><a href="./infoHost">회원 정보 수정</a></li>                               
                            </ul>
                        </div>
                        <div class="mypage_content">

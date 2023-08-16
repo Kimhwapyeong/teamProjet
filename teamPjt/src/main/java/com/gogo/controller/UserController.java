@@ -108,36 +108,6 @@ public class UserController extends CommonRestController{
 		model.addAttribute("file", file);
 	}
 	
-//	@PostMapping("infoFrm")
-//	public String infoFrm(MemberVO member
-//									, @RequestParam("imgFile")MultipartFile imgFile
-//									, HttpSession session
-//									, RedirectAttributes rttr) {
-//		
-//		System.out.println(member.getMemberId());
-//		System.out.println(member.getMemberEmail());
-//		System.out.println(member.getPw());
-//		System.err.println("imgFile : "+imgFile);
-//		
-//		try {
-//			int res = service.updateMember(member, imgFile, session);
-//			
-//			if(res>0) {
-//				rttr.addFlashAttribute("msg", "회원 정보 수정 성공!");
-//				return "redirect:/member/mypage/info";
-//				
-//			} else {
-//				rttr.addFlashAttribute("msg", "회원 정보 수정 실패..");
-//				return "redirect:/member/mypage/info";
-//
-//			}
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//		return "/main";
-//	}
 	
 	@PostMapping("infoFrm")
 	public String infoFrm(RedirectAttributes rttr, MemberVO vo, List<MultipartFile> files) {
