@@ -123,6 +123,19 @@ public class RestStayController {
     	
     }
 	
+	@GetMapping("/room/{stayName}/{findStartDate}/{findEndDate}")
+	public Map<String, Object> roomListDate(@PathVariable("stayName") String stayName, @PathVariable("findStartDate") String findStartDate, @PathVariable("findEndDate") String findEndDate) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<Map<String, String>> roomList = stayService.stayRoomListDate(stayName, findStartDate, findEndDate);
+		List<Map<String, String>> roomImg = stayService.stayRoomImgDate(stayName, findStartDate, findEndDate);
+		
+		map.put("roomList", roomList);
+		map.put("roomImg", roomImg);
+		return map;
+	}
+	
+	
 	
 	private static String get(String apiUrl, Map<String, String> requestHeaders){
         HttpURLConnection con = connect(apiUrl);

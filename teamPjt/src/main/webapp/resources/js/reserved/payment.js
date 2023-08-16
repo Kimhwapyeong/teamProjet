@@ -66,7 +66,6 @@
 								
 								
 								alert("결제 및 결제 검증 완료");
-								location.href='/main';
 								
 							} else {
 								alert("결제 및 결제 검증 실패 : "+ rsp.error_msg);
@@ -95,14 +94,14 @@
 					
 				
 						alert(msg);
-						location.href='/main';
+						location.href='/member/mypage/reservation';
 					
 				
 				
 				} else {
 					alert('[결제 오류] 사용량이 많습니다.\n받아들이고 다시 시도해 주세요');
 					//alert('[결제 오류] 거래 번호(imp_uid)가 존재하지 않습니다.\n다시 시도해 주세요!');
-					location.href='/main';
+					location.href='/member/mypage/reservation';
 				}
 			})
 		}
@@ -165,7 +164,7 @@
 				    	
 				    	if(res.responseText == 'success'){
 				    		alert('환불 요청 완료');
-				    		location.href='/main';
+				    		location.href='/member/mypage/cancel';
 				    	} else if (res.responseText == 'dup'){
 				    		alert('이미 처리된 건입니다.');
 				    	} else {

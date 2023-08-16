@@ -39,4 +39,8 @@ public interface StayMapper {
 	
 	public List<StayVO> likeIdRest(StayVO vo);
 	
+	public List<Map<String, String>> stayRoomListDate(@Param("stayName")String stayName, @Param("findStartDate")String findStartDate, @Param("findEndDate")String findEndDate);
+	
+	public List<Map<String, String>> stayRoomImgDate(@Param("stayName")String stayName, @Param("findStartDate")String findStartDate, @Param("findEndDate")String findEndDate);
+	
 }

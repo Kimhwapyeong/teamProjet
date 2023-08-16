@@ -180,7 +180,7 @@
 			</if>
    			<if test='findStartDate != null and findEndDate != null'>
    				<![CDATA[
-				AND subq3.stayno not in (SELECT stayno FROM reservation JOIN room ON room.roomno = reservation.roomno WHERE #{findStartDate} <= checkout AND #{findEndDate} >= checkin)
+				and subq3.stayno in (select stayno from room where roomno not in (SELECT stayno FROM reservation JOIN room ON room.roomno = reservation.roomno WHERE #{findStartDate} <= checkout AND #{findEndDate} >= checkin))
    				]]>
 			</if>
 			
@@ -390,8 +390,6 @@
 	<resultMap type="java.util.HashMap" id="stayRoomList">
 	    <result property="bed" column="BED" />
 	    <result property="field" column="FIELD" />
-	    <result property="findStartDate" column="FINDSTARTDATE" />
-	    <result property="findEndDate" column="FINDENDDATE" />
 	</resultMap>
 	<!-- 숙수 페이지에서 방 이미지 뽑기 -->
 	<select id="stayRoomImg" resultType="com.gogo.vo.FileuploadVO">
@@ -404,6 +402,64 @@
 	)
 	WHERE rn = 1
 	</select>
+	
+	
+	
+	
+	
+	
+	
+	<!-- 숙소 페이지에서 방 리스트 -> 뽑기 날짜를 통해서-->
+	<select id="stayRoomListDate" resultType="java.util.Map">
+		select * 
+		from(	
+			SELECT 
+			  room.roomno as roomno,
+			  roomName,
+			  stdperson,
+			  overperson,
+			  TO_CHAR(PRICE, '999,999') AS price,
+			  bed,
+			  ROW_NUMBER() OVER (PARTITION BY room.roomno ORDER BY room.roomno) AS rn
+			FROM room
+			LEFT JOIN roomoptionyn ON room.roomno = roomoptionyn.roomno
+			LEFT JOIN attach ON room.roomno = attach.roomno
+			WHERE room.stayNo = (SELECT stayNo FROM stay WHERE stayName = #{stayName})
+		) subquery
+		where rn = 1
+   		<![CDATA[
+			AND roomno not in (SELECT stayno FROM reservation JOIN room ON room.roomno = reservation.roomno WHERE #{findStartDate} <= checkout AND #{findEndDate} >= checkin)
+   		]]>
+	</select>
+	<resultMap type="java.util.HashMap" id="stayRoomListDate">
+	    <result property="roomNo" column="ROOMNO" />
+	    <result property="price" column="PRICE" />
+	    <result property="bed" column="BED" />
+	    <result property="roomName" column="ROOMNAME" />
+	    <result property="stdPerson" column="STDPERSON" />
+	    <result property="overPerson" column="OVERPERSON" />
+	</resultMap>
+	
+	
+	<!-- 숙수 페이지에서 방 이미지 뽑기 -->
+	<select id="stayRoomImgDate" resultType="java.util.Map">
+	SELECT (uploadpath ||uuid|| '_' ||filename) as filename, stayno, roomno
+	FROM (
+	    SELECT uuid, memberid, uploadpath, filename, stayno, roomno,
+	           ROW_NUMBER() OVER (PARTITION BY roomno ORDER BY uuid) AS rn
+	    FROM attach
+	    WHERE stayno = (SELECT stayno FROM stay WHERE stayname = #{stayName}) AND roomno IS NOT NULL
+	)
+	WHERE rn = 1
+   	<![CDATA[
+		AND roomno not in (SELECT stayno FROM reservation JOIN room ON room.roomno = reservation.roomno WHERE #{findStartDate} <= checkout AND #{findEndDate} >= checkin)
+   	]]>
+	</select>
+	<resultMap type="java.util.HashMap" id="stayRoomImgDate">
+	    <result property="fileName" column="FILENAME" />
+	    <result property="stayNo" column="STAYNO" />
+	    <result property="roomNo" column="ROOMNO" />
+	</resultMap>
 	
 	
 	

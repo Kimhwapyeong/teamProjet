@@ -385,7 +385,6 @@
 				// 좋아요
 				let member = document.getElementById('memberId').value;
 	            console.log(member);
-	            console.log('like.stayNo');
 
 	            //좋아요
 	            let likeBtn = document.querySelector('.links_area li .btn_like2');
@@ -460,45 +459,29 @@
 				dayBtn.addEventListener('click', () => {
 	            	console.log('aa');
 	            	
-	            	let findStartDate = document.querySelector('#reserved_checkIn').value.replaceAll('-','/');
+	            	let findStartDate = document.querySelector('#check_in_day').innerHTML.split(' ')[0];
         			if(findStartDate === null){
         				findStartDate == "";
         			}
         			console.log(findStartDate);
         			
         			// 체크아웃
-        			let findEndDate = document.querySelector('#reserved_checkOut').value.replaceAll('-','/');
+        			let findEndDate = document.querySelector('#check_out_day').innerHTML.split(' ')[0];
         			if(findEndDate === null){
         				findEndDate == "";
         			}
         			console.log(findEndDate);
         			
-        			/* let data = {
-        					findStartDate : findStartDate,
-        					findEndDate : findEndDate
-        			      };
 
         			      
-        			      fetch("/stst/room", {
-        			        method : 'post', 
-        			        headers : {
-        			          'Content-Type': 'application/json'
-        			        },
-        			        body : JSON.stringify(data)
-        			      })
-        			      .then(response => response.json())
-        			      .then(map => {console.log(map);}); */
+        			fetch('/stst/room/'+stayName+'/'+findStartDate+'/'+findEndDate)
+        			.then(response => response.json())
+        			.then(map => roomArea(map));
 	            	
 	            	document.querySelector('.booking_summary .modalOverlayList').style.display='none';
         			      
-	            	
-        			let checkIn = document.querySelector('#reserved_checkIn').value.replaceAll('-','/');
-        			console.log(checkIn);
-        			let checkOut = document.querySelector('#reserved_checkOut').value.replaceAll('-','/');
-        			console.log(checkOut);      
-        			      
 	            	document.querySelector('.btn_select').innerHTML = formatDate(checkInDate) + ' ~ ' + formatDate(checkOutDate) + '  (' + (checkOutDate - checkInDate) + '박)';
-	            })
+	            });
         		
 	            // 날짜 변환
         		function formatDate(input) {
@@ -507,16 +490,62 @@
 				    let day = input.substr(6, 2);
 				    return year + '/' + month + '/' + day;
 				}
-        
+				
+				
+        		
         
 	            
 	            
         
         
+        
+        
+        function roomArea(map){
+			let roomList = map.roomList;
+			let roomImg = map.roomImg;
+			
+			console.log(roomList);
+			console.log(roomImg);
+			
+			let roomListArea = document.querySelector('.swiper-wrapper');
+			
+			roomListArea.innerHTML = '';
+			let pageBlock = '';
+			
+			roomList.forEach((list, index)=>{
+				pageBlock
+				+='<li class="swiper-slide slider_box single-room swiper-slide-active">'
+				+'	<a href="/stay/roomInfo?stayName='+stayName+'&roomName='+list.ROOMNAME+'">';
+				
+ 				roomImg.forEach((img, index)=>{
+					if(img.ROOMNO == list.ROOMNO){
+						let file = img.FILENAME.replaceAll("\\", "/")
+ 					pageBlock
+					+='	<div role="presentation" class="img" style="background-image: url(/resources/images/'+file+'); background-repeat: no-repeat; background-position: center center; background-size: cover;">'
+					+'	</div>';
+					}
+				}) 
+				
+				pageBlock
+				+='		<div class="room-info">'
+				+'			<p class="name" style="width: 100%;">'
+				+'				<small>특실</small>'+list.ROOMNAME+''
+				+'			</p>'
+				+'			<p class="etc" style="width: 100%;">'
+				+'				<span>기준 '+list.STDPERSON+'명&nbsp;(최대 '+list.OVERPERSON+'명)</span><span>침구 '+list.BED+'개</span>'
+				+'			</p>'
+				+'			<p class="price">₩'+list.PRICE+' ~</p>'
+				+'			<p class="book mo-book-btn" role="presentation">예약하기</p>'
+				+'		</div>'
+				+'	</a>'
+				+'</li>';
+			})
+			roomListArea.innerHTML += pageBlock;
+			
+		}
         
         
         });
-        
         
         
         
@@ -614,7 +643,7 @@
                                      <div class="shared-calendar" >
                                         <div class="DatePicker_calendar_wrap" >
                                             <div class="DateRangePicker DateRangePicker_1">
-                                                <div class="" style="width: 1080px; height: 450px; border: 1px solid #e4e4e4; background: #fff; border-radius: 5px;">
+                                                <div class="" style="width: 1080px; height: 450px; /*border: 1px solid #e4e4e4;*/ background: #fff; border-radius: 5px;">
                                                         <div class="calendar-wrap" style="padding-top: 0px ">
                                                             <div class="calendar-middle-wrap" style="height: 400px;">
                                                               <div class="cal_nav" style="margin-top:20px;">

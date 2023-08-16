@@ -123,8 +123,13 @@ public class StayServiceImpl implements StayService{
 		return stayMapper.likeIdRest(vo);
 	}
 
+	@Override
+	public List<Map<String, String>> stayRoomListDate(String stayName, String findStartDate, String findEndDate) {
+		return stayMapper.stayRoomListDate(stayName, findStartDate, findEndDate);
+	}
 
-	
-
-	
+	@Override
+	public List<Map<String, String>> stayRoomImgDate(String stayName, String findStartDate, String findEndDate) {
+		return stayMapper.stayRoomImgDate(stayName, findStartDate, findEndDate);
+	}
 }

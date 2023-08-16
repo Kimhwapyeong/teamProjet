@@ -238,8 +238,19 @@
 	        console.log('님 컴이 꾸져서 연결이 끊겼습니다... 재접속합니다');
 	        setTimeout(connection, 2000);
 	    } else {
-	        console.log('당신 스스로 퇴장을 선택하였습니다');
-	        location.href='/main';
+	    	
+	    	if(role == '<호스트>'){
+	    		
+		        console.log('당신 스스로 퇴장을 선택하였습니다');
+		        location.href='/member/host/message';
+		        
+	    	} else {
+	    		
+		        console.log('당신 스스로 퇴장을 선택하였습니다');
+		        location.href='/member/mypage/message';
+	    		
+	    	}
+	    	
 	    }
 
 	    
