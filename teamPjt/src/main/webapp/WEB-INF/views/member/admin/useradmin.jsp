@@ -104,7 +104,6 @@
 		 	console.log(memberId);
 		 	
 		 	memberFrm.action = "/member/admin/delete";
-		 	memberFrm.memberId.value=memberId;
 		 	memberFrm.submit();  
 	 }
 </script>
