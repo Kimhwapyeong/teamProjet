@@ -69,12 +69,12 @@ public class roomTest {
 		vo.setStayName("");
 		vo.setStayAdress("");
 		vo.setStayView("");
-		vo.setStdPerson("0");
-		vo.setMaxPrice("1000000");
+		vo.setStdPerson("");
+		vo.setMaxPrice("");
 		vo.setStayType("");
-		vo.setRoomOption("babiqu");
-		vo.setFindStartDate("");
-		vo.setFindEndDate("");
+		vo.setRoomOption("");
+		vo.setFindStartDate("2023-08-16");
+		vo.setFindEndDate("2023-08-22");
 		List<StayVO> keyword = sm.stayKeywordList(vo);
 		log.info("=========");
 		log.info(keyword);

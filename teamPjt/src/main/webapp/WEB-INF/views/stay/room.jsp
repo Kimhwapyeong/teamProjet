@@ -489,23 +489,28 @@
         			      .then(response => response.json())
         			      .then(map => {console.log(map);}); */
 	            	
-/////// HEAD
-	            	document.querySelector('.booking_summary .modalOverlayList').style.display='';
-///////
-	            	document.querySelector('.booking_summary .modalOverlay').style.display='none';
+	            	document.querySelector('.booking_summary .modalOverlayList').style.display='none';
+        			      
 	            	
-        			checkIn = document.querySelector('#reserved_checkIn').value.replaceAll('-','/');
+        			let checkIn = document.querySelector('#reserved_checkIn').value.replaceAll('-','/');
         			console.log(checkIn);
-        			checkOut = document.querySelector('#reserved_checkOut').value.replaceAll('-','/');
+        			let checkOut = document.querySelector('#reserved_checkOut').value.replaceAll('-','/');
         			console.log(checkOut);      
         			      
-	            	document.querySelector('.btn_select').innerHTML = checkIn + ' ~ ' + checkOut + '  / ' + document.querySelector('#reserved_day').value + '박';
-////// branch 'master' of https://github.com/Kimhwapyeong/teamProjet.git
+	            	document.querySelector('.btn_select').innerHTML = formatDate(checkInDate) + ' ~ ' + formatDate(checkOutDate) + '  (' + (checkOutDate - checkInDate) + '박)';
 	            })
-        
         		
+	            // 날짜 변환
+        		function formatDate(input) {
+				    let year = input.substr(0, 4);
+				    let month = input.substr(4, 2);
+				    let day = input.substr(6, 2);
+				    return year + '/' + month + '/' + day;
+				}
         
         
+	            
+	            
         
         
         
@@ -612,7 +617,7 @@
                                                 <div class="" style="width: 1080px; height: 450px; border: 1px solid #e4e4e4; background: #fff; border-radius: 5px;">
                                                         <div class="calendar-wrap" style="padding-top: 0px ">
                                                             <div class="calendar-middle-wrap" style="height: 400px;">
-                                                              <div class="cal_nav">
+                                                              <div class="cal_nav" style="margin-top:20px;">
                                                                 <a href="javascript:;" class="nav-btn go-prev"></a>
                                                                 <span class="year-month start-year-month">2023.08</span>
                                                                 <a href="javascript:;" class="nav-btn go-next"></a>
@@ -632,7 +637,7 @@
                                                             </div>
                                                       
                                                             <div class="calendar-middle-wrap" style="height: 400px;">
-                                                              <div class="cal_nav">
+                                                              <div class="cal_nav" style="margin-top:20px;">
                                                                 <a href="javascript:;" class="nav-btn go-prev"></a>
                                                                 <span class="year-month last-year-month">2023.09</span>
                                                                 <a href="javascript:;" class="nav-btn go-next"></a>
@@ -679,7 +684,7 @@
                                                                   <input type="hidden" id="reserved_checkOut" name="reserved_checkOut" value="">
                                                         
                                                                   <div class="btn-wrapper" style="position:absolute; bottom:5%; left:35%;">
-                                                                    <button style=" border:0px; cursor: pointer;" type="button" onclick="" class="btn-number-search">찾아보기</button>
+                                                                    <button style=" border:0px; cursor: pointer; margin-left: 80px;" type="submit" onclick="" class="btn-number-search">찾아보기</button>
                                                                   </div>
                                                                   <!-- <button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer; position:absolute; top:3%; right:2%;" type="button" id="closeBtn2">
                                                                     <img src="https://www.stayfolio.com/web/images/btn_layer_close.png">

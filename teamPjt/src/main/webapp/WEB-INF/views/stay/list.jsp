@@ -656,14 +656,16 @@
 	        			
 	        			
 	        			// 체크인
-	        			let findStartDate = document.querySelector('#reserved_checkIn').value.replaceAll('-','/');
+	        			//let findStartDate = document.querySelector('#reserved_checkIn').value.replaceAll('-','/');
+	        			let findStartDate = document.querySelector('#reserved_checkIn').value;
 	        			if(findStartDate === null){
 	        				findStartDate == "";
 	        			}
 	        			console.log(findStartDate);
 	        			
 	        			// 체크아웃
-	        			let findEndDate = document.querySelector('#reserved_checkOut').value.replaceAll('-','/');
+	        			//let findEndDate = document.querySelector('#reserved_checkOut').value.replaceAll('-','/');
+	        			let findEndDate = document.querySelector('#reserved_checkOut').value;
 	        			if(findEndDate === null){
 	        				findEndDate == "";
 	        			}
@@ -681,7 +683,7 @@
 	        					findStartDate : findStartDate,
 	        					findEndDate : findEndDate
 	        			      };
-	
+								console.log(data);
 	        			      
 	        			      fetch("/stst/keyword", {
 	        			        method : 'post', 

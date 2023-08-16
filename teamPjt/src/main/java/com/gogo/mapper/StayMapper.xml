@@ -178,8 +178,10 @@
 			<if test='roomOption != null and "beamprojector".equals(roomOption)'>
 				AND subquery.sequence_number = 1 and beamprojector = 'Y'
 			</if>
-			<if test='findStartDate != null and findEndDate != null'>
-				and subq3.stayno != (select stayno from room where roomno = (select roomno from reservation where #{findStartDate} >= to_char(checkin, 'yyyy/mm/dd') and to_char(checkout,'yyyy/mm/dd') >= #{findEndDate}))
+   			<if test='findStartDate != null and findEndDate != null'>
+   				<![CDATA[
+				AND subq3.stayno not in (SELECT stayno FROM reservation JOIN room ON room.roomno = reservation.roomno WHERE #{findStartDate} <= checkout AND #{findEndDate} >= checkin)
+   				]]>
 			</if>
 			
 			<!-- 카테고리별 값 출력 -->
