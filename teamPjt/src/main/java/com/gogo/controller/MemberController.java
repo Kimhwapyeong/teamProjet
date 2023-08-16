@@ -143,7 +143,7 @@ public class MemberController extends CommonRestController {
             e.printStackTrace();
             model.addAttribute("msg", "회원가입 중 예외사항이 발생하였습니다.");
         }
-        	return "redirect:/main"; 
+        	return "redirect:/login/login"; 
     }
 
 	// 아이디 중복확인 요청
