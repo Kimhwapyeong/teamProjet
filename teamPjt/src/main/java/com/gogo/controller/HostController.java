@@ -61,7 +61,7 @@ public class HostController extends CommonRestController{
 	
 	// 객실 삭제
 	@PostMapping("deleteRoom")
-	public String delete(Model model, RedirectAttributes rttr, String roomNo) {
+	public String delete(Model model, RedirectAttributes rttr, @RequestParam("delNo") String roomNo) {
 		System.out.println("roomNo: " + roomNo);
 		System.out.println("======================");
 		

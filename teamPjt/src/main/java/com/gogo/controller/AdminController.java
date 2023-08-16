@@ -153,7 +153,7 @@ public class AdminController {
 	    return list;
 	}
 	
-	@RequestMapping("profit")
+	@RequestMapping("gender")
 	public @ResponseBody List<MemberVO> profit(Model model, MemberVO vo){
 	    List<MemberVO> gender = mypageService.chartGender(vo);  // model -> gender
 	    model.addAttribute("gender", gender);

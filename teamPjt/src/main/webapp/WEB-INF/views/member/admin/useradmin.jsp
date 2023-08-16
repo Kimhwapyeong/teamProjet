@@ -71,8 +71,7 @@
 			if(keyList != 0){
 				keyList.forEach((list, index)=>{         
 					pageBlock
-					+= '<div>'
-					+ '<tr style="line-height:50px;">                                             '
+					+= '<tr style="line-height:50px;">                                             '
 					+ '	<td>                                                                   '
 					+ '		<label class="check_skin">                                         '
 					+ '		<input type="checkbox"name="memberId" value="'+list.memberId+'"> '
@@ -83,8 +82,7 @@
 					+ '	<td>'+list.memberName+'</td>                                         '
 					+ '	<td>'+list.memberEmail +'</td>                                        '
 					+ '	<td>'+list.registraionDate+'</td>                                    '
-					+ '</tr>                                                                      '
-					+ '</div>'
+					+ '</tr>                                                                      ';
 				});   
 				
 			} // if
@@ -106,7 +104,6 @@
 		 	console.log(memberId);
 		 	
 		 	memberFrm.action = "/member/admin/delete";
-		 	memberFrm.memberId.value=memberId;
 		 	memberFrm.submit();  
 	 }
 </script>
@@ -196,8 +193,7 @@
 													<th>회원가입일</th>
 												</tr>
 											</thead>
-											<tbody>
-												<div id="memberList">
+											<tbody id="memberList">
 												<!-- ▶▶▶  forEach ▶▶▶  -->
 												<c:forEach items="${member}" var="member" step="1">
 													<tr style="line-height:50px;">
@@ -213,7 +209,6 @@
 														<td>${member.registraionDate }</td>
 													</tr>
 												</c:forEach>
-												</div>
 											</tbody>
 										</table>
 									</form>

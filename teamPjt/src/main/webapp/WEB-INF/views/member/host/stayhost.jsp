@@ -49,21 +49,55 @@ window.addEventListener('load', function(){
             const roomNo = button.getAttribute("data-roomno");  // 삭제할 roomNo
             console.log("roomNo", roomNo);
             deleteModalButton.setAttribute("data-roomno", roomNo);
+            alert(roomNo);
         });
     });
 
 
     deleteModalButton.addEventListener("click", function() {
         const selectedRoomNo = deleteModalButton.getAttribute("data-roomno");
+        alert("selectedRoomNo : " + selectedRoomNo);
         if (selectedRoomNo !== "") {
             const form = document.forms["deleteFrm"];
-            const roomNoInput = form.querySelector('input[name="roomNo"]');
+            //const roomNoInput = form.querySelector('input[name="roomNo"]');
+            const roomNoInput = form.querySelector('input[name="deleteNo"]');
             roomNoInput.value = selectedRoomNo;
+			
+            document.querySelector('input[name=delNo]').value = roomNoInput.value;
+            
+            alert("roomNoInput : " + roomNoInput.value);
             form.submit();
         }
-    });
-
-
+    });  
+    
+    
+    /*deleteModalButton.addEventListener("click", function() {
+            const form = document.forms["deleteFrm"];
+            const roomNoInput = form.querySelector('input[name="deleteNo"]');
+            roomNoInput.value = selectedRoomNo;
+            alert("roomNoInput : " + roomNoInput.value);
+            form.submit();
+    });  */
+    
+    
+/*     deleteModalButton.addEventListener("click", function() {
+    	const form = document.forms["deleteFrm"];
+    	const delNoList = document.querySelectorAll("[type=checkbox]:checked");
+	 	
+	 	let deleteNo = "";
+	 	
+	 	delNoList.forEach((checkRoom) =>{
+	 		deleteNo += checkRoom.value + ',';
+	 	});
+	 	
+	 	deleteNo = deleteNo.substr(0, deleteNo.length-1);
+	 	console.log(deleteNo);
+	 	
+	 	deleteFrm.action = "/member/host/deleteRoom";
+	 	deleteFrm.submit();  
+    });   */
+ 	
+ 	
     
 });
 
@@ -147,7 +181,6 @@ window.addEventListener('load', function(){
                            <div class="reserv_wrap mypage-reservation-info"">
                            	   <!-- ▶▶▶  forEach ▶▶▶  -->
                                <c:forEach items="${list}" var="vo" step="1">
-                               <!-- <img alt="" src="/resources/images/${vo.mainPic1 }"> -->
                                <c:if test="${sessionScope.memberId == vo.memberId}">
 
                                <div class="reserv_box accepted">
@@ -189,7 +222,8 @@ window.addEventListener('load', function(){
 			                                	<div id="divRoom" style="width:350px; margin: 0px; display: inline-block;">
 			                                		<div class="photo-container">
 			                                		
-			                                			<input type="hidden" name="roomNo" id="roomNo" value="${room.ROOMNO }">
+			                                			<!-- <input type="text" name="roomNo" id="roomNo" value="${room.ROOMNO }"> -->
+			                                			<input type="text" name="deleteNo" id="deleteNo" value="${room.ROOMNO }">
 			                                			
 					                                	<a href="../../../stay/roomInfo?stayName=${room.STAYNAME }&roomName=${room.ROOMNAME}" style="display:flex;">
 					                                       <div class="photo" style="background-image: url('/resources/images/${room.ROOMPHOTO.replace('\\','/')}'); background-repeat: no-repeat;
@@ -230,6 +264,7 @@ window.addEventListener('load', function(){
 			                                        </div>
 			                                    </div>
 		                                	</c:forEach>
+		                                	<input type="hidden" name="delNo" value="">
 			                             </div>
 		                             </div>
 	                           </form>

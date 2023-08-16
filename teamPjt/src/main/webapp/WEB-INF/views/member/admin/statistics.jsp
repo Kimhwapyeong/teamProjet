@@ -154,7 +154,7 @@
 									            
 									            
 									            $.ajax({
-									                url:"/member/admin/profit",
+									                url:"/member/admin/gender",
 									                type:"get",
 									                data:{ },
 									                dataType:"json",

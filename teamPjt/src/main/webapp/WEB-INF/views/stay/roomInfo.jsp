@@ -100,7 +100,7 @@
 			    
 			    
 			    
-			    document.querySelector('.btn_select').innerHTML = checkIn + ' ~ ' + checkOut + '  / ' + document.querySelector('#reserved_day').value + '박';
+			    document.querySelector('.btn_select').innerHTML = checkIn + ' ~ ' + checkOut + '   (' + document.querySelector('#reserved_day').value + '박)';
 			});
             
             
