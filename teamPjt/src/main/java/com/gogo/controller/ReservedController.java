@@ -1,8 +1,11 @@
 package com.gogo.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -84,6 +87,25 @@ public class ReservedController {
 		}
 		
 		return res;
+	}
+	
+	
+	@PostMapping("dayDisabled")
+	@ResponseBody
+	public List<String> reservedDay(@RequestBody String stayName, Model model) throws UnsupportedEncodingException {
+		
+		String decodedStayName = URLDecoder.decode(stayName, "UTF-8");		
+		String result = decodedStayName.replace("=", "");
+		
+		System.err.println(result);
+		
+		List<String> list = service.getReservedList(result);
+		
+		
+		
+		return list;
+		
+		
 	}
 	
 	

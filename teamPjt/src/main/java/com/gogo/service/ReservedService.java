@@ -30,4 +30,6 @@ public interface ReservedService {
 	public String goReserved(ReservedVO reserved, Model model);
 	
 	public String comma(Object a);
+	
+	public List<String> getReservedList(String stayName);
 }

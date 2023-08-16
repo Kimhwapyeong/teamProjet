@@ -194,6 +194,7 @@
     		
     	}
     	
+    	var stayName = '${param.stayName}'; 
     </script>
     
   </div>

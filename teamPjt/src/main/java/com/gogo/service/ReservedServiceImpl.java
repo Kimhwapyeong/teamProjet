@@ -151,5 +151,10 @@ public class ReservedServiceImpl implements ReservedService{
 
 	}
 	
+	@Override
+	public List<String> getReservedList(String stayName){
+		return reservedMapper.getReservedList(stayName);
+	}
+	
 		
 }

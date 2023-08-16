@@ -92,6 +92,7 @@ function calendarInit(thisMonth) {
                 // 지난 날짜는 disable 처리
                 if (i < today.getDate()) {
                     start_calendar += pervDisableDay(i)
+                    
                 } else {
                     start_calendar += dailyDay(currentYear, currentMonth, i);
                 }
@@ -438,4 +439,44 @@ function zf(num) {
     }
 
     return num;
+}
+
+window.addEventListener('load', function(){
+	
+	console.log('stayName : ', stayName);
+	
+	
+	if(stayName!=''){
+		
+		console.log('hi');
+		
+		$.ajax({
+				"url" : "/reserved/dayDisabled"
+				, "type" : "post"
+				, "data" : stayName
+		}).done(function(res){
+			console.log("현재 스테이 예약 결과 : ", res);
+			
+			res.forEach(date=>{
+				
+				
+				reservation_disabled(date);
+				
+			});
+			
+			
+		});
+		
+	}
+	
+	
+	
+});
+
+function reservation_disabled(date){
+	
+	console.log('reservation_disabled : ',date);
+	
+	$('div[data-day='+date+']').addClass('prev disable');
+	
 }
