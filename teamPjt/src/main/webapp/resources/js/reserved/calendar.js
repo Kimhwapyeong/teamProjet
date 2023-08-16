@@ -218,6 +218,8 @@ function addClassSelectDay() {
     		diff = Math.ceil(diff / (1000*60*60*24));
     		
 	        $('.check_day_count').html(diff+'일');
+	        $('#check_in_day_list').html(getCheckIndateHtml());
+	        $('#check_out_day_list').html(getCheckOutdateHtml());
 	        $('#reserved_day').val(diff);
 	        $('#reserved_checkIn').val(a);
 	        $('#reserved_checkOut').val(b);
