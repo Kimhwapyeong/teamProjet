@@ -218,6 +218,8 @@ function addClassSelectDay() {
     		diff = Math.ceil(diff / (1000*60*60*24));
     		
 	        $('.check_day_count').html(diff+'일');
+	        $('#check_in_day_list2').html(getCheckIndateHtml());
+	        $('#check_out_day_list2').html(getCheckOutdateHtml());
 	        $('#reserved_day').val(diff);
 	        $('#reserved_checkIn').val(a);
 	        $('#reserved_checkOut').val(b);
@@ -236,6 +238,7 @@ function selectDay(obj) {
         checkInDate2 = $(obj).data('day');
 
         $('#check_in_day_list').html(getcheckInDate2Html());
+        $('#check_in_day_list22').html(getcheckInDate2Html());
 
         lastcheckInDate2();
     } else {
@@ -248,6 +251,7 @@ function selectDay(obj) {
         if (checkOutDate2 === "" && parseInt(checkInDate2) > $(obj).data('day')) {
             $('.checkIn').find('.check_in_out_p').html('');
             $('.day').removeClass('checkIn');
+            $('#check_in_day_list22').html("");
             $('#check_in_day_list').html("");
 
             checkOutDate2 = checkInDate2
@@ -259,6 +263,7 @@ function selectDay(obj) {
             $('.day[data-day="' + checkOutDate2 + '"]').addClass('checkOut');
             $('.checkOut').find('.check_in_out_p').html('체크아웃');
 
+            $('#check_in_day_list22').html(getcheckInDate2Html());
             $('#check_in_day_list').html(getcheckInDate2Html());
             $('#check_out_day_list').html(getcheckOutDate2Html());
 
@@ -293,6 +298,7 @@ function selectDay(obj) {
                 checkInDate2 = $(obj).data('day');
                 checkOutDate2 = "";
 
+                $('#check_in_day_list22').html(getcheckInDate2Html());
                 $('#check_in_day_list').html(getcheckInDate2Html());
                 $('#check_out_day_list').html("");
 

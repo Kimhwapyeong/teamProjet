@@ -14,7 +14,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="/resources/js/list/list.js"></script>
+<!-- <script src="/resources/js/list/list.js"></script> -->
+<script src="/resources/js/reserved/calendar.js"></script>
 
 <script>
         window.addEventListener('load', function () {
@@ -96,7 +97,17 @@
 				console.log(checkOut);
 			    
 			    document.querySelector('.booking_summary .modalOverlay').style.display='none';
+			    
+			    
+			    
+			    document.querySelector('.btn_select').innerHTML = checkIn + ' ~ ' + checkOut + '  / ' + document.querySelector('#reserved_day').value + '박';
 			});
+            
+            
+           
+            
+            
+            
 			
 			document.getElementById('paymentButton').addEventListener('click', function () {
 			    // 가져올 값들
