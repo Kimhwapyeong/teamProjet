@@ -250,7 +250,7 @@
 				<button type="submit" class="btn_bk" onclick="purchaseBtn()">결제하기</button>
 			</div>
 			<div class="bt_btns">
-				<button type="submit" onclick="location.href='/main'" class="btn_bk" style="background-color:#243087;">메인으로</button>
+				<button onclick="location.href='/main'" class="btn_bk" style="background-color:#243087;">메인으로</button>
 			</div>
 	</div>
 	
