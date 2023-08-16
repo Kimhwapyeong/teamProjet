@@ -14,7 +14,8 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="/resources/js/list/list.js"></script>
+<!-- <script src="/resources/js/list/list.js"></script> -->
+<script src="/resources/js/reserved/calendar.js"></script>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=124076e69929aa6f11bd182ef5993338"></script>
 
@@ -68,7 +69,13 @@
             let btn_close = document.querySelector('.container .container .btn_close');
             btn_close.addEventListener('click', () => {
             	console.log('a');
+<<<<<<< HEAD
             	document.querySelector('.booking_summary .modalOverlayList').style.display='none';
+=======
+            	document.querySelector('.booking_summary .modalOverlay').style.display='none';
+            	
+            	
+>>>>>>> branch 'master' of https://github.com/Kimhwapyeong/teamProjet.git
             }) 
             
             
@@ -466,7 +473,7 @@
         			}
         			console.log(findEndDate);
         			
-        			let data = {
+        			/* let data = {
         					findStartDate : findStartDate,
         					findEndDate : findEndDate
         			      };
@@ -480,10 +487,20 @@
         			        body : JSON.stringify(data)
         			      })
         			      .then(response => response.json())
-        			      //.then(map => keywordList(map));
-        			      .then(map => {console.log(map);});
+        			      .then(map => {console.log(map);}); */
 	            	
+<<<<<<< HEAD
 	            	document.querySelector('.booking_summary .modalOverlayList').style.display='';
+=======
+	            	document.querySelector('.booking_summary .modalOverlay').style.display='none';
+	            	
+        			checkIn = document.querySelector('#reserved_checkIn').value.replaceAll('-','/');
+        			console.log(checkIn);
+        			checkOut = document.querySelector('#reserved_checkOut').value.replaceAll('-','/');
+        			console.log(checkOut);      
+        			      
+	            	document.querySelector('.btn_select').innerHTML = checkIn + ' ~ ' + checkOut + '  / ' + document.querySelector('#reserved_day').value + '박';
+>>>>>>> branch 'master' of https://github.com/Kimhwapyeong/teamProjet.git
 	            })
         
         		
