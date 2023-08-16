@@ -69,13 +69,13 @@
             let btn_close = document.querySelector('.container .container .btn_close');
             btn_close.addEventListener('click', () => {
             	console.log('a');
-<<<<<<< HEAD
+//////////// HEAD
             	document.querySelector('.booking_summary .modalOverlayList').style.display='none';
-=======
+///////////
             	document.querySelector('.booking_summary .modalOverlay').style.display='none';
             	
             	
->>>>>>> branch 'master' of https://github.com/Kimhwapyeong/teamProjet.git
+/////////// branch 'master' of https://github.com/Kimhwapyeong/teamProjet.git
             }) 
             
             
@@ -489,9 +489,9 @@
         			      .then(response => response.json())
         			      .then(map => {console.log(map);}); */
 	            	
-<<<<<<< HEAD
+/////// HEAD
 	            	document.querySelector('.booking_summary .modalOverlayList').style.display='';
-=======
+///////
 	            	document.querySelector('.booking_summary .modalOverlay').style.display='none';
 	            	
         			checkIn = document.querySelector('#reserved_checkIn').value.replaceAll('-','/');
@@ -500,7 +500,7 @@
         			console.log(checkOut);      
         			      
 	            	document.querySelector('.btn_select').innerHTML = checkIn + ' ~ ' + checkOut + '  / ' + document.querySelector('#reserved_day').value + '박';
->>>>>>> branch 'master' of https://github.com/Kimhwapyeong/teamProjet.git
+////// branch 'master' of https://github.com/Kimhwapyeong/teamProjet.git
 	            })
         
         		
