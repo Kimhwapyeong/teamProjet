@@ -62,13 +62,13 @@
             let dateBtn = document.querySelector('.booking_summary .dayday');
             dateBtn.addEventListener('click', () => {
             	console.log('aa');
-            	document.querySelector('.booking_summary .modalOverlay').style.display='';
+            	document.querySelector('.booking_summary .modalOverlayList').style.display='';
             })
             
             let btn_close = document.querySelector('.container .container .btn_close');
             btn_close.addEventListener('click', () => {
             	console.log('a');
-            	document.querySelector('.booking_summary .modalOverlay').style.display='none';
+            	document.querySelector('.booking_summary .modalOverlayList').style.display='none';
             }) 
             
             
@@ -483,7 +483,7 @@
         			      //.then(map => keywordList(map));
         			      .then(map => {console.log(map);});
 	            	
-	            	document.querySelector('.booking_summary .modalOverlay').style.display='';
+	            	document.querySelector('.booking_summary .modalOverlayList').style.display='';
 	            })
         
         		
@@ -585,7 +585,7 @@
 				</div>
 				
 				
-				 <div class="modalOverlay" style="display: none">
+				 <div class="modalOverlayList" style="display: none">
                         <div class="modalWrapper" >
                             <div class="modalInner" >
                                 <div class="container" >
@@ -650,7 +650,7 @@
                                                                   <span>총 예약일</span>
                                                                 </p>
                                                                 <p>
-                                                                  <label id="check_out_day" class="check_day_count" style="font-size: 20px;"></label>
+                                                                  <label id="check_out_day" class="check_day_count_list" style="font-size: 20px;"></label>
                                                                 </p>
                                                       
                                                               </div>

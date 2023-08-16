@@ -216,15 +216,46 @@ function addClassSelectDay() {
     		
     		let diff = Math.abs(co.getTime() - ci.getTime());
     		diff = Math.ceil(diff / (1000*60*60*24));
+
+     		
+    		if($('.modalOverlayList').attr('style')!=''){
+    			
+    			$('.check_day_count').html(diff+'일');
+    			$('#reserved_day').val(diff);
+    			$('#reserved_checkIn').val(a);
+    			$('#reserved_checkOut').val(b);
+    			$('.space').html('~');
     		
-	        $('.check_day_count').html(diff+'일');
-	        $('#check_in_day_list').html(getCheckIndateHtml());
-	        $('#check_out_day_list').html(getCheckOutdateHtml());
-	        $('#reserved_day').val(diff);
-	        $('#reserved_checkIn').val(a);
-	        $('#reserved_checkOut').val(b);
+    		} else {
+    			
+    			$('#check_in_day_list').html('');
+    			$('#check_out_day_list').html('');
+    			$('.check_day_count_list').html('');
+    			$('.space').html('');
+    			
+    		}
+    		
+    		if($('.modalOverlay').attr('style')!=''){
+    			
+    			$('.check_day_count').html(diff+'일');
+    	   		$('#check_in_day_list').html(getCheckIndateHtml());
+        		$('#check_out_day_list').html(getCheckOutdateHtml());
+        		$('.check_day_count_list').html(diff+'일');
+        		$('.space').html('~');
+
+    		} else {
+    			
+    			
+    			$('.check_day_count').html('');
+    			$('#reserved_day').val('');
+    			$('#reserved_checkIn').val('');
+    			$('#reserved_checkOut').val('');
+    			$('.space').html('');
+    			
+    		}
+    		
+    		
 	        
-	        $('.space').html('~');
         }
 }
 

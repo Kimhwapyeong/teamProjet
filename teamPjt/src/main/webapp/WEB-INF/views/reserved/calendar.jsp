@@ -101,7 +101,7 @@
 		<input type="hidden" name="memberCount" value="${reserved.memberCount}">
 		<input type="hidden" name="btnYN" value="${btnYN}">
 		
-		    <div style="position:absolute; top:660px; left:10%; width:1000px;" class="reserveBox">   
+		    <div style="position:absolute; top:720px; left:10%; width:1000px;" class="reserveBox">   
 		    	<button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer;" type="submit" onclick="check(form)">예약하기</button><br><br>
 		    	<button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer;" id="reload">초기화</button><br><br>
 		    	<button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer;" id="back">메인으로</button><br><br>
