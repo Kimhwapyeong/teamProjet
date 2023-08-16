@@ -1,6 +1,5 @@
 package com.gogo.test.member;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
@@ -28,7 +27,7 @@ public class MemberServiceTest {
 		member.setMemberId("admin");
 		member.setPw("1234");
 		
-		member = memberService.login(member);
+		member = memberService.loginAction(member);
 		
 		log.info(member);
 		assertNotNull(member);

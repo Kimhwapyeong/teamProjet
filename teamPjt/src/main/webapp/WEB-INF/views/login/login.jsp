@@ -85,6 +85,20 @@
 	});
  
 </script>
+<script type="text/javascript">
+	function kakaoLogin() {
+		$.ajax({
+			url: '/login/kakaoActionUrl',
+			type: 'get',
+			async: false,
+			dataType: 'text',
+			success: function (res) {
+				console.log(res);
+				location.href = res;
+			}
+		});
+	}
+</script>
 </head>
 <body>
 
@@ -151,19 +165,7 @@
     );
 naverLogin.init();
 </script>
-<script type="text/javascript">
-	function kakaoLogin() {
-		$.ajax({
-			url: '/login/kakaoAction',
-			type: 'get',
-			async: false,
-			dataType: 'text',
-			success: function (res) {
-				location.href = res;
-			}
-		});
-	}
-</script>
+
 
 <jsp:include page="../common/footer.jsp" />
 </html>

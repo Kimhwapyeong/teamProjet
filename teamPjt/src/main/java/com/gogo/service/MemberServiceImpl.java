@@ -199,7 +199,7 @@ public class MemberServiceImpl implements MemberService {
 	     System.out.println("----------------------------토큰발급---------------------------");
 	     String access_Token = "";
 	     String refresh_Token = "";
-	     
+	     String openid = "";
 	     //토큰발급 요청을 보낼 주소
 	     String reqURL = "https://kauth.kakao.com/oauth/token";
 	        
@@ -221,6 +221,8 @@ public class MemberServiceImpl implements MemberService {
 	            sb.append("&client_id=7801f55d59a73a55013d6f22a1a3e9a1");
 	            sb.append("&redirect_uri=http://localhost:8080/login/kakaoAction");
 	            sb.append("&code=" + authorize_code);
+	            sb.append("&scope=" + openid);
+	            
 	            bw.write(sb.toString());
 	            bw.flush();
 	            
@@ -254,7 +256,6 @@ public class MemberServiceImpl implements MemberService {
 
 				br.close();
 				bw.close();
-
 	            
 	        } catch (IOException e) {
 	            e.printStackTrace();
@@ -266,9 +267,9 @@ public class MemberServiceImpl implements MemberService {
 	 // 카카오 Access token 보내 사용자 정보 요청 
 	@SuppressWarnings("unchecked")
 	@Override
-	  public HashMap<String, Object> getUserInfo (String access_Token) {
+	public HashMap<String, Object> getUserInfo(String access_Token) {
 
-	        //    요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
+	        // 요청하는 클라이언트마다 가진 정보가 다를 수 있으므로 HashMap타입으로 선언
 	        HashMap<String, Object> userInfo = new HashMap<String, Object>();
 	        String reqURL = "https://kapi.kakao.com/v2/user/me";
 	        try {
@@ -276,7 +277,7 @@ public class MemberServiceImpl implements MemberService {
 	            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	            conn.setRequestMethod("GET");
 
-	            //  요청에 필요한 Header에 포함될 내용
+	            // 요청에 필요한 Header에 포함될 내용
 	            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 
 	            int responseCode = conn.getResponseCode();
@@ -291,7 +292,7 @@ public class MemberServiceImpl implements MemberService {
 	                result += line;
 	            }
 	            System.out.println("response body : " + result);
-	            System.out.println("result type" + result.getClass().getName());
+	            System.out.println("result type :" + result.getClass().getName());
 
 				// JSON 데이터를 객체로 변환
 				ObjectMapper objectMapper = new ObjectMapper();
@@ -304,17 +305,22 @@ public class MemberServiceImpl implements MemberService {
 
 				Map<String, Object> properties = (Map<String, Object>) jsonMap.get("properties");
 				Map<String, Object> kakao_account = (Map<String, Object>) jsonMap.get("kakao_account");
+				long id = (long) jsonMap.get("id");
 
+				 System.out.println(id);
 				 System.out.println(properties.get("nickname"));
 				 System.out.println(kakao_account.get("email"));
-
+			
+				String memberId = Long.toString(id);
 				String memberName = properties.get("nickname").toString();
-				String profile = kakao_account.get("profile_image").toString();
-				String memberEmail = kakao_account.get("account_email").toString();
+				String profile = properties.get("profile_image").toString();
+				String memberEmail = kakao_account.get("email").toString();
 				String gender = kakao_account.get("gender").toString();
 				String age_group = kakao_account.get("age_range").toString();
 				String birthday = kakao_account.get("birthday").toString();
-				
+
+
+				userInfo.put("id", memberId);
 				userInfo.put("nickname", memberName);
 				userInfo.put("profile_image", profile);
 				userInfo.put("account_email", memberEmail);

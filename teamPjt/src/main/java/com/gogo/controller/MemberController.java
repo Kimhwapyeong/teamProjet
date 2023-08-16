@@ -1,5 +1,6 @@
 package com.gogo.controller;
 
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -96,7 +99,7 @@ public class MemberController extends CommonRestController {
 		
 	}
 
-	
+
 	// 회원가입 페이지 이동
 	@GetMapping("/login/signup")
 	public String signup(HttpSession session) {
@@ -315,7 +318,7 @@ public class MemberController extends CommonRestController {
 	
 	
 	// 카카오톡 로그인 연동 (인가코드 발급)
-    @RequestMapping(value = "/login/kakaoAction")
+    @RequestMapping(value = "/login/kakaoActionUrl")
     public @ResponseBody
     String kakaoAction(
             HttpServletRequest request) throws Exception {
@@ -333,7 +336,7 @@ public class MemberController extends CommonRestController {
     }
     
     // 카카오 연동정보 조회 + DB에 회원 정보넣기
-    @RequestMapping(value = "/selectMyAccessTocken")
+    @RequestMapping(value = "/login/kakaoAction")
     public String oauthKakao(
             @RequestParam(value = "code", required = false) String code
             , HttpServletRequest req, Model model, HttpSession session) throws Throwable {
@@ -348,21 +351,41 @@ public class MemberController extends CommonRestController {
 
         // 토큰을 이용해 회원 정보 가져오기
         HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
-        System.out.println("------- access_Token ------- : " + access_Token);
-        System.out.println("------- userInfo ------- : " + userInfo.get("email"));    
-        System.out.println("------- nickname ------- : " + userInfo.get("nickname")); 
+
 
         // 가져온 회원 정보 DB에 넣어 회원가입 시키기
         MemberVO member = new MemberVO();
+        
+        String memberName = URLEncoder.encode((String) userInfo.get("nickname"), "UTF-8");
+        
+	     // userInfo에서 필요한 정보를 추출하여 MemberVO에 설정
+	     member.setMemberName(memberName);
+	     member.setMemberId((String) userInfo.get("id"));
+	     member.setMemberEmail((String) userInfo.get("account_email"));
+	     member.setAge_group((String) userInfo.get("age_range"));
+	     
+	     String originalgender = (String) userInfo.get("gender");
+	     String gender = originalgender.substring(0, 1);
+	     member.setGender(gender);
+	     
+		String birthday = (String)userInfo.get("birthday");
+		String month = birthday.substring(0,2);
+		String days = birthday.substring(2);
+		member.setBirthday("00"+month+days);
+	    
+        System.out.println("----- access_Token ----- : " + access_Token);
+        System.out.println("------- id ------- : " + userInfo.get("memberId"));    
+        System.out.println("------- nickname ------- : " + memberName);    
+        System.out.println("----- account_email ---- : " + userInfo.get("account_email"));    
+        System.out.println("-------- gender -------- : " + userInfo.get("gender")); 
+        System.out.println("------ age_range ------- : " + userInfo.get("age_range")); 
+        System.out.println("------- birthday ------- : " + userInfo.get("birthday")); 
 
-	    String birthday = member.getBirthday();
-	    String month = birthday.substring(0, 2);
-	    String days = birthday.substring(3);
-	    member.setBirthday("00"+month+days);
-
+	    
         // 만약 DB에 해당 회원의 ID가 없다면 회원가입 시키기
-	    int idCheck = memberService.idCheck(member);
-	    if(idCheck==0) {
+	    //int idCheck = memberService.idCheck(member);
+	    if (member != null && member.getMemberEmail() != null) {
+	    //if(idCheck==0) {
 	    	
 	    	// 비밀번호 랜덤
 	    	String kakaoPW = UUID.randomUUID().toString();
@@ -381,16 +404,17 @@ public class MemberController extends CommonRestController {
 	    	
 	    } else {
 	    	// 이미 회원가입 되어 있는 네이버 로그인의 경우 비밀번호를 가져와 세팅
-	    	String naverPW = memberService.getPw(member);
-	    	member.setPw(naverPW);
+	    	String kakaoPW = memberService.getPw(member);
+	    	member.setPw(kakaoPW);
 	    	Map<String, Object> map = loginAction(member, model, session);	
+	    	
 	    	if("success".equals(map.get("result"))) {
 	    		userInfo.put("result", "ok");
 	    	} else {
 	    		userInfo.put("result", "ok");
 	    	}
 	    }
-	    return "/main"; //본인 원하는 경로 설정
+	    return "/main"; 
 
     }
 }

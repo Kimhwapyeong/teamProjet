@@ -1,9 +1,7 @@
 package com.gogo.test.member;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,7 +28,7 @@ public class MemberTest {
 		member.setMemberId("admin");
 		member.setPw("1234");
 		
-		member = memberMapper.login(member);
+		member = memberMapper.loginAction(member);
 		
 		log.info(member);
 		assertNotNull(member);

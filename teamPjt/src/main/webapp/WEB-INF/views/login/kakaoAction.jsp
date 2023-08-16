@@ -14,7 +14,7 @@
         // 인가코드 가져오기
         let codeURL = new URL(window.location.href);
         let code= codeURL.searchParams.get('code');
-
+console.log(code);
         // 인가코드 유무 확인
         if(code != null){
             console.log("codeURL: " + codeURL);
