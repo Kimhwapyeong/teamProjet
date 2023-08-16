@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -138,7 +139,16 @@
 						<div class="btn_select ">날짜를 선택해주세요.</div>
 					</div>
 					<%-- <a href="/reserved/reserved?stayName=${roomInfo.STAYNAME }&roomName=${roomInfo.ROOMNAME }&roomNo=${roomInfo.ROOMNO}"><button type="button" class="btn_bk pc_only">결제하기</button></a> --%>
-					<button type="button" class="btn_bk pc_only" id="paymentButton">결제하기</button>
+					세션 : ${sessionScope.memberId}
+					아이디 : ${roomInfo.MEMBERID }
+					<c:set var="isMember" value="${sessionScope.memberId == roomInfo.MEMBERID}" />
+					<c:if test="${isMember}">
+						<a href="/editroom?roomNo=${roomInfo.ROOMNO }"><button type="button" class="btn_bk pc_only" id="paymentButton">수정하기</button></a>
+					</c:if>
+					<c:if test="${not isMember}">
+						<button type="button" class="btn_bk pc_only" id="paymentButton">결제하기</button>
+					</c:if>
+					
 					<%-- <a href="/reserved/reserved?roomNo=${roomInfo.ROOMNO}"><button type="button" class="btn_bk pc_only">결제하기</button></a> --%>
 
 

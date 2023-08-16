@@ -474,6 +474,7 @@
 		room.roomno as roomno ,
 		room.stayno as stayno, 
 		roomname, 
+		memberid,
 		stdperson, 
 		overperson, 
 		roominfo, 
@@ -491,10 +492,13 @@
 		FROM ROOM 
 		LEFT JOIN ROOMOPTIONYN
 		ON ROOM.ROOMNO = ROOMOPTIONYN.ROOMNO
+		LEFT JOIN STAY
+		ON STAY.STAYNO = ROOM.ROOMNO
 		WHERE ROOMNAME = #{roomName} AND ROOM.STAYNO = (SELECT STAYNO FROM STAY WHERE STAYNAME=#{stayName})
 	</select>
 	<resultMap type="java.util.HashMap" id="roomInfoPageList">
 	    <result property="stayName" column="STAYNAME" />
+	    <result property="memberId" column="MEMBERID" />
 	    <result property="bathroom" column="BATHROOM" />
 	    <result property="kitchen" column="KITCHEN" />
 	    <result property="parking" column="PARKING" />
