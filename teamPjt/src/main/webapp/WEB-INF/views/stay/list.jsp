@@ -586,7 +586,7 @@
 					        if (idx < slideImgs.length-1) {
 					            idx++;
 					        } else {
-					            idx = 0; // 인덱스가 이미지 개수를 넘어가면 초기화
+					            idx = 1; // 인덱스가 이미지 개수를 넘어가면 초기화
 					        }
 					            // 현재 인덱스의 이미지 스타일을 가져옴
 					            let slideImgStyle = slideImgs[idx].getAttribute('style');
@@ -600,29 +600,31 @@
 					    });
 					});
 					
-					/* let prev = document.querySelectorAll('.swiper-button-prev');
+/* 					let prev = document.querySelectorAll('.swiper-button-prev');
 					
-					slideBtn.forEach((button, index) => {
+					prev.forEach((button, index) => {
 					    button.addEventListener('click', () => {
 					        let slideImgList = document.querySelectorAll('.flist_img')[index]; // 해당 버튼의 이미지가 보이는 칸
 					        let slideImgs = slideImgList.querySelectorAll('.swiper-wrapper li'); // 해당 칸의 이미지들
 					        
-					        ldx = slideImgs.length;
+					        //idx = slideImgs.length-1;
 					        
-					        if (idx < 0) {
-					        	ldx = slideImgs.length; // 인덱스가 이미지 개수를 넘어가면 초기화
+					        if (idx == 0) {
+					        	idx = slideImgs.length-1; // 인덱스가 이미지 개수를 넘어가면 초기화
 					        } else {
 					            // 현재 인덱스의 이미지 스타일을 가져옴
 					            let slideImgStyle = slideImgs[idx].getAttribute('style');
 					            
 					            // 첫 번째 li 요소의 스타일을 변경하여 이미지를 바꿈
 					            let img = document.querySelectorAll('.swiper-wrapper')[index];
+					            let tmp = img.querySelectorAll('li')[0].getAttribute('style');
 					            img.querySelectorAll('li')[0].setAttribute('style', slideImgStyle);
+					            slideImgs[idx].setAttribute('style', tmp);
 					            
 					            idx--;
 					        }
 					    });
-					}); */
+					});  */
 		            
 		            
         		
