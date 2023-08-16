@@ -35,7 +35,7 @@ public interface StayMapper {
 	
 	public List<FileuploadVO> stayImgList();
 
-	public List<StayVO> stayLocList(String stayLoc);
+	public List<StayVO> stayLocList(StayVO vo);
 	
 	public List<StayVO> likeIdRest(StayVO vo);
 	

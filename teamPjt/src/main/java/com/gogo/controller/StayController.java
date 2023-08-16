@@ -26,7 +26,7 @@ public class StayController {
 	StayService stayService;
 	
 	@GetMapping("list")
-	public void getList(String stayLoc, Model model, HttpServletRequest request) {
+	public void getList(StayVO paramVO, Model model, HttpServletRequest request) {
 		StayVO vo = new StayVO();
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("memberId");
@@ -35,8 +35,8 @@ public class StayController {
 		}else {
 			vo.setMemberId("");
 		}
-		if(stayLoc != null && !stayLoc.contentEquals("")) {
-			stayService.stayLocList(stayLoc, model);
+		if(!"undefined".equals(paramVO.getStayLoc()) || !"undefined".equals(paramVO.getStayType())) {
+			stayService.stayLocList(paramVO, model);
 		}else {
 			stayService.stayList(model);
 		}

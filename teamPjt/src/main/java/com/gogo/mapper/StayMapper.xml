@@ -469,7 +469,13 @@
 			            room r ON t.stayno = r.stayno
 			        group by t.stayno, t.stayname, t.stayloc, t.stayadress, t.stayinfo, t.staytype
 			                , t.badge, t.latitude, t.longitude, t.stayview, t.mainpic1
-			        having t.stayloc =  #{stayLoc}
+			        having 1=1
+			        <if test='stayLoc != null and !"undefined".equals(stayLoc)'>
+				        and t.stayloc =  #{stayLoc}
+			        </if>
+			        <if test='stayType != null and !"undefined".equals(stayType)'>
+				        and t.staytype = #{stayType}
+			        </if>
 			        ORDER BY 
 			        no DESC) t)
 		where rn between 1 and 10

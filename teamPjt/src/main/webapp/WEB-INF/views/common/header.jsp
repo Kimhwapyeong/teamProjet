@@ -172,7 +172,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	    	button.addEventListener('click', ()=>{
 	    		typeButtons.forEach(otherButton => {
 	                if (otherButton === button) {
-	                    otherButton.classList.add('active');
+	                	// 이미 선택된 버튼을 누르면 active 클래스 삭제
+	                	if(button.classList.contains('active')){
+	                		button.classList.remove('active');
+	                	}else{
+		                    otherButton.classList.add('active');
+	                	}
 	                } else {
 	                    otherButton.classList.remove('active');
 	                }
@@ -219,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	    		type = button.innerHTML;
 	    	}
 	    })
-	 	location.href='/stay/list?stayLoc='+where+'&type='+type;
+	 	location.href='/stay/list?stayLoc='+where+'&stayType='+type;
 	}
 	
 	// 화면이 사이즈가 재조정 될 때마다 함수 실행
