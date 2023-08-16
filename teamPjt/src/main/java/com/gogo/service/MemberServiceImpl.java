@@ -48,8 +48,10 @@ public class MemberServiceImpl implements MemberService {
 			if(member.getPw().contentEquals(paramMember.getPw())) {
 				member.setRole(memberMapper.getMemberRole(member.getMemberId()));
 				FileuploadVO fileVO = mypageMapper.selectProfile(member.getMemberId());
-				System.out.println(fileVO.getProfile());
-				member.setProfile(fileVO.getProfile());
+				if(fileVO != null) {
+					System.out.println(fileVO.getProfile());
+					member.setProfile(fileVO.getProfile());
+				}
 				return member;
 			}
 			
@@ -63,8 +65,10 @@ public class MemberServiceImpl implements MemberService {
 				// 사용자 권한을 조회
 				member.setRole(memberMapper.getMemberRole(member.getMemberId()));
 				FileuploadVO fileVO = mypageMapper.selectProfile(member.getMemberId());
-				System.out.println(fileVO.getProfile());
-				member.setProfile(fileVO.getProfile());
+				if(fileVO != null) {
+					System.out.println(fileVO.getProfile());
+					member.setProfile(fileVO.getProfile());
+				}
 				return member;
 			}
 //			return memberMapper.loginAction(member);
