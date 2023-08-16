@@ -179,7 +179,7 @@
 				AND subquery.sequence_number = 1 and beamprojector = 'Y'
 			</if>
 			<if test='findStartDate != null and findEndDate != null'>
-				and subq3.stayno != (select stayno from room where roomno = (select roomno from reservation where to_char(checkin, 'yyyy/mm/dd') >= #{findStartDate} and #{findEndDate} >= to_char(checkout, 'yyyy/mm/dd')))
+				and subq3.stayno != (select stayno from room where roomno = (select roomno from reservation where #{findStartDate} >= to_char(checkin, 'yyyy/mm/dd') and to_char(checkout,'yyyy/mm/dd') >= #{findEndDate}))
 			</if>
 			
 			<!-- 카테고리별 값 출력 -->
