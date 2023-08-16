@@ -69,7 +69,7 @@
 					                    <p class="option">${like.STAYLOC }<br>최소 ${like.STDPERSON }명 / 최대 ${like.OVERPERSON }명<br>₩${like.PRICE }</p>
 					                </div>
 					                <div class="btns"><button type="button" class="btn_bk"><a href="../../../stay/room?stayName=${like.STAYNAME }" style="color:white">예약하기</a></button>
-					                </div><a href="/findstay/about-flow">
+					                </div><a href="../../../stay/room?stayName=${like.STAYNAME }">
 					                    <div class="likestay_img" role="presentation" style="padding-top: 0px;">
 					                        <ul
 					                            class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events slider1 flist_slider">

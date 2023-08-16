@@ -62,6 +62,9 @@ window.addEventListener('load', function(){
             //const roomNoInput = form.querySelector('input[name="roomNo"]');
             const roomNoInput = form.querySelector('input[name="deleteNo"]');
             roomNoInput.value = selectedRoomNo;
+			
+            document.querySelector('input[name=delNo]').value = roomNoInput.value;
+            
             alert("roomNoInput : " + roomNoInput.value);
             form.submit();
         }
@@ -77,7 +80,7 @@ window.addEventListener('load', function(){
     });  */
     
     
-    deleteModalButton.addEventListener("click", function() {
+/*     deleteModalButton.addEventListener("click", function() {
     	const form = document.forms["deleteFrm"];
     	const delNoList = document.querySelectorAll("[type=checkbox]:checked");
 	 	
@@ -92,7 +95,7 @@ window.addEventListener('load', function(){
 	 	
 	 	deleteFrm.action = "/member/host/deleteRoom";
 	 	deleteFrm.submit();  
-    });  
+    });   */
  	
  	
     
@@ -261,6 +264,7 @@ window.addEventListener('load', function(){
 			                                        </div>
 			                                    </div>
 		                                	</c:forEach>
+		                                	<input type="hidden" name="delNo" value="">
 			                             </div>
 		                             </div>
 	                           </form>
