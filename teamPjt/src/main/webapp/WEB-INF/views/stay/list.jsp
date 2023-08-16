@@ -593,7 +593,9 @@
 					            
 					            // 첫 번째 li 요소의 스타일을 변경하여 이미지를 바꿈
 					            let img = document.querySelectorAll('.swiper-wrapper')[index];
+					            let tmp = img.querySelectorAll('li')[0].getAttribute('style');
 					            img.querySelectorAll('li')[0].setAttribute('style', slideImgStyle);
+					            slideImgs[idx].setAttribute('style', tmp);
 					            console.log(idx);
 					    });
 					});
