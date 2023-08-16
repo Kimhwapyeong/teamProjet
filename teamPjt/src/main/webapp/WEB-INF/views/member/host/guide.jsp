@@ -136,7 +136,7 @@ window.addEventListener('load', function(){
 						</div>
 						<div class="mb-3">
 							  <label for="memberId" class="form-label" style="background-color:white; font-size:14px;"> 작성자  <span style="color: red"> *</span></label>
-							  <input type="text" class="form-control" placeholder="host" id="memberId" name="memberId" value="host1" style="font-size:15px" required>
+							  <input type="text" class="form-control" placeholder="host" id="memberId" name="memberId" value="${ sessionScope.memberId }" style="font-size:15px" required>
 						</div>
 						<div class="mb-3">
 							  <label for="content" class="form-label" required>내용  <span style="color: red">*</span></label>
