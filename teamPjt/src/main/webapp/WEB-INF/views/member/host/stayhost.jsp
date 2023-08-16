@@ -192,7 +192,7 @@ window.addEventListener('load', function(){
                                    </div>
                                    <div class="stay_view">
                                        <div class="photo" 
-                                           style="background-image: url('/resources/images/${vo.mainPic1.replace('\\','/')}'); background-repeat: no-repeat; background-position: center center; background-size: cover;">
+                                           style="background-image: url('/display?fileName=${vo.mainPic1.replace('\\','/')}'); background-repeat: no-repeat; background-position: center center; background-size: cover;">
                                             <a href="../../editstay?stayNo=${vo.stayNo}">
                                             <span class="view">스테이 수정</span></a></div>
                                    </div>
@@ -226,7 +226,7 @@ window.addEventListener('load', function(){
 			                                			<input type="text" name="deleteNo" id="deleteNo" value="${room.ROOMNO }">
 			                                			
 					                                	<a href="../../../stay/roomInfo?stayName=${room.STAYNAME }&roomName=${room.ROOMNAME}" style="display:flex;">
-					                                       <div class="photo" style="background-image: url('/resources/images/${room.ROOMPHOTO.replace('\\','/')}'); background-repeat: no-repeat;
+					                                       <div class="photo" style="background-image: url('/display?fileName=${room.ROOMPHOTO.replace('\\','/')}'); background-repeat: no-repeat;
 					                                        background-position: center center; background-size: cover; width: 330px; height: 200px; margin-top:50px;">
 					                                        	 <div class="image-overlay"><p>객실 보기</p></div>
 					                                        </div>
