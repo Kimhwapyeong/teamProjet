@@ -36,14 +36,12 @@
         <![CDATA[
 			SELECT TO_CHAR(R.checkIn + LEVEL - 1, 'YYYYMMDD') AS date_between
 			FROM RESERVATION R
-			JOIN ROOM RM ON R.roomNo = RM.roomNo
-			JOIN STAY S ON RM.stayNo = S.stayNo
-			WHERE S.stayName = #{stayName}
+			WHERE R.roomNo = #{roomNo}
 			CONNECT BY LEVEL <= (R.checkOut - R.checkIn + 1)
 			AND PRIOR SYS_GUID() IS NOT NULL
 			AND PRIOR R.checkIn = R.checkIn
 			AND PRIOR R.reservationNo = R.reservationNo
-			START WITH S.stayName = #{stayName}
+			START WITH R.roomNo = #{roomNo}
 			ORDER BY date_between
         ]]>
 	</select>

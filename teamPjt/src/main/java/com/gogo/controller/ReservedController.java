@@ -92,16 +92,17 @@ public class ReservedController {
 	
 	@PostMapping("dayDisabled")
 	@ResponseBody
-	public List<String> reservedDay(@RequestBody String stayName, Model model) throws UnsupportedEncodingException {
+	public List<String> reservedDay(@RequestBody String roomNo, Model model) throws UnsupportedEncodingException {
 		
-		String decodedStayName = URLDecoder.decode(stayName, "UTF-8");		
-		String result = decodedStayName.replace("=", "");
+		
+		String result = roomNo.replace("=", "");
 		
 		System.err.println(result);
 		
 		List<String> list = service.getReservedList(result);
+		System.err.println(list);
 		
-		
+		model.addAttribute("disableList", list);
 		
 		return list;
 		

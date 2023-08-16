@@ -31,5 +31,5 @@ public interface ReservedService {
 	
 	public String comma(Object a);
 	
-	public List<String> getReservedList(String stayName);
+	public List<String> getReservedList(String roomNo);
 }

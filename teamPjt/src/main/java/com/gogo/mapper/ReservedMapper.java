@@ -25,6 +25,6 @@ public interface ReservedMapper {
 	
 	public String getReservationNo();
 	
-	public List<String> getReservedList(String stayName);
+	public List<String> getReservedList(String roomNo);
 	
 }

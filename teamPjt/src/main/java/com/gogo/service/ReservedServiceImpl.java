@@ -152,8 +152,8 @@ public class ReservedServiceImpl implements ReservedService{
 	}
 	
 	@Override
-	public List<String> getReservedList(String stayName){
-		return reservedMapper.getReservedList(stayName);
+	public List<String> getReservedList(String roomNo){
+		return reservedMapper.getReservedList(roomNo);
 	}
 	
 		

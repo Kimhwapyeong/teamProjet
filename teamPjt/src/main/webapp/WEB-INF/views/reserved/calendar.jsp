@@ -194,7 +194,8 @@
     		
     	}
     	
-    	var stayName = '${param.stayName}'; 
+    	var roomNo = '${roomInfo.ROOMNO}'; 
+    	var list = '${disableList}';
     </script>
     
   </div>

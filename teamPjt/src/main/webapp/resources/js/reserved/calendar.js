@@ -20,7 +20,9 @@ let checkOutDate = "";
 $(document).ready(function () {
     // 달력 만들기
     calendarInit(thisMonth);
+    
 
+    
     // 이전달로 이동
     $('.go-prev').on('click', function () {
         const startDate = $('.start-year-month').html().split('.');
@@ -32,10 +34,15 @@ $(document).ready(function () {
 
         thisMonth = new Date(currentYear, currentMonth - 1, 1);
         calendarInit(thisMonth);
+        
+        reservation_disabled();
     });
 
     // 다음달로 이동
     $('.go-next').on('click', function () {
+    	
+    	
+    	
         const lastDate = $('.last-year-month').html().split('.');
 
         // 예약 가능 최대 개월수와 같거나 크다면 다음달 이동 막기
@@ -51,6 +58,10 @@ $(document).ready(function () {
 
         thisMonth = new Date(currentYear, currentMonth + 1, 1);
         calendarInit(thisMonth);
+        
+        reservation_disabled();
+        
+        
     });
 });
 
@@ -170,19 +181,24 @@ function calendarInit(thisMonth) {
 
     // 이번달
     function dailyDay(currentYear, currentMonth, day) {
-        const date = currentYear + '' + zf((currentMonth + 1)) + '' + zf(day);
-
-        if (checkInDate === date) {
-            return '<div class="day current checkIn" data-day="' + date + '" onclick="selectDay(this)"><span>' + day + '</span><p class="check_in_out_p"></p><p>' + '</div>';
-        } else if (checkOutDate === date) {
-            return '<div class="day current checkOut" data-day="' + date + '" onclick="selectDay(this)"><span>' + day + '</span><p class="check_in_out_p"></p><p>' + '</div>';
-        } else {
-            return '<div class="day current" data-day="' + date + '" onclick="selectDay(this)"><span>' + day + '</span><p class="check_in_out_p"></p><p>' + '</div>';
-        }
+    	
+			
+		
+		const date = currentYear + '' + zf((currentMonth + 1)) + '' + zf(day);
+		if (checkInDate === date) {
+			return '<div class="day current checkIn" data-day="' + date + '" onclick="selectDay(this)"><span>' + day + '</span><p class="check_in_out_p"></p><p>' + '</div>';
+		} else if (checkOutDate === date) {
+			return '<div class="day current checkOut" data-day="' + date + '" onclick="selectDay(this)"><span>' + day + '</span><p class="check_in_out_p"></p><p>' + '</div>';
+		} else {
+			return '<div class="day current" data-day="' + date + '" onclick="selectDay(this)"><span>' + day + '</span><p class="check_in_out_p"></p><p>' + '</div>';
+		}
+    	
+    	
     }
 
     // 다음달 미리 보기
     function nextDisableDay(day) {
+    	
         return '<div class="day next disable">' + day + '</div>';
     }
 
@@ -262,9 +278,13 @@ function addClassSelectDay() {
 
 // 달력 날짜 클릭
 function selectDay(obj) {
-	console.log(obj);
+	
+	reservation_disabled()
+	
+	console.log('obj : ',obj);
     if (checkInDate === "") {
-        $(obj).addClass('checkIn');
+    	
+    	$(obj).addClass('checkIn'); 
         $('.checkIn').find('.check_in_out_p').html('체크인');
 
         checkInDate = $(obj).data('day');
@@ -297,7 +317,7 @@ function selectDay(obj) {
             $('#check_out_day').html(getCheckOutdateHtml());
 
             addClassSelectDay();
-
+            checkInNoNo(obj);
             return;
         }
 
@@ -314,26 +334,75 @@ function selectDay(obj) {
         } else {
             // 체크아웃을 날짜 까지 지정했지만 체크인 날짜를 변경할 경우
             if (confirm('체크인 날짜를 변경 하시겠습니까?')) {
-                $('.checkIn').find('.check_in_out_p').html('');
-                $('.checkOut').find('.check_in_out_p').html('');
-
-                $('.day').removeClass('checkIn');
-                $('.day').removeClass('checkOut');
-                $('.day').removeClass('selectDay');
-
-                $(obj).addClass('checkIn');
-                $('.checkIn').find('.check_in_out_p').html('체크인');
-
-                checkInDate = $(obj).data('day');
-                checkOutDate = "";
-
-                $('#check_in_day').html(getCheckIndateHtml());
-                $('#check_out_day').html("");
-
-                lastCheckInDate();
+//                $('.checkIn').find('.check_in_out_p').html('');
+//                $('.checkOut').find('.check_in_out_p').html('');
+//
+//                $('.day').removeClass('checkIn');
+//                $('.day').removeClass('checkOut');
+//                $('.day').removeClass('selectDay');
+//
+//                $(obj).addClass('checkIn');
+//                $('.checkIn').find('.check_in_out_p').html('체크인');
+//
+//                checkInDate = $(obj).data('day');
+//                checkOutDate = "";
+//
+//                $('#check_in_day').html(getCheckIndateHtml());
+//                $('#check_out_day').html("");
+//
+//                lastCheckInDate();
+            	
+            	reloadAll();
             }
         }
     }
+    
+    checkInNoNo(obj);
+}
+
+function checkInNoNo(obj){
+	
+    if($(obj).attr('class').includes('yesterday') 
+    		&& $(obj).attr('class').includes('checkIn')){
+    	
+    	$('.checkIn').find('.check_in_out_p').html('');
+    	$(obj).removeClass('checkIn');
+    	checkInDate = '';
+    	$('#check_in_day').html('');
+    	$('#check_in_day_list').html('');
+    	$('#check_out_day_list').html('');
+    	$('.check_day_count_list').html('');
+    	$('.check_day_count').html('');
+    	$('.space').html('');
+    	alert($(obj).attr('data-day')+'일은 체크아웃만 가능합니다.');
+    	reloadAll();
+    }
+	
+}
+
+function reloadAll(){
+	
+	// 달력 체크 인/아웃 값 초기화
+	$('.checkIn').find('.check_in_out_p').html('');
+	$('.checkOut').find('.check_in_out_p').html('');
+
+	$('.day').removeClass('checkIn');
+	$('.day').removeClass('checkOut');
+	$('.day').removeClass('selectDay');
+
+
+	$('.checkInOutInfo label').html('')
+
+
+
+	checkInDate = '';
+	checkOutDate = '';
+	
+	// ~ 표시
+	$('.space').html('');
+	
+	calendarInit(thisMonth);
+	
 }
 
 // 체크인 날짜 표기
@@ -441,42 +510,103 @@ function zf(num) {
     return num;
 }
 
+
 window.addEventListener('load', function(){
 	
-	console.log('stayName : ', stayName);
+	reservation_disabled(function(yesterday){
+	    console.log("Yesterday: ", yesterday);
+	});
 	
+	if($('#check_in_day_list').html()==''
+		&& $('#check_out_day_list').html()==''){
+		
+		reloadAll();
+		
+	}
 	
-	if(stayName!=''){
+});
+
+
+
+function reservation_disabled(){
+	
+	console.log('roomNo : ', roomNo);
+	
+	var yesterday;
+	
+	if(roomNo!=''){
 		
 		console.log('hi');
 		
 		$.ajax({
 				"url" : "/reserved/dayDisabled"
 				, "type" : "post"
-				, "data" : stayName
+				, "data" : roomNo
 		}).done(function(res){
 			console.log("현재 스테이 예약 결과 : ", res);
+			let yesterdays = [];
 			
-			res.forEach(date=>{
+			yesterdays = res;
+			
+			res.forEach(date => {
+			    
+			    // 'date'를 Date 객체로 변환합니다.
+			    // 'date'가 'YYYYMMDD' 형식이므로 이를 'YYYY-MM-DD' 형식으로 바꿔서 Date 객체를 생성합니다.
+			    let currentDate = new Date(date.slice(0, 4) + '-' + date.slice(4, 6) + '-' + date.slice(6, 8));
+			    
+			    // 3달 뒤의 날짜를 계산합니다.
+			    currentDate.setMonth(currentDate.getMonth() + 3);
+			    
+			    // 오늘 날짜를 설정합니다.
+			    let today = new Date(date.slice(0, 4) + '-' + date.slice(4, 6) + '-' + date.slice(6, 8));
+
+				let yesterday = Number(date-1);
+				yesterdays.push(yesterday);
 				
+				console.log('reservation_disabled : ',date);
+				$('div[data-day='+yesterday+']').attr('style','color:yellow');
+				$('div[data-day='+yesterday+']').addClass('yesterday');
 				
-				reservation_disabled(date);
-				
+				$('div[data-day='+date+']').addClass('prev disable reserved');
+				$('div[data-day='+date+']').removeClass('current');
+				$('div[data-day='+date+']').removeAttr('onclick');
+				$('div[data-day='+date+']').removeAttr('data-day').attr('hi', date);
+			    
+			    
+			    if(checkInDate!='' && Number(checkInDate) < Number(date)){
+			    	
+			    	// 오늘 날짜부터 3달 뒤의 날짜까지 반복합니다.
+			    	while (today <= currentDate) {
+			    		// 날짜를 'YYYYMMDD' 형식의 문자열로 변환합니다.
+			    		let nextDate = today.toISOString().slice(0, 10).replace(/-/g, '');
+			    		
+			    		
+			    			
+			    			// 해당 날짜의 요소에 원하는 작업을 수행합니다.
+			    			$('div[data-day=' + nextDate + ']').addClass('prev disable');
+			    			$('div[data-day=' + nextDate + ']').removeClass('current');
+			    			$('div[data-day=' + nextDate + ']').removeAttr('onclick');
+			    			$('div[data-day=' + nextDate + ']').removeAttr('data-day').attr('hi', nextDate);
+			    			
+			    			// 다음 날짜로 이동합니다 (날짜에 1을 더합니다).
+			    			today.setDate(today.getDate() + 1);
+			    		
+			    		
+			    	}
+			    }
+			    
+			    
 			});
 			
 			
+			
 		});
+			
+			
+			
 		
 	}
 	
 	
-	
-});
-
-function reservation_disabled(date){
-	
-	console.log('reservation_disabled : ',date);
-	
-	$('div[data-day='+date+']').addClass('prev disable');
 	
 }
