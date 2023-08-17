@@ -600,7 +600,7 @@
 					    });
 					});
 					
-/* 					let prev = document.querySelectorAll('.swiper-button-prev');
+ 					let prev = document.querySelectorAll('.swiper-button-prev');
 					
 					prev.forEach((button, index) => {
 					    button.addEventListener('click', () => {
@@ -611,10 +611,10 @@
 					        
 					        if (idx == 0) {
 					        	idx = slideImgs.length-1; // 인덱스가 이미지 개수를 넘어가면 초기화
-					        } else {
+					        }
 					            // 현재 인덱스의 이미지 스타일을 가져옴
 					            let slideImgStyle = slideImgs[idx].getAttribute('style');
-					            
+				
 					            // 첫 번째 li 요소의 스타일을 변경하여 이미지를 바꿈
 					            let img = document.querySelectorAll('.swiper-wrapper')[index];
 					            let tmp = img.querySelectorAll('li')[0].getAttribute('style');
@@ -622,9 +622,9 @@
 					            slideImgs[idx].setAttribute('style', tmp);
 					            
 					            idx--;
-					        }
+					       
 					    });
-					});  */
+					}); 
 		            
 		            
         		
