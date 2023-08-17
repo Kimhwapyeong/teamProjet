@@ -111,9 +111,16 @@
             
 			
 			document.getElementById('paymentButton').addEventListener('click', function () {
-			    // 가져올 값들
+			    // 파라메터로 checkIn / checkOut값을 받아 왔을 때
+			    let checkInValue = "${param.checkIn}";
+    			let checkOutValue = "${param.checkOut}";
 			    
+    			if(checkInValue != '' && checkOutValue != ''){
+				    document.querySelector('#reserved_checkIn').value = checkInValue.split('/').join('-');
+				    document.querySelector('#reserved_checkOut').value = checkOutValue.split('/').join('-');
+    			}
 			    // URL 생성
+			    
 			    const url = '/reserved/reserved?roomNo='+${roomInfo.ROOMNO}+'&checkIn='+document.querySelector('#reserved_checkIn').value.replaceAll('-','/')+'&checkOut='+document.querySelector('#reserved_checkOut').value.replaceAll('-','/');
 			    
 			    location.href = url;
