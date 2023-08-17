@@ -47,4 +47,8 @@ public interface StayService {
 	
 	List<FileuploadVO> restStayImgList();
 	
+	Map<String, String> stayAllImg(String stayName, Model model);
+	
+	List<Map<String, String>> roomAllImg(String stayName, Model model);
+	
 }

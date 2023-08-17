@@ -43,4 +43,7 @@ public interface StayMapper {
 	
 	public List<Map<String, String>> stayRoomImgDate(@Param("stayName")String stayName, @Param("findStartDate")String findStartDate, @Param("findEndDate")String findEndDate);
 	
+	public Map<String, String> stayAllImg(String stayName);
+	
+	public List<Map<String, String>> roomAllImg(String stayName);
 }

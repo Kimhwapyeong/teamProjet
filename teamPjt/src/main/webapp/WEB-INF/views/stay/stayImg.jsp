@@ -424,326 +424,53 @@
             }
         }
 </style>
+<script>
+	window.addEventListener('load', function () {
+		
+	}
+</script>
 <title>Insert title here</title>
 </head>
 <body>
 	<%@include file="../common/header.jsp" %>
 	<div class="_gallery_wrapper__cyjyQ">
                 <div class="container">
-                
+                	
+                	
                     <div class="_gallery_sec_photo__CITKA">
                         <div class="_gallery_cont_area__OLib1">
                             <div class="_gallery_cont_tit__nqN0s">
-                                <p class="_gallery_name__FFIx8">서와정(stayName)</p>
-                                <p class="_gallery_desc__2gd8E">평온한 쉼이 있는 곳(stayInfo)</p>
-                                <p class="_gallery_location__KCmB2">강원 / 강릉시(stayLoc)</p>
+                                <p class="_gallery_name__FFIx8">${param.stayName}</p>
+                                 <p class="_gallery_desc__2gd8E">${stayImg.STAYINFO}</p>
+                                <p class="_gallery_location__KCmB2">${stayImg.STAYLOC}</p>
                             </div>
                         </div>
                         <div>
                             <div class="_gallery_photo_box__Wg_4Z">
                                 <div data-index="0" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/188/808/original/1a0fd2fe1f34c1bb6b32bc2201b227d4cc28b31a.jpeg?1689916761"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy">(stayMainPic1)</div>
+                                        src="../resources/images/${stayImg.MAINPIC1}"
+                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
                             </div>
                         </div>
                     </div>
                     
+                    <c:set var="prevRoomName" value="" />
                     
                     <div class="_gallery_sec_photo__CITKA">
                         <div class="_gallery_cont_area__OLib1">
-                            <div class="_gallery_cont_subtit__e5Fgl">스테이(roomName)</div>
+	                            <div class="_gallery_cont_subtit__e5Fgl">스테이</div>
                         </div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="1" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/188/826/original/36da18b19c0e30f52325e45078392ddf18d969b1.jpeg?1689920960"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
+	                        <div>
+	                    <c:forEach items="${roomImg}" var="room" step="1">
+	                            <div class="_gallery_photo_box__Wg_4Z" style="margin-bottom: 30px">
+	                                <div data-index="1" role="presentation" class="_gallery_pointer__c0HmY"><img
+	                                        src="../resources/images/${room.FILENAME.replace('\\','/') }"
+	                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
+	                            </div>
+	                    </c:forEach>
+	                        </div>
                     </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="2" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/188/825/original/b57396e544535ded8b28b41d0e1056033773cc1c.jpeg?1689920910"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="3" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/188/827/original/b17f0a8e5b42d9ebf659130fcd2c5dcb442f00ea.jpeg?1689920977"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="4" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/188/829/original/2186b02fb99574b7a994f8de64168ea8d76ec66d.jpeg?1689921075"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="5" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/188/828/original/d323ec02dc8a9a048e4713936b21e1f9abc1d9e2.jpeg?1689920988"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1">
-                            <div class="_gallery_cont_subtit__e5Fgl">서와정</div>
-                        </div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="6" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/274/original/dbe8f056fad21c9fa23a092a70dfb5976f9ae7fe.jpeg?1690259978"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="7" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/275/original/26ee14b8707bfeec6fa9d6b124eeb5789c94f91e.jpeg?1690259981"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="8" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/276/original/26ee17075ae0e521f4f33e13673782eea1949175.jpeg?1690259983"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="9" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/277/original/c8568f552e1b3dbb97ec7ada5e762092bfb4aa25.jpeg?1690259986"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="10" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/278/original/07833452f23c28f0bf632d9df3784b67dd7a3929.jpeg?1690259988"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="11" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/279/original/fb18ea3d26df7cd9daa66f51f97c4e7d0c8bdc02.jpeg?1690259991"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="12" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/280/original/f88d708c67f5245d0ee1933ce63d6edd35d6b6d6.jpeg?1690259993"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="13" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/281/original/16349289d7b12e4c55d9434ecf0f3a5e88055593.jpeg?1690259996"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="14" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/282/original/36653d1ee2139fc23953b7a99eace799017ab464.jpeg?1690259998"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="15" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/283/original/7f4d2d30c134b603d8a369ea4deb69f7fad97a72.jpeg?1690260000"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="16" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/284/original/361aa9c958dd7a07db020a034536aa17879b8dbc.jpeg?1690260003"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="17" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/285/original/bc617cb6d7c1584a894bc2fdbb7d3892db354e9e.jpeg?1690260007"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="18" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/286/original/4242b4a2275f34cf37ac1fa323afc6a13fe726a2.jpeg?1690260009"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="19" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/287/original/b078c9488c237d8922db3ceeb9af65b934172283.jpeg?1690260014"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="20" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/288/original/0d11983c304783c67d525af70e28a776a3fef23d.jpeg?1690260016"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="21" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/289/original/71c875412a3037032ca6629569d49316800dafc7.jpeg?1690260019"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="22" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/290/original/00e8d5714ac625eb67b8c79a1ae6716641a47836.jpeg?1690260022"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="23" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/291/original/6d1989e636ac5db67f481c7d5639360b803b56b1.jpeg?1690260025"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="24" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/292/original/6ab0d3be88a03e2943bcf6f9e94a61e58f7b166a.jpeg?1690260028"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="25" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/293/original/c3758b118ba62cbf913be35bc998d435d50ed032.jpeg?1690260030"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="26" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/295/original/536ab7cdfa2105f27ee7780963fa4ae41ec87af5.jpeg?1690260036"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="27" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/294/original/e224e1e2c6bbc84c51435610641c2e5dc8708ad9.jpeg?1690260033"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="28" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/296/original/0cc4be541a2bae5d59c553d49dbf5ed907043b10.jpeg?1690260038"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_gallery_sec_photo__CITKA">
-                        <div class="_gallery_cont_area__OLib1"></div>
-                        <div>
-                            <div class="_gallery_photo_box__Wg_4Z">
-                                <div data-index="29" role="presentation" class="_gallery_pointer__c0HmY"><img
-                                        src="//images.stayfolio.com/system/pictures/images/000/189/297/original/0710200bb1d741f776bc79caeef85f3448852f9a.jpeg?1690260041"
-                                        alt="Detail Stay" class="_gallery_photo__q4TEN" loading="lazy"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                   </div>
             </div>
 	<%@include file="../common/footer.jsp"%>
 </body>

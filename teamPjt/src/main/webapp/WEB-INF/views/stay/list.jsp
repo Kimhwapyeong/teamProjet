@@ -1679,10 +1679,10 @@
 		
 			<!-- 페이지 -->
 			<div class="paging false">
-				<a href="/" class="prev" title="이전 페이지">이전 페이지</a><a href="/"
+				<!-- <a href="/" class="prev" title="이전 페이지">이전 페이지</a><a href="/"
 					class="on">1</a><a href="/" class="">2</a><a href="/" class="">3</a><a
 					href="/" class="">4</a><a href="/" class="">5</a><a
-					href="/" class="next" title="다음 페이지">다음 페이지</a>
+					href="/" class="next" title="다음 페이지">다음 페이지</a> -->
 			</div>
 		</div>
 		<!-- </div> -->

@@ -570,4 +570,36 @@
 		where rn between 1 and 10
 	</select>
 	
+	
+	<!-- stayImg 페이지 stay 뽑기 -->
+	<select id="stayAllImg" resultType="java.util.Map">
+		select 
+		stayName,
+		stayloc || '/' || SUBSTR(stayadress, INSTR(stayadress, ' ') + 1, INSTR(stayadress, ' ', INSTR(stayadress, ' ') + 1) - INSTR(stayadress, ' ') - 1) AS stayLoc,
+		stayInfo,
+		mainPic1
+		from stay
+		where stayName = #{stayName}
+	</select>
+	<resultMap type="java.util.HashMap" id="stayAllImg">
+	    <result property="stayName" column="STAYNAME" />
+	    <result property="stayLoc" column="STAYLOC" />
+	    <result property="stayInfo" column="STAYINFO" />
+	    <result property="mainPic1" column="MAINPIC1" />
+	</resultMap>
+	
+	<!-- stayImg 페이지 room 뽑기 -->
+	<select id="roomAllImg" resultType="java.util.Map">
+		select (uploadpath || uuid || '_' || filename) as fileName, room.roomno as roomno, room.stayno as stayno, roomname
+		from attach
+		join room
+		on room.roomno = attach.roomno
+		where attach.roomno is not null and attach.stayno = (select stayNo from stay where stayName = #{stayName})
+	</select>
+	<resultMap type="java.util.HashMap" id="roomAllImg">
+	    <result property="fileName" column="FILENAME" />
+	    <result property="roomno" column="ROOMNO" />
+	    <result property="stayno" column="STAYNO" />
+	    <result property="roomname" column="ROOMNAME" />
+	</resultMap>
 </mapper>

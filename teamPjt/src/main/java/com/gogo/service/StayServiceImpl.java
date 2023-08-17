@@ -137,4 +137,18 @@ public class StayServiceImpl implements StayService{
 	public List<FileuploadVO> restStayImgList() {
 		return stayMapper.stayImgList();
 	}
+
+	@Override
+	public Map<String, String> stayAllImg(String stayName, Model model) {
+		Map<String, String> stay = stayMapper.stayAllImg(stayName);
+		model.addAttribute("stayImg", stay);
+		return null;
+	}
+
+	@Override
+	public List<Map<String, String>> roomAllImg(String stayName, Model model) {
+		List<Map<String, String>> room = stayMapper.roomAllImg(stayName);
+		model.addAttribute("roomImg", room);
+		return null;
+	}
 }

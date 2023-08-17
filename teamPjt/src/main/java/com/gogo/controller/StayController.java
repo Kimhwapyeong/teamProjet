@@ -68,8 +68,9 @@ public class StayController {
 	}
 	
 	@GetMapping("stayImg")
-	public void stayImg() {
-		
+	public void stayImg(String stayName, Model model) {
+		stayService.stayAllImg(stayName, model);
+		stayService.roomAllImg(stayName, model);
 	}
 	
 	
