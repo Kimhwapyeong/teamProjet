@@ -515,7 +515,7 @@
 			roomList.forEach((list, index)=>{
 				pageBlock
 				+='<li class="swiper-slide slider_box single-room swiper-slide-active">'
-				+'	<a href="/stay/roomInfo?stayName='+stayName+'&roomName='+list.ROOMNAME+'">';
+				+'	<a href="/stay/roomInfo?stayName='+stayName+'&roomName='+list.ROOMNAME+'&checkIn='+formatDate(checkInDate)+'&checkOut='+formatDate(checkOutDate)+'">';
 				
 				roomImg.forEach((img, index)=>{
 					if(img.ROOMNO == list.ROOMNO){
