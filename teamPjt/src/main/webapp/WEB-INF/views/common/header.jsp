@@ -115,6 +115,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 	// 알림창을 위한 변수
 	let msg = '${msg}'
+	if('${param.msg}' != ''){
+		msg = '${param.msg}';
+	}
 	// let msg = '모달테스트';
 	
 	// sideMenu가 켜진 상태에서 페이지 사이즈를 늘려 메뉴가 사라졌을 경우, 다시 사이즈를 줄이면
@@ -122,6 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	var side;
 
 	window.addEventListener('load', function(){
+		console.log(msg);
 		// btnWhere 클릭되면 모달창 보이기
 		btnWhere.addEventListener('click', function(){
 	        document.querySelector("#whereModal").style.display='';
@@ -203,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	    	document.querySelector("#sideMenu").style.display='none';
 	    	side = 0;
 	    })
-	    let msg = '${param.msg}';
+
 	    // msg가 있으면 알림창 보여주기
 	    alertPopOn(msg);
 	
