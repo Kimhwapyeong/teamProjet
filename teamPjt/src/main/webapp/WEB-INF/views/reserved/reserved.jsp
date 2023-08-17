@@ -14,6 +14,8 @@
 	}
 
 </style>
+
+<!-- 인터넷 환경에 따라 자꾸 오류떠서 그냥 들어오면 한 번 새로고침하여 paymentNo의 값을 새로 받아옴 -->
 <script type="text/javascript">
     // 페이지 로드 시 실행되는 함수
     window.onload = function() {
