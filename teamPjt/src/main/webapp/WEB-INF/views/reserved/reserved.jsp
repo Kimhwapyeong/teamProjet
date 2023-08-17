@@ -14,6 +14,28 @@
 	}
 
 </style>
+<script type="text/javascript">
+    // 페이지 로드 시 실행되는 함수
+    window.onload = function() {
+        // 로컬 스토리지에서 reloadStatus 값을 가져옴
+        var reloadStatus = localStorage.getItem('reloadStatus');
+        
+        // reloadStatus 값이 없거나 'notReloaded'인 경우에만 새로고침 수행
+        if (reloadStatus === null || reloadStatus === 'notReloaded') {
+            // 로컬 스토리지에 reloadStatus 값을 'reloaded'로 설정
+            localStorage.setItem('reloadStatus', 'reloaded');
+            
+            // 페이지 새로고침
+            location.reload();
+        } 
+        else {
+            // reloadStatus 값을 'notReloaded'로 다시 설정하여 
+            // 다음 번 페이지 로드 시에도 새로고침이 수행될 수 있도록 함
+            localStorage.setItem('reloadStatus', 'notReloaded');
+        }
+    }
+</script>
+
 <script>
 
 			
