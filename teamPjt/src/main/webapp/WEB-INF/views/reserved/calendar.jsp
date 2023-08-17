@@ -102,7 +102,7 @@
 		<input type="hidden" name="btnYN" value="${btnYN}">
 		
 		    <div style="position:absolute; top:720px; left:10%; width:1000px;" class="reserveBox">   
-		    	<button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer;" type="submit" onclick="check(form)">예약하기</button><br><br>
+		    	<button id="reserveOr" style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer;" type="submit" onclick="check(form)">예약하기</button><br><br>
 		    	<button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer;" id="reload">초기화</button><br><br>
 		    	<button style="padding-bottom:10px; background-color:white; border:0px; cursor: pointer;" id="back">메인으로</button><br><br>
 		    </div>
@@ -112,8 +112,23 @@
     </form>
     </div>
     <script>
+    	
+    	
+    
     
     	window.addEventListener('load', function(){
+    		
+    		var isReserve = '${param.roomNo}';
+    		
+    		if(isReserve!=''){
+    			
+    			$('#reserveOr').html('예약하기');
+    		
+    		} else {
+    			
+    			$('#reserveOr').html('검색하기');
+    		}
+    		
     		
     		/*
     		// 예약 페이지에선 닫기 버튼 안보여주기
@@ -196,6 +211,25 @@
     	
     	var roomNo = '${roomInfo.ROOMNO}'; 
     	var list = '${disableList}';
+    	
+    	window.addEventListener('load', function(){
+    		
+    		var wherePage = '${param.stayLoc}';
+    		var wherePage2 = '${param.btnYN}';
+    		
+    		if(wherePage!='' || wherePage2 !=''){
+    			
+	    		$('.reserveBox').attr('style','position:absolute; top:750px; left:10%; width:1000px;');
+	    		$('hr:eq(1)').attr('style','border-top: 2.9px solid;color: #00000061;width:1150px;position:absolute;left:3%;top: 680px;');
+	    		
+    		} else {
+    			
+    			
+    			
+    		}
+    		
+    	});
+    	
     </script>
     
   </div>
