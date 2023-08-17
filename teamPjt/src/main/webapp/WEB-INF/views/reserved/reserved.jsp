@@ -166,7 +166,7 @@
 								
 
 		var buyer_name = '${sessionScope.memberId}';   // sessionScope.userId 받아와야 함
-		var paymentNo = '${paymentNo}'; // 시퀀스 추가해야 함
+		var paymentNo = '${paymentNo}'+ new Date().getTime(); // 시퀀스 추가해야 함
 		var payInfo = '${sessionScope.memberId}';
 		var purchaseName = $('input[name=stayName]').val()+', ' +$('input[name=roomName]').val();
 		var purchaseAmount = '${price}';
