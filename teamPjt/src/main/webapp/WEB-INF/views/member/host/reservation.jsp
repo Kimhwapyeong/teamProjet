@@ -47,6 +47,7 @@
                                <li class=""><a href="./income">수입 현황</a></li>
                                <li class=""><a href="./guide">호스트가이드</a></li>
                                <li class=""><a href="./infoHost">회원 정보 수정</a></li>
+                               <li class=""><a href="./message">메시지</a></li>
                            </ul>
                        </div>
                        <div class="mypage_content">
