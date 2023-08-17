@@ -132,4 +132,9 @@ public class StayServiceImpl implements StayService{
 	public List<Map<String, String>> stayRoomImgDate(String stayName, String findStartDate, String findEndDate) {
 		return stayMapper.stayRoomImgDate(stayName, findStartDate, findEndDate);
 	}
+
+	@Override
+	public List<FileuploadVO> restStayImgList() {
+		return stayMapper.stayImgList();
+	}
 }

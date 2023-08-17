@@ -139,8 +139,6 @@
 						<div class="btn_select ">날짜를 선택해주세요.</div>
 					</div>
 					<%-- <a href="/reserved/reserved?stayName=${roomInfo.STAYNAME }&roomName=${roomInfo.ROOMNAME }&roomNo=${roomInfo.ROOMNO}"><button type="button" class="btn_bk pc_only">결제하기</button></a> --%>
-					세션 : ${sessionScope.memberId}
-					아이디 : ${roomInfo.MEMBERID }
 					<c:set var="isMember" value="${sessionScope.memberId == roomInfo.MEMBERID}" />
 					<c:if test="${isMember}">
 						<a href="/editroom?roomNo=${roomInfo.ROOMNO }"><button type="button" class="btn_bk pc_only" id="paymentButton">수정하기</button></a>
