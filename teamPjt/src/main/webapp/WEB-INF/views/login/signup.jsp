@@ -4,10 +4,11 @@
 <!DOCTYPE html>
 <jsp:include page="../common/header.jsp" />
 <html>
-	<!-- jQuery 라이브러리 추가 -->
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- jQuery 라이브러리 추가 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- ?v=<new java.util.Date().getTime()>을 붙이면 수정사항이 바로바로 새로고침 됨-->
 <script src="/resources/js/member/signupCheck.js"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <head>
 <link rel="stylesheet" href="/resources/css/login/signup.css">
 
