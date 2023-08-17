@@ -461,20 +461,23 @@
 	<select id="likestay" resultType="java.util.Map">
 		SELECT 
 		    s.stayname, 
-		    s.staytype, 
-		    s.stayadress, 
-		    r.stdperson, 
-		    r.overperson, 
-		    r.price, 
-		    l.memberid, 
-		    s.mainpic1
+		    MIN(r.price) AS price
+		    , s.staytype
+		    , s.stayadress
+		    , s.mainpic1
+		    , min(r.stdperson) AS stdperson
+		    , max(r.overperson) As overperson
+		    , l.memberid
 		FROM stay s 
 		JOIN room r ON s.stayno = r.stayno
-		JOIN likestay l ON r.stayno = l.stayno
-		WHERE l.memberid = #{memberId} AND r.price = (
-		    SELECT MIN(price) FROM room WHERE stayno = s.stayno
-		)
-		ORDER BY stayname
+		JOIN likestay l ON s.stayno = l.stayno
+		WHERE l.memberid = 'user1'
+		GROUP BY s.stayname
+		, s.staytype
+		, s.stayadress
+		, s.mainpic1
+		, l.memberid
+		ORDER BY s.stayname
 	</select>
 	
 	<resultMap type="java.util.HashMap" id="likeMap">
