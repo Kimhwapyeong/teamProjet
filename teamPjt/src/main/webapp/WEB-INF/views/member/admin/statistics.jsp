@@ -178,8 +178,8 @@
 									                                fill: false,
 									                                backgroundColor: [
 									                                    //색상
-									                                    'rgba(34, 80, 150, 0.61)',
-									                                    'rgba(194, 93, 26, 0.418)'
+									                                    'rgba(34, 80, 150, 0.315)',
+									                                    'rgba(194, 93, 26, 0.205)'
 									                                ],
 									                                borderColor: [
 									                                    //경계선 색상

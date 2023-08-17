@@ -99,8 +99,8 @@
 	<select id="chartGender" resultType="com.gogo.vo.MemberVO">
 		SELECT
 		    CASE 
-		        WHEN gender = 'M' THEN '남자'
-		        WHEN gender = 'F' THEN '여자'
+		        WHEN gender = 'M' THEN '남'
+		        WHEN gender = 'F' THEN '여'
 		    END AS gender_group,
 		    COUNT(*) AS gender_Count
 		FROM
@@ -108,8 +108,8 @@
 		WHERE gender IS NOT NULL
 		GROUP BY
 		    CASE 
-		        WHEN gender = 'M' THEN '남자'
-		        WHEN gender = 'F' THEN '여자'
+		        WHEN gender = 'M' THEN '남'
+		        WHEN gender = 'F' THEN '여'
 		    END
 	</select>
 	
