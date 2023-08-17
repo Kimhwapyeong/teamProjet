@@ -641,7 +641,8 @@
 							
 		        			fetch('/stst/category/'+ categoryName)
 							.then(response => response.json())
-							.then(map => keywordList(map));
+							.then(map => {keywordList(map);
+											likeBtnActive()});
         				})
         			})
         			
@@ -762,8 +763,8 @@
 	        			// 체크아웃
 	        			//let findEndDate = document.querySelector('#reserved_checkOut').value.replaceAll('-','/');
 	        			let findEndDate = document.querySelector('#reserved_checkOut').value;
-	        			if(findEndDate === null){
-	        				findEndDate == "";
+	        			if(findEndDate === ""){
+	        				findEndDate == null;
 	        			}
 	        			console.log(findEndDate);
 	        			
@@ -790,7 +791,7 @@
 	        			      })
 	        			      .then(response => response.json())
 	        			      //.then(map => keywordList(map));
-	        			      .then(map => keywordList(map)); 
+	        			      .then(map => {keywordList(map); likeBtnActive()}); 
 	        			});
 
         	 
@@ -851,17 +852,17 @@
 		 				// 로그인이 안되어 있을 떄
  		 				if(id == null && id == ""){
 		 					pageBlock
-		 					+='	<button type="button" class="btn_like "><span>관심스테이</span></button>';
+		 					+='	<button type="button" class="btn_like " value="'+list.stayNo+'"><span>관심스테이</span></button>';
 		 				// 로그인이 되어 있을 떄
 		 				}else if(likeList != null && id != null){
 		 					pageBlock
-		 					+='	<button type="button" class="btn_like"><span>관심스테이</span></button>';
+		 					+='	<button type="button" class="btn_like" value="'+list.stayNo+'"><span>관심스테이</span></button>';
 		 					likeList.forEach((like,idx)=>{
 		 						console.log('like:' + like.stayNo);
 			 					// 좋아요 값이 있을때
 			 					if(list.stayNo == like.stayNo){
 			 						pageBlock
-				 					+='	<button type="button" class="btn_like on"><span>관심스테이</span></button>';
+				 					+='	<button type="button" class="btn_like on" value="'+list.stayNo+'"><span>관심스테이</span></button>';
 			 					}
 		 					})
 		 				}
@@ -905,7 +906,63 @@
             
             
             
-            
+     function likeBtnActive(){
+         let member = document.getElementById('memberId').value;
+         console.log(member);
+
+         //좋아요
+         let likeBtn = document.querySelectorAll('.flist_box .btn_like');
+         likeBtn.forEach((button,index) => {
+             button.addEventListener('click', () => {
+             	if(member === null || member === ""){
+             		alertPopOn("로그인 후 이용하세요");
+                 }else{
+	                    likeBtn.forEach(otherButton => {
+		                    //누른 버튼의 index 번호가 같고
+		                    if(otherButton === button){
+		                    	//클래스가 포함되어 있으면
+		                        if(!button.classList.contains('on')){
+		                        	button.classList.add('on');
+		                        	
+		                        	let data = {
+		    	        					stayNo : document.querySelectorAll('.btn_like')[index].value,
+		    	        					memberId: member
+		    	        			      };
+		                        	
+		                        	fetch("/stst/insertLike", {
+			        			        method : 'post', 
+			        			        headers : {
+			        			          'Content-Type': 'application/json'
+			        			        },
+			        			        body : JSON.stringify(data)
+			        			      })
+			        			      .then(response => response.json())
+			        			      .then(map => {console.log(map);});
+		                        }else{
+		                            button.classList.remove('on');
+		                            
+		                            let data = {
+		    	        					stayNo : document.querySelectorAll('.btn_like')[index].value,
+		    	        					memberId: member
+		    	        			      };
+		                        	
+		                        	fetch("/stst/deleteLike", {
+			        			        method : 'post', 
+			        			        headers : {
+			        			          'Content-Type': 'application/json'
+			        			        },
+			        			        body : JSON.stringify(data)
+			        			      })
+			        			      .then(response => response.json())
+			        			      //.then(map => keywordList(map));
+			        			      .then(map => {console.log(map);});
+		                    	}
+	                    	}
+	                    })
+                 }
+             })
+         })
+     }
             
             
             
