@@ -162,8 +162,8 @@
 										<div class="DatePicker_calendar_wrap">
 											<div class="DateRangePicker DateRangePicker_1">
 												<div class=""
-													style="width: 1080px; height: 450px; border: 1px solid #e4e4e4; background: #fff; border-radius: 5px;">
-													<div class="calendar-wrap" style="padding-top: 0px">
+													style="width: 1080px; height: 450px; /*border: 1px solid #e4e4e4;*/ background: #fff; border-radius: 5px;">
+													<div class="calendar-wrap" style="padding-top: 0px; margin-top: 60px;">
 														<div class="calendar-middle-wrap" style="height: 400px;">
 															<div class="cal_nav">
 																<a href="javascript:;" class="nav-btn go-prev"></a> <span
@@ -336,7 +336,7 @@
 										</div>
 										<!-- <button type="button" class="day_del">선택 날짜 지우기</button> -->
 									</div>
-									<div class="btn_close" role="presentation"></div>
+									<div class="btn_close" role="presentation" ></div>
 								</div>
 							</div>
 						</div>

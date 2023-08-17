@@ -54,7 +54,7 @@ input ::placeholder{
 									selected="" value="" disabled="" hidden="">선택해 주세요</option>
 								<option value="펜션">펜션</option>
 								<option value="한옥">한옥</option>
-								<option value="호스텔">호스텔</option>
+								<option value="렌탈하우스">렌탈하우스</option>
 								<option value="민박">민박</option>
 								<option value="호텔">호텔</option></select>
 						</div></li>

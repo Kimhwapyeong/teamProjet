@@ -339,7 +339,7 @@ public class MemberController extends CommonRestController {
     @RequestMapping(value = "/login/kakaoAction")
     public String oauthKakao(
             @RequestParam(value = "code", required = false) String code
-            , HttpServletRequest req, Model model, HttpSession session) throws Throwable {
+            , HttpServletRequest req, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Throwable {
 
         System.out.println("--------- 카카오 정보조회 들어옴 ---------");
 
@@ -363,6 +363,7 @@ public class MemberController extends CommonRestController {
 	     member.setMemberId((String) userInfo.get("id"));
 	     member.setMemberEmail((String) userInfo.get("account_email"));
 	     member.setAge_group((String) userInfo.get("age_range"));
+	     member.setProfile((String) userInfo.get("profile_image"));
 	     
 	     String originalgender = (String) userInfo.get("gender");
 	     String gender = originalgender.substring(0, 1);
@@ -372,20 +373,22 @@ public class MemberController extends CommonRestController {
 		String month = birthday.substring(0,2);
 		String days = birthday.substring(2);
 		member.setBirthday("00"+month+days);
+		
 	    
         System.out.println("----- access_Token ----- : " + access_Token);
-        System.out.println("------- id ------- : " + userInfo.get("memberId"));    
+        System.out.println("------- id ------- : " + userInfo.get("id"));    
         System.out.println("------- nickname ------- : " + memberName);    
         System.out.println("----- account_email ---- : " + userInfo.get("account_email"));    
         System.out.println("-------- gender -------- : " + userInfo.get("gender")); 
         System.out.println("------ age_range ------- : " + userInfo.get("age_range")); 
         System.out.println("------- birthday ------- : " + userInfo.get("birthday")); 
+        System.out.println("------- profile_image ------- : " + userInfo.get("profile_image")); 
 
 	    
         // 만약 DB에 해당 회원의 ID가 없다면 회원가입 시키기
-	    //int idCheck = memberService.idCheck(member);
-	    if (member != null && member.getMemberEmail() != null) {
-	    //if(idCheck==0) {
+	    int idCheck = memberService.idCheck(member);
+	    
+	    if(idCheck==0) {
 	    	
 	    	// 비밀번호 랜덤
 	    	String kakaoPW = UUID.randomUUID().toString();
@@ -394,9 +397,14 @@ public class MemberController extends CommonRestController {
 	    	int res = memberService.signupAction(member);
 	    	
 	    	if(res>0) {
+	            // 카카오 로그인 성공 시 snsYN을 "Y"로 설정
+	            member.setSnsCk("Y");
+	            memberService.insertMemberRole(member.getMemberId(), "user");
 	    		memberService.updateKakao(member);
 	    		userInfo.put("msg", "카카오 회원가입 성공");
 	    		loginAction(member, model, session);
+	    		redirectAttributes.addFlashAttribute("msg", "환영합니다.");
+	    		
 	    	} else {
 	    		userInfo.put("msg", "카카오 회원가입 실패");
 	    		
@@ -405,6 +413,7 @@ public class MemberController extends CommonRestController {
 	    } else {
 	    	// 이미 회원가입 되어 있는 네이버 로그인의 경우 비밀번호를 가져와 세팅
 	    	String kakaoPW = memberService.getPw(member);
+	    	
 	    	member.setPw(kakaoPW);
 	    	Map<String, Object> map = loginAction(member, model, session);	
 	    	
@@ -414,7 +423,7 @@ public class MemberController extends CommonRestController {
 	    		userInfo.put("result", "ok");
 	    	}
 	    }
-	    return "/main"; 
+	    return "redirect:/main"; 
 
     }
 }

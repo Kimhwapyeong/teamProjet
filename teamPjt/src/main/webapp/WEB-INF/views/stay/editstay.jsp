@@ -53,10 +53,9 @@ input ::placeholder{
 						<div class="dd">
 							<select style="width: 100%" class="form_style" name="stayType"><option
 									selected="" value="" disabled="" hidden="">선택해 주세요</option>
-								<option value="렌탈하우스" ${ map.stayVO.stayType eq '렌탈하우스' ? 'selected' : '' }>렌탈하우스</option>
 								<option value="펜션" ${ map.stayVO.stayType eq '펜션' ? 'selected' : '' }>펜션</option>
 								<option value="한옥" ${ map.stayVO.stayType eq '한옥' ? 'selected' : '' }>한옥</option>
-								<option value="호스텔" ${ map.stayVO.stayType eq '호스텔' ? 'selected' : '' }>호스텔</option>
+								<option value="렌탈하우스" ${ map.stayVO.stayType eq '렌탈하우스' ? 'selected' : '' }>렌탈하우스</option>
 								<option value="민박" ${ map.stayVO.stayType eq '민박' ? 'selected' : '' }>민박</option>
 								<option value="호텔" ${ map.stayVO.stayType eq '호텔' ? 'selected' : '' }>호텔</option></select>
 						</div></li>
