@@ -14,6 +14,30 @@
 	}
 
 </style>
+
+<!-- 인터넷 환경에 따라 자꾸 오류떠서 그냥 들어오면 한 번 새로고침하여 paymentNo의 값을 새로 받아옴 -->
+<script type="text/javascript">
+    // 페이지 로드 시 실행되는 함수
+    window.onload = function() {
+        // 로컬 스토리지에서 reloadStatus 값을 가져옴
+        var reloadStatus = localStorage.getItem('reloadStatus');
+        
+        // reloadStatus 값이 없거나 'notReloaded'인 경우에만 새로고침 수행
+        if (reloadStatus === null || reloadStatus === 'notReloaded') {
+            // 로컬 스토리지에 reloadStatus 값을 'reloaded'로 설정
+            localStorage.setItem('reloadStatus', 'reloaded');
+            
+            // 페이지 새로고침
+            location.reload();
+        } 
+        else {
+            // reloadStatus 값을 'notReloaded'로 다시 설정하여 
+            // 다음 번 페이지 로드 시에도 새로고침이 수행될 수 있도록 함
+            localStorage.setItem('reloadStatus', 'notReloaded');
+        }
+    }
+</script>
+
 <script>
 
 			
@@ -166,7 +190,7 @@
 								
 
 		var buyer_name = '${sessionScope.memberId}';   // sessionScope.userId 받아와야 함
-		var paymentNo = '${paymentNo}'; // 시퀀스 추가해야 함
+		var paymentNo = '${paymentNo}'+ new Date().getTime(); // 시퀀스 추가해야 함
 		var payInfo = '${sessionScope.memberId}';
 		var purchaseName = $('input[name=stayName]').val()+', ' +$('input[name=roomName]').val();
 		var purchaseAmount = '${price}';

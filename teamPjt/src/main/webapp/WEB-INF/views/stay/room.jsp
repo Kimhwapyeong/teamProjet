@@ -163,17 +163,25 @@
 
 			  
 			  let tmp = roomList[0].innerHTML;
-			  roomList[0].innerHTML = roomList[1].innerHTML;
+			  for(i=0; i<roomList.length-1; i++){
+				  roomList[i].innerHTML = roomList[i+1].innerHTML;
+			  }
+			  roomList[roomList.length-1].innerHTML = tmp;
+/* 			  roomList[0].innerHTML = roomList[1].innerHTML;
 			  roomList[1].innerHTML = roomList[2].innerHTML;
-			  roomList[2].innerHTML = tmp;
+			  roomList[2].innerHTML = tmp; */
 			});
 
 			let prevtBtn = document.querySelector('.swiper-button-prev-room');
 			prevtBtn.addEventListener('click', ()=>{
-				  let tmp = roomList[0].innerHTML;
-				  roomList[0].innerHTML = roomList[2].innerHTML;
+				  let tmp = roomList[roomList.length-1].innerHTML;
+				  for(i=roomList.length-1; i>0; i--){
+					  roomList[i].innerHTML = roomList[i-1].innerHTML;
+				  }
+				  roomList[0].innerHTML = tmp;
+				  /* roomList[0].innerHTML = roomList[2].innerHTML;
 				  roomList[1].innerHTML = roomList[1].innerHTML;
-				  roomList[2].innerHTML = tmp;
+				  roomList[2].innerHTML = tmp; */
 			})
 			
 			
