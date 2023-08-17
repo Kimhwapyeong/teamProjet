@@ -394,17 +394,18 @@ $(document).ready(function() {
 					<button type="button" class="btn_bk" id="btnSignup" onclick="go_join()">회원가입</button>
 				</div>
 				<div id='signupMsg'></div>
-				<div class="sns_login">
-					<ul>
-						<li style="padding-left: 200px;"><a style="position: absolute; top: 96%;" class="btn_naver" href="/">네이버</a>
-							<div id="naverIdLogin" style="display: none;">
-								<a id="naverIdLogin_loginButton" href="#"><img
-									src="https://static.nid.naver.com/oauth/big_g.PNG?version=js-2.0.1"
-									height="50"></a>
-							</div></li>
-						<li><a style="position: absolute; top: 96%; left:50%;" class="btn_kakao" href="/">카카오</a></li>
-					</ul>
-				</div>
+        <div class="sns_login">
+            <div class="tit">SNS 계정으로 로그인하기</div>
+            <ul>
+                <li>
+                    <a id="naverIdLogin" class="btn_naver" href="#" style="margin: right;">네이버</a>
+                </li>
+                <li> 
+                    <a id="kakaoIdLogin" class="btn_kakao" onclick="kakaoLogin();"
+                    href="javascript:void(0)">카카오</a>
+                </li>
+            </ul>
+          </div>
 			</div>
 		</div>
 	</form>
@@ -494,8 +495,33 @@ $(document).ready(function() {
             });
         });
     });
-
-
+	// 네이버 로그인
+    var naverLogin = new naver.LoginWithNaverId(
+            {
+                clientId: "oBTXRKlWIJxCsXbBSgGL",
+                  // 본인의 Client ID로 수정, 띄어쓰기는 사용하지 마세요.
+                callbackUrl: "http://localhost:8080/naverAction",
+                  // 본인의 callBack url로 수정하세요.
+                isPopup: false,
+                loginButton: {color: "green", type: 1, height: 40}
+                  // 네이버 로그인버튼 디자인 설정. 한번 바꿔보세요:D
+            }
+        );
+    naverLogin.init();
+    
+    // 카카오 로그인
+    function kakaoLogin() {
+		$.ajax({
+			url: '/login/kakaoActionUrl',
+			type: 'get',
+			async: false,
+			dataType: 'text',
+			success: function (res) {
+				console.log(res);
+				location.href = res;
+			}
+		});
+	}
 
 
         
