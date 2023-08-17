@@ -148,6 +148,8 @@ public class EchoHandler extends TextWebSocketHandler{
                 	type = "ENTER";
                 } else if(message.getPayload().contains("id='OUT'")) {
                 	type = "OUT";	
+                } else if(message.getPayload().contains("id=\"INVITE\"")) {
+                	type = "INVITE";
                 } else {
                 	type = "TALK";
                 }

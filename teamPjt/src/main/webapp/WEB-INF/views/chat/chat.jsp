@@ -49,6 +49,10 @@
                     
                     <script>
                     
+                    
+                    
+                    
+                    
                     $(document).ready(function() {
                         $('#inviteBtn').click(function() {
                             var inviteData = {
@@ -65,8 +69,10 @@
                                 success: function(response) {
                                     if (response.status === 'success') {
                                         console.log('Invitation sent successfully:', response.msg);
+                                        sock.send ('<span id="INVITE" style="font-weight:bold; font-size:1.3em;">'+$('#myMemberId').val()+'님이 '+$('#targetMemberId').val()+'님을 '+ $('#roomId').val()+'번 방에 초대하셨습니다.</span>');
                                     } else {
                                         console.log('Failed to send invitation:', response.msg);
+                                        sock.send('초대에 실패하였습니다. 원준에게 문의해 주세요.');
                                     }
                                 },
                                 error: function(error) {
