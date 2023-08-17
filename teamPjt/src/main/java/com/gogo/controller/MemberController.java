@@ -354,10 +354,10 @@ public class MemberController extends CommonRestController {
         // 가져온 회원 정보 DB에 넣어 회원가입 시키기
         MemberVO member = new MemberVO();
         
-        String memberName = URLEncoder.encode((String) userInfo.get("nickname"), "UTF-8");
+  
         
 	     // userInfo에서 필요한 정보를 추출하여 MemberVO에 설정
-	     member.setMemberName(memberName);
+	     member.setMemberName((String) userInfo.get("nickname"));
 	     member.setMemberId((String) userInfo.get("id"));
 	     member.setMemberEmail((String) userInfo.get("account_email"));
 	     member.setAge_group((String) userInfo.get("age_range"));
@@ -375,7 +375,7 @@ public class MemberController extends CommonRestController {
 	    
         System.out.println("----- access_Token ----- : " + access_Token);
         System.out.println("------- id ------- : " + userInfo.get("id"));    
-        System.out.println("------- nickname ------- : " + memberName);    
+        System.out.println("------- nickname ------- : " + userInfo.get("nickname"));    
         System.out.println("----- account_email ---- : " + userInfo.get("account_email"));    
         System.out.println("-------- gender -------- : " + userInfo.get("gender")); 
         System.out.println("------ age_range ------- : " + userInfo.get("age_range")); 
