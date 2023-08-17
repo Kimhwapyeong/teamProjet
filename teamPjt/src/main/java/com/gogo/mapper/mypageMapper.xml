@@ -471,7 +471,7 @@
 		FROM stay s 
 		JOIN room r ON s.stayno = r.stayno
 		JOIN likestay l ON s.stayno = l.stayno
-		WHERE l.memberid = 'user1'
+		WHERE l.memberid = #{memberId}
 		GROUP BY s.stayname
 		, s.staytype
 		, s.stayadress
