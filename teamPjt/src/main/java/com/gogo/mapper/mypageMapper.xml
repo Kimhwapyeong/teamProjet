@@ -226,9 +226,8 @@
 	
 	
 	<!-- 수입 현황 -->
-	<!-- 일단 memberid where 절 x -->
 	<select id="profit" resultType="com.gogo.vo.ReservedVO">
-		SELECT
+	    SELECT
 		    TO_CHAR(v.regdate, 'YYYY-MM') AS month,
 		    SUM(price) AS total_price
 		FROM
@@ -239,10 +238,10 @@
 		    stay s ON s.stayno = r.stayno
 		JOIN
 		    payment p ON v.reservationno = p.reservationno
-		JOIN
+		LEFT JOIN
 		    refund f ON p.paymentno = f.paymentno
 		WHERE
-			s.memberid = #{memberId}
+		    s.memberid = #{memberId} AND f.amount IS NULL
 		GROUP BY
 		    TO_CHAR(v.regdate, 'YYYY-MM')
 		ORDER BY

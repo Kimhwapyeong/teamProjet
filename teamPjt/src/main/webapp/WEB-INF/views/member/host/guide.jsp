@@ -42,8 +42,12 @@ window.addEventListener('load', function(){
     color: white;
   }
   
-	.form-control {
+	.form-control, button {
 	    border-radius: 0 !important;
+	}
+	
+	.btn-sm {
+    	margin-right: 5px;
 	}
 </style>
 
@@ -114,7 +118,7 @@ window.addEventListener('load', function(){
 						                                             독특한 개성을 가진 숙소를 선별하고 있습니다. 하나의 책을 추천하듯 세계 곳곳에 숨어 있는 파인 스테이를 소개, 연결, 제작하며 그 속에 담긴 이야기를 여행자에게 전달합니다.
                                          </span></div>
                                             
-                                             <div class="store_sec">
+                                             <div class="store_sec" style="border-bottom: none;">
                                                  <div class="tit">네 가지 관점</div><div class="desc">스테이 큐레이션은 아래 네 가지 관점에 기반합니다.</div><ul class="point_list"><li>
                                                  <span class="dt">독창성 (ORIGINALITY)</span><span class="dd">자신만의 컨셉과 이야기, 가치를 지닌 스테이</span></li>
                                                  <li><span class="dt">디자인 (DESIGN)</span><span class="dd"><span>
