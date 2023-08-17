@@ -573,7 +573,6 @@
         	
         	document.addEventListener('DOMContentLoaded', function() {
 
-        		
 	        		// 슬라이드 이미지
 		           	let slideBtn = document.querySelectorAll('.swiper-button-next');
 					let idx = 0;
@@ -625,8 +624,6 @@
 					       
 					    });
 					}); 
-		            
-		            
         		
 
         		
@@ -642,7 +639,7 @@
 		        			fetch('/stst/category/'+ categoryName)
 							.then(response => response.json())
 							.then(map => {keywordList(map);
-											likeBtnActive()});
+											likeBtnActive(); slideBtnActive();});
         				})
         			})
         			
@@ -722,10 +719,14 @@
 	        			// 숙소 유형	
 	        			let stayTypes = [];
 	        			let stayTypeInputs = document.querySelectorAll('#stayTypeList li label input:checked');
-
-	        			stayTypeInputs.forEach(input => {
-	        				stayTypes.push(input.value);
-	        			});
+						
+	        			/* if(document.querySelectorAll('#stayTypeList li label input:checked')[0].value == ""){
+	        				stayTypes = ['펜션', '한옥', '렌탈하우스', '민박', '호텔'];
+	        			}else{ */
+		        			stayTypeInputs.forEach(input => {
+		        				stayTypes.push(input.value);
+		        			});
+	        			//}
 	        			console.log(stayTypes);
 	        			
 	        			
@@ -745,10 +746,14 @@
 	        			// 숙소 옵션
 	        			let roomOptions = [];
 	        			let roomOptionInputs = document.querySelectorAll('#roomOptionList li label input:checked');
-
-	        			roomOptionInputs.forEach(input => {
-	        				roomOptions.push(input.value);
-	        			});
+							
+	        			/* if(document.querySelectorAll('#roomOptionList li label input:checked')[0].value == ""){
+	        				roomOptions = ['babiqu', 'pet', 'beamprojector', 'pool', 'terrace'];
+	        			}else{ */
+	        				roomOptionInputs.forEach(input => {
+	        					roomOptions.push(input.value);
+		        			});
+	        			//}
 	        			console.log(roomOptions);
 	        			
 	        			
@@ -791,7 +796,7 @@
 	        			      })
 	        			      .then(response => response.json())
 	        			      //.then(map => keywordList(map));
-	        			      .then(map => {keywordList(map); likeBtnActive()}); 
+	        			      .then(map => {keywordList(map); likeBtnActive(); slideBtnActive();}); 
 	        			});
 
         	 
@@ -800,6 +805,7 @@
         	function keywordList(map){
         		let keyList = map.list;
         		let likeList = map.likeList;
+        		let imgList = map.imgList;
         		
         		console.log(map);
         		console.log(likeList);
@@ -834,13 +840,22 @@
 		 				+'      </a>'	
 		 				+'		<div class="flist_img" role="presentation"style="padding-top: 0px;">'
 		 				+'			<ul class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events slider1 flist_slider">'
-		 				+'				<div class="swiper-button-prev "></div>'
-		 				+'				<div class="swiper-button-next"></div>'
+		 				+'				<div class="swiper-button-prev" onclick="slideBtnActive()"></div>'
+		 				+'				<div class="swiper-button-next" onclick="slideBtnActive()"></div>'
 		 				+'				<a href="/stay/room?stayName='+list.stayName+'">'
 		 				+'				<div class="swiper-wrapper">'
-		 				+'					<li class="swiper-slide img swiper-slide-active" style="background: url(/display?fileName='+savePath+') center center / cover no-repeat; cursor: pointer; width: 410px;">'
-		 				+'					</li>'
-		 				+'				</div>'
+		 				
+		 				imgList.forEach((img, index)=>{
+			 				if(img.stayNo == list.stayNo){
+			 					let file = img.fileName.replaceAll('\\','/');
+			 				pageBlock			
+							+='						<li class="swiper-slide img swiper-slide-active" style="background: url(/resources/images/'+file+') center center / cover no-repeat; cursor: pointer; width: 410px;">'
+							+'						</li>'
+			 				}
+		 				})	
+						
+		 				pageBlock
+		 				+='				</div>'
 		 				+'      		</a>'	
 		 				+'				<div class="_badge_badge_wrapper__h9IsV">'
 		 				+'					<div class="_badge_exclusive__prNZN">'
@@ -852,17 +867,17 @@
 		 				// 로그인이 안되어 있을 떄
  		 				if(id == null && id == ""){
 		 					pageBlock
-		 					+='	<button type="button" class="btn_like " value="'+list.stayNo+'"><span>관심스테이</span></button>';
+		 					+='	<button type="button" class="btn_like " value="'+list.stayNo+'" onclick="likeBtnActive()"><span>관심스테이</span></button>';
 		 				// 로그인이 되어 있을 떄
 		 				}else if(likeList != null && id != null){
 		 					pageBlock
-		 					+='	<button type="button" class="btn_like" value="'+list.stayNo+'"><span>관심스테이</span></button>';
+		 					+='	<button type="button" class="btn_like" value="'+list.stayNo+'" onclick="likeBtnActive()"><span>관심스테이</span></button>';
 		 					likeList.forEach((like,idx)=>{
 		 						console.log('like:' + like.stayNo);
 			 					// 좋아요 값이 있을때
 			 					if(list.stayNo == like.stayNo){
 			 						pageBlock
-				 					+='	<button type="button" class="btn_like on" value="'+list.stayNo+'"><span>관심스테이</span></button>';
+				 					+='	<button type="button" class="btn_like on" value="'+list.stayNo+'" onclick="likeBtnActive()"><span>관심스테이</span></button>';
 			 					}
 		 					})
 		 				}
@@ -966,7 +981,59 @@
             
             
             
-            
+     function slideBtnActive(){
+ 		// 슬라이드 이미지
+        	let slideBtn = document.querySelectorAll('.swiper-button-next');
+			let idx = 0;
+			
+			slideBtn.forEach((button, index) => {
+			    button.addEventListener('click', () => {
+			        let slideImgList = document.querySelectorAll('.flist_img')[index]; // 해당 버튼의 이미지가 보이는 칸
+			        let slideImgs = slideImgList.querySelectorAll('.swiper-wrapper li'); // 해당 칸의 이미지들
+			        
+			        if (idx < slideImgs.length-1) {
+			            idx++;
+			        } else {
+			            idx = 1; // 인덱스가 이미지 개수를 넘어가면 초기화
+			        }
+			            // 현재 인덱스의 이미지 스타일을 가져옴
+			            let slideImgStyle = slideImgs[idx].getAttribute('style');
+			            
+			            // 첫 번째 li 요소의 스타일을 변경하여 이미지를 바꿈
+			            let img = document.querySelectorAll('.swiper-wrapper')[index];
+			            let tmp = img.querySelectorAll('li')[0].getAttribute('style');
+			            img.querySelectorAll('li')[0].setAttribute('style', slideImgStyle);
+			            slideImgs[idx].setAttribute('style', tmp);
+			            console.log(idx);
+			    });
+			});
+			
+			let prev = document.querySelectorAll('.swiper-button-prev');
+			
+			prev.forEach((button, index) => {
+			    button.addEventListener('click', () => {
+			        let slideImgList = document.querySelectorAll('.flist_img')[index]; // 해당 버튼의 이미지가 보이는 칸
+			        let slideImgs = slideImgList.querySelectorAll('.swiper-wrapper li'); // 해당 칸의 이미지들
+			        
+			        //idx = slideImgs.length-1;
+			        
+			        if (idx == 0) {
+			        	idx = slideImgs.length-1; // 인덱스가 이미지 개수를 넘어가면 초기화
+			        }
+			            // 현재 인덱스의 이미지 스타일을 가져옴
+			            let slideImgStyle = slideImgs[idx].getAttribute('style');
+		
+			            // 첫 번째 li 요소의 스타일을 변경하여 이미지를 바꿈
+			            let img = document.querySelectorAll('.swiper-wrapper')[index];
+			            let tmp = img.querySelectorAll('li')[0].getAttribute('style');
+			            img.querySelectorAll('li')[0].setAttribute('style', slideImgStyle);
+			            slideImgs[idx].setAttribute('style', tmp);
+			            
+			            idx--;
+			       
+			    });
+			}); 
+			}
             
             
             
@@ -1542,8 +1609,8 @@
 						<div class="flist_img" role="presentation" style="padding-top: 0px;">
 							<ul class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events slider1 flist_slider">
 							
-								<div class="swiper-button-prev "></div>
-								<div class="swiper-button-next"></div>
+								<div class="swiper-button-prev" onclick="slideActiveBtn()"></div>
+								<div class="swiper-button-next" onclick="slideActiveBtn()"></div>
 								
 								<a href="/stay/room?stayName=${list.stayName}">
 								<div class="swiper-wrapper">

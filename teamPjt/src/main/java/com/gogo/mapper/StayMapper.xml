@@ -85,7 +85,7 @@
 		subq3.maxprice as maxprice,
 		subq3.minprice as minprice,
 		decode(like_count, null, 0, like_count) as likecount
-		<if test='roomOption != null and !"".equals(roomOption)'>
+		<if test='roomOptions != null and roomOptions.length > 0 and roomOptions[0] != ""'>
 			 ,subquery.roomNo,
 		     subquery.babiqu,
 		     subquery.pet,
@@ -123,7 +123,7 @@
 		LEFT JOIN room ON stay.stayNo = room.stayNo
 		) subq2
 	) subq3
-	<if test='roomOption != null and !"".equals(roomOption)'>
+	<if test='roomOptions != null and roomOptions.length > 0 and roomOptions[0] != ""'>
 		left JOIN (
 		  SELECT
 		    stayNo,
@@ -157,28 +157,55 @@
 			<if test='maxPrice!= null and !"".equals(maxPrice)'>
 				and minprice between 0 and #{maxPrice}
 			</if>	
-			<if test='stayType != null and !"".equals(stayType)'>
-				and staytype = '${stayType}'
-			</if>	
+			<if test='stayTypes != null and stayTypes[0] != ""'>
+			    and staytype IN
+			    <foreach item='stayType' collection='stayTypes' open='(' separator=',' close=')'>
+			        #{stayType}
+			    </foreach>
+			</if>
 			<if test='stayView != null and !"".equals(stayView)'>
 				and stayview = '${stayView}'
 			</if>	
-			<if test='roomOption != null and "babiqu".equals(roomOption)'>
+			
+			<if test='roomOptions != null and roomOptions.length > 0 and roomOptions[0] != ""'>
+			    <foreach collection='roomOptions' item='roomOption' separator=' ' open='' close=''>
+			        <choose>
+			            <when test='roomOption == "babiqu"'>
+			                <![CDATA[AND subquery.sequence_number = 1 and babiqu = 'Y' ]]>
+			            </when>
+			            <when test='roomOption == "pet"'>
+			                <![CDATA[AND subquery.sequence_number = 1 and pet = 'Y' ]]>
+			            </when>
+			            <when test='roomOption == "pool"'>
+			                <![CDATA[AND subquery.sequence_number = 1 and pool = 'Y' ]]>
+			            </when>
+			            <when test='roomOption == "terrace"'>
+			                <![CDATA[AND subquery.sequence_number = 1 and terrace = 'Y' ]]>
+			            </when>
+			            <when test='roomOption == "beamprojector"'>
+			                <![CDATA[AND subquery.sequence_number = 1 and beamprojector = 'Y' ]]>
+			            </when>
+			        </choose>
+			    </foreach>
+			</if>
+			
+			
+<!-- 			<if test='roomOption != null and "babiqu".equals(roomOptions)'>
 				AND subquery.sequence_number = 1 and babiqu = 'Y' 
 			</if>	
-			<if test='roomOption != null and "pet".equals(roomOption)'>
+			<if test='roomOption != null and "pet".equals(roomOptions)'>
 				AND subquery.sequence_number = 1 and pet = 'Y' 
 			</if>	
-			<if test='roomOption != null and "pool".equals(roomOption)'>
+			<if test='roomOption != null and "pool".equals(roomOptions)'>
 				AND subquery.sequence_number = 1 and pool = 'Y'
 			</if>	
-			<if test='roomOption != null and "terrace".equals(roomOption)'>
+			<if test='roomOption != null and "terrace".equals(roomOptions)'>
 				AND subquery.sequence_number = 1 and terrace = 'Y'
 			</if>	
-			<if test='roomOption != null and "beamprojector".equals(roomOption)'>
+			<if test='roomOption != null and "beamprojector".equals(roomOptions)'>
 				AND subquery.sequence_number = 1 and beamprojector = 'Y'
-			</if>
-   			<if test='findStartDate != null and findEndDate != null'>
+			</if> -->
+   			<if test='findStartDate != null and findEndDate != null and findStartDate != "" and findEndDate != ""'>
    				<![CDATA[
 				and subq3.stayno in (select stayno from room where roomno not in (SELECT stayno FROM reservation JOIN room ON room.roomno = reservation.roomno WHERE #{findStartDate} <= checkout AND #{findEndDate} >= checkin))
    				]]>

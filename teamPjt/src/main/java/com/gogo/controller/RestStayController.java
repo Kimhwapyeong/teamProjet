@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gogo.service.StayService;
+import com.gogo.vo.FileuploadVO;
 import com.gogo.vo.StayVO;
 
 import lombok.extern.log4j.Log4j;
@@ -52,9 +53,11 @@ public class RestStayController {
 			vo.setMemberId("");
 		}
 		List<StayVO> likeList = stayService.likeIdRest(vo);
+		List<FileuploadVO> imgList = stayService.restStayImgList();
 		
 		map.put("likeList", likeList);
 		map.put("list", list);
+		map.put("imgList", imgList);
 		return map;
 	}
 	
@@ -74,7 +77,9 @@ public class RestStayController {
 			vo.setMemberId("");
 		}
 		List<StayVO> likeList = stayService.likeIdRest(vo);
+		List<FileuploadVO> imgList = stayService.restStayImgList();
 		
+		map.put("imgList", imgList);
 		map.put("likeList", likeList);
 		map.put("list", list);
 		return map;
