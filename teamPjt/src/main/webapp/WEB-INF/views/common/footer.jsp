@@ -8,10 +8,10 @@
                 <div class="menu-cs">
                     <ul class="menu">
                         <li><a target="_self" rel="noreferrer" href="#none">ABOUT</a></li>
-                        <li><a target="_self" rel="noreferrer" href="/4-point-approach">4 POINT APPROACH</a></li>
-                        <li><a target="_blank" rel="noreferrer"
-                                href="https://page.stibee.com/subscriptions/243310?groupIds=238993">NEWSLETTER</a></li>
-                        <li><a target="_blank" rel="noreferrer" href="http://stayfolio.kr/career">CAREERS</a></li>
+                        <li><a target="_self" rel="noreferrer" href="#none">4 POINT APPROACH</a></li>
+                        <li><a target="_self" rel="noreferrer"
+                                href="#none">NEWSLETTER</a></li>
+                        <li><a target="_self" rel="noreferrer" href="#none">CAREERS</a></li>
                     </ul>
                     <div class="cs">
                         <div style="display:flex;align-items:center;margin-top:18px">
@@ -26,10 +26,10 @@
                                     rel="noopener noreferrer">마케팅 제휴</a></button><button type="button" class="wh"><a
                                     rel="noreferrer">B2B 구매</a></button></div>
                         <div class="cs-temp" style="margin-top:13px"><a
-                                href="https://stayfolio.notion.site/Ver-1-5-25cf5f57f2384b7aa8bf0f07fa93270b"
-                                target="_blank" rel="noreferrer">이용약관</a><a
-                                href="https://stayfolio.notion.site/Ver-2-1-1b8348dda5aa42419ed16a27381e8ad6"
-                                target="_blank" rel="noreferrer" class="bold">개인정보 처리방침</a></div>
+                                href="#none"
+                                target="_self" rel="noreferrer">이용약관</a><a
+                                href="#none"
+                                target="_self" rel="noreferrer" class="bold">개인정보 처리방침</a></div>
                     </div>
                 </div>
                 <ul class="sns">
@@ -64,8 +64,11 @@
 			<c:if test="${ sessionScope.role_id eq '[admin]' }" var="res">
 				<li><a class=" false" href="/member/admin/hosthelp"><span>MESSAGE</span></a></li>
 			</c:if>
-			<c:if test="${ not res }">
+			<c:if test="${ sessionScope.role_id eq '[user]' }">
 				<li><a class=" false" href="/member/mypage/message"><span>MESSAGE</span></a></li>
+			</c:if>
+			<c:if test="${ sessionScope.role_id eq '[host]' }">
+				<li><a class=" false" href="/member/host/message"><span>MESSAGE</span></a></li>
 			</c:if>
 		</ul>
 	</nav>

@@ -468,6 +468,7 @@ document.addEventListener('DOMContentLoaded', function() {
 											<li><a href="/member/host/reservation">예약 관리</a></li>
 											<li><a href="/member/host/income">수입 현황</a></li>
 											<li><a href="/member/host/guide">호스트 가이드</a></li>
+											<li><a href="/member/host/infoHost">회원 정보 수정</a></li>
 											<li><a href="/member/host/message">메시지</a></li>
 											<li class="login"><a href="/logout">로그아웃</a></li>
 										</ul>
@@ -527,7 +528,8 @@ document.addEventListener('DOMContentLoaded', function() {
 						<li><a href="/member/host/reservation">예약 관리</a></li>
 						<li><a href="/member/host/income">수입 현황</a></li>
 						<li><a href="/member/host/guide">호스트 가이드</a></li>
-						<li><a href="/member/mypage/message">메시지</a></li>
+						<li><a href="/member/host/infoHost">회원 정보 수정</a></li>
+						<li><a href="/member/host/message">메시지</a></li>
 					</c:if>
 					<c:if test="${ sessionScope.role_id eq '[admin]' }">
 						<li><a href="/member/admin/stayadmin">숙소 관리</a></li>

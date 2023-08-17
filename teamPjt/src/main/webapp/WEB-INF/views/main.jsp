@@ -349,7 +349,7 @@ function setMainImgsHeight(){
 					</p>
 					<p class="txt">${ stay.stayInfo }</p>
 					<p class="event">${ stay.stayName }</p>
-					<p class="more">read more</p>
+					<p class="more"><a href="/stay/room?stayName=${ stay.stayName }">read more</a></p>
 				</div>
 			</div>
 		</c:forEach>
