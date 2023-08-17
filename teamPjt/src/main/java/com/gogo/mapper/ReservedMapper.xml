@@ -36,7 +36,9 @@
         <![CDATA[
 			SELECT TO_CHAR(R.checkIn + LEVEL - 1, 'YYYYMMDD') AS date_between
 			FROM RESERVATION R
+			JOIN PAYMENT P ON R.reservationNo = P.reservationNo
 			WHERE R.roomNo = #{roomNo}
+			AND P.cancleYN = 'N'
 			CONNECT BY LEVEL <= (R.checkOut - R.checkIn + 1)
 			AND PRIOR SYS_GUID() IS NOT NULL
 			AND PRIOR R.checkIn = R.checkIn

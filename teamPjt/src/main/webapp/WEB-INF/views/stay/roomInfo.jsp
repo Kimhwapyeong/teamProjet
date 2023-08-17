@@ -111,9 +111,16 @@
             
 			
 			document.getElementById('paymentButton').addEventListener('click', function () {
-			    // 가져올 값들
+			    // 파라메터로 checkIn / checkOut값을 받아 왔을 때
+			    let checkInValue = "${param.checkIn}";
+    			let checkOutValue = "${param.checkOut}";
 			    
+    			if(checkInValue != '' && checkOutValue != ''){
+				    document.querySelector('#reserved_checkIn').value = checkInValue.split('/').join('-');
+				    document.querySelector('#reserved_checkOut').value = checkOutValue.split('/').join('-');
+    			}
 			    // URL 생성
+			    
 			    const url = '/reserved/reserved?roomNo='+${roomInfo.ROOMNO}+'&checkIn='+document.querySelector('#reserved_checkIn').value.replaceAll('-','/')+'&checkOut='+document.querySelector('#reserved_checkOut').value.replaceAll('-','/');
 			    
 			    location.href = url;
@@ -121,7 +128,27 @@
 			});
             
             
-            
+			// 파라매터로 받아온 날짜 차이 계산 함수
+			function calculateDateDifference() {
+				console.log("${param.checkIn}")
+		        let checkInDate = new Date("${param.checkIn}");
+		        let checkOutDate = new Date("${param.checkOut}");
+
+		        // 날짜 차이 계산 (밀리초 단위)
+		        let timeDifference = checkOutDate - checkInDate;
+		        console.log(timeDifference);
+
+		        // 일 단위로 변환
+		        let daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+		        console.log(daysDifference);
+
+		        // 출력 엘리먼트에 결과 표시
+		        let dateDifferenceElement = document.getElementById("dateDifference");
+		        dateDifferenceElement.innerHTML = '('+daysDifference+'박)';
+		    }
+
+		    // 함수 호출하여 날짜 차이 계산
+		    calculateDateDifference();
         });
 </script>
 </head>
@@ -135,9 +162,16 @@
 			<div class="booking_wrap">
 				<div class="booking_summary">
 					<div class="name">${roomInfo.STAYNAME }</div>
+					<c:if test="${param.checkIn eq null && param.checkOut eq null }">
 					<div class="dayday" role="presentation">
 						<div class="btn_select ">날짜를 선택해주세요.</div>
 					</div>
+					</c:if>
+					<c:if test="${param.checkIn != null && param.checkOut != null }">
+					<div class="dayday" role="presentation">
+						<div class="btn_select ">${param.checkIn } ~ ${param.checkOut } <span id="dateDifference"></span></div>
+					</div>
+					</c:if>
 					<%-- <a href="/reserved/reserved?stayName=${roomInfo.STAYNAME }&roomName=${roomInfo.ROOMNAME }&roomNo=${roomInfo.ROOMNO}"><button type="button" class="btn_bk pc_only">결제하기</button></a> --%>
 					<c:set var="isMember" value="${sessionScope.memberId == roomInfo.MEMBERID}" />
 					<c:if test="${isMember}">

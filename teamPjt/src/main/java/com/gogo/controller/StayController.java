@@ -67,7 +67,10 @@ public class StayController {
 		stayService.roomInfoPagePic(stayName, roomName, model);
 	}
 	
-	
+	@GetMapping("stayImg")
+	public void stayImg() {
+		
+	}
 	
 	
 	

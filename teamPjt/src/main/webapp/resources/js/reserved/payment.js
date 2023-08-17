@@ -100,6 +100,8 @@
 				
 				} else {
 					alert('[결제 오류] 사용량이 많습니다.\n받아들이고 다시 시도해 주세요');
+					console.log(rsp.error_msg);
+					alert('rsp.error_msg : '+rsp.error_msg);
 					//alert('[결제 오류] 거래 번호(imp_uid)가 존재하지 않습니다.\n다시 시도해 주세요!');
 					location.href='/member/mypage/reservation';
 				}

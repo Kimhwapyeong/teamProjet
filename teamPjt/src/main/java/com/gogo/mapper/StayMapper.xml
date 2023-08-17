@@ -455,7 +455,7 @@
 		) subquery
 		where rn = 1
    		<![CDATA[
-			AND roomno not in (SELECT stayno FROM reservation JOIN room ON room.roomno = reservation.roomno WHERE #{findStartDate} <= checkout AND #{findEndDate} >= checkin)
+			AND roomno not in (SELECT room.roomno FROM reservation JOIN room ON room.roomno = reservation.roomno WHERE #{findStartDate} <= checkout AND #{findEndDate} >= checkin)
    		]]>
 	</select>
 	<resultMap type="java.util.HashMap" id="stayRoomListDate">
@@ -479,7 +479,7 @@
 	)
 	WHERE rn = 1
    	<![CDATA[
-		AND roomno not in (SELECT stayno FROM reservation JOIN room ON room.roomno = reservation.roomno WHERE #{findStartDate} <= checkout AND #{findEndDate} >= checkin)
+		AND roomno not in (SELECT room.roomno FROM reservation JOIN room ON room.roomno = reservation.roomno WHERE #{findStartDate} <= checkout AND #{findEndDate} >= checkin)
    	]]>
 	</select>
 	<resultMap type="java.util.HashMap" id="stayRoomImgDate">

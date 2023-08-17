@@ -8,13 +8,11 @@
 <title>${list.STAYNAME }</title>
 <link rel="shortcut icon" type="image⁄x-icon" href="https://www.stayfolio.com/web/images/logo.png">
 
-<!-- <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 <link href="../resources/css/common/48ab7619b7161b1c.css" rel="stylesheet">
 <link href="../resources/css//common/5f0d2e1da89b35fb.css" rel="stylesheet">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<!-- <script src="/resources/js/list/list.js"></script> -->
 <script src="/resources/js/reserved/calendar.js"></script>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=124076e69929aa6f11bd182ef5993338"></script>
@@ -163,17 +161,25 @@
 
 			  
 			  let tmp = roomList[0].innerHTML;
-			  roomList[0].innerHTML = roomList[1].innerHTML;
+			  for(i=0; i<roomList.length-1; i++){
+				  roomList[i].innerHTML = roomList[i+1].innerHTML;
+			  }
+			  roomList[roomList.length-1].innerHTML = tmp;
+/* 			  roomList[0].innerHTML = roomList[1].innerHTML;
 			  roomList[1].innerHTML = roomList[2].innerHTML;
-			  roomList[2].innerHTML = tmp;
+			  roomList[2].innerHTML = tmp; */
 			});
 
 			let prevtBtn = document.querySelector('.swiper-button-prev-room');
 			prevtBtn.addEventListener('click', ()=>{
-				  let tmp = roomList[0].innerHTML;
-				  roomList[0].innerHTML = roomList[2].innerHTML;
+				  let tmp = roomList[roomList.length-1].innerHTML;
+				  for(i=roomList.length-1; i>0; i--){
+					  roomList[i].innerHTML = roomList[i-1].innerHTML;
+				  }
+				  roomList[0].innerHTML = tmp;
+				  /* roomList[0].innerHTML = roomList[2].innerHTML;
 				  roomList[1].innerHTML = roomList[1].innerHTML;
-				  roomList[2].innerHTML = tmp;
+				  roomList[2].innerHTML = tmp; */
 			})
 			
 			
@@ -515,7 +521,7 @@
 			roomList.forEach((list, index)=>{
 				pageBlock
 				+='<li class="swiper-slide slider_box single-room swiper-slide-active">'
-				+'	<a href="/stay/roomInfo?stayName='+stayName+'&roomName='+list.ROOMNAME+'">';
+				+'	<a href="/stay/roomInfo?stayName='+stayName+'&roomName='+list.ROOMNAME+'&checkIn='+formatDate(checkInDate)+'&checkOut='+formatDate(checkOutDate)+'">';
 				
 				roomImg.forEach((img, index)=>{
 					if(img.ROOMNO == list.ROOMNO){
@@ -608,7 +614,7 @@
 				</ul>
 			</div>
 			<div class="top_img">
-				<a href="/findstay/dansim-stay/gallery">
+				<a href="/stay/stayImg?stayName=${list.STAYNAME }">
 					<div class="stay-main-img">
 						<span id="show-pictures-button">사진 모아보기</span> <span
 							style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">

@@ -216,8 +216,9 @@
     		
     		var wherePage = '${param.stayLoc}';
     		var wherePage2 = '${param.btnYN}';
+    		var wherePage3 = '${param.check_in}';
     		
-    		if(wherePage!='' || wherePage2 !=''){
+    		if(wherePage!='' || wherePage2 !=''|| wherePage3 != ''){
     			
 	    		$('.reserveBox').attr('style','position:absolute; top:750px; left:10%; width:1000px;');
 	    		$('hr:eq(1)').attr('style','border-top: 2.9px solid;color: #00000061;width:1150px;position:absolute;left:3%;top: 680px;');

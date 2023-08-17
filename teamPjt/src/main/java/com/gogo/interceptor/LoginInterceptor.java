@@ -33,11 +33,11 @@ public class LoginInterceptor implements HandlerInterceptor{
 		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("memberId") == null 
-				|| session.getAttribute("memberId").toString() == "") {
+				|| session.getAttribute("memberId").toString().equals("")) {
 			
 			// 로그인 페이지로 이동
 			String msg = URLEncoder.encode("로그인 후 사용 가능한 메뉴 입니다.","utf-8");			
-			response.sendRedirect("/login?msg="+msg);
+			response.sendRedirect("/login/login?msg="+msg);
 			return false;
 		}
 		return true;

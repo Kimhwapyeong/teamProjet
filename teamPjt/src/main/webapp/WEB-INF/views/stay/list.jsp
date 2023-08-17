@@ -57,6 +57,20 @@
     </style>
     <script>
     window.onload = function() {
+    	
+    		// 체크 인/아웃으로 검색 후 처리
+    		
+    		var isCheckTime = '${param.reserved_checkIn}';
+    		if(isCheckTime!=''){
+    			
+    			$('.DateInput Input:eq(0)').val('${param.reserved_checkIn}');
+    			$('.DateInput Input:eq(1)').val('${param.reserved_checkOut}');
+    			
+    			
+    			searchFrom.submit();
+    		}
+    		
+    	
 
             // 국내여행 버튼 띄우기
             travelbtn.addEventListener('click', function () {
@@ -1612,7 +1626,7 @@
 								<div class="swiper-button-prev" onclick="slideActiveBtn()"></div>
 								<div class="swiper-button-next" onclick="slideActiveBtn()"></div>
 								
-								<a href="/stay/room?stayName=${list.stayName}">
+								<a href="/stay/room?stayName=${sl.stayName}">
 								<div class="swiper-wrapper">
 									<%-- <li class="swiper-slide img swiper-slide-active"
 										style="background: url(/resources/images/${list.mainPic1.replace('\\','/')}) center center / cover no-repeat; cursor: pointer; width: 410px;">
@@ -1662,8 +1676,7 @@
 						</c:if>
 				</div>
 			</c:forEach>
-	
-
+		
 			<!-- 페이지 -->
 			<div class="paging false">
 				<a href="/" class="prev" title="이전 페이지">이전 페이지</a><a href="/"

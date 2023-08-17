@@ -81,7 +81,7 @@ public class ReservedController {
 		String res = service.goReserved(reserved, model);
 		
 		if("search".equals(btnYN)) {
-			res = "/stay/list";
+			res = "redirect:/stay/list?reserved_checkIn="+reserved_checkIn+"&reserved_checkOut="+reserved_checkOut;
 		} else {
 			res = "/reserved/reserved";
 		}
