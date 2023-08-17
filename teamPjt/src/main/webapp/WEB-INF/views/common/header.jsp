@@ -363,7 +363,7 @@ document.addEventListener('DOMContentLoaded', function() {
 												<a class="">한옥</a>
 											</button></li>
 										<li><button type="button">
-												<a class="">호스텔</a>
+												<a class="">렌탈하우스</a>
 											</button></li>
 										<li><button type="button">
 												<a class="">민박</a>
