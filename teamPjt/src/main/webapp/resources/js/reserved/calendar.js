@@ -555,7 +555,7 @@ function reservation_disabled(){
 			    let currentDate = new Date(date.slice(0, 4) + '-' + date.slice(4, 6) + '-' + date.slice(6, 8));
 			    
 			    // 3달 뒤의 날짜를 계산합니다.
-			    currentDate.setMonth(currentDate.getMonth() + 3);
+			    currentDate.setMonth(currentDate.getMonth() + 4);
 			    
 			    // 오늘 날짜를 설정합니다.
 			    let today = new Date(date.slice(0, 4) + '-' + date.slice(4, 6) + '-' + date.slice(6, 8));
