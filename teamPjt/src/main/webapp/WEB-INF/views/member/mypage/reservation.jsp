@@ -208,8 +208,8 @@ window.addEventListener('load', function(){
 								<div class="reserv_box accepted">
 									<div class="reserv_name">
 										<p class="name">
-											
-											<span class="ellipsis"
+											<p class="label" style="background-color: cornflowerblue;">이용 완료</p>
+											<span style="font-size:2.3em;" class="ellipsis"
 												onclick="goReserved_Detail('${list.CHECKIN}', '${list.CHECKOUT}', '${list.PRICE}', '${list.STAYNO}', '${list.RESERVATIONNO}', '${list.MEMBERCOUNT}' , 'yes')">${list.STAYNAME }</span>
 										</p>
 									</div>
