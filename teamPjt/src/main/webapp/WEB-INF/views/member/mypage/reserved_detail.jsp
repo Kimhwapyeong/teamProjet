@@ -15,6 +15,10 @@
 <script src='/resources/js/reserved/payment.js'></script>
 <!-- css -->
 <link rel="stylesheet" href="/resources/css/mypage/reservation.css">
+<style>
+
+	.active{font-weight: 530;}
+</style>
 </head>
 
 
@@ -62,6 +66,7 @@
 							<li class=""><a href="./cancel">취소 내역</a></li>
 							<li class=""><a href="./likestay">관심 스테이</a></li>
 							<li class=""><a href="./info">회원 정보 수정</a></li>
+							<li class=""><a href="./message">메시지</a></li>
 						</ul>
 					</div>
 <div class="mypage_content reservation">
@@ -79,26 +84,52 @@
             <ul class="guide_step">
                 <li>
                     <div class="guide_box ">
-                        <div class="step"><img src="/web/images/ico_guide1.svg" alt=""><small class="pc_only">STEP 01</small><br class="pc_only">예약 신청<small class="mo_only">STEP 01</small></div>
+                        <div class="step" style="padding-left: 0px;"><img src="/web/images/ico_guide1.svg" alt=""><small class="pc_only">STEP 01</small><br class="pc_only">예약 신청<small class="mo_only">STEP 01</small></div>
                         <div class="desc">예약 신청이 완료되었으며, 호스트의 예약 확정 대기 상태입니다. 스테이의 예약 상황에 따라
                             취소/환불될 수 있습니다.</div>
                     </div>
                 </li>
                 <li>
                     <div class="guide_box active">
-                        <div class="step"><img src="/web/images/ico_guide2.svg" alt=""><small class="pc_only">STEP 02</small><br class="pc_only">예약 확정<small class="mo_only">STEP 02</small></div>
+                        <div class="step" style="padding-left: 0px;"><img src="/web/images/ico_guide2.svg" alt=""><small class="pc_only">STEP 02</small><br class="pc_only">예약 확정<small class="mo_only">STEP 02</small></div>
                         <div class="desc">호스트가 예약을 최종 확정한 상태입니다. 예약 취소 시 각 스테이의 환불규정에 따라 환불이
                             진행됩니다.</div>
                     </div>
                 </li>
                 <li>
                     <div class="guide_box ">
-                        <div class="step"><img src="/web/images/ico_guide3.svg" alt=""><small class="pc_only">STEP 03</small><br class="pc_only">체크인<small class="mo_only">STEP 03</small></div>
+                        <div class="step" style="padding-left: 0px;"><img src="/web/images/ico_guide3.svg" alt=""><small class="pc_only">STEP 03</small><br class="pc_only">체크인<small class="mo_only">STEP 03</small></div>
                         <div class="desc">예약 내용에 따라 스테이를 이용할 수 있습니다. 예약 당일 오전 체크인 안내를 드리고 있습니다.
                         </div>
                     </div>
                 </li>
             </ul>
+            
+            <script>
+            	
+            	window.addEventListener('load', function(){
+            		
+            		var isAlready = '${param.already}';
+            		
+            		if(isAlready=='yes'){
+            			
+	            		$('.guide_box:eq(2)').addClass('active');
+	            		$('.guide_box:eq(1)').removeClass('active');
+	            		
+            		
+            		} else {
+            			
+	            		$('.guide_box:eq(1)').addClass('active');
+	            		$('.guide_box:eq(2)').removeClass('active');
+            			
+            		}
+            		
+            		
+            	});
+            	
+            	
+            </script>
+            
         </div>
         <div class="reserv_sec">
             <div class="title">예약 안내</div>

@@ -121,7 +121,7 @@ window.addEventListener('load', function(){
 										<p class="label">예약 확정</p>
 										<!-- =============================== 숙소이름  ============================================-->
 										<p class="name">
-											<span class="ellipsis">${list.STAYNAME }</span>
+											<span class="ellipsis" onclick="goReserved_Detail('${list.CHECKIN}', '${list.CHECKOUT}', '${list.PRICE}', '${list.STAYNO}', '${list.RESERVATIONNO}', '${list.MEMBERCOUNT}')">${list.STAYNAME }</span>
 										</p>
 									</div>
 									<div class="stay_view">
@@ -152,11 +152,10 @@ window.addEventListener('load', function(){
                         </div>
                         
                         <script>
-                        function goReserved_Detail(checkIn, checkOut, price, stayNo, reservationNo, mainImg, memberCount, stayName) {
+                        function goReserved_Detail(checkIn, checkOut, price, stayNo, reservationNo, memberCount, already) {
                             
                         	
                         	
-                        	console.log(mainImg);
                         	
                             const encodedParams = {
                                 checkIn: checkIn,
@@ -165,10 +164,12 @@ window.addEventListener('load', function(){
                                 stayNo: stayNo,
                                 reservationNo: reservationNo,
                                 memberCount : memberCount,
-                                stayName : stayName
+                                already : already
     
                             };
 
+                        	
+                        	
                             const baseUrl = '/member/mypage/reserved_detail';
                             const encodedParamsStr = encodeURL(encodedParams);
                             const finalUrl = baseUrl + '?' + encodedParamsStr;
@@ -207,7 +208,9 @@ window.addEventListener('load', function(){
 								<div class="reserv_box accepted">
 									<div class="reserv_name">
 										<p class="name">
-											<span class="ellipsis">${list.STAYNAME }</span>
+											
+											<span class="ellipsis"
+												onclick="goReserved_Detail('${list.CHECKIN}', '${list.CHECKOUT}', '${list.PRICE}', '${list.STAYNO}', '${list.RESERVATIONNO}', '${list.MEMBERCOUNT}' , 'yes')">${list.STAYNAME }</span>
 										</p>
 									</div>
 									<div class="stay_view">
@@ -225,10 +228,7 @@ window.addEventListener('load', function(){
 										</div>
 										<div class="price">₩ ${list.PRICE }</div> <br>
 										<button type="button" class="btn_reserv_detail"
-												onclick="location.href='/member/mypage/reserved_detail'
-													+'?stayName=${list.STAYNAME}&mainImg=${list.MAINPIC1}&'
-													+'checkIn=${list.CHECKIN}&checkOut=${list.CHECKOUT}&'
-													+'memberCount=${list.MEMBERCOUNT}&price=${list.PRICE}&stayNo=${list.STAYNO}&reservationNo=${list.RESERVATIONNO}';">예약 상세 확인</button>
+												onclick="goReserved_Detail('${list.CHECKIN}', '${list.CHECKOUT}', '${list.PRICE}', '${list.STAYNO}', '${list.RESERVATIONNO}', '${list.MEMBERCOUNT}', 'yes')">예약 상세 확인</button>
 								</div>
 							</div>							
 							</c:if>
