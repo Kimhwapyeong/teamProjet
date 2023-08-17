@@ -43,11 +43,11 @@ public class mypageTest {
 		log.info("list : " + list);
 	}
 	
-	@Test
-	public void reserveinfo() {
-		List<Map<String, String>> list = (List<Map<String, String>>) mapper.reservinfo();
-		log.info("list : " + list);
-	}
+//	@Test
+//	public void reserveinfo() {
+//		List<Map<String, String>> list = (List<Map<String, String>>) mapper.reservinfo();
+//		log.info("list : " + list);
+//	}
 	
 	@Test
 	public void reservpic() {
@@ -182,5 +182,11 @@ public class mypageTest {
 		List<MemberVO> list = mapper.getMemberSearch(vo);
 		log.info("list : " + list);
 		
+	}
+	
+	@Test
+	public void selectRoomName() {
+		List<RoomVO> list = mapper.selectRoomName("host1");
+		log.info("list : " + list);
 	}
 }

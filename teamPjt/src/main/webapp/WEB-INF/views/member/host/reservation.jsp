@@ -8,6 +8,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>reservation</title>
     <link rel="stylesheet" href="./css/host/host.css">
+
+<style type="text/css">
+	select {
+    	border-radius: 0 !important;
+	}
+	
+    tbody tr {
+        line-height:30px;
+    }
+</style>
+
+<script>
+    function retrieveReservation() {
+        var selectedRoomNo = document.querySelector("#roomSelect").value; // 선택한 객실의 roomNo 값
+    }
+</script>
 </head>
 
    <body style="">
@@ -50,81 +66,68 @@
                                <li class=""><a href="./message">메시지</a></li>
                            </ul>
                        </div>
+                       <!-- 객실 검색 -->
+				    	<div style="display: flex; justify-content: center; align-items: center;">
+						    <form action="/member/host/reservation" method="post">
+						        <div style="display: flex;">
+						            <select name="selectedRoomNo" class="form-select" aria-label="Default select example" style="height: 40px; width: 300px; flex: 1;">
+						                <option >객실 선택</option>
+						                <c:forEach items="${name}" var="name" step="1">
+						                    <option value="${name.roomNo}" ${paramRoomNo == name.roomNo ? 'selected' : ''} >${name.roomName} </option>
+						                </c:forEach>
+						            </select>
+						            <button type="submit" class="btn btn-outline-dark" style="border-radius: 0; margin-left:20px;">조회</button>
+						        </div>
+						    </form>
+						</div>
+
+
+						<div style="height:50px;"></div>
+                       
+                       <!-- 객실 정보 출력 -->
                        <div class="mypage_content">
                            <div class="reserv_wrap mypage-reservation-info">
 								<div class="container">
-								<div class="stay_view">
-										<!-- ▶▶▶ forEach ▶▶▶ -->
-								    
-                                 </div>
-                                 
-                                       <p class="name"><span class="ellipsis"></span></p>
-								
+                                     <p class="name"><span class="ellipsis"></span></p>
                                 <table class="table">
 								    <thead>
+								    <c:if test="${not empty list}">
 								        <tr>
-								            <th>객실 번호</th>
+								            <th>객실명</th>
 								            <th>회원 아이디</th>
 								            <th>예약일</th>
 								            <th>체크인</th>
 								            <th>체크아웃</th>
 								            <th>예약 인원</th>
 								        </tr>
+								    </c:if>
 								    </thead>
 								    <tbody>
-								        <c:set var="prevRoomNo" value="" />
-								        <c:set var="firstRow" value="true" />
-								
 								        <!-- ▶▶▶ forEach ▶▶▶ -->
 								        <c:forEach items="${list}" var="reserve" step="1">
-				                        <c:if test="${sessionScope.memberId == reserve.STAYMEMBERID}">
 				                        
-								            <c:set var="currentRoomNo" value="${reserve.ROOMNO}" />
-											
-											<!-- 전객실번호 존재 x or 현객실번호=전객실번호 -> 출력x -->
-								            <c:if test="${not empty prevRoomNo and !currentRoomNo.equals(prevRoomNo)}">
-								                </tbody>
-								            </c:if>
-											
-											<!-- 현객실번호 != 전객실번호 <hr> 태그로 구분 -->
-								            <c:if test="${firstRow or not currentRoomNo.equals(prevRoomNo)}">
-								                <tbody>
-								                    <tr>
-								                        <td colspan="6"><hr></td>
-								                    </tr>
-								                </tbody>
-								            </c:if>
 								
-								            <tbody>
+								            <c:if test="${empty reserve}">
+								                    <tr>
+								                        <td colspan="6">예약된 내역이 없습니다</td>
+								                    </tr>
+								            </c:if>
 								                <tr>
-								                    <td>${reserve.ROOMNO}</td>
+								                    <td>${reserve.ROOMNAME}</td>
 								                    <td>${reserve.RESERVATIONMEMBERID}</td>
 								                    <td>${reserve.REGDATE}</td>
 								                    <td>${reserve.CHECKIN}</td>
 								                    <td>${reserve.CHECKOUT}</td>
 								                    <td>${reserve.MEMBERCOUNT}</td>
 								                </tr>
-								            </tbody>
-								
-								            <!-- 변수 업데이트 -->
-								            <c:set var="prevRoomNo" value="${currentRoomNo}" />
-								            <c:set var="firstRow" value="false" />
-			                           
-			                            </c:if>
 								        </c:forEach>
-								
-								        <!-- 마지막 그룹 닫기 -->
-								        <c:if test="${not firstRow}">
-								            </tbody>
-								        </c:if>
+			                           
 								    </tbody>
 								</table>
 								
                                 </div>
                            </div>
-                           
 
-                           <!-- =============================== 페이징 ============================================-->
                            <div class="paging"><a href="/" class="prev" title="이전 페이지">이전 페이지</a><a href="/"
                                    class="on">1</a><a href="/" class="next" title="다음 페이지">다음 페이지</a></div>
                        </div>

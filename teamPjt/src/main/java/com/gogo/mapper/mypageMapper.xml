@@ -189,6 +189,7 @@
 	<select id="reservinfo" resultType="java.util.Map">
 		SELECT
 		      v.roomno,
+		      r.roomname,
 		      v.memberid AS reservationMemberId,
               s.memberid AS stayMemberId,
 		      TO_CHAR(regdate, 'YY-MM-DD') AS regdate,
@@ -198,10 +199,13 @@
 	    FROM reservation v, room r, stay s
         where v.roomno = r.roomno
         and r.stayno = s.stayno
+        and s.memberid = #{memberId}
+        and r.roomno= #{roomNo}
 	</select>
 	
 	<resultMap type="java.util.HashMap" id="reserv_Map">
 	    <result property="roomNo" column="ROOMNO" />
+	    <result property="roomName" column="ROOMNAME" />
 	    <result property="reservationMemberId" column="RESERVATIONMEMBERID" />
 	    <result property="stayMemberId" column="STAYMEMBERID" />
 	    <result property="regDate" column="REGDATE" />
@@ -222,8 +226,13 @@
 	    FROM STAY s
 	    JOIN ROOM r ON s.STAYNO = r.STAYNO
 	    JOIN RESERVATION v ON r.ROOMNO = v.ROOMNO
-	</select>  
+	</select>
 	
+	
+	<!-- 객실 이름 -> select -->  
+	<select id="selectRoomName" resultType="com.gogo.vo.RoomVO">
+		select roomname, roomno from room join stay using(stayno) where stay.memberid=#{memberId}
+	</select>
 	
 	<!-- 수입 현황 -->
 	<select id="profit" resultType="com.gogo.vo.ReservedVO">
@@ -394,27 +403,28 @@
 		    WHERE v.memberid = #{memberId} AND f.paymentno IS NOT NULL
 		    AND v.checkout > SYSDATE
 		) WHERE row_num BETWEEN ((${pageNo}-1) * 5 + 1) AND ${pageNo} * 5
-			</select>
-			<select id="cancleListCount" resultType="int">
-					SELECT count(*) FROM (
-					    SELECT s.stayname, r.price, s.stayno,
-					           v.reservationno,
-					           TO_CHAR(v.regdate, 'yyyy-mm-dd') AS regdate,
-					           TO_CHAR(v.checkin, 'yyyy-mm-dd') AS checkin,
-					           TO_CHAR(v.checkout, 'yyyy-mm-dd') AS checkout,
-					           v.membercount,
-					           s.mainpic1,
-					           m.memberid,
-					           ROW_NUMBER() OVER (ORDER BY f.regdate DESC) as row_num
-					    FROM reservation v
-					    JOIN member m ON m.memberid = v.memberid
-					    JOIN payment p ON v.reservationno = p.reservationno
-					    JOIN room r ON r.roomno = v.roomno
-					    JOIN stay s ON s.stayno = r.stayno
-					    LEFT JOIN refund f ON p.paymentno = f.paymentno
-					    WHERE v.memberid = #{memberId} AND f.paymentno IS NOT NULL
-					    AND v.checkout > SYSDATE
-					) 
+	</select>
+	
+	<select id="cancleListCount" resultType="int">
+		SELECT count(*) FROM (
+		    SELECT s.stayname, r.price, s.stayno,
+		           v.reservationno,
+		           TO_CHAR(v.regdate, 'yyyy-mm-dd') AS regdate,
+		           TO_CHAR(v.checkin, 'yyyy-mm-dd') AS checkin,
+		           TO_CHAR(v.checkout, 'yyyy-mm-dd') AS checkout,
+		           v.membercount,
+		           s.mainpic1,
+		           m.memberid,
+		           ROW_NUMBER() OVER (ORDER BY f.regdate DESC) as row_num
+		    FROM reservation v
+		    JOIN member m ON m.memberid = v.memberid
+		    JOIN payment p ON v.reservationno = p.reservationno
+		    JOIN room r ON r.roomno = v.roomno
+		    JOIN stay s ON s.stayno = r.stayno
+		    LEFT JOIN refund f ON p.paymentno = f.paymentno
+		    WHERE v.memberid = #{memberId} AND f.paymentno IS NOT NULL
+		    AND v.checkout > SYSDATE
+		) 
 	</select>
 	
 	<resultMap type="java.util.HashMap" id="cancelMap">

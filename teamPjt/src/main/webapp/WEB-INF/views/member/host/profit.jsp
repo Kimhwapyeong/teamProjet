@@ -57,7 +57,7 @@
 								<!--차트-->
 								<div style="margin-left: 5%;">
 									<h6 style="font-weight:bold; ">월별 수익 현황</h6>
-								    <div style="width: 700px; height: 700px; margin-top : 20px;">
+								    <div style="width: 850px; height: 600px; margin-top : 20px;">
 									<canvas id="myChart"></canvas>
 								</div>
 							

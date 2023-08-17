@@ -147,7 +147,7 @@ public class UserController extends CommonRestController{
 		if(res > 0) {
 			msg="회원 탈퇴 되었습니다";
 			rttr.addFlashAttribute("msg", msg);  
-			return "redirect:/member/mypage/info";
+			return "redirect:/main";
 		} else {
 			msg="회원 탈퇴 중 오류가 발생하였습니다";
 			rttr.addFlashAttribute("msg", msg);  

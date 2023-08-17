@@ -60,7 +60,10 @@ public interface mypageMapper {
 	public String getRoomFirstPic(String roomNo);
 	
 	// 예약 관리
-	public List<Map<String, String>> reservinfo();
+	public List<Map<String, String>> reservinfo(@Param("memberId") String memberId, @Param("roomNo") int roomNo);
+	
+	// 객실이름
+	public List<RoomVO> selectRoomName(String memberId);
 	
 	// 예약 관리 대표 사진
 	public List<Map<String, String>> reservpic();

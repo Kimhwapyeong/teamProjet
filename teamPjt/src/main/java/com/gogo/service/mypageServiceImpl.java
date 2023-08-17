@@ -7,12 +7,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -144,13 +146,6 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 	}
 	
 	// 숙소 관리 - 객실 관리
-//	@Override
-//	public List<RoomVO> roomInfo(String memberId, Model model) {
-//		List<RoomVO> room = mypageMapper.roomInfo(memberId);
-//		model.addAttribute("room", room);
-//		return null;
-//	}
-	// 숙소 관리 - 객실 관리
 	@Override
 	public List<RoomVO> roomInfo(String memberId, Model model) {
 		List<RoomVO> room = mypageMapper.getRoomArr(memberId);
@@ -168,11 +163,12 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 	}
 	
 	@Override
-	public List<Map<String, String>> reservinfo(Model model) {
-		List<Map<String, String>> list = mypageMapper.reservinfo();
+	public List<Map<String, String>> reservinfo(@Param("memberId") String memberId, @Param("roomNo") int roomNo, Model model) {
+		List<Map<String, String>> list = mypageMapper.reservinfo(memberId, roomNo);
 		log.info("===========");
 		log.info("list : " + list);
 		model.addAttribute("list", list);
+		model.addAttribute("paramRoomNo", roomNo);
 		return null;
 	}
 	
@@ -183,6 +179,13 @@ public class mypageServiceImpl extends myPageUploadPath implements mypageService
 		log.info("===========");
 		log.info("pic : " + pic);
 		model.addAttribute("pic", pic);
+		return null;
+	}
+	
+	@Override
+	public List<RoomVO> selectRoomName(String memberId, Model model) {
+		List<RoomVO> name = mypageMapper.selectRoomName(memberId);
+		model.addAttribute("name", name);
 		return null;
 	}
 	

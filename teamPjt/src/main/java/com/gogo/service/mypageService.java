@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,10 +65,13 @@ public interface mypageService {
 	public int deleteRoom(String roomNo);
 	
 	// 예약 관리
-	public List<Map<String, String>> reservinfo(Model model);
+	public List<Map<String, String>> reservinfo(@Param("memberId") String memberId, @Param("roomNo") int roomNo, Model model);
 	
 	// 예약 관리 대표 사진
 	public List<Map<String, String>> reservpic(Model model);
+	
+	// 객실이름
+	public List<RoomVO> selectRoomName(String memberId, Model model);
 	
 	// 수입 현황
 	public List<ReservedVO> profit(String memberId);

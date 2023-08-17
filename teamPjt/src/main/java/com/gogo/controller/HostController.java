@@ -89,10 +89,21 @@ public class HostController extends CommonRestController {
 	
 	
 	// 예약 관리
-	@GetMapping("reservation")
-	public void reservation(Model model) {
-		mypageService.reservinfo(model);
+	@PostMapping("reservation")
+	public void reservation(Model model, HttpServletRequest request, @RequestParam("selectedRoomNo") int roomNo) {
+		HttpSession session = request.getSession();
+		String memberId = (String) session.getAttribute("memberId");
+		log.info("roomNo ===========" + roomNo);
+		mypageService.reservinfo(memberId, roomNo, model);
 		mypageService.reservpic(model);
+		mypageService.selectRoomName(memberId, model);
+	}
+	
+	@GetMapping("reservation")
+	public void selectRoomName(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		String memberId = (String) session.getAttribute("memberId");
+		mypageService.selectRoomName(memberId, model);
 	}
 
 	
