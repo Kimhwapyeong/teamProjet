@@ -1626,7 +1626,7 @@
 								<div class="swiper-button-prev" onclick="slideActiveBtn()"></div>
 								<div class="swiper-button-next" onclick="slideActiveBtn()"></div>
 								
-								<a href="/stay/room?stayName=${sl.stayName}">
+								<a href="/stay/room?stayName=${list.stayName}">
 								<div class="swiper-wrapper">
 									<%-- <li class="swiper-slide img swiper-slide-active"
 										style="background: url(/resources/images/${list.mainPic1.replace('\\','/')}) center center / cover no-repeat; cursor: pointer; width: 410px;">
