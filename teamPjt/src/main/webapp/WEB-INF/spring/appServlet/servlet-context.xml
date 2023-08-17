@@ -44,6 +44,13 @@
 			<exclude-mapping path=""/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
+
+		<!-- 호스트 체크 -->
+		<interceptor>
+			<mapping path="/member/mypage/**"/>
+			<exclude-mapping path=""/>
+			<beans:ref bean="hostInterceptor"/>
+		</interceptor>
 		
 	</interceptors>
 	
