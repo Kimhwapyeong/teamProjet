@@ -762,8 +762,8 @@
 	        			// 체크아웃
 	        			//let findEndDate = document.querySelector('#reserved_checkOut').value.replaceAll('-','/');
 	        			let findEndDate = document.querySelector('#reserved_checkOut').value;
-	        			if(findEndDate === null){
-	        				findEndDate == "";
+	        			if(findEndDate === ""){
+	        				findEndDate == null;
 	        			}
 	        			console.log(findEndDate);
 	        			
