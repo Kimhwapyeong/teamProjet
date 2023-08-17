@@ -33045,8 +33045,8 @@ button.swiper-pagination-bullet {
     position: absolute;
     width: 18px;
     height: 18px;
-    top: 0;
-    right: 20px;
+    top: 35px;
+    right: 80px;
     background: url(https://www.stayfolio.com/web/images/btn-close.png) no-repeat 50%
 }
 

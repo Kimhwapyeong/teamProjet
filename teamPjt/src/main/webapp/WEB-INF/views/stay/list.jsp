@@ -628,34 +628,7 @@
 		            
 		            
         		
-		            /* let slideBtns = document.querySelectorAll('.swiper-button-next');
-		            let slideImgLists = document.querySelectorAll('.swiper-wrapper');
-		            let currentIdx = 0;
 
-		            slideBtns.forEach((button, index) => {
-		                button.addEventListener('click', () => {
-		                    let slideImgList = slideImgLists[index];
-		                    let slideImgs = slideImgList.querySelectorAll('li');
-		                    
-		                    currentIdx = (currentIdx + 1) % slideImgs.length;
-		                    
-		                    slideImgLists.forEach((imgList, listIndex) => {
-		                        imgList.innerHTML = listIndex === index ? slideImgs[currentIdx].outerHTML : '';
-		                    });
-		                });
-		            }); */
-		            
-		            
-		            
-		            
-		            
-		            
-		            
-		            
-		            
-		            
-		            
-        		
         		
         	  		// 오른쪽 카테고리(인기순, 최신순, ...)
         			let listCategory = document.querySelectorAll('#listpick li');
@@ -735,7 +708,7 @@
 	        			console.log(maxPrice);
 	        			
 	        			// 숙소 유형
-	        			let stayType = document.querySelectorAll('#stayTypeList li label input');
+ 	        			/* let stayType = document.querySelectorAll('#stayTypeList li label input');
 	        			stayType.forEach((button) => {
 							if(!button.checked){
 								stayType == "";
@@ -743,10 +716,22 @@
 								stayType = button.value;
 							}        				
 	        			})
-	        			console.log(stayType);
-	        			 			
+	        			console.log(stayType); */
+	        			
+	        			// 숙소 유형	
+	        			let stayTypes = [];
+	        			let stayTypeInputs = document.querySelectorAll('#stayTypeList li label input:checked');
+
+	        			stayTypeInputs.forEach(input => {
+	        				stayTypes.push(input.value);
+	        			});
+	        			console.log(stayTypes);
+	        			
+	        			
+	        			
+	        			
 	        			// 숙소 옵션
-	        			let roomOption = document.querySelectorAll('#roomOptionList li label input');
+/* 	        			let roomOption = document.querySelectorAll('#roomOptionList li label input');
 	        			roomOption.forEach((button) => {
 							if(button.checked){
 								roomOption = button.value;
@@ -754,7 +739,16 @@
 								roomOption == "";
 							}        				
 	        			})
-	        			console.log(roomOption);
+	        			console.log(roomOption); */
+	        			
+	        			// 숙소 옵션
+	        			let roomOptions = [];
+	        			let roomOptionInputs = document.querySelectorAll('#roomOptionList li label input:checked');
+
+	        			roomOptionInputs.forEach(input => {
+	        				roomOptions.push(input.value);
+	        			});
+	        			console.log(roomOptions);
 	        			
 	        			
 	        			// 체크인
@@ -780,8 +774,8 @@
 	        					stayView : stayView,
 	        					stdPerson : stdPerson,
 	        					maxPrice : maxPrice,
-	        					stayType : stayType,
-	        					roomOption : roomOption,
+	        					stayTypes : stayTypes,
+	        					roomOptions : roomOptions,
 	        					findStartDate : findStartDate,
 	        					findEndDate : findEndDate
 	        			      };
@@ -1389,7 +1383,7 @@
                                 <li class="ko"><label class="check_skin" for="hanok"><input type="checkbox"
                                             id="hanok" name="staytype" value="한옥"><span>한옥</span></label></li>
                                 <li class="ko"><label class="check_skin" for="hostel"><input type="checkbox"
-                                            id="hostel" name="staytype" value="호스텔"><span>호스텔</span></label></li>
+                                            id="hostel" name="staytype" value="렌탈하우스"><span>렌탈하우스</span></label></li>
                                 <li class="ko"><label class="check_skin" for="bnb"><input type="checkbox"
                                             id="bnb" name="staytype" value="민박"><span>민박</span></label></li>
                                 <li class="ko"><label class="check_skin" for="hotel"><input type="checkbox"
@@ -1470,12 +1464,7 @@
     </div>
     </div>
     
-    
-<%--     								<c:forEach items="${stayImg}" var="imgList" step="1">
-    									<c:if test="${imgList.stayNo eq '1'}">
-    										<div>${imgList.fileName.replace('\\','/') }</div>
-    									</c:if>
-									</c:forEach> --%>
+
     
 	<div class="container findstay_list  ">
 		<div class="flist_wrap" id="stayList">
@@ -1562,5 +1551,4 @@
 		<!-- </div> -->
 		<%@include file="../common/footer.jsp"%>
 </body>
-
 </html>

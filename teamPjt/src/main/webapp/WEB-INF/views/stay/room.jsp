@@ -470,7 +470,8 @@
         			}
         			console.log(findEndDate);
         			
-
+					let stayName = document.querySelector('.top_title .name').innerHTML;
+					console.log(stayName);
         			      
         			fetch('/stst/room/'+stayName+'/'+findStartDate+'/'+findEndDate)
         			.then(response => response.json())
@@ -506,6 +507,7 @@
 			console.log(roomImg);
 			
 			let roomListArea = document.querySelector('.swiper-wrapper');
+			let stayName = document.querySelector('.top_title .name').innerHTML;
 			
 			roomListArea.innerHTML = '';
 			let pageBlock = '';
@@ -515,7 +517,7 @@
 				+='<li class="swiper-slide slider_box single-room swiper-slide-active">'
 				+'	<a href="/stay/roomInfo?stayName='+stayName+'&roomName='+list.ROOMNAME+'">';
 				
- 				roomImg.forEach((img, index)=>{
+				roomImg.forEach((img, index)=>{
 					if(img.ROOMNO == list.ROOMNO){
 						let file = img.FILENAME.replaceAll("\\", "/")
  					pageBlock

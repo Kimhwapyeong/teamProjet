@@ -43,7 +43,8 @@ public class StayVO {
 	private String sns; // 숙소 sns
 	private String tel; // 숙소 번호
 	
-	
+	private String[] roomOptions; // 룸옵션 배열을 통해 보내기
+	private String[] stayTypes; // 분류
 	
 	
 	
