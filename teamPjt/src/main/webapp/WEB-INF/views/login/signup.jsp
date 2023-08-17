@@ -19,6 +19,8 @@
 <script>
 window.addEventListener('load',function(){
 
+	document.querySelector('#naverIdLogin_loginButton>img').height=0;
+	
     // 입력 필드에 변경 사항이 있을 때 유효성 검사를 실행
     var inputFields = document.querySelectorAll('input');
     inputFields.forEach(function (input) {
@@ -397,7 +399,7 @@ $(document).ready(function() {
 				<div id='signupMsg'></div>
         <div class="sns_login">
             <div class="tit">SNS 계정으로 로그인하기</div>
-            <ul>
+            <ul id="snsLogin">
                 <li>
                     <a id="naverIdLogin" class="btn_naver" href="#" style="margin: right;">네이버</a>
                 </li>
