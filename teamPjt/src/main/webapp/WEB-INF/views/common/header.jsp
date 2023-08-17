@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	    	document.querySelector("#sideMenu").style.display='none';
 	    	side = 0;
 	    })
-	    
+	    let msg = '${param.msg}';
 	    // msg가 있으면 알림창 보여주기
 	    alertPopOn(msg);
 	
