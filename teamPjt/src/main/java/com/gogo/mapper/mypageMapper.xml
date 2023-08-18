@@ -28,7 +28,7 @@
 			TO_CHAR(registraiondate, 'YYYY-MM-DD') AS registraiondate
 		FROM member
 		WHERE memberid != 'admin'
-        ORDER BY MEMBERID ASC
+        ORDER BY registraiondate DESC
 	</select>
 	
 	
