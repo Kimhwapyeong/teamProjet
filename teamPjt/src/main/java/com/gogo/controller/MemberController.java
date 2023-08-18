@@ -368,8 +368,8 @@ public String oauthKakao(
     	 gender = "F";
      }else if(gender.equals("m")){
     	 gender = "M";
-     }
-    member.setGender(gender);
+     } 
+     member.setGender(gender);
      
      String birthday = (String)userInfo.get("birthday");
      String month = birthday.substring(0,2);
