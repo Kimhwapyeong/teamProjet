@@ -363,7 +363,13 @@ public String oauthKakao(
      // female에서 f만 출력
      String originalgender = (String) userInfo.get("gender");
      String gender = originalgender.substring(0, 1);
-     member.setGender(gender);
+     
+     if(gender.equals("f")) {
+    	 gender = "F";
+     }else if(gender.equals("m")){
+    	 gender = "M";
+     }
+    member.setGender(gender);
      
      String birthday = (String)userInfo.get("birthday");
      String month = birthday.substring(0,2);
