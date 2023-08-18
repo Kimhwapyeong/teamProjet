@@ -96,8 +96,6 @@ public class MemberController extends CommonRestController {
 	// 회원가입 페이지 이동
 	@GetMapping("/login/signup")
 	public String signup(HttpSession session) {
-		// 세션에 member라는 이름으로 "signup"을 저장 
-		//session.setAttribute("member", "signup");
 		return "/login/signup";
 	}
 	
@@ -205,7 +203,6 @@ public class MemberController extends CommonRestController {
 				@ModelAttribute MemberVO member) {
 		 
 		 try {
-			    
 			 member.setMemberId(memberId);
 			 member.setMemberName(memberName);
 			 member.setMemberEmail(memberEmail);
@@ -218,6 +215,7 @@ public class MemberController extends CommonRestController {
 			    }
 			    // randomAlphanumeric : 새로운 패스워드 생성
 			    String newPwd = RandomStringUtils.randomAlphanumeric(10);
+			    
 			    // 암호화
 			    String enpassword = encryptPassword(newPwd);
 			    
@@ -318,7 +316,7 @@ public class MemberController extends CommonRestController {
 	    System.out.println("--------- 카카오연동 들어옴 ---------");
 	
 	    String reqUrl =
-	            "https://kauth.kakao.com/oauth/authorize"
+	    				"https://kauth.kakao.com/oauth/authorize"
 	                    + "?client_id=7801f55d59a73a55013d6f22a1a3e9a1"
 	                    + "&redirect_uri=http://localhost:8080/login/kakaoAction"
 	                    + "&response_type=code";
@@ -371,7 +369,6 @@ public class MemberController extends CommonRestController {
 	     String month = birthday.substring(0,2);
 	     String days = birthday.substring(2);
 	     member.setBirthday("00"+month+days);
-		
 	    
 		System.out.println("----- access_Token ----- : " + access_Token);
 		System.out.println("------- id ------- : " + userInfo.get("id"));    
@@ -382,7 +379,6 @@ public class MemberController extends CommonRestController {
 		System.out.println("------- birthday ------- : " + userInfo.get("birthday")); 
 		System.out.println("------- profile_image ------- : " + userInfo.get("profile_image")); 
 	
-	    
 	    // 만약 DB에 해당 회원의 ID가 없다면 회원가입 시키기
 	    int idCheck = memberService.idCheck(member);
 	    
@@ -402,10 +398,8 @@ public class MemberController extends CommonRestController {
 	    		userInfo.put("msg", "카카오 회원가입 성공");
 	    		loginAction(member, model, session);
 	    		redirectAttributes.addFlashAttribute("msg", "환영합니다.");
-	    		
 	    	} else {
 	    		userInfo.put("msg", "카카오 회원가입 실패");
-	    		
 	    	}
 	    	
 	    } else {
@@ -422,6 +416,5 @@ public class MemberController extends CommonRestController {
 	    	}
 	    }
 	    return "redirect:/main"; 
-	
 	}
 }

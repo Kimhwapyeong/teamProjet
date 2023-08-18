@@ -40,7 +40,6 @@
  	}catch(e){
  		console.log('fetchPost', e);
  	}
- 	
  }
  
  window.addEventListener('load',function(){
@@ -55,7 +54,6 @@
 					memberId : loginForm.id.value,
 					pw : loginForm.password.value
 			}
-			
 			console.log(obj);
 			
 			// 요청
@@ -77,11 +75,8 @@
 		}
 		console.log(map);
 	 }
- 
  	$('#btnSignup').click(function(){
-		
 		location.href='/login/signup';
-		
 	});
  
 </script>
@@ -138,7 +133,6 @@
             <div class="tit">SNS 계정으로 로그인하기</div>
             <ul>
                 <li>
-                	
                     <a id="naverIdLogin" class="btn_naver" href="#" style="margin: right;">네이버</a>
                 </li>
                 <li> 
