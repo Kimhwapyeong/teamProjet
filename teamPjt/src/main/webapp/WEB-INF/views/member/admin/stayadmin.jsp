@@ -76,7 +76,6 @@
                                <!-- ▶▶▶  forEach ▶▶▶  -->
                                <c:forEach items="${list}" var="vo" step="1">
                                <div class="reserv_box accepted">
-                               
                                    <div class="reserv_name">
                                         <!-- =============================== 숙소 seq  ============================================-->
                                        <div class="option" style='line-height: 50px;'>
@@ -85,7 +84,6 @@
 													<input type="checkbox"name="stayNo" value="${vo.stayNo }" >
 													<span style="font-size: 12px" style='line-height: 50px;'></span>
 											</label>
-												
 	                                       ${vo.stayNo}
                                        </div>
                                        
@@ -114,15 +112,14 @@
 							   <button type="button" class="btn btn-outline-dark btn-sm" style="float:right" onclick="deleteStay()">숙소 삭제</button>
                          </form>
                          
-	                           <!-- =============================== 페이징 ============================================-->
 	                           <div class="paging"><a href="/" class="prev" title="이전 페이지">이전 페이지</a><a href="/"
                                    class="on">1</a><a href="/" class="next" title="다음 페이지">다음 페이지</a></div>
                        </div>
-                       
                    </div>
                </div>
                
-           </div><button class="custom-button-1"></button>
+           </div>
+           <button class="custom-button-1"></button>
        </div>
        
 <!-- 푸터 -->
