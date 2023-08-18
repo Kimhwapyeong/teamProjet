@@ -57,10 +57,10 @@ window.addEventListener('load', function(){
         const selectedRoomNo = deleteModalButton.getAttribute("data-roomno");
         if (selectedRoomNo !== "") {
             const form = document.forms["deleteFrm"];
-            const roomNoInput = form.querySelector('input[name="deleteNo"]');
-            roomNoInput.value = selectedRoomNo;
+            //const roomNoInput = form.querySelector('input[name="deleteNo"]');
+            //roomNoInput.value = selectedRoomNo;
 			
-            document.querySelector('input[name=delNo]').value = roomNoInput.value;
+            document.querySelector('input[name=delNo]').value = selectedRoomNo;
             
             form.submit();
         }

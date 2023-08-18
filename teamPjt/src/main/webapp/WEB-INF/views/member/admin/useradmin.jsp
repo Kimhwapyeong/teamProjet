@@ -203,7 +203,7 @@
 															<span style="font-size: 12px"></span>
 															</label>
 														</td>
-														<td>${member.memberId }</td>
+														<td style="overflow:hidden">${member.memberId }</td>
 														<td>${member.memberName }</td>
 														<td>${member.memberEmail }</td>
 														<td>${member.registraionDate }</td>
