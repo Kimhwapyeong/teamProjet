@@ -668,7 +668,7 @@
 							
 		        			fetch('/stst/category/'+ encodedPromotion)
 							.then(response => response.json())
-							.then(map => keywordList(map));
+							.then(map => {keywordList(map); likeBtnActive(); slideBtnActive();});
         				})
         			})
         			
@@ -1109,7 +1109,7 @@
                                                 </li>
                                                 <li><button type="button" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="경상">경상</button>
                                                 </li>
-                                                <li><button type="button" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="전라">전라</button>
+                                                <li><button type="button" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="전남">전남</button>
                                                 </li>
                                                 <li><button type="button" class="" style="cursor: pointer;" name="stayAdress" id="stayAdress" value="인천">인천</button>
                                                 </li>
@@ -1395,7 +1395,7 @@
                                 <li class="area_mobile ko"><button type="button" class=""
                                         style="cursor: pointer;">경상</button></li>
                                 <li class="area_mobile ko"><button type="button" class=""
-                                        style="cursor: pointer;">전라</button></li>
+                                        style="cursor: pointer;">전남</button></li>
                                 <li class="area_mobile ko"><button type="button" class=""
                                         style="cursor: pointer;">인천</button></li>
                                 <li class="area_mobile ko"><button type="button" class=""
@@ -1576,7 +1576,7 @@
                         <ul class="_selector_filter_list__UUNfp" id="motionList">
                             <li class="_selector_selected__ciPbE">모든 스테이</li>
                             <li class="">프로모션</li>
-                            <li class="">너랑 가고싶어</li>
+                            <li class="">핫해 핫해</li>
                         </ul>
                     </div>
                 </div>
@@ -1685,7 +1685,7 @@
 					href="/" class="next" title="다음 페이지">다음 페이지</a> -->
 			</div>
 		</div>
-		<!-- </div> -->
+		</div>
 		<%@include file="../common/footer.jsp"%>
 </body>
 </html>

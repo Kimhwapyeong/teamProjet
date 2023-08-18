@@ -67,13 +67,8 @@
             let btn_close = document.querySelector('.container .container .btn_close');
             btn_close.addEventListener('click', () => {
             	console.log('a');
-//////////// HEAD
             	document.querySelector('.booking_summary .modalOverlayList').style.display='none';
-///////////
             	document.querySelector('.booking_summary .modalOverlay').style.display='none';
-            	
-            	
-/////////// branch 'master' of https://github.com/Kimhwapyeong/teamProjet.git
             }) 
             
             
@@ -116,17 +111,7 @@
 			 let room = document.querySelectorAll('.room_slider ul');
 			
 			 let startIdx = 0;
-			 let maxIdx = roomList.length;
-			 
-/* 			 nextBtn.addEventListener('click', ()=>{
-				console.log('a');
-				// 버튼을 누르면  0 1 2
-				// 버튼을 누르면  1 2 0
-				// 버튼을 누르면  2 0 1
-				// 버튼을 누르면  0 1 2
-				
-				
-			}) */	
+			 let maxIdx = roomList.length;			 	
 			
 			// 객실 갯수에 따른 인덱스 번호
 			let indices = Array.from({ length: roomList.length }, (_, i) => i);
@@ -365,8 +350,7 @@
 					
 					
 				var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-				//var imageSrc = "https://www.stayfolio.com/web/images/map-stay.png"; 
-				    
+ 				    
 				for (var i = 0; i < positions.length; i ++) {
 				    console.log(positions[i].latlng);
 				    // 마커 이미지의 이미지 크기 입니다
@@ -886,7 +870,7 @@
 				</div>
 				<div class="fdetail_text">
 					<div class="txt1">저희 특별한 공간과 시간만을 제공하는 스테이폴리오에서 가장 인기있는 숙소 '${list.STAYNAME }' 입니다.</div>
-					<div class="txt2">‘ㄱ’자 구조의 단심 스테이는 전면에 배치된 4개의 통창이 단연 돋보입니다.
+					<div class="txt2">‘ㄱ’자 구조의 ${list.STAYNAME }는 전면에 배치된 4개의 통창이 단연 돋보입니다.
 						특히, 다이닝 공간의 폴딩형 창은 완전히 오픈하면 주변과 경계 없이 호흡이 가능합니다. 실내에 따로 마련된 욕조 공간
 						또한, 창을 통해 햇볕을 받으며 탁 트인 주변 경치를 감상할 수 있도록 했습니다. 노출 콘크리트와 월넛 우드 소재로
 						구성된 내부는 공간에 채워진 오브제나 액자, 가구와 어우러져 사뭇 미술관 같은 분위기마저 듭니다. 단심 스테이는
@@ -909,26 +893,25 @@
 								src="https://images.stayfolio.com/system/pictures/images/000/161/857/original/41df569c4c5367b783f4793f058957ab0d7a771d.png?1673938881"
 								alt="special_img_1"></i>
 							<div class="tit">실내 스파</div>
-							<div class="desc">6인까지도 충분히 들어갈 수 있는 실내 스파가 있습니다. 가족과 함께
-								즐겨보세요.</div>
+							<div class="desc"> 여러분 프로젝트 하느라 고생 진짜 많으셨습니다. </div>
 						</li>
 						</c:if>
-						<c:if test="${list.BABIQU eq 'Y'}">
+						<c:if test="${list.BEAMPROJECTOR eq 'Y'}">
 						<li>
 						<i><img
 								src="https://images.stayfolio.com/system/pictures/images/000/022/852/original/da72017d52231aece7591975b33191a88d831d33.png?1509347637"
 								alt="special_img_1"></i>
 							<div class="tit">TOWN HOTEL</div>
-							<div class="desc">서촌의 작은 골목들을 배경삼아, 동네가 품은 이야기와 정취를 느끼며 편안히 머물 수 있는 공간이 되고자 합니다. 커피 맛이 좋은 스펙터, 가정식이 훌륭한 공기식당, 통인시장과 수성동 계곡 등 서촌의 매력적인 곳들을 산책하며 호흡하는 여행을 추천합니다.</div>
+							<div class="desc"> 여러분들 프로젝트가 최고로 잘했어요. </div>
 						</li>
 						</c:if>
-						<c:if test="${list.POOL eq 'Y'}">
+						<c:if test="${list.BABIQU eq 'Y'}">
 						<li>
 						<i><img
 								src="https://images.stayfolio.com/system/pictures/images/000/018/215/original/b8c313646dafe7674539a93e7e1effd20f670cd9.png?1500455204"
 								alt="special_img_1"></i>
 							<div class="tit">MEALS</div>
-							<div class="desc">쌀과 제철 채소, 해산물, 그리고 멧돼지와 오소리고기 등 산을 온전히 느낄 수 있는 가이세키 요리(일본식 코스 요리)를 제공합니다.</div>
+							<div class="desc"> 여러분들이 짱이에요. </div>
 						</li>
 						</c:if>
 					</div>
@@ -1170,6 +1153,6 @@
 			</div>
 		</div>
 	</div>
-</body>
 <%@include file="../common/footer.jsp"%>
+</body>
 </html>
