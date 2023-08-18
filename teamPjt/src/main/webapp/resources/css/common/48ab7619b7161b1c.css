@@ -1692,6 +1692,7 @@ select {
     font-size: 18px;
     letter-spacing: 14px;
     font-family: Lato-Bold;
+    font-weight: bold;
     color: #000;
     text-indent: 14px
 }
