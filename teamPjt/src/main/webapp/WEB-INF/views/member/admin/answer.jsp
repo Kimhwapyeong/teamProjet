@@ -125,13 +125,10 @@ window.addEventListener('load', function(){
 						<button type="submit" class="btn btn-outline-dark btn-sm" style=" float: right">답변 보내기</button>
 					</form>
 					
-					
                  </div>
-                 
                  
 				</div>
 			</div>
-
 		</div>
 		<button class="custom-button-1"></button>
 	</div>

@@ -81,7 +81,6 @@
                                   
                                   <!-- ▶▶▶  forEach ▶▶▶  -->
                                   <c:forEach items="${list}" var="qa" step="1">
-                                  
                                     <tr style="line-height: 40px">
                                         <td>${qa.queNo }</td>
                                         <td>${qa.memberId }</td>
@@ -94,7 +93,6 @@
 	                                        </c:if>
                                         </td>
                                     </tr>
-                                    
                                     </c:forEach>
                                     
                                     </tbody>
@@ -102,8 +100,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- =============================== 페이징 ============================================-->
                         <div class="paging"><a href="/" class="prev" title="이전 페이지">이전 페이지</a><a href="/"
                                 class="on">1</a><a href="/" class="next" title="다음 페이지">다음 페이지</a></div>
                     </div>
