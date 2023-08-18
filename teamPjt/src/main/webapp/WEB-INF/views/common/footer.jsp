@@ -73,7 +73,7 @@
 		</ul>
 	</nav>
 <!-- bootstrap script -->
-
+role = ${sessionScope.member.role }
 <button id="msgBtn" class="custom-button-1"></button>
 <script>
 	
@@ -87,10 +87,14 @@
 				
 				alertPopOn('로그인이 필요한 서비스입니다');
 				return false;
-			} else {
+			} else if('${sessionScope.member.role}' == '[user]'){
 				
-				location.href='/chat/chat';
+				location.href='/member/mypage/message';
 				
+			} else if('${sessionScope.member.role}' == '[host]'){
+				location.href='/member/host/message';
+			} else if('${sessionScope.member.role}' == '[admin]'){
+				location.href='/member/admin/hosthelp';
 			}
 			
 		});

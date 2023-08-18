@@ -160,7 +160,7 @@
 								
 								<h6 style="line-height: 60px">회원목록</h6>
 								
-								<form method="post" name="searchForm">
+								<form method="post" name="searchForm" onsubmit="return false">
 									<!-- 가운데 정렬 -->
 										<div class="row g-3 justify-content-center">
 										 	 <div class="col-auto" >

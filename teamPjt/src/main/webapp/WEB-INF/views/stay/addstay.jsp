@@ -76,9 +76,9 @@ input ::placeholder{
 							<textarea rows="5" class="form_style" name="stayInfo"
 								placeholder="공간의 구조, 컨셉, 스토리 등을 자유롭게 작성해 주세요. (최소 10자, 최대 150자)"></textarea>
 						</div></li>
-					<li><div class="dt">뱃지 *</div>
+					<li>
 						<div class="dd">
-							<input type="text" class="form_style" name="badge" value=""
+							<input type="hidden" class="form_style" name="badge" value="HOT"
 								placeholder="뱃지는 ... 입니다.">
 						</div></li>
 					<div class="_contactus_divider__BZ5eb"></div>

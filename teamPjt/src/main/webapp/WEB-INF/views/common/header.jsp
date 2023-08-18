@@ -566,7 +566,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					<div class="jsx-bc9726d7609f7d7f">언어 설정</div>
 					<div class="jsx-bc9726d7609f7d7f lang">한국어</div>
 				</li> -->
-				<li role="presentation" class="jsx-bc9726d7609f7d7f">1:1 문의</li>
+				<!-- <li role="presentation" class="jsx-bc9726d7609f7d7f">1:1 문의</li> -->
 			</ul>
 			<div class="jsx-13bd1097de52bb6b">
 				<button type="button" class="jsx-13bd1097de52bb6b" onclick="location.href='/login/login'">로그인</button>

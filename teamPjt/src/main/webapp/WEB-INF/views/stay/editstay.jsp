@@ -79,7 +79,7 @@ input ::placeholder{
 					<li><div class="dt">뱃지 *</div>
 						<div class="dd">
 							<input type="text" class="form_style" name="badge" value="${ map.stayVO.badge }"
-								placeholder="뱃지는 ... 입니다.">
+								placeholder="뱃지는 ... 입니다." readonly>
 						</div></li>
 					<div class="_contactus_divider__BZ5eb"></div>
 					

@@ -384,8 +384,8 @@ function setMainImgsHeight(){
 		</button>
 	</div>
 	<div class="_routerWithArrow_wrapper__v67Nt">
-		<button id="router" type="button">
-			전체 보기<span
+<!-- 		<button id="router" type="button">
+			<span
 				style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"><span
 				style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"><img
 					alt="" aria-hidden="true"
@@ -396,7 +396,7 @@ function setMainImgsHeight(){
 				src="https://www.stayfolio.com/web/images/main/ico_next.svg"
 				decoding="async" data-nimg="intrinsic"
 				style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"></span>
-		</button>
+		</button> -->
 	</div>
 	<div
 		class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events stay_list"
@@ -431,7 +431,7 @@ function setMainImgsHeight(){
 							<span>
 								<div class="_badge_badge_wrapper__h9IsV">
 									<div class="_badge_exclusive__prNZN">
-										<span class="_badge_txt__fonwF">EXCLUSIVE</span>
+										<span class="_badge_txt__fonwF">${ stay.badge }</span>
 									</div>
 								</div>
 							</span>
