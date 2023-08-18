@@ -40,7 +40,7 @@ $(document).ready(function() {
 					                <p class="mb-4">조회결과가 없습니다.</p>                                        
 					            </c:when>                                                                         
 					            <c:otherwise>                                                                     
-					                <p class="mb-4"> ${memberId}</p>                                              
+					                <p class="mb-4" style="font-size: 20px"> ${memberId}</p>                                              
 					            </c:otherwise>                                                                    
 					        </c:choose>                                                                         
 					    </div>    
