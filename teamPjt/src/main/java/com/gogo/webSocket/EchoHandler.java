@@ -18,7 +18,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.gogo.service.MemberService;
 import com.gogo.service.MessageService;
 import com.gogo.service.ReservedService;
 import com.gogo.vo.MemberVO;
@@ -41,6 +41,8 @@ public class EchoHandler extends TextWebSocketHandler{
     MessageService service;
     @Autowired
     ReservedService service_reserved;
+    @Autowired
+    MemberService service_member;
     
     
     
@@ -248,14 +250,27 @@ public class EchoHandler extends TextWebSocketHandler{
         String stayNo = (String)session.getAttributes().get("stayNoMsg");
         int pageNo = session.getAttributes().containsKey("hostMsgPageNo") && session.getAttributes().get("hostMsgPageNo") != null 
                         ? (int)session.getAttributes().get("hostMsgPageNo") : 1;
-
-        StayVO stay = service_reserved.selectOne_stay(stayNo);
-        String memberId = stay.getMemberId();
-
+        
+        String nowLogin = (String)session.getAttributes().get("memberId");
+        List<String> memberRole = service_member.getMemberRole(nowLogin);
+        String memberId = "";  
+        List<MessageRoomVO> updatedRooms = null;
+        if("host".equals(memberRole.get(0))) {
+        	
+        	StayVO stay = service_reserved.selectOne_stay(stayNo);
+        	memberId = stay.getMemberId();
+        	updatedRooms = service.messageRoomList(memberId, pageNo); // 방 목록을 가져오는 서비스 로직
+        } else {
+        	
+        	memberId = nowLogin;
+        	updatedRooms = service.messageRoomListUser(memberId, pageNo); // 방 목록을 가져오는 서비스 로직
+        }
+        
+        
         System.err.println("핸들러 memberId : "+memberId);
+        System.err.println("핸들러 memberRole : "+ memberRole.get(0));
         System.err.println("핸들러 pageNo : "+pageNo);
 
-        List<MessageRoomVO> updatedRooms = service.messageRoomList(memberId, pageNo); // 방 목록을 가져오는 서비스 로직
         System.err.println("핸들러 updatedRooms"+updatedRooms);
 
         Map<String, Object> map = new HashMap<>();
