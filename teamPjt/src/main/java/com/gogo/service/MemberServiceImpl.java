@@ -111,7 +111,7 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.selectOne(member);
 	}
 	@Override
-	public String findIdAction(MemberVO member) {
+	public List<MemberVO> findIdAction(MemberVO member) {
 		return memberMapper.findIdAction(member);
 	}
 	// 비밀번호 찾기 

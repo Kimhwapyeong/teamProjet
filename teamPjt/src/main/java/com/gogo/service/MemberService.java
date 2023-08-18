@@ -30,7 +30,7 @@ public interface MemberService {
 	public int signupAction(MemberVO member);
 
 	// 아이디 찾기 
-	public String findIdAction(MemberVO member);
+	public List<MemberVO> findIdAction(MemberVO member);
 
 	// 비밀번호 찾기
 	public int findPwAction(MemberVO member);
@@ -52,6 +52,7 @@ public interface MemberService {
 	
 	// 회원 권한 검색
 	public List<String> getMemberRole(String memberId);
+
 
 
 

@@ -1,6 +1,7 @@
 package com.gogo.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -59,11 +60,6 @@ public class MemberController extends CommonRestController {
 		System.out.println("pw : " + member.getPw());
 		
 		MemberVO membervo = memberService.loginAction(member);
-//		MemberVO user = memberService.selectOne(member);
-//		List<String> role = memberService.getMemberRole(member.getMemberId());
-//		
-//		user.setRole(role);
-		
 		
 		if(membervo != null) {
 			
@@ -177,7 +173,8 @@ public class MemberController extends CommonRestController {
 			member.setMemberEmail(memberEmail);
 		    
 			// 회원정보 검색
-			String memberId = memberService.findIdAction(member);
+			List<MemberVO> memberId = memberService.findIdAction(member);
+			
 		    model.addAttribute("memberId", memberId);
 		    
 		} catch (Exception e) {
@@ -313,119 +310,118 @@ public class MemberController extends CommonRestController {
 	    return result;
 	}
 	
+		
+	// 카카오톡 로그인 연동 (인가코드 발급)
+	@RequestMapping(value = "/login/kakaoActionUrl")
+	public @ResponseBody String kakaoAction(
+	        HttpServletRequest request) throws Exception {
+	    System.out.println("--------- 카카오연동 들어옴 ---------");
 	
-// 카카오톡 로그인 연동 (인가코드 발급)
-@RequestMapping(value = "/login/kakaoActionUrl")
-public @ResponseBody
-String kakaoAction(
-        HttpServletRequest request) throws Exception {
-    System.out.println("--------- 카카오연동 들어옴 ---------");
-
-    String reqUrl =
-            "https://kauth.kakao.com/oauth/authorize"
-                    + "?client_id=7801f55d59a73a55013d6f22a1a3e9a1"
-                    + "&redirect_uri=http://localhost:8080/login/kakaoAction"
-                    + "&response_type=code";
-    
-    System.out.println("reqUrl : "+reqUrl);
-
-    return reqUrl;
-}
-
-// 카카오 연동정보 조회 + DB에 회원 정보넣기
-@RequestMapping(value = "/login/kakaoAction")
-public String oauthKakao(
-        @RequestParam(value = "code", required = false) String code
-        , HttpServletRequest req, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Throwable {
-
-	System.out.println("--------- 카카오 정보조회 들어옴 ---------");
-
-    // 발급받은 인가코드(reqUrl)를 통해 토큰 발급받기
-    System.out.println("####code##### :" + code);   
-    String access_Token = memberService.getAccessToken(code);    // 인가코드를 통해 토큰발급
-    System.out.println("###access_Token#### : " + access_Token);    // 확인용 토큰 출력
-
-
-    // 토큰을 이용해 회원 정보 가져오기
-    HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
-
-
-     // 가져온 회원 정보 DB에 넣어 회원가입 시키기
-     MemberVO member = new MemberVO();
-        
-	 // userInfo에서 필요한 정보를 추출하여 MemberVO에 설정
-     member.setMemberName((String) userInfo.get("nickname"));
-     member.setMemberId((String) userInfo.get("id"));
-     member.setMemberEmail((String) userInfo.get("account_email"));
-     member.setAge_group((String) userInfo.get("age_range"));
-     member.setProfile((String) userInfo.get("profile_image"));
-     
-     // female에서 f만 출력
-     String originalgender = (String) userInfo.get("gender");
-     String gender = originalgender.substring(0, 1);
-     
-     if(gender.equals("f")) {
-    	 gender = "F";
-     }else if(gender.equals("m")){
-    	 gender = "M";
-     } 
-     member.setGender(gender);
-     
-     String birthday = (String)userInfo.get("birthday");
-     String month = birthday.substring(0,2);
-     String days = birthday.substring(2);
-     member.setBirthday("00"+month+days);
+	    String reqUrl =
+	            "https://kauth.kakao.com/oauth/authorize"
+	                    + "?client_id=7801f55d59a73a55013d6f22a1a3e9a1"
+	                    + "&redirect_uri=http://localhost:8080/login/kakaoAction"
+	                    + "&response_type=code";
+	    
+	    System.out.println("reqUrl : "+reqUrl);
 	
-    
-	System.out.println("----- access_Token ----- : " + access_Token);
-	System.out.println("------- id ------- : " + userInfo.get("id"));    
-	System.out.println("------- nickname ------- : " + userInfo.get("nickname"));    
-	System.out.println("----- account_email ---- : " + userInfo.get("account_email"));    
-	System.out.println("-------- gender -------- : " + userInfo.get("gender")); 
-	System.out.println("------ age_range ------- : " + userInfo.get("age_range")); 
-	System.out.println("------- birthday ------- : " + userInfo.get("birthday")); 
-	System.out.println("------- profile_image ------- : " + userInfo.get("profile_image")); 
-
-    
-    // 만약 DB에 해당 회원의 ID가 없다면 회원가입 시키기
-    int idCheck = memberService.idCheck(member);
-    
-    if(idCheck==0) {
-    	
-    	// 비밀번호 랜덤
-    	String kakaoPW = UUID.randomUUID().toString();
-    	member.setPw(kakaoPW);
-
-    	int res = memberService.signupAction(member);
-    	
-    	if(res>0) {
-            // 카카오 로그인 성공 시 snsYN을 "Y"로 설정
-            member.setSnsCk("Y");
-            memberService.insertMemberRole(member.getMemberId(), "user");
-    		memberService.updateKakao(member);
-    		userInfo.put("msg", "카카오 회원가입 성공");
-    		loginAction(member, model, session);
-    		redirectAttributes.addFlashAttribute("msg", "환영합니다.");
-    		
-    	} else {
-    		userInfo.put("msg", "카카오 회원가입 실패");
-    		
-    	}
-    	
-    } else {
-    	// 이미 회원가입 되어 있는 네이버 로그인의 경우 비밀번호를 가져와 세팅
-    	String kakaoPW = memberService.getPw(member);
-    	
-    	member.setPw(kakaoPW);
-    	Map<String, Object> map = loginAction(member, model, session);	
-    	
-    	if("success".equals(map.get("result"))) {
-    		userInfo.put("result", "ok");
-    	} else {
-    		userInfo.put("result", "ok");
-    	}
-    }
-    return "redirect:/main"; 
-
-}
+	    return reqUrl;
+	}
+	
+	// 카카오 연동정보 조회 + DB에 회원 정보넣기
+	@RequestMapping(value = "/login/kakaoAction")
+	public String oauthKakao(
+	        @RequestParam(value = "code", required = false) String code
+	        , HttpServletRequest req, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Throwable {
+	
+		System.out.println("--------- 카카오 정보조회 들어옴 ---------");
+	
+	    // 발급받은 인가코드(reqUrl)를 통해 토큰 발급받기
+	    System.out.println("####code##### :" + code);   
+	    String access_Token = memberService.getAccessToken(code);    // 인가코드를 통해 토큰발급
+	    System.out.println("###access_Token#### : " + access_Token);    // 확인용 토큰 출력
+	
+	
+	    // 토큰을 이용해 회원 정보 가져오기
+	    HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
+	
+	
+	     // 가져온 회원 정보 DB에 넣어 회원가입 시키기
+	     MemberVO member = new MemberVO();
+	        
+		 // userInfo에서 필요한 정보를 추출하여 MemberVO에 설정
+	     member.setMemberName((String) userInfo.get("nickname"));
+	     member.setMemberId((String) userInfo.get("id"));
+	     member.setMemberEmail((String) userInfo.get("account_email"));
+	     member.setAge_group((String) userInfo.get("age_range"));
+	     member.setProfile((String) userInfo.get("profile_image"));
+	     
+	     // female에서 f만 출력
+	     String originalgender = (String) userInfo.get("gender");
+	     String gender = originalgender.substring(0, 1);
+	     
+	     if(gender.equals("f")) {
+	    	 gender = "F";
+	     }else if(gender.equals("m")){
+	    	 gender = "M";
+	     } 
+	     member.setGender(gender);
+	     
+	     String birthday = (String)userInfo.get("birthday");
+	     String month = birthday.substring(0,2);
+	     String days = birthday.substring(2);
+	     member.setBirthday("00"+month+days);
+		
+	    
+		System.out.println("----- access_Token ----- : " + access_Token);
+		System.out.println("------- id ------- : " + userInfo.get("id"));    
+		System.out.println("------- nickname ------- : " + userInfo.get("nickname"));    
+		System.out.println("----- account_email ---- : " + userInfo.get("account_email"));    
+		System.out.println("-------- gender -------- : " + userInfo.get("gender")); 
+		System.out.println("------ age_range ------- : " + userInfo.get("age_range")); 
+		System.out.println("------- birthday ------- : " + userInfo.get("birthday")); 
+		System.out.println("------- profile_image ------- : " + userInfo.get("profile_image")); 
+	
+	    
+	    // 만약 DB에 해당 회원의 ID가 없다면 회원가입 시키기
+	    int idCheck = memberService.idCheck(member);
+	    
+	    if(idCheck==0) {
+	    	
+	    	// 비밀번호 랜덤
+	    	String kakaoPW = UUID.randomUUID().toString();
+	    	member.setPw(kakaoPW);
+	
+	    	int res = memberService.signupAction(member);
+	    	
+	    	if(res>0) {
+	            // 카카오 로그인 성공 시 snsYN을 "Y"로 설정
+	            member.setSnsCk("Y");
+	            memberService.insertMemberRole(member.getMemberId(), "user");
+	    		memberService.updateKakao(member);
+	    		userInfo.put("msg", "카카오 회원가입 성공");
+	    		loginAction(member, model, session);
+	    		redirectAttributes.addFlashAttribute("msg", "환영합니다.");
+	    		
+	    	} else {
+	    		userInfo.put("msg", "카카오 회원가입 실패");
+	    		
+	    	}
+	    	
+	    } else {
+	    	// 이미 회원가입 되어 있는 네이버 로그인의 경우 비밀번호를 가져와 세팅
+	    	String kakaoPW = memberService.getPw(member);
+	    	
+	    	member.setPw(kakaoPW);
+	    	Map<String, Object> map = loginAction(member, model, session);	
+	    	
+	    	if("success".equals(map.get("result"))) {
+	    		userInfo.put("result", "ok");
+	    	} else {
+	    		userInfo.put("result", "ok");
+	    	}
+	    }
+	    return "redirect:/main"; 
+	
+	}
 }

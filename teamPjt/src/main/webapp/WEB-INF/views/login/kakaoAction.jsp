@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-카카오 로그인
+<h5>카카오 로그인</h5>
 <script type="text/javascript">
     // 카카오 최초 로그인시 DB에 정보넣기
     $(document).ready(function() {

@@ -24,7 +24,7 @@ public interface MemberMapper {
 
 	public int idCheck(MemberVO member);
 
-	public String findIdAction(MemberVO member);
+	public List<MemberVO> findIdAction(MemberVO member);
 
 	public int findPwAction(MemberVO member);
 
@@ -33,4 +33,5 @@ public interface MemberMapper {
 	public void insertMemberRole(@Param("memberId") String memberId,@Param("role_id") String role_id);
 
 	public int updateKakao(MemberVO member);
+
 }
